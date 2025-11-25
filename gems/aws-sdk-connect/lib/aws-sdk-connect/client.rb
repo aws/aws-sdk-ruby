@@ -2313,6 +2313,12 @@ module Aws::Connect
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
+    # @option params [String] :settings
+    #   The configuration settings for the flow module.
+    #
+    # @option params [Types::ExternalInvocationConfiguration] :external_invocation_configuration
+    #   The external invocation configuration for the flow module.
+    #
     # @return [Types::CreateContactFlowModuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContactFlowModuleResponse#id #id} => String
@@ -2329,6 +2335,10 @@ module Aws::Connect
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken",
+    #     settings: "FlowModuleSettings",
+    #     external_invocation_configuration: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2342,6 +2352,107 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_contact_flow_module(params = {}, options = {})
       req = build_request(:create_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # Creates a named alias that points to a specific version of a contact
+    # flow module.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :description
+    #   The description of the alias.
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [required, Integer] :contact_flow_module_version
+    #   The version of the flow module.
+    #
+    # @option params [required, String] :alias_name
+    #   The name of the alias.
+    #
+    # @return [Types::CreateContactFlowModuleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContactFlowModuleAliasResponse#contact_flow_module_arn #contact_flow_module_arn} => String
+    #   * {Types::CreateContactFlowModuleAliasResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact_flow_module_alias({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     description: "ContactFlowDescription",
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #     contact_flow_module_version: 1, # required
+    #     alias_name: "ContactFlowModuleAlias", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_module_arn #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModuleAlias AWS API Documentation
+    #
+    # @overload create_contact_flow_module_alias(params = {})
+    # @param [Hash] params ({})
+    def create_contact_flow_module_alias(params = {}, options = {})
+      req = build_request(:create_contact_flow_module_alias, params)
+      req.send_request(options)
+    end
+
+    # Creates an immutable snapshot of a contact flow module, preserving its
+    # content and settings at a specific point in time for version control
+    # and rollback capabilities.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :description
+    #   The description of the flow module version.
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [String] :flow_module_content_sha_256
+    #   Indicates the checksum value of the flow module content.
+    #
+    # @return [Types::CreateContactFlowModuleVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContactFlowModuleVersionResponse#contact_flow_module_arn #contact_flow_module_arn} => String
+    #   * {Types::CreateContactFlowModuleVersionResponse#version #version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact_flow_module_version({
+    #     instance_id: "InstanceId", # required
+    #     description: "ContactFlowModuleDescription",
+    #     contact_flow_module_id: "ARN", # required
+    #     flow_module_content_sha_256: "FlowModuleContentSha256",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_module_arn #=> String
+    #   resp.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModuleVersion AWS API Documentation
+    #
+    # @overload create_contact_flow_module_version(params = {})
+    # @param [Hash] params ({})
+    def create_contact_flow_module_version(params = {}, options = {})
+      req = build_request(:create_contact_flow_module_version, params)
       req.send_request(options)
     end
 
@@ -3761,6 +3872,12 @@ module Aws::Connect
     #             },
     #             user_ids: ["UserId"],
     #           },
+    #           exclusion: {
+    #             user_tags: {
+    #               "String" => "String",
+    #             },
+    #             user_ids: ["UserId"],
+    #           },
     #         },
     #         create_case_action: {
     #           fields: [ # required
@@ -4805,6 +4922,77 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_contact_flow_module(params = {}, options = {})
       req = build_request(:delete_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # Removes an alias reference, breaking the named connection to the
+    # underlying module version without affecting the version itself.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the alias.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_flow_module_alias({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     contact_flow_module_id: "ResourceId", # required
+    #     alias_id: "ResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowModuleAlias AWS API Documentation
+    #
+    # @overload delete_contact_flow_module_alias(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_flow_module_alias(params = {}, options = {})
+      req = build_request(:delete_contact_flow_module_alias, params)
+      req.send_request(options)
+    end
+
+    # Removes a specific version of a contact flow module.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [required, Integer] :contact_flow_module_version
+    #   The version of the flow module to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_flow_module_version({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_module_id: "ARN", # required
+    #     contact_flow_module_version: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowModuleVersion AWS API Documentation
+    #
+    # @overload delete_contact_flow_module_version(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_flow_module_version(params = {}, options = {})
+      req = build_request(:delete_contact_flow_module_version, params)
       req.send_request(options)
     end
 
@@ -6212,6 +6400,11 @@ module Aws::Connect
     #   resp.contact_flow_module.status #=> String, one of "PUBLISHED", "SAVED"
     #   resp.contact_flow_module.tags #=> Hash
     #   resp.contact_flow_module.tags["TagKey"] #=> String
+    #   resp.contact_flow_module.flow_module_content_sha_256 #=> String
+    #   resp.contact_flow_module.version #=> Integer
+    #   resp.contact_flow_module.version_description #=> String
+    #   resp.contact_flow_module.settings #=> String
+    #   resp.contact_flow_module.external_invocation_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModule AWS API Documentation
     #
@@ -6219,6 +6412,55 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_contact_flow_module(params = {}, options = {})
       req = build_request(:describe_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific alias, including which
+    # version it currently points to and its metadata.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the alias.
+    #
+    # @return [Types::DescribeContactFlowModuleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContactFlowModuleAliasResponse#contact_flow_module_alias #contact_flow_module_alias} => Types::ContactFlowModuleAliasInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_contact_flow_module_alias({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #     alias_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_module_alias.contact_flow_module_id #=> String
+    #   resp.contact_flow_module_alias.contact_flow_module_arn #=> String
+    #   resp.contact_flow_module_alias.alias_id #=> String
+    #   resp.contact_flow_module_alias.version #=> Integer
+    #   resp.contact_flow_module_alias.name #=> String
+    #   resp.contact_flow_module_alias.description #=> String
+    #   resp.contact_flow_module_alias.last_modified_region #=> String
+    #   resp.contact_flow_module_alias.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModuleAlias AWS API Documentation
+    #
+    # @overload describe_contact_flow_module_alias(params = {})
+    # @param [Hash] params ({})
+    def describe_contact_flow_module_alias(params = {}, options = {})
+      req = build_request(:describe_contact_flow_module_alias, params)
       req.send_request(options)
     end
 
@@ -7023,6 +7265,10 @@ module Aws::Connect
     #   resp.rule.actions[0].send_notification_action.recipient.user_tags["String"] #=> String
     #   resp.rule.actions[0].send_notification_action.recipient.user_ids #=> Array
     #   resp.rule.actions[0].send_notification_action.recipient.user_ids[0] #=> String
+    #   resp.rule.actions[0].send_notification_action.exclusion.user_tags #=> Hash
+    #   resp.rule.actions[0].send_notification_action.exclusion.user_tags["String"] #=> String
+    #   resp.rule.actions[0].send_notification_action.exclusion.user_ids #=> Array
+    #   resp.rule.actions[0].send_notification_action.exclusion.user_ids[0] #=> String
     #   resp.rule.actions[0].create_case_action.fields #=> Array
     #   resp.rule.actions[0].create_case_action.fields[0].id #=> String
     #   resp.rule.actions[0].create_case_action.fields[0].value.boolean_value #=> Boolean
@@ -12007,6 +12253,119 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists all aliases associated with a contact flow module, showing their
+    # current version mappings and metadata.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListContactFlowModuleAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactFlowModuleAliasesResponse#contact_flow_module_alias_summary_list #contact_flow_module_alias_summary_list} => Array&lt;Types::ContactFlowModuleAliasSummary&gt;
+    #   * {Types::ListContactFlowModuleAliasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contact_flow_module_aliases({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     contact_flow_module_id: "ARN", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_module_alias_summary_list #=> Array
+    #   resp.contact_flow_module_alias_summary_list[0].arn #=> String
+    #   resp.contact_flow_module_alias_summary_list[0].alias_id #=> String
+    #   resp.contact_flow_module_alias_summary_list[0].version #=> Integer
+    #   resp.contact_flow_module_alias_summary_list[0].alias_name #=> String
+    #   resp.contact_flow_module_alias_summary_list[0].alias_description #=> String
+    #   resp.contact_flow_module_alias_summary_list[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowModuleAliases AWS API Documentation
+    #
+    # @overload list_contact_flow_module_aliases(params = {})
+    # @param [Hash] params ({})
+    def list_contact_flow_module_aliases(params = {}, options = {})
+      req = build_request(:list_contact_flow_module_aliases, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of all versions for a specific contact flow
+    # module.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListContactFlowModuleVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactFlowModuleVersionsResponse#contact_flow_module_version_summary_list #contact_flow_module_version_summary_list} => Array&lt;Types::ContactFlowModuleVersionSummary&gt;
+    #   * {Types::ListContactFlowModuleVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contact_flow_module_versions({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_module_id: "ARN", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_module_version_summary_list #=> Array
+    #   resp.contact_flow_module_version_summary_list[0].arn #=> String
+    #   resp.contact_flow_module_version_summary_list[0].version_description #=> String
+    #   resp.contact_flow_module_version_summary_list[0].version #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowModuleVersions AWS API Documentation
+    #
+    # @overload list_contact_flow_module_versions(params = {})
+    # @param [Hash] params ({})
+    def list_contact_flow_module_versions(params = {}, options = {})
+      req = build_request(:list_contact_flow_module_versions, params)
+      req.send_request(options)
+    end
+
     # Provides information about the flow modules for the specified Amazon
     # Connect instance.
     #
@@ -15454,6 +15813,11 @@ module Aws::Connect
     #   resp.contact_flow_modules[0].status #=> String, one of "PUBLISHED", "SAVED"
     #   resp.contact_flow_modules[0].tags #=> Hash
     #   resp.contact_flow_modules[0].tags["TagKey"] #=> String
+    #   resp.contact_flow_modules[0].flow_module_content_sha_256 #=> String
+    #   resp.contact_flow_modules[0].version #=> Integer
+    #   resp.contact_flow_modules[0].version_description #=> String
+    #   resp.contact_flow_modules[0].settings #=> String
+    #   resp.contact_flow_modules[0].external_invocation_configuration.enabled #=> Boolean
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -18622,8 +18986,10 @@ module Aws::Connect
     # and then puts the contact in queue, the call is then routed to the
     # agent, like any other inbound case.
     #
-    # There is a 60-second dialing timeout for this operation. If the call
-    # is not connected after 60 seconds, it fails.
+    # Dialing timeout for this operation can be configured with the
+    # “RingTimeoutInSeconds” parameter. If not specified, the default
+    # dialing timeout will be 60 seconds which means if the call is not
+    # connected within 60 seconds, it fails.
     #
     # <note markdown="1"> UK numbers with a 447 prefix are not allowed by default. Before you
     # can dial these UK mobile numbers, you must submit a service quota
@@ -20279,6 +20645,54 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates a specific Aliases metadata, including the version it’s tied
+    # to, it’s name, and description.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the flow module.
+    #
+    # @option params [required, String] :alias_id
+    #   The identifier of the alias.
+    #
+    # @option params [String] :name
+    #   The name of the alias.
+    #
+    # @option params [String] :description
+    #   The description of the alias.
+    #
+    # @option params [Integer] :contact_flow_module_version
+    #   The version of the flow module.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_flow_module_alias({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #     alias_id: "ResourceId", # required
+    #     name: "ContactFlowModuleName",
+    #     description: "ContactFlowModuleDescription",
+    #     contact_flow_module_version: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleAlias AWS API Documentation
+    #
+    # @overload update_contact_flow_module_alias(params = {})
+    # @param [Hash] params ({})
+    def update_contact_flow_module_alias(params = {}, options = {})
+      req = build_request(:update_contact_flow_module_alias, params)
+      req.send_request(options)
+    end
+
     # Updates specified flow module for the specified Amazon Connect
     # instance.
     #
@@ -20298,13 +20712,16 @@ module Aws::Connect
     # @option params [required, String] :contact_flow_module_id
     #   The identifier of the flow module.
     #
-    # @option params [required, String] :content
+    # @option params [String] :content
     #   The JSON string that represents the content of the flow. For an
     #   example, see [Example flow in Amazon Connect Flow language][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
+    #
+    # @option params [String] :settings
+    #   Serialized JSON string of the flow module Settings schema.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -20313,7 +20730,8 @@ module Aws::Connect
     #   resp = client.update_contact_flow_module_content({
     #     instance_id: "InstanceId", # required
     #     contact_flow_module_id: "ContactFlowModuleId", # required
-    #     content: "ContactFlowModuleContent", # required
+    #     content: "ContactFlowModuleContent",
+    #     settings: "FlowModuleSettings",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContent AWS API Documentation
@@ -22106,6 +22524,12 @@ module Aws::Connect
     #             },
     #             user_ids: ["UserId"],
     #           },
+    #           exclusion: {
+    #             user_tags: {
+    #               "String" => "String",
+    #             },
+    #             user_ids: ["UserId"],
+    #           },
     #         },
     #         create_case_action: {
     #           fields: [ # required
@@ -22942,7 +23366,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.224.0'
+      context[:gem_version] = '1.226.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

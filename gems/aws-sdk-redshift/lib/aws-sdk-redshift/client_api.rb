@@ -23,6 +23,7 @@ module Aws::Redshift
     AccountWithRestoreAccess = Shapes::StructureShape.new(name: 'AccountWithRestoreAccess')
     AccountsWithRestoreAccessList = Shapes::ListShape.new(name: 'AccountsWithRestoreAccessList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     AquaConfiguration = Shapes::StructureShape.new(name: 'AquaConfiguration')
     AquaConfigurationStatus = Shapes::StringShape.new(name: 'AquaConfigurationStatus')
     AquaStatus = Shapes::StringShape.new(name: 'AquaStatus')
@@ -67,6 +68,7 @@ module Aws::Redshift
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     BucketNotFoundFault = Shapes::StructureShape.new(name: 'BucketNotFoundFault', error: {"code" => "BucketNotFoundFault", "httpStatusCode" => 400, "senderFault" => true})
     CancelResizeMessage = Shapes::StructureShape.new(name: 'CancelResizeMessage')
+    CatalogNameString = Shapes::StringShape.new(name: 'CatalogNameString')
     CertificateAssociation = Shapes::StructureShape.new(name: 'CertificateAssociation')
     CertificateAssociationList = Shapes::ListShape.new(name: 'CertificateAssociationList')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
@@ -122,6 +124,7 @@ module Aws::Redshift
     ClusterVersionsMessage = Shapes::StructureShape.new(name: 'ClusterVersionsMessage')
     ClustersMessage = Shapes::StructureShape.new(name: 'ClustersMessage')
     ConflictPolicyUpdateFault = Shapes::StructureShape.new(name: 'ConflictPolicyUpdateFault', error: {"code" => "ConflictPolicyUpdateFault", "httpStatusCode" => 409, "senderFault" => true})
+    Connect = Shapes::StructureShape.new(name: 'Connect')
     ConsumerIdentifierList = Shapes::ListShape.new(name: 'ConsumerIdentifierList')
     CopyClusterSnapshotMessage = Shapes::StructureShape.new(name: 'CopyClusterSnapshotMessage')
     CopyClusterSnapshotResult = Shapes::StructureShape.new(name: 'CopyClusterSnapshotResult')
@@ -393,6 +396,9 @@ module Aws::Redshift
     LakeFormationQuery = Shapes::StructureShape.new(name: 'LakeFormationQuery')
     LakeFormationScopeUnion = Shapes::UnionShape.new(name: 'LakeFormationScopeUnion')
     LakeFormationServiceIntegrations = Shapes::ListShape.new(name: 'LakeFormationServiceIntegrations')
+    LakehouseConfiguration = Shapes::StructureShape.new(name: 'LakehouseConfiguration')
+    LakehouseIdcRegistration = Shapes::StringShape.new(name: 'LakehouseIdcRegistration')
+    LakehouseRegistration = Shapes::StringShape.new(name: 'LakehouseRegistration')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault', error: {"code" => "LimitExceededFault", "httpStatusCode" => 400, "senderFault" => true})
     ListRecommendationsMessage = Shapes::StructureShape.new(name: 'ListRecommendationsMessage')
     ListRecommendationsResult = Shapes::StructureShape.new(name: 'ListRecommendationsResult')
@@ -427,6 +433,7 @@ module Aws::Redshift
     ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
     ModifyIntegrationMessage = Shapes::StructureShape.new(name: 'ModifyIntegrationMessage')
+    ModifyLakehouseConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyLakehouseConfigurationMessage')
     ModifyRedshiftIdcApplicationMessage = Shapes::StructureShape.new(name: 'ModifyRedshiftIdcApplicationMessage')
     ModifyRedshiftIdcApplicationResult = Shapes::StructureShape.new(name: 'ModifyRedshiftIdcApplicationResult')
     ModifyScheduledActionMessage = Shapes::StructureShape.new(name: 'ModifyScheduledActionMessage')
@@ -491,6 +498,8 @@ module Aws::Redshift
     RedshiftIdcApplicationNotExistsFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationNotExistsFault', error: {"code" => "RedshiftIdcApplicationNotExists", "httpStatusCode" => 404, "senderFault" => true})
     RedshiftIdcApplicationQuotaExceededFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationQuotaExceededFault', error: {"code" => "RedshiftIdcApplicationQuotaExceeded", "httpStatusCode" => 400, "senderFault" => true})
     RedshiftInvalidParameterFault = Shapes::StructureShape.new(name: 'RedshiftInvalidParameterFault', error: {"code" => "RedshiftInvalidParameter", "httpStatusCode" => 400, "senderFault" => true})
+    RedshiftScopeUnion = Shapes::UnionShape.new(name: 'RedshiftScopeUnion')
+    RedshiftServiceIntegrations = Shapes::ListShape.new(name: 'RedshiftServiceIntegrations')
     ReferenceLink = Shapes::StructureShape.new(name: 'ReferenceLink')
     ReferenceLinkList = Shapes::ListShape.new(name: 'ReferenceLinkList')
     RegisterNamespaceInputMessage = Shapes::StructureShape.new(name: 'RegisterNamespaceInputMessage')
@@ -863,6 +872,8 @@ module Aws::Redshift
     Cluster.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     Cluster.add_member(:multi_az, Shapes::ShapeRef.new(shape: String, location_name: "MultiAZ"))
     Cluster.add_member(:multi_az_secondary, Shapes::ShapeRef.new(shape: SecondaryClusterInfo, location_name: "MultiAZSecondary"))
+    Cluster.add_member(:lakehouse_registration_status, Shapes::ShapeRef.new(shape: String, location_name: "LakehouseRegistrationStatus"))
+    Cluster.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: String, location_name: "CatalogArn"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -1034,6 +1045,9 @@ module Aws::Redshift
 
     ConflictPolicyUpdateFault.struct_class = Types::ConflictPolicyUpdateFault
 
+    Connect.add_member(:authorization, Shapes::ShapeRef.new(shape: ServiceAuthorization, required: true, location_name: "Authorization"))
+    Connect.struct_class = Types::Connect
+
     ConsumerIdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
     CopyClusterSnapshotMessage.add_member(:source_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotIdentifier"))
@@ -1094,6 +1108,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     CreateClusterMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
     CreateClusterMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
+    CreateClusterMessage.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "CatalogName"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1200,6 +1215,7 @@ module Aws::Redshift
     CreateRedshiftIdcApplicationMessage.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
     CreateRedshiftIdcApplicationMessage.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
     CreateRedshiftIdcApplicationMessage.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    CreateRedshiftIdcApplicationMessage.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "ApplicationType"))
     CreateRedshiftIdcApplicationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateRedshiftIdcApplicationMessage.add_member(:sso_tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "SsoTagKeys"))
     CreateRedshiftIdcApplicationMessage.struct_class = Types::CreateRedshiftIdcApplicationMessage
@@ -2093,6 +2109,12 @@ module Aws::Redshift
 
     LakeFormationServiceIntegrations.member = Shapes::ShapeRef.new(shape: LakeFormationScopeUnion)
 
+    LakehouseConfiguration.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    LakehouseConfiguration.add_member(:lakehouse_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "LakehouseIdcApplicationArn"))
+    LakehouseConfiguration.add_member(:lakehouse_registration_status, Shapes::ShapeRef.new(shape: String, location_name: "LakehouseRegistrationStatus"))
+    LakehouseConfiguration.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: String, location_name: "CatalogArn"))
+    LakehouseConfiguration.struct_class = Types::LakehouseConfiguration
+
     LimitExceededFault.struct_class = Types::LimitExceededFault
 
     ListRecommendationsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
@@ -2254,6 +2276,14 @@ module Aws::Redshift
     ModifyIntegrationMessage.add_member(:description, Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: "Description"))
     ModifyIntegrationMessage.add_member(:integration_name, Shapes::ShapeRef.new(shape: IntegrationName, location_name: "IntegrationName"))
     ModifyIntegrationMessage.struct_class = Types::ModifyIntegrationMessage
+
+    ModifyLakehouseConfigurationMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    ModifyLakehouseConfigurationMessage.add_member(:lakehouse_registration, Shapes::ShapeRef.new(shape: LakehouseRegistration, location_name: "LakehouseRegistration"))
+    ModifyLakehouseConfigurationMessage.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "CatalogName"))
+    ModifyLakehouseConfigurationMessage.add_member(:lakehouse_idc_registration, Shapes::ShapeRef.new(shape: LakehouseIdcRegistration, location_name: "LakehouseIdcRegistration"))
+    ModifyLakehouseConfigurationMessage.add_member(:lakehouse_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "LakehouseIdcApplicationArn"))
+    ModifyLakehouseConfigurationMessage.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DryRun"))
+    ModifyLakehouseConfigurationMessage.struct_class = Types::ModifyLakehouseConfigurationMessage
 
     ModifyRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RedshiftIdcApplicationArn"))
     ModifyRedshiftIdcApplicationMessage.add_member(:identity_namespace, Shapes::ShapeRef.new(shape: IdentityNamespaceString, location_name: "IdentityNamespace"))
@@ -2469,6 +2499,7 @@ module Aws::Redshift
     RedshiftIdcApplication.add_member(:idc_onboard_status, Shapes::ShapeRef.new(shape: String, location_name: "IdcOnboardStatus"))
     RedshiftIdcApplication.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
     RedshiftIdcApplication.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    RedshiftIdcApplication.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "ApplicationType"))
     RedshiftIdcApplication.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RedshiftIdcApplication.add_member(:sso_tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "SsoTagKeys"))
     RedshiftIdcApplication.struct_class = Types::RedshiftIdcApplication
@@ -2482,6 +2513,14 @@ module Aws::Redshift
     RedshiftIdcApplicationQuotaExceededFault.struct_class = Types::RedshiftIdcApplicationQuotaExceededFault
 
     RedshiftInvalidParameterFault.struct_class = Types::RedshiftInvalidParameterFault
+
+    RedshiftScopeUnion.add_member(:connect, Shapes::ShapeRef.new(shape: Connect, location_name: "Connect"))
+    RedshiftScopeUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RedshiftScopeUnion.add_member_subclass(:connect, Types::RedshiftScopeUnion::Connect)
+    RedshiftScopeUnion.add_member_subclass(:unknown, Types::RedshiftScopeUnion::Unknown)
+    RedshiftScopeUnion.struct_class = Types::RedshiftScopeUnion
+
+    RedshiftServiceIntegrations.member = Shapes::ShapeRef.new(shape: RedshiftScopeUnion)
 
     ReferenceLink.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     ReferenceLink.add_member(:link, Shapes::ShapeRef.new(shape: String, location_name: "Link"))
@@ -2655,6 +2694,8 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     RestoreFromClusterSnapshotMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     RestoreFromClusterSnapshotMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
+    RestoreFromClusterSnapshotMessage.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "CatalogName"))
+    RestoreFromClusterSnapshotMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -2795,9 +2836,11 @@ module Aws::Redshift
 
     ServiceIntegrationsUnion.add_member(:lake_formation, Shapes::ShapeRef.new(shape: LakeFormationServiceIntegrations, location_name: "LakeFormation"))
     ServiceIntegrationsUnion.add_member(:s3_access_grants, Shapes::ShapeRef.new(shape: S3AccessGrantsServiceIntegrations, location_name: "S3AccessGrants"))
+    ServiceIntegrationsUnion.add_member(:redshift, Shapes::ShapeRef.new(shape: RedshiftServiceIntegrations, location_name: "Redshift"))
     ServiceIntegrationsUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceIntegrationsUnion.add_member_subclass(:lake_formation, Types::ServiceIntegrationsUnion::LakeFormation)
     ServiceIntegrationsUnion.add_member_subclass(:s3_access_grants, Types::ServiceIntegrationsUnion::S3AccessGrants)
+    ServiceIntegrationsUnion.add_member_subclass(:redshift, Types::ServiceIntegrationsUnion::Redshift)
     ServiceIntegrationsUnion.add_member_subclass(:unknown, Types::ServiceIntegrationsUnion::Unknown)
     ServiceIntegrationsUnion.struct_class = Types::ServiceIntegrationsUnion
 
@@ -3247,6 +3290,8 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
       end)
 
       api.add_operation(:create_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4688,6 +4733,21 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
+      api.add_operation(:modify_lakehouse_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyLakehouseConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyLakehouseConfigurationMessage)
+        o.output = Shapes::ShapeRef.new(shape: LakehouseConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
+      end)
+
       api.add_operation(:modify_redshift_idc_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyRedshiftIdcApplication"
         o.http_method = "POST"
@@ -4886,6 +4946,8 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationNotExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundFault)
       end)
 

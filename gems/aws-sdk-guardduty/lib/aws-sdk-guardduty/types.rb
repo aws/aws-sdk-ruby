@@ -420,6 +420,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains additional information about the detected threat.
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the S3 object, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The device name of the EBS volume, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AdditionalInfo AWS API Documentation
+    #
+    class AdditionalInfo < Struct.new(
+      :version_id,
+      :device_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the installed EKS add-on (GuardDuty security agent).
     #
     # @!attribute [rw] addon_version
@@ -3288,6 +3307,35 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about an EBS snapshot that was scanned for
+    # malware.
+    #
+    # @!attribute [rw] device_name
+    #   The device name of the EBS snapshot that was scanned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EbsSnapshot AWS API Documentation
+    #
+    class EbsSnapshot < Struct.new(
+      :device_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the EBS snapshot that was scanned for malware.
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the EBS snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EbsSnapshotDetails AWS API Documentation
+    #
+    class EbsSnapshotDetails < Struct.new(
+      :snapshot_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains list of scanned and skipped EBS volumes with details.
     #
     # @!attribute [rw] scanned_volume_details
@@ -3367,6 +3415,20 @@ module Aws::GuardDuty
     class EbsVolumesResult < Struct.new(
       :status,
       :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the EC2 AMI that was scanned.
+    #
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the EC2 AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Ec2ImageDetails AWS API Documentation
+    #
+    class Ec2ImageDetails < Struct.new(
+      :image_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4512,6 +4574,188 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @!attribute [rw] scan_id
+    #   A unique identifier that gets generated when you invoke the API
+    #   without any error. Each malware scan has a corresponding scan ID.
+    #   Using this scan ID, you can monitor the status of your malware scan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanRequest AWS API Documentation
+    #
+    class GetMalwareScanRequest < Struct.new(
+      :scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_id
+    #   A unique identifier associated with the malware scan. Each malware
+    #   scan has a corresponding scan ID. Using this scan ID, you can
+    #   monitor the status of your malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   The unique ID of the detector that is associated with the request,
+    #   if it belongs to an account which is a GuardDuty customer.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_detector_id
+    #   The unique detector ID of the administrator account that the request
+    #   is associated with. If the account is an administrator, the
+    #   `AdminDetectorId` will be the same as the one used for `DetectorId.
+    #   If the customer is not a GuardDuty customer, this field will not be
+    #   present.`.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource on which a malware scan
+    #   was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that was scanned for malware.
+    #   @return [String]
+    #
+    # @!attribute [rw] scanned_resources_count
+    #   The total number of resources that were successfully scanned. This
+    #   is dependent on the resource type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] skipped_resources_count
+    #   The total number of resources that were skipped during the scan.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_resources_count
+    #   The total number of resources that failed to be scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scanned_resources
+    #   A list of resources along with their metadata that were scanned as
+    #   part of the malware scan operation.
+    #   @return [Array<Types::ScannedResource>]
+    #
+    # @!attribute [rw] scan_configuration
+    #   Information about the scan configuration used for the malware scan.
+    #   @return [Types::ScanConfiguration]
+    #
+    # @!attribute [rw] scan_category
+    #   The category of the malware scan, indicating the type of scan
+    #   performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status
+    #   A value representing the current status of the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status_reason
+    #   Represents the reason for the current scan status, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   A value representing the initiator of the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_started_at
+    #   The timestamp representing when the malware scan was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_completed_at
+    #   The timestamp representing when the malware scan was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_result_details
+    #   Detailed information about the results of the malware scan, if the
+    #   scan completed.
+    #   @return [Types::GetMalwareScanResultDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanResponse AWS API Documentation
+    #
+    class GetMalwareScanResponse < Struct.new(
+      :scan_id,
+      :detector_id,
+      :admin_detector_id,
+      :resource_arn,
+      :resource_type,
+      :scanned_resources_count,
+      :skipped_resources_count,
+      :failed_resources_count,
+      :scanned_resources,
+      :scan_configuration,
+      :scan_category,
+      :scan_status,
+      :scan_status_reason,
+      :scan_type,
+      :scan_started_at,
+      :scan_completed_at,
+      :scan_result_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the results of the malware scan.
+    #
+    # @!attribute [rw] scan_result_status
+    #   Status indicating whether threats were found for a completed scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] skipped_file_count
+    #   The total number of files that were skipped during the scan.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_file_count
+    #   The total number of files that failed to be scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threat_found_file_count
+    #   The total number of files in which threats were detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_file_count
+    #   The total number of files that were processed during the scan.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_bytes
+    #   The total number of bytes that were scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unique_threat_count
+    #   The total number of unique threats that were detected during the
+    #   scan.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threats
+    #   The threats that were detected during the malware scan.
+    #   @return [Array<Types::ScanResultThreat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanResultDetails AWS API Documentation
+    #
+    class GetMalwareScanResultDetails < Struct.new(
+      :scan_result_status,
+      :skipped_file_count,
+      :failed_file_count,
+      :threat_found_file_count,
+      :total_file_count,
+      :total_bytes,
+      :unique_threat_count,
+      :threats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with this scan.
     #
@@ -5089,6 +5333,22 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the incremental scan configuration.
+    #
+    # @!attribute [rw] baseline_resource_arn
+    #   Amazon Resource Name (ARN) of the baseline resource used for
+    #   incremental scanning. The scan will only process changes since this
+    #   baseline resource was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IncrementalScanDetails AWS API Documentation
+    #
+    class IncrementalScanDetails < Struct.new(
+      :baseline_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the indicators that include a set of
     # signals observed in an attack sequence.
     #
@@ -5296,6 +5556,36 @@ module Aws::GuardDuty
     #
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about where a threat was detected.
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource where the threat was
+    #   detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_path
+    #   The path where the threat was detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash
+    #   The hash value of the infected item.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_info
+    #   Additional information about the detected threat item.
+    #   @return [Types::AdditionalInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ItemDetails AWS API Documentation
+    #
+    class ItemDetails < Struct.new(
+      :resource_arn,
+      :item_path,
+      :hash,
+      :additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6276,6 +6566,97 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Represents the criteria used to filter the malware scan entries.
+    #
+    # @!attribute [rw] list_malware_scans_filter_criterion
+    #   Represents a condition that when matched will be added to the
+    #   response of the operation.
+    #   @return [Array<Types::ListMalwareScansFilterCriterion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareScansFilterCriteria AWS API Documentation
+    #
+    class ListMalwareScansFilterCriteria < Struct.new(
+      :list_malware_scans_filter_criterion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a condition that when matched will be added to the response
+    # of the operation. Irrespective of using any filter criteria, an
+    # administrator account can view the scan entries for all of its member
+    # accounts. However, each member account can view the scan entries only
+    # for their own account.
+    #
+    # @!attribute [rw] list_malware_scans_criterion_key
+    #   An enum value representing possible scan properties to match with
+    #   given scan entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_condition
+    #   Contains information about the condition.
+    #   @return [Types::FilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareScansFilterCriterion AWS API Documentation
+    #
+    class ListMalwareScansFilterCriterion < Struct.new(
+      :list_malware_scans_criterion_key,
+      :filter_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria
+    #   Represents the criteria used to filter the malware scan entries.
+    #   @return [Types::ListMalwareScansFilterCriteria]
+    #
+    # @!attribute [rw] sort_criteria
+    #   Represents the criteria used for sorting malware scan entries.
+    #   @return [Types::SortCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareScansRequest AWS API Documentation
+    #
+    class ListMalwareScansRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filter_criteria,
+      :sort_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scans
+    #   The list of malware scans associated with the provided input
+    #   parameters.
+    #   @return [Array<Types::MalwareScan>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more scans.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareScansResponse AWS API Documentation
+    #
+    class ListMalwareScansResponse < Struct.new(
+      :scans,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the member.
     #
@@ -6747,6 +7128,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains finding configuration details about the malware scan.
+    #
+    # @!attribute [rw] trigger_type
+    #   The event that triggered the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_scan_details
+    #   Contains information about the incremental scan configuration.
+    #   @return [Types::IncrementalScanDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionFindingsScanConfiguration AWS API Documentation
+    #
+    class MalwareProtectionFindingsScanConfiguration < Struct.new(
+      :trigger_type,
+      :incremental_scan_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about whether the tags will be added to the S3 object
     # after scanning.
     #
@@ -6819,6 +7219,58 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a particular malware scan.
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource for the given malware
+    #   scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that was scanned for malware.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_id
+    #   A unique identifier that gets generated when you invoke the API
+    #   without any error. Each malware scan has a corresponding scan ID.
+    #   Using this scan ID, you can monitor the status of your malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status
+    #   An enum value representing the current status of the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_result_status
+    #   An enum value representing the result of the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   An enum value representing the type of scan that was initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_started_at
+    #   The timestamp representing when the malware scan was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_completed_at
+    #   The timestamp representing when the malware scan was completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareScan AWS API Documentation
+    #
+    class MalwareScan < Struct.new(
+      :resource_arn,
+      :resource_type,
+      :scan_id,
+      :scan_status,
+      :scan_result_status,
+      :scan_type,
+      :scan_started_at,
+      :scan_completed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the malware scan that generated a GuardDuty finding.
     #
     # @!attribute [rw] threats
@@ -6826,10 +7278,35 @@ module Aws::GuardDuty
     #   GuardDuty finding.
     #   @return [Array<Types::Threat>]
     #
+    # @!attribute [rw] scan_id
+    #   The unique identifier for the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   The type of malware scan performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_category
+    #   The category of the malware scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration
+    #   The configuration settings used for the malware scan.
+    #   @return [Types::MalwareProtectionFindingsScanConfiguration]
+    #
+    # @!attribute [rw] unique_threat_count
+    #   The number of unique malware threats detected during the scan.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareScanDetails AWS API Documentation
     #
     class MalwareScanDetails < Struct.new(
-      :threats)
+      :threats,
+      :scan_id,
+      :scan_type,
+      :scan_category,
+      :scan_configuration,
+      :unique_threat_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8215,6 +8692,41 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the recovery point configuration for
+    # scanning backup data from Amazon Web Services Backup.
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the Amazon Web Services Backup vault that contains the
+    #   name of the recovery point to be scanned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RecoveryPoint AWS API Documentation
+    #
+    class RecoveryPoint < Struct.new(
+      :backup_vault_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the backup recovery point.
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault containing the recovery point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RecoveryPointDetails AWS API Documentation
+    #
+    class RecoveryPointDetails < Struct.new(
+      :recovery_point_arn,
+      :backup_vault_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the remote Amazon Web Services account that
     # made the API call.
     #
@@ -8358,6 +8870,18 @@ module Aws::GuardDuty
     #   a finding.
     #   @return [Types::LambdaDetails]
     #
+    # @!attribute [rw] ebs_snapshot_details
+    #   Contains details about the EBS snapshot that was scanned.
+    #   @return [Types::EbsSnapshotDetails]
+    #
+    # @!attribute [rw] ec2_image_details
+    #   Contains details about the EC2 image that was scanned.
+    #   @return [Types::Ec2ImageDetails]
+    #
+    # @!attribute [rw] recovery_point_details
+    #   Contains details about the backup recovery point that was scanned.
+    #   @return [Types::RecoveryPointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -8373,7 +8897,10 @@ module Aws::GuardDuty
       :rds_db_instance_details,
       :rds_limitless_db_details,
       :rds_db_user_details,
-      :lambda_details)
+      :lambda_details,
+      :ebs_snapshot_details,
+      :ec2_image_details,
+      :recovery_point_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9135,6 +9662,54 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the configuration used for the malware
+    # scan.
+    #
+    # @!attribute [rw] role
+    #   Amazon Resource Name (ARN) of the IAM role that should contain the
+    #   required permissions for the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_details
+    #   Information about the entity that triggered the malware scan.
+    #   @return [Types::TriggerDetails]
+    #
+    # @!attribute [rw] incremental_scan_details
+    #   Information about the incremental scan configuration, if applicable.
+    #   @return [Types::IncrementalScanDetails]
+    #
+    # @!attribute [rw] recovery_point
+    #   Information about the recovery point configuration used for the
+    #   scan, if applicable.
+    #   @return [Types::ScanConfigurationRecoveryPoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanConfiguration AWS API Documentation
+    #
+    class ScanConfiguration < Struct.new(
+      :role,
+      :trigger_details,
+      :incremental_scan_details,
+      :recovery_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the recovery point configuration used in
+    # the scan.
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the Amazon Web Services Backup vault that contains the
+    #   recovery point for the scanned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanConfigurationRecoveryPoint AWS API Documentation
+    #
+    class ScanConfigurationRecoveryPoint < Struct.new(
+      :backup_vault_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a complete view providing malware scan result details.
     #
     # @!attribute [rw] scanned_item_count
@@ -9262,6 +9837,41 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a specific threat that was detected during
+    # the malware scan.
+    #
+    # @!attribute [rw] name
+    #   The name of the detected threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source that detected this threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of instances of this threat that were detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hash
+    #   The hash value associated with the detected threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_details
+    #   Additional information about where this threat was detected.
+    #   @return [Array<Types::ItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanResultThreat AWS API Documentation
+    #
+    class ScanResultThreat < Struct.new(
+      :name,
+      :source,
+      :count,
+      :hash,
+      :item_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains files infected with the given threat providing details of
     # malware name and severity.
     #
@@ -9312,6 +9922,61 @@ module Aws::GuardDuty
       :total_gb,
       :files,
       :volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a resource that was scanned as part of the
+    # malware scan operation.
+    #
+    # @!attribute [rw] scanned_resource_arn
+    #   Amazon Resource Name (ARN) of the scanned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] scanned_resource_type
+    #   The resource type of the scanned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] scanned_resource_status
+    #   The status of the scanned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status_reason
+    #   The reason for the scan status of this particular resource, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_details
+    #   Information about the scanned resource.
+    #   @return [Types::ScannedResourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScannedResource AWS API Documentation
+    #
+    class ScannedResource < Struct.new(
+      :scanned_resource_arn,
+      :scanned_resource_type,
+      :scanned_resource_status,
+      :scan_status_reason,
+      :resource_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional information about a resource that was scanned.
+    #
+    # @!attribute [rw] ebs_volume
+    #   Contains information about the EBS volume that was scanned.
+    #   @return [Types::VolumeDetail]
+    #
+    # @!attribute [rw] ebs_snapshot
+    #   Contains information about the EBS snapshot that was scanned.
+    #   @return [Types::EbsSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScannedResourceDetails AWS API Documentation
+    #
+    class ScannedResourceDetails < Struct.new(
+      :ebs_volume,
+      :ebs_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9743,15 +10408,58 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the configuration to be used for the
+    # malware scan.
+    #
+    # @!attribute [rw] role
+    #   Amazon Resource Name (ARN) of the IAM role that is used for scanning
+    #   the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_scan_details
+    #   Contains information about the incremental scan configuration. When
+    #   specified, the scan will only process changes since the baseline
+    #   resource.
+    #   @return [Types::IncrementalScanDetails]
+    #
+    # @!attribute [rw] recovery_point
+    #   Contains information about the recovery point configuration for the
+    #   requested scan.
+    #   @return [Types::RecoveryPoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMalwareScanConfiguration AWS API Documentation
+    #
+    class StartMalwareScanConfiguration < Struct.new(
+      :role,
+      :incremental_scan_details,
+      :recovery_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the resource for which you invoked the
     #   API.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration
+    #   Contains information about the configuration to be used for the
+    #   malware scan.
+    #   @return [Types::StartMalwareScanConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMalwareScanRequest AWS API Documentation
     #
     class StartMalwareScanRequest < Struct.new(
-      :resource_arn)
+      :resource_arn,
+      :client_token,
+      :scan_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9906,12 +10614,28 @@ module Aws::GuardDuty
     #   resource.
     #   @return [Array<Types::ItemPath>]
     #
+    # @!attribute [rw] count
+    #   The number of occurrences of this specific threat detected during
+    #   the scan.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hash
+    #   The hash identifier of the detected malware threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_details
+    #   Detailed information about the detected malware threat.
+    #   @return [Array<Types::ItemDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Threat AWS API Documentation
     #
     class Threat < Struct.new(
       :name,
       :source,
-      :item_paths)
+      :item_paths,
+      :count,
+      :hash,
+      :item_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10017,11 +10741,16 @@ module Aws::GuardDuty
     #   The description of the scan trigger.
     #   @return [String]
     #
+    # @!attribute [rw] trigger_type
+    #   Specifies the trigger type that started the malware scan.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TriggerDetails AWS API Documentation
     #
     class TriggerDetails < Struct.new(
       :guard_duty_finding_id,
-      :description)
+      :description,
+      :trigger_type)
       SENSITIVE = []
       include Aws::Structure
     end

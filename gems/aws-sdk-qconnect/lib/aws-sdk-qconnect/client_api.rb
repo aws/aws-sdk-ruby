@@ -373,6 +373,8 @@ module Aws::QConnect
     MessageTemplateSearchExpression = Shapes::StructureShape.new(name: 'MessageTemplateSearchExpression')
     MessageTemplateSearchResultData = Shapes::StructureShape.new(name: 'MessageTemplateSearchResultData')
     MessageTemplateSearchResultsList = Shapes::ListShape.new(name: 'MessageTemplateSearchResultsList')
+    MessageTemplateSourceConfiguration = Shapes::UnionShape.new(name: 'MessageTemplateSourceConfiguration')
+    MessageTemplateSourceConfigurationSummary = Shapes::UnionShape.new(name: 'MessageTemplateSourceConfigurationSummary')
     MessageTemplateSummary = Shapes::StructureShape.new(name: 'MessageTemplateSummary')
     MessageTemplateSummaryList = Shapes::ListShape.new(name: 'MessageTemplateSummaryList')
     MessageTemplateVersionSummary = Shapes::StructureShape.new(name: 'MessageTemplateVersionSummary')
@@ -400,6 +402,12 @@ module Aws::QConnect
     Participant = Shapes::StringShape.new(name: 'Participant')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::StringShape.new(name: 'Priority')
+    PushADMMessageTemplateContent = Shapes::StructureShape.new(name: 'PushADMMessageTemplateContent')
+    PushAPNSMessageTemplateContent = Shapes::StructureShape.new(name: 'PushAPNSMessageTemplateContent')
+    PushBaiduMessageTemplateContent = Shapes::StructureShape.new(name: 'PushBaiduMessageTemplateContent')
+    PushFCMMessageTemplateContent = Shapes::StructureShape.new(name: 'PushFCMMessageTemplateContent')
+    PushMessageAction = Shapes::StringShape.new(name: 'PushMessageAction')
+    PushMessageTemplateContent = Shapes::StructureShape.new(name: 'PushMessageTemplateContent')
     PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
     PutFeedbackResponse = Shapes::StructureShape.new(name: 'PutFeedbackResponse')
     QueryAssistantRequest = Shapes::StructureShape.new(name: 'QueryAssistantRequest')
@@ -576,6 +584,17 @@ module Aws::QConnect
     WebCrawlerLimitsRateLimitInteger = Shapes::IntegerShape.new(name: 'WebCrawlerLimitsRateLimitInteger')
     WebScopeType = Shapes::StringShape.new(name: 'WebScopeType')
     WebUrl = Shapes::StringShape.new(name: 'WebUrl')
+    WhatsAppBusinessAccountId = Shapes::StringShape.new(name: 'WhatsAppBusinessAccountId')
+    WhatsAppMessageTemplateComponent = Shapes::StringShape.new(name: 'WhatsAppMessageTemplateComponent')
+    WhatsAppMessageTemplateComponents = Shapes::ListShape.new(name: 'WhatsAppMessageTemplateComponents')
+    WhatsAppMessageTemplateContent = Shapes::StructureShape.new(name: 'WhatsAppMessageTemplateContent')
+    WhatsAppMessageTemplateContentData = Shapes::StringShape.new(name: 'WhatsAppMessageTemplateContentData')
+    WhatsAppMessageTemplateId = Shapes::StringShape.new(name: 'WhatsAppMessageTemplateId')
+    WhatsAppMessageTemplateLanguage = Shapes::StringShape.new(name: 'WhatsAppMessageTemplateLanguage')
+    WhatsAppMessageTemplateName = Shapes::StringShape.new(name: 'WhatsAppMessageTemplateName')
+    WhatsAppMessageTemplateSourceConfiguration = Shapes::StructureShape.new(name: 'WhatsAppMessageTemplateSourceConfiguration')
+    WhatsAppMessageTemplateSourceConfigurationSummary = Shapes::StructureShape.new(name: 'WhatsAppMessageTemplateSourceConfigurationSummary')
+    WhatsAppSourceConfigurationStatus = Shapes::StringShape.new(name: 'WhatsAppSourceConfigurationStatus')
 
     AIAgentConfiguration.add_member(:manual_search_ai_agent_configuration, Shapes::ShapeRef.new(shape: ManualSearchAIAgentConfiguration, location_name: "manualSearchAIAgentConfiguration"))
     AIAgentConfiguration.add_member(:answer_recommendation_ai_agent_configuration, Shapes::ShapeRef.new(shape: AnswerRecommendationAIAgentConfiguration, location_name: "answerRecommendationAIAgentConfiguration"))
@@ -1125,11 +1144,12 @@ module Aws::QConnect
     CreateMessageTemplateAttachmentResponse.struct_class = Types::CreateMessageTemplateAttachmentResponse
 
     CreateMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
-    CreateMessageTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    CreateMessageTemplateRequest.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    CreateMessageTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    CreateMessageTemplateRequest.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, location_name: "content"))
     CreateMessageTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateMessageTemplateRequest.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
     CreateMessageTemplateRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    CreateMessageTemplateRequest.add_member(:source_configuration, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfiguration, location_name: "sourceConfiguration"))
     CreateMessageTemplateRequest.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
     CreateMessageTemplateRequest.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
     CreateMessageTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -1438,13 +1458,15 @@ module Aws::QConnect
     ExtendedMessageTemplateData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
     ExtendedMessageTemplateData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
     ExtendedMessageTemplateData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    ExtendedMessageTemplateData.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     ExtendedMessageTemplateData.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
     ExtendedMessageTemplateData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
     ExtendedMessageTemplateData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
     ExtendedMessageTemplateData.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
-    ExtendedMessageTemplateData.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    ExtendedMessageTemplateData.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, location_name: "content"))
     ExtendedMessageTemplateData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     ExtendedMessageTemplateData.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    ExtendedMessageTemplateData.add_member(:source_configuration_summary, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfigurationSummary, location_name: "sourceConfigurationSummary"))
     ExtendedMessageTemplateData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
     ExtendedMessageTemplateData.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
     ExtendedMessageTemplateData.add_member(:attribute_types, Shapes::ShapeRef.new(shape: MessageTemplateAttributeTypeList, location_name: "attributeTypes"))
@@ -1971,9 +1993,13 @@ module Aws::QConnect
 
     MessageTemplateContentProvider.add_member(:email, Shapes::ShapeRef.new(shape: EmailMessageTemplateContent, location_name: "email"))
     MessageTemplateContentProvider.add_member(:sms, Shapes::ShapeRef.new(shape: SMSMessageTemplateContent, location_name: "sms"))
+    MessageTemplateContentProvider.add_member(:whats_app, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateContent, location_name: "whatsApp"))
+    MessageTemplateContentProvider.add_member(:push, Shapes::ShapeRef.new(shape: PushMessageTemplateContent, location_name: "push"))
     MessageTemplateContentProvider.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MessageTemplateContentProvider.add_member_subclass(:email, Types::MessageTemplateContentProvider::Email)
     MessageTemplateContentProvider.add_member_subclass(:sms, Types::MessageTemplateContentProvider::Sms)
+    MessageTemplateContentProvider.add_member_subclass(:whats_app, Types::MessageTemplateContentProvider::WhatsApp)
+    MessageTemplateContentProvider.add_member_subclass(:push, Types::MessageTemplateContentProvider::Push)
     MessageTemplateContentProvider.add_member_subclass(:unknown, Types::MessageTemplateContentProvider::Unknown)
     MessageTemplateContentProvider.struct_class = Types::MessageTemplateContentProvider
 
@@ -1982,13 +2008,15 @@ module Aws::QConnect
     MessageTemplateData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
     MessageTemplateData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
     MessageTemplateData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateData.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     MessageTemplateData.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
     MessageTemplateData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
     MessageTemplateData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
     MessageTemplateData.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
-    MessageTemplateData.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    MessageTemplateData.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, location_name: "content"))
     MessageTemplateData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     MessageTemplateData.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    MessageTemplateData.add_member(:source_configuration_summary, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfigurationSummary, location_name: "sourceConfigurationSummary"))
     MessageTemplateData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
     MessageTemplateData.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
     MessageTemplateData.add_member(:attribute_types, Shapes::ShapeRef.new(shape: MessageTemplateAttributeTypeList, location_name: "attributeTypes"))
@@ -2031,6 +2059,7 @@ module Aws::QConnect
     MessageTemplateSearchResultData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
     MessageTemplateSearchResultData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
     MessageTemplateSearchResultData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateSearchResultData.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     MessageTemplateSearchResultData.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
     MessageTemplateSearchResultData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
     MessageTemplateSearchResultData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
@@ -2038,6 +2067,7 @@ module Aws::QConnect
     MessageTemplateSearchResultData.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, location_name: "isActive"))
     MessageTemplateSearchResultData.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
     MessageTemplateSearchResultData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    MessageTemplateSearchResultData.add_member(:source_configuration_summary, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfigurationSummary, location_name: "sourceConfigurationSummary"))
     MessageTemplateSearchResultData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
     MessageTemplateSearchResultData.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
     MessageTemplateSearchResultData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -2045,15 +2075,29 @@ module Aws::QConnect
 
     MessageTemplateSearchResultsList.member = Shapes::ShapeRef.new(shape: MessageTemplateSearchResultData)
 
+    MessageTemplateSourceConfiguration.add_member(:whats_app, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateSourceConfiguration, location_name: "whatsApp"))
+    MessageTemplateSourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MessageTemplateSourceConfiguration.add_member_subclass(:whats_app, Types::MessageTemplateSourceConfiguration::WhatsApp)
+    MessageTemplateSourceConfiguration.add_member_subclass(:unknown, Types::MessageTemplateSourceConfiguration::Unknown)
+    MessageTemplateSourceConfiguration.struct_class = Types::MessageTemplateSourceConfiguration
+
+    MessageTemplateSourceConfigurationSummary.add_member(:whats_app, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateSourceConfigurationSummary, location_name: "whatsApp"))
+    MessageTemplateSourceConfigurationSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MessageTemplateSourceConfigurationSummary.add_member_subclass(:whats_app, Types::MessageTemplateSourceConfigurationSummary::WhatsApp)
+    MessageTemplateSourceConfigurationSummary.add_member_subclass(:unknown, Types::MessageTemplateSourceConfigurationSummary::Unknown)
+    MessageTemplateSourceConfigurationSummary.struct_class = Types::MessageTemplateSourceConfigurationSummary
+
     MessageTemplateSummary.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
     MessageTemplateSummary.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
     MessageTemplateSummary.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
     MessageTemplateSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
     MessageTemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateSummary.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     MessageTemplateSummary.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
     MessageTemplateSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
     MessageTemplateSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
     MessageTemplateSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
+    MessageTemplateSummary.add_member(:source_configuration, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfiguration, location_name: "sourceConfiguration"))
     MessageTemplateSummary.add_member(:active_version_number, Shapes::ShapeRef.new(shape: Version, location_name: "activeVersionNumber"))
     MessageTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     MessageTemplateSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -2066,6 +2110,7 @@ module Aws::QConnect
     MessageTemplateVersionSummary.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
     MessageTemplateVersionSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
     MessageTemplateVersionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateVersionSummary.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     MessageTemplateVersionSummary.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
     MessageTemplateVersionSummary.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isActive"))
     MessageTemplateVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
@@ -2109,6 +2154,54 @@ module Aws::QConnect
 
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
+    PushADMMessageTemplateContent.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "title"))
+    PushADMMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "body"))
+    PushADMMessageTemplateContent.add_member(:action, Shapes::ShapeRef.new(shape: PushMessageAction, location_name: "action"))
+    PushADMMessageTemplateContent.add_member(:sound, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "sound"))
+    PushADMMessageTemplateContent.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "url"))
+    PushADMMessageTemplateContent.add_member(:image_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "imageUrl"))
+    PushADMMessageTemplateContent.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "imageIconUrl"))
+    PushADMMessageTemplateContent.add_member(:small_image_icon_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "smallImageIconUrl"))
+    PushADMMessageTemplateContent.add_member(:raw_content, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "rawContent"))
+    PushADMMessageTemplateContent.struct_class = Types::PushADMMessageTemplateContent
+
+    PushAPNSMessageTemplateContent.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "title"))
+    PushAPNSMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "body"))
+    PushAPNSMessageTemplateContent.add_member(:action, Shapes::ShapeRef.new(shape: PushMessageAction, location_name: "action"))
+    PushAPNSMessageTemplateContent.add_member(:sound, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "sound"))
+    PushAPNSMessageTemplateContent.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "url"))
+    PushAPNSMessageTemplateContent.add_member(:media_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "mediaUrl"))
+    PushAPNSMessageTemplateContent.add_member(:raw_content, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "rawContent"))
+    PushAPNSMessageTemplateContent.struct_class = Types::PushAPNSMessageTemplateContent
+
+    PushBaiduMessageTemplateContent.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "title"))
+    PushBaiduMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "body"))
+    PushBaiduMessageTemplateContent.add_member(:action, Shapes::ShapeRef.new(shape: PushMessageAction, location_name: "action"))
+    PushBaiduMessageTemplateContent.add_member(:sound, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "sound"))
+    PushBaiduMessageTemplateContent.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "url"))
+    PushBaiduMessageTemplateContent.add_member(:image_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "imageUrl"))
+    PushBaiduMessageTemplateContent.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "imageIconUrl"))
+    PushBaiduMessageTemplateContent.add_member(:small_image_icon_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "smallImageIconUrl"))
+    PushBaiduMessageTemplateContent.add_member(:raw_content, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "rawContent"))
+    PushBaiduMessageTemplateContent.struct_class = Types::PushBaiduMessageTemplateContent
+
+    PushFCMMessageTemplateContent.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "title"))
+    PushFCMMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "body"))
+    PushFCMMessageTemplateContent.add_member(:action, Shapes::ShapeRef.new(shape: PushMessageAction, location_name: "action"))
+    PushFCMMessageTemplateContent.add_member(:sound, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "sound"))
+    PushFCMMessageTemplateContent.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "url"))
+    PushFCMMessageTemplateContent.add_member(:image_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "imageUrl"))
+    PushFCMMessageTemplateContent.add_member(:image_icon_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "imageIconUrl"))
+    PushFCMMessageTemplateContent.add_member(:small_image_icon_url, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "smallImageIconUrl"))
+    PushFCMMessageTemplateContent.add_member(:raw_content, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "rawContent"))
+    PushFCMMessageTemplateContent.struct_class = Types::PushFCMMessageTemplateContent
+
+    PushMessageTemplateContent.add_member(:adm, Shapes::ShapeRef.new(shape: PushADMMessageTemplateContent, location_name: "adm"))
+    PushMessageTemplateContent.add_member(:apns, Shapes::ShapeRef.new(shape: PushAPNSMessageTemplateContent, location_name: "apns"))
+    PushMessageTemplateContent.add_member(:fcm, Shapes::ShapeRef.new(shape: PushFCMMessageTemplateContent, location_name: "fcm"))
+    PushMessageTemplateContent.add_member(:baidu, Shapes::ShapeRef.new(shape: PushBaiduMessageTemplateContent, location_name: "baidu"))
+    PushMessageTemplateContent.struct_class = Types::PushMessageTemplateContent
 
     PutFeedbackRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     PutFeedbackRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "targetId"))
@@ -2321,7 +2414,8 @@ module Aws::QConnect
     RenderMessageTemplateRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, required: true, location_name: "attributes"))
     RenderMessageTemplateRequest.struct_class = Types::RenderMessageTemplateRequest
 
-    RenderMessageTemplateResponse.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    RenderMessageTemplateResponse.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, location_name: "content"))
+    RenderMessageTemplateResponse.add_member(:source_configuration_summary, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfigurationSummary, location_name: "sourceConfigurationSummary"))
     RenderMessageTemplateResponse.add_member(:attributes_not_interpolated, Shapes::ShapeRef.new(shape: MessageTemplateAttributeKeyList, location_name: "attributesNotInterpolated"))
     RenderMessageTemplateResponse.add_member(:attachments, Shapes::ShapeRef.new(shape: MessageTemplateAttachmentList, location_name: "attachments"))
     RenderMessageTemplateResponse.struct_class = Types::RenderMessageTemplateResponse
@@ -2648,6 +2742,7 @@ module Aws::QConnect
     UpdateMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
     UpdateMessageTemplateRequest.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, location_name: "content"))
     UpdateMessageTemplateRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    UpdateMessageTemplateRequest.add_member(:source_configuration, Shapes::ShapeRef.new(shape: MessageTemplateSourceConfiguration, location_name: "sourceConfiguration"))
     UpdateMessageTemplateRequest.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
     UpdateMessageTemplateRequest.struct_class = Types::UpdateMessageTemplateRequest
 
@@ -2716,6 +2811,25 @@ module Aws::QConnect
 
     WebCrawlerLimits.add_member(:rate_limit, Shapes::ShapeRef.new(shape: WebCrawlerLimitsRateLimitInteger, location_name: "rateLimit"))
     WebCrawlerLimits.struct_class = Types::WebCrawlerLimits
+
+    WhatsAppMessageTemplateComponents.member = Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateComponent)
+
+    WhatsAppMessageTemplateContent.add_member(:data, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateContentData, location_name: "data"))
+    WhatsAppMessageTemplateContent.struct_class = Types::WhatsAppMessageTemplateContent
+
+    WhatsAppMessageTemplateSourceConfiguration.add_member(:business_account_id, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountId, required: true, location_name: "businessAccountId"))
+    WhatsAppMessageTemplateSourceConfiguration.add_member(:template_id, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateId, required: true, location_name: "templateId"))
+    WhatsAppMessageTemplateSourceConfiguration.add_member(:components, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateComponents, location_name: "components"))
+    WhatsAppMessageTemplateSourceConfiguration.struct_class = Types::WhatsAppMessageTemplateSourceConfiguration
+
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:business_account_id, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountId, required: true, location_name: "businessAccountId"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:template_id, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateId, required: true, location_name: "templateId"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateName, location_name: "name"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:language, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateLanguage, location_name: "language"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:components, Shapes::ShapeRef.new(shape: WhatsAppMessageTemplateComponents, location_name: "components"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:status, Shapes::ShapeRef.new(shape: WhatsAppSourceConfigurationStatus, location_name: "status"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "statusReason"))
+    WhatsAppMessageTemplateSourceConfigurationSummary.struct_class = Types::WhatsAppMessageTemplateSourceConfigurationSummary
 
 
     # @api private

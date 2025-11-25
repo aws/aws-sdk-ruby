@@ -419,6 +419,7 @@ module Aws::FSx
       attr_accessor aliases: ::Array[::String]
       attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor fsrm_configuration: Types::WindowsFsrmConfiguration
       SENSITIVE: []
     end
 
@@ -1786,6 +1787,7 @@ module Aws::FSx
       attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates
       attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor fsrm_configuration: Types::WindowsFsrmConfiguration
       SENSITIVE: []
     end
 
@@ -1936,6 +1938,13 @@ module Aws::FSx
       attr_accessor audit_log_configuration: Types::WindowsAuditLogConfiguration
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
       attr_accessor preferred_file_server_ipv_6: ::String
+      attr_accessor fsrm_configuration: Types::WindowsFsrmConfiguration
+      SENSITIVE: []
+    end
+
+    class WindowsFsrmConfiguration
+      attr_accessor fsrm_service_enabled: bool
+      attr_accessor event_log_destination: ::String
       SENSITIVE: []
     end
   end

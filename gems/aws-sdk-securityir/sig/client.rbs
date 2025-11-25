@@ -207,6 +207,7 @@ module Aws
         def impacted_services: () -> ::Array[::String]
         def case_attachments: () -> ::Array[Types::CaseAttachmentAttributes]
         def closed_date: () -> ::Time
+        def case_metadata: () -> ::Array[Types::CaseMetadataEntry]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#get_case-instance_method
       def get_case: (
@@ -301,6 +302,19 @@ module Aws
                          ) -> _ListCommentsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommentsResponseSuccess
 
+      interface _ListInvestigationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvestigationsResponse]
+        def next_token: () -> ::String
+        def investigation_actions: () -> ::Array[Types::InvestigationAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#list_investigations-instance_method
+      def list_investigations: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 case_id: ::String
+                               ) -> _ListInvestigationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvestigationsResponseSuccess
+
       interface _ListMembershipsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMembershipsResponse]
         def next_token: () -> ::String
@@ -322,6 +336,18 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SendFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#send_feedback-instance_method
+      def send_feedback: (
+                           case_id: ::String,
+                           result_id: ::String,
+                           usefulness: ("USEFUL" | "NOT_USEFUL"),
+                           ?comment: ::String
+                         ) -> _SendFeedbackResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendFeedbackResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
@@ -393,7 +419,13 @@ module Aws
                            },
                          ],
                          ?impacted_accounts_to_add: Array[::String],
-                         ?impacted_accounts_to_delete: Array[::String]
+                         ?impacted_accounts_to_delete: Array[::String],
+                         ?case_metadata: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
                        ) -> _UpdateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseResponseSuccess
 

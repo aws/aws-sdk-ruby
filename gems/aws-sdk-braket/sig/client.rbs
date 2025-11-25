@@ -188,6 +188,32 @@ module Aws
                                ) -> _CreateQuantumTaskResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuantumTaskResponseSuccess
 
+      interface _CreateSpendingLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSpendingLimitResponse]
+        def spending_limit_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#create_spending_limit-instance_method
+      def create_spending_limit: (
+                                   client_token: ::String,
+                                   device_arn: ::String,
+                                   spending_limit: ::String,
+                                   ?time_period: {
+                                     start_at: ::Time,
+                                     end_at: ::Time
+                                   },
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateSpendingLimitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSpendingLimitResponseSuccess
+
+      interface _DeleteSpendingLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSpendingLimitResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#delete_spending_limit-instance_method
+      def delete_spending_limit: (
+                                   spending_limit_arn: ::String
+                                 ) -> _DeleteSpendingLimitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSpendingLimitResponseSuccess
+
       interface _GetDeviceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResponse]
         def device_arn: () -> ::String
@@ -328,6 +354,25 @@ module Aws
                                 ) -> _SearchQuantumTasksResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchQuantumTasksResponseSuccess
 
+      interface _SearchSpendingLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSpendingLimitsResponse]
+        def spending_limits: () -> ::Array[Types::SpendingLimitSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#search_spending_limits-instance_method
+      def search_spending_limits: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?filters: Array[
+                                      {
+                                        name: ::String,
+                                        values: Array[::String],
+                                        operator: ("EQUAL")
+                                      },
+                                    ]
+                                  ) -> _SearchSpendingLimitsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSpendingLimitsResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -347,6 +392,21 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateSpendingLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSpendingLimitResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket/Client.html#update_spending_limit-instance_method
+      def update_spending_limit: (
+                                   spending_limit_arn: ::String,
+                                   client_token: ::String,
+                                   ?spending_limit: ::String,
+                                   ?time_period: {
+                                     start_at: ::Time,
+                                     end_at: ::Time
+                                   }
+                                 ) -> _UpdateSpendingLimitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSpendingLimitResponseSuccess
     end
   end
 end

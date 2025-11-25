@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2025-11-19)
+------------------
+
+* Feature - Adds support to TestState for mocked results and exceptions, along with additional inspection data.
+
 1.99.0 (2025-10-27)
 ------------------
 

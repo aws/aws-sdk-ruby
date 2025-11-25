@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-11-21)
+------------------
+
+* Feature - Add ListInvestigations and SendFeedback APIs to support SecurityIR AI agents
+
 1.16.0 (2025-11-11)
 ------------------
 

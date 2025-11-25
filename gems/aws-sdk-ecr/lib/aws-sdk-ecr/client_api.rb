@@ -16,8 +16,13 @@ module Aws::ECR
 
     AccountSettingName = Shapes::StringShape.new(name: 'AccountSettingName')
     AccountSettingValue = Shapes::StringShape.new(name: 'AccountSettingValue')
+    Annotations = Shapes::MapShape.new(name: 'Annotations')
     Arch = Shapes::StringShape.new(name: 'Arch')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArtifactStatus = Shapes::StringShape.new(name: 'ArtifactStatus')
+    ArtifactStatusFilter = Shapes::StringShape.new(name: 'ArtifactStatusFilter')
+    ArtifactType = Shapes::StringShape.new(name: 'ArtifactType')
+    ArtifactTypeList = Shapes::ListShape.new(name: 'ArtifactTypeList')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
@@ -38,6 +43,7 @@ module Aws::ECR
     BatchGetRepositoryScanningConfigurationResponse = Shapes::StructureShape.new(name: 'BatchGetRepositoryScanningConfigurationResponse')
     BatchedOperationLayerDigest = Shapes::StringShape.new(name: 'BatchedOperationLayerDigest')
     BatchedOperationLayerDigestList = Shapes::ListShape.new(name: 'BatchedOperationLayerDigestList')
+    BlockedByOrganizationPolicyException = Shapes::StructureShape.new(name: 'BlockedByOrganizationPolicyException')
     CompleteLayerUploadRequest = Shapes::StructureShape.new(name: 'CompleteLayerUploadRequest')
     CompleteLayerUploadResponse = Shapes::StructureShape.new(name: 'CompleteLayerUploadResponse')
     CreatePullThroughCacheRuleRequest = Shapes::StructureShape.new(name: 'CreatePullThroughCacheRuleRequest')
@@ -67,10 +73,16 @@ module Aws::ECR
     DeleteRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyResponse')
     DeleteRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryRequest')
     DeleteRepositoryResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryResponse')
+    DeleteSigningConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSigningConfigurationRequest')
+    DeleteSigningConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSigningConfigurationResponse')
+    DeregisterPullTimeUpdateExclusionRequest = Shapes::StructureShape.new(name: 'DeregisterPullTimeUpdateExclusionRequest')
+    DeregisterPullTimeUpdateExclusionResponse = Shapes::StructureShape.new(name: 'DeregisterPullTimeUpdateExclusionResponse')
     DescribeImageReplicationStatusRequest = Shapes::StructureShape.new(name: 'DescribeImageReplicationStatusRequest')
     DescribeImageReplicationStatusResponse = Shapes::StructureShape.new(name: 'DescribeImageReplicationStatusResponse')
     DescribeImageScanFindingsRequest = Shapes::StructureShape.new(name: 'DescribeImageScanFindingsRequest')
     DescribeImageScanFindingsResponse = Shapes::StructureShape.new(name: 'DescribeImageScanFindingsResponse')
+    DescribeImageSigningStatusRequest = Shapes::StructureShape.new(name: 'DescribeImageSigningStatusRequest')
+    DescribeImageSigningStatusResponse = Shapes::StructureShape.new(name: 'DescribeImageSigningStatusResponse')
     DescribeImagesFilter = Shapes::StructureShape.new(name: 'DescribeImagesFilter')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResponse = Shapes::StructureShape.new(name: 'DescribeImagesResponse')
@@ -91,8 +103,11 @@ module Aws::ECR
     Epoch = Shapes::IntegerShape.new(name: 'Epoch')
     EvaluationTimestamp = Shapes::TimestampShape.new(name: 'EvaluationTimestamp')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExclusionAlreadyExistsException = Shapes::StructureShape.new(name: 'ExclusionAlreadyExistsException')
+    ExclusionNotFoundException = Shapes::StructureShape.new(name: 'ExclusionNotFoundException')
     ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
     ExploitAvailable = Shapes::StringShape.new(name: 'ExploitAvailable')
+    FiftyMaxResults = Shapes::IntegerShape.new(name: 'FiftyMaxResults')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     FindingArn = Shapes::StringShape.new(name: 'FindingArn')
     FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
@@ -119,9 +134,12 @@ module Aws::ECR
     GetRegistryScanningConfigurationResponse = Shapes::StructureShape.new(name: 'GetRegistryScanningConfigurationResponse')
     GetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'GetRepositoryPolicyRequest')
     GetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'GetRepositoryPolicyResponse')
+    GetSigningConfigurationRequest = Shapes::StructureShape.new(name: 'GetSigningConfigurationRequest')
+    GetSigningConfigurationResponse = Shapes::StructureShape.new(name: 'GetSigningConfigurationResponse')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageActionType = Shapes::StringShape.new(name: 'ImageActionType')
     ImageAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageAlreadyExistsException')
+    ImageArchivedException = Shapes::StructureShape.new(name: 'ImageArchivedException')
     ImageCount = Shapes::IntegerShape.new(name: 'ImageCount')
     ImageDetail = Shapes::StructureShape.new(name: 'ImageDetail')
     ImageDetailList = Shapes::ListShape.new(name: 'ImageDetailList')
@@ -136,6 +154,8 @@ module Aws::ECR
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageManifest = Shapes::StringShape.new(name: 'ImageManifest')
     ImageNotFoundException = Shapes::StructureShape.new(name: 'ImageNotFoundException')
+    ImageReferrer = Shapes::StructureShape.new(name: 'ImageReferrer')
+    ImageReferrerList = Shapes::ListShape.new(name: 'ImageReferrerList')
     ImageReplicationStatus = Shapes::StructureShape.new(name: 'ImageReplicationStatus')
     ImageReplicationStatusList = Shapes::ListShape.new(name: 'ImageReplicationStatusList')
     ImageScanFinding = Shapes::StructureShape.new(name: 'ImageScanFinding')
@@ -144,7 +164,12 @@ module Aws::ECR
     ImageScanFindingsSummary = Shapes::StructureShape.new(name: 'ImageScanFindingsSummary')
     ImageScanStatus = Shapes::StructureShape.new(name: 'ImageScanStatus')
     ImageScanningConfiguration = Shapes::StructureShape.new(name: 'ImageScanningConfiguration')
+    ImageSigningStatus = Shapes::StructureShape.new(name: 'ImageSigningStatus')
+    ImageSigningStatusList = Shapes::ListShape.new(name: 'ImageSigningStatusList')
     ImageSizeInBytes = Shapes::IntegerShape.new(name: 'ImageSizeInBytes')
+    ImageStatus = Shapes::StringShape.new(name: 'ImageStatus')
+    ImageStatusFilter = Shapes::StringShape.new(name: 'ImageStatusFilter')
+    ImageStorageClassUpdateNotSupportedException = Shapes::StructureShape.new(name: 'ImageStorageClassUpdateNotSupportedException')
     ImageTag = Shapes::StringShape.new(name: 'ImageTag')
     ImageTagAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageTagAlreadyExistsException')
     ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
@@ -166,6 +191,8 @@ module Aws::ECR
     KmsException = Shapes::StructureShape.new(name: 'KmsException')
     KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     KmsKeyForRepositoryCreationTemplate = Shapes::StringShape.new(name: 'KmsKeyForRepositoryCreationTemplate')
+    LastActivatedAtTimestamp = Shapes::TimestampShape.new(name: 'LastActivatedAtTimestamp')
+    LastArchivedAtTimestamp = Shapes::TimestampShape.new(name: 'LastArchivedAtTimestamp')
     Layer = Shapes::StructureShape.new(name: 'Layer')
     LayerAlreadyExistsException = Shapes::StructureShape.new(name: 'LayerAlreadyExistsException')
     LayerAvailability = Shapes::StringShape.new(name: 'LayerAvailability')
@@ -191,13 +218,20 @@ module Aws::ECR
     LifecyclePolicyPreviewSummary = Shapes::StructureShape.new(name: 'LifecyclePolicyPreviewSummary')
     LifecyclePolicyRuleAction = Shapes::StructureShape.new(name: 'LifecyclePolicyRuleAction')
     LifecyclePolicyRulePriority = Shapes::IntegerShape.new(name: 'LifecyclePolicyRulePriority')
+    LifecyclePolicyStorageClass = Shapes::StringShape.new(name: 'LifecyclePolicyStorageClass')
+    LifecyclePolicyTargetStorageClass = Shapes::StringShape.new(name: 'LifecyclePolicyTargetStorageClass')
     LifecyclePolicyText = Shapes::StringShape.new(name: 'LifecyclePolicyText')
     LifecyclePolicyTextForRepositoryCreationTemplate = Shapes::StringShape.new(name: 'LifecyclePolicyTextForRepositoryCreationTemplate')
     LifecyclePreviewMaxResults = Shapes::IntegerShape.new(name: 'LifecyclePreviewMaxResults')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListImageReferrersFilter = Shapes::StructureShape.new(name: 'ListImageReferrersFilter')
+    ListImageReferrersRequest = Shapes::StructureShape.new(name: 'ListImageReferrersRequest')
+    ListImageReferrersResponse = Shapes::StructureShape.new(name: 'ListImageReferrersResponse')
     ListImagesFilter = Shapes::StructureShape.new(name: 'ListImagesFilter')
     ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
     ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
+    ListPullTimeUpdateExclusionsRequest = Shapes::StructureShape.new(name: 'ListPullTimeUpdateExclusionsRequest')
+    ListPullTimeUpdateExclusionsResponse = Shapes::StructureShape.new(name: 'ListPullTimeUpdateExclusionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -212,6 +246,7 @@ module Aws::ECR
     Platform = Shapes::StringShape.new(name: 'Platform')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     PrefixList = Shapes::ListShape.new(name: 'PrefixList')
+    PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
     ProxyEndpoint = Shapes::StringShape.new(name: 'ProxyEndpoint')
     PullThroughCacheRule = Shapes::StructureShape.new(name: 'PullThroughCacheRule')
     PullThroughCacheRuleAlreadyExistsException = Shapes::StructureShape.new(name: 'PullThroughCacheRuleAlreadyExistsException')
@@ -219,6 +254,7 @@ module Aws::ECR
     PullThroughCacheRuleNotFoundException = Shapes::StructureShape.new(name: 'PullThroughCacheRuleNotFoundException')
     PullThroughCacheRuleRepositoryPrefix = Shapes::StringShape.new(name: 'PullThroughCacheRuleRepositoryPrefix')
     PullThroughCacheRuleRepositoryPrefixList = Shapes::ListShape.new(name: 'PullThroughCacheRuleRepositoryPrefixList')
+    PullTimeUpdateExclusionList = Shapes::ListShape.new(name: 'PullTimeUpdateExclusionList')
     PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
     PutAccountSettingRequest = Shapes::StructureShape.new(name: 'PutAccountSettingRequest')
     PutAccountSettingResponse = Shapes::StructureShape.new(name: 'PutAccountSettingResponse')
@@ -236,6 +272,8 @@ module Aws::ECR
     PutRegistryScanningConfigurationResponse = Shapes::StructureShape.new(name: 'PutRegistryScanningConfigurationResponse')
     PutReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'PutReplicationConfigurationRequest')
     PutReplicationConfigurationResponse = Shapes::StructureShape.new(name: 'PutReplicationConfigurationResponse')
+    PutSigningConfigurationRequest = Shapes::StructureShape.new(name: 'PutSigningConfigurationRequest')
+    PutSigningConfigurationResponse = Shapes::StructureShape.new(name: 'PutSigningConfigurationResponse')
     RCTAppliedFor = Shapes::StringShape.new(name: 'RCTAppliedFor')
     RCTAppliedForList = Shapes::ListShape.new(name: 'RCTAppliedForList')
     Reason = Shapes::StringShape.new(name: 'Reason')
@@ -245,6 +283,8 @@ module Aws::ECR
     ReferenceUrlsList = Shapes::ListShape.new(name: 'ReferenceUrlsList')
     ReferencedImagesNotFoundException = Shapes::StructureShape.new(name: 'ReferencedImagesNotFoundException')
     Region = Shapes::StringShape.new(name: 'Region')
+    RegisterPullTimeUpdateExclusionRequest = Shapes::StructureShape.new(name: 'RegisterPullTimeUpdateExclusionRequest')
+    RegisterPullTimeUpdateExclusionResponse = Shapes::StructureShape.new(name: 'RegisterPullTimeUpdateExclusionResponse')
     RegistryId = Shapes::StringShape.new(name: 'RegistryId')
     RegistryPolicyNotFoundException = Shapes::StructureShape.new(name: 'RegistryPolicyNotFoundException')
     RegistryPolicyText = Shapes::StringShape.new(name: 'RegistryPolicyText')
@@ -309,6 +349,18 @@ module Aws::ECR
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
     Severity = Shapes::StringShape.new(name: 'Severity')
     SeverityCount = Shapes::IntegerShape.new(name: 'SeverityCount')
+    SigningConfiguration = Shapes::StructureShape.new(name: 'SigningConfiguration')
+    SigningConfigurationNotFoundException = Shapes::StructureShape.new(name: 'SigningConfigurationNotFoundException')
+    SigningProfileArn = Shapes::StringShape.new(name: 'SigningProfileArn')
+    SigningRepositoryFilter = Shapes::StructureShape.new(name: 'SigningRepositoryFilter')
+    SigningRepositoryFilterList = Shapes::ListShape.new(name: 'SigningRepositoryFilterList')
+    SigningRepositoryFilterType = Shapes::StringShape.new(name: 'SigningRepositoryFilterType')
+    SigningRepositoryFilterValue = Shapes::StringShape.new(name: 'SigningRepositoryFilterValue')
+    SigningRule = Shapes::StructureShape.new(name: 'SigningRule')
+    SigningRuleList = Shapes::ListShape.new(name: 'SigningRuleList')
+    SigningStatus = Shapes::StringShape.new(name: 'SigningStatus')
+    SigningStatusFailureCode = Shapes::StringShape.new(name: 'SigningStatusFailureCode')
+    SigningStatusFailureReason = Shapes::StringShape.new(name: 'SigningStatusFailureReason')
     Source = Shapes::StringShape.new(name: 'Source')
     SourceLayerHash = Shapes::StringShape.new(name: 'SourceLayerHash')
     StartImageScanRequest = Shapes::StructureShape.new(name: 'StartImageScanRequest')
@@ -316,6 +368,8 @@ module Aws::ECR
     StartLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewRequest')
     StartLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewResponse')
     Status = Shapes::StringShape.new(name: 'Status')
+    String = Shapes::StringShape.new(name: 'String')
+    SubjectIdentifier = Shapes::StructureShape.new(name: 'SubjectIdentifier')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -325,10 +379,13 @@ module Aws::ECR
     TagStatus = Shapes::StringShape.new(name: 'TagStatus')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetStorageClass = Shapes::StringShape.new(name: 'TargetStorageClass')
     TemplateAlreadyExistsException = Shapes::StructureShape.new(name: 'TemplateAlreadyExistsException')
     TemplateNotFoundException = Shapes::StructureShape.new(name: 'TemplateNotFoundException')
     Title = Shapes::StringShape.new(name: 'Title')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    TransitioningImageTotalCount = Shapes::StructureShape.new(name: 'TransitioningImageTotalCount')
+    TransitioningImageTotalCounts = Shapes::ListShape.new(name: 'TransitioningImageTotalCounts')
     Type = Shapes::StringShape.new(name: 'Type')
     UnableToAccessSecretException = Shapes::StructureShape.new(name: 'UnableToAccessSecretException')
     UnableToDecryptSecretValueException = Shapes::StructureShape.new(name: 'UnableToDecryptSecretValueException')
@@ -338,6 +395,8 @@ module Aws::ECR
     UnsupportedUpstreamRegistryException = Shapes::StructureShape.new(name: 'UnsupportedUpstreamRegistryException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateImageStorageClassRequest = Shapes::StructureShape.new(name: 'UpdateImageStorageClassRequest')
+    UpdateImageStorageClassResponse = Shapes::StructureShape.new(name: 'UpdateImageStorageClassResponse')
     UpdatePullThroughCacheRuleRequest = Shapes::StructureShape.new(name: 'UpdatePullThroughCacheRuleRequest')
     UpdatePullThroughCacheRuleResponse = Shapes::StructureShape.new(name: 'UpdatePullThroughCacheRuleResponse')
     UpdateRepositoryCreationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateRepositoryCreationTemplateRequest')
@@ -358,6 +417,11 @@ module Aws::ECR
     VulnerablePackage = Shapes::StructureShape.new(name: 'VulnerablePackage')
     VulnerablePackageName = Shapes::StringShape.new(name: 'VulnerablePackageName')
     VulnerablePackagesList = Shapes::ListShape.new(name: 'VulnerablePackagesList')
+
+    Annotations.key = Shapes::ShapeRef.new(shape: String)
+    Annotations.value = Shapes::ShapeRef.new(shape: String)
+
+    ArtifactTypeList.member = Shapes::ShapeRef.new(shape: ArtifactType)
 
     Attribute.add_member(:key, Shapes::ShapeRef.new(shape: AttributeKey, required: true, location_name: "key"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "value"))
@@ -420,6 +484,9 @@ module Aws::ECR
     BatchGetRepositoryScanningConfigurationResponse.struct_class = Types::BatchGetRepositoryScanningConfigurationResponse
 
     BatchedOperationLayerDigestList.member = Shapes::ShapeRef.new(shape: BatchedOperationLayerDigest)
+
+    BlockedByOrganizationPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    BlockedByOrganizationPolicyException.struct_class = Types::BlockedByOrganizationPolicyException
 
     CompleteLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     CompleteLayerUploadRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -554,6 +621,18 @@ module Aws::ECR
     DeleteRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     DeleteRepositoryResponse.struct_class = Types::DeleteRepositoryResponse
 
+    DeleteSigningConfigurationRequest.struct_class = Types::DeleteSigningConfigurationRequest
+
+    DeleteSigningConfigurationResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeleteSigningConfigurationResponse.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfiguration, location_name: "signingConfiguration"))
+    DeleteSigningConfigurationResponse.struct_class = Types::DeleteSigningConfigurationResponse
+
+    DeregisterPullTimeUpdateExclusionRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    DeregisterPullTimeUpdateExclusionRequest.struct_class = Types::DeregisterPullTimeUpdateExclusionRequest
+
+    DeregisterPullTimeUpdateExclusionResponse.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, location_name: "principalArn"))
+    DeregisterPullTimeUpdateExclusionResponse.struct_class = Types::DeregisterPullTimeUpdateExclusionResponse
+
     DescribeImageReplicationStatusRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DescribeImageReplicationStatusRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
     DescribeImageReplicationStatusRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -579,7 +658,19 @@ module Aws::ECR
     DescribeImageScanFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeImageScanFindingsResponse.struct_class = Types::DescribeImageScanFindingsResponse
 
+    DescribeImageSigningStatusRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    DescribeImageSigningStatusRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
+    DescribeImageSigningStatusRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeImageSigningStatusRequest.struct_class = Types::DescribeImageSigningStatusRequest
+
+    DescribeImageSigningStatusResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    DescribeImageSigningStatusResponse.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
+    DescribeImageSigningStatusResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeImageSigningStatusResponse.add_member(:signing_statuses, Shapes::ShapeRef.new(shape: ImageSigningStatusList, location_name: "signingStatuses"))
+    DescribeImageSigningStatusResponse.struct_class = Types::DescribeImageSigningStatusResponse
+
     DescribeImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
+    DescribeImagesFilter.add_member(:image_status, Shapes::ShapeRef.new(shape: ImageStatusFilter, location_name: "imageStatus"))
     DescribeImagesFilter.struct_class = Types::DescribeImagesFilter
 
     DescribeImagesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -662,6 +753,12 @@ module Aws::ECR
 
     EnhancedImageScanFindingList.member = Shapes::ShapeRef.new(shape: EnhancedImageScanFinding)
 
+    ExclusionAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ExclusionAlreadyExistsException.struct_class = Types::ExclusionAlreadyExistsException
+
+    ExclusionNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ExclusionNotFoundException.struct_class = Types::ExclusionNotFoundException
+
     FindingSeverityCounts.key = Shapes::ShapeRef.new(shape: FindingSeverity)
     FindingSeverityCounts.value = Shapes::ShapeRef.new(shape: SeverityCount)
 
@@ -737,6 +834,12 @@ module Aws::ECR
     GetRepositoryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
     GetRepositoryPolicyResponse.struct_class = Types::GetRepositoryPolicyResponse
 
+    GetSigningConfigurationRequest.struct_class = Types::GetSigningConfigurationRequest
+
+    GetSigningConfigurationResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetSigningConfigurationResponse.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfiguration, location_name: "signingConfiguration"))
+    GetSigningConfigurationResponse.struct_class = Types::GetSigningConfigurationResponse
+
     Image.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     Image.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     Image.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
@@ -746,6 +849,9 @@ module Aws::ECR
 
     ImageAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageAlreadyExistsException.struct_class = Types::ImageAlreadyExistsException
+
+    ImageArchivedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageArchivedException.struct_class = Types::ImageArchivedException
 
     ImageDetail.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     ImageDetail.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
@@ -758,6 +864,10 @@ module Aws::ECR
     ImageDetail.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
     ImageDetail.add_member(:artifact_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "artifactMediaType"))
     ImageDetail.add_member(:last_recorded_pull_time, Shapes::ShapeRef.new(shape: RecordedPullTimestamp, location_name: "lastRecordedPullTime"))
+    ImageDetail.add_member(:subject_manifest_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "subjectManifestDigest"))
+    ImageDetail.add_member(:image_status, Shapes::ShapeRef.new(shape: ImageStatus, location_name: "imageStatus"))
+    ImageDetail.add_member(:last_archived_at, Shapes::ShapeRef.new(shape: LastArchivedAtTimestamp, location_name: "lastArchivedAt"))
+    ImageDetail.add_member(:last_activated_at, Shapes::ShapeRef.new(shape: LastActivatedAtTimestamp, location_name: "lastActivatedAt"))
     ImageDetail.struct_class = Types::ImageDetail
 
     ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)
@@ -782,6 +892,16 @@ module Aws::ECR
 
     ImageNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageNotFoundException.struct_class = Types::ImageNotFoundException
+
+    ImageReferrer.add_member(:digest, Shapes::ShapeRef.new(shape: ImageDigest, required: true, location_name: "digest"))
+    ImageReferrer.add_member(:media_type, Shapes::ShapeRef.new(shape: MediaType, required: true, location_name: "mediaType"))
+    ImageReferrer.add_member(:artifact_type, Shapes::ShapeRef.new(shape: ArtifactType, location_name: "artifactType"))
+    ImageReferrer.add_member(:size, Shapes::ShapeRef.new(shape: ImageSizeInBytes, required: true, location_name: "size"))
+    ImageReferrer.add_member(:annotations, Shapes::ShapeRef.new(shape: Annotations, location_name: "annotations"))
+    ImageReferrer.add_member(:artifact_status, Shapes::ShapeRef.new(shape: ArtifactStatus, location_name: "artifactStatus"))
+    ImageReferrer.struct_class = Types::ImageReferrer
+
+    ImageReferrerList.member = Shapes::ShapeRef.new(shape: ImageReferrer)
 
     ImageReplicationStatus.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     ImageReplicationStatus.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -818,6 +938,17 @@ module Aws::ECR
 
     ImageScanningConfiguration.add_member(:scan_on_push, Shapes::ShapeRef.new(shape: ScanOnPushFlag, location_name: "scanOnPush"))
     ImageScanningConfiguration.struct_class = Types::ImageScanningConfiguration
+
+    ImageSigningStatus.add_member(:signing_profile_arn, Shapes::ShapeRef.new(shape: SigningProfileArn, location_name: "signingProfileArn"))
+    ImageSigningStatus.add_member(:failure_code, Shapes::ShapeRef.new(shape: SigningStatusFailureCode, location_name: "failureCode"))
+    ImageSigningStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: SigningStatusFailureReason, location_name: "failureReason"))
+    ImageSigningStatus.add_member(:status, Shapes::ShapeRef.new(shape: SigningStatus, location_name: "status"))
+    ImageSigningStatus.struct_class = Types::ImageSigningStatus
+
+    ImageSigningStatusList.member = Shapes::ShapeRef.new(shape: ImageSigningStatus)
+
+    ImageStorageClassUpdateNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ImageStorageClassUpdateNotSupportedException.struct_class = Types::ImageStorageClassUpdateNotSupportedException
 
     ImageTagAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageTagAlreadyExistsException.struct_class = Types::ImageTagAlreadyExistsException
@@ -906,20 +1037,40 @@ module Aws::ECR
     LifecyclePolicyPreviewResult.add_member(:image_pushed_at, Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
     LifecyclePolicyPreviewResult.add_member(:action, Shapes::ShapeRef.new(shape: LifecyclePolicyRuleAction, location_name: "action"))
     LifecyclePolicyPreviewResult.add_member(:applied_rule_priority, Shapes::ShapeRef.new(shape: LifecyclePolicyRulePriority, location_name: "appliedRulePriority"))
+    LifecyclePolicyPreviewResult.add_member(:storage_class, Shapes::ShapeRef.new(shape: LifecyclePolicyStorageClass, location_name: "storageClass"))
     LifecyclePolicyPreviewResult.struct_class = Types::LifecyclePolicyPreviewResult
 
     LifecyclePolicyPreviewResultList.member = Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewResult)
 
     LifecyclePolicyPreviewSummary.add_member(:expiring_image_total_count, Shapes::ShapeRef.new(shape: ImageCount, location_name: "expiringImageTotalCount"))
+    LifecyclePolicyPreviewSummary.add_member(:transitioning_image_total_counts, Shapes::ShapeRef.new(shape: TransitioningImageTotalCounts, location_name: "transitioningImageTotalCounts"))
     LifecyclePolicyPreviewSummary.struct_class = Types::LifecyclePolicyPreviewSummary
 
     LifecyclePolicyRuleAction.add_member(:type, Shapes::ShapeRef.new(shape: ImageActionType, location_name: "type"))
+    LifecyclePolicyRuleAction.add_member(:target_storage_class, Shapes::ShapeRef.new(shape: LifecyclePolicyTargetStorageClass, location_name: "targetStorageClass"))
     LifecyclePolicyRuleAction.struct_class = Types::LifecyclePolicyRuleAction
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListImageReferrersFilter.add_member(:artifact_types, Shapes::ShapeRef.new(shape: ArtifactTypeList, location_name: "artifactTypes"))
+    ListImageReferrersFilter.add_member(:artifact_status, Shapes::ShapeRef.new(shape: ArtifactStatusFilter, location_name: "artifactStatus"))
+    ListImageReferrersFilter.struct_class = Types::ListImageReferrersFilter
+
+    ListImageReferrersRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    ListImageReferrersRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    ListImageReferrersRequest.add_member(:subject_id, Shapes::ShapeRef.new(shape: SubjectIdentifier, required: true, location_name: "subjectId"))
+    ListImageReferrersRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListImageReferrersFilter, location_name: "filter"))
+    ListImageReferrersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListImageReferrersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: FiftyMaxResults, location_name: "maxResults"))
+    ListImageReferrersRequest.struct_class = Types::ListImageReferrersRequest
+
+    ListImageReferrersResponse.add_member(:referrers, Shapes::ShapeRef.new(shape: ImageReferrerList, location_name: "referrers"))
+    ListImageReferrersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListImageReferrersResponse.struct_class = Types::ListImageReferrersResponse
+
     ListImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
+    ListImagesFilter.add_member(:image_status, Shapes::ShapeRef.new(shape: ImageStatusFilter, location_name: "imageStatus"))
     ListImagesFilter.struct_class = Types::ListImagesFilter
 
     ListImagesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -932,6 +1083,14 @@ module Aws::ECR
     ListImagesResponse.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
     ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListImagesResponse.struct_class = Types::ListImagesResponse
+
+    ListPullTimeUpdateExclusionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPullTimeUpdateExclusionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPullTimeUpdateExclusionsRequest.struct_class = Types::ListPullTimeUpdateExclusionsRequest
+
+    ListPullTimeUpdateExclusionsResponse.add_member(:pull_time_update_exclusions, Shapes::ShapeRef.new(shape: PullTimeUpdateExclusionList, location_name: "pullTimeUpdateExclusions"))
+    ListPullTimeUpdateExclusionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPullTimeUpdateExclusionsResponse.struct_class = Types::ListPullTimeUpdateExclusionsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -975,6 +1134,8 @@ module Aws::ECR
     PullThroughCacheRuleNotFoundException.struct_class = Types::PullThroughCacheRuleNotFoundException
 
     PullThroughCacheRuleRepositoryPrefixList.member = Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix)
+
+    PullTimeUpdateExclusionList.member = Shapes::ShapeRef.new(shape: PrincipalArn)
 
     PutAccountSettingRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountSettingName, required: true, location_name: "name"))
     PutAccountSettingRequest.add_member(:value, Shapes::ShapeRef.new(shape: AccountSettingValue, required: true, location_name: "value"))
@@ -1047,6 +1208,12 @@ module Aws::ECR
     PutReplicationConfigurationResponse.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "replicationConfiguration"))
     PutReplicationConfigurationResponse.struct_class = Types::PutReplicationConfigurationResponse
 
+    PutSigningConfigurationRequest.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfiguration, required: true, location_name: "signingConfiguration"))
+    PutSigningConfigurationRequest.struct_class = Types::PutSigningConfigurationRequest
+
+    PutSigningConfigurationResponse.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfiguration, location_name: "signingConfiguration"))
+    PutSigningConfigurationResponse.struct_class = Types::PutSigningConfigurationResponse
+
     RCTAppliedForList.member = Shapes::ShapeRef.new(shape: RCTAppliedFor)
 
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
@@ -1057,6 +1224,13 @@ module Aws::ECR
 
     ReferencedImagesNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ReferencedImagesNotFoundException.struct_class = Types::ReferencedImagesNotFoundException
+
+    RegisterPullTimeUpdateExclusionRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    RegisterPullTimeUpdateExclusionRequest.struct_class = Types::RegisterPullTimeUpdateExclusionRequest
+
+    RegisterPullTimeUpdateExclusionResponse.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, location_name: "principalArn"))
+    RegisterPullTimeUpdateExclusionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
+    RegisterPullTimeUpdateExclusionResponse.struct_class = Types::RegisterPullTimeUpdateExclusionResponse
 
     RegistryPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     RegistryPolicyNotFoundException.struct_class = Types::RegistryPolicyNotFoundException
@@ -1198,6 +1372,24 @@ module Aws::ECR
     SetRepositoryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
     SetRepositoryPolicyResponse.struct_class = Types::SetRepositoryPolicyResponse
 
+    SigningConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: SigningRuleList, required: true, location_name: "rules"))
+    SigningConfiguration.struct_class = Types::SigningConfiguration
+
+    SigningConfigurationNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    SigningConfigurationNotFoundException.struct_class = Types::SigningConfigurationNotFoundException
+
+    SigningRepositoryFilter.add_member(:filter, Shapes::ShapeRef.new(shape: SigningRepositoryFilterValue, required: true, location_name: "filter"))
+    SigningRepositoryFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: SigningRepositoryFilterType, required: true, location_name: "filterType"))
+    SigningRepositoryFilter.struct_class = Types::SigningRepositoryFilter
+
+    SigningRepositoryFilterList.member = Shapes::ShapeRef.new(shape: SigningRepositoryFilter)
+
+    SigningRule.add_member(:signing_profile_arn, Shapes::ShapeRef.new(shape: SigningProfileArn, required: true, location_name: "signingProfileArn"))
+    SigningRule.add_member(:repository_filters, Shapes::ShapeRef.new(shape: SigningRepositoryFilterList, location_name: "repositoryFilters"))
+    SigningRule.struct_class = Types::SigningRule
+
+    SigningRuleList.member = Shapes::ShapeRef.new(shape: SigningRule)
+
     StartImageScanRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     StartImageScanRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     StartImageScanRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
@@ -1219,6 +1411,9 @@ module Aws::ECR
     StartLifecyclePolicyPreviewResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
     StartLifecyclePolicyPreviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewStatus, location_name: "status"))
     StartLifecyclePolicyPreviewResponse.struct_class = Types::StartLifecyclePolicyPreviewResponse
+
+    SubjectIdentifier.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, required: true, location_name: "imageDigest"))
+    SubjectIdentifier.struct_class = Types::SubjectIdentifier
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -1246,6 +1441,12 @@ module Aws::ECR
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
+    TransitioningImageTotalCount.add_member(:target_storage_class, Shapes::ShapeRef.new(shape: LifecyclePolicyTargetStorageClass, location_name: "targetStorageClass"))
+    TransitioningImageTotalCount.add_member(:image_total_count, Shapes::ShapeRef.new(shape: ImageCount, location_name: "imageTotalCount"))
+    TransitioningImageTotalCount.struct_class = Types::TransitioningImageTotalCount
+
+    TransitioningImageTotalCounts.member = Shapes::ShapeRef.new(shape: TransitioningImageTotalCount)
+
     UnableToAccessSecretException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnableToAccessSecretException.struct_class = Types::UnableToAccessSecretException
 
@@ -1269,6 +1470,18 @@ module Aws::ECR
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateImageStorageClassRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    UpdateImageStorageClassRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    UpdateImageStorageClassRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
+    UpdateImageStorageClassRequest.add_member(:target_storage_class, Shapes::ShapeRef.new(shape: TargetStorageClass, required: true, location_name: "targetStorageClass"))
+    UpdateImageStorageClassRequest.struct_class = Types::UpdateImageStorageClassRequest
+
+    UpdateImageStorageClassResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    UpdateImageStorageClassResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    UpdateImageStorageClassResponse.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
+    UpdateImageStorageClassResponse.add_member(:image_status, Shapes::ShapeRef.new(shape: ImageStatus, location_name: "imageStatus"))
+    UpdateImageStorageClassResponse.struct_class = Types::UpdateImageStorageClassResponse
 
     UpdatePullThroughCacheRuleRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     UpdatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
@@ -1552,6 +1765,30 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
       end)
 
+      api.add_operation(:delete_signing_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSigningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSigningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSigningConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: SigningConfigurationNotFoundException)
+      end)
+
+      api.add_operation(:deregister_pull_time_update_exclusion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterPullTimeUpdateExclusion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterPullTimeUpdateExclusionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterPullTimeUpdateExclusionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ExclusionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:describe_image_replication_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeImageReplicationStatus"
         o.http_method = "POST"
@@ -1583,6 +1820,19 @@ module Aws::ECR
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_image_signing_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImageSigningStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImageSigningStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImageSigningStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
       end)
 
       api.add_operation(:describe_images, Seahorse::Model::Operation.new.tap do |o|
@@ -1768,6 +2018,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
       end)
 
+      api.add_operation(:get_signing_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSigningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSigningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSigningConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: SigningConfigurationNotFoundException)
+      end)
+
       api.add_operation(:initiate_layer_upload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "InitiateLayerUpload"
         o.http_method = "POST"
@@ -1778,6 +2040,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KmsException)
+      end)
+
+      api.add_operation(:list_image_referrers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImageReferrers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImageReferrersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImageReferrersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:list_images, Seahorse::Model::Operation.new.tap do |o|
@@ -1795,6 +2069,18 @@ module Aws::ECR
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_pull_time_update_exclusions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPullTimeUpdateExclusions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPullTimeUpdateExclusionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPullTimeUpdateExclusionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1893,6 +2179,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: BlockedByOrganizationPolicyException)
       end)
 
       api.add_operation(:put_replication_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1904,6 +2191,30 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:put_signing_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSigningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutSigningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSigningConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:register_pull_time_update_exclusion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterPullTimeUpdateExclusion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterPullTimeUpdateExclusionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterPullTimeUpdateExclusionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ExclusionAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
       api.add_operation(:set_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1930,6 +2241,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageArchivedException)
       end)
 
       api.add_operation(:start_lifecycle_policy_preview, Seahorse::Model::Operation.new.tap do |o|
@@ -1970,6 +2282,20 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:update_image_storage_class, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateImageStorageClass"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateImageStorageClassRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateImageStorageClassResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageStorageClassUpdateNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_pull_through_cache_rule, Seahorse::Model::Operation.new.tap do |o|

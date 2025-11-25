@@ -38,6 +38,76 @@ module Aws
                   ) -> Client::_DescribeFlowResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeFlowResponseSuccess
       end
+
+      class InputActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterInputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterInputResponseSuccess
+      end
+
+      class InputDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterInputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterInputResponseSuccess
+      end
+
+      class InputStandby
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterInputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterInputResponseSuccess
+      end
+
+      class OutputActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterOutputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterOutputResponseSuccess
+      end
+
+      class OutputDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterOutputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterOutputResponseSuccess
+      end
+
+      class OutputRouted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterOutputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterOutputResponseSuccess
+      end
+
+      class OutputStandby
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetRouterOutputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRouterOutputResponseSuccess
+      end
     end
   end
 end

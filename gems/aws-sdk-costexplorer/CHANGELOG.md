@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2025-11-19)
+------------------
+
+* Feature - Add support for COST_CATEGORY, TAG, and LINKED_ACCOUNT AWS managed cost anomaly detection monitors
+
 1.138.0 (2025-10-27)
 ------------------
 

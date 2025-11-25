@@ -22,6 +22,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
 # This module provides support for {{full_name}}. This module is available in the
 # `{{gem_name}}` gem.
 #
+{{^service.h2_required_setting?}}
 # # Client
 #
 # The {Client} class provides one method for each API operation. Operation
@@ -35,6 +36,27 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
 #
 # See {Client} for more information.
 #
+{{/service.h2_required_setting?}}
+{{#service.h2_setting?}}
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+{{#example_operation_name}}
+#
+#     {{example_var_name}} = {{module_name}}::AsyncClient.new
+#     resp = {{example_var_name}}.{{example_operation_name}}(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+{{/example_operation_name}}
+#
+# See {AsyncClient} for more information.
+#
+{{/service.h2_setting?}}
 # # Errors
 #
 # Errors returned from {{full_name}} are defined in the

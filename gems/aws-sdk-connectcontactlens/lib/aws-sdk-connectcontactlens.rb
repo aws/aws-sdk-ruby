@@ -54,7 +54,7 @@ module Aws::ConnectContactLens
   autoload :EndpointProvider, 'aws-sdk-connectcontactlens/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcontactlens/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

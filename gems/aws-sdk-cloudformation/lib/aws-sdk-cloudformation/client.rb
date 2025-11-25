@@ -2173,6 +2173,7 @@ module Aws::CloudFormation
     #     auto_deployment: {
     #       enabled: false,
     #       retain_stacks_on_account_removal: false,
+    #       depends_on: ["StackSetARN"],
     #     },
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
     #     client_request_token: "ClientRequestToken",
@@ -3962,6 +3963,8 @@ module Aws::CloudFormation
     #   resp.stack_set.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
     #   resp.stack_set.auto_deployment.enabled #=> Boolean
     #   resp.stack_set.auto_deployment.retain_stacks_on_account_removal #=> Boolean
+    #   resp.stack_set.auto_deployment.depends_on #=> Array
+    #   resp.stack_set.auto_deployment.depends_on[0] #=> String
     #   resp.stack_set.permission_model #=> String, one of "SERVICE_MANAGED", "SELF_MANAGED"
     #   resp.stack_set.organizational_unit_ids #=> Array
     #   resp.stack_set.organizational_unit_ids[0] #=> String
@@ -6658,6 +6661,8 @@ module Aws::CloudFormation
     #   resp.summaries[0].status #=> String, one of "ACTIVE", "DELETED"
     #   resp.summaries[0].auto_deployment.enabled #=> Boolean
     #   resp.summaries[0].auto_deployment.retain_stacks_on_account_removal #=> Boolean
+    #   resp.summaries[0].auto_deployment.depends_on #=> Array
+    #   resp.summaries[0].auto_deployment.depends_on[0] #=> String
     #   resp.summaries[0].permission_model #=> String, one of "SERVICE_MANAGED", "SELF_MANAGED"
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
@@ -7670,10 +7675,10 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :unique_id
     #   A unique ID of the signal. When you signal Amazon EC2 instances or
-    #   Auto Scaling groups, specify the instance ID that you are signaling as
-    #   the unique ID. If you send multiple signals to a single resource (such
-    #   as signaling a wait condition), each signal requires a different
-    #   unique ID.
+    #   Amazon EC2 Auto Scaling groups, specify the instance ID that you are
+    #   signaling as the unique ID. If you send multiple signals to a single
+    #   resource (such as signaling a wait condition), each signal requires a
+    #   different unique ID.
     #
     # @option params [required, String] :status
     #   The status of the signal, which is either success or failure. A
@@ -8974,6 +8979,7 @@ module Aws::CloudFormation
     #     auto_deployment: {
     #       enabled: false,
     #       retain_stacks_on_account_removal: false,
+    #       depends_on: ["StackSetARN"],
     #     },
     #     operation_id: "ClientRequestToken",
     #     accounts: ["Account"],
@@ -9119,7 +9125,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

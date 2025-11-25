@@ -54,7 +54,7 @@ module Aws::DirectConnect
   autoload :EndpointProvider, 'aws-sdk-directconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-directconnect/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

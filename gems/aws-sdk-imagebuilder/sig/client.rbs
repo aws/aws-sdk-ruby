@@ -107,6 +107,7 @@ module Aws
         def request_id: () -> ::String
         def client_token: () -> ::String
         def component_build_version_arn: () -> ::String
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_component-instance_method
       def create_component: (
@@ -120,7 +121,8 @@ module Aws
                               ?uri: ::String,
                               ?kms_key_id: ::String,
                               ?tags: Hash[::String, ::String],
-                              client_token: ::String
+                              client_token: ::String,
+                              ?dry_run: bool
                             ) -> _CreateComponentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentResponseSuccess
 
@@ -129,6 +131,7 @@ module Aws
         def request_id: () -> ::String
         def client_token: () -> ::String
         def container_recipe_arn: () -> ::String
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_container_recipe-instance_method
       def create_container_recipe: (
@@ -265,6 +268,7 @@ module Aws
         def request_id: () -> ::String
         def client_token: () -> ::String
         def image_build_version_arn: () -> ::String
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_image-instance_method
       def create_image: (
@@ -369,6 +373,7 @@ module Aws
         def request_id: () -> ::String
         def client_token: () -> ::String
         def image_recipe_arn: () -> ::String
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_image_recipe-instance_method
       def create_image_recipe: (
@@ -517,6 +522,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowResponse]
         def client_token: () -> ::String
         def workflow_build_version_arn: () -> ::String
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#create_workflow-instance_method
       def create_workflow: (
@@ -529,7 +535,8 @@ module Aws
                              ?kms_key_id: ::String,
                              ?tags: Hash[::String, ::String],
                              client_token: ::String,
-                             type: ("BUILD" | "TEST" | "DISTRIBUTION")
+                             type: ("BUILD" | "TEST" | "DISTRIBUTION"),
+                             ?dry_run: bool
                            ) -> _CreateWorkflowResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
 
@@ -630,10 +637,29 @@ module Aws
                            ) -> _DeleteWorkflowResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowResponseSuccess
 
+      interface _DistributeImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DistributeImageResponse]
+        def client_token: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#distribute_image-instance_method
+      def distribute_image: (
+                              source_image: ::String,
+                              distribution_configuration_arn: ::String,
+                              execution_role: ::String,
+                              ?tags: Hash[::String, ::String],
+                              client_token: ::String,
+                              ?logging_configuration: {
+                                log_group_name: ::String?
+                              }
+                            ) -> _DistributeImageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DistributeImageResponseSuccess
+
       interface _GetComponentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentResponse]
         def request_id: () -> ::String
         def component: () -> Types::Component
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_component-instance_method
       def get_component: (
@@ -656,6 +682,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetContainerRecipeResponse]
         def request_id: () -> ::String
         def container_recipe: () -> Types::ContainerRecipe
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_container_recipe-instance_method
       def get_container_recipe: (
@@ -689,6 +716,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetImageResponse]
         def request_id: () -> ::String
         def image: () -> Types::Image
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image-instance_method
       def get_image: (
@@ -722,6 +750,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetImageRecipeResponse]
         def request_id: () -> ::String
         def image_recipe: () -> Types::ImageRecipe
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_image_recipe-instance_method
       def get_image_recipe: (
@@ -787,6 +816,7 @@ module Aws
       interface _GetWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
         def workflow: () -> Types::Workflow
+        def latest_version_references: () -> Types::LatestVersionReferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_workflow-instance_method
       def get_workflow: (
@@ -1338,6 +1368,18 @@ module Aws
                                      policy: ::String
                                    ) -> _PutImageRecipePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutImageRecipePolicyResponseSuccess
+
+      interface _RetryImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetryImageResponse]
+        def client_token: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#retry_image-instance_method
+      def retry_image: (
+                         image_build_version_arn: ::String,
+                         client_token: ::String
+                       ) -> _RetryImageResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryImageResponseSuccess
 
       interface _SendWorkflowStepActionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendWorkflowStepActionResponse]

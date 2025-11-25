@@ -54,7 +54,7 @@ module Aws::Drs
   autoload :EndpointProvider, 'aws-sdk-drs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-drs/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

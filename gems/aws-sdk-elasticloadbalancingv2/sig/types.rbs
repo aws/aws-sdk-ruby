@@ -215,6 +215,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor target_type: ("instance" | "ip" | "lambda" | "alb")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor ip_address_type: ("ipv4" | "ipv6")
+      attr_accessor target_control_port: ::Integer
       SENSITIVE: []
     end
 
@@ -1110,6 +1111,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor target_type: ("instance" | "ip" | "lambda" | "alb")
       attr_accessor protocol_version: ::String
       attr_accessor ip_address_type: ("ipv4" | "ipv6")
+      attr_accessor target_control_port: ::Integer
       SENSITIVE: []
     end
 

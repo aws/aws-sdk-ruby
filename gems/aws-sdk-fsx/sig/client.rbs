@@ -334,6 +334,10 @@ module Aws
                                   disk_iops_configuration: {
                                     mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
                                     iops: ::Integer?
+                                  }?,
+                                  fsrm_configuration: {
+                                    fsrm_service_enabled: bool,
+                                    event_log_destination: ::String?
                                   }?
                                 },
                                 ?lustre_configuration: {
@@ -478,6 +482,10 @@ module Aws
                                               disk_iops_configuration: {
                                                 mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
                                                 iops: ::Integer?
+                                              }?,
+                                              fsrm_configuration: {
+                                                fsrm_service_enabled: bool,
+                                                event_log_destination: ::String?
                                               }?
                                             },
                                             ?lustre_configuration: {
@@ -1246,6 +1254,10 @@ module Aws
                                   disk_iops_configuration: {
                                     mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
                                     iops: ::Integer?
+                                  }?,
+                                  fsrm_configuration: {
+                                    fsrm_service_enabled: bool,
+                                    event_log_destination: ::String?
                                   }?
                                 },
                                 ?lustre_configuration: {

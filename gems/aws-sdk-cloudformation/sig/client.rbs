@@ -371,7 +371,8 @@ module Aws
                               ?permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED"),
                               ?auto_deployment: {
                                 enabled: bool?,
-                                retain_stacks_on_account_removal: bool?
+                                retain_stacks_on_account_removal: bool?,
+                                depends_on: Array[::String]?
                               },
                               ?call_as: ("SELF" | "DELEGATED_ADMIN"),
                               ?client_request_token: ::String,
@@ -1622,7 +1623,8 @@ module Aws
                               ?permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED"),
                               ?auto_deployment: {
                                 enabled: bool?,
-                                retain_stacks_on_account_removal: bool?
+                                retain_stacks_on_account_removal: bool?,
+                                depends_on: Array[::String]?
                               },
                               ?operation_id: ::String,
                               ?accounts: Array[::String],

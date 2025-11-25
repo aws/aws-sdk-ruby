@@ -1336,6 +1336,9 @@ module Aws::BCMPricingCalculator
     #   * {Types::CreateBillEstimateResponse#cost_summary #cost_summary} => Types::BillEstimateCostSummary
     #   * {Types::CreateBillEstimateResponse#created_at #created_at} => Time
     #   * {Types::CreateBillEstimateResponse#expires_at #expires_at} => Time
+    #   * {Types::CreateBillEstimateResponse#group_sharing_preference #group_sharing_preference} => String
+    #   * {Types::CreateBillEstimateResponse#cost_category_group_sharing_preference_arn #cost_category_group_sharing_preference_arn} => String
+    #   * {Types::CreateBillEstimateResponse#cost_category_group_sharing_preference_effective_date #cost_category_group_sharing_preference_effective_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1367,6 +1370,9 @@ module Aws::BCMPricingCalculator
     #   resp.cost_summary.service_cost_differences["String"].estimated_cost.currency #=> String, one of "USD"
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
+    #   resp.group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.cost_category_group_sharing_preference_arn #=> String
+    #   resp.cost_category_group_sharing_preference_effective_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/CreateBillEstimate AWS API Documentation
     #
@@ -1393,6 +1399,14 @@ module Aws::BCMPricingCalculator
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the bill scenario.
     #
+    # @option params [String] :group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #
+    # @option params [String] :cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #
     # @return [Types::CreateBillScenarioResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBillScenarioResponse#id #id} => String
@@ -1402,6 +1416,8 @@ module Aws::BCMPricingCalculator
     #   * {Types::CreateBillScenarioResponse#created_at #created_at} => Time
     #   * {Types::CreateBillScenarioResponse#expires_at #expires_at} => Time
     #   * {Types::CreateBillScenarioResponse#failure_message #failure_message} => String
+    #   * {Types::CreateBillScenarioResponse#group_sharing_preference #group_sharing_preference} => String
+    #   * {Types::CreateBillScenarioResponse#cost_category_group_sharing_preference_arn #cost_category_group_sharing_preference_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1411,6 +1427,8 @@ module Aws::BCMPricingCalculator
     #     tags: {
     #       "ResourceTagKey" => "ResourceTagValue",
     #     },
+    #     group_sharing_preference: "OPEN", # accepts OPEN, PRIORITIZED, RESTRICTED
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn",
     #   })
     #
     # @example Response structure
@@ -1423,6 +1441,8 @@ module Aws::BCMPricingCalculator
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
     #   resp.failure_message #=> String
+    #   resp.group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.cost_category_group_sharing_preference_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/CreateBillScenario AWS API Documentation
     #
@@ -1579,6 +1599,9 @@ module Aws::BCMPricingCalculator
     #   * {Types::GetBillEstimateResponse#cost_summary #cost_summary} => Types::BillEstimateCostSummary
     #   * {Types::GetBillEstimateResponse#created_at #created_at} => Time
     #   * {Types::GetBillEstimateResponse#expires_at #expires_at} => Time
+    #   * {Types::GetBillEstimateResponse#group_sharing_preference #group_sharing_preference} => String
+    #   * {Types::GetBillEstimateResponse#cost_category_group_sharing_preference_arn #cost_category_group_sharing_preference_arn} => String
+    #   * {Types::GetBillEstimateResponse#cost_category_group_sharing_preference_effective_date #cost_category_group_sharing_preference_effective_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1605,6 +1628,9 @@ module Aws::BCMPricingCalculator
     #   resp.cost_summary.service_cost_differences["String"].estimated_cost.currency #=> String, one of "USD"
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
+    #   resp.group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.cost_category_group_sharing_preference_arn #=> String
+    #   resp.cost_category_group_sharing_preference_effective_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetBillEstimate AWS API Documentation
     #
@@ -1629,6 +1655,8 @@ module Aws::BCMPricingCalculator
     #   * {Types::GetBillScenarioResponse#created_at #created_at} => Time
     #   * {Types::GetBillScenarioResponse#expires_at #expires_at} => Time
     #   * {Types::GetBillScenarioResponse#failure_message #failure_message} => String
+    #   * {Types::GetBillScenarioResponse#group_sharing_preference #group_sharing_preference} => String
+    #   * {Types::GetBillScenarioResponse#cost_category_group_sharing_preference_arn #cost_category_group_sharing_preference_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1646,6 +1674,8 @@ module Aws::BCMPricingCalculator
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
     #   resp.failure_message #=> String
+    #   resp.group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.cost_category_group_sharing_preference_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetBillScenario AWS API Documentation
     #
@@ -2226,7 +2256,7 @@ module Aws::BCMPricingCalculator
     #   resp = client.list_bill_scenarios({
     #     filters: [
     #       {
-    #         name: "STATUS", # required, accepts STATUS, NAME
+    #         name: "STATUS", # required, accepts STATUS, NAME, GROUP_SHARING_PREFERENCE, COST_CATEGORY_ARN
     #         values: ["String"], # required
     #         match_option: "EQUALS", # accepts EQUALS, STARTS_WITH, CONTAINS
     #       },
@@ -2254,6 +2284,8 @@ module Aws::BCMPricingCalculator
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].expires_at #=> Time
     #   resp.items[0].failure_message #=> String
+    #   resp.items[0].group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.items[0].cost_category_group_sharing_preference_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/ListBillScenarios AWS API Documentation
@@ -2528,6 +2560,9 @@ module Aws::BCMPricingCalculator
     #   * {Types::UpdateBillEstimateResponse#cost_summary #cost_summary} => Types::BillEstimateCostSummary
     #   * {Types::UpdateBillEstimateResponse#created_at #created_at} => Time
     #   * {Types::UpdateBillEstimateResponse#expires_at #expires_at} => Time
+    #   * {Types::UpdateBillEstimateResponse#group_sharing_preference #group_sharing_preference} => String
+    #   * {Types::UpdateBillEstimateResponse#cost_category_group_sharing_preference_arn #cost_category_group_sharing_preference_arn} => String
+    #   * {Types::UpdateBillEstimateResponse#cost_category_group_sharing_preference_effective_date #cost_category_group_sharing_preference_effective_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2556,6 +2591,9 @@ module Aws::BCMPricingCalculator
     #   resp.cost_summary.service_cost_differences["String"].estimated_cost.currency #=> String, one of "USD"
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
+    #   resp.group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.cost_category_group_sharing_preference_arn #=> String
+    #   resp.cost_category_group_sharing_preference_effective_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdateBillEstimate AWS API Documentation
     #
@@ -2577,6 +2615,14 @@ module Aws::BCMPricingCalculator
     # @option params [Time,DateTime,Date,Integer,String] :expires_at
     #   The new expiration date for the bill scenario.
     #
+    # @option params [String] :group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #
+    # @option params [String] :cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #
     # @return [Types::UpdateBillScenarioResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBillScenarioResponse#id #id} => String
@@ -2586,6 +2632,8 @@ module Aws::BCMPricingCalculator
     #   * {Types::UpdateBillScenarioResponse#created_at #created_at} => Time
     #   * {Types::UpdateBillScenarioResponse#expires_at #expires_at} => Time
     #   * {Types::UpdateBillScenarioResponse#failure_message #failure_message} => String
+    #   * {Types::UpdateBillScenarioResponse#group_sharing_preference #group_sharing_preference} => String
+    #   * {Types::UpdateBillScenarioResponse#cost_category_group_sharing_preference_arn #cost_category_group_sharing_preference_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2593,6 +2641,8 @@ module Aws::BCMPricingCalculator
     #     identifier: "ResourceId", # required
     #     name: "BillScenarioName",
     #     expires_at: Time.now,
+    #     group_sharing_preference: "OPEN", # accepts OPEN, PRIORITIZED, RESTRICTED
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn",
     #   })
     #
     # @example Response structure
@@ -2605,6 +2655,8 @@ module Aws::BCMPricingCalculator
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
     #   resp.failure_message #=> String
+    #   resp.group_sharing_preference #=> String, one of "OPEN", "PRIORITIZED", "RESTRICTED"
+    #   resp.cost_category_group_sharing_preference_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdateBillScenario AWS API Documentation
     #
@@ -2730,7 +2782,7 @@ module Aws::BCMPricingCalculator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmpricingcalculator'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

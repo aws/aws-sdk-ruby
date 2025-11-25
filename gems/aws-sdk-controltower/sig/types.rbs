@@ -72,9 +72,9 @@ module Aws::ControlTower
 
     class CreateLandingZoneInput
       attr_accessor version: ::String
-      attr_accessor manifest: untyped
       attr_accessor remediation_types: ::Array[("INHERITANCE_DRIFT")]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor manifest: untyped
       SENSITIVE: []
     end
 
@@ -355,12 +355,12 @@ module Aws::ControlTower
 
     class LandingZoneDetail
       attr_accessor version: ::String
-      attr_accessor manifest: untyped
       attr_accessor remediation_types: ::Array[("INHERITANCE_DRIFT")]
       attr_accessor arn: ::String
       attr_accessor status: ("ACTIVE" | "PROCESSING" | "FAILED")
       attr_accessor latest_available_version: ::String
       attr_accessor drift_status: Types::LandingZoneDriftStatusSummary
+      attr_accessor manifest: untyped
       SENSITIVE: []
     end
 
@@ -582,9 +582,9 @@ module Aws::ControlTower
 
     class UpdateLandingZoneInput
       attr_accessor version: ::String
-      attr_accessor manifest: untyped
       attr_accessor remediation_types: ::Array[("INHERITANCE_DRIFT")]
       attr_accessor landing_zone_identifier: ::String
+      attr_accessor manifest: untyped
       SENSITIVE: []
     end
 

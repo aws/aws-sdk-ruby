@@ -691,6 +691,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor connect_source_phone_number: ::String
       attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      attr_accessor ring_timeout: ::Integer
       SENSITIVE: [:destination_phone_number, :attributes]
     end
 
@@ -698,6 +699,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor connect_contact_flow_id: ::String
       attr_accessor connect_source_phone_number: ::String
       attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      attr_accessor ring_timeout: ::Integer
       SENSITIVE: []
     end
 

@@ -554,6 +554,17 @@ module Aws
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _GetBucketAbacResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketAbacOutput]
+        def abac_status: () -> Types::AbacStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#get_bucket_abac-instance_method
+      def get_bucket_abac: (
+                             bucket: ::String,
+                             ?expected_bucket_owner: ::String
+                           ) -> _GetBucketAbacResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketAbacResponseSuccess
+
       interface _GetBucketAccelerateConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketAccelerateConfigurationOutput]
         def status: () -> ("Enabled" | "Suspended")
@@ -1353,6 +1364,18 @@ module Aws
                       ) -> _ListPartsResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPartsResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_bucket_abac-instance_method
+      def put_bucket_abac: (
+                             bucket: ::String,
+                             ?content_md5: ::String,
+                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
+                             ?expected_bucket_owner: ::String,
+                             abac_status: {
+                               status: ("Enabled" | "Disabled")?
+                             }
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_bucket_accelerate_configuration-instance_method
       def put_bucket_accelerate_configuration: (
                                                  bucket: ::String,
@@ -1470,7 +1493,10 @@ module Aws
                                            sse_algorithm: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse"),
                                            kms_master_key_id: ::String?
                                          }?,
-                                         bucket_key_enabled: bool?
+                                         bucket_key_enabled: bool?,
+                                         blocked_encryption_types: {
+                                           encryption_type: Array[("NONE" | "SSE-C")]?
+                                         }?
                                        },
                                      ]
                                    },

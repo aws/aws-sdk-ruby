@@ -126,6 +126,7 @@ module Aws::IAM
     EnableOrganizationsRootCredentialsManagementResponse = Shapes::StructureShape.new(name: 'EnableOrganizationsRootCredentialsManagementResponse')
     EnableOrganizationsRootSessionsRequest = Shapes::StructureShape.new(name: 'EnableOrganizationsRootSessionsRequest')
     EnableOrganizationsRootSessionsResponse = Shapes::StructureShape.new(name: 'EnableOrganizationsRootSessionsResponse')
+    EnableOutboundWebIdentityFederationResponse = Shapes::StructureShape.new(name: 'EnableOutboundWebIdentityFederationResponse')
     EntityAlreadyExistsException = Shapes::StructureShape.new(name: 'EntityAlreadyExistsException', error: {"code" => "EntityAlreadyExists", "httpStatusCode" => 409, "senderFault" => true})
     EntityDetails = Shapes::StructureShape.new(name: 'EntityDetails')
     EntityInfo = Shapes::StructureShape.new(name: 'EntityInfo')
@@ -136,6 +137,10 @@ module Aws::IAM
     EvalDecisionSourceType = Shapes::StringShape.new(name: 'EvalDecisionSourceType')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationResultsListType = Shapes::ListShape.new(name: 'EvaluationResultsListType')
+    FeatureDisabledException = Shapes::StructureShape.new(name: 'FeatureDisabledException', error: {"code" => "FeatureDisabled", "httpStatusCode" => 404, "senderFault" => true})
+    FeatureDisabledMessage = Shapes::StringShape.new(name: 'FeatureDisabledMessage')
+    FeatureEnabledException = Shapes::StructureShape.new(name: 'FeatureEnabledException', error: {"code" => "FeatureEnabled", "httpStatusCode" => 409, "senderFault" => true})
+    FeatureEnabledMessage = Shapes::StringShape.new(name: 'FeatureEnabledMessage')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FeaturesListType = Shapes::ListShape.new(name: 'FeaturesListType')
     GenerateCredentialReportResponse = Shapes::StructureShape.new(name: 'GenerateCredentialReportResponse')
@@ -171,6 +176,7 @@ module Aws::IAM
     GetOpenIDConnectProviderResponse = Shapes::StructureShape.new(name: 'GetOpenIDConnectProviderResponse')
     GetOrganizationsAccessReportRequest = Shapes::StructureShape.new(name: 'GetOrganizationsAccessReportRequest')
     GetOrganizationsAccessReportResponse = Shapes::StructureShape.new(name: 'GetOrganizationsAccessReportResponse')
+    GetOutboundWebIdentityFederationInfoResponse = Shapes::StructureShape.new(name: 'GetOutboundWebIdentityFederationInfoResponse')
     GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetPolicyVersionRequest = Shapes::StructureShape.new(name: 'GetPolicyVersionRequest')
@@ -976,6 +982,9 @@ module Aws::IAM
     EnableOrganizationsRootSessionsResponse.add_member(:enabled_features, Shapes::ShapeRef.new(shape: FeaturesListType, location_name: "EnabledFeatures"))
     EnableOrganizationsRootSessionsResponse.struct_class = Types::EnableOrganizationsRootSessionsResponse
 
+    EnableOutboundWebIdentityFederationResponse.add_member(:issuer_identifier, Shapes::ShapeRef.new(shape: stringType, location_name: "IssuerIdentifier"))
+    EnableOutboundWebIdentityFederationResponse.struct_class = Types::EnableOutboundWebIdentityFederationResponse
+
     EntityAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: entityAlreadyExistsMessage, location_name: "message"))
     EntityAlreadyExistsException.struct_class = Types::EntityAlreadyExistsException
 
@@ -1012,6 +1021,12 @@ module Aws::IAM
     EvaluationResult.struct_class = Types::EvaluationResult
 
     EvaluationResultsListType.member = Shapes::ShapeRef.new(shape: EvaluationResult)
+
+    FeatureDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: FeatureDisabledMessage, location_name: "message"))
+    FeatureDisabledException.struct_class = Types::FeatureDisabledException
+
+    FeatureEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: FeatureEnabledMessage, location_name: "message"))
+    FeatureEnabledException.struct_class = Types::FeatureEnabledException
 
     FeaturesListType.member = Shapes::ShapeRef.new(shape: FeatureType)
 
@@ -1160,6 +1175,10 @@ module Aws::IAM
     GetOrganizationsAccessReportResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     GetOrganizationsAccessReportResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
     GetOrganizationsAccessReportResponse.struct_class = Types::GetOrganizationsAccessReportResponse
+
+    GetOutboundWebIdentityFederationInfoResponse.add_member(:issuer_identifier, Shapes::ShapeRef.new(shape: stringType, location_name: "IssuerIdentifier"))
+    GetOutboundWebIdentityFederationInfoResponse.add_member(:jwt_vending_enabled, Shapes::ShapeRef.new(shape: booleanType, location_name: "JwtVendingEnabled"))
+    GetOutboundWebIdentityFederationInfoResponse.struct_class = Types::GetOutboundWebIdentityFederationInfoResponse
 
     GetPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
     GetPolicyRequest.struct_class = Types::GetPolicyRequest
@@ -3016,6 +3035,15 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
       end)
 
+      api.add_operation(:disable_outbound_web_identity_federation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableOutboundWebIdentityFederation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: FeatureDisabledException)
+      end)
+
       api.add_operation(:enable_mfa_device, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableMFADevice"
         o.http_method = "POST"
@@ -3055,6 +3083,15 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
         o.errors << Shapes::ShapeRef.new(shape: CallerIsNotManagementAccountException)
+      end)
+
+      api.add_operation(:enable_outbound_web_identity_federation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableOutboundWebIdentityFederation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: EnableOutboundWebIdentityFederationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureEnabledException)
       end)
 
       api.add_operation(:generate_credential_report, Seahorse::Model::Operation.new.tap do |o|
@@ -3256,6 +3293,15 @@ module Aws::IAM
         o.input = Shapes::ShapeRef.new(shape: GetOrganizationsAccessReportRequest)
         o.output = Shapes::ShapeRef.new(shape: GetOrganizationsAccessReportResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+      end)
+
+      api.add_operation(:get_outbound_web_identity_federation_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOutboundWebIdentityFederationInfo"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetOutboundWebIdentityFederationInfoResponse)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureDisabledException)
       end)
 
       api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|

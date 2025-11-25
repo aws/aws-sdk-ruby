@@ -126,7 +126,9 @@ module Aws::Transfer
     DescribedUser = Shapes::StructureShape.new(name: 'DescribedUser')
     DescribedWebApp = Shapes::StructureShape.new(name: 'DescribedWebApp')
     DescribedWebAppCustomization = Shapes::StructureShape.new(name: 'DescribedWebAppCustomization')
+    DescribedWebAppEndpointDetails = Shapes::UnionShape.new(name: 'DescribedWebAppEndpointDetails')
     DescribedWebAppIdentityProviderDetails = Shapes::UnionShape.new(name: 'DescribedWebAppIdentityProviderDetails')
+    DescribedWebAppVpcConfig = Shapes::StructureShape.new(name: 'DescribedWebAppVpcConfig')
     DescribedWorkflow = Shapes::StructureShape.new(name: 'DescribedWorkflow')
     Description = Shapes::StringShape.new(name: 'Description')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
@@ -371,10 +373,12 @@ module Aws::Transfer
     UpdateUserResponse = Shapes::StructureShape.new(name: 'UpdateUserResponse')
     UpdateWebAppCustomizationRequest = Shapes::StructureShape.new(name: 'UpdateWebAppCustomizationRequest')
     UpdateWebAppCustomizationResponse = Shapes::StructureShape.new(name: 'UpdateWebAppCustomizationResponse')
+    UpdateWebAppEndpointDetails = Shapes::UnionShape.new(name: 'UpdateWebAppEndpointDetails')
     UpdateWebAppIdentityCenterConfig = Shapes::StructureShape.new(name: 'UpdateWebAppIdentityCenterConfig')
     UpdateWebAppIdentityProviderDetails = Shapes::UnionShape.new(name: 'UpdateWebAppIdentityProviderDetails')
     UpdateWebAppRequest = Shapes::StructureShape.new(name: 'UpdateWebAppRequest')
     UpdateWebAppResponse = Shapes::StructureShape.new(name: 'UpdateWebAppResponse')
+    UpdateWebAppVpcConfig = Shapes::StructureShape.new(name: 'UpdateWebAppVpcConfig')
     Url = Shapes::StringShape.new(name: 'Url')
     UserCount = Shapes::IntegerShape.new(name: 'UserCount')
     UserDetails = Shapes::StructureShape.new(name: 'UserDetails')
@@ -385,7 +389,9 @@ module Aws::Transfer
     VpcLatticeResourceConfigurationArn = Shapes::StringShape.new(name: 'VpcLatticeResourceConfigurationArn')
     WebAppAccessEndpoint = Shapes::StringShape.new(name: 'WebAppAccessEndpoint')
     WebAppEndpoint = Shapes::StringShape.new(name: 'WebAppEndpoint')
+    WebAppEndpointDetails = Shapes::UnionShape.new(name: 'WebAppEndpointDetails')
     WebAppEndpointPolicy = Shapes::StringShape.new(name: 'WebAppEndpointPolicy')
+    WebAppEndpointType = Shapes::StringShape.new(name: 'WebAppEndpointType')
     WebAppFaviconFile = Shapes::BlobShape.new(name: 'WebAppFaviconFile')
     WebAppId = Shapes::StringShape.new(name: 'WebAppId')
     WebAppIdentityProviderDetails = Shapes::UnionShape.new(name: 'WebAppIdentityProviderDetails')
@@ -393,6 +399,7 @@ module Aws::Transfer
     WebAppTitle = Shapes::StringShape.new(name: 'WebAppTitle')
     WebAppUnitCount = Shapes::IntegerShape.new(name: 'WebAppUnitCount')
     WebAppUnits = Shapes::UnionShape.new(name: 'WebAppUnits')
+    WebAppVpcConfig = Shapes::StructureShape.new(name: 'WebAppVpcConfig')
     WorkflowDescription = Shapes::StringShape.new(name: 'WorkflowDescription')
     WorkflowDetail = Shapes::StructureShape.new(name: 'WorkflowDetail')
     WorkflowDetails = Shapes::StructureShape.new(name: 'WorkflowDetails')
@@ -546,6 +553,7 @@ module Aws::Transfer
     CreateWebAppRequest.add_member(:web_app_units, Shapes::ShapeRef.new(shape: WebAppUnits, location_name: "WebAppUnits"))
     CreateWebAppRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateWebAppRequest.add_member(:web_app_endpoint_policy, Shapes::ShapeRef.new(shape: WebAppEndpointPolicy, location_name: "WebAppEndpointPolicy"))
+    CreateWebAppRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: WebAppEndpointDetails, location_name: "EndpointDetails"))
     CreateWebAppRequest.struct_class = Types::CreateWebAppRequest
 
     CreateWebAppResponse.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
@@ -866,6 +874,8 @@ module Aws::Transfer
     DescribedWebApp.add_member(:web_app_units, Shapes::ShapeRef.new(shape: WebAppUnits, location_name: "WebAppUnits"))
     DescribedWebApp.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedWebApp.add_member(:web_app_endpoint_policy, Shapes::ShapeRef.new(shape: WebAppEndpointPolicy, location_name: "WebAppEndpointPolicy"))
+    DescribedWebApp.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: WebAppEndpointType, location_name: "EndpointType"))
+    DescribedWebApp.add_member(:described_endpoint_details, Shapes::ShapeRef.new(shape: DescribedWebAppEndpointDetails, location_name: "DescribedEndpointDetails"))
     DescribedWebApp.struct_class = Types::DescribedWebApp
 
     DescribedWebAppCustomization.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -875,11 +885,22 @@ module Aws::Transfer
     DescribedWebAppCustomization.add_member(:favicon_file, Shapes::ShapeRef.new(shape: WebAppFaviconFile, location_name: "FaviconFile"))
     DescribedWebAppCustomization.struct_class = Types::DescribedWebAppCustomization
 
+    DescribedWebAppEndpointDetails.add_member(:vpc, Shapes::ShapeRef.new(shape: DescribedWebAppVpcConfig, location_name: "Vpc"))
+    DescribedWebAppEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DescribedWebAppEndpointDetails.add_member_subclass(:vpc, Types::DescribedWebAppEndpointDetails::Vpc)
+    DescribedWebAppEndpointDetails.add_member_subclass(:unknown, Types::DescribedWebAppEndpointDetails::Unknown)
+    DescribedWebAppEndpointDetails.struct_class = Types::DescribedWebAppEndpointDetails
+
     DescribedWebAppIdentityProviderDetails.add_member(:identity_center_config, Shapes::ShapeRef.new(shape: DescribedIdentityCenterConfig, location_name: "IdentityCenterConfig"))
     DescribedWebAppIdentityProviderDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DescribedWebAppIdentityProviderDetails.add_member_subclass(:identity_center_config, Types::DescribedWebAppIdentityProviderDetails::IdentityCenterConfig)
     DescribedWebAppIdentityProviderDetails.add_member_subclass(:unknown, Types::DescribedWebAppIdentityProviderDetails::Unknown)
     DescribedWebAppIdentityProviderDetails.struct_class = Types::DescribedWebAppIdentityProviderDetails
+
+    DescribedWebAppVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    DescribedWebAppVpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    DescribedWebAppVpcConfig.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    DescribedWebAppVpcConfig.struct_class = Types::DescribedWebAppVpcConfig
 
     DescribedWorkflow.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DescribedWorkflow.add_member(:description, Shapes::ShapeRef.new(shape: WorkflowDescription, location_name: "Description"))
@@ -1201,6 +1222,7 @@ module Aws::Transfer
     ListedWebApp.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
     ListedWebApp.add_member(:access_endpoint, Shapes::ShapeRef.new(shape: WebAppAccessEndpoint, location_name: "AccessEndpoint"))
     ListedWebApp.add_member(:web_app_endpoint, Shapes::ShapeRef.new(shape: WebAppEndpoint, location_name: "WebAppEndpoint"))
+    ListedWebApp.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: WebAppEndpointType, location_name: "EndpointType"))
     ListedWebApp.struct_class = Types::ListedWebApp
 
     ListedWebApps.member = Shapes::ShapeRef.new(shape: ListedWebApp)
@@ -1519,6 +1541,12 @@ module Aws::Transfer
     UpdateWebAppCustomizationResponse.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
     UpdateWebAppCustomizationResponse.struct_class = Types::UpdateWebAppCustomizationResponse
 
+    UpdateWebAppEndpointDetails.add_member(:vpc, Shapes::ShapeRef.new(shape: UpdateWebAppVpcConfig, location_name: "Vpc"))
+    UpdateWebAppEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateWebAppEndpointDetails.add_member_subclass(:vpc, Types::UpdateWebAppEndpointDetails::Vpc)
+    UpdateWebAppEndpointDetails.add_member_subclass(:unknown, Types::UpdateWebAppEndpointDetails::Unknown)
+    UpdateWebAppEndpointDetails.struct_class = Types::UpdateWebAppEndpointDetails
+
     UpdateWebAppIdentityCenterConfig.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     UpdateWebAppIdentityCenterConfig.struct_class = Types::UpdateWebAppIdentityCenterConfig
 
@@ -1532,15 +1560,25 @@ module Aws::Transfer
     UpdateWebAppRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: UpdateWebAppIdentityProviderDetails, location_name: "IdentityProviderDetails"))
     UpdateWebAppRequest.add_member(:access_endpoint, Shapes::ShapeRef.new(shape: WebAppAccessEndpoint, location_name: "AccessEndpoint"))
     UpdateWebAppRequest.add_member(:web_app_units, Shapes::ShapeRef.new(shape: WebAppUnits, location_name: "WebAppUnits"))
+    UpdateWebAppRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: UpdateWebAppEndpointDetails, location_name: "EndpointDetails"))
     UpdateWebAppRequest.struct_class = Types::UpdateWebAppRequest
 
     UpdateWebAppResponse.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
     UpdateWebAppResponse.struct_class = Types::UpdateWebAppResponse
 
+    UpdateWebAppVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    UpdateWebAppVpcConfig.struct_class = Types::UpdateWebAppVpcConfig
+
     UserDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     UserDetails.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     UserDetails.struct_class = Types::UserDetails
+
+    WebAppEndpointDetails.add_member(:vpc, Shapes::ShapeRef.new(shape: WebAppVpcConfig, location_name: "Vpc"))
+    WebAppEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WebAppEndpointDetails.add_member_subclass(:vpc, Types::WebAppEndpointDetails::Vpc)
+    WebAppEndpointDetails.add_member_subclass(:unknown, Types::WebAppEndpointDetails::Unknown)
+    WebAppEndpointDetails.struct_class = Types::WebAppEndpointDetails
 
     WebAppIdentityProviderDetails.add_member(:identity_center_config, Shapes::ShapeRef.new(shape: IdentityCenterConfig, location_name: "IdentityCenterConfig"))
     WebAppIdentityProviderDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1553,6 +1591,11 @@ module Aws::Transfer
     WebAppUnits.add_member_subclass(:provisioned, Types::WebAppUnits::Provisioned)
     WebAppUnits.add_member_subclass(:unknown, Types::WebAppUnits::Unknown)
     WebAppUnits.struct_class = Types::WebAppUnits
+
+    WebAppVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    WebAppVpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    WebAppVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    WebAppVpcConfig.struct_class = Types::WebAppVpcConfig
 
     WorkflowDetail.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     WorkflowDetail.add_member(:execution_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "ExecutionRole"))

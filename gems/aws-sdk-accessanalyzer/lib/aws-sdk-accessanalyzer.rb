@@ -54,7 +54,7 @@ module Aws::AccessAnalyzer
   autoload :EndpointProvider, 'aws-sdk-accessanalyzer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-accessanalyzer/endpoints'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

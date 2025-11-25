@@ -86,10 +86,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#create_landing_zone-instance_method
       def create_landing_zone: (
                                  version: ::String,
-                                 manifest: {
-                                 },
                                  ?remediation_types: Array[("INHERITANCE_DRIFT")],
-                                 ?tags: Hash[::String, ::String]
+                                 ?tags: Hash[::String, ::String],
+                                 ?manifest: {
+                                 }
                                ) -> _CreateLandingZoneResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLandingZoneResponseSuccess
 
@@ -441,10 +441,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_landing_zone-instance_method
       def update_landing_zone: (
                                  version: ::String,
-                                 manifest: {
-                                 },
                                  ?remediation_types: Array[("INHERITANCE_DRIFT")],
-                                 landing_zone_identifier: ::String
+                                 landing_zone_identifier: ::String,
+                                 ?manifest: {
+                                 }
                                ) -> _UpdateLandingZoneResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLandingZoneResponseSuccess
     end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `login_credentials` in credentials chain when config is enabled.
+
+3.239.1 (2025-11-21)
+------------------
+
+* Issue - Fixed HTTP/2 connection issues when using custom ports.
+
+3.239.0 (2025-11-20)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Issue - Fix region configuration for LoginCredential's Signin client.
+
+3.238.0 (2025-11-19)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - IAM now supports outbound identity federation via the STS GetWebIdentityToken API, enabling AWS workloads to securely authenticate with external services using short-lived JSON Web Tokens.
+
+* Feature - Add `LoginCredentials` which retrieves credentials from AWS Sign-In. Support `aws-sdk-signin` alias gem.
+
 3.237.0 (2025-11-10)
 ------------------
 

@@ -97,6 +97,30 @@
       "input":{"shape":"BatchDescribeModelPackageInput"},
       "output":{"shape":"BatchDescribeModelPackageOutput"}
     },
+    "BatchRebootClusterNodes":{
+      "name":"BatchRebootClusterNodes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchRebootClusterNodesRequest"},
+      "output":{"shape":"BatchRebootClusterNodesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
+    "BatchReplaceClusterNodes":{
+      "name":"BatchReplaceClusterNodes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchReplaceClusterNodesRequest"},
+      "output":{"shape":"BatchReplaceClusterNodesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
     "CreateAction":{
       "name":"CreateAction",
       "http":{
@@ -4216,6 +4240,25 @@
     }
   },
   "shapes":{
+    "AcceleratorPartitionConfig":{
+      "type":"structure",
+      "required":[
+        "Type",
+        "Count"
+      ],
+      "members":{
+        "Type":{"shape":"MIGProfileType"},
+        "Count":{
+          "shape":"AcceleratorPartitionConfigCountInteger",
+          "box":true
+        }
+      }
+    },
+    "AcceleratorPartitionConfigCountInteger":{
+      "type":"integer",
+      "max":10000000,
+      "min":0
+    },
     "AcceleratorsAmount":{
       "type":"integer",
       "box":true,
@@ -4283,6 +4326,20 @@
         "Enabled",
         "Disabled"
       ]
+    },
+    "ActiveClusterOperationCount":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
+    "ActiveClusterOperationName":{
+      "type":"string",
+      "enum":["Scaling"]
+    },
+    "ActiveOperations":{
+      "type":"map",
+      "key":{"shape":"ActiveClusterOperationName"},
+      "value":{"shape":"ActiveClusterOperationCount"}
     },
     "AddAssociationRequest":{
       "type":"structure",
@@ -6000,6 +6057,160 @@
         "ModelApprovalStatus":{"shape":"ModelApprovalStatus"}
       }
     },
+    "BatchRebootClusterNodeLogicalIdsError":{
+      "type":"structure",
+      "required":[
+        "NodeLogicalId",
+        "ErrorCode",
+        "Message"
+      ],
+      "members":{
+        "NodeLogicalId":{"shape":"ClusterNodeLogicalId"},
+        "ErrorCode":{"shape":"BatchRebootClusterNodesErrorCode"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "BatchRebootClusterNodeLogicalIdsErrors":{
+      "type":"list",
+      "member":{"shape":"BatchRebootClusterNodeLogicalIdsError"},
+      "max":25,
+      "min":0
+    },
+    "BatchRebootClusterNodesError":{
+      "type":"structure",
+      "required":[
+        "NodeId",
+        "ErrorCode",
+        "Message"
+      ],
+      "members":{
+        "NodeId":{"shape":"ClusterNodeId"},
+        "ErrorCode":{"shape":"BatchRebootClusterNodesErrorCode"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "BatchRebootClusterNodesErrorCode":{
+      "type":"string",
+      "enum":[
+        "InstanceIdNotFound",
+        "InvalidInstanceStatus",
+        "InstanceIdInUse",
+        "InternalServerError"
+      ]
+    },
+    "BatchRebootClusterNodesErrors":{
+      "type":"list",
+      "member":{"shape":"BatchRebootClusterNodesError"},
+      "max":25,
+      "min":0
+    },
+    "BatchRebootClusterNodesRequest":{
+      "type":"structure",
+      "required":["ClusterName"],
+      "members":{
+        "ClusterName":{"shape":"ClusterNameOrArn"},
+        "NodeIds":{"shape":"BatchRebootClusterNodesRequestNodeIdsList"},
+        "NodeLogicalIds":{"shape":"BatchRebootClusterNodesRequestNodeLogicalIdsList"}
+      }
+    },
+    "BatchRebootClusterNodesRequestNodeIdsList":{
+      "type":"list",
+      "member":{"shape":"ClusterNodeId"},
+      "max":25,
+      "min":1
+    },
+    "BatchRebootClusterNodesRequestNodeLogicalIdsList":{
+      "type":"list",
+      "member":{"shape":"ClusterNodeLogicalId"},
+      "max":25,
+      "min":1
+    },
+    "BatchRebootClusterNodesResponse":{
+      "type":"structure",
+      "members":{
+        "Successful":{"shape":"ClusterNodeIds"},
+        "Failed":{"shape":"BatchRebootClusterNodesErrors"},
+        "FailedNodeLogicalIds":{"shape":"BatchRebootClusterNodeLogicalIdsErrors"},
+        "SuccessfulNodeLogicalIds":{"shape":"ClusterNodeLogicalIdList"}
+      }
+    },
+    "BatchReplaceClusterNodeLogicalIdsError":{
+      "type":"structure",
+      "required":[
+        "NodeLogicalId",
+        "ErrorCode",
+        "Message"
+      ],
+      "members":{
+        "NodeLogicalId":{"shape":"ClusterNodeLogicalId"},
+        "ErrorCode":{"shape":"BatchReplaceClusterNodesErrorCode"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "BatchReplaceClusterNodeLogicalIdsErrors":{
+      "type":"list",
+      "member":{"shape":"BatchReplaceClusterNodeLogicalIdsError"},
+      "max":25,
+      "min":0
+    },
+    "BatchReplaceClusterNodesError":{
+      "type":"structure",
+      "required":[
+        "NodeId",
+        "ErrorCode",
+        "Message"
+      ],
+      "members":{
+        "NodeId":{"shape":"ClusterNodeId"},
+        "ErrorCode":{"shape":"BatchReplaceClusterNodesErrorCode"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "BatchReplaceClusterNodesErrorCode":{
+      "type":"string",
+      "enum":[
+        "InstanceIdNotFound",
+        "InvalidInstanceStatus",
+        "InstanceIdInUse",
+        "InternalServerError"
+      ]
+    },
+    "BatchReplaceClusterNodesErrors":{
+      "type":"list",
+      "member":{"shape":"BatchReplaceClusterNodesError"},
+      "max":25,
+      "min":0
+    },
+    "BatchReplaceClusterNodesRequest":{
+      "type":"structure",
+      "required":["ClusterName"],
+      "members":{
+        "ClusterName":{"shape":"ClusterNameOrArn"},
+        "NodeIds":{"shape":"BatchReplaceClusterNodesRequestNodeIdsList"},
+        "NodeLogicalIds":{"shape":"BatchReplaceClusterNodesRequestNodeLogicalIdsList"}
+      }
+    },
+    "BatchReplaceClusterNodesRequestNodeIdsList":{
+      "type":"list",
+      "member":{"shape":"ClusterNodeId"},
+      "max":25,
+      "min":1
+    },
+    "BatchReplaceClusterNodesRequestNodeLogicalIdsList":{
+      "type":"list",
+      "member":{"shape":"ClusterNodeLogicalId"},
+      "max":25,
+      "min":1
+    },
+    "BatchReplaceClusterNodesResponse":{
+      "type":"structure",
+      "members":{
+        "Successful":{"shape":"ClusterNodeIds"},
+        "Failed":{"shape":"BatchReplaceClusterNodesErrors"},
+        "FailedNodeLogicalIds":{"shape":"BatchReplaceClusterNodeLogicalIdsErrors"},
+        "SuccessfulNodeLogicalIds":{"shape":"ClusterNodeLogicalIdList"}
+      }
+    },
     "BatchStrategy":{
       "type":"string",
       "enum":[
@@ -6871,6 +7082,20 @@
       "type":"string",
       "pattern":"[a-z]{3}\\d-az\\d"
     },
+    "ClusterCapacityRequirements":{
+      "type":"structure",
+      "members":{
+        "Spot":{"shape":"ClusterSpotOptions"},
+        "OnDemand":{"shape":"ClusterOnDemandOptions"}
+      }
+    },
+    "ClusterCapacityType":{
+      "type":"string",
+      "enum":[
+        "Spot",
+        "OnDemand"
+      ]
+    },
     "ClusterConfigMode":{
       "type":"string",
       "enum":[
@@ -6967,6 +7192,7 @@
       "members":{
         "CurrentCount":{"shape":"ClusterNonNegativeInstanceCount"},
         "TargetCount":{"shape":"ClusterInstanceCount"},
+        "MinCount":{"shape":"ClusterInstanceCount"},
         "InstanceGroupName":{"shape":"ClusterInstanceGroupName"},
         "InstanceType":{"shape":"ClusterInstanceType"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
@@ -6981,6 +7207,9 @@
         "ScheduledUpdateConfig":{"shape":"ScheduledUpdateConfig"},
         "CurrentImageId":{"shape":"ImageId"},
         "DesiredImageId":{"shape":"ImageId"},
+        "ActiveOperations":{"shape":"ActiveOperations"},
+        "KubernetesConfig":{"shape":"ClusterKubernetesConfigDetails"},
+        "CapacityRequirements":{"shape":"ClusterCapacityRequirements"},
         "TargetStateCount":{"shape":"ClusterInstanceCount"},
         "SoftwareUpdateStatus":{"shape":"SoftwareUpdateStatus"},
         "ActiveSoftwareUpdateConfig":{"shape":"DeploymentConfiguration"}
@@ -7007,6 +7236,7 @@
       ],
       "members":{
         "InstanceCount":{"shape":"ClusterInstanceCount"},
+        "MinInstanceCount":{"shape":"ClusterInstanceCount"},
         "InstanceGroupName":{"shape":"ClusterInstanceGroupName"},
         "InstanceType":{"shape":"ClusterInstanceType"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
@@ -7017,7 +7247,9 @@
         "TrainingPlanArn":{"shape":"TrainingPlanArn"},
         "OverrideVpcConfig":{"shape":"VpcConfig"},
         "ScheduledUpdateConfig":{"shape":"ScheduledUpdateConfig"},
-        "ImageId":{"shape":"ImageId"}
+        "ImageId":{"shape":"ImageId"},
+        "KubernetesConfig":{"shape":"ClusterKubernetesConfig"},
+        "CapacityRequirements":{"shape":"ClusterCapacityRequirements"}
       }
     },
     "ClusterInstanceGroupSpecifications":{
@@ -7197,6 +7429,88 @@
         "ml.r7i.48xlarge"
       ]
     },
+    "ClusterKubernetesConfig":{
+      "type":"structure",
+      "members":{
+        "Labels":{"shape":"ClusterKubernetesLabels"},
+        "Taints":{"shape":"ClusterKubernetesTaints"}
+      }
+    },
+    "ClusterKubernetesConfigDetails":{
+      "type":"structure",
+      "members":{
+        "CurrentLabels":{"shape":"ClusterKubernetesLabels"},
+        "DesiredLabels":{"shape":"ClusterKubernetesLabels"},
+        "CurrentTaints":{"shape":"ClusterKubernetesTaints"},
+        "DesiredTaints":{"shape":"ClusterKubernetesTaints"}
+      }
+    },
+    "ClusterKubernetesConfigNodeDetails":{
+      "type":"structure",
+      "members":{
+        "CurrentLabels":{"shape":"ClusterKubernetesLabels"},
+        "DesiredLabels":{"shape":"ClusterKubernetesLabels"},
+        "CurrentTaints":{"shape":"ClusterKubernetesTaints"},
+        "DesiredTaints":{"shape":"ClusterKubernetesTaints"}
+      }
+    },
+    "ClusterKubernetesLabelKey":{
+      "type":"string",
+      "max":317,
+      "min":1,
+      "pattern":"([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?[A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?"
+    },
+    "ClusterKubernetesLabelValue":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?"
+    },
+    "ClusterKubernetesLabels":{
+      "type":"map",
+      "key":{"shape":"ClusterKubernetesLabelKey"},
+      "value":{"shape":"ClusterKubernetesLabelValue"},
+      "max":50,
+      "min":0
+    },
+    "ClusterKubernetesTaint":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Effect"
+      ],
+      "members":{
+        "Key":{"shape":"ClusterKubernetesTaintKey"},
+        "Value":{"shape":"ClusterKubernetesTaintValue"},
+        "Effect":{"shape":"ClusterKubernetesTaintEffect"}
+      }
+    },
+    "ClusterKubernetesTaintEffect":{
+      "type":"string",
+      "enum":[
+        "NoSchedule",
+        "PreferNoSchedule",
+        "NoExecute"
+      ]
+    },
+    "ClusterKubernetesTaintKey":{
+      "type":"string",
+      "max":317,
+      "min":1,
+      "pattern":"([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?[A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?"
+    },
+    "ClusterKubernetesTaintValue":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?"
+    },
+    "ClusterKubernetesTaints":{
+      "type":"list",
+      "member":{"shape":"ClusterKubernetesTaint"},
+      "max":50,
+      "min":0
+    },
     "ClusterLifeCycleConfig":{
       "type":"structure",
       "required":[
@@ -7254,7 +7568,9 @@
         "Placement":{"shape":"ClusterInstancePlacement"},
         "CurrentImageId":{"shape":"ImageId"},
         "DesiredImageId":{"shape":"ImageId"},
-        "UltraServerInfo":{"shape":"UltraServerInfo"}
+        "UltraServerInfo":{"shape":"UltraServerInfo"},
+        "KubernetesConfig":{"shape":"ClusterKubernetesConfigNodeDetails"},
+        "CapacityType":{"shape":"ClusterCapacityType"}
       }
     },
     "ClusterNodeId":{
@@ -7313,13 +7629,18 @@
         "LaunchTime":{"shape":"Timestamp"},
         "LastSoftwareUpdateTime":{"shape":"Timestamp"},
         "InstanceStatus":{"shape":"ClusterInstanceStatusDetails"},
-        "UltraServerInfo":{"shape":"UltraServerInfo"}
+        "UltraServerInfo":{"shape":"UltraServerInfo"},
+        "PrivateDnsHostname":{"shape":"ClusterPrivateDnsHostname"}
       }
     },
     "ClusterNonNegativeInstanceCount":{
       "type":"integer",
       "box":true,
       "min":0
+    },
+    "ClusterOnDemandOptions":{
+      "type":"structure",
+      "members":{}
     },
     "ClusterOrchestrator":{
       "type":"structure",
@@ -7447,6 +7768,10 @@
         "CREATION_TIME",
         "NAME"
       ]
+    },
+    "ClusterSpotOptions":{
+      "type":"structure",
+      "members":{}
     },
     "ClusterStatus":{
       "type":"string",
@@ -7753,7 +8078,8 @@
         "Count":{"shape":"InstanceCount"},
         "Accelerators":{"shape":"AcceleratorsAmount"},
         "VCpu":{"shape":"VCpuAmount"},
-        "MemoryInGiB":{"shape":"MemoryInGiBAmount"}
+        "MemoryInGiB":{"shape":"MemoryInGiBAmount"},
+        "AcceleratorPartition":{"shape":"AcceleratorPartitionConfig"}
       }
     },
     "ComputeQuotaResourceConfigList":{
@@ -8512,7 +8838,8 @@
         "EnableNetworkIsolation":{
           "shape":"Boolean",
           "box":true
-        }
+        },
+        "MetricsConfig":{"shape":"MetricsConfig"}
       }
     },
     "CreateEndpointConfigOutput":{
@@ -9215,6 +9542,7 @@
         "RoleArn":{"shape":"RoleArn"},
         "ModelSource":{"shape":"OptimizationJobModelSource"},
         "DeploymentInstanceType":{"shape":"OptimizationJobDeploymentInstanceType"},
+        "MaxInstanceCount":{"shape":"OptimizationJobMaxInstanceCount"},
         "OptimizationEnvironment":{"shape":"OptimizationJobEnvironmentVariables"},
         "OptimizationConfigs":{"shape":"OptimizationConfigs"},
         "OutputConfig":{"shape":"OptimizationJobOutputConfig"},
@@ -11421,7 +11749,8 @@
         "EnableNetworkIsolation":{
           "shape":"Boolean",
           "box":true
-        }
+        },
+        "MetricsConfig":{"shape":"MetricsConfig"}
       }
     },
     "DescribeEndpointInput":{
@@ -11454,7 +11783,8 @@
         "AsyncInferenceConfig":{"shape":"AsyncInferenceConfig"},
         "PendingDeploymentSummary":{"shape":"PendingDeploymentSummary"},
         "ExplainerConfig":{"shape":"ExplainerConfig"},
-        "ShadowProductionVariants":{"shape":"ProductionVariantSummaryList"}
+        "ShadowProductionVariants":{"shape":"ProductionVariantSummaryList"},
+        "MetricsConfig":{"shape":"MetricsConfig"}
       }
     },
     "DescribeExperimentRequest":{
@@ -12371,6 +12701,7 @@
         "ModelSource":{"shape":"OptimizationJobModelSource"},
         "OptimizationEnvironment":{"shape":"OptimizationJobEnvironmentVariables"},
         "DeploymentInstanceType":{"shape":"OptimizationJobDeploymentInstanceType"},
+        "MaxInstanceCount":{"shape":"OptimizationJobMaxInstanceCount"},
         "OptimizationConfigs":{"shape":"OptimizationConfigs"},
         "OutputConfig":{"shape":"OptimizationJobOutputConfig"},
         "OptimizationOutput":{"shape":"OptimizationOutput"},
@@ -13706,6 +14037,10 @@
     },
     "EnableCaching":{"type":"boolean"},
     "EnableCapture":{"type":"boolean"},
+    "EnableEnhancedMetrics":{
+      "type":"boolean",
+      "box":true
+    },
     "EnableInfraCheck":{
       "type":"boolean",
       "box":true
@@ -16539,6 +16874,7 @@
       "members":{
         "InstanceCount":{"shape":"InstanceCount"},
         "TargetCount":{"shape":"TargetCount"},
+        "MinCount":{"shape":"InstanceCount"},
         "FailureMessage":{"shape":"String"}
       }
     },
@@ -19140,6 +19476,39 @@
       "min":0,
       "pattern":"(https|s3)://([^/]+)/?(.*)"
     },
+    "MIGProfileType":{
+      "type":"string",
+      "enum":[
+        "mig-1g.5gb",
+        "mig-1g.10gb",
+        "mig-1g.18gb",
+        "mig-1g.20gb",
+        "mig-1g.23gb",
+        "mig-1g.35gb",
+        "mig-1g.45gb",
+        "mig-1g.47gb",
+        "mig-2g.10gb",
+        "mig-2g.20gb",
+        "mig-2g.35gb",
+        "mig-2g.45gb",
+        "mig-2g.47gb",
+        "mig-3g.20gb",
+        "mig-3g.40gb",
+        "mig-3g.71gb",
+        "mig-3g.90gb",
+        "mig-3g.93gb",
+        "mig-4g.20gb",
+        "mig-4g.40gb",
+        "mig-4g.71gb",
+        "mig-4g.90gb",
+        "mig-4g.93gb",
+        "mig-7g.40gb",
+        "mig-7g.80gb",
+        "mig-7g.141gb",
+        "mig-7g.180gb",
+        "mig-7g.186gb"
+      ]
+    },
     "MLFramework":{
       "type":"string",
       "max":128,
@@ -19375,6 +19744,10 @@
       "min":1,
       "pattern":".+"
     },
+    "MetricPublishFrequencyInSeconds":{
+      "type":"integer",
+      "box":true
+    },
     "MetricRegex":{
       "type":"string",
       "max":500,
@@ -19398,6 +19771,13 @@
       "union":true
     },
     "MetricValue":{"type":"float"},
+    "MetricsConfig":{
+      "type":"structure",
+      "members":{
+        "EnableEnhancedMetrics":{"shape":"EnableEnhancedMetrics"},
+        "MetricPublishFrequencyInSeconds":{"shape":"MetricPublishFrequencyInSeconds"}
+      }
+    },
     "MetricsSource":{
       "type":"structure",
       "required":[
@@ -20373,6 +20753,36 @@
         "Name",
         "CreationTime"
       ]
+    },
+    "ModelSpeculativeDecodingConfig":{
+      "type":"structure",
+      "required":["Technique"],
+      "members":{
+        "Technique":{"shape":"ModelSpeculativeDecodingTechnique"},
+        "TrainingDataSource":{"shape":"ModelSpeculativeDecodingTrainingDataSource"}
+      }
+    },
+    "ModelSpeculativeDecodingS3DataType":{
+      "type":"string",
+      "enum":[
+        "S3Prefix",
+        "ManifestFile"
+      ]
+    },
+    "ModelSpeculativeDecodingTechnique":{
+      "type":"string",
+      "enum":["EAGLE"]
+    },
+    "ModelSpeculativeDecodingTrainingDataSource":{
+      "type":"structure",
+      "required":[
+        "S3Uri",
+        "S3DataType"
+      ],
+      "members":{
+        "S3Uri":{"shape":"S3Uri"},
+        "S3DataType":{"shape":"ModelSpeculativeDecodingS3DataType"}
+      }
     },
     "ModelStepMetadata":{
       "type":"structure",
@@ -21410,7 +21820,8 @@
       "members":{
         "ModelQuantizationConfig":{"shape":"ModelQuantizationConfig"},
         "ModelCompilationConfig":{"shape":"ModelCompilationConfig"},
-        "ModelShardingConfig":{"shape":"ModelShardingConfig"}
+        "ModelShardingConfig":{"shape":"ModelShardingConfig"},
+        "ModelSpeculativeDecodingConfig":{"shape":"ModelSpeculativeDecodingConfig"}
       },
       "union":true
     },
@@ -21438,6 +21849,8 @@
         "ml.p4d.24xlarge",
         "ml.p4de.24xlarge",
         "ml.p5.48xlarge",
+        "ml.p5e.48xlarge",
+        "ml.p5en.48xlarge",
         "ml.g5.xlarge",
         "ml.g5.2xlarge",
         "ml.g5.4xlarge",
@@ -21478,10 +21891,16 @@
       "max":25,
       "min":0
     },
+    "OptimizationJobMaxInstanceCount":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
     "OptimizationJobModelSource":{
       "type":"structure",
       "members":{
-        "S3":{"shape":"OptimizationJobModelSourceS3"}
+        "S3":{"shape":"OptimizationJobModelSourceS3"},
+        "SageMakerModel":{"shape":"OptimizationSageMakerModel"}
       }
     },
     "OptimizationJobModelSourceS3":{
@@ -21496,7 +21915,8 @@
       "required":["S3OutputLocation"],
       "members":{
         "KmsKeyId":{"shape":"KmsKeyId"},
-        "S3OutputLocation":{"shape":"S3Uri"}
+        "S3OutputLocation":{"shape":"S3Uri"},
+        "SageMakerModel":{"shape":"OptimizationSageMakerModel"}
       }
     },
     "OptimizationJobStatus":{
@@ -21533,6 +21953,7 @@
         "OptimizationEndTime":{"shape":"Timestamp"},
         "LastModifiedTime":{"shape":"LastModifiedTime"},
         "DeploymentInstanceType":{"shape":"OptimizationJobDeploymentInstanceType"},
+        "MaxInstanceCount":{"shape":"OptimizationJobMaxInstanceCount"},
         "OptimizationTypes":{"shape":"OptimizationTypes"}
       }
     },
@@ -21551,6 +21972,12 @@
       "type":"structure",
       "members":{
         "RecommendedInferenceImage":{"shape":"OptimizationContainerImage"}
+      }
+    },
+    "OptimizationSageMakerModel":{
+      "type":"structure",
+      "members":{
+        "ModelName":{"shape":"ModelName"}
       }
     },
     "OptimizationType":{"type":"string"},
@@ -24154,7 +24581,6 @@
     },
     "ResourceConfig":{
       "type":"structure",
-      "required":["VolumeSizeInGB"],
       "members":{
         "InstanceType":{"shape":"TrainingInstanceType"},
         "InstanceCount":{
@@ -24162,7 +24588,7 @@
           "box":true
         },
         "VolumeSizeInGB":{
-          "shape":"VolumeSizeInGB",
+          "shape":"OptionalVolumeSizeInGB",
           "box":true
         },
         "VolumeKmsKeyId":{"shape":"KmsKeyId"},
@@ -24560,7 +24986,8 @@
       "type":"string",
       "enum":[
         "training-job",
-        "hyperpod-cluster"
+        "hyperpod-cluster",
+        "endpoint"
       ]
     },
     "SageMakerResourceNames":{

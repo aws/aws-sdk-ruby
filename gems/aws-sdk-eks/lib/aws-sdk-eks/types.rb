@@ -691,12 +691,12 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An Auto Scaling group that is associated with an Amazon EKS managed
-    # node group.
+    # An Amazon EC2 Auto Scaling group that is associated with an Amazon EKS
+    # managed node group.
     #
     # @!attribute [rw] name
-    #   The name of the Auto Scaling group associated with an Amazon EKS
-    #   managed node group.
+    #   The name of the Amazon EC2 Auto Scaling group associated with an
+    #   Amazon EKS managed node group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AutoScalingGroup AWS API Documentation
@@ -1000,6 +1000,11 @@ module Aws::EKS
     #   active state.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_plane_scaling_config
+    #   The control plane scaling tier configuration. For more information,
+    #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
+    #   @return [Types::ControlPlaneScalingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1029,7 +1034,8 @@ module Aws::EKS
       :remote_network_config,
       :compute_config,
       :storage_config,
-      :deletion_protection)
+      :deletion_protection,
+      :control_plane_scaling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1320,6 +1326,24 @@ module Aws::EKS
     #
     class ControlPlanePlacementResponse < Struct.new(
       :group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The control plane scaling tier configuration. For more information,
+    # see EKS Provisioned Control Plane in the Amazon EKS User Guide.
+    #
+    # @!attribute [rw] tier
+    #   The control plane scaling tier configuration. Available options are
+    #   `standard`, `tier-xl`, `tier-2xl`, or `tier-4xl`. For more
+    #   information, see EKS Provisioned Control Plane in the Amazon EKS
+    #   User Guide.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ControlPlaneScalingConfig AWS API Documentation
+    #
+    class ControlPlaneScalingConfig < Struct.new(
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1803,6 +1827,11 @@ module Aws::EKS
     #   deletion. Default value is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_plane_scaling_config
+    #   The control plane scaling tier configuration. For more information,
+    #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
+    #   @return [Types::ControlPlaneScalingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -1823,7 +1852,8 @@ module Aws::EKS
       :remote_network_config,
       :compute_config,
       :storage_config,
-      :deletion_protection)
+      :deletion_protection,
+      :control_plane_scaling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3997,12 +4027,13 @@ module Aws::EKS
     #     is failing to authenticate or authorize with your Kubernetes
     #     cluster API server.
     #
-    #   * **AsgInstanceLaunchFailures**: Your Auto Scaling group is
-    #     experiencing failures while attempting to launch instances.
+    #   * **AsgInstanceLaunchFailures**: Your Amazon EC2 Auto Scaling group
+    #     is experiencing failures while attempting to launch instances.
     #
-    #   * **AutoScalingGroupNotFound**: We couldn't find the Auto Scaling
-    #     group associated with the managed node group. You may be able to
-    #     recreate an Auto Scaling group with the same settings to recover.
+    #   * **AutoScalingGroupNotFound**: We couldn't find the Amazon EC2
+    #     Auto Scaling group associated with the managed node group. You may
+    #     be able to recreate an Amazon EC2 Auto Scaling group with the same
+    #     settings to recover.
     #
     #   * **ClusterUnreachable**: Amazon EKS or one or more of your managed
     #     nodes is unable to to communicate with your Kubernetes cluster API
@@ -5493,10 +5524,11 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing the scaling configuration details for the Auto
-    # Scaling group that is associated with your node group. When creating a
-    # node group, you must specify all or none of the properties. When
-    # updating a node group, you can specify any or none of the properties.
+    # An object representing the scaling configuration details for the
+    # Amazon EC2 Auto Scaling group that is associated with your node group.
+    # When creating a node group, you must specify all or none of the
+    # properties. When updating a node group, you can specify any or none of
+    # the properties.
     #
     # @!attribute [rw] min_size
     #   The minimum number of nodes that the managed node group can scale in
@@ -7132,6 +7164,11 @@ module Aws::EKS
     #   the cluster can be deleted normally.
     #   @return [Boolean]
     #
+    # @!attribute [rw] control_plane_scaling_config
+    #   The control plane scaling tier configuration. For more information,
+    #   see EKS Provisioned Control Plane in the Amazon EKS User Guide.
+    #   @return [Types::ControlPlaneScalingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
     #
     class UpdateClusterConfigRequest < Struct.new(
@@ -7146,7 +7183,8 @@ module Aws::EKS
       :kubernetes_network_config,
       :storage_config,
       :remote_network_config,
-      :deletion_protection)
+      :deletion_protection,
+      :control_plane_scaling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7347,14 +7385,16 @@ module Aws::EKS
     #
     # @!attribute [rw] version
     #   The Kubernetes version to update to. If no version is specified,
-    #   then the Kubernetes version of the node group does not change. You
-    #   can specify the Kubernetes version of the cluster to update the node
-    #   group to the latest AMI version of the cluster's Kubernetes
-    #   version. If you specify `launchTemplate`, and your launch template
-    #   uses a custom AMI, then don't specify `version`, or the node group
-    #   update will fail. For more information about using launch templates
-    #   with Amazon EKS, see [Customizing managed nodes with launch
-    #   templates][1] in the *Amazon EKS User Guide*.
+    #   then the node group will be updated to match the cluster's current
+    #   Kubernetes version, and the latest available AMI for that version
+    #   will be used. You can also specify the Kubernetes version of the
+    #   cluster to update the node group to the latest AMI version of the
+    #   cluster's Kubernetes version. If you specify `launchTemplate`, and
+    #   your launch template uses a custom AMI, then don't specify
+    #   `version`, or the node group update will fail. For more information
+    #   about using launch templates with Amazon EKS, see [Customizing
+    #   managed nodes with launch templates][1] in the *Amazon EKS User
+    #   Guide*.
     #
     #
     #

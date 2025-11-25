@@ -337,6 +337,17 @@ module Aws::DatabaseMigrationService
     #   The key length of the cryptographic algorithm being used.
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key_id
+    #   An KMS key identifier that is used to encrypt the certificate.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Certificate AWS API Documentation
     #
     class Certificate < Struct.new(
@@ -349,7 +360,8 @@ module Aws::DatabaseMigrationService
       :valid_from_date,
       :valid_to_date,
       :signing_algorithm,
-      :key_length)
+      :key_length,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5785,6 +5797,14 @@ module Aws::DatabaseMigrationService
     #   CreateEndpoint to create the endpoint with a cross-account.
     #   @return [String]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the endpoint is read-only. When set to `true`,
+    #   this endpoint is managed by DMS as part of a zero-ETL integration
+    #   and cannot be modified or deleted directly. You can only modify or
+    #   delete read-only endpoints through their associated zero-ETL
+    #   integration.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dynamo_db_settings
     #   The settings for the DynamoDB target endpoint. For more information,
     #   see the `DynamoDBSettings` structure.
@@ -5878,6 +5898,12 @@ module Aws::DatabaseMigrationService
     #   information, see the `TimestreamSettings` structure.
     #   @return [Types::TimestreamSettings]
     #
+    # @!attribute [rw] lakehouse_settings
+    #   Settings in JSON format for the target Lakehouse endpoint. This
+    #   parameter applies to endpoints that are automatically created by DMS
+    #   for a Lakehouse data warehouse as part of a zero-ETL integration.
+    #   @return [Types::LakehouseSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -5898,6 +5924,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :external_table_definition,
       :external_id,
+      :is_read_only,
       :dynamo_db_settings,
       :s3_settings,
       :dms_transfer_settings,
@@ -5916,7 +5943,8 @@ module Aws::DatabaseMigrationService
       :doc_db_settings,
       :redis_settings,
       :gcp_my_sql_settings,
-      :timestream_settings)
+      :timestream_settings,
+      :lakehouse_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6786,13 +6814,25 @@ module Aws::DatabaseMigrationService
     #   The tags associated with the certificate.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] kms_key_id
+    #   An KMS key identifier that is used to encrypt the certificate.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificateMessage AWS API Documentation
     #
     class ImportCertificateMessage < Struct.new(
       :certificate_identifier,
       :certificate_pem,
       :certificate_wallet,
-      :tags)
+      :tags,
+      :kms_key_id)
       SENSITIVE = [:certificate_pem]
       include Aws::Structure
     end
@@ -7353,6 +7393,22 @@ module Aws::DatabaseMigrationService
       :include_null_and_empty,
       :no_hex_prefix,
       :use_large_integer_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines a Lakehouse endpoint. This endpoint
+    # type is used for zero-ETL integrations with Lakehouse data warehouses.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Lakehouse resource that serves
+    #   as the target for this endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/LakehouseSettings AWS API Documentation
+    #
+    class LakehouseSettings < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11637,6 +11693,14 @@ module Aws::DatabaseMigrationService
     #   The timestamp when DMS will deprovision the replication.
     #   @return [Time]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the serverless replication is read-only. When set
+    #   to `true`, this replication is managed by DMS as part of a zero-ETL
+    #   integration and cannot be modified or deleted directly. You can only
+    #   modify or delete read-only replications through their associated
+    #   zero-ETL integration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Replication AWS API Documentation
     #
     class Replication < Struct.new(
@@ -11659,7 +11723,8 @@ module Aws::DatabaseMigrationService
       :replication_create_time,
       :replication_update_time,
       :replication_last_stop_time,
-      :replication_deprovision_time)
+      :replication_deprovision_time,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11716,6 +11781,14 @@ module Aws::DatabaseMigrationService
     #   The time the serverless replication config was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the replication configuration is read-only. When
+    #   set to `true`, this replication configuration is managed by DMS as
+    #   part of a zero-ETL integration and cannot be modified or deleted
+    #   directly. You can only modify or delete read-only replication
+    #   configurations through their associated zero-ETL integration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationConfig AWS API Documentation
     #
     class ReplicationConfig < Struct.new(
@@ -11729,7 +11802,8 @@ module Aws::DatabaseMigrationService
       :supplemental_settings,
       :table_mappings,
       :replication_config_create_time,
-      :replication_config_update_time)
+      :replication_config_update_time,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12126,6 +12200,14 @@ module Aws::DatabaseMigrationService
     #   not yet supported.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the replication subnet group is read-only. When
+    #   set to `true`, this subnet group is managed by DMS as part of a
+    #   zero-ETL integration and cannot be modified or deleted directly. You
+    #   can only modify or delete read-only subnet groups through their
+    #   associated zero-ETL integration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroup AWS API Documentation
     #
     class ReplicationSubnetGroup < Struct.new(
@@ -12134,7 +12216,8 @@ module Aws::DatabaseMigrationService
       :vpc_id,
       :subnet_group_status,
       :subnets,
-      :supported_network_types)
+      :supported_network_types,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end

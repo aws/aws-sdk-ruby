@@ -28,6 +28,7 @@ module Aws::Invoicing
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -57,6 +58,31 @@ module Aws::Invoicing
       # @return [String]
       def resource_name
         @data[:resource_name]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Invoicing::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
       end
     end
 

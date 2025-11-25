@@ -929,6 +929,8 @@ module Aws::BedrockAgentCoreControl
     #
     #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM credentials.
     #
+    #   * `NONE` - No authorization
+    #
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
     #   The authorizer configuration for the gateway. Required if
     #   `authorizerType` is `CUSTOM_JWT`.
@@ -936,6 +938,11 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key used to encrypt data
     #   associated with the gateway.
+    #
+    # @option params [Array<Types::GatewayInterceptorConfiguration>] :interceptor_configurations
+    #   A list of configuration settings for a gateway interceptor. Gateway
+    #   interceptors allow custom code to be invoked during gateway
+    #   invocations.
     #
     # @option params [String] :exception_level
     #   The level of detail in error messages returned when invoking the
@@ -968,6 +975,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayResponse#authorizer_type #authorizer_type} => String
     #   * {Types::CreateGatewayResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
     #   * {Types::CreateGatewayResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::CreateGatewayResponse#interceptor_configurations #interceptor_configurations} => Array&lt;Types::GatewayInterceptorConfiguration&gt;
     #   * {Types::CreateGatewayResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
     #   * {Types::CreateGatewayResponse#exception_level #exception_level} => String
     #
@@ -986,7 +994,7 @@ module Aws::BedrockAgentCoreControl
     #         search_type: "SEMANTIC", # accepts SEMANTIC
     #       },
     #     },
-    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE
     #     authorizer_configuration: {
     #       custom_jwt_authorizer: {
     #         discovery_url: "DiscoveryUrl", # required
@@ -995,6 +1003,19 @@ module Aws::BedrockAgentCoreControl
     #       },
     #     },
     #     kms_key_arn: "KmsKeyArn",
+    #     interceptor_configurations: [
+    #       {
+    #         interceptor: { # required
+    #           lambda: {
+    #             arn: "LambdaFunctionArn", # required
+    #           },
+    #         },
+    #         interception_points: ["REQUEST"], # required, accepts REQUEST, RESPONSE
+    #         input_configuration: {
+    #           pass_request_headers: false, # required
+    #         },
+    #       },
+    #     ],
     #     exception_level: "DEBUG", # accepts DEBUG
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1019,13 +1040,18 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
-    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.kms_key_arn #=> String
+    #   resp.interceptor_configurations #=> Array
+    #   resp.interceptor_configurations[0].interceptor.lambda.arn #=> String
+    #   resp.interceptor_configurations[0].interception_points #=> Array
+    #   resp.interceptor_configurations[0].interception_points[0] #=> String, one of "REQUEST", "RESPONSE"
+    #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.exception_level #=> String, one of "DEBUG"
     #
@@ -2291,6 +2317,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayResponse#authorizer_type #authorizer_type} => String
     #   * {Types::GetGatewayResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
     #   * {Types::GetGatewayResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetGatewayResponse#interceptor_configurations #interceptor_configurations} => Array&lt;Types::GatewayInterceptorConfiguration&gt;
     #   * {Types::GetGatewayResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
     #   * {Types::GetGatewayResponse#exception_level #exception_level} => String
     #
@@ -2318,13 +2345,18 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
-    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.kms_key_arn #=> String
+    #   resp.interceptor_configurations #=> Array
+    #   resp.interceptor_configurations[0].interceptor.lambda.arn #=> String
+    #   resp.interceptor_configurations[0].interception_points #=> Array
+    #   resp.interceptor_configurations[0].interception_points[0] #=> String, one of "REQUEST", "RESPONSE"
+    #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.exception_level #=> String, one of "DEBUG"
     #
@@ -3056,7 +3088,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
-    #   resp.items[0].authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.items[0].authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE"
     #   resp.items[0].protocol_type #=> String, one of "MCP"
     #   resp.next_token #=> String
     #
@@ -3673,6 +3705,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :kms_key_arn
     #   The updated ARN of the KMS key used to encrypt the gateway.
     #
+    # @option params [Array<Types::GatewayInterceptorConfiguration>] :interceptor_configurations
+    #   The updated interceptor configurations for the gateway.
+    #
     # @option params [String] :exception_level
     #   The level of detail in error messages returned when invoking the
     #   gateway.
@@ -3700,6 +3735,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayResponse#authorizer_type #authorizer_type} => String
     #   * {Types::UpdateGatewayResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
     #   * {Types::UpdateGatewayResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::UpdateGatewayResponse#interceptor_configurations #interceptor_configurations} => Array&lt;Types::GatewayInterceptorConfiguration&gt;
     #   * {Types::UpdateGatewayResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
     #   * {Types::UpdateGatewayResponse#exception_level #exception_level} => String
     #
@@ -3718,7 +3754,7 @@ module Aws::BedrockAgentCoreControl
     #         search_type: "SEMANTIC", # accepts SEMANTIC
     #       },
     #     },
-    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE
     #     authorizer_configuration: {
     #       custom_jwt_authorizer: {
     #         discovery_url: "DiscoveryUrl", # required
@@ -3727,6 +3763,19 @@ module Aws::BedrockAgentCoreControl
     #       },
     #     },
     #     kms_key_arn: "KmsKeyArn",
+    #     interceptor_configurations: [
+    #       {
+    #         interceptor: { # required
+    #           lambda: {
+    #             arn: "LambdaFunctionArn", # required
+    #           },
+    #         },
+    #         interception_points: ["REQUEST"], # required, accepts REQUEST, RESPONSE
+    #         input_configuration: {
+    #           pass_request_headers: false, # required
+    #         },
+    #       },
+    #     ],
     #     exception_level: "DEBUG", # accepts DEBUG
     #   })
     #
@@ -3748,13 +3797,18 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
-    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.kms_key_arn #=> String
+    #   resp.interceptor_configurations #=> Array
+    #   resp.interceptor_configurations[0].interceptor.lambda.arn #=> String
+    #   resp.interceptor_configurations[0].interception_points #=> Array
+    #   resp.interceptor_configurations[0].interception_points[0] #=> String, one of "REQUEST", "RESPONSE"
+    #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.exception_level #=> String, one of "DEBUG"
     #
@@ -4422,7 +4476,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

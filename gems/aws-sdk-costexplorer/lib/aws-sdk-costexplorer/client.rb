@@ -533,7 +533,7 @@ module Aws::CostExplorer
     #       last_updated_date: "YearMonthDay",
     #       last_evaluated_date: "YearMonthDay",
     #       monitor_type: "DIMENSIONAL", # required, accepts DIMENSIONAL, CUSTOM
-    #       monitor_dimension: "SERVICE", # accepts SERVICE
+    #       monitor_dimension: "SERVICE", # accepts SERVICE, LINKED_ACCOUNT, TAG, COST_CATEGORY
     #       monitor_specification: {
     #         or: [
     #           {
@@ -1129,7 +1129,7 @@ module Aws::CostExplorer
     #   resp.anomaly_monitors[0].last_updated_date #=> String
     #   resp.anomaly_monitors[0].last_evaluated_date #=> String
     #   resp.anomaly_monitors[0].monitor_type #=> String, one of "DIMENSIONAL", "CUSTOM"
-    #   resp.anomaly_monitors[0].monitor_dimension #=> String, one of "SERVICE"
+    #   resp.anomaly_monitors[0].monitor_dimension #=> String, one of "SERVICE", "LINKED_ACCOUNT", "TAG", "COST_CATEGORY"
     #   resp.anomaly_monitors[0].monitor_specification.or #=> Array
     #   resp.anomaly_monitors[0].monitor_specification.or[0] #=> Types::Expression
     #   resp.anomaly_monitors[0].monitor_specification.and #=> Array
@@ -6113,7 +6113,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

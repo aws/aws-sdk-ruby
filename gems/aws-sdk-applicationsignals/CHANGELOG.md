@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2025-11-20)
+------------------
+
+* Feature - Amazon CloudWatch Application Signals now supports un-instrumented services discovery, cross-account views, and change history, helping SRE and DevOps teams monitor and troubleshoot their large-scale distributed applications.
+
 1.31.0 (2025-10-28)
 ------------------
 

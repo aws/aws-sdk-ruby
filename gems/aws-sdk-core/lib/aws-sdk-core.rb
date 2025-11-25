@@ -25,6 +25,7 @@ module Aws
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :ProcessCredentials, 'aws-sdk-core/process_credentials'
   autoload :SSOCredentials, 'aws-sdk-core/sso_credentials'
+  autoload :LoginCredentials, 'aws-sdk-core/login_credentials'
 
 
   # tokens and token providers
@@ -175,3 +176,6 @@ require_relative 'aws-sdk-sts'
 # aws-sdk-sso is included to support Aws::SSOCredentials
 require_relative 'aws-sdk-sso'
 require_relative 'aws-sdk-ssooidc'
+
+# aws-sdk-signin is included to support Aws::SignInCredentials
+require_relative 'aws-sdk-signin'

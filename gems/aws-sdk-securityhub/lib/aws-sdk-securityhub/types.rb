@@ -25025,6 +25025,73 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A filter structure that contains a logical combination of string
+    # filters and nested composite filters for findings trend data.
+    #
+    # @!attribute [rw] string_filters
+    #   A list of string filters that apply to findings trend data fields.
+    #   @return [Array<Types::FindingsTrendsStringFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   A list of nested composite filters that you can use to create
+    #   complex filter conditions for findings trend data.
+    #   @return [Array<Types::FindingsTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator (AND, OR) to apply between the string filters
+    #   and nested composite filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsTrendsCompositeFilter AWS API Documentation
+    #
+    class FindingsTrendsCompositeFilter < Struct.new(
+      :string_filters,
+      :nested_composite_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that defines filters to apply to findings trend data
+    # queries.
+    #
+    # @!attribute [rw] composite_filters
+    #   A list of composite filters to apply to the findings trend data.
+    #   @return [Array<Types::FindingsTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator (AND, OR) to apply between multiple composite
+    #   filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsTrendsFilters AWS API Documentation
+    #
+    class FindingsTrendsFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for string-based fields in findings trend data.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the findings field to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A string filter for filtering Security Hub findings.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsTrendsStringFilter AWS API Documentation
+    #
+    class FindingsTrendsStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the behavior of the firewall.
     #
     # @!attribute [rw] stateful_rule_group_references
@@ -25778,6 +25845,66 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] filters
+    #   The filters to apply to the findings trend data.
+    #   @return [Types::FindingsTrendsFilters]
+    #
+    # @!attribute [rw] start_time
+    #   The starting timestamp for the time period to analyze findings
+    #   trends, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ending timestamp for the time period to analyze findings trends,
+    #   in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for paginating results. This value is returned in
+    #   the response if more results are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of trend data points to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsTrendsV2Request AWS API Documentation
+    #
+    class GetFindingsTrendsV2Request < Struct.new(
+      :filters,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] granularity
+    #   The time interval granularity for the returned trend data.
+    #   @return [String]
+    #
+    # @!attribute [rw] trends_metrics
+    #   The collection of time-series trend metrics, including counts of
+    #   findings by severity across the specified time period.
+    #   @return [Array<Types::TrendsMetricsResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for retrieving the next page of results, if more
+    #   trend data is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsTrendsV2Response AWS API Documentation
+    #
+    class GetFindingsTrendsV2Response < Struct.new(
+      :granularity,
+      :trends_metrics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
     #   The finding attributes used to define a condition to filter the
     #   returned OCSF findings. You can filter up to 10 composite filters.
     #   For each filter type inside of a composite filter, you can provide
@@ -26000,6 +26127,67 @@ module Aws::SecurityHub
     #
     class GetResourcesStatisticsV2Response < Struct.new(
       :group_by_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   The filters to apply to the resources trend data.
+    #   @return [Types::ResourcesTrendsFilters]
+    #
+    # @!attribute [rw] start_time
+    #   The starting timestamp for the time period to analyze resources
+    #   trends, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ending timestamp for the time period to analyze resources
+    #   trends, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for paginating results. This value is returned in
+    #   the response if more results are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of trend data points to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesTrendsV2Request AWS API Documentation
+    #
+    class GetResourcesTrendsV2Request < Struct.new(
+      :filters,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] granularity
+    #   The time interval granularity for the returned trend data (such as
+    #   DAILY or WEEKLY).
+    #   @return [String]
+    #
+    # @!attribute [rw] trends_metrics
+    #   The collection of time-series trend metrics, including counts of
+    #   resources across the specified time period.
+    #   @return [Array<Types::ResourcesTrendsMetricsResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for retrieving the next page of results, if more
+    #   trend data is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesTrendsV2Response AWS API Documentation
+    #
+    class GetResourcesTrendsV2Response < Struct.new(
+      :granularity,
+      :trends_metrics,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29976,6 +30164,20 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains counts of resources for trend analysis.
+    #
+    # @!attribute [rw] all_resources
+    #   The total count of all resources for the given time interval.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesCount AWS API Documentation
+    #
+    class ResourcesCount < Struct.new(
+      :all_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Enables the filtering of Amazon Web Services resources based on date
     # and timestamp attributes.
     #
@@ -30075,6 +30277,112 @@ module Aws::SecurityHub
     class ResourcesStringFilter < Struct.new(
       :field_name,
       :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter structure that contains a logical combination of string
+    # filters and nested composite filters for resources trend data.
+    #
+    # @!attribute [rw] string_filters
+    #   A list of string filters that apply to resources trend data fields.
+    #   @return [Array<Types::ResourcesTrendsStringFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   A list of nested composite filters that you can use to create
+    #   complex filter conditions for resources trend data.
+    #   @return [Array<Types::ResourcesTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator (AND, OR) to apply between the string filters
+    #   and nested composite filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsCompositeFilter AWS API Documentation
+    #
+    class ResourcesTrendsCompositeFilter < Struct.new(
+      :string_filters,
+      :nested_composite_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that defines filters to apply to resources trend data
+    # queries.
+    #
+    # @!attribute [rw] composite_filters
+    #   A list of composite filters to apply to the resources trend data.
+    #   @return [Array<Types::ResourcesTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator (AND, OR) to apply between multiple composite
+    #   filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsFilters AWS API Documentation
+    #
+    class ResourcesTrendsFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the resource trend metrics data for a specific time point in
+    # the requested time period.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp for this data point in the resources trend metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trends_values
+    #   The resource trend metric values associated with this timestamp,
+    #   including resource counts.
+    #   @return [Types::ResourcesTrendsValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsMetricsResult AWS API Documentation
+    #
+    class ResourcesTrendsMetricsResult < Struct.new(
+      :timestamp,
+      :trends_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for string-based fields in resources trend data, such as
+    # resource type or account ID.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the resources field to filter on, such as resourceType,
+    #   accountId, or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A string filter for filtering Security Hub findings.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsStringFilter AWS API Documentation
+    #
+    class ResourcesTrendsStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the aggregated resource count values for a specific point in
+    # the resources trend timeline.
+    #
+    # @!attribute [rw] resources_count
+    #   The resource count statistics for this data point in the trend
+    #   timeline.
+    #   @return [Types::ResourcesCount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsValues AWS API Documentation
+    #
+    class ResourcesTrendsValues < Struct.new(
+      :resources_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31137,6 +31445,64 @@ module Aws::SecurityHub
       :label,
       :normalized,
       :original)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains counts of findings grouped by severity level for trend
+    # analysis.
+    #
+    # @!attribute [rw] unknown
+    #   The count of findings with Unknown severity level at this point in
+    #   the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] informational
+    #   The count of findings with Informational severity level at this
+    #   point in the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] low
+    #   The count of findings with Low severity level at this point in the
+    #   trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium
+    #   The count of findings with Medium severity level at this point in
+    #   the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high
+    #   The count of findings with High severity level at this point in the
+    #   trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] critical
+    #   The count of findings with Critical severity level at this point in
+    #   the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fatal
+    #   The count of findings with Fatal severity level at this point in the
+    #   trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] other
+    #   The count of findings with severity levels not fitting into the
+    #   standard categories at this point in the trend timeline.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SeverityTrendsCount AWS API Documentation
+    #
+    class SeverityTrendsCount < Struct.new(
+      :unknown,
+      :informational,
+      :low,
+      :medium,
+      :high,
+      :critical,
+      :fatal,
+      :other)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32342,6 +32708,43 @@ module Aws::SecurityHub
     class ThrottlingException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the findings trend metrics data for a specific time point in
+    # the requested time period.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp for this data point in the findings trend metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trends_values
+    #   The finding trend metric values associated with this timestamp,
+    #   including severity counts.
+    #   @return [Types::TrendsValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TrendsMetricsResult AWS API Documentation
+    #
+    class TrendsMetricsResult < Struct.new(
+      :timestamp,
+      :trends_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the aggregated finding values for a specific point in the
+    # findings trend timeline.
+    #
+    # @!attribute [rw] severity_trends
+    #   The count of findings organized by severity level for this data
+    #   point in the trend timeline.
+    #   @return [Types::SeverityTrendsCount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TrendsValues AWS API Documentation
+    #
+    class TrendsValues < Struct.new(
+      :severity_trends)
       SENSITIVE = []
       include Aws::Structure
     end

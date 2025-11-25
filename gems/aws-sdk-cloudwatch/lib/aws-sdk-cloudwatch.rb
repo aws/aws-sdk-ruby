@@ -58,7 +58,7 @@ module Aws::CloudWatch
   autoload :CompositeAlarm, 'aws-sdk-cloudwatch/composite_alarm'
   autoload :Metric, 'aws-sdk-cloudwatch/metric'
 
-  GEM_VERSION = '1.124.0'
+  GEM_VERSION = '1.125.0'
 
 end
 

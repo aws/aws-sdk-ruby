@@ -212,8 +212,13 @@ module Aws::EC2
     AutoAcceptSharedAssociationsValue = Shapes::StringShape.new(name: 'AutoAcceptSharedAssociationsValue')
     AutoAcceptSharedAttachmentsValue = Shapes::StringShape.new(name: 'AutoAcceptSharedAttachmentsValue')
     AutoPlacement = Shapes::StringShape.new(name: 'AutoPlacement')
+    AutoProvisionZonesState = Shapes::StringShape.new(name: 'AutoProvisionZonesState')
     AutoRecoveryFlag = Shapes::BooleanShape.new(name: 'AutoRecoveryFlag')
+    AutoScalingIpsState = Shapes::StringShape.new(name: 'AutoScalingIpsState')
+    AvailabilityMode = Shapes::StringShape.new(name: 'AvailabilityMode')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneAddress = Shapes::StructureShape.new(name: 'AvailabilityZoneAddress')
+    AvailabilityZoneAddresses = Shapes::ListShape.new(name: 'AvailabilityZoneAddresses')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneIdStringList = Shapes::ListShape.new(name: 'AvailabilityZoneIdStringList')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
@@ -529,8 +534,12 @@ module Aws::EC2
     CreateInstanceExportTaskResult = Shapes::StructureShape.new(name: 'CreateInstanceExportTaskResult')
     CreateInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateInternetGatewayRequest')
     CreateInternetGatewayResult = Shapes::StructureShape.new(name: 'CreateInternetGatewayResult')
+    CreateInterruptibleCapacityReservationAllocationRequest = Shapes::StructureShape.new(name: 'CreateInterruptibleCapacityReservationAllocationRequest')
+    CreateInterruptibleCapacityReservationAllocationResult = Shapes::StructureShape.new(name: 'CreateInterruptibleCapacityReservationAllocationResult')
     CreateIpamExternalResourceVerificationTokenRequest = Shapes::StructureShape.new(name: 'CreateIpamExternalResourceVerificationTokenRequest')
     CreateIpamExternalResourceVerificationTokenResult = Shapes::StructureShape.new(name: 'CreateIpamExternalResourceVerificationTokenResult')
+    CreateIpamPolicyRequest = Shapes::StructureShape.new(name: 'CreateIpamPolicyRequest')
+    CreateIpamPolicyResult = Shapes::StructureShape.new(name: 'CreateIpamPolicyResult')
     CreateIpamPoolRequest = Shapes::StructureShape.new(name: 'CreateIpamPoolRequest')
     CreateIpamPoolResult = Shapes::StructureShape.new(name: 'CreateIpamPoolResult')
     CreateIpamPrefixListResolverRequest = Shapes::StructureShape.new(name: 'CreateIpamPrefixListResolverRequest')
@@ -624,6 +633,10 @@ module Aws::EC2
     CreateTransitGatewayConnectRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayConnectRequest')
     CreateTransitGatewayConnectRequestOptions = Shapes::StructureShape.new(name: 'CreateTransitGatewayConnectRequestOptions')
     CreateTransitGatewayConnectResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayConnectResult')
+    CreateTransitGatewayMeteringPolicyEntryRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayMeteringPolicyEntryRequest')
+    CreateTransitGatewayMeteringPolicyEntryResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayMeteringPolicyEntryResult')
+    CreateTransitGatewayMeteringPolicyRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayMeteringPolicyRequest')
+    CreateTransitGatewayMeteringPolicyResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayMeteringPolicyResult')
     CreateTransitGatewayMulticastDomainRequest = Shapes::StructureShape.new(name: 'CreateTransitGatewayMulticastDomainRequest')
     CreateTransitGatewayMulticastDomainRequestOptions = Shapes::StructureShape.new(name: 'CreateTransitGatewayMulticastDomainRequestOptions')
     CreateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'CreateTransitGatewayMulticastDomainResult')
@@ -669,6 +682,8 @@ module Aws::EC2
     CreateVolumeRequest = Shapes::StructureShape.new(name: 'CreateVolumeRequest')
     CreateVpcBlockPublicAccessExclusionRequest = Shapes::StructureShape.new(name: 'CreateVpcBlockPublicAccessExclusionRequest')
     CreateVpcBlockPublicAccessExclusionResult = Shapes::StructureShape.new(name: 'CreateVpcBlockPublicAccessExclusionResult')
+    CreateVpcEncryptionControlRequest = Shapes::StructureShape.new(name: 'CreateVpcEncryptionControlRequest')
+    CreateVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'CreateVpcEncryptionControlResult')
     CreateVpcEndpointConnectionNotificationRequest = Shapes::StructureShape.new(name: 'CreateVpcEndpointConnectionNotificationRequest')
     CreateVpcEndpointConnectionNotificationResult = Shapes::StructureShape.new(name: 'CreateVpcEndpointConnectionNotificationResult')
     CreateVpcEndpointRequest = Shapes::StructureShape.new(name: 'CreateVpcEndpointRequest')
@@ -756,6 +771,8 @@ module Aws::EC2
     DeleteInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteInternetGatewayRequest')
     DeleteIpamExternalResourceVerificationTokenRequest = Shapes::StructureShape.new(name: 'DeleteIpamExternalResourceVerificationTokenRequest')
     DeleteIpamExternalResourceVerificationTokenResult = Shapes::StructureShape.new(name: 'DeleteIpamExternalResourceVerificationTokenResult')
+    DeleteIpamPolicyRequest = Shapes::StructureShape.new(name: 'DeleteIpamPolicyRequest')
+    DeleteIpamPolicyResult = Shapes::StructureShape.new(name: 'DeleteIpamPolicyResult')
     DeleteIpamPoolRequest = Shapes::StructureShape.new(name: 'DeleteIpamPoolRequest')
     DeleteIpamPoolResult = Shapes::StructureShape.new(name: 'DeleteIpamPoolResult')
     DeleteIpamPrefixListResolverRequest = Shapes::StructureShape.new(name: 'DeleteIpamPrefixListResolverRequest')
@@ -845,6 +862,10 @@ module Aws::EC2
     DeleteTransitGatewayConnectPeerResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayConnectPeerResult')
     DeleteTransitGatewayConnectRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayConnectRequest')
     DeleteTransitGatewayConnectResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayConnectResult')
+    DeleteTransitGatewayMeteringPolicyEntryRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMeteringPolicyEntryRequest')
+    DeleteTransitGatewayMeteringPolicyEntryResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMeteringPolicyEntryResult')
+    DeleteTransitGatewayMeteringPolicyRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMeteringPolicyRequest')
+    DeleteTransitGatewayMeteringPolicyResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMeteringPolicyResult')
     DeleteTransitGatewayMulticastDomainRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMulticastDomainRequest')
     DeleteTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'DeleteTransitGatewayMulticastDomainResult')
     DeleteTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteTransitGatewayPeeringAttachmentRequest')
@@ -874,6 +895,8 @@ module Aws::EC2
     DeleteVolumeRequest = Shapes::StructureShape.new(name: 'DeleteVolumeRequest')
     DeleteVpcBlockPublicAccessExclusionRequest = Shapes::StructureShape.new(name: 'DeleteVpcBlockPublicAccessExclusionRequest')
     DeleteVpcBlockPublicAccessExclusionResult = Shapes::StructureShape.new(name: 'DeleteVpcBlockPublicAccessExclusionResult')
+    DeleteVpcEncryptionControlRequest = Shapes::StructureShape.new(name: 'DeleteVpcEncryptionControlRequest')
+    DeleteVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'DeleteVpcEncryptionControlResult')
     DeleteVpcEndpointConnectionNotificationsRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointConnectionNotificationsRequest')
     DeleteVpcEndpointConnectionNotificationsResult = Shapes::StructureShape.new(name: 'DeleteVpcEndpointConnectionNotificationsResult')
     DeleteVpcEndpointServiceConfigurationsRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointServiceConfigurationsRequest')
@@ -1099,6 +1122,8 @@ module Aws::EC2
     DescribeIpamByoasnResult = Shapes::StructureShape.new(name: 'DescribeIpamByoasnResult')
     DescribeIpamExternalResourceVerificationTokensRequest = Shapes::StructureShape.new(name: 'DescribeIpamExternalResourceVerificationTokensRequest')
     DescribeIpamExternalResourceVerificationTokensResult = Shapes::StructureShape.new(name: 'DescribeIpamExternalResourceVerificationTokensResult')
+    DescribeIpamPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoliciesRequest')
+    DescribeIpamPoliciesResult = Shapes::StructureShape.new(name: 'DescribeIpamPoliciesResult')
     DescribeIpamPoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolsRequest')
     DescribeIpamPoolsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolsResult')
     DescribeIpamPrefixListResolverTargetsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPrefixListResolverTargetsRequest')
@@ -1268,6 +1293,8 @@ module Aws::EC2
     DescribeTransitGatewayConnectPeersResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayConnectPeersResult')
     DescribeTransitGatewayConnectsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayConnectsRequest')
     DescribeTransitGatewayConnectsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayConnectsResult')
+    DescribeTransitGatewayMeteringPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayMeteringPoliciesRequest')
+    DescribeTransitGatewayMeteringPoliciesResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayMeteringPoliciesResult')
     DescribeTransitGatewayMulticastDomainsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayMulticastDomainsRequest')
     DescribeTransitGatewayMulticastDomainsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayMulticastDomainsResult')
     DescribeTransitGatewayPeeringAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewayPeeringAttachmentsRequest')
@@ -1321,6 +1348,9 @@ module Aws::EC2
     DescribeVpcClassicLinkDnsSupportResult = Shapes::StructureShape.new(name: 'DescribeVpcClassicLinkDnsSupportResult')
     DescribeVpcClassicLinkRequest = Shapes::StructureShape.new(name: 'DescribeVpcClassicLinkRequest')
     DescribeVpcClassicLinkResult = Shapes::StructureShape.new(name: 'DescribeVpcClassicLinkResult')
+    DescribeVpcEncryptionControlsMaxResults = Shapes::IntegerShape.new(name: 'DescribeVpcEncryptionControlsMaxResults')
+    DescribeVpcEncryptionControlsRequest = Shapes::StructureShape.new(name: 'DescribeVpcEncryptionControlsRequest')
+    DescribeVpcEncryptionControlsResult = Shapes::StructureShape.new(name: 'DescribeVpcEncryptionControlsResult')
     DescribeVpcEndpointAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeVpcEndpointAssociationsRequest')
     DescribeVpcEndpointAssociationsResult = Shapes::StructureShape.new(name: 'DescribeVpcEndpointAssociationsResult')
     DescribeVpcEndpointConnectionNotificationsRequest = Shapes::StructureShape.new(name: 'DescribeVpcEndpointConnectionNotificationsRequest')
@@ -1405,6 +1435,8 @@ module Aws::EC2
     DisableInstanceSqlHaStandbyDetectionsResult = Shapes::StructureShape.new(name: 'DisableInstanceSqlHaStandbyDetectionsResult')
     DisableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountRequest')
     DisableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountResult')
+    DisableIpamPolicyRequest = Shapes::StructureShape.new(name: 'DisableIpamPolicyRequest')
+    DisableIpamPolicyResult = Shapes::StructureShape.new(name: 'DisableIpamPolicyResult')
     DisableRouteServerPropagationRequest = Shapes::StructureShape.new(name: 'DisableRouteServerPropagationRequest')
     DisableRouteServerPropagationResult = Shapes::StructureShape.new(name: 'DisableRouteServerPropagationResult')
     DisableSerialConsoleAccessRequest = Shapes::StructureShape.new(name: 'DisableSerialConsoleAccessRequest')
@@ -1561,6 +1593,8 @@ module Aws::EC2
     EnableInstanceSqlHaStandbyDetectionsResult = Shapes::StructureShape.new(name: 'EnableInstanceSqlHaStandbyDetectionsResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
     EnableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountResult')
+    EnableIpamPolicyRequest = Shapes::StructureShape.new(name: 'EnableIpamPolicyRequest')
+    EnableIpamPolicyResult = Shapes::StructureShape.new(name: 'EnableIpamPolicyResult')
     EnableReachabilityAnalyzerOrganizationSharingRequest = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingRequest')
     EnableReachabilityAnalyzerOrganizationSharingResult = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingResult')
     EnableRouteServerPropagationRequest = Shapes::StructureShape.new(name: 'EnableRouteServerPropagationRequest')
@@ -1580,6 +1614,9 @@ module Aws::EC2
     EnclaveOptions = Shapes::StructureShape.new(name: 'EnclaveOptions')
     EnclaveOptionsRequest = Shapes::StructureShape.new(name: 'EnclaveOptionsRequest')
     EncryptionInTransitSupported = Shapes::BooleanShape.new(name: 'EncryptionInTransitSupported')
+    EncryptionStateValue = Shapes::StringShape.new(name: 'EncryptionStateValue')
+    EncryptionSupport = Shapes::StructureShape.new(name: 'EncryptionSupport')
+    EncryptionSupportOptionValue = Shapes::StringShape.new(name: 'EncryptionSupportOptionValue')
     EndDateType = Shapes::StringShape.new(name: 'EndDateType')
     EndpointIpAddressType = Shapes::StringShape.new(name: 'EndpointIpAddressType')
     EndpointSet = Shapes::ListShape.new(name: 'EndpointSet')
@@ -1735,6 +1772,8 @@ module Aws::EC2
     GetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdResult')
     GetEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultRequest')
     GetEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultResult')
+    GetEnabledIpamPolicyRequest = Shapes::StructureShape.new(name: 'GetEnabledIpamPolicyRequest')
+    GetEnabledIpamPolicyResult = Shapes::StructureShape.new(name: 'GetEnabledIpamPolicyResult')
     GetFlowLogsIntegrationTemplateRequest = Shapes::StructureShape.new(name: 'GetFlowLogsIntegrationTemplateRequest')
     GetFlowLogsIntegrationTemplateResult = Shapes::StructureShape.new(name: 'GetFlowLogsIntegrationTemplateResult')
     GetGroupsForCapacityReservationRequest = Shapes::StructureShape.new(name: 'GetGroupsForCapacityReservationRequest')
@@ -1762,6 +1801,10 @@ module Aws::EC2
     GetIpamDiscoveredPublicAddressesResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredPublicAddressesResult')
     GetIpamDiscoveredResourceCidrsRequest = Shapes::StructureShape.new(name: 'GetIpamDiscoveredResourceCidrsRequest')
     GetIpamDiscoveredResourceCidrsResult = Shapes::StructureShape.new(name: 'GetIpamDiscoveredResourceCidrsResult')
+    GetIpamPolicyAllocationRulesRequest = Shapes::StructureShape.new(name: 'GetIpamPolicyAllocationRulesRequest')
+    GetIpamPolicyAllocationRulesResult = Shapes::StructureShape.new(name: 'GetIpamPolicyAllocationRulesResult')
+    GetIpamPolicyOrganizationTargetsRequest = Shapes::StructureShape.new(name: 'GetIpamPolicyOrganizationTargetsRequest')
+    GetIpamPolicyOrganizationTargetsResult = Shapes::StructureShape.new(name: 'GetIpamPolicyOrganizationTargetsResult')
     GetIpamPoolAllocationsMaxResults = Shapes::IntegerShape.new(name: 'GetIpamPoolAllocationsMaxResults')
     GetIpamPoolAllocationsRequest = Shapes::StructureShape.new(name: 'GetIpamPoolAllocationsRequest')
     GetIpamPoolAllocationsResult = Shapes::StructureShape.new(name: 'GetIpamPoolAllocationsResult')
@@ -1811,6 +1854,8 @@ module Aws::EC2
     GetSubnetCidrReservationsResult = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsResult')
     GetTransitGatewayAttachmentPropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsRequest')
     GetTransitGatewayAttachmentPropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsResult')
+    GetTransitGatewayMeteringPolicyEntriesRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMeteringPolicyEntriesRequest')
+    GetTransitGatewayMeteringPolicyEntriesResult = Shapes::StructureShape.new(name: 'GetTransitGatewayMeteringPolicyEntriesResult')
     GetTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsRequest')
     GetTransitGatewayMulticastDomainAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsResult')
     GetTransitGatewayPolicyTableAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayPolicyTableAssociationsRequest')
@@ -1830,6 +1875,9 @@ module Aws::EC2
     GetVerifiedAccessEndpointTargetsResult = Shapes::StructureShape.new(name: 'GetVerifiedAccessEndpointTargetsResult')
     GetVerifiedAccessGroupPolicyRequest = Shapes::StructureShape.new(name: 'GetVerifiedAccessGroupPolicyRequest')
     GetVerifiedAccessGroupPolicyResult = Shapes::StructureShape.new(name: 'GetVerifiedAccessGroupPolicyResult')
+    GetVpcResourcesBlockingEncryptionEnforcementMaxResults = Shapes::IntegerShape.new(name: 'GetVpcResourcesBlockingEncryptionEnforcementMaxResults')
+    GetVpcResourcesBlockingEncryptionEnforcementRequest = Shapes::StructureShape.new(name: 'GetVpcResourcesBlockingEncryptionEnforcementRequest')
+    GetVpcResourcesBlockingEncryptionEnforcementResult = Shapes::StructureShape.new(name: 'GetVpcResourcesBlockingEncryptionEnforcementResult')
     GetVpnConnectionDeviceSampleConfigurationRequest = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceSampleConfigurationRequest')
     GetVpnConnectionDeviceSampleConfigurationResult = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceSampleConfigurationResult')
     GetVpnConnectionDeviceTypesRequest = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceTypesRequest')
@@ -2128,6 +2176,10 @@ module Aws::EC2
     InternetGatewayId = Shapes::StringShape.new(name: 'InternetGatewayId')
     InternetGatewayIdList = Shapes::ListShape.new(name: 'InternetGatewayIdList')
     InternetGatewayList = Shapes::ListShape.new(name: 'InternetGatewayList')
+    InterruptibleCapacityAllocation = Shapes::StructureShape.new(name: 'InterruptibleCapacityAllocation')
+    InterruptibleCapacityReservationAllocationStatus = Shapes::StringShape.new(name: 'InterruptibleCapacityReservationAllocationStatus')
+    InterruptionInfo = Shapes::StructureShape.new(name: 'InterruptionInfo')
+    InterruptionType = Shapes::StringShape.new(name: 'InterruptionType')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
@@ -2170,6 +2222,20 @@ module Aws::EC2
     IpamOrganizationalUnitExclusion = Shapes::StructureShape.new(name: 'IpamOrganizationalUnitExclusion')
     IpamOrganizationalUnitExclusionSet = Shapes::ListShape.new(name: 'IpamOrganizationalUnitExclusionSet')
     IpamOverlapStatus = Shapes::StringShape.new(name: 'IpamOverlapStatus')
+    IpamPolicy = Shapes::StructureShape.new(name: 'IpamPolicy')
+    IpamPolicyAllocationRule = Shapes::StructureShape.new(name: 'IpamPolicyAllocationRule')
+    IpamPolicyAllocationRuleList = Shapes::ListShape.new(name: 'IpamPolicyAllocationRuleList')
+    IpamPolicyAllocationRuleListRequest = Shapes::ListShape.new(name: 'IpamPolicyAllocationRuleListRequest')
+    IpamPolicyAllocationRuleRequest = Shapes::StructureShape.new(name: 'IpamPolicyAllocationRuleRequest')
+    IpamPolicyDocument = Shapes::StructureShape.new(name: 'IpamPolicyDocument')
+    IpamPolicyDocumentSet = Shapes::ListShape.new(name: 'IpamPolicyDocumentSet')
+    IpamPolicyId = Shapes::StringShape.new(name: 'IpamPolicyId')
+    IpamPolicyManagedBy = Shapes::StringShape.new(name: 'IpamPolicyManagedBy')
+    IpamPolicyOrganizationTarget = Shapes::StructureShape.new(name: 'IpamPolicyOrganizationTarget')
+    IpamPolicyOrganizationTargetSet = Shapes::ListShape.new(name: 'IpamPolicyOrganizationTargetSet')
+    IpamPolicyResourceType = Shapes::StringShape.new(name: 'IpamPolicyResourceType')
+    IpamPolicySet = Shapes::ListShape.new(name: 'IpamPolicySet')
+    IpamPolicyState = Shapes::StringShape.new(name: 'IpamPolicyState')
     IpamPool = Shapes::StructureShape.new(name: 'IpamPool')
     IpamPoolAllocation = Shapes::StructureShape.new(name: 'IpamPoolAllocation')
     IpamPoolAllocationAllowedCidrs = Shapes::ListShape.new(name: 'IpamPoolAllocationAllowedCidrs')
@@ -2378,6 +2444,8 @@ module Aws::EC2
     ListSnapshotsInRecycleBinMaxResults = Shapes::IntegerShape.new(name: 'ListSnapshotsInRecycleBinMaxResults')
     ListSnapshotsInRecycleBinRequest = Shapes::StructureShape.new(name: 'ListSnapshotsInRecycleBinRequest')
     ListSnapshotsInRecycleBinResult = Shapes::StructureShape.new(name: 'ListSnapshotsInRecycleBinResult')
+    ListVolumesInRecycleBinRequest = Shapes::StructureShape.new(name: 'ListVolumesInRecycleBinRequest')
+    ListVolumesInRecycleBinResult = Shapes::StructureShape.new(name: 'ListVolumesInRecycleBinResult')
     ListingState = Shapes::StringShape.new(name: 'ListingState')
     ListingStatus = Shapes::StringShape.new(name: 'ListingStatus')
     LoadBalancerArn = Shapes::StringShape.new(name: 'LoadBalancerArn')
@@ -2542,6 +2610,8 @@ module Aws::EC2
     ModifyInstanceNetworkPerformanceResult = Shapes::StructureShape.new(name: 'ModifyInstanceNetworkPerformanceResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
     ModifyInstancePlacementResult = Shapes::StructureShape.new(name: 'ModifyInstancePlacementResult')
+    ModifyIpamPolicyAllocationRulesRequest = Shapes::StructureShape.new(name: 'ModifyIpamPolicyAllocationRulesRequest')
+    ModifyIpamPolicyAllocationRulesResult = Shapes::StructureShape.new(name: 'ModifyIpamPolicyAllocationRulesResult')
     ModifyIpamPoolRequest = Shapes::StructureShape.new(name: 'ModifyIpamPoolRequest')
     ModifyIpamPoolResult = Shapes::StructureShape.new(name: 'ModifyIpamPoolResult')
     ModifyIpamPrefixListResolverRequest = Shapes::StructureShape.new(name: 'ModifyIpamPrefixListResolverRequest')
@@ -2585,6 +2655,8 @@ module Aws::EC2
     ModifyTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterRuleResult')
     ModifyTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionRequest')
     ModifyTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionResult')
+    ModifyTransitGatewayMeteringPolicyRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayMeteringPolicyRequest')
+    ModifyTransitGatewayMeteringPolicyResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayMeteringPolicyResult')
     ModifyTransitGatewayOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayOptions')
     ModifyTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPrefixListReferenceRequest')
     ModifyTransitGatewayPrefixListReferenceResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPrefixListReferenceResult')
@@ -2625,6 +2697,8 @@ module Aws::EC2
     ModifyVpcBlockPublicAccessExclusionResult = Shapes::StructureShape.new(name: 'ModifyVpcBlockPublicAccessExclusionResult')
     ModifyVpcBlockPublicAccessOptionsRequest = Shapes::StructureShape.new(name: 'ModifyVpcBlockPublicAccessOptionsRequest')
     ModifyVpcBlockPublicAccessOptionsResult = Shapes::StructureShape.new(name: 'ModifyVpcBlockPublicAccessOptionsResult')
+    ModifyVpcEncryptionControlRequest = Shapes::StructureShape.new(name: 'ModifyVpcEncryptionControlRequest')
+    ModifyVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'ModifyVpcEncryptionControlResult')
     ModifyVpcEndpointConnectionNotificationRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointConnectionNotificationRequest')
     ModifyVpcEndpointConnectionNotificationResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointConnectionNotificationResult')
     ModifyVpcEndpointRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointRequest')
@@ -3095,6 +3169,8 @@ module Aws::EC2
     RestoreSnapshotTierRequest = Shapes::StructureShape.new(name: 'RestoreSnapshotTierRequest')
     RestoreSnapshotTierRequestTemporaryRestoreDays = Shapes::IntegerShape.new(name: 'RestoreSnapshotTierRequestTemporaryRestoreDays')
     RestoreSnapshotTierResult = Shapes::StructureShape.new(name: 'RestoreSnapshotTierResult')
+    RestoreVolumeFromRecycleBinRequest = Shapes::StructureShape.new(name: 'RestoreVolumeFromRecycleBinRequest')
+    RestoreVolumeFromRecycleBinResult = Shapes::StructureShape.new(name: 'RestoreVolumeFromRecycleBinResult')
     ResultRange = Shapes::IntegerShape.new(name: 'ResultRange')
     RetentionPeriodRequestDays = Shapes::IntegerShape.new(name: 'RetentionPeriodRequestDays')
     RetentionPeriodResponseDays = Shapes::IntegerShape.new(name: 'RetentionPeriodResponseDays')
@@ -3481,6 +3557,16 @@ module Aws::EC2
     TransitGatewayIdStringList = Shapes::ListShape.new(name: 'TransitGatewayIdStringList')
     TransitGatewayList = Shapes::ListShape.new(name: 'TransitGatewayList')
     TransitGatewayMaxResults = Shapes::IntegerShape.new(name: 'TransitGatewayMaxResults')
+    TransitGatewayMeteringPayerType = Shapes::StringShape.new(name: 'TransitGatewayMeteringPayerType')
+    TransitGatewayMeteringPolicy = Shapes::StructureShape.new(name: 'TransitGatewayMeteringPolicy')
+    TransitGatewayMeteringPolicyEntry = Shapes::StructureShape.new(name: 'TransitGatewayMeteringPolicyEntry')
+    TransitGatewayMeteringPolicyEntryList = Shapes::ListShape.new(name: 'TransitGatewayMeteringPolicyEntryList')
+    TransitGatewayMeteringPolicyEntryState = Shapes::StringShape.new(name: 'TransitGatewayMeteringPolicyEntryState')
+    TransitGatewayMeteringPolicyId = Shapes::StringShape.new(name: 'TransitGatewayMeteringPolicyId')
+    TransitGatewayMeteringPolicyIdStringList = Shapes::ListShape.new(name: 'TransitGatewayMeteringPolicyIdStringList')
+    TransitGatewayMeteringPolicyList = Shapes::ListShape.new(name: 'TransitGatewayMeteringPolicyList')
+    TransitGatewayMeteringPolicyRule = Shapes::StructureShape.new(name: 'TransitGatewayMeteringPolicyRule')
+    TransitGatewayMeteringPolicyState = Shapes::StringShape.new(name: 'TransitGatewayMeteringPolicyState')
     TransitGatewayMulitcastDomainAssociationState = Shapes::StringShape.new(name: 'TransitGatewayMulitcastDomainAssociationState')
     TransitGatewayMulticastDeregisteredGroupMembers = Shapes::StructureShape.new(name: 'TransitGatewayMulticastDeregisteredGroupMembers')
     TransitGatewayMulticastDeregisteredGroupSources = Shapes::StructureShape.new(name: 'TransitGatewayMulticastDeregisteredGroupSources')
@@ -3576,6 +3662,8 @@ module Aws::EC2
     UnsuccessfulItemSet = Shapes::ListShape.new(name: 'UnsuccessfulItemSet')
     UpdateCapacityManagerOrganizationsAccessRequest = Shapes::StructureShape.new(name: 'UpdateCapacityManagerOrganizationsAccessRequest')
     UpdateCapacityManagerOrganizationsAccessResult = Shapes::StructureShape.new(name: 'UpdateCapacityManagerOrganizationsAccessResult')
+    UpdateInterruptibleCapacityReservationAllocationRequest = Shapes::StructureShape.new(name: 'UpdateInterruptibleCapacityReservationAllocationRequest')
+    UpdateInterruptibleCapacityReservationAllocationResult = Shapes::StructureShape.new(name: 'UpdateInterruptibleCapacityReservationAllocationResult')
     UpdateSecurityGroupRuleDescriptionsEgressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressRequest')
     UpdateSecurityGroupRuleDescriptionsEgressResult = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressResult')
     UpdateSecurityGroupRuleDescriptionsIngressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsIngressRequest')
@@ -3673,6 +3761,8 @@ module Aws::EC2
     VolumeModification = Shapes::StructureShape.new(name: 'VolumeModification')
     VolumeModificationList = Shapes::ListShape.new(name: 'VolumeModificationList')
     VolumeModificationState = Shapes::StringShape.new(name: 'VolumeModificationState')
+    VolumeRecycleBinInfo = Shapes::StructureShape.new(name: 'VolumeRecycleBinInfo')
+    VolumeRecycleBinInfoList = Shapes::ListShape.new(name: 'VolumeRecycleBinInfoList')
     VolumeState = Shapes::StringShape.new(name: 'VolumeState')
     VolumeStatusAction = Shapes::StructureShape.new(name: 'VolumeStatusAction')
     VolumeStatusActionsList = Shapes::ListShape.new(name: 'VolumeStatusActionsList')
@@ -3709,12 +3799,18 @@ module Aws::EC2
     VpcClassicLinkIdList = Shapes::ListShape.new(name: 'VpcClassicLinkIdList')
     VpcClassicLinkList = Shapes::ListShape.new(name: 'VpcClassicLinkList')
     VpcEncryptionControl = Shapes::StructureShape.new(name: 'VpcEncryptionControl')
+    VpcEncryptionControlConfiguration = Shapes::StructureShape.new(name: 'VpcEncryptionControlConfiguration')
     VpcEncryptionControlExclusion = Shapes::StructureShape.new(name: 'VpcEncryptionControlExclusion')
     VpcEncryptionControlExclusionState = Shapes::StringShape.new(name: 'VpcEncryptionControlExclusionState')
+    VpcEncryptionControlExclusionStateInput = Shapes::StringShape.new(name: 'VpcEncryptionControlExclusionStateInput')
     VpcEncryptionControlExclusions = Shapes::StructureShape.new(name: 'VpcEncryptionControlExclusions')
     VpcEncryptionControlId = Shapes::StringShape.new(name: 'VpcEncryptionControlId')
+    VpcEncryptionControlIdList = Shapes::ListShape.new(name: 'VpcEncryptionControlIdList')
+    VpcEncryptionControlList = Shapes::ListShape.new(name: 'VpcEncryptionControlList')
     VpcEncryptionControlMode = Shapes::StringShape.new(name: 'VpcEncryptionControlMode')
     VpcEncryptionControlState = Shapes::StringShape.new(name: 'VpcEncryptionControlState')
+    VpcEncryptionNonCompliantResource = Shapes::StructureShape.new(name: 'VpcEncryptionNonCompliantResource')
+    VpcEncryptionNonCompliantResourceList = Shapes::ListShape.new(name: 'VpcEncryptionNonCompliantResourceList')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
     VpcEndpointAssociation = Shapes::StructureShape.new(name: 'VpcEndpointAssociation')
     VpcEndpointAssociationSet = Shapes::ListShape.new(name: 'VpcEndpointAssociationSet')
@@ -4293,6 +4389,8 @@ module Aws::EC2
     AssociateNatGatewayAddressRequest.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIdList, required: true, location_name: "AllocationId"))
     AssociateNatGatewayAddressRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpList, location_name: "PrivateIpAddress"))
     AssociateNatGatewayAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateNatGatewayAddressRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    AssociateNatGatewayAddressRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     AssociateNatGatewayAddressRequest.struct_class = Types::AssociateNatGatewayAddressRequest
 
     AssociateNatGatewayAddressResult.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "natGatewayId"))
@@ -4562,6 +4660,13 @@ module Aws::EC2
     AvailabilityZone.add_member(:state, Shapes::ShapeRef.new(shape: AvailabilityZoneState, location_name: "zoneState"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
+    AvailabilityZoneAddress.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    AvailabilityZoneAddress.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    AvailabilityZoneAddress.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIdList, location_name: "AllocationId"))
+    AvailabilityZoneAddress.struct_class = Types::AvailabilityZoneAddress
+
+    AvailabilityZoneAddresses.member = Shapes::ShapeRef.new(shape: AvailabilityZoneAddress, location_name: "AvailabilityZoneAddress")
+
     AvailabilityZoneIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId")
 
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "item")
@@ -4663,6 +4768,7 @@ module Aws::EC2
     ByoipCidr.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ByoipCidr.add_member(:state, Shapes::ShapeRef.new(shape: ByoipCidrState, location_name: "state"))
     ByoipCidr.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "networkBorderGroup"))
+    ByoipCidr.add_member(:advertisement_type, Shapes::ShapeRef.new(shape: String, location_name: "advertisementType"))
     ByoipCidr.struct_class = Types::ByoipCidr
 
     ByoipCidrSet.member = Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "item")
@@ -4921,6 +5027,9 @@ module Aws::EC2
     CapacityReservation.add_member(:commitment_info, Shapes::ShapeRef.new(shape: CapacityReservationCommitmentInfo, location_name: "commitmentInfo"))
     CapacityReservation.add_member(:delivery_preference, Shapes::ShapeRef.new(shape: CapacityReservationDeliveryPreference, location_name: "deliveryPreference"))
     CapacityReservation.add_member(:capacity_block_id, Shapes::ShapeRef.new(shape: CapacityBlockId, location_name: "capacityBlockId"))
+    CapacityReservation.add_member(:interruptible, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "interruptible"))
+    CapacityReservation.add_member(:interruptible_capacity_allocation, Shapes::ShapeRef.new(shape: InterruptibleCapacityAllocation, location_name: "interruptibleCapacityAllocation"))
+    CapacityReservation.add_member(:interruption_info, Shapes::ShapeRef.new(shape: InterruptionInfo, location_name: "interruptionInfo"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationBillingRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
@@ -5204,11 +5313,17 @@ module Aws::EC2
     CloudWatchLogOptions.add_member(:log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "logEnabled"))
     CloudWatchLogOptions.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "logGroupArn"))
     CloudWatchLogOptions.add_member(:log_output_format, Shapes::ShapeRef.new(shape: String, location_name: "logOutputFormat"))
+    CloudWatchLogOptions.add_member(:bgp_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "bgpLogEnabled"))
+    CloudWatchLogOptions.add_member(:bgp_log_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "bgpLogGroupArn"))
+    CloudWatchLogOptions.add_member(:bgp_log_output_format, Shapes::ShapeRef.new(shape: String, location_name: "bgpLogOutputFormat"))
     CloudWatchLogOptions.struct_class = Types::CloudWatchLogOptions
 
     CloudWatchLogOptionsSpecification.add_member(:log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LogEnabled"))
     CloudWatchLogOptionsSpecification.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "LogGroupArn"))
     CloudWatchLogOptionsSpecification.add_member(:log_output_format, Shapes::ShapeRef.new(shape: String, location_name: "LogOutputFormat"))
+    CloudWatchLogOptionsSpecification.add_member(:bgp_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BgpLogEnabled"))
+    CloudWatchLogOptionsSpecification.add_member(:bgp_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "BgpLogGroupArn"))
+    CloudWatchLogOptionsSpecification.add_member(:bgp_log_output_format, Shapes::ShapeRef.new(shape: String, location_name: "BgpLogOutputFormat"))
     CloudWatchLogOptionsSpecification.struct_class = Types::CloudWatchLogOptionsSpecification
 
     CoipAddressUsage.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
@@ -5713,6 +5828,19 @@ module Aws::EC2
     CreateInternetGatewayResult.add_member(:internet_gateway, Shapes::ShapeRef.new(shape: InternetGateway, location_name: "internetGateway"))
     CreateInternetGatewayResult.struct_class = Types::CreateInternetGatewayResult
 
+    CreateInterruptibleCapacityReservationAllocationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    CreateInterruptibleCapacityReservationAllocationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
+    CreateInterruptibleCapacityReservationAllocationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateInterruptibleCapacityReservationAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateInterruptibleCapacityReservationAllocationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateInterruptibleCapacityReservationAllocationRequest.struct_class = Types::CreateInterruptibleCapacityReservationAllocationRequest
+
+    CreateInterruptibleCapacityReservationAllocationResult.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "sourceCapacityReservationId"))
+    CreateInterruptibleCapacityReservationAllocationResult.add_member(:target_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "targetInstanceCount"))
+    CreateInterruptibleCapacityReservationAllocationResult.add_member(:status, Shapes::ShapeRef.new(shape: InterruptibleCapacityReservationAllocationStatus, location_name: "status"))
+    CreateInterruptibleCapacityReservationAllocationResult.add_member(:interruption_type, Shapes::ShapeRef.new(shape: InterruptionType, location_name: "interruptionType"))
+    CreateInterruptibleCapacityReservationAllocationResult.struct_class = Types::CreateInterruptibleCapacityReservationAllocationResult
+
     CreateIpamExternalResourceVerificationTokenRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateIpamExternalResourceVerificationTokenRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
     CreateIpamExternalResourceVerificationTokenRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -5721,6 +5849,15 @@ module Aws::EC2
 
     CreateIpamExternalResourceVerificationTokenResult.add_member(:ipam_external_resource_verification_token, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationToken, location_name: "ipamExternalResourceVerificationToken"))
     CreateIpamExternalResourceVerificationTokenResult.struct_class = Types::CreateIpamExternalResourceVerificationTokenResult
+
+    CreateIpamPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateIpamPolicyRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateIpamPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateIpamPolicyRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
+    CreateIpamPolicyRequest.struct_class = Types::CreateIpamPolicyRequest
+
+    CreateIpamPolicyResult.add_member(:ipam_policy, Shapes::ShapeRef.new(shape: IpamPolicy, location_name: "ipamPolicy"))
+    CreateIpamPolicyResult.struct_class = Types::CreateIpamPolicyResult
 
     CreateIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateIpamPoolRequest.add_member(:ipam_scope_id, Shapes::ShapeRef.new(shape: IpamScopeId, required: true, location_name: "IpamScopeId"))
@@ -5923,10 +6060,13 @@ module Aws::EC2
     CreateManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
     CreateManagedPrefixListResult.struct_class = Types::CreateManagedPrefixListResult
 
+    CreateNatGatewayRequest.add_member(:availability_mode, Shapes::ShapeRef.new(shape: AvailabilityMode, location_name: "AvailabilityMode"))
     CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    CreateNatGatewayRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
+    CreateNatGatewayRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    CreateNatGatewayRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    CreateNatGatewayRequest.add_member(:availability_zone_addresses, Shapes::ShapeRef.new(shape: AvailabilityZoneAddresses, location_name: "AvailabilityZoneAddress"))
     CreateNatGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNatGatewayRequest.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "ConnectivityType"))
     CreateNatGatewayRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
@@ -6303,6 +6443,33 @@ module Aws::EC2
     CreateTransitGatewayConnectResult.add_member(:transit_gateway_connect, Shapes::ShapeRef.new(shape: TransitGatewayConnect, location_name: "transitGatewayConnect"))
     CreateTransitGatewayConnectResult.struct_class = Types::CreateTransitGatewayConnectResult
 
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:policy_rule_number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "PolicyRuleNumber"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:source_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "SourceTransitGatewayAttachmentId"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:source_transit_gateway_attachment_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "SourceTransitGatewayAttachmentType"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "SourceCidrBlock"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:source_port_range, Shapes::ShapeRef.new(shape: String, location_name: "SourcePortRange"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:destination_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "DestinationTransitGatewayAttachmentId"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:destination_transit_gateway_attachment_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "DestinationTransitGatewayAttachmentType"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: String, location_name: "DestinationPortRange"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "Protocol"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:metered_account, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPayerType, required: true, location_name: "MeteredAccount"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTransitGatewayMeteringPolicyEntryRequest.struct_class = Types::CreateTransitGatewayMeteringPolicyEntryRequest
+
+    CreateTransitGatewayMeteringPolicyEntryResult.add_member(:transit_gateway_metering_policy_entry, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyEntry, location_name: "transitGatewayMeteringPolicyEntry"))
+    CreateTransitGatewayMeteringPolicyEntryResult.struct_class = Types::CreateTransitGatewayMeteringPolicyEntryResult
+
+    CreateTransitGatewayMeteringPolicyRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, required: true, location_name: "TransitGatewayId"))
+    CreateTransitGatewayMeteringPolicyRequest.add_member(:middlebox_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "MiddleboxAttachmentId"))
+    CreateTransitGatewayMeteringPolicyRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    CreateTransitGatewayMeteringPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateTransitGatewayMeteringPolicyRequest.struct_class = Types::CreateTransitGatewayMeteringPolicyRequest
+
+    CreateTransitGatewayMeteringPolicyResult.add_member(:transit_gateway_metering_policy, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicy, location_name: "transitGatewayMeteringPolicy"))
+    CreateTransitGatewayMeteringPolicyResult.struct_class = Types::CreateTransitGatewayMeteringPolicyResult
+
     CreateTransitGatewayMulticastDomainRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, required: true, location_name: "TransitGatewayId"))
     CreateTransitGatewayMulticastDomainRequest.add_member(:options, Shapes::ShapeRef.new(shape: CreateTransitGatewayMulticastDomainRequestOptions, location_name: "Options"))
     CreateTransitGatewayMulticastDomainRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -6562,6 +6729,14 @@ module Aws::EC2
     CreateVpcBlockPublicAccessExclusionResult.add_member(:vpc_block_public_access_exclusion, Shapes::ShapeRef.new(shape: VpcBlockPublicAccessExclusion, location_name: "vpcBlockPublicAccessExclusion"))
     CreateVpcBlockPublicAccessExclusionResult.struct_class = Types::CreateVpcBlockPublicAccessExclusionResult
 
+    CreateVpcEncryptionControlRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVpcEncryptionControlRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    CreateVpcEncryptionControlRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVpcEncryptionControlRequest.struct_class = Types::CreateVpcEncryptionControlRequest
+
+    CreateVpcEncryptionControlResult.add_member(:vpc_encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "vpcEncryptionControl"))
+    CreateVpcEncryptionControlResult.struct_class = Types::CreateVpcEncryptionControlResult
+
     CreateVpcEndpointConnectionNotificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateVpcEndpointConnectionNotificationRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: VpcEndpointServiceId, location_name: "ServiceId"))
     CreateVpcEndpointConnectionNotificationRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
@@ -6631,6 +6806,7 @@ module Aws::EC2
     CreateVpcRequest.add_member(:ipv_6_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "Ipv6IpamPoolId"))
     CreateVpcRequest.add_member(:ipv_6_netmask_length, Shapes::ShapeRef.new(shape: NetmaskLength, location_name: "Ipv6NetmaskLength"))
     CreateVpcRequest.add_member(:ipv_6_cidr_block_network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlockNetworkBorderGroup"))
+    CreateVpcRequest.add_member(:vpc_encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControlConfiguration, location_name: "VpcEncryptionControl"))
     CreateVpcRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateVpcRequest.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
@@ -6871,6 +7047,13 @@ module Aws::EC2
 
     DeleteIpamExternalResourceVerificationTokenResult.add_member(:ipam_external_resource_verification_token, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationToken, location_name: "ipamExternalResourceVerificationToken"))
     DeleteIpamExternalResourceVerificationTokenResult.struct_class = Types::DeleteIpamExternalResourceVerificationTokenResult
+
+    DeleteIpamPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteIpamPolicyRequest.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, required: true, location_name: "IpamPolicyId"))
+    DeleteIpamPolicyRequest.struct_class = Types::DeleteIpamPolicyRequest
+
+    DeleteIpamPolicyResult.add_member(:ipam_policy, Shapes::ShapeRef.new(shape: IpamPolicy, location_name: "ipamPolicy"))
+    DeleteIpamPolicyResult.struct_class = Types::DeleteIpamPolicyResult
 
     DeleteIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteIpamPoolRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -7204,6 +7387,21 @@ module Aws::EC2
     DeleteTransitGatewayConnectResult.add_member(:transit_gateway_connect, Shapes::ShapeRef.new(shape: TransitGatewayConnect, location_name: "transitGatewayConnect"))
     DeleteTransitGatewayConnectResult.struct_class = Types::DeleteTransitGatewayConnectResult
 
+    DeleteTransitGatewayMeteringPolicyEntryRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
+    DeleteTransitGatewayMeteringPolicyEntryRequest.add_member(:policy_rule_number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "PolicyRuleNumber"))
+    DeleteTransitGatewayMeteringPolicyEntryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTransitGatewayMeteringPolicyEntryRequest.struct_class = Types::DeleteTransitGatewayMeteringPolicyEntryRequest
+
+    DeleteTransitGatewayMeteringPolicyEntryResult.add_member(:transit_gateway_metering_policy_entry, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyEntry, location_name: "transitGatewayMeteringPolicyEntry"))
+    DeleteTransitGatewayMeteringPolicyEntryResult.struct_class = Types::DeleteTransitGatewayMeteringPolicyEntryResult
+
+    DeleteTransitGatewayMeteringPolicyRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
+    DeleteTransitGatewayMeteringPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteTransitGatewayMeteringPolicyRequest.struct_class = Types::DeleteTransitGatewayMeteringPolicyRequest
+
+    DeleteTransitGatewayMeteringPolicyResult.add_member(:transit_gateway_metering_policy, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicy, location_name: "transitGatewayMeteringPolicy"))
+    DeleteTransitGatewayMeteringPolicyResult.struct_class = Types::DeleteTransitGatewayMeteringPolicyResult
+
     DeleteTransitGatewayMulticastDomainRequest.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainId, required: true, location_name: "TransitGatewayMulticastDomainId"))
     DeleteTransitGatewayMulticastDomainRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteTransitGatewayMulticastDomainRequest.struct_class = Types::DeleteTransitGatewayMulticastDomainRequest
@@ -7311,6 +7509,13 @@ module Aws::EC2
 
     DeleteVpcBlockPublicAccessExclusionResult.add_member(:vpc_block_public_access_exclusion, Shapes::ShapeRef.new(shape: VpcBlockPublicAccessExclusion, location_name: "vpcBlockPublicAccessExclusion"))
     DeleteVpcBlockPublicAccessExclusionResult.struct_class = Types::DeleteVpcBlockPublicAccessExclusionResult
+
+    DeleteVpcEncryptionControlRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteVpcEncryptionControlRequest.add_member(:vpc_encryption_control_id, Shapes::ShapeRef.new(shape: VpcEncryptionControlId, required: true, location_name: "VpcEncryptionControlId"))
+    DeleteVpcEncryptionControlRequest.struct_class = Types::DeleteVpcEncryptionControlRequest
+
+    DeleteVpcEncryptionControlResult.add_member(:vpc_encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "vpcEncryptionControl"))
+    DeleteVpcEncryptionControlResult.struct_class = Types::DeleteVpcEncryptionControlResult
 
     DeleteVpcEndpointConnectionNotificationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteVpcEndpointConnectionNotificationsRequest.add_member(:connection_notification_ids, Shapes::ShapeRef.new(shape: ConnectionNotificationIdsList, required: true, location_name: "ConnectionNotificationId"))
@@ -8250,6 +8455,17 @@ module Aws::EC2
     DescribeIpamExternalResourceVerificationTokensResult.add_member(:ipam_external_resource_verification_tokens, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationTokenSet, location_name: "ipamExternalResourceVerificationTokenSet"))
     DescribeIpamExternalResourceVerificationTokensResult.struct_class = Types::DescribeIpamExternalResourceVerificationTokensResult
 
+    DescribeIpamPoliciesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamPoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpamPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    DescribeIpamPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamPoliciesRequest.add_member(:ipam_policy_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "IpamPolicyId"))
+    DescribeIpamPoliciesRequest.struct_class = Types::DescribeIpamPoliciesRequest
+
+    DescribeIpamPoliciesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpamPoliciesResult.add_member(:ipam_policies, Shapes::ShapeRef.new(shape: IpamPolicySet, location_name: "ipamPolicySet"))
+    DescribeIpamPoliciesResult.struct_class = Types::DescribeIpamPoliciesResult
+
     DescribeIpamPoolsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeIpamPoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeIpamPoolsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
@@ -9066,6 +9282,17 @@ module Aws::EC2
     DescribeTransitGatewayConnectsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeTransitGatewayConnectsResult.struct_class = Types::DescribeTransitGatewayConnectsResult
 
+    DescribeTransitGatewayMeteringPoliciesRequest.add_member(:transit_gateway_metering_policy_ids, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyIdStringList, location_name: "TransitGatewayMeteringPolicyIds"))
+    DescribeTransitGatewayMeteringPoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTransitGatewayMeteringPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    DescribeTransitGatewayMeteringPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeTransitGatewayMeteringPoliciesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTransitGatewayMeteringPoliciesRequest.struct_class = Types::DescribeTransitGatewayMeteringPoliciesRequest
+
+    DescribeTransitGatewayMeteringPoliciesResult.add_member(:transit_gateway_metering_policies, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyList, location_name: "transitGatewayMeteringPolicies"))
+    DescribeTransitGatewayMeteringPoliciesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTransitGatewayMeteringPoliciesResult.struct_class = Types::DescribeTransitGatewayMeteringPoliciesResult
+
     DescribeTransitGatewayMulticastDomainsRequest.add_member(:transit_gateway_multicast_domain_ids, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainIdStringList, location_name: "TransitGatewayMulticastDomainIds"))
     DescribeTransitGatewayMulticastDomainsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeTransitGatewayMulticastDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -9299,6 +9526,18 @@ module Aws::EC2
 
     DescribeVpcClassicLinkResult.add_member(:vpcs, Shapes::ShapeRef.new(shape: VpcClassicLinkList, location_name: "vpcSet"))
     DescribeVpcClassicLinkResult.struct_class = Types::DescribeVpcClassicLinkResult
+
+    DescribeVpcEncryptionControlsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeVpcEncryptionControlsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeVpcEncryptionControlsRequest.add_member(:vpc_encryption_control_ids, Shapes::ShapeRef.new(shape: VpcEncryptionControlIdList, location_name: "VpcEncryptionControlId"))
+    DescribeVpcEncryptionControlsRequest.add_member(:vpc_ids, Shapes::ShapeRef.new(shape: VpcIdStringList, location_name: "VpcId"))
+    DescribeVpcEncryptionControlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeVpcEncryptionControlsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeVpcEncryptionControlsMaxResults, location_name: "MaxResults"))
+    DescribeVpcEncryptionControlsRequest.struct_class = Types::DescribeVpcEncryptionControlsRequest
+
+    DescribeVpcEncryptionControlsResult.add_member(:vpc_encryption_controls, Shapes::ShapeRef.new(shape: VpcEncryptionControlList, location_name: "vpcEncryptionControlSet"))
+    DescribeVpcEncryptionControlsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeVpcEncryptionControlsResult.struct_class = Types::DescribeVpcEncryptionControlsResult
 
     DescribeVpcEndpointAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeVpcEndpointAssociationsRequest.add_member(:vpc_endpoint_ids, Shapes::ShapeRef.new(shape: VpcEndpointIdList, location_name: "VpcEndpointId"))
@@ -9648,6 +9887,14 @@ module Aws::EC2
 
     DisableIpamOrganizationAdminAccountResult.add_member(:success, Shapes::ShapeRef.new(shape: Boolean, location_name: "success"))
     DisableIpamOrganizationAdminAccountResult.struct_class = Types::DisableIpamOrganizationAdminAccountResult
+
+    DisableIpamPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableIpamPolicyRequest.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, required: true, location_name: "IpamPolicyId"))
+    DisableIpamPolicyRequest.add_member(:organization_target_id, Shapes::ShapeRef.new(shape: String, location_name: "OrganizationTargetId"))
+    DisableIpamPolicyRequest.struct_class = Types::DisableIpamPolicyRequest
+
+    DisableIpamPolicyResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DisableIpamPolicyResult.struct_class = Types::DisableIpamPolicyResult
 
     DisableRouteServerPropagationRequest.add_member(:route_server_id, Shapes::ShapeRef.new(shape: RouteServerId, required: true, location_name: "RouteServerId"))
     DisableRouteServerPropagationRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "RouteTableId"))
@@ -10194,6 +10441,14 @@ module Aws::EC2
     EnableIpamOrganizationAdminAccountResult.add_member(:success, Shapes::ShapeRef.new(shape: Boolean, location_name: "success"))
     EnableIpamOrganizationAdminAccountResult.struct_class = Types::EnableIpamOrganizationAdminAccountResult
 
+    EnableIpamPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableIpamPolicyRequest.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, required: true, location_name: "IpamPolicyId"))
+    EnableIpamPolicyRequest.add_member(:organization_target_id, Shapes::ShapeRef.new(shape: String, location_name: "OrganizationTargetId"))
+    EnableIpamPolicyRequest.struct_class = Types::EnableIpamPolicyRequest
+
+    EnableIpamPolicyResult.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, location_name: "ipamPolicyId"))
+    EnableIpamPolicyResult.struct_class = Types::EnableIpamPolicyResult
+
     EnableReachabilityAnalyzerOrganizationSharingRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableReachabilityAnalyzerOrganizationSharingRequest.struct_class = Types::EnableReachabilityAnalyzerOrganizationSharingRequest
 
@@ -10257,6 +10512,10 @@ module Aws::EC2
 
     EnclaveOptionsRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     EnclaveOptionsRequest.struct_class = Types::EnclaveOptionsRequest
+
+    EncryptionSupport.add_member(:encryption_state, Shapes::ShapeRef.new(shape: EncryptionStateValue, location_name: "encryptionState"))
+    EncryptionSupport.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    EncryptionSupport.struct_class = Types::EncryptionSupport
 
     EndpointSet.member = Shapes::ShapeRef.new(shape: ClientVpnEndpoint, location_name: "item")
 
@@ -10801,6 +11060,9 @@ module Aws::EC2
     GetCapacityReservationUsageResult.add_member(:available_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableInstanceCount"))
     GetCapacityReservationUsageResult.add_member(:state, Shapes::ShapeRef.new(shape: CapacityReservationState, location_name: "state"))
     GetCapacityReservationUsageResult.add_member(:instance_usages, Shapes::ShapeRef.new(shape: InstanceUsageSet, location_name: "instanceUsageSet"))
+    GetCapacityReservationUsageResult.add_member(:interruptible, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "interruptible"))
+    GetCapacityReservationUsageResult.add_member(:interruptible_capacity_allocation, Shapes::ShapeRef.new(shape: InterruptibleCapacityAllocation, location_name: "interruptibleCapacityAllocation"))
+    GetCapacityReservationUsageResult.add_member(:interruption_info, Shapes::ShapeRef.new(shape: InterruptionInfo, location_name: "interruptionInfo"))
     GetCapacityReservationUsageResult.struct_class = Types::GetCapacityReservationUsageResult
 
     GetCoipPoolUsageRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, required: true, location_name: "PoolId"))
@@ -10869,6 +11131,14 @@ module Aws::EC2
     GetEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     GetEbsEncryptionByDefaultResult.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     GetEbsEncryptionByDefaultResult.struct_class = Types::GetEbsEncryptionByDefaultResult
+
+    GetEnabledIpamPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetEnabledIpamPolicyRequest.struct_class = Types::GetEnabledIpamPolicyRequest
+
+    GetEnabledIpamPolicyResult.add_member(:ipam_policy_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ipamPolicyEnabled"))
+    GetEnabledIpamPolicyResult.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, location_name: "ipamPolicyId"))
+    GetEnabledIpamPolicyResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: IpamPolicyManagedBy, location_name: "managedBy"))
+    GetEnabledIpamPolicyResult.struct_class = Types::GetEnabledIpamPolicyResult
 
     GetFlowLogsIntegrationTemplateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetFlowLogsIntegrationTemplateRequest.add_member(:flow_log_id, Shapes::ShapeRef.new(shape: VpcFlowLogId, required: true, location_name: "FlowLogId"))
@@ -11002,6 +11272,30 @@ module Aws::EC2
     GetIpamDiscoveredResourceCidrsResult.add_member(:ipam_discovered_resource_cidrs, Shapes::ShapeRef.new(shape: IpamDiscoveredResourceCidrSet, location_name: "ipamDiscoveredResourceCidrSet"))
     GetIpamDiscoveredResourceCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetIpamDiscoveredResourceCidrsResult.struct_class = Types::GetIpamDiscoveredResourceCidrsResult
+
+    GetIpamPolicyAllocationRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetIpamPolicyAllocationRulesRequest.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, required: true, location_name: "IpamPolicyId"))
+    GetIpamPolicyAllocationRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetIpamPolicyAllocationRulesRequest.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "Locale"))
+    GetIpamPolicyAllocationRulesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPolicyResourceType, location_name: "ResourceType"))
+    GetIpamPolicyAllocationRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    GetIpamPolicyAllocationRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetIpamPolicyAllocationRulesRequest.struct_class = Types::GetIpamPolicyAllocationRulesRequest
+
+    GetIpamPolicyAllocationRulesResult.add_member(:ipam_policy_documents, Shapes::ShapeRef.new(shape: IpamPolicyDocumentSet, location_name: "ipamPolicyDocumentSet"))
+    GetIpamPolicyAllocationRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIpamPolicyAllocationRulesResult.struct_class = Types::GetIpamPolicyAllocationRulesResult
+
+    GetIpamPolicyOrganizationTargetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetIpamPolicyOrganizationTargetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    GetIpamPolicyOrganizationTargetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetIpamPolicyOrganizationTargetsRequest.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, required: true, location_name: "IpamPolicyId"))
+    GetIpamPolicyOrganizationTargetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetIpamPolicyOrganizationTargetsRequest.struct_class = Types::GetIpamPolicyOrganizationTargetsRequest
+
+    GetIpamPolicyOrganizationTargetsResult.add_member(:organization_targets, Shapes::ShapeRef.new(shape: IpamPolicyOrganizationTargetSet, location_name: "organizationTargetSet"))
+    GetIpamPolicyOrganizationTargetsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetIpamPolicyOrganizationTargetsResult.struct_class = Types::GetIpamPolicyOrganizationTargetsResult
 
     GetIpamPoolAllocationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetIpamPoolAllocationsRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -11238,6 +11532,17 @@ module Aws::EC2
     GetTransitGatewayAttachmentPropagationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetTransitGatewayAttachmentPropagationsResult.struct_class = Types::GetTransitGatewayAttachmentPropagationsResult
 
+    GetTransitGatewayMeteringPolicyEntriesRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
+    GetTransitGatewayMeteringPolicyEntriesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetTransitGatewayMeteringPolicyEntriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
+    GetTransitGatewayMeteringPolicyEntriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTransitGatewayMeteringPolicyEntriesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetTransitGatewayMeteringPolicyEntriesRequest.struct_class = Types::GetTransitGatewayMeteringPolicyEntriesRequest
+
+    GetTransitGatewayMeteringPolicyEntriesResult.add_member(:transit_gateway_metering_policy_entries, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyEntryList, location_name: "transitGatewayMeteringPolicyEntries"))
+    GetTransitGatewayMeteringPolicyEntriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetTransitGatewayMeteringPolicyEntriesResult.struct_class = Types::GetTransitGatewayMeteringPolicyEntriesResult
+
     GetTransitGatewayMulticastDomainAssociationsRequest.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainId, required: true, location_name: "TransitGatewayMulticastDomainId"))
     GetTransitGatewayMulticastDomainAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     GetTransitGatewayMulticastDomainAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -11328,6 +11633,16 @@ module Aws::EC2
     GetVerifiedAccessGroupPolicyResult.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "policyEnabled"))
     GetVerifiedAccessGroupPolicyResult.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "policyDocument"))
     GetVerifiedAccessGroupPolicyResult.struct_class = Types::GetVerifiedAccessGroupPolicyResult
+
+    GetVpcResourcesBlockingEncryptionEnforcementRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    GetVpcResourcesBlockingEncryptionEnforcementRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetVpcResourcesBlockingEncryptionEnforcementMaxResults, location_name: "MaxResults"))
+    GetVpcResourcesBlockingEncryptionEnforcementRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetVpcResourcesBlockingEncryptionEnforcementRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetVpcResourcesBlockingEncryptionEnforcementRequest.struct_class = Types::GetVpcResourcesBlockingEncryptionEnforcementRequest
+
+    GetVpcResourcesBlockingEncryptionEnforcementResult.add_member(:non_compliant_resources, Shapes::ShapeRef.new(shape: VpcEncryptionNonCompliantResourceList, location_name: "nonCompliantResourceSet"))
+    GetVpcResourcesBlockingEncryptionEnforcementResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetVpcResourcesBlockingEncryptionEnforcementResult.struct_class = Types::GetVpcResourcesBlockingEncryptionEnforcementResult
 
     GetVpnConnectionDeviceSampleConfigurationRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
     GetVpnConnectionDeviceSampleConfigurationRequest.add_member(:vpn_connection_device_type_id, Shapes::ShapeRef.new(shape: VpnConnectionDeviceTypeId, required: true, location_name: "VpnConnectionDeviceTypeId"))
@@ -12478,6 +12793,17 @@ module Aws::EC2
 
     InternetGatewayList.member = Shapes::ShapeRef.new(shape: InternetGateway, location_name: "item")
 
+    InterruptibleCapacityAllocation.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    InterruptibleCapacityAllocation.add_member(:target_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "targetInstanceCount"))
+    InterruptibleCapacityAllocation.add_member(:status, Shapes::ShapeRef.new(shape: InterruptibleCapacityReservationAllocationStatus, location_name: "status"))
+    InterruptibleCapacityAllocation.add_member(:interruptible_capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "interruptibleCapacityReservationId"))
+    InterruptibleCapacityAllocation.add_member(:interruption_type, Shapes::ShapeRef.new(shape: InterruptionType, location_name: "interruptionType"))
+    InterruptibleCapacityAllocation.struct_class = Types::InterruptibleCapacityAllocation
+
+    InterruptionInfo.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceCapacityReservationId"))
+    InterruptionInfo.add_member(:interruption_type, Shapes::ShapeRef.new(shape: InterruptionType, location_name: "interruptionType"))
+    InterruptionInfo.struct_class = Types::InterruptionInfo
+
     IpAddressList.member = Shapes::ShapeRef.new(shape: IpAddress, location_name: "item")
 
     IpList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -12621,6 +12947,41 @@ module Aws::EC2
     IpamOrganizationalUnitExclusion.struct_class = Types::IpamOrganizationalUnitExclusion
 
     IpamOrganizationalUnitExclusionSet.member = Shapes::ShapeRef.new(shape: IpamOrganizationalUnitExclusion, location_name: "item")
+
+    IpamPolicy.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    IpamPolicy.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, location_name: "ipamPolicyId"))
+    IpamPolicy.add_member(:ipam_policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ipamPolicyArn"))
+    IpamPolicy.add_member(:ipam_policy_region, Shapes::ShapeRef.new(shape: String, location_name: "ipamPolicyRegion"))
+    IpamPolicy.add_member(:state, Shapes::ShapeRef.new(shape: IpamPolicyState, location_name: "state"))
+    IpamPolicy.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    IpamPolicy.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    IpamPolicy.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, location_name: "ipamId"))
+    IpamPolicy.struct_class = Types::IpamPolicy
+
+    IpamPolicyAllocationRule.add_member(:source_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "sourceIpamPoolId"))
+    IpamPolicyAllocationRule.struct_class = Types::IpamPolicyAllocationRule
+
+    IpamPolicyAllocationRuleList.member = Shapes::ShapeRef.new(shape: IpamPolicyAllocationRule, location_name: "item")
+
+    IpamPolicyAllocationRuleListRequest.member = Shapes::ShapeRef.new(shape: IpamPolicyAllocationRuleRequest, location_name: "item")
+
+    IpamPolicyAllocationRuleRequest.add_member(:source_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "SourceIpamPoolId"))
+    IpamPolicyAllocationRuleRequest.struct_class = Types::IpamPolicyAllocationRuleRequest
+
+    IpamPolicyDocument.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, location_name: "ipamPolicyId"))
+    IpamPolicyDocument.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "locale"))
+    IpamPolicyDocument.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPolicyResourceType, location_name: "resourceType"))
+    IpamPolicyDocument.add_member(:allocation_rules, Shapes::ShapeRef.new(shape: IpamPolicyAllocationRuleList, location_name: "allocationRuleSet"))
+    IpamPolicyDocument.struct_class = Types::IpamPolicyDocument
+
+    IpamPolicyDocumentSet.member = Shapes::ShapeRef.new(shape: IpamPolicyDocument, location_name: "item")
+
+    IpamPolicyOrganizationTarget.add_member(:organization_target_id, Shapes::ShapeRef.new(shape: String, location_name: "organizationTargetId"))
+    IpamPolicyOrganizationTarget.struct_class = Types::IpamPolicyOrganizationTarget
+
+    IpamPolicyOrganizationTargetSet.member = Shapes::ShapeRef.new(shape: IpamPolicyOrganizationTarget, location_name: "item")
+
+    IpamPolicySet.member = Shapes::ShapeRef.new(shape: IpamPolicy, location_name: "item")
 
     IpamPool.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     IpamPool.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "ipamPoolId"))
@@ -13326,6 +13687,16 @@ module Aws::EC2
     ListSnapshotsInRecycleBinResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListSnapshotsInRecycleBinResult.struct_class = Types::ListSnapshotsInRecycleBinResult
 
+    ListVolumesInRecycleBinRequest.add_member(:volume_ids, Shapes::ShapeRef.new(shape: VolumeIdStringList, location_name: "VolumeId"))
+    ListVolumesInRecycleBinRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ListVolumesInRecycleBinRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    ListVolumesInRecycleBinRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListVolumesInRecycleBinRequest.struct_class = Types::ListVolumesInRecycleBinRequest
+
+    ListVolumesInRecycleBinResult.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeRecycleBinInfoList, location_name: "volumeSet"))
+    ListVolumesInRecycleBinResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListVolumesInRecycleBinResult.struct_class = Types::ListVolumesInRecycleBinResult
+
     LoadBalancersConfig.add_member(:classic_load_balancers_config, Shapes::ShapeRef.new(shape: ClassicLoadBalancersConfig, location_name: "classicLoadBalancersConfig"))
     LoadBalancersConfig.add_member(:target_groups_config, Shapes::ShapeRef.new(shape: TargetGroupsConfig, location_name: "targetGroupsConfig"))
     LoadBalancersConfig.struct_class = Types::LoadBalancersConfig
@@ -13876,6 +14247,16 @@ module Aws::EC2
     ModifyInstancePlacementResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyInstancePlacementResult.struct_class = Types::ModifyInstancePlacementResult
 
+    ModifyIpamPolicyAllocationRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyIpamPolicyAllocationRulesRequest.add_member(:ipam_policy_id, Shapes::ShapeRef.new(shape: IpamPolicyId, required: true, location_name: "IpamPolicyId"))
+    ModifyIpamPolicyAllocationRulesRequest.add_member(:locale, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Locale"))
+    ModifyIpamPolicyAllocationRulesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPolicyResourceType, required: true, location_name: "ResourceType"))
+    ModifyIpamPolicyAllocationRulesRequest.add_member(:allocation_rules, Shapes::ShapeRef.new(shape: IpamPolicyAllocationRuleListRequest, location_name: "AllocationRule"))
+    ModifyIpamPolicyAllocationRulesRequest.struct_class = Types::ModifyIpamPolicyAllocationRulesRequest
+
+    ModifyIpamPolicyAllocationRulesResult.add_member(:ipam_policy_document, Shapes::ShapeRef.new(shape: IpamPolicyDocument, location_name: "ipamPolicyDocument"))
+    ModifyIpamPolicyAllocationRulesResult.struct_class = Types::ModifyIpamPolicyAllocationRulesResult
+
     ModifyIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyIpamPoolRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
     ModifyIpamPoolRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -14130,6 +14511,15 @@ module Aws::EC2
     ModifyTrafficMirrorSessionResult.add_member(:traffic_mirror_session, Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "trafficMirrorSession"))
     ModifyTrafficMirrorSessionResult.struct_class = Types::ModifyTrafficMirrorSessionResult
 
+    ModifyTransitGatewayMeteringPolicyRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
+    ModifyTransitGatewayMeteringPolicyRequest.add_member(:add_middlebox_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "AddMiddleboxAttachmentId"))
+    ModifyTransitGatewayMeteringPolicyRequest.add_member(:remove_middlebox_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "RemoveMiddleboxAttachmentId"))
+    ModifyTransitGatewayMeteringPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTransitGatewayMeteringPolicyRequest.struct_class = Types::ModifyTransitGatewayMeteringPolicyRequest
+
+    ModifyTransitGatewayMeteringPolicyResult.add_member(:transit_gateway_metering_policy, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicy, location_name: "transitGatewayMeteringPolicy"))
+    ModifyTransitGatewayMeteringPolicyResult.struct_class = Types::ModifyTransitGatewayMeteringPolicyResult
+
     ModifyTransitGatewayOptions.add_member(:add_transit_gateway_cidr_blocks, Shapes::ShapeRef.new(shape: TransitGatewayCidrBlockStringList, location_name: "AddTransitGatewayCidrBlocks"))
     ModifyTransitGatewayOptions.add_member(:remove_transit_gateway_cidr_blocks, Shapes::ShapeRef.new(shape: TransitGatewayCidrBlockStringList, location_name: "RemoveTransitGatewayCidrBlocks"))
     ModifyTransitGatewayOptions.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: VpnEcmpSupportValue, location_name: "VpnEcmpSupport"))
@@ -14141,6 +14531,7 @@ module Aws::EC2
     ModifyTransitGatewayOptions.add_member(:default_route_table_propagation, Shapes::ShapeRef.new(shape: DefaultRouteTablePropagationValue, location_name: "DefaultRouteTablePropagation"))
     ModifyTransitGatewayOptions.add_member(:propagation_default_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, location_name: "PropagationDefaultRouteTableId"))
     ModifyTransitGatewayOptions.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: Long, location_name: "AmazonSideAsn"))
+    ModifyTransitGatewayOptions.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EncryptionSupportOptionValue, location_name: "EncryptionSupport"))
     ModifyTransitGatewayOptions.struct_class = Types::ModifyTransitGatewayOptions
 
     ModifyTransitGatewayPrefixListReferenceRequest.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableId, required: true, location_name: "TransitGatewayRouteTableId"))
@@ -14347,6 +14738,22 @@ module Aws::EC2
     ModifyVpcBlockPublicAccessOptionsResult.add_member(:vpc_block_public_access_options, Shapes::ShapeRef.new(shape: VpcBlockPublicAccessOptions, location_name: "vpcBlockPublicAccessOptions"))
     ModifyVpcBlockPublicAccessOptionsResult.struct_class = Types::ModifyVpcBlockPublicAccessOptionsResult
 
+    ModifyVpcEncryptionControlRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVpcEncryptionControlRequest.add_member(:vpc_encryption_control_id, Shapes::ShapeRef.new(shape: VpcEncryptionControlId, required: true, location_name: "VpcEncryptionControlId"))
+    ModifyVpcEncryptionControlRequest.add_member(:mode, Shapes::ShapeRef.new(shape: VpcEncryptionControlMode, location_name: "Mode"))
+    ModifyVpcEncryptionControlRequest.add_member(:internet_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "InternetGatewayExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:egress_only_internet_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "EgressOnlyInternetGatewayExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:nat_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "NatGatewayExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:virtual_private_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VirtualPrivateGatewayExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:vpc_peering_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcPeeringExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:lambda_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "LambdaExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:vpc_lattice_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcLatticeExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:elastic_file_system_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ElasticFileSystemExclusion"))
+    ModifyVpcEncryptionControlRequest.struct_class = Types::ModifyVpcEncryptionControlRequest
+
+    ModifyVpcEncryptionControlResult.add_member(:vpc_encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "vpcEncryptionControl"))
+    ModifyVpcEncryptionControlResult.struct_class = Types::ModifyVpcEncryptionControlResult
+
     ModifyVpcEndpointConnectionNotificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVpcEndpointConnectionNotificationRequest.add_member(:connection_notification_id, Shapes::ShapeRef.new(shape: ConnectionNotificationId, required: true, location_name: "ConnectionNotificationId"))
     ModifyVpcEndpointConnectionNotificationRequest.add_member(:connection_notification_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConnectionNotificationArn"))
@@ -14548,6 +14955,10 @@ module Aws::EC2
     NatGateway.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     NatGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     NatGateway.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    NatGateway.add_member(:availability_mode, Shapes::ShapeRef.new(shape: AvailabilityMode, location_name: "availabilityMode"))
+    NatGateway.add_member(:auto_scaling_ips, Shapes::ShapeRef.new(shape: AutoScalingIpsState, location_name: "autoScalingIps"))
+    NatGateway.add_member(:auto_provision_zones, Shapes::ShapeRef.new(shape: AutoProvisionZonesState, location_name: "autoProvisionZones"))
+    NatGateway.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "routeTableId"))
     NatGateway.struct_class = Types::NatGateway
 
     NatGatewayAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
@@ -14558,6 +14969,8 @@ module Aws::EC2
     NatGatewayAddress.add_member(:is_primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPrimary"))
     NatGatewayAddress.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
     NatGatewayAddress.add_member(:status, Shapes::ShapeRef.new(shape: NatGatewayAddressStatus, location_name: "status"))
+    NatGatewayAddress.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
+    NatGatewayAddress.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     NatGatewayAddress.struct_class = Types::NatGatewayAddress
 
     NatGatewayAddressList.member = Shapes::ShapeRef.new(shape: NatGatewayAddress, location_name: "item")
@@ -16083,6 +16496,13 @@ module Aws::EC2
     RestoreSnapshotTierResult.add_member(:is_permanent_restore, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPermanentRestore"))
     RestoreSnapshotTierResult.struct_class = Types::RestoreSnapshotTierResult
 
+    RestoreVolumeFromRecycleBinRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    RestoreVolumeFromRecycleBinRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RestoreVolumeFromRecycleBinRequest.struct_class = Types::RestoreVolumeFromRecycleBinRequest
+
+    RestoreVolumeFromRecycleBinResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    RestoreVolumeFromRecycleBinResult.struct_class = Types::RestoreVolumeFromRecycleBinResult
+
     RevokeClientVpnIngressRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
     RevokeClientVpnIngressRequest.add_member(:target_network_cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetNetworkCidr"))
     RevokeClientVpnIngressRequest.add_member(:access_group_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessGroupId"))
@@ -17467,6 +17887,39 @@ module Aws::EC2
 
     TransitGatewayList.member = Shapes::ShapeRef.new(shape: TransitGateway, location_name: "item")
 
+    TransitGatewayMeteringPolicy.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, location_name: "transitGatewayMeteringPolicyId"))
+    TransitGatewayMeteringPolicy.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "transitGatewayId"))
+    TransitGatewayMeteringPolicy.add_member(:middlebox_attachment_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "middleboxAttachmentIdSet"))
+    TransitGatewayMeteringPolicy.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyState, location_name: "state"))
+    TransitGatewayMeteringPolicy.add_member(:update_effective_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "updateEffectiveAt"))
+    TransitGatewayMeteringPolicy.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TransitGatewayMeteringPolicy.struct_class = Types::TransitGatewayMeteringPolicy
+
+    TransitGatewayMeteringPolicyEntry.add_member(:policy_rule_number, Shapes::ShapeRef.new(shape: String, location_name: "policyRuleNumber"))
+    TransitGatewayMeteringPolicyEntry.add_member(:metered_account, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPayerType, location_name: "meteredAccount"))
+    TransitGatewayMeteringPolicyEntry.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyEntryState, location_name: "state"))
+    TransitGatewayMeteringPolicyEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "updatedAt"))
+    TransitGatewayMeteringPolicyEntry.add_member(:update_effective_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "updateEffectiveAt"))
+    TransitGatewayMeteringPolicyEntry.add_member(:metering_policy_rule, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyRule, location_name: "meteringPolicyRule"))
+    TransitGatewayMeteringPolicyEntry.struct_class = Types::TransitGatewayMeteringPolicyEntry
+
+    TransitGatewayMeteringPolicyEntryList.member = Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyEntry, location_name: "item")
+
+    TransitGatewayMeteringPolicyIdStringList.member = Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, location_name: "item")
+
+    TransitGatewayMeteringPolicyList.member = Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicy, location_name: "item")
+
+    TransitGatewayMeteringPolicyRule.add_member(:source_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "sourceTransitGatewayAttachmentId"))
+    TransitGatewayMeteringPolicyRule.add_member(:source_transit_gateway_attachment_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "sourceTransitGatewayAttachmentType"))
+    TransitGatewayMeteringPolicyRule.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidrBlock"))
+    TransitGatewayMeteringPolicyRule.add_member(:source_port_range, Shapes::ShapeRef.new(shape: String, location_name: "sourcePortRange"))
+    TransitGatewayMeteringPolicyRule.add_member(:destination_transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "destinationTransitGatewayAttachmentId"))
+    TransitGatewayMeteringPolicyRule.add_member(:destination_transit_gateway_attachment_type, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentResourceType, location_name: "destinationTransitGatewayAttachmentType"))
+    TransitGatewayMeteringPolicyRule.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
+    TransitGatewayMeteringPolicyRule.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: String, location_name: "destinationPortRange"))
+    TransitGatewayMeteringPolicyRule.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    TransitGatewayMeteringPolicyRule.struct_class = Types::TransitGatewayMeteringPolicyRule
+
     TransitGatewayMulticastDeregisteredGroupMembers.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayMulticastDomainId"))
     TransitGatewayMulticastDeregisteredGroupMembers.add_member(:deregistered_network_interface_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "deregisteredNetworkInterfaceIds"))
     TransitGatewayMulticastDeregisteredGroupMembers.add_member(:group_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "groupIpAddress"))
@@ -17551,6 +18004,7 @@ module Aws::EC2
     TransitGatewayOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: DnsSupportValue, location_name: "dnsSupport"))
     TransitGatewayOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: SecurityGroupReferencingSupportValue, location_name: "securityGroupReferencingSupport"))
     TransitGatewayOptions.add_member(:multicast_support, Shapes::ShapeRef.new(shape: MulticastSupportValue, location_name: "multicastSupport"))
+    TransitGatewayOptions.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EncryptionSupport, location_name: "encryptionSupport"))
     TransitGatewayOptions.struct_class = Types::TransitGatewayOptions
 
     TransitGatewayPeeringAttachment.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayAttachmentId"))
@@ -17843,6 +18297,19 @@ module Aws::EC2
     UpdateCapacityManagerOrganizationsAccessResult.add_member(:capacity_manager_status, Shapes::ShapeRef.new(shape: CapacityManagerStatus, location_name: "capacityManagerStatus"))
     UpdateCapacityManagerOrganizationsAccessResult.add_member(:organizations_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "organizationsAccess"))
     UpdateCapacityManagerOrganizationsAccessResult.struct_class = Types::UpdateCapacityManagerOrganizationsAccessResult
+
+    UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:target_instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TargetInstanceCount"))
+    UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UpdateInterruptibleCapacityReservationAllocationRequest.struct_class = Types::UpdateInterruptibleCapacityReservationAllocationRequest
+
+    UpdateInterruptibleCapacityReservationAllocationResult.add_member(:interruptible_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "interruptibleCapacityReservationId"))
+    UpdateInterruptibleCapacityReservationAllocationResult.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "sourceCapacityReservationId"))
+    UpdateInterruptibleCapacityReservationAllocationResult.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    UpdateInterruptibleCapacityReservationAllocationResult.add_member(:target_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "targetInstanceCount"))
+    UpdateInterruptibleCapacityReservationAllocationResult.add_member(:status, Shapes::ShapeRef.new(shape: InterruptibleCapacityReservationAllocationStatus, location_name: "status"))
+    UpdateInterruptibleCapacityReservationAllocationResult.add_member(:interruption_type, Shapes::ShapeRef.new(shape: InterruptionType, location_name: "interruptionType"))
+    UpdateInterruptibleCapacityReservationAllocationResult.struct_class = Types::UpdateInterruptibleCapacityReservationAllocationResult
 
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "GroupId"))
@@ -18220,6 +18687,25 @@ module Aws::EC2
 
     VolumeModificationList.member = Shapes::ShapeRef.new(shape: VolumeModification, location_name: "item")
 
+    VolumeRecycleBinInfo.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "volumeId"))
+    VolumeRecycleBinInfo.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    VolumeRecycleBinInfo.add_member(:state, Shapes::ShapeRef.new(shape: VolumeState, location_name: "state"))
+    VolumeRecycleBinInfo.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
+    VolumeRecycleBinInfo.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
+    VolumeRecycleBinInfo.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
+    VolumeRecycleBinInfo.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    VolumeRecycleBinInfo.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    VolumeRecycleBinInfo.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    VolumeRecycleBinInfo.add_member(:source_volume_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceVolumeId"))
+    VolumeRecycleBinInfo.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    VolumeRecycleBinInfo.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
+    VolumeRecycleBinInfo.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
+    VolumeRecycleBinInfo.add_member(:recycle_bin_enter_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "recycleBinEnterTime"))
+    VolumeRecycleBinInfo.add_member(:recycle_bin_exit_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "recycleBinExitTime"))
+    VolumeRecycleBinInfo.struct_class = Types::VolumeRecycleBinInfo
+
+    VolumeRecycleBinInfoList.member = Shapes::ShapeRef.new(shape: VolumeRecycleBinInfo, location_name: "item")
+
     VolumeStatusAction.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     VolumeStatusAction.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     VolumeStatusAction.add_member(:event_id, Shapes::ShapeRef.new(shape: String, location_name: "eventId"))
@@ -18341,6 +18827,17 @@ module Aws::EC2
     VpcEncryptionControl.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     VpcEncryptionControl.struct_class = Types::VpcEncryptionControl
 
+    VpcEncryptionControlConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: VpcEncryptionControlMode, required: true, location_name: "Mode"))
+    VpcEncryptionControlConfiguration.add_member(:internet_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "InternetGatewayExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:egress_only_internet_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "EgressOnlyInternetGatewayExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:nat_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "NatGatewayExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:virtual_private_gateway_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VirtualPrivateGatewayExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:vpc_peering_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcPeeringExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:lambda_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "LambdaExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:vpc_lattice_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcLatticeExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:elastic_file_system_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ElasticFileSystemExclusion"))
+    VpcEncryptionControlConfiguration.struct_class = Types::VpcEncryptionControlConfiguration
+
     VpcEncryptionControlExclusion.add_member(:state, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "state"))
     VpcEncryptionControlExclusion.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
     VpcEncryptionControlExclusion.struct_class = Types::VpcEncryptionControlExclusion
@@ -18354,6 +18851,18 @@ module Aws::EC2
     VpcEncryptionControlExclusions.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "vpcLattice"))
     VpcEncryptionControlExclusions.add_member(:elastic_file_system, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "elasticFileSystem"))
     VpcEncryptionControlExclusions.struct_class = Types::VpcEncryptionControlExclusions
+
+    VpcEncryptionControlIdList.member = Shapes::ShapeRef.new(shape: VpcEncryptionControlId, location_name: "item")
+
+    VpcEncryptionControlList.member = Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "item")
+
+    VpcEncryptionNonCompliantResource.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    VpcEncryptionNonCompliantResource.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    VpcEncryptionNonCompliantResource.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    VpcEncryptionNonCompliantResource.add_member(:is_excludable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isExcludable"))
+    VpcEncryptionNonCompliantResource.struct_class = Types::VpcEncryptionNonCompliantResource
+
+    VpcEncryptionNonCompliantResourceList.member = Shapes::ShapeRef.new(shape: VpcEncryptionNonCompliantResource, location_name: "item")
 
     VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointId"))
     VpcEndpoint.add_member(:vpc_endpoint_type, Shapes::ShapeRef.new(shape: VpcEndpointType, location_name: "vpcEndpointType"))
@@ -19303,6 +19812,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateInternetGatewayResult)
       end)
 
+      api.add_operation(:create_interruptible_capacity_reservation_allocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInterruptibleCapacityReservationAllocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInterruptibleCapacityReservationAllocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInterruptibleCapacityReservationAllocationResult)
+      end)
+
       api.add_operation(:create_ipam, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIpam"
         o.http_method = "POST"
@@ -19317,6 +19834,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateIpamExternalResourceVerificationTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateIpamExternalResourceVerificationTokenResult)
+      end)
+
+      api.add_operation(:create_ipam_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIpamPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIpamPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIpamPolicyResult)
       end)
 
       api.add_operation(:create_ipam_pool, Seahorse::Model::Operation.new.tap do |o|
@@ -19703,6 +20228,22 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayConnectPeerResult)
       end)
 
+      api.add_operation(:create_transit_gateway_metering_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayMeteringPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayMeteringPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayMeteringPolicyResult)
+      end)
+
+      api.add_operation(:create_transit_gateway_metering_policy_entry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTransitGatewayMeteringPolicyEntry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTransitGatewayMeteringPolicyEntryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTransitGatewayMeteringPolicyEntryResult)
+      end)
+
       api.add_operation(:create_transit_gateway_multicast_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTransitGatewayMulticastDomain"
         o.http_method = "POST"
@@ -19821,6 +20362,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateVpcBlockPublicAccessExclusionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateVpcBlockPublicAccessExclusionResult)
+      end)
+
+      api.add_operation(:create_vpc_encryption_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcEncryptionControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcEncryptionControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcEncryptionControlResult)
       end)
 
       api.add_operation(:create_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -20029,6 +20578,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteIpamExternalResourceVerificationTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteIpamExternalResourceVerificationTokenResult)
+      end)
+
+      api.add_operation(:delete_ipam_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIpamPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIpamPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIpamPolicyResult)
       end)
 
       api.add_operation(:delete_ipam_pool, Seahorse::Model::Operation.new.tap do |o|
@@ -20391,6 +20948,22 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayConnectPeerResult)
       end)
 
+      api.add_operation(:delete_transit_gateway_metering_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTransitGatewayMeteringPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayMeteringPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayMeteringPolicyResult)
+      end)
+
+      api.add_operation(:delete_transit_gateway_metering_policy_entry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTransitGatewayMeteringPolicyEntry"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTransitGatewayMeteringPolicyEntryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTransitGatewayMeteringPolicyEntryResult)
+      end)
+
       api.add_operation(:delete_transit_gateway_multicast_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTransitGatewayMulticastDomain"
         o.http_method = "POST"
@@ -20509,6 +21082,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteVpcBlockPublicAccessExclusionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteVpcBlockPublicAccessExclusionResult)
+      end)
+
+      api.add_operation(:delete_vpc_encryption_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcEncryptionControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcEncryptionControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcEncryptionControlResult)
       end)
 
       api.add_operation(:delete_vpc_endpoint_connection_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -21509,6 +22090,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeIpamExternalResourceVerificationTokensResult)
       end)
 
+      api.add_operation(:describe_ipam_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamPoliciesResult)
+      end)
+
       api.add_operation(:describe_ipam_pools, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIpamPools"
         o.http_method = "POST"
@@ -22440,6 +23029,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_transit_gateway_metering_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTransitGatewayMeteringPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayMeteringPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayMeteringPoliciesResult)
+      end)
+
       api.add_operation(:describe_transit_gateway_multicast_domains, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTransitGatewayMulticastDomains"
         o.http_method = "POST"
@@ -22716,6 +23313,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_vpc_encryption_controls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcEncryptionControls"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcEncryptionControlsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcEncryptionControlsResult)
       end)
 
       api.add_operation(:describe_vpc_endpoint_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -23012,6 +23617,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisableIpamOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: DisableIpamOrganizationAdminAccountResult)
+      end)
+
+      api.add_operation(:disable_ipam_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableIpamPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableIpamPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableIpamPolicyResult)
       end)
 
       api.add_operation(:disable_route_server_propagation, Seahorse::Model::Operation.new.tap do |o|
@@ -23318,6 +23931,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: EnableIpamOrganizationAdminAccountResult)
       end)
 
+      api.add_operation(:enable_ipam_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableIpamPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableIpamPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableIpamPolicyResult)
+      end)
+
       api.add_operation(:enable_reachability_analyzer_organization_sharing, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableReachabilityAnalyzerOrganizationSharing"
         o.http_method = "POST"
@@ -23582,6 +24203,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultResult)
       end)
 
+      api.add_operation(:get_enabled_ipam_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEnabledIpamPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEnabledIpamPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEnabledIpamPolicyResult)
+      end)
+
       api.add_operation(:get_flow_logs_integration_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFlowLogsIntegrationTemplate"
         o.http_method = "POST"
@@ -23714,6 +24343,22 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_ipam_policy_allocation_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIpamPolicyAllocationRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIpamPolicyAllocationRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIpamPolicyAllocationRulesResult)
+      end)
+
+      api.add_operation(:get_ipam_policy_organization_targets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIpamPolicyOrganizationTargets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIpamPolicyOrganizationTargetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIpamPolicyOrganizationTargetsResult)
       end)
 
       api.add_operation(:get_ipam_pool_allocations, Seahorse::Model::Operation.new.tap do |o|
@@ -23964,6 +24609,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:get_transit_gateway_metering_policy_entries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayMeteringPolicyEntries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayMeteringPolicyEntriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayMeteringPolicyEntriesResult)
+      end)
+
       api.add_operation(:get_transit_gateway_multicast_domain_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransitGatewayMulticastDomainAssociations"
         o.http_method = "POST"
@@ -24064,6 +24717,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetVerifiedAccessGroupPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVerifiedAccessGroupPolicyResult)
+      end)
+
+      api.add_operation(:get_vpc_resources_blocking_encryption_enforcement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpcResourcesBlockingEncryptionEnforcement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVpcResourcesBlockingEncryptionEnforcementRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpcResourcesBlockingEncryptionEnforcementResult)
       end)
 
       api.add_operation(:get_vpn_connection_device_sample_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -24170,6 +24831,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_volumes_in_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVolumesInRecycleBin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVolumesInRecycleBinRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVolumesInRecycleBinResult)
       end)
 
       api.add_operation(:lock_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -24388,6 +25057,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ModifyIpamResult)
       end)
 
+      api.add_operation(:modify_ipam_policy_allocation_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyIpamPolicyAllocationRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyIpamPolicyAllocationRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyIpamPolicyAllocationRulesResult)
+      end)
+
       api.add_operation(:modify_ipam_pool, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyIpamPool"
         o.http_method = "POST"
@@ -24572,6 +25249,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayResult)
       end)
 
+      api.add_operation(:modify_transit_gateway_metering_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTransitGatewayMeteringPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayMeteringPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayMeteringPolicyResult)
+      end)
+
       api.add_operation(:modify_transit_gateway_prefix_list_reference, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyTransitGatewayPrefixListReference"
         o.http_method = "POST"
@@ -24682,6 +25367,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyVpcBlockPublicAccessOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyVpcBlockPublicAccessOptionsResult)
+      end)
+
+      api.add_operation(:modify_vpc_encryption_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVpcEncryptionControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVpcEncryptionControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVpcEncryptionControlResult)
       end)
 
       api.add_operation(:modify_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -25172,6 +25865,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: RestoreSnapshotTierResult)
       end)
 
+      api.add_operation(:restore_volume_from_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreVolumeFromRecycleBin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreVolumeFromRecycleBinRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreVolumeFromRecycleBinResult)
+      end)
+
       api.add_operation(:revoke_client_vpn_ingress, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RevokeClientVpnIngress"
         o.http_method = "POST"
@@ -25366,6 +26067,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCapacityManagerOrganizationsAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCapacityManagerOrganizationsAccessResult)
+      end)
+
+      api.add_operation(:update_interruptible_capacity_reservation_allocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInterruptibleCapacityReservationAllocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInterruptibleCapacityReservationAllocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInterruptibleCapacityReservationAllocationResult)
       end)
 
       api.add_operation(:update_security_group_rule_descriptions_egress, Seahorse::Model::Operation.new.tap do |o|

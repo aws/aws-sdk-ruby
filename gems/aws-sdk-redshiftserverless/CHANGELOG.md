@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2025-11-21)
+------------------
+
+* Feature - Added UpdateLakehouseConfiguration API to manage Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation for namespaces.
+
 1.58.0 (2025-10-27)
 ------------------
 

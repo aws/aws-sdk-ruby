@@ -2463,8 +2463,11 @@ module Aws::Kinesis
     # registered. Tags will take effect from the `CREATING` status of the
     # consumer.
     #
-    # You can register up to 20 consumers per stream. A given consumer can
-    # only be registered with one stream at a time.
+    # With On-demand Advantage streams, you can register up to 50 consumers
+    # per stream to use Enhanced Fan-out. With On-demand Standard and
+    # Provisioned streams, you can register up to 20 consumers per stream to
+    # use Enhanced Fan-out. A given consumer can only be registered with one
+    # stream at a time.
     #
     # For an example of how to use this operation, see [Enhanced Fan-Out
     # Using the Kinesis Data Streams API][1].
@@ -3241,7 +3244,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

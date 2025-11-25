@@ -122,6 +122,28 @@ module Aws
                               ) -> _GetRecommendationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationResponseSuccess
 
+      interface _ListEfficiencyMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEfficiencyMetricsResponse]
+        def efficiency_metrics_by_group: () -> ::Array[Types::EfficiencyMetricsByGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_efficiency_metrics-instance_method
+      def list_efficiency_metrics: (
+                                     ?group_by: ::String,
+                                     granularity: ("Daily" | "Monthly"),
+                                     time_period: {
+                                       start: ::String,
+                                       end: ::String
+                                     },
+                                     ?max_results: ::Integer,
+                                     ?order_by: {
+                                       dimension: ::String?,
+                                       order: ("Asc" | "Desc")?
+                                     },
+                                     ?next_token: ::String
+                                   ) -> _ListEfficiencyMetricsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEfficiencyMetricsResponseSuccess
+
       interface _ListEnrollmentStatusesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnrollmentStatusesResponse]
         def items: () -> ::Array[Types::AccountEnrollmentStatus]

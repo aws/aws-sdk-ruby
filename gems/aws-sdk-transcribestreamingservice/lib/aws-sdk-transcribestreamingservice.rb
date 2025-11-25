@@ -27,6 +27,22 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:transcribestreamingservice)
 #
 # See {Client} for more information.
 #
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+#
+#     transcribe_streaming_service = Aws::TranscribeStreamingService::AsyncClient.new
+#     resp = transcribe_streaming_service.get_medical_scribe_stream(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+#
+# See {AsyncClient} for more information.
+#
 # # Errors
 #
 # Errors returned from Amazon Transcribe Streaming Service are defined in the
@@ -56,7 +72,7 @@ module Aws::TranscribeStreamingService
   autoload :AsyncClient, 'aws-sdk-transcribestreamingservice/async_client'
   autoload :EventStreams, 'aws-sdk-transcribestreamingservice/event_streams'
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.94.0'
 
 end
 

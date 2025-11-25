@@ -2854,6 +2854,11 @@ module Aws::QConnect
     #   `zh_CN`, `zh_TW`
     #   @return [String]
     #
+    # @!attribute [rw] source_configuration
+    #   The source configuration of the message template. Only set this
+    #   argument for WHATSAPP channel subtype.
+    #   @return [Types::MessageTemplateSourceConfiguration]
+    #
     # @!attribute [rw] default_attributes
     #   An object that specifies the default values to use for variables in
     #   the message template. This object contains different categories of
@@ -2895,6 +2900,7 @@ module Aws::QConnect
       :description,
       :channel_subtype,
       :language,
+      :source_configuration,
       :default_attributes,
       :grouping_configuration,
       :client_token,
@@ -4258,6 +4264,10 @@ module Aws::QConnect
     #   The name of the message template.
     #   @return [String]
     #
+    # @!attribute [rw] channel
+    #   The channel of the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] channel_subtype
     #   The channel subtype this message template applies to.
     #   @return [String]
@@ -4289,6 +4299,10 @@ module Aws::QConnect
     #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
     #   `zh_CN`, `zh_TW`
     #   @return [String]
+    #
+    # @!attribute [rw] source_configuration_summary
+    #   The source configuration summary of the message template.
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     #
     # @!attribute [rw] grouping_configuration
     #   The configuration information of the grouping of Amazon Q in Connect
@@ -4340,6 +4354,7 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
@@ -4347,6 +4362,7 @@ module Aws::QConnect
       :content,
       :description,
       :language,
+      :source_configuration_summary,
       :grouping_configuration,
       :default_attributes,
       :attribute_types,
@@ -4355,7 +4371,7 @@ module Aws::QConnect
       :version_number,
       :message_template_content_sha_256,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channel]
       include Aws::Structure
     end
 
@@ -6981,11 +6997,23 @@ module Aws::QConnect
     #   subtype.
     #   @return [Types::SMSMessageTemplateContent]
     #
+    # @!attribute [rw] whats_app
+    #   The content of the message template that applies to the WHATSAPP
+    #   channel subtype.
+    #   @return [Types::WhatsAppMessageTemplateContent]
+    #
+    # @!attribute [rw] push
+    #   The content of the message template that applies to the push channel
+    #   subtype.
+    #   @return [Types::PushMessageTemplateContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateContentProvider AWS API Documentation
     #
     class MessageTemplateContentProvider < Struct.new(
       :email,
       :sms,
+      :whats_app,
+      :push,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6993,6 +7021,8 @@ module Aws::QConnect
 
       class Email < MessageTemplateContentProvider; end
       class Sms < MessageTemplateContentProvider; end
+      class WhatsApp < MessageTemplateContentProvider; end
+      class Push < MessageTemplateContentProvider; end
       class Unknown < MessageTemplateContentProvider; end
     end
 
@@ -7016,6 +7046,10 @@ module Aws::QConnect
     #
     # @!attribute [rw] name
     #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channel of the message template.
     #   @return [String]
     #
     # @!attribute [rw] channel_subtype
@@ -7049,6 +7083,10 @@ module Aws::QConnect
     #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
     #   `zh_CN`, `zh_TW`
     #   @return [String]
+    #
+    # @!attribute [rw] source_configuration_summary
+    #   The source configuration summary of the message template.
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     #
     # @!attribute [rw] grouping_configuration
     #   The configuration information of the grouping of Amazon Q in Connect
@@ -7088,6 +7126,7 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
@@ -7095,12 +7134,13 @@ module Aws::QConnect
       :content,
       :description,
       :language,
+      :source_configuration_summary,
       :grouping_configuration,
       :default_attributes,
       :attribute_types,
       :message_template_content_sha_256,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channel]
       include Aws::Structure
     end
 
@@ -7290,6 +7330,10 @@ module Aws::QConnect
     #   The name of the message template.
     #   @return [String]
     #
+    # @!attribute [rw] channel
+    #   The channel of the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] channel_subtype
     #   The channel subtype this message template applies to.
     #   @return [String]
@@ -7318,6 +7362,10 @@ module Aws::QConnect
     # @!attribute [rw] description
     #   The description of the message template.
     #   @return [String]
+    #
+    # @!attribute [rw] source_configuration_summary
+    #   The source configuration summary of the message template.
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     #
     # @!attribute [rw] grouping_configuration
     #   The configuration information of the grouping of Amazon Q in Connect
@@ -7344,6 +7392,7 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
@@ -7351,11 +7400,58 @@ module Aws::QConnect
       :is_active,
       :version_number,
       :description,
+      :source_configuration_summary,
       :grouping_configuration,
       :language,
       :tags)
+      SENSITIVE = [:channel]
+      include Aws::Structure
+    end
+
+    # The container of message template source configuration.
+    #
+    # @note MessageTemplateSourceConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MessageTemplateSourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MessageTemplateSourceConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] whats_app
+    #   The sourceConfiguration of the message template that applies to the
+    #   WHATSAPP channel subtype.
+    #   @return [Types::WhatsAppMessageTemplateSourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateSourceConfiguration AWS API Documentation
+    #
+    class MessageTemplateSourceConfiguration < Struct.new(
+      :whats_app,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class WhatsApp < MessageTemplateSourceConfiguration; end
+      class Unknown < MessageTemplateSourceConfiguration; end
+    end
+
+    # The container of message template source configuration summary.
+    #
+    # @note MessageTemplateSourceConfigurationSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MessageTemplateSourceConfigurationSummary corresponding to the set member.
+    #
+    # @!attribute [rw] whats_app
+    #   The sourceConfiguration summary of the message template that applies
+    #   to the WHATSAPP channel subtype.
+    #   @return [Types::WhatsAppMessageTemplateSourceConfigurationSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateSourceConfigurationSummary AWS API Documentation
+    #
+    class MessageTemplateSourceConfigurationSummary < Struct.new(
+      :whats_app,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class WhatsApp < MessageTemplateSourceConfigurationSummary; end
+      class Unknown < MessageTemplateSourceConfigurationSummary; end
     end
 
     # The summary of the message template.
@@ -7380,6 +7476,10 @@ module Aws::QConnect
     #   The name of the message template.
     #   @return [String]
     #
+    # @!attribute [rw] channel
+    #   The channel this message template applies to.
+    #   @return [String]
+    #
     # @!attribute [rw] channel_subtype
     #   The channel subtype this message template applies to.
     #   @return [String]
@@ -7396,6 +7496,10 @@ module Aws::QConnect
     #   The Amazon Resource Name (ARN) of the user who last updated the
     #   message template data.
     #   @return [String]
+    #
+    # @!attribute [rw] source_configuration
+    #   The container of message template source configuration.
+    #   @return [Types::MessageTemplateSourceConfiguration]
     #
     # @!attribute [rw] active_version_number
     #   The version number of the message template version that is
@@ -7419,14 +7523,16 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
       :last_modified_by,
+      :source_configuration,
       :active_version_number,
       :description,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channel]
       include Aws::Structure
     end
 
@@ -7452,6 +7558,10 @@ module Aws::QConnect
     #   The name of the message template.
     #   @return [String]
     #
+    # @!attribute [rw] channel
+    #   The channel of the message template.
+    #   @return [String]
+    #
     # @!attribute [rw] channel_subtype
     #   The channel subtype this message template applies to.
     #   @return [String]
@@ -7472,10 +7582,11 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :is_active,
       :version_number)
-      SENSITIVE = []
+      SENSITIVE = [:channel]
       include Aws::Structure
     end
 
@@ -7618,6 +7729,352 @@ module Aws::QConnect
     #
     class PreconditionFailedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of the push message template that applies to ADM (Amazon
+    # Device Messaging) notification service.
+    #
+    # @!attribute [rw] title
+    #   The title to use in a push notification that's based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in a push notification that is based on the
+    #   message template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that is
+    #   based on the message template. Valid values are:
+    #
+    #   * `OPEN_APP` - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * `DEEP_LINK` - Your app opens and displays a designated user
+    #     interface in the app. This action uses the deep-linking features
+    #     of the Android platform.
+    #
+    #   * `URL` - The default mobile browser on the recipient's device
+    #     opens and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   `/res/raw/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the `action` property is `URL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL of an image to display in a push notification that's based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL of the large icon image to display in the content view of a
+    #   push notification that's based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PushADMMessageTemplateContent AWS API Documentation
+    #
+    class PushADMMessageTemplateContent < Struct.new(
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :image_url,
+      :image_icon_url,
+      :small_image_icon_url,
+      :raw_content)
+      SENSITIVE = [:title, :sound, :url, :image_url, :image_icon_url, :small_image_icon_url]
+      include Aws::Structure
+    end
+
+    # The content of the push message template that applies to APNS (Apple
+    # Push Notification service) notification service.
+    #
+    # @!attribute [rw] title
+    #   The title to use in a push notification that's based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in a push notification that is based on the
+    #   message template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that is
+    #   based on the message template. Valid values are:
+    #
+    #   * `OPEN_APP` - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * `DEEP_LINK` - Your app opens and displays a designated user
+    #     interface in the app. This action uses the deep-linking features
+    #     of the iOS platform.
+    #
+    #   * `URL` - The default mobile browser on the recipient's device
+    #     opens and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The key for the sound to play when the recipient receives a push
+    #   notification that's based on the message template. The value for
+    #   this key is the name of a sound file in your app's main bundle or
+    #   the `Library/Sounds` folder in your app's data container. If the
+    #   sound file can't be found or you specify `default` for the value,
+    #   the system plays the default alert sound.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the `action` property is `URL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_url
+    #   The URL of an image or video to display in push notifications that
+    #   are based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The raw, JSON-formatted string to use as the payload for a push
+    #   notification that's based on the message template. If specified,
+    #   this value overrides all other content for the message template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PushAPNSMessageTemplateContent AWS API Documentation
+    #
+    class PushAPNSMessageTemplateContent < Struct.new(
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :media_url,
+      :raw_content)
+      SENSITIVE = [:title, :sound, :url, :media_url]
+      include Aws::Structure
+    end
+
+    # The content of the push message template that applies to Baidu
+    # notification service.
+    #
+    # @!attribute [rw] title
+    #   The title to use in a push notification that's based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in a push notification that is based on the
+    #   message template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that is
+    #   based on the message template. Valid values are:
+    #
+    #   * `OPEN_APP` - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * `DEEP_LINK` - Your app opens and displays a designated user
+    #     interface in the app. This action uses the deep-linking features
+    #     of the Android platform.
+    #
+    #   * `URL` - The default mobile browser on the recipient's device
+    #     opens and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   `/res/raw/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the `action` property is `URL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL of an image to display in a push notification that's based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL of the large icon image to display in the content view of a
+    #   push notification that's based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PushBaiduMessageTemplateContent AWS API Documentation
+    #
+    class PushBaiduMessageTemplateContent < Struct.new(
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :image_url,
+      :image_icon_url,
+      :small_image_icon_url,
+      :raw_content)
+      SENSITIVE = [:title, :sound, :url, :image_url, :image_icon_url, :small_image_icon_url]
+      include Aws::Structure
+    end
+
+    # The content of the push message template that applies to FCM (Firebase
+    # Cloud Messaging) notification service.
+    #
+    # @!attribute [rw] title
+    #   The title to use in a push notification that's based on the message
+    #   template. This title appears above the notification message on a
+    #   recipient's device.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The message body to use in a push notification that is based on the
+    #   message template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @!attribute [rw] action
+    #   The action to occur if a recipient taps a push notification that is
+    #   based on the message template. Valid values are:
+    #
+    #   * `OPEN_APP` - Your app opens or it becomes the foreground app if it
+    #     was sent to the background. This is the default action.
+    #
+    #   * `DEEP_LINK` - Your app opens and displays a designated user
+    #     interface in the app. This action uses the deep-linking features
+    #     of the Android platform.
+    #
+    #   * `URL` - The default mobile browser on the recipient's device
+    #     opens and loads the web page at a URL that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] sound
+    #   The sound to play when a recipient receives a push notification
+    #   that's based on the message template. You can use the default
+    #   stream or specify the file name of a sound resource that's bundled
+    #   in your app. On an Android platform, the sound file must reside in
+    #   `/res/raw/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL to open in a recipient's default mobile browser, if a
+    #   recipient taps a push notification that's based on the message
+    #   template and the value of the `action` property is `URL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_url
+    #   The URL of an image to display in a push notification that's based
+    #   on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_icon_url
+    #   The URL of the large icon image to display in the content view of a
+    #   push notification that's based on the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_image_icon_url
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_content
+    #   The URL of the small icon image to display in the status bar and the
+    #   content view of a push notification that's based on the message
+    #   template.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PushFCMMessageTemplateContent AWS API Documentation
+    #
+    class PushFCMMessageTemplateContent < Struct.new(
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :image_url,
+      :image_icon_url,
+      :small_image_icon_url,
+      :raw_content)
+      SENSITIVE = [:title, :sound, :url, :image_url, :image_icon_url, :small_image_icon_url]
+      include Aws::Structure
+    end
+
+    # The content of the message template that applies to the push channel
+    # subtype.
+    #
+    # @!attribute [rw] adm
+    #   The content of the message template that applies to ADM (Amazon
+    #   Device Messaging) notification service.
+    #   @return [Types::PushADMMessageTemplateContent]
+    #
+    # @!attribute [rw] apns
+    #   The content of the message template that applies to APNS(Apple Push
+    #   Notification service) notification service.
+    #   @return [Types::PushAPNSMessageTemplateContent]
+    #
+    # @!attribute [rw] fcm
+    #   The content of the message template that applies to FCM (Firebase
+    #   Cloud Messaging) notification service.
+    #   @return [Types::PushFCMMessageTemplateContent]
+    #
+    # @!attribute [rw] baidu
+    #   The content of the message template that applies to Baidu
+    #   notification service.
+    #   @return [Types::PushBaiduMessageTemplateContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/PushMessageTemplateContent AWS API Documentation
+    #
+    class PushMessageTemplateContent < Struct.new(
+      :adm,
+      :apns,
+      :fcm,
+      :baidu)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8611,6 +9068,10 @@ module Aws::QConnect
     #   The content of the message template.
     #   @return [Types::MessageTemplateContentProvider]
     #
+    # @!attribute [rw] source_configuration_summary
+    #   The source configuration of the message template.
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
+    #
     # @!attribute [rw] attributes_not_interpolated
     #   The attribute keys that are not resolved.
     #   @return [Array<String>]
@@ -8623,6 +9084,7 @@ module Aws::QConnect
     #
     class RenderMessageTemplateResponse < Struct.new(
       :content,
+      :source_configuration_summary,
       :attributes_not_interpolated,
       :attachments)
       SENSITIVE = [:attributes_not_interpolated]
@@ -10199,6 +10661,11 @@ module Aws::QConnect
     #   `zh_CN`, `zh_TW`
     #   @return [String]
     #
+    # @!attribute [rw] source_configuration
+    #   The source configuration of the message template. Only set this
+    #   argument for WHATSAPP channel subtype.
+    #   @return [Types::MessageTemplateSourceConfiguration]
+    #
     # @!attribute [rw] default_attributes
     #   An object that specifies the default values to use for variables in
     #   the message template. This object contains different categories of
@@ -10214,6 +10681,7 @@ module Aws::QConnect
       :message_template_id,
       :content,
       :language,
+      :source_configuration,
       :default_attributes)
       SENSITIVE = []
       include Aws::Structure
@@ -10545,6 +11013,93 @@ module Aws::QConnect
     class WebCrawlerLimits < Struct.new(
       :rate_limit)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of the message template that applies to the WHATSAPP
+    # channel subtype.
+    #
+    # @!attribute [rw] data
+    #   The data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/WhatsAppMessageTemplateContent AWS API Documentation
+    #
+    class WhatsAppMessageTemplateContent < Struct.new(
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information about the external data source.
+    #
+    # @!attribute [rw] business_account_id
+    #   The ID of the End User Messaging WhatsApp Business Account to
+    #   associate with this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The WhatsApp template ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] components
+    #   The list of component mapping from WhatsApp template parameters to
+    #   Message Template attributes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/WhatsAppMessageTemplateSourceConfiguration AWS API Documentation
+    #
+    class WhatsAppMessageTemplateSourceConfiguration < Struct.new(
+      :business_account_id,
+      :template_id,
+      :components)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information about the external data source.
+    #
+    # @!attribute [rw] business_account_id
+    #   The ID of the End User Messaging WhatsApp Business Account to
+    #   associate with this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The ID of WhatsApp template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the WhatsApp template.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language of the WhatsApp template.
+    #   @return [String]
+    #
+    # @!attribute [rw] components
+    #   The list of component mapping from WhatsApp template parameters to
+    #   Message Template attributes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The status reason of the message template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/WhatsAppMessageTemplateSourceConfigurationSummary AWS API Documentation
+    #
+    class WhatsAppMessageTemplateSourceConfigurationSummary < Struct.new(
+      :business_account_id,
+      :template_id,
+      :name,
+      :language,
+      :components,
+      :status,
+      :status_reason)
+      SENSITIVE = [:status_reason]
       include Aws::Structure
     end
 

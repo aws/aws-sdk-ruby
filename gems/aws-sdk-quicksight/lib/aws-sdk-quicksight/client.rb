@@ -4478,9 +4478,14 @@ module Aws::QuickSight
     #       },
     #       sheet: {
     #         tile: {
+    #           background_color: "Color",
     #           border: {
+    #             color: "Color",
     #             show: false,
+    #             width: "Width",
     #           },
+    #           border_radius: "BorderRadius",
+    #           padding: "Padding",
     #         },
     #         tile_layout: {
     #           gutter: {
@@ -4490,6 +4495,10 @@ module Aws::QuickSight
     #             show: false,
     #           },
     #         },
+    #         background: {
+    #           color: "Color",
+    #           gradient: "String",
+    #         },
     #       },
     #       typography: {
     #         font_families: [
@@ -4497,6 +4506,105 @@ module Aws::QuickSight
     #             font_family: "String",
     #           },
     #         ],
+    #         axis_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         axis_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_value_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         data_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         visual_title_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
+    #         visual_subtitle_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
     #       },
     #     },
     #     permissions: [
@@ -9889,11 +9997,71 @@ module Aws::QuickSight
     #   resp.theme.version.configuration.ui_color_palette.dimension_foreground #=> String
     #   resp.theme.version.configuration.ui_color_palette.measure #=> String
     #   resp.theme.version.configuration.ui_color_palette.measure_foreground #=> String
+    #   resp.theme.version.configuration.sheet.tile.background_color #=> String
+    #   resp.theme.version.configuration.sheet.tile.border.color #=> String
     #   resp.theme.version.configuration.sheet.tile.border.show #=> Boolean
+    #   resp.theme.version.configuration.sheet.tile.border.width #=> String
+    #   resp.theme.version.configuration.sheet.tile.border_radius #=> String
+    #   resp.theme.version.configuration.sheet.tile.padding #=> String
     #   resp.theme.version.configuration.sheet.tile_layout.gutter.show #=> Boolean
     #   resp.theme.version.configuration.sheet.tile_layout.margin.show #=> Boolean
+    #   resp.theme.version.configuration.sheet.background.color #=> String
+    #   resp.theme.version.configuration.sheet.background.gradient #=> String
     #   resp.theme.version.configuration.typography.font_families #=> Array
     #   resp.theme.version.configuration.typography.font_families[0].font_family #=> String
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.text_alignment #=> String, one of "LEFT", "CENTER", "RIGHT", "AUTO"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.text_transform #=> String, one of "CAPITALIZE"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.text_alignment #=> String, one of "LEFT", "CENTER", "RIGHT", "AUTO"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.text_transform #=> String, one of "CAPITALIZE"
     #   resp.theme.version.errors #=> Array
     #   resp.theme.version.errors[0].type #=> String, one of "INTERNAL_FAILURE"
     #   resp.theme.version.errors[0].message #=> String
@@ -10756,6 +10924,8 @@ module Aws::QuickSight
     #       generative_qn_a: {
     #         initial_topic_id: "RestrictiveResourceId",
     #       },
+    #       quick_chat: {
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -10901,6 +11071,8 @@ module Aws::QuickSight
     #       },
     #       generative_qn_a: {
     #         initial_topic_id: "RestrictiveResourceId",
+    #       },
+    #       quick_chat: {
     #       },
     #     },
     #     allowed_domains: ["String"],
@@ -19502,9 +19674,14 @@ module Aws::QuickSight
     #       },
     #       sheet: {
     #         tile: {
+    #           background_color: "Color",
     #           border: {
+    #             color: "Color",
     #             show: false,
+    #             width: "Width",
     #           },
+    #           border_radius: "BorderRadius",
+    #           padding: "Padding",
     #         },
     #         tile_layout: {
     #           gutter: {
@@ -19514,6 +19691,10 @@ module Aws::QuickSight
     #             show: false,
     #           },
     #         },
+    #         background: {
+    #           color: "Color",
+    #           gradient: "String",
+    #         },
     #       },
     #       typography: {
     #         font_families: [
@@ -19521,6 +19702,105 @@ module Aws::QuickSight
     #             font_family: "String",
     #           },
     #         ],
+    #         axis_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         axis_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_value_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         data_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         visual_title_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
+    #         visual_subtitle_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
     #       },
     #     },
     #   })
@@ -20376,7 +20656,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

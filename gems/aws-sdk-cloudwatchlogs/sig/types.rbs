@@ -179,6 +179,7 @@ module Aws::CloudWatchLogs
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor deletion_protection_enabled: bool
       SENSITIVE: []
     end
 
@@ -1142,6 +1143,7 @@ module Aws::CloudWatchLogs
       attr_accessor inherited_properties: ::Array[("ACCOUNT_DATA_PROTECTION")]
       attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       attr_accessor log_group_arn: ::String
+      attr_accessor deletion_protection_enabled: bool
       SENSITIVE: []
     end
 
@@ -1344,7 +1346,8 @@ module Aws::CloudWatchLogs
     class ParseToOCSF
       attr_accessor source: ::String
       attr_accessor event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF")
-      attr_accessor ocsf_version: ("V1.1")
+      attr_accessor ocsf_version: ("V1.1" | "V1.5")
+      attr_accessor mapping_version: ::String
       SENSITIVE: []
     end
 
@@ -1521,6 +1524,12 @@ module Aws::CloudWatchLogs
       attr_accessor next_sequence_token: ::String
       attr_accessor rejected_log_events_info: Types::RejectedLogEventsInfo
       attr_accessor rejected_entity_info: Types::RejectedEntityInfo
+      SENSITIVE: []
+    end
+
+    class PutLogGroupDeletionProtectionRequest
+      attr_accessor log_group_identifier: ::String
+      attr_accessor deletion_protection_enabled: bool
       SENSITIVE: []
     end
 

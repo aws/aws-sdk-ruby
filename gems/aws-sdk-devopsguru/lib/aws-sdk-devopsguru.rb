@@ -54,7 +54,7 @@ module Aws::DevOpsGuru
   autoload :EndpointProvider, 'aws-sdk-devopsguru/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-devopsguru/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

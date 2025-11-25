@@ -68,11 +68,18 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) that identifies the transfer
+    #   relationship owned by the Bill Transfer account (caller account).
+    #   When specified, the PrimaryAccountId is no longer required.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/AccountGrouping AWS API Documentation
     #
     class AccountGrouping < Struct.new(
       :linked_account_ids,
-      :auto_associate)
+      :auto_associate,
+      :responsibility_transfer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -430,6 +437,10 @@ module Aws::BillingConductor
     #   (`AutoAssociate`) enabled.
     #   @return [Types::ListBillingGroupAccountGrouping]
     #
+    # @!attribute [rw] billing_group_type
+    #   The type of billing group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BillingGroupListElement AWS API Documentation
     #
     class BillingGroupListElement < Struct.new(
@@ -443,7 +454,8 @@ module Aws::BillingConductor
       :last_modified_time,
       :status,
       :status_reason,
-      :account_grouping)
+      :account_grouping,
+      :billing_group_type)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -627,11 +639,13 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] computation_rule
-    #   The display settings of the custom line item
+    #   Specifies how the custom line item charges are computed.
     #   @return [String]
     #
     # @!attribute [rw] presentation_details
-    #   The presentation configuration of the custom line item
+    #   Details controlling how the custom line item charges are presented
+    #   in the bill. Contains specifications for which service the charges
+    #   will be shown under.
     #   @return [Types::PresentationObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateCustomLineItemInput AWS API Documentation
@@ -972,11 +986,13 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] computation_rule
-    #   The display settings of the custom line item
+    #   The computation rule that determines how the custom line item
+    #   charges are computed and reflected in the bill.
     #   @return [String]
     #
     # @!attribute [rw] presentation_details
-    #   The presentation configuration of the custom line item
+    #   Configuration details specifying how the custom line item charges
+    #   are presented, including which service the charges are shown under.
     #   @return [Types::PresentationObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemListElement AWS API Documentation
@@ -1085,11 +1101,13 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] computation_rule
-    #   The display settings of the custom line item
+    #   The computation rule for a specific version of a custom line item,
+    #   determining how charges are computed and reflected in the bill.
     #   @return [String]
     #
     # @!attribute [rw] presentation_details
-    #   The presentation configuration of the custom line item
+    #   Presentation configuration for a specific version of a custom line
+    #   item, specifying how charges are displayed in the bill.
     #   @return [Types::PresentationObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
@@ -1393,7 +1411,8 @@ module Aws::BillingConductor
     # You can use line item filters to include or exclude specific resource
     # values from the billing group's total cost. For example, if you
     # create a custom line item and you want to filter out a value, such as
-    # Savings Plan discounts, you can update `LineItemFilter` to exclude it.
+    # Savings Plans discounts, you can update `LineItemFilter` to exclude
+    # it.
     #
     # @!attribute [rw] attribute
     #   The attribute of the line item filter. This specifies what attribute
@@ -1408,7 +1427,7 @@ module Aws::BillingConductor
     #
     # @!attribute [rw] values
     #   The values of the line item filter. This specifies the values to
-    #   filter on. Currently, you can only exclude Savings Plan discounts.
+    #   filter on. Currently, you can only exclude Savings Plans discounts.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/LineItemFilter AWS API Documentation
@@ -1519,10 +1538,16 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) that identifies the transfer
+    #   relationship for the billing group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupAccountGrouping AWS API Documentation
     #
     class ListBillingGroupAccountGrouping < Struct.new(
-      :auto_associate)
+      :auto_associate,
+      :responsibility_transfer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1613,13 +1638,33 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] primary_account_ids
+    #   A list of primary account IDs to filter the billing groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] billing_group_types
+    #   Filter billing groups by their type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] names
+    #   Filter billing groups by their names.
+    #   @return [Array<Types::StringSearch>]
+    #
+    # @!attribute [rw] responsibility_transfer_arns
+    #   Filter billing groups by their responsibility transfer ARNs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupsFilter AWS API Documentation
     #
     class ListBillingGroupsFilter < Struct.new(
       :arns,
       :pricing_plan,
       :statuses,
-      :auto_associate)
+      :auto_associate,
+      :primary_account_ids,
+      :billing_group_types,
+      :names,
+      :responsibility_transfer_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2286,10 +2331,13 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # The presentation configuration of the custom line item
+    # An object that defines how custom line item charges are presented in
+    # the bill, containing specifications for service presentation.
     #
     # @!attribute [rw] service
-    #   This defines the service of where the custom line item is presented
+    #   The service under which the custom line item charges will be
+    #   presented. Must be a string between 1 and 128 characters matching
+    #   the pattern "`^[a-zA-Z0-9]+$`".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PresentationObject AWS API Documentation
@@ -2494,6 +2542,25 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # A structure that defines string search parameters.
+    #
+    # @!attribute [rw] search_option
+    #   The search option to be applied when performing the string search.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_value
+    #   The value to search for within the specified string field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/StringSearch AWS API Documentation
+    #
+    class StringSearch < Struct.new(
+      :search_option,
+      :search_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #   @return [String]
@@ -2577,10 +2644,17 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) that identifies the transfer
+    #   relationship. Note: Modifications to the ResponsibilityTransferArn
+    #   are not permitted for existing billing groups.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroupAccountGrouping AWS API Documentation
     #
     class UpdateBillingGroupAccountGrouping < Struct.new(
-      :auto_associate)
+      :auto_associate,
+      :responsibility_transfer_arn)
       SENSITIVE = []
       include Aws::Structure
     end

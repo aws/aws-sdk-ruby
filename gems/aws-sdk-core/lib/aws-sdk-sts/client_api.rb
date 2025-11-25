@@ -40,13 +40,17 @@ module Aws::STS
     GetFederationTokenResponse = Shapes::StructureShape.new(name: 'GetFederationTokenResponse')
     GetSessionTokenRequest = Shapes::StructureShape.new(name: 'GetSessionTokenRequest')
     GetSessionTokenResponse = Shapes::StructureShape.new(name: 'GetSessionTokenResponse')
+    GetWebIdentityTokenRequest = Shapes::StructureShape.new(name: 'GetWebIdentityTokenRequest')
+    GetWebIdentityTokenResponse = Shapes::StructureShape.new(name: 'GetWebIdentityTokenResponse')
     IDPCommunicationErrorException = Shapes::StructureShape.new(name: 'IDPCommunicationErrorException', error: {"code" => "IDPCommunicationError", "httpStatusCode" => 400, "senderFault" => true})
     IDPRejectedClaimException = Shapes::StructureShape.new(name: 'IDPRejectedClaimException', error: {"code" => "IDPRejectedClaim", "httpStatusCode" => 403, "senderFault" => true})
     InvalidAuthorizationMessageException = Shapes::StructureShape.new(name: 'InvalidAuthorizationMessageException', error: {"code" => "InvalidAuthorizationMessageException", "httpStatusCode" => 400, "senderFault" => true})
     InvalidIdentityTokenException = Shapes::StructureShape.new(name: 'InvalidIdentityTokenException', error: {"code" => "InvalidIdentityToken", "httpStatusCode" => 400, "senderFault" => true})
     Issuer = Shapes::StringShape.new(name: 'Issuer')
+    JWTPayloadSizeExceededException = Shapes::StructureShape.new(name: 'JWTPayloadSizeExceededException', error: {"code" => "JWTPayloadSizeExceededException", "httpStatusCode" => 400, "senderFault" => true})
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException', error: {"code" => "MalformedPolicyDocument", "httpStatusCode" => 400, "senderFault" => true})
     NameQualifier = Shapes::StringShape.new(name: 'NameQualifier')
+    OutboundWebIdentityFederationDisabledException = Shapes::StructureShape.new(name: 'OutboundWebIdentityFederationDisabledException', error: {"code" => "OutboundWebIdentityFederationDisabledException", "httpStatusCode" => 403, "senderFault" => true})
     PackedPolicyTooLargeException = Shapes::StructureShape.new(name: 'PackedPolicyTooLargeException', error: {"code" => "PackedPolicyTooLarge", "httpStatusCode" => 400, "senderFault" => true})
     PolicyDescriptorType = Shapes::StructureShape.new(name: 'PolicyDescriptorType')
     ProvidedContext = Shapes::StructureShape.new(name: 'ProvidedContext')
@@ -54,6 +58,7 @@ module Aws::STS
     RegionDisabledException = Shapes::StructureShape.new(name: 'RegionDisabledException', error: {"code" => "RegionDisabledException", "httpStatusCode" => 403, "senderFault" => true})
     RootDurationSecondsType = Shapes::IntegerShape.new(name: 'RootDurationSecondsType')
     SAMLAssertionType = Shapes::StringShape.new(name: 'SAMLAssertionType')
+    SessionDurationEscalationException = Shapes::StructureShape.new(name: 'SessionDurationEscalationException', error: {"code" => "SessionDurationEscalationException", "httpStatusCode" => 403, "senderFault" => true})
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubjectType = Shapes::StringShape.new(name: 'SubjectType')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -77,14 +82,18 @@ module Aws::STS
     idpRejectedClaimMessage = Shapes::StringShape.new(name: 'idpRejectedClaimMessage')
     invalidAuthorizationMessage = Shapes::StringShape.new(name: 'invalidAuthorizationMessage')
     invalidIdentityTokenMessage = Shapes::StringShape.new(name: 'invalidIdentityTokenMessage')
+    jwtAlgorithmType = Shapes::StringShape.new(name: 'jwtAlgorithmType')
+    jwtPayloadSizeExceededException = Shapes::StringShape.new(name: 'jwtPayloadSizeExceededException')
     malformedPolicyDocumentMessage = Shapes::StringShape.new(name: 'malformedPolicyDocumentMessage')
     nonNegativeIntegerType = Shapes::IntegerShape.new(name: 'nonNegativeIntegerType')
+    outboundWebIdentityFederationDisabledException = Shapes::StringShape.new(name: 'outboundWebIdentityFederationDisabledException')
     packedPolicyTooLargeMessage = Shapes::StringShape.new(name: 'packedPolicyTooLargeMessage')
     policyDescriptorListType = Shapes::ListShape.new(name: 'policyDescriptorListType')
     regionDisabledMessage = Shapes::StringShape.new(name: 'regionDisabledMessage')
     roleDurationSecondsType = Shapes::IntegerShape.new(name: 'roleDurationSecondsType')
     roleSessionNameType = Shapes::StringShape.new(name: 'roleSessionNameType')
     serialNumberType = Shapes::StringShape.new(name: 'serialNumberType')
+    sessionDurationEscalationException = Shapes::StringShape.new(name: 'sessionDurationEscalationException')
     sessionPolicyDocumentType = Shapes::StringShape.new(name: 'sessionPolicyDocumentType')
     sourceIdentityType = Shapes::StringShape.new(name: 'sourceIdentityType')
     tagKeyListType = Shapes::ListShape.new(name: 'tagKeyListType')
@@ -99,6 +108,10 @@ module Aws::STS
     userIdType = Shapes::StringShape.new(name: 'userIdType')
     userNameType = Shapes::StringShape.new(name: 'userNameType')
     webIdentitySubjectType = Shapes::StringShape.new(name: 'webIdentitySubjectType')
+    webIdentityTokenAudienceListType = Shapes::ListShape.new(name: 'webIdentityTokenAudienceListType')
+    webIdentityTokenAudienceStringType = Shapes::StringShape.new(name: 'webIdentityTokenAudienceStringType')
+    webIdentityTokenDurationSecondsType = Shapes::IntegerShape.new(name: 'webIdentityTokenDurationSecondsType')
+    webIdentityTokenType = Shapes::StringShape.new(name: 'webIdentityTokenType')
 
     AssumeRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "RoleArn"))
     AssumeRoleRequest.add_member(:role_session_name, Shapes::ShapeRef.new(shape: roleSessionNameType, required: true, location_name: "RoleSessionName"))
@@ -233,6 +246,16 @@ module Aws::STS
     GetSessionTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetSessionTokenResponse.struct_class = Types::GetSessionTokenResponse
 
+    GetWebIdentityTokenRequest.add_member(:audience, Shapes::ShapeRef.new(shape: webIdentityTokenAudienceListType, required: true, location_name: "Audience"))
+    GetWebIdentityTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: webIdentityTokenDurationSecondsType, location_name: "DurationSeconds"))
+    GetWebIdentityTokenRequest.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: jwtAlgorithmType, required: true, location_name: "SigningAlgorithm"))
+    GetWebIdentityTokenRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    GetWebIdentityTokenRequest.struct_class = Types::GetWebIdentityTokenRequest
+
+    GetWebIdentityTokenResponse.add_member(:web_identity_token, Shapes::ShapeRef.new(shape: webIdentityTokenType, location_name: "WebIdentityToken"))
+    GetWebIdentityTokenResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: dateType, location_name: "Expiration"))
+    GetWebIdentityTokenResponse.struct_class = Types::GetWebIdentityTokenResponse
+
     IDPCommunicationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: idpCommunicationErrorMessage, location_name: "message"))
     IDPCommunicationErrorException.struct_class = Types::IDPCommunicationErrorException
 
@@ -245,8 +268,14 @@ module Aws::STS
     InvalidIdentityTokenException.add_member(:message, Shapes::ShapeRef.new(shape: invalidIdentityTokenMessage, location_name: "message"))
     InvalidIdentityTokenException.struct_class = Types::InvalidIdentityTokenException
 
+    JWTPayloadSizeExceededException.add_member(:message, Shapes::ShapeRef.new(shape: jwtPayloadSizeExceededException, location_name: "message"))
+    JWTPayloadSizeExceededException.struct_class = Types::JWTPayloadSizeExceededException
+
     MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: malformedPolicyDocumentMessage, location_name: "message"))
     MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    OutboundWebIdentityFederationDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: outboundWebIdentityFederationDisabledException, location_name: "message"))
+    OutboundWebIdentityFederationDisabledException.struct_class = Types::OutboundWebIdentityFederationDisabledException
 
     PackedPolicyTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: packedPolicyTooLargeMessage, location_name: "message"))
     PackedPolicyTooLargeException.struct_class = Types::PackedPolicyTooLargeException
@@ -263,6 +292,9 @@ module Aws::STS
     RegionDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: regionDisabledMessage, location_name: "message"))
     RegionDisabledException.struct_class = Types::RegionDisabledException
 
+    SessionDurationEscalationException.add_member(:message, Shapes::ShapeRef.new(shape: sessionDurationEscalationException, location_name: "message"))
+    SessionDurationEscalationException.struct_class = Types::SessionDurationEscalationException
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: tagKeyType, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: tagValueType, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -272,6 +304,8 @@ module Aws::STS
     tagKeyListType.member = Shapes::ShapeRef.new(shape: tagKeyType)
 
     tagListType.member = Shapes::ShapeRef.new(shape: Tag)
+
+    webIdentityTokenAudienceListType.member = Shapes::ShapeRef.new(shape: webIdentityTokenAudienceStringType)
 
 
     # @api private
@@ -382,6 +416,7 @@ module Aws::STS
         o.output = Shapes::ShapeRef.new(shape: GetDelegatedAccessTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredTradeInTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RegionDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: PackedPolicyTooLargeException)
       end)
 
       api.add_operation(:get_federation_token, Seahorse::Model::Operation.new.tap do |o|
@@ -402,6 +437,17 @@ module Aws::STS
         o.input = Shapes::ShapeRef.new(shape: GetSessionTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSessionTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: RegionDisabledException)
+      end)
+
+      api.add_operation(:get_web_identity_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWebIdentityToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetWebIdentityTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWebIdentityTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: SessionDurationEscalationException)
+        o.errors << Shapes::ShapeRef.new(shape: OutboundWebIdentityFederationDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: JWTPayloadSizeExceededException)
       end)
     end
 

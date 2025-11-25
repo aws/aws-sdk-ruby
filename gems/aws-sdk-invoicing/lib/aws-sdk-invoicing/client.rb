@@ -620,6 +620,7 @@ module Aws::Invoicing
     #     tax_inheritance_disabled: false,
     #     rule: { # required
     #       linked_accounts: ["AccountIdString"],
+    #       bill_source_accounts: ["AccountIdString"],
     #     },
     #     resource_tags: [
     #       {
@@ -639,6 +640,210 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def create_invoice_unit(params = {}, options = {})
       req = build_request(:create_invoice_unit, params)
+      req.send_request(options)
+    end
+
+    # Creates a procurement portal preference configuration for e-invoice
+    # delivery and purchase order retrieval. This preference defines how
+    # invoices are delivered to a procurement portal and how purchase orders
+    # are retrieved.
+    #
+    # @option params [required, String] :procurement_portal_name
+    #   The name of the procurement portal.
+    #
+    # @option params [required, String] :buyer_domain
+    #   The domain identifier for the buyer in the procurement portal.
+    #
+    # @option params [required, String] :buyer_identifier
+    #   The unique identifier for the buyer in the procurement portal.
+    #
+    # @option params [required, String] :supplier_domain
+    #   The domain identifier for the supplier in the procurement portal.
+    #
+    # @option params [required, String] :supplier_identifier
+    #   The unique identifier for the supplier in the procurement portal.
+    #
+    # @option params [Types::ProcurementPortalPreferenceSelector] :selector
+    #   Specifies criteria for selecting which invoices should be processed
+    #   using a particular procurement portal preference.
+    #
+    # @option params [String] :procurement_portal_shared_secret
+    #   The shared secret or authentication credential used to establish
+    #   secure communication with the procurement portal. This value must be
+    #   encrypted at rest.
+    #
+    # @option params [String] :procurement_portal_instance_endpoint
+    #   The endpoint URL where e-invoices will be delivered to the procurement
+    #   portal. Must be a valid HTTPS URL.
+    #
+    # @option params [Types::TestEnvPreferenceInput] :test_env_preference
+    #   Configuration settings for the test environment of the procurement
+    #   portal. Includes test credentials and endpoints that are used for
+    #   validation before production deployment.
+    #
+    # @option params [required, Boolean] :einvoice_delivery_enabled
+    #   Indicates whether e-invoice delivery is enabled for this procurement
+    #   portal preference. Set to true to enable e-invoice delivery, false to
+    #   disable.
+    #
+    # @option params [Types::EinvoiceDeliveryPreference] :einvoice_delivery_preference
+    #   Specifies the e-invoice delivery configuration including document
+    #   types, attachment types, and customization settings for the portal.
+    #
+    # @option params [required, Boolean] :purchase_order_retrieval_enabled
+    #   Indicates whether purchase order retrieval is enabled for this
+    #   procurement portal preference. Set to true to enable PO retrieval,
+    #   false to disable.
+    #
+    # @option params [required, Array<Types::Contact>] :contacts
+    #   List of contact information for portal administrators and technical
+    #   contacts responsible for the e-invoice integration.
+    #
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   The tags to apply to this procurement portal preference resource. Each
+    #   tag consists of a key and an optional value.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateProcurementPortalPreferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProcurementPortalPreferenceResponse#procurement_portal_preference_arn #procurement_portal_preference_arn} => String
+    #
+    #
+    # @example Example: CreateProcurementPortalPreference for Coupa
+    #
+    #   resp = client.create_procurement_portal_preference({
+    #     buyer_domain: "NetworkID", 
+    #     buyer_identifier: "BuyerId_1", 
+    #     client_token: "e362c68e-4e74-48d7-9228-0bc5aa447b42", 
+    #     contacts: [
+    #       {
+    #         email: "example-placeholder@amazon.com", 
+    #         name: "John Doe", 
+    #       }, 
+    #     ], 
+    #     einvoice_delivery_enabled: true, 
+    #     einvoice_delivery_preference: {
+    #       connection_testing_method: "PROD_ENV_DOLLAR_TEST", 
+    #       einvoice_delivery_activation_date: Time.parse(1750279280.091), 
+    #       einvoice_delivery_attachment_types: [
+    #         "INVOICE_PDF", 
+    #       ], 
+    #       einvoice_delivery_document_types: [
+    #         "AWS_CLOUD_INVOICE", 
+    #       ], 
+    #       protocol: "CXML", 
+    #       purchase_order_data_sources: [
+    #         {
+    #           einvoice_delivery_document_type: "AWS_CLOUD_INVOICE", 
+    #           purchase_order_data_source_type: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
+    #     procurement_portal_name: "COUPA", 
+    #     procurement_portal_shared_secret: "Coupa_Secret", 
+    #     purchase_order_retrieval_enabled: true, 
+    #     resource_tags: [
+    #       {
+    #         key: "testKey", 
+    #         value: "testValue", 
+    #       }, 
+    #     ], 
+    #     selector: {
+    #       invoice_unit_arns: [
+    #         "arn:aws:invoicing::111111111111:invoice-unit/12345678", 
+    #         "arn:aws:invoicing::111111111111:invoice-unit/12345679", 
+    #       ], 
+    #       seller_of_records: [
+    #         "AWS_INC", 
+    #         "AWS_EUROPE", 
+    #       ], 
+    #     }, 
+    #     supplier_domain: "NetworkID", 
+    #     supplier_identifier: "SupplierId_1", 
+    #     test_env_preference: {
+    #       buyer_domain: "NetworkID", 
+    #       buyer_identifier: "BuyerId_1_Test", 
+    #       procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
+    #       procurement_portal_shared_secret: "Coupa_Secret_test", 
+    #       supplier_domain: "NetworkID", 
+    #       supplier_identifier: "SupplierId_1_Test", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_procurement_portal_preference({
+    #     procurement_portal_name: "SAP_BUSINESS_NETWORK", # required, accepts SAP_BUSINESS_NETWORK, COUPA
+    #     buyer_domain: "NetworkID", # required, accepts NetworkID
+    #     buyer_identifier: "BasicStringWithoutSpace", # required
+    #     supplier_domain: "NetworkID", # required, accepts NetworkID
+    #     supplier_identifier: "BasicStringWithoutSpace", # required
+    #     selector: {
+    #       invoice_unit_arns: ["InvoiceUnitArnString"],
+    #       seller_of_records: ["BasicStringWithoutSpace"],
+    #     },
+    #     procurement_portal_shared_secret: "SensitiveBasicStringWithoutSpace",
+    #     procurement_portal_instance_endpoint: "BasicStringWithoutSpace",
+    #     test_env_preference: {
+    #       buyer_domain: "NetworkID", # required, accepts NetworkID
+    #       buyer_identifier: "BasicStringWithoutSpace", # required
+    #       supplier_domain: "NetworkID", # required, accepts NetworkID
+    #       supplier_identifier: "BasicStringWithoutSpace", # required
+    #       procurement_portal_shared_secret: "BasicStringWithoutSpace",
+    #       procurement_portal_instance_endpoint: "BasicStringWithoutSpace",
+    #     },
+    #     einvoice_delivery_enabled: false, # required
+    #     einvoice_delivery_preference: {
+    #       einvoice_delivery_document_types: ["AWS_CLOUD_INVOICE"], # required, accepts AWS_CLOUD_INVOICE, AWS_CLOUD_CREDIT_MEMO, AWS_MARKETPLACE_INVOICE, AWS_MARKETPLACE_CREDIT_MEMO, AWS_REQUEST_FOR_PAYMENT
+    #       einvoice_delivery_attachment_types: ["INVOICE_PDF"], # accepts INVOICE_PDF, RFP_PDF
+    #       protocol: "CXML", # required, accepts CXML
+    #       purchase_order_data_sources: [ # required
+    #         {
+    #           einvoice_delivery_document_type: "AWS_CLOUD_INVOICE", # accepts AWS_CLOUD_INVOICE, AWS_CLOUD_CREDIT_MEMO, AWS_MARKETPLACE_INVOICE, AWS_MARKETPLACE_CREDIT_MEMO, AWS_REQUEST_FOR_PAYMENT
+    #           purchase_order_data_source_type: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", # accepts ASSOCIATED_PURCHASE_ORDER_REQUIRED, PURCHASE_ORDER_NOT_REQUIRED
+    #         },
+    #       ],
+    #       connection_testing_method: "PROD_ENV_DOLLAR_TEST", # required, accepts PROD_ENV_DOLLAR_TEST, TEST_ENV_REPLAY_TEST
+    #       einvoice_delivery_activation_date: Time.now, # required
+    #     },
+    #     purchase_order_retrieval_enabled: false, # required
+    #     contacts: [ # required
+    #       {
+    #         name: "BasicString",
+    #         email: "EmailString",
+    #       },
+    #     ],
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       },
+    #     ],
+    #     client_token: "BasicStringWithoutSpace",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/CreateProcurementPortalPreference AWS API Documentation
+    #
+    # @overload create_procurement_portal_preference(params = {})
+    # @param [Hash] params ({})
+    def create_procurement_portal_preference(params = {}, options = {})
+      req = build_request(:create_procurement_portal_preference, params)
       req.send_request(options)
     end
 
@@ -680,6 +885,49 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def delete_invoice_unit(params = {}, options = {})
       req = build_request(:delete_invoice_unit, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing procurement portal preference. This action cannot
+    # be undone. Active e-invoice delivery and PO retrieval configurations
+    # will be terminated.
+    #
+    # @option params [required, String] :procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference to
+    #   delete.
+    #
+    # @return [Types::DeleteProcurementPortalPreferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProcurementPortalPreferenceResponse#procurement_portal_preference_arn #procurement_portal_preference_arn} => String
+    #
+    #
+    # @example Example: DeleteProcurementPortalPreference call
+    #
+    #   resp = client.delete_procurement_portal_preference({
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_procurement_portal_preference({
+    #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/DeleteProcurementPortalPreference AWS API Documentation
+    #
+    # @overload delete_procurement_portal_preference(params = {})
+    # @param [Hash] params ({})
+    def delete_procurement_portal_preference(params = {}, options = {})
+      req = build_request(:delete_procurement_portal_preference, params)
       req.send_request(options)
     end
 
@@ -844,6 +1092,8 @@ module Aws::Invoicing
     #   resp.tax_inheritance_disabled #=> Boolean
     #   resp.rule.linked_accounts #=> Array
     #   resp.rule.linked_accounts[0] #=> String
+    #   resp.rule.bill_source_accounts #=> Array
+    #   resp.rule.bill_source_accounts[0] #=> String
     #   resp.last_modified #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/GetInvoiceUnit AWS API Documentation
@@ -852,6 +1102,150 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def get_invoice_unit(params = {}, options = {})
       req = build_request(:get_invoice_unit, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a specific procurement portal preference
+    # configuration.
+    #
+    # @option params [required, String] :procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference to
+    #   retrieve.
+    #
+    # @return [Types::GetProcurementPortalPreferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProcurementPortalPreferenceResponse#procurement_portal_preference #procurement_portal_preference} => Types::ProcurementPortalPreference
+    #
+    #
+    # @example Example: GetProcurementPortalPreference for Coupa pref
+    #
+    #   resp = client.get_procurement_portal_preference({
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference: {
+    #       aws_account_id: "111111111111", 
+    #       buyer_domain: "NetworkID", 
+    #       buyer_identifier: "BuyerId_1", 
+    #       contacts: [
+    #         {
+    #           email: "example-placeholder@amazon.com", 
+    #           name: "John Doe", 
+    #         }, 
+    #       ], 
+    #       create_date: Time.parse(1750375489.242), 
+    #       einvoice_delivery_enabled: true, 
+    #       einvoice_delivery_preference: {
+    #         connection_testing_method: "PROD_ENV_DOLLAR_TEST", 
+    #         einvoice_delivery_activation_date: Time.parse(1750279280.091), 
+    #         einvoice_delivery_attachment_types: [
+    #           "INVOICE_PDF", 
+    #         ], 
+    #         einvoice_delivery_document_types: [
+    #           "AWS_CLOUD_INVOICE", 
+    #         ], 
+    #         protocol: "CXML", 
+    #         purchase_order_data_sources: [
+    #           {
+    #             einvoice_delivery_document_type: "AWS_CLOUD_INVOICE", 
+    #             purchase_order_data_source_type: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       einvoice_delivery_preference_status: "PENDING_VERIFICATION", 
+    #       last_update_date: Time.parse(1750375489.242), 
+    #       procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
+    #       procurement_portal_name: "COUPA", 
+    #       procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd", 
+    #       procurement_portal_shared_secret: "Coupa_Secret", 
+    #       purchase_order_retrieval_enabled: true, 
+    #       purchase_order_retrieval_endpoint: "https://www.placeholder-domain.test", 
+    #       purchase_order_retrieval_preference_status: "PENDING_VERIFICATION", 
+    #       selector: {
+    #         invoice_unit_arns: [
+    #           "arn:aws:invoicing::111111111111:invoice-unit/12345678", 
+    #           "arn:aws:invoicing::111111111111:invoice-unit/12345679", 
+    #         ], 
+    #         seller_of_records: [
+    #           "AWS_INC", 
+    #           "AWS_EUROPE", 
+    #         ], 
+    #       }, 
+    #       supplier_domain: "NetworkID", 
+    #       supplier_identifier: "SupplierId_1", 
+    #       test_env_preference: {
+    #         buyer_domain: "NetworkID", 
+    #         buyer_identifier: "BuyerId_1_Test", 
+    #         procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
+    #         procurement_portal_shared_secret: "Coupa_Secret_test", 
+    #         purchase_order_retrieval_endpoint: "https://www.placeholder-domain.test", 
+    #         supplier_domain: "NetworkID", 
+    #         supplier_identifier: "SupplierId_1_Test", 
+    #       }, 
+    #       version: 1, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_procurement_portal_preference({
+    #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference.aws_account_id #=> String
+    #   resp.procurement_portal_preference.procurement_portal_preference_arn #=> String
+    #   resp.procurement_portal_preference.procurement_portal_name #=> String, one of "SAP_BUSINESS_NETWORK", "COUPA"
+    #   resp.procurement_portal_preference.buyer_domain #=> String, one of "NetworkID"
+    #   resp.procurement_portal_preference.buyer_identifier #=> String
+    #   resp.procurement_portal_preference.supplier_domain #=> String, one of "NetworkID"
+    #   resp.procurement_portal_preference.supplier_identifier #=> String
+    #   resp.procurement_portal_preference.selector.invoice_unit_arns #=> Array
+    #   resp.procurement_portal_preference.selector.invoice_unit_arns[0] #=> String
+    #   resp.procurement_portal_preference.selector.seller_of_records #=> Array
+    #   resp.procurement_portal_preference.selector.seller_of_records[0] #=> String
+    #   resp.procurement_portal_preference.procurement_portal_shared_secret #=> String
+    #   resp.procurement_portal_preference.procurement_portal_instance_endpoint #=> String
+    #   resp.procurement_portal_preference.purchase_order_retrieval_endpoint #=> String
+    #   resp.procurement_portal_preference.test_env_preference.buyer_domain #=> String, one of "NetworkID"
+    #   resp.procurement_portal_preference.test_env_preference.buyer_identifier #=> String
+    #   resp.procurement_portal_preference.test_env_preference.supplier_domain #=> String, one of "NetworkID"
+    #   resp.procurement_portal_preference.test_env_preference.supplier_identifier #=> String
+    #   resp.procurement_portal_preference.test_env_preference.procurement_portal_shared_secret #=> String
+    #   resp.procurement_portal_preference.test_env_preference.procurement_portal_instance_endpoint #=> String
+    #   resp.procurement_portal_preference.test_env_preference.purchase_order_retrieval_endpoint #=> String
+    #   resp.procurement_portal_preference.einvoice_delivery_enabled #=> Boolean
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.einvoice_delivery_document_types #=> Array
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.einvoice_delivery_document_types[0] #=> String, one of "AWS_CLOUD_INVOICE", "AWS_CLOUD_CREDIT_MEMO", "AWS_MARKETPLACE_INVOICE", "AWS_MARKETPLACE_CREDIT_MEMO", "AWS_REQUEST_FOR_PAYMENT"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.einvoice_delivery_attachment_types #=> Array
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.einvoice_delivery_attachment_types[0] #=> String, one of "INVOICE_PDF", "RFP_PDF"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.protocol #=> String, one of "CXML"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.purchase_order_data_sources #=> Array
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.purchase_order_data_sources[0].einvoice_delivery_document_type #=> String, one of "AWS_CLOUD_INVOICE", "AWS_CLOUD_CREDIT_MEMO", "AWS_MARKETPLACE_INVOICE", "AWS_MARKETPLACE_CREDIT_MEMO", "AWS_REQUEST_FOR_PAYMENT"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.purchase_order_data_sources[0].purchase_order_data_source_type #=> String, one of "ASSOCIATED_PURCHASE_ORDER_REQUIRED", "PURCHASE_ORDER_NOT_REQUIRED"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.connection_testing_method #=> String, one of "PROD_ENV_DOLLAR_TEST", "TEST_ENV_REPLAY_TEST"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference.einvoice_delivery_activation_date #=> Time
+    #   resp.procurement_portal_preference.purchase_order_retrieval_enabled #=> Boolean
+    #   resp.procurement_portal_preference.contacts #=> Array
+    #   resp.procurement_portal_preference.contacts[0].name #=> String
+    #   resp.procurement_portal_preference.contacts[0].email #=> String
+    #   resp.procurement_portal_preference.einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preference.einvoice_delivery_preference_status_reason #=> String
+    #   resp.procurement_portal_preference.purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preference.purchase_order_retrieval_preference_status_reason #=> String
+    #   resp.procurement_portal_preference.version #=> Integer
+    #   resp.procurement_portal_preference.create_date #=> Time
+    #   resp.procurement_portal_preference.last_update_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/GetProcurementPortalPreference AWS API Documentation
+    #
+    # @overload get_procurement_portal_preference(params = {})
+    # @param [Hash] params ({})
+    def get_procurement_portal_preference(params = {}, options = {})
+      req = build_request(:get_procurement_portal_preference, params)
       req.send_request(options)
     end
 
@@ -1653,6 +2047,7 @@ module Aws::Invoicing
     #       names: ["InvoiceUnitName"],
     #       invoice_receivers: ["AccountIdString"],
     #       accounts: ["AccountIdString"],
+    #       bill_source_accounts: ["AccountIdString"],
     #     },
     #     next_token: "NextTokenString",
     #     max_results: 1,
@@ -1669,6 +2064,8 @@ module Aws::Invoicing
     #   resp.invoice_units[0].tax_inheritance_disabled #=> Boolean
     #   resp.invoice_units[0].rule.linked_accounts #=> Array
     #   resp.invoice_units[0].rule.linked_accounts[0] #=> String
+    #   resp.invoice_units[0].rule.bill_source_accounts #=> Array
+    #   resp.invoice_units[0].rule.bill_source_accounts[0] #=> String
     #   resp.invoice_units[0].last_modified #=> Time
     #   resp.next_token #=> String
     #
@@ -1678,6 +2075,167 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def list_invoice_units(params = {}, options = {})
       req = build_request(:list_invoice_units, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of procurement portal preferences associated with the
+    # Amazon Web Services account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. (You received this token from a
+    #   previous call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned NextToken
+    #   value.
+    #
+    # @return [Types::ListProcurementPortalPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProcurementPortalPreferencesResponse#procurement_portal_preferences #procurement_portal_preferences} => Array&lt;Types::ProcurementPortalPreferenceSummary&gt;
+    #   * {Types::ListProcurementPortalPreferencesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListProcurementPortalPreferences for Coupa prefs. First Call with following pages
+    #
+    #   resp = client.list_procurement_portal_preferences({
+    #     max_results: 2, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "AAQA-EFRSURBSGpkVFU5MVNUVWNXTzNoUEptWEFGcEt0QzBBeHZaZmRUU2w3L0hRQmdDeEx3R0NuSnF2NjM5NGNmM1I5KzNIQzNnT0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVhPSnhEQ04rWk1idnAyb1RBZ0VRZ0RzbFJBeFlXMk9RRGFtTU8vdFc0MUJlTFFNU2hPR1E5bDM3MHcyS05mSjIzbU93MG1aVXk1MzBiWWVsZ3FaZzhjMndhTjZtNzNYTWd3bnpsZz09E8JRNUKK1r2-b9X8Qd1RAOSKHZOCy-UCpOQjJdSfZHcUefTH0YmlIW8ykllegYUWB1D1NjDjC3u2z2e4cLBTmQhrQewSBW-I_i8okXup9RWN60eMOnB6dl5jUiinJ-FjY_jGjbOkiWuJhXteDKP16RfVRW7mxp2-v1-B8gPPxGLolXHBHrb8gt18P8eWs8RcvRRmmbGUy5qa6nFH5WiCq9Bx2fTUTy9Iz_xZooNuiqC6y119EGQqJ9WsWsIUa8MbWHFXtn9-Uriz7osYocbFm1Evv_NCn3YK-wFy9rUlUskcM2n9AqvPYhOyf0reV7E8cErZFR_Ev8l008QcxQfaqK19-gKR9clddwoDzMVfVuyiW3vbzUXz7fzQLr-UMLCGdE3yHf1oz2SEbcxhHZ2eh7-9wEYDv0v92wXg7m7xaYvaKuVBPKqBaq66GdpS1HTfakkjRGvsoBStXWVgPahISglPO__-Ym5NnXOw2wENBVXZ7RsVe6nJ1X15bB1RDkqLV8xJD0L83snuCEBtM9pyUUQOPvfGHzC4yRusMgBav_y1kq0wjqsbJV5EhHV_SIwf-WZa_A==", 
+    #     procurement_portal_preferences: [
+    #       {
+    #         aws_account_id: "111111111111", 
+    #         buyer_domain: "NetworkID", 
+    #         buyer_identifier: "BuyerId_2", 
+    #         create_date: Time.parse(1750375489.242), 
+    #         einvoice_delivery_enabled: true, 
+    #         einvoice_delivery_preference_status: "PENDING_VERIFICATION", 
+    #         last_update_date: Time.parse(1750375489.242), 
+    #         procurement_portal_name: "COUPA", 
+    #         procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/1c7c6d71-fbc1-45bd-a18c-40cb61810679", 
+    #         purchase_order_retrieval_enabled: true, 
+    #         purchase_order_retrieval_preference_status: "PENDING_VERIFICATION", 
+    #         selector: {
+    #           invoice_unit_arns: [
+    #             "arn:aws:invoicing::111111111111:invoice-unit/12345679", 
+    #           ], 
+    #           seller_of_records: [
+    #             "AWS_INC", 
+    #           ], 
+    #         }, 
+    #         supplier_domain: "NetworkID", 
+    #         supplier_identifier: "SupplierId_1", 
+    #         version: 1, 
+    #       }, 
+    #       {
+    #         aws_account_id: "111111111111", 
+    #         buyer_domain: "NetworkID", 
+    #         buyer_identifier: "BuyerId_4", 
+    #         create_date: Time.parse(1750375489.242), 
+    #         einvoice_delivery_enabled: true, 
+    #         einvoice_delivery_preference_status: "PENDING_VERIFICATION", 
+    #         last_update_date: Time.parse(1750375489.242), 
+    #         procurement_portal_name: "COUPA", 
+    #         procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/ae467ebd-ec8c-4089-b904-a7cd9e76f970", 
+    #         purchase_order_retrieval_enabled: true, 
+    #         purchase_order_retrieval_preference_status: "PENDING_VERIFICATION", 
+    #         selector: {
+    #           invoice_unit_arns: [
+    #             "arn:aws:invoicing::111111111111:invoice-unit/12345678", 
+    #           ], 
+    #           seller_of_records: [
+    #             "AWS_INC", 
+    #           ], 
+    #         }, 
+    #         supplier_domain: "NetworkID", 
+    #         supplier_identifier: "SupplierId_1", 
+    #         version: 1, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListProcurementPortalPreferences for Coupa prefs. Second Call with the last page
+    #
+    #   resp = client.list_procurement_portal_preferences({
+    #     max_results: 2, 
+    #     next_token: "AAQA-EFRSURBSGpkVFU5MVNUVWNXTzNoUEptWEFGcEt0QzBBeHZaZmRUU2w3L0hRQmdDeEx3R0NuSnF2NjM5NGNmM1I5KzNIQzNnT0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVhPSnhEQ04rWk1idnAyb1RBZ0VRZ0RzbFJBeFlXMk9RRGFtTU8vdFc0MUJlTFFNU2hPR1E5bDM3MHcyS05mSjIzbU93MG1aVXk1MzBiWWVsZ3FaZzhjMndhTjZtNzNYTWd3bnpsZz09E8JRNUKK1r2-b9X8Qd1RAOSKHZOCy-UCpOQjJdSfZHcUefTH0YmlIW8ykllegYUWB1D1NjDjC3u2z2e4cLBTmQhrQewSBW-I_i8okXup9RWN60eMOnB6dl5jUiinJ-FjY_jGjbOkiWuJhXteDKP16RfVRW7mxp2-v1-B8gPPxGLolXHBHrb8gt18P8eWs8RcvRRmmbGUy5qa6nFH5WiCq9Bx2fTUTy9Iz_xZooNuiqC6y119EGQqJ9WsWsIUa8MbWHFXtn9-Uriz7osYocbFm1Evv_NCn3YK-wFy9rUlUskcM2n9AqvPYhOyf0reV7E8cErZFR_Ev8l008QcxQfaqK19-gKR9clddwoDzMVfVuyiW3vbzUXz7fzQLr-UMLCGdE3yHf1oz2SEbcxhHZ2eh7-9wEYDv0v92wXg7m7xaYvaKuVBPKqBaq66GdpS1HTfakkjRGvsoBStXWVgPahISglPO__-Ym5NnXOw2wENBVXZ7RsVe6nJ1X15bB1RDkqLV8xJD0L83snuCEBtM9pyUUQOPvfGHzC4yRusMgBav_y1kq0wjqsbJV5EhHV_SIwf-WZa_A==", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preferences: [
+    #       {
+    #         aws_account_id: "111111111111", 
+    #         buyer_domain: "NetworkID", 
+    #         buyer_identifier: "BuyerId_1", 
+    #         create_date: Time.parse(1750375489.242), 
+    #         einvoice_delivery_enabled: true, 
+    #         einvoice_delivery_preference_status: "TEST_INITIALIZED", 
+    #         einvoice_delivery_preference_status_reason: "test initialized example reason", 
+    #         last_update_date: Time.parse(1750375489.242), 
+    #         procurement_portal_name: "COUPA", 
+    #         procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #         purchase_order_retrieval_enabled: true, 
+    #         purchase_order_retrieval_preference_status: "TEST_INITIALIZED", 
+    #         purchase_order_retrieval_preference_status_reason: "test initialized example reason", 
+    #         selector: {
+    #           invoice_unit_arns: [
+    #             "arn:aws:invoicing::111111111111:invoice-unit/12345678", 
+    #           ], 
+    #           seller_of_records: [
+    #             "AWS_INC", 
+    #           ], 
+    #         }, 
+    #         supplier_domain: "NetworkID", 
+    #         supplier_identifier: "SupplierId_1", 
+    #         version: 3, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_procurement_portal_preferences({
+    #     next_token: "BasicStringWithoutSpace",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preferences #=> Array
+    #   resp.procurement_portal_preferences[0].aws_account_id #=> String
+    #   resp.procurement_portal_preferences[0].procurement_portal_preference_arn #=> String
+    #   resp.procurement_portal_preferences[0].procurement_portal_name #=> String, one of "SAP_BUSINESS_NETWORK", "COUPA"
+    #   resp.procurement_portal_preferences[0].buyer_domain #=> String, one of "NetworkID"
+    #   resp.procurement_portal_preferences[0].buyer_identifier #=> String
+    #   resp.procurement_portal_preferences[0].supplier_domain #=> String, one of "NetworkID"
+    #   resp.procurement_portal_preferences[0].supplier_identifier #=> String
+    #   resp.procurement_portal_preferences[0].selector.invoice_unit_arns #=> Array
+    #   resp.procurement_portal_preferences[0].selector.invoice_unit_arns[0] #=> String
+    #   resp.procurement_portal_preferences[0].selector.seller_of_records #=> Array
+    #   resp.procurement_portal_preferences[0].selector.seller_of_records[0] #=> String
+    #   resp.procurement_portal_preferences[0].einvoice_delivery_enabled #=> Boolean
+    #   resp.procurement_portal_preferences[0].purchase_order_retrieval_enabled #=> Boolean
+    #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status_reason #=> String
+    #   resp.procurement_portal_preferences[0].purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
+    #   resp.procurement_portal_preferences[0].purchase_order_retrieval_preference_status_reason #=> String
+    #   resp.procurement_portal_preferences[0].version #=> Integer
+    #   resp.procurement_portal_preferences[0].create_date #=> Time
+    #   resp.procurement_portal_preferences[0].last_update_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalPreferences AWS API Documentation
+    #
+    # @overload list_procurement_portal_preferences(params = {})
+    # @param [Hash] params ({})
+    def list_procurement_portal_preferences(params = {}, options = {})
+      req = build_request(:list_procurement_portal_preferences, params)
       req.send_request(options)
     end
 
@@ -1725,6 +2283,159 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing procurement portal preference configuration. This
+    # operation can modify settings for e-invoice delivery and purchase
+    # order retrieval.
+    #
+    # @option params [required, String] :procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference to
+    #   update.
+    #
+    # @option params [Types::ProcurementPortalPreferenceSelector] :selector
+    #   Specifies criteria for selecting which invoices should be processed
+    #   using a particular procurement portal preference.
+    #
+    # @option params [String] :procurement_portal_shared_secret
+    #   The updated shared secret or authentication credential for the
+    #   procurement portal. This value must be encrypted at rest.
+    #
+    # @option params [String] :procurement_portal_instance_endpoint
+    #   The updated endpoint URL where e-invoices will be delivered to the
+    #   procurement portal. Must be a valid HTTPS URL.
+    #
+    # @option params [Types::TestEnvPreferenceInput] :test_env_preference
+    #   Updated configuration settings for the test environment of the
+    #   procurement portal.
+    #
+    # @option params [required, Boolean] :einvoice_delivery_enabled
+    #   Updated flag indicating whether e-invoice delivery is enabled for this
+    #   procurement portal preference.
+    #
+    # @option params [Types::EinvoiceDeliveryPreference] :einvoice_delivery_preference
+    #   Updated e-invoice delivery configuration including document types,
+    #   attachment types, and customization settings for the portal.
+    #
+    # @option params [required, Boolean] :purchase_order_retrieval_enabled
+    #   Updated flag indicating whether purchase order retrieval is enabled
+    #   for this procurement portal preference.
+    #
+    # @option params [required, Array<Types::Contact>] :contacts
+    #   Updated list of contact information for portal administrators and
+    #   technical contacts.
+    #
+    # @return [Types::PutProcurementPortalPreferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProcurementPortalPreferenceResponse#procurement_portal_preference_arn #procurement_portal_preference_arn} => String
+    #
+    #
+    # @example Example: PutProcurementPortalPreference for Coupa pref
+    #
+    #   resp = client.put_procurement_portal_preference({
+    #     contacts: [
+    #       {
+    #         email: "example-placeholder2@amazon.com", 
+    #         name: "John Doe2", 
+    #       }, 
+    #     ], 
+    #     einvoice_delivery_enabled: true, 
+    #     einvoice_delivery_preference: {
+    #       connection_testing_method: "PROD_ENV_DOLLAR_TEST", 
+    #       einvoice_delivery_activation_date: Time.parse(1750279280.091), 
+    #       einvoice_delivery_attachment_types: [
+    #         "INVOICE_PDF", 
+    #       ], 
+    #       einvoice_delivery_document_types: [
+    #         "AWS_CLOUD_INVOICE", 
+    #       ], 
+    #       protocol: "CXML", 
+    #       purchase_order_data_sources: [
+    #         {
+    #           einvoice_delivery_document_type: "AWS_CLOUD_INVOICE", 
+    #           purchase_order_data_source_type: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #     procurement_portal_shared_secret: "Coupa_Secret_2", 
+    #     purchase_order_retrieval_enabled: true, 
+    #     selector: {
+    #       invoice_unit_arns: [
+    #         "arn:aws:invoicing::111111111111:invoice-unit/12345679", 
+    #       ], 
+    #       seller_of_records: [
+    #         "AWS_INC", 
+    #       ], 
+    #     }, 
+    #     test_env_preference: {
+    #       buyer_domain: "NetworkID", 
+    #       buyer_identifier: "BuyerId_1_Test", 
+    #       procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
+    #       procurement_portal_shared_secret: "Coupa_Secret_test_2", 
+    #       supplier_domain: "NetworkID", 
+    #       supplier_identifier: "SupplierId_1_Test", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_procurement_portal_preference({
+    #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
+    #     selector: {
+    #       invoice_unit_arns: ["InvoiceUnitArnString"],
+    #       seller_of_records: ["BasicStringWithoutSpace"],
+    #     },
+    #     procurement_portal_shared_secret: "SensitiveBasicStringWithoutSpace",
+    #     procurement_portal_instance_endpoint: "BasicStringWithoutSpace",
+    #     test_env_preference: {
+    #       buyer_domain: "NetworkID", # required, accepts NetworkID
+    #       buyer_identifier: "BasicStringWithoutSpace", # required
+    #       supplier_domain: "NetworkID", # required, accepts NetworkID
+    #       supplier_identifier: "BasicStringWithoutSpace", # required
+    #       procurement_portal_shared_secret: "BasicStringWithoutSpace",
+    #       procurement_portal_instance_endpoint: "BasicStringWithoutSpace",
+    #     },
+    #     einvoice_delivery_enabled: false, # required
+    #     einvoice_delivery_preference: {
+    #       einvoice_delivery_document_types: ["AWS_CLOUD_INVOICE"], # required, accepts AWS_CLOUD_INVOICE, AWS_CLOUD_CREDIT_MEMO, AWS_MARKETPLACE_INVOICE, AWS_MARKETPLACE_CREDIT_MEMO, AWS_REQUEST_FOR_PAYMENT
+    #       einvoice_delivery_attachment_types: ["INVOICE_PDF"], # accepts INVOICE_PDF, RFP_PDF
+    #       protocol: "CXML", # required, accepts CXML
+    #       purchase_order_data_sources: [ # required
+    #         {
+    #           einvoice_delivery_document_type: "AWS_CLOUD_INVOICE", # accepts AWS_CLOUD_INVOICE, AWS_CLOUD_CREDIT_MEMO, AWS_MARKETPLACE_INVOICE, AWS_MARKETPLACE_CREDIT_MEMO, AWS_REQUEST_FOR_PAYMENT
+    #           purchase_order_data_source_type: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", # accepts ASSOCIATED_PURCHASE_ORDER_REQUIRED, PURCHASE_ORDER_NOT_REQUIRED
+    #         },
+    #       ],
+    #       connection_testing_method: "PROD_ENV_DOLLAR_TEST", # required, accepts PROD_ENV_DOLLAR_TEST, TEST_ENV_REPLAY_TEST
+    #       einvoice_delivery_activation_date: Time.now, # required
+    #     },
+    #     purchase_order_retrieval_enabled: false, # required
+    #     contacts: [ # required
+    #       {
+    #         name: "BasicString",
+    #         email: "EmailString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/PutProcurementPortalPreference AWS API Documentation
+    #
+    # @overload put_procurement_portal_preference(params = {})
+    # @param [Hash] params ({})
+    def put_procurement_portal_preference(params = {}, options = {})
+      req = build_request(:put_procurement_portal_preference, params)
       req.send_request(options)
     end
 
@@ -1879,6 +2590,7 @@ module Aws::Invoicing
     #     tax_inheritance_disabled: false,
     #     rule: {
     #       linked_accounts: ["AccountIdString"],
+    #       bill_source_accounts: ["AccountIdString"],
     #     },
     #   })
     #
@@ -1892,6 +2604,71 @@ module Aws::Invoicing
     # @param [Hash] params ({})
     def update_invoice_unit(params = {}, options = {})
       req = build_request(:update_invoice_unit, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of a procurement portal preference, including the
+    # activation state of e-invoice delivery and purchase order retrieval
+    # features.
+    #
+    # @option params [required, String] :procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference to
+    #   update.
+    #
+    # @option params [String] :einvoice_delivery_preference_status
+    #   The updated status of the e-invoice delivery preference.
+    #
+    # @option params [String] :einvoice_delivery_preference_status_reason
+    #   The reason for the e-invoice delivery preference status update,
+    #   providing context for the change.
+    #
+    # @option params [String] :purchase_order_retrieval_preference_status
+    #   The updated status of the purchase order retrieval preference.
+    #
+    # @option params [String] :purchase_order_retrieval_preference_status_reason
+    #   The reason for the purchase order retrieval preference status update,
+    #   providing context for the change.
+    #
+    # @return [Types::UpdateProcurementPortalPreferenceStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProcurementPortalPreferenceStatusResponse#procurement_portal_preference_arn #procurement_portal_preference_arn} => String
+    #
+    #
+    # @example Example: UpdateProcurementPortalPreference for EinvoiceDeliveryPreferenceStatus and PurchaseOrderRetrievalPreferenceStatus
+    #
+    #   resp = client.update_procurement_portal_preference_status({
+    #     einvoice_delivery_preference_status: "SUSPENDED", 
+    #     einvoice_delivery_preference_status_reason: "suspended example reason", 
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #     purchase_order_retrieval_preference_status: "SUSPENDED", 
+    #     purchase_order_retrieval_preference_status_reason: "suspended example reason", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_procurement_portal_preference_status({
+    #     procurement_portal_preference_arn: "ProcurementPortalPreferenceArnString", # required
+    #     einvoice_delivery_preference_status: "PENDING_VERIFICATION", # accepts PENDING_VERIFICATION, TEST_INITIALIZED, TEST_INITIALIZATION_FAILED, TEST_FAILED, ACTIVE, SUSPENDED
+    #     einvoice_delivery_preference_status_reason: "BasicString",
+    #     purchase_order_retrieval_preference_status: "PENDING_VERIFICATION", # accepts PENDING_VERIFICATION, TEST_INITIALIZED, TEST_INITIALIZATION_FAILED, TEST_FAILED, ACTIVE, SUSPENDED
+    #     purchase_order_retrieval_preference_status_reason: "BasicString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_preference_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/UpdateProcurementPortalPreferenceStatus AWS API Documentation
+    #
+    # @overload update_procurement_portal_preference_status(params = {})
+    # @param [Hash] params ({})
+    def update_procurement_portal_preference_status(params = {}, options = {})
+      req = build_request(:update_procurement_portal_preference_status, params)
       req.send_request(options)
     end
 
@@ -1913,7 +2690,7 @@ module Aws::Invoicing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-invoicing'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

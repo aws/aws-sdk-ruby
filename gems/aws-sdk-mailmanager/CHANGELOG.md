@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2025-11-21)
+------------------
+
+* Feature - Add support for resources in the aws-eusc partition.
+
 1.35.0 (2025-10-22)
 ------------------
 

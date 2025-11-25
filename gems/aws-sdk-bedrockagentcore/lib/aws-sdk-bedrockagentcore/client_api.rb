@@ -79,6 +79,12 @@ module Aws::BedrockAgentCore
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventMetadataFilterExpression = Shapes::StructureShape.new(name: 'EventMetadataFilterExpression')
     EventMetadataFilterList = Shapes::ListShape.new(name: 'EventMetadataFilterList')
+    ExtractionJob = Shapes::StructureShape.new(name: 'ExtractionJob')
+    ExtractionJobFilterInput = Shapes::StructureShape.new(name: 'ExtractionJobFilterInput')
+    ExtractionJobMessages = Shapes::UnionShape.new(name: 'ExtractionJobMessages')
+    ExtractionJobMetadata = Shapes::StructureShape.new(name: 'ExtractionJobMetadata')
+    ExtractionJobMetadataList = Shapes::ListShape.new(name: 'ExtractionJobMetadataList')
+    ExtractionJobStatus = Shapes::StringShape.new(name: 'ExtractionJobStatus')
     FilterInput = Shapes::StructureShape.new(name: 'FilterInput')
     GetAgentCardRequest = Shapes::StructureShape.new(name: 'GetAgentCardRequest')
     GetAgentCardResponse = Shapes::StructureShape.new(name: 'GetAgentCardResponse')
@@ -126,6 +132,9 @@ module Aws::BedrockAgentCore
     ListCodeInterpreterSessionsResponse = Shapes::StructureShape.new(name: 'ListCodeInterpreterSessionsResponse')
     ListEventsInput = Shapes::StructureShape.new(name: 'ListEventsInput')
     ListEventsOutput = Shapes::StructureShape.new(name: 'ListEventsOutput')
+    ListMemoryExtractionJobsInput = Shapes::StructureShape.new(name: 'ListMemoryExtractionJobsInput')
+    ListMemoryExtractionJobsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListMemoryExtractionJobsInputMaxResultsInteger')
+    ListMemoryExtractionJobsOutput = Shapes::StructureShape.new(name: 'ListMemoryExtractionJobsOutput')
     ListMemoryRecordsInput = Shapes::StructureShape.new(name: 'ListMemoryRecordsInput')
     ListMemoryRecordsOutput = Shapes::StructureShape.new(name: 'ListMemoryRecordsOutput')
     ListSessionsInput = Shapes::StructureShape.new(name: 'ListSessionsInput')
@@ -151,6 +160,8 @@ module Aws::BedrockAgentCore
     MemoryRecordsOutputList = Shapes::ListShape.new(name: 'MemoryRecordsOutputList')
     MemoryRecordsUpdateInputList = Shapes::ListShape.new(name: 'MemoryRecordsUpdateInputList')
     MemoryStrategyId = Shapes::StringShape.new(name: 'MemoryStrategyId')
+    MessageMetadata = Shapes::StructureShape.new(name: 'MessageMetadata')
+    MessagesList = Shapes::ListShape.new(name: 'MessagesList')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
     MetadataValue = Shapes::UnionShape.new(name: 'MetadataValue')
@@ -199,6 +210,8 @@ module Aws::BedrockAgentCore
     StartCodeInterpreterSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceIdString')
     StartCodeInterpreterSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceParentString')
     StartCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'StartCodeInterpreterSessionResponse')
+    StartMemoryExtractionJobInput = Shapes::StructureShape.new(name: 'StartMemoryExtractionJobInput')
+    StartMemoryExtractionJobOutput = Shapes::StructureShape.new(name: 'StartMemoryExtractionJobOutput')
     State = Shapes::StringShape.new(name: 'State')
     StopBrowserSessionRequest = Shapes::StructureShape.new(name: 'StopBrowserSessionRequest')
     StopBrowserSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StopBrowserSessionRequestTraceIdString')
@@ -406,6 +419,32 @@ module Aws::BedrockAgentCore
     EventMetadataFilterExpression.struct_class = Types::EventMetadataFilterExpression
 
     EventMetadataFilterList.member = Shapes::ShapeRef.new(shape: EventMetadataFilterExpression)
+
+    ExtractionJob.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    ExtractionJob.struct_class = Types::ExtractionJob
+
+    ExtractionJobFilterInput.add_member(:strategy_id, Shapes::ShapeRef.new(shape: String, location_name: "strategyId"))
+    ExtractionJobFilterInput.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
+    ExtractionJobFilterInput.add_member(:actor_id, Shapes::ShapeRef.new(shape: String, location_name: "actorId"))
+    ExtractionJobFilterInput.add_member(:status, Shapes::ShapeRef.new(shape: ExtractionJobStatus, location_name: "status"))
+    ExtractionJobFilterInput.struct_class = Types::ExtractionJobFilterInput
+
+    ExtractionJobMessages.add_member(:messages_list, Shapes::ShapeRef.new(shape: MessagesList, location_name: "messagesList"))
+    ExtractionJobMessages.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExtractionJobMessages.add_member_subclass(:messages_list, Types::ExtractionJobMessages::MessagesList)
+    ExtractionJobMessages.add_member_subclass(:unknown, Types::ExtractionJobMessages::Unknown)
+    ExtractionJobMessages.struct_class = Types::ExtractionJobMessages
+
+    ExtractionJobMetadata.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobID"))
+    ExtractionJobMetadata.add_member(:messages, Shapes::ShapeRef.new(shape: ExtractionJobMessages, required: true, location_name: "messages"))
+    ExtractionJobMetadata.add_member(:status, Shapes::ShapeRef.new(shape: ExtractionJobStatus, location_name: "status"))
+    ExtractionJobMetadata.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    ExtractionJobMetadata.add_member(:strategy_id, Shapes::ShapeRef.new(shape: String, location_name: "strategyId"))
+    ExtractionJobMetadata.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
+    ExtractionJobMetadata.add_member(:actor_id, Shapes::ShapeRef.new(shape: String, location_name: "actorId"))
+    ExtractionJobMetadata.struct_class = Types::ExtractionJobMetadata
+
+    ExtractionJobMetadataList.member = Shapes::ShapeRef.new(shape: ExtractionJobMetadata)
 
     FilterInput.add_member(:branch, Shapes::ShapeRef.new(shape: BranchFilter, location_name: "branch"))
     FilterInput.add_member(:event_metadata, Shapes::ShapeRef.new(shape: EventMetadataFilterList, location_name: "eventMetadata"))
@@ -618,6 +657,16 @@ module Aws::BedrockAgentCore
     ListEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEventsOutput.struct_class = Types::ListEventsOutput
 
+    ListMemoryExtractionJobsInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
+    ListMemoryExtractionJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMemoryExtractionJobsInputMaxResultsInteger, location_name: "maxResults"))
+    ListMemoryExtractionJobsInput.add_member(:filter, Shapes::ShapeRef.new(shape: ExtractionJobFilterInput, location_name: "filter"))
+    ListMemoryExtractionJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListMemoryExtractionJobsInput.struct_class = Types::ListMemoryExtractionJobsInput
+
+    ListMemoryExtractionJobsOutput.add_member(:jobs, Shapes::ShapeRef.new(shape: ExtractionJobMetadataList, required: true, location_name: "jobs"))
+    ListMemoryExtractionJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListMemoryExtractionJobsOutput.struct_class = Types::ListMemoryExtractionJobsOutput
+
     ListMemoryRecordsInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     ListMemoryRecordsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "namespace"))
     ListMemoryRecordsInput.add_member(:memory_strategy_id, Shapes::ShapeRef.new(shape: MemoryStrategyId, location_name: "memoryStrategyId"))
@@ -696,6 +745,12 @@ module Aws::BedrockAgentCore
     MemoryRecordsOutputList.member = Shapes::ShapeRef.new(shape: MemoryRecordOutput)
 
     MemoryRecordsUpdateInputList.member = Shapes::ShapeRef.new(shape: MemoryRecordUpdateInput)
+
+    MessageMetadata.add_member(:event_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "eventId"))
+    MessageMetadata.add_member(:message_index, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "messageIndex"))
+    MessageMetadata.struct_class = Types::MessageMetadata
+
+    MessagesList.member = Shapes::ShapeRef.new(shape: MessageMetadata)
 
     MetadataMap.key = Shapes::ShapeRef.new(shape: MetadataKey)
     MetadataMap.value = Shapes::ShapeRef.new(shape: MetadataValue)
@@ -795,6 +850,14 @@ module Aws::BedrockAgentCore
     StartCodeInterpreterSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: CodeInterpreterSessionId, required: true, location_name: "sessionId"))
     StartCodeInterpreterSessionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     StartCodeInterpreterSessionResponse.struct_class = Types::StartCodeInterpreterSessionResponse
+
+    StartMemoryExtractionJobInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
+    StartMemoryExtractionJobInput.add_member(:extraction_job, Shapes::ShapeRef.new(shape: ExtractionJob, required: true, location_name: "extractionJob"))
+    StartMemoryExtractionJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartMemoryExtractionJobInput.struct_class = Types::StartMemoryExtractionJobInput
+
+    StartMemoryExtractionJobOutput.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
+    StartMemoryExtractionJobOutput.struct_class = Types::StartMemoryExtractionJobOutput
 
     StopBrowserSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StopBrowserSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
     StopBrowserSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StopBrowserSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
@@ -1260,6 +1323,26 @@ module Aws::BedrockAgentCore
         )
       end)
 
+      api.add_operation(:list_memory_extraction_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMemoryExtractionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/memories/{memoryId}/extractionJobs"
+        o.input = Shapes::ShapeRef.new(shape: ListMemoryExtractionJobsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListMemoryExtractionJobsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_memory_records, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMemoryRecords"
         o.http_method = "POST"
@@ -1351,6 +1434,20 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_memory_extraction_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMemoryExtractionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/memories/{memoryId}/extractionJobs/start"
+        o.input = Shapes::ShapeRef.new(shape: StartMemoryExtractionJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StartMemoryExtractionJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:stop_browser_session, Seahorse::Model::Operation.new.tap do |o|

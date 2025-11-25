@@ -292,6 +292,7 @@ module Aws::Lambda
     ProvisionedConcurrencyConfigNotFoundException = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigNotFoundException')
     ProvisionedConcurrencyStatusEnum = Shapes::StringShape.new(name: 'ProvisionedConcurrencyStatusEnum')
     ProvisionedPollerConfig = Shapes::StructureShape.new(name: 'ProvisionedPollerConfig')
+    ProvisionedPollerGroupName = Shapes::StringShape.new(name: 'ProvisionedPollerGroupName')
     PublishLayerVersionRequest = Shapes::StructureShape.new(name: 'PublishLayerVersionRequest')
     PublishLayerVersionResponse = Shapes::StructureShape.new(name: 'PublishLayerVersionResponse')
     PublishVersionRequest = Shapes::StructureShape.new(name: 'PublishVersionRequest')
@@ -369,6 +370,9 @@ module Aws::Lambda
     TagsError = Shapes::StructureShape.new(name: 'TagsError')
     TagsErrorCode = Shapes::StringShape.new(name: 'TagsErrorCode')
     TagsErrorMessage = Shapes::StringShape.new(name: 'TagsErrorMessage')
+    TenancyConfig = Shapes::StructureShape.new(name: 'TenancyConfig')
+    TenantId = Shapes::StringShape.new(name: 'TenantId')
+    TenantIsolationMode = Shapes::StringShape.new(name: 'TenantIsolationMode')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -580,6 +584,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     CreateFunctionRequest.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStart, location_name: "SnapStart"))
     CreateFunctionRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
+    CreateFunctionRequest.add_member(:tenancy_config, Shapes::ShapeRef.new(shape: TenancyConfig, location_name: "TenancyConfig"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -814,6 +819,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStartResponse, location_name: "SnapStart"))
     FunctionConfiguration.add_member(:runtime_version_config, Shapes::ShapeRef.new(shape: RuntimeVersionConfig, location_name: "RuntimeVersionConfig"))
     FunctionConfiguration.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
+    FunctionConfiguration.add_member(:tenancy_config, Shapes::ShapeRef.new(shape: TenancyConfig, location_name: "TenancyConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -1014,6 +1020,7 @@ module Aws::Lambda
     InvocationRequest.add_member(:client_context, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Client-Context"))
     InvocationRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, location_name: "Payload"))
     InvocationRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
+    InvocationRequest.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location: "header", location_name: "X-Amz-Tenant-Id"))
     InvocationRequest.struct_class = Types::InvocationRequest
     InvocationRequest[:payload] = :payload
     InvocationRequest[:payload_member] = InvocationRequest.member(:payload)
@@ -1050,6 +1057,7 @@ module Aws::Lambda
     InvokeWithResponseStreamRequest.add_member(:client_context, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Client-Context"))
     InvokeWithResponseStreamRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     InvokeWithResponseStreamRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, location_name: "Payload"))
+    InvokeWithResponseStreamRequest.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location: "header", location_name: "X-Amz-Tenant-Id"))
     InvokeWithResponseStreamRequest.struct_class = Types::InvokeWithResponseStreamRequest
     InvokeWithResponseStreamRequest[:payload] = :payload
     InvokeWithResponseStreamRequest[:payload_member] = InvokeWithResponseStreamRequest.member(:payload)
@@ -1287,6 +1295,7 @@ module Aws::Lambda
 
     ProvisionedPollerConfig.add_member(:minimum_pollers, Shapes::ShapeRef.new(shape: MinimumNumberOfPollers, location_name: "MinimumPollers"))
     ProvisionedPollerConfig.add_member(:maximum_pollers, Shapes::ShapeRef.new(shape: MaximumNumberOfPollers, location_name: "MaximumPollers"))
+    ProvisionedPollerConfig.add_member(:poller_group_name, Shapes::ShapeRef.new(shape: ProvisionedPollerGroupName, location_name: "PollerGroupName"))
     ProvisionedPollerConfig.struct_class = Types::ProvisionedPollerConfig
 
     PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
@@ -1477,6 +1486,9 @@ module Aws::Lambda
     TagsError.add_member(:error_code, Shapes::ShapeRef.new(shape: TagsErrorCode, required: true, location_name: "ErrorCode"))
     TagsError.add_member(:message, Shapes::ShapeRef.new(shape: TagsErrorMessage, required: true, location_name: "Message"))
     TagsError.struct_class = Types::TagsError
+
+    TenancyConfig.add_member(:tenant_isolation_mode, Shapes::ShapeRef.new(shape: TenantIsolationMode, required: true, location_name: "TenantIsolationMode"))
+    TenancyConfig.struct_class = Types::TenancyConfig
 
     TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
     TooManyRequestsException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))

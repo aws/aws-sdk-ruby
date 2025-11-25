@@ -286,6 +286,11 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class DryRunException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Endpoint
       attr_accessor address: ::String
       attr_accessor port: ::Integer
@@ -692,11 +697,13 @@ module Aws::RedshiftServerless
       attr_accessor admin_password_secret_arn: ::String
       attr_accessor admin_password_secret_kms_key_id: ::String
       attr_accessor admin_username: ::String
+      attr_accessor catalog_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor db_name: ::String
       attr_accessor default_iam_role_arn: ::String
       attr_accessor iam_roles: ::Array[::String]
       attr_accessor kms_key_id: ::String
+      attr_accessor lakehouse_registration_status: ::String
       attr_accessor log_exports: ::Array[("useractivitylog" | "userlog" | "connectionlog")]
       attr_accessor namespace_arn: ::String
       attr_accessor namespace_id: ::String
@@ -1016,6 +1023,24 @@ module Aws::RedshiftServerless
 
     class UpdateEndpointAccessResponse
       attr_accessor endpoint: Types::EndpointAccess
+      SENSITIVE: []
+    end
+
+    class UpdateLakehouseConfigurationRequest
+      attr_accessor catalog_name: ::String
+      attr_accessor dry_run: bool
+      attr_accessor lakehouse_idc_application_arn: ::String
+      attr_accessor lakehouse_idc_registration: ("Associate" | "Disassociate")
+      attr_accessor lakehouse_registration: ("Register" | "Deregister")
+      attr_accessor namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLakehouseConfigurationResponse
+      attr_accessor catalog_arn: ::String
+      attr_accessor lakehouse_idc_application_arn: ::String
+      attr_accessor lakehouse_registration_status: ::String
+      attr_accessor namespace_name: ::String
       SENSITIVE: []
     end
 

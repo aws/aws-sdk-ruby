@@ -337,6 +337,17 @@ module Aws::S3
       end
     end
 
+    class GetBucketAbac
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+        )
+      end
+    end
+
     class GetBucketAccelerateConfiguration
       def self.build(context)
         Aws::S3::EndpointParameters.create(
@@ -878,6 +889,17 @@ module Aws::S3
       end
     end
 
+    class PutBucketAbac
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+        )
+      end
+    end
+
     class PutBucketAccelerateConfiguration
       def self.build(context)
         Aws::S3::EndpointParameters.create(
@@ -1348,6 +1370,8 @@ module Aws::S3
         DeleteObjects.build(context)
       when :delete_public_access_block
         DeletePublicAccessBlock.build(context)
+      when :get_bucket_abac
+        GetBucketAbac.build(context)
       when :get_bucket_accelerate_configuration
         GetBucketAccelerateConfiguration.build(context)
       when :get_bucket_acl
@@ -1440,6 +1464,8 @@ module Aws::S3
         ListObjectsV2.build(context)
       when :list_parts
         ListParts.build(context)
+      when :put_bucket_abac
+        PutBucketAbac.build(context)
       when :put_bucket_accelerate_configuration
         PutBucketAccelerateConfiguration.build(context)
       when :put_bucket_acl

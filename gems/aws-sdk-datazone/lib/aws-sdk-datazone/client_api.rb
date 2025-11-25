@@ -103,6 +103,13 @@ module Aws::DataZone
     AthenaPropertiesPatch = Shapes::StructureShape.new(name: 'AthenaPropertiesPatch')
     AthenaPropertiesPatchWorkgroupNameString = Shapes::StringShape.new(name: 'AthenaPropertiesPatchWorkgroupNameString')
     Attribute = Shapes::StringShape.new(name: 'Attribute')
+    AttributeEntityType = Shapes::StringShape.new(name: 'AttributeEntityType')
+    AttributeError = Shapes::StructureShape.new(name: 'AttributeError')
+    AttributeIdentifier = Shapes::StringShape.new(name: 'AttributeIdentifier')
+    AttributeInput = Shapes::StructureShape.new(name: 'AttributeInput')
+    Attributes = Shapes::ListShape.new(name: 'Attributes')
+    AttributesErrors = Shapes::ListShape.new(name: 'AttributesErrors')
+    AttributesList = Shapes::ListShape.new(name: 'AttributesList')
     AuthType = Shapes::StringShape.new(name: 'AuthType')
     AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
     AuthenticationConfigurationInput = Shapes::StructureShape.new(name: 'AuthenticationConfigurationInput')
@@ -128,6 +135,14 @@ module Aws::DataZone
     BasicAuthenticationCredentials = Shapes::StructureShape.new(name: 'BasicAuthenticationCredentials')
     BasicAuthenticationCredentialsPasswordString = Shapes::StringShape.new(name: 'BasicAuthenticationCredentialsPasswordString')
     BasicAuthenticationCredentialsUserNameString = Shapes::StringShape.new(name: 'BasicAuthenticationCredentialsUserNameString')
+    BatchGetAttributeItems = Shapes::ListShape.new(name: 'BatchGetAttributeItems')
+    BatchGetAttributeOutput = Shapes::StructureShape.new(name: 'BatchGetAttributeOutput')
+    BatchGetAttributesMetadataInput = Shapes::StructureShape.new(name: 'BatchGetAttributesMetadataInput')
+    BatchGetAttributesMetadataOutput = Shapes::StructureShape.new(name: 'BatchGetAttributesMetadataOutput')
+    BatchPutAttributeItems = Shapes::ListShape.new(name: 'BatchPutAttributeItems')
+    BatchPutAttributeOutput = Shapes::StructureShape.new(name: 'BatchPutAttributeOutput')
+    BatchPutAttributesMetadataInput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataInput')
+    BatchPutAttributesMetadataOutput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BusinessNameGenerationConfiguration = Shapes::StructureShape.new(name: 'BusinessNameGenerationConfiguration')
     CancelMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunInput')
@@ -521,7 +536,9 @@ module Aws::DataZone
     GlossaryItemAdditionalAttributes = Shapes::StructureShape.new(name: 'GlossaryItemAdditionalAttributes')
     GlossaryName = Shapes::StringShape.new(name: 'GlossaryName')
     GlossaryStatus = Shapes::StringShape.new(name: 'GlossaryStatus')
+    GlossaryTermEnforcementDetail = Shapes::StructureShape.new(name: 'GlossaryTermEnforcementDetail')
     GlossaryTermId = Shapes::StringShape.new(name: 'GlossaryTermId')
+    GlossaryTermIdentifiers = Shapes::ListShape.new(name: 'GlossaryTermIdentifiers')
     GlossaryTermItem = Shapes::StructureShape.new(name: 'GlossaryTermItem')
     GlossaryTermItemAdditionalAttributes = Shapes::StructureShape.new(name: 'GlossaryTermItemAdditionalAttributes')
     GlossaryTermName = Shapes::StringShape.new(name: 'GlossaryTermName')
@@ -1105,6 +1122,8 @@ module Aws::DataZone
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     UpdateProjectProfileInput = Shapes::StructureShape.new(name: 'UpdateProjectProfileInput')
     UpdateProjectProfileOutput = Shapes::StructureShape.new(name: 'UpdateProjectProfileOutput')
+    UpdateRootDomainUnitOwnerInput = Shapes::StructureShape.new(name: 'UpdateRootDomainUnitOwnerInput')
+    UpdateRootDomainUnitOwnerOutput = Shapes::StructureShape.new(name: 'UpdateRootDomainUnitOwnerOutput')
     UpdateRuleInput = Shapes::StructureShape.new(name: 'UpdateRuleInput')
     UpdateRuleOutput = Shapes::StructureShape.new(name: 'UpdateRuleOutput')
     UpdateSubscriptionGrantStatusInput = Shapes::StructureShape.new(name: 'UpdateSubscriptionGrantStatusInput')
@@ -1465,6 +1484,21 @@ module Aws::DataZone
     AthenaPropertiesPatch.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: AthenaPropertiesPatchWorkgroupNameString, location_name: "workgroupName"))
     AthenaPropertiesPatch.struct_class = Types::AthenaPropertiesPatch
 
+    AttributeError.add_member(:attribute_identifier, Shapes::ShapeRef.new(shape: AttributeIdentifier, required: true, location_name: "attributeIdentifier"))
+    AttributeError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    AttributeError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    AttributeError.struct_class = Types::AttributeError
+
+    AttributeInput.add_member(:attribute_identifier, Shapes::ShapeRef.new(shape: AttributeIdentifier, required: true, location_name: "attributeIdentifier"))
+    AttributeInput.add_member(:forms, Shapes::ShapeRef.new(shape: FormInputList, required: true, location_name: "forms"))
+    AttributeInput.struct_class = Types::AttributeInput
+
+    Attributes.member = Shapes::ShapeRef.new(shape: AttributeInput)
+
+    AttributesErrors.member = Shapes::ShapeRef.new(shape: AttributeError)
+
+    AttributesList.member = Shapes::ShapeRef.new(shape: AttributeIdentifier)
+
     AuthenticationConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     AuthenticationConfiguration.add_member(:o_auth_2_properties, Shapes::ShapeRef.new(shape: OAuth2Properties, location_name: "oAuth2Properties"))
     AuthenticationConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: AuthenticationConfigurationSecretArnString, location_name: "secretArn"))
@@ -1510,6 +1544,39 @@ module Aws::DataZone
     BasicAuthenticationCredentials.add_member(:password, Shapes::ShapeRef.new(shape: BasicAuthenticationCredentialsPasswordString, location_name: "password"))
     BasicAuthenticationCredentials.add_member(:user_name, Shapes::ShapeRef.new(shape: BasicAuthenticationCredentialsUserNameString, location_name: "userName"))
     BasicAuthenticationCredentials.struct_class = Types::BasicAuthenticationCredentials
+
+    BatchGetAttributeItems.member = Shapes::ShapeRef.new(shape: BatchGetAttributeOutput)
+
+    BatchGetAttributeOutput.add_member(:attribute_identifier, Shapes::ShapeRef.new(shape: AttributeIdentifier, required: true, location_name: "attributeIdentifier"))
+    BatchGetAttributeOutput.add_member(:forms, Shapes::ShapeRef.new(shape: FormOutputList, location_name: "forms"))
+    BatchGetAttributeOutput.struct_class = Types::BatchGetAttributeOutput
+
+    BatchGetAttributesMetadataInput.add_member(:attribute_identifiers, Shapes::ShapeRef.new(shape: AttributesList, required: true, location: "querystring", location_name: "attributeIdentifier"))
+    BatchGetAttributesMetadataInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    BatchGetAttributesMetadataInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityIdentifier"))
+    BatchGetAttributesMetadataInput.add_member(:entity_revision, Shapes::ShapeRef.new(shape: Revision, location: "querystring", location_name: "entityRevision"))
+    BatchGetAttributesMetadataInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: AttributeEntityType, required: true, location: "uri", location_name: "entityType"))
+    BatchGetAttributesMetadataInput.struct_class = Types::BatchGetAttributesMetadataInput
+
+    BatchGetAttributesMetadataOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: BatchGetAttributeItems, location_name: "attributes"))
+    BatchGetAttributesMetadataOutput.add_member(:errors, Shapes::ShapeRef.new(shape: AttributesErrors, required: true, location_name: "errors"))
+    BatchGetAttributesMetadataOutput.struct_class = Types::BatchGetAttributesMetadataOutput
+
+    BatchPutAttributeItems.member = Shapes::ShapeRef.new(shape: BatchPutAttributeOutput)
+
+    BatchPutAttributeOutput.add_member(:attribute_identifier, Shapes::ShapeRef.new(shape: AttributeIdentifier, required: true, location_name: "attributeIdentifier"))
+    BatchPutAttributeOutput.struct_class = Types::BatchPutAttributeOutput
+
+    BatchPutAttributesMetadataInput.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "attributes"))
+    BatchPutAttributesMetadataInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    BatchPutAttributesMetadataInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    BatchPutAttributesMetadataInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityIdentifier"))
+    BatchPutAttributesMetadataInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: AttributeEntityType, required: true, location: "uri", location_name: "entityType"))
+    BatchPutAttributesMetadataInput.struct_class = Types::BatchPutAttributesMetadataInput
+
+    BatchPutAttributesMetadataOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: BatchPutAttributeItems, location_name: "attributes"))
+    BatchPutAttributesMetadataOutput.add_member(:errors, Shapes::ShapeRef.new(shape: AttributesErrors, location_name: "errors"))
+    BatchPutAttributesMetadataOutput.struct_class = Types::BatchPutAttributesMetadataOutput
 
     BusinessNameGenerationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     BusinessNameGenerationConfiguration.struct_class = Types::BusinessNameGenerationConfiguration
@@ -3637,6 +3704,11 @@ module Aws::DataZone
     GlossaryItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
     GlossaryItemAdditionalAttributes.struct_class = Types::GlossaryItemAdditionalAttributes
 
+    GlossaryTermEnforcementDetail.add_member(:required_glossary_term_ids, Shapes::ShapeRef.new(shape: GlossaryTermIdentifiers, location_name: "requiredGlossaryTermIds"))
+    GlossaryTermEnforcementDetail.struct_class = Types::GlossaryTermEnforcementDetail
+
+    GlossaryTermIdentifiers.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
+
     GlossaryTermItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: GlossaryTermItemAdditionalAttributes, location_name: "additionalAttributes"))
     GlossaryTermItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     GlossaryTermItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
@@ -5010,8 +5082,10 @@ module Aws::DataZone
 
     RuleAssetTypeList.member = Shapes::ShapeRef.new(shape: AssetTypeIdentifier)
 
+    RuleDetail.add_member(:glossary_term_enforcement_detail, Shapes::ShapeRef.new(shape: GlossaryTermEnforcementDetail, location_name: "glossaryTermEnforcementDetail"))
     RuleDetail.add_member(:metadata_form_enforcement_detail, Shapes::ShapeRef.new(shape: MetadataFormEnforcementDetail, location_name: "metadataFormEnforcementDetail"))
     RuleDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RuleDetail.add_member_subclass(:glossary_term_enforcement_detail, Types::RuleDetail::GlossaryTermEnforcementDetail)
     RuleDetail.add_member_subclass(:metadata_form_enforcement_detail, Types::RuleDetail::MetadataFormEnforcementDetail)
     RuleDetail.add_member_subclass(:unknown, Types::RuleDetail::Unknown)
     RuleDetail.struct_class = Types::RuleDetail
@@ -5920,6 +5994,14 @@ module Aws::DataZone
     UpdateProjectProfileOutput.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     UpdateProjectProfileOutput.struct_class = Types::UpdateProjectProfileOutput
 
+    UpdateRootDomainUnitOwnerInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateRootDomainUnitOwnerInput.add_member(:current_owner, Shapes::ShapeRef.new(shape: UserIdentifier, required: true, location_name: "currentOwner"))
+    UpdateRootDomainUnitOwnerInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateRootDomainUnitOwnerInput.add_member(:new_owner, Shapes::ShapeRef.new(shape: String, required: true, location_name: "newOwner"))
+    UpdateRootDomainUnitOwnerInput.struct_class = Types::UpdateRootDomainUnitOwnerInput
+
+    UpdateRootDomainUnitOwnerOutput.struct_class = Types::UpdateRootDomainUnitOwnerOutput
+
     UpdateRuleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateRuleInput.add_member(:detail, Shapes::ShapeRef.new(shape: RuleDetail, location_name: "detail"))
     UpdateRuleInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -6173,6 +6255,35 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/associate-governed-terms"
         o.input = Shapes::ShapeRef.new(shape: AssociateGovernedTermsInput)
         o.output = Shapes::ShapeRef.new(shape: AssociateGovernedTermsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:batch_get_attributes_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAttributesMetadata"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/attributes-metadata"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAttributesMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAttributesMetadataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:batch_put_attributes_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchPutAttributesMetadata"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/attributes-metadata"
+        o.input = Shapes::ShapeRef.new(shape: BatchPutAttributesMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchPutAttributesMetadataOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -8705,6 +8816,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_root_domain_unit_owner, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRootDomainUnitOwner"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/root-domain-unit-owner"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRootDomainUnitOwnerInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRootDomainUnitOwnerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

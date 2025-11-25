@@ -224,6 +224,11 @@ module Aws::CloudWatchRUM
       end
 
       # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+
+      # @return [String]
       def quota_code
         @data[:quota_code]
       end
@@ -231,11 +236,6 @@ module Aws::CloudWatchRUM
       # @return [String]
       def retry_after_seconds
         @data[:retry_after_seconds]
-      end
-
-      # @return [String]
-      def service_code
-        @data[:service_code]
       end
 
       def retryable?

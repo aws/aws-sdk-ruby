@@ -825,6 +825,11 @@ module Aws::MediaLive
     Route = Shapes::StructureShape.new(name: 'Route')
     RouteCreateRequest = Shapes::StructureShape.new(name: 'RouteCreateRequest')
     RouteUpdateRequest = Shapes::StructureShape.new(name: 'RouteUpdateRequest')
+    RouterDestination = Shapes::StructureShape.new(name: 'RouterDestination')
+    RouterDestinationSettings = Shapes::StructureShape.new(name: 'RouterDestinationSettings')
+    RouterEncryptionType = Shapes::StringShape.new(name: 'RouterEncryptionType')
+    RouterInputSettings = Shapes::StructureShape.new(name: 'RouterInputSettings')
+    RouterSettings = Shapes::StructureShape.new(name: 'RouterSettings')
     RtmpAdMarkers = Shapes::StringShape.new(name: 'RtmpAdMarkers')
     RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
     RtmpCaptionData = Shapes::StringShape.new(name: 'RtmpCaptionData')
@@ -891,6 +896,7 @@ module Aws::MediaLive
     Smpte2110ReceiverGroupSdpSettings = Shapes::StructureShape.new(name: 'Smpte2110ReceiverGroupSdpSettings')
     Smpte2110ReceiverGroupSettings = Shapes::StructureShape.new(name: 'Smpte2110ReceiverGroupSettings')
     SmpteTtDestinationSettings = Shapes::StructureShape.new(name: 'SmpteTtDestinationSettings')
+    SpecialRouterSettings = Shapes::StructureShape.new(name: 'SpecialRouterSettings')
     SrtCallerDecryption = Shapes::StructureShape.new(name: 'SrtCallerDecryption')
     SrtCallerDecryptionRequest = Shapes::StructureShape.new(name: 'SrtCallerDecryptionRequest')
     SrtCallerSource = Shapes::StructureShape.new(name: 'SrtCallerSource')
@@ -1210,6 +1216,8 @@ module Aws::MediaLive
     __listOfRoute = Shapes::ListShape.new(name: '__listOfRoute')
     __listOfRouteCreateRequest = Shapes::ListShape.new(name: '__listOfRouteCreateRequest')
     __listOfRouteUpdateRequest = Shapes::ListShape.new(name: '__listOfRouteUpdateRequest')
+    __listOfRouterDestination = Shapes::ListShape.new(name: '__listOfRouterDestination')
+    __listOfRouterDestinationSettings = Shapes::ListShape.new(name: '__listOfRouterDestinationSettings')
     __listOfRtmpAdMarkers = Shapes::ListShape.new(name: '__listOfRtmpAdMarkers')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
@@ -2076,6 +2084,7 @@ module Aws::MediaLive
     CreateInput.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsCreateRequest, location_name: "multicastSettings"))
     CreateInput.add_member(:smpte_2110_receiver_group_settings, Shapes::ShapeRef.new(shape: Smpte2110ReceiverGroupSettings, location_name: "smpte2110ReceiverGroupSettings"))
     CreateInput.add_member(:sdi_sources, Shapes::ShapeRef.new(shape: InputSdiSources, location_name: "sdiSources"))
+    CreateInput.add_member(:router_settings, Shapes::ShapeRef.new(shape: RouterSettings, location_name: "routerSettings"))
     CreateInput.struct_class = Types::CreateInput
 
     CreateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
@@ -2094,6 +2103,7 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsCreateRequest, location_name: "multicastSettings"))
     CreateInputRequest.add_member(:smpte_2110_receiver_group_settings, Shapes::ShapeRef.new(shape: Smpte2110ReceiverGroupSettings, location_name: "smpte2110ReceiverGroupSettings"))
     CreateInputRequest.add_member(:sdi_sources, Shapes::ShapeRef.new(shape: InputSdiSources, location_name: "sdiSources"))
+    CreateInputRequest.add_member(:router_settings, Shapes::ShapeRef.new(shape: RouterSettings, location_name: "routerSettings"))
     CreateInputRequest.struct_class = Types::CreateInputRequest
 
     CreateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -2616,6 +2626,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettings, location_name: "multicastSettings"))
     DescribeInputResponse.add_member(:smpte_2110_receiver_group_settings, Shapes::ShapeRef.new(shape: Smpte2110ReceiverGroupSettings, location_name: "smpte2110ReceiverGroupSettings"))
     DescribeInputResponse.add_member(:sdi_sources, Shapes::ShapeRef.new(shape: InputSdiSources, location_name: "sdiSources"))
+    DescribeInputResponse.add_member(:router_settings, Shapes::ShapeRef.new(shape: RouterInputSettings, location_name: "routerSettings"))
     DescribeInputResponse.struct_class = Types::DescribeInputResponse
 
     DescribeInputSecurityGroupRequest.add_member(:input_security_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputSecurityGroupId"))
@@ -3418,6 +3429,7 @@ module Aws::MediaLive
     Input.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettings, location_name: "multicastSettings"))
     Input.add_member(:smpte_2110_receiver_group_settings, Shapes::ShapeRef.new(shape: Smpte2110ReceiverGroupSettings, location_name: "smpte2110ReceiverGroupSettings"))
     Input.add_member(:sdi_sources, Shapes::ShapeRef.new(shape: InputSdiSources, location_name: "sdiSources"))
+    Input.add_member(:router_settings, Shapes::ShapeRef.new(shape: RouterInputSettings, location_name: "routerSettings"))
     Input.struct_class = Types::Input
 
     InputAttachment.add_member(:automatic_input_failover_settings, Shapes::ShapeRef.new(shape: AutomaticInputFailoverSettings, location_name: "automaticInputFailoverSettings"))
@@ -4625,6 +4637,23 @@ module Aws::MediaLive
     RouteUpdateRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
     RouteUpdateRequest.struct_class = Types::RouteUpdateRequest
 
+    RouterDestination.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZoneName"))
+    RouterDestination.add_member(:router_output_arn, Shapes::ShapeRef.new(shape: __string, location_name: "routerOutputArn"))
+    RouterDestination.struct_class = Types::RouterDestination
+
+    RouterDestinationSettings.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "availabilityZoneName"))
+    RouterDestinationSettings.struct_class = Types::RouterDestinationSettings
+
+    RouterInputSettings.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfRouterDestination, location_name: "destinations"))
+    RouterInputSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: RouterEncryptionType, location_name: "encryptionType"))
+    RouterInputSettings.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    RouterInputSettings.struct_class = Types::RouterInputSettings
+
+    RouterSettings.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfRouterDestinationSettings, location_name: "destinations"))
+    RouterSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: RouterEncryptionType, location_name: "encryptionType"))
+    RouterSettings.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
+    RouterSettings.struct_class = Types::RouterSettings
+
     RtmpCaptionInfoDestinationSettings.struct_class = Types::RtmpCaptionInfoDestinationSettings
 
     RtmpGroupSettings.add_member(:ad_markers, Shapes::ShapeRef.new(shape: __listOfRtmpAdMarkers, location_name: "adMarkers"))
@@ -4794,6 +4823,9 @@ module Aws::MediaLive
     Smpte2110ReceiverGroupSettings.struct_class = Types::Smpte2110ReceiverGroupSettings
 
     SmpteTtDestinationSettings.struct_class = Types::SmpteTtDestinationSettings
+
+    SpecialRouterSettings.add_member(:router_arn, Shapes::ShapeRef.new(shape: __string, location_name: "routerArn"))
+    SpecialRouterSettings.struct_class = Types::SpecialRouterSettings
 
     SrtCallerDecryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
     SrtCallerDecryption.add_member(:passphrase_secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "passphraseSecretArn"))
@@ -5492,6 +5524,7 @@ module Aws::MediaLive
     UpdateInput.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsUpdateRequest, location_name: "multicastSettings"))
     UpdateInput.add_member(:smpte_2110_receiver_group_settings, Shapes::ShapeRef.new(shape: Smpte2110ReceiverGroupSettings, location_name: "smpte2110ReceiverGroupSettings"))
     UpdateInput.add_member(:sdi_sources, Shapes::ShapeRef.new(shape: InputSdiSources, location_name: "sdiSources"))
+    UpdateInput.add_member(:special_router_settings, Shapes::ShapeRef.new(shape: SpecialRouterSettings, location_name: "specialRouterSettings"))
     UpdateInput.struct_class = Types::UpdateInput
 
     UpdateInputDevice.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
@@ -5537,6 +5570,7 @@ module Aws::MediaLive
     UpdateInputRequest.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsUpdateRequest, location_name: "multicastSettings"))
     UpdateInputRequest.add_member(:smpte_2110_receiver_group_settings, Shapes::ShapeRef.new(shape: Smpte2110ReceiverGroupSettings, location_name: "smpte2110ReceiverGroupSettings"))
     UpdateInputRequest.add_member(:sdi_sources, Shapes::ShapeRef.new(shape: InputSdiSources, location_name: "sdiSources"))
+    UpdateInputRequest.add_member(:special_router_settings, Shapes::ShapeRef.new(shape: SpecialRouterSettings, location_name: "specialRouterSettings"))
     UpdateInputRequest.struct_class = Types::UpdateInputRequest
 
     UpdateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -5894,6 +5928,10 @@ module Aws::MediaLive
     __listOfRouteCreateRequest.member = Shapes::ShapeRef.new(shape: RouteCreateRequest)
 
     __listOfRouteUpdateRequest.member = Shapes::ShapeRef.new(shape: RouteUpdateRequest)
+
+    __listOfRouterDestination.member = Shapes::ShapeRef.new(shape: RouterDestination)
+
+    __listOfRouterDestinationSettings.member = Shapes::ShapeRef.new(shape: RouterDestinationSettings)
 
     __listOfRtmpAdMarkers.member = Shapes::ShapeRef.new(shape: RtmpAdMarkers)
 

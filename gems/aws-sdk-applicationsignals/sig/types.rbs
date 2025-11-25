@@ -58,6 +58,7 @@ module Aws::ApplicationSignals
     class AuditorResult
       attr_accessor auditor: ::String
       attr_accessor description: ::String
+      attr_accessor data: ::Hash[::String, ::String]
       attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "NONE")
       SENSITIVE: []
     end
@@ -117,7 +118,7 @@ module Aws::ApplicationSignals
       attr_accessor account_id: ::String
       attr_accessor region: ::String
       attr_accessor entity: ::Hash[::String, ::String]
-      attr_accessor change_event_type: ("DEPLOYMENT")
+      attr_accessor change_event_type: ("DEPLOYMENT" | "CONFIGURATION")
       attr_accessor event_id: ::String
       attr_accessor user_name: ::String
       attr_accessor event_name: ::String
@@ -254,19 +255,41 @@ module Aws::ApplicationSignals
       attr_accessor end_time: ::Time
       attr_accessor auditors: ::Array[::String]
       attr_accessor audit_targets: ::Array[Types::AuditTarget]
+      attr_accessor detail_level: ("BRIEF" | "DETAILED")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListAuditFindingsOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       attr_accessor audit_findings: ::Array[Types::AuditFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityEventsInput
+      attr_accessor entity: ::Hash[::String, ::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityEventsOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor change_events: ::Array[Types::ChangeEvent]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListGroupingAttributeDefinitionsInput
       attr_accessor next_token: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor include_linked_accounts: bool
       SENSITIVE: []
     end
 

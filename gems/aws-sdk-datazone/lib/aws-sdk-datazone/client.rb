@@ -918,6 +918,127 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets the attribute metadata.
+    #
+    # @option params [required, Array<String>] :attribute_identifiers
+    #   The attribute identifier.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where you want to get the attribute metadata.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The entity ID for which you want to get attribute metadata.
+    #
+    # @option params [String] :entity_revision
+    #   The entity revision for which you want to get attribute metadata.
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which you want to get attribute metadata.
+    #
+    # @return [Types::BatchGetAttributesMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAttributesMetadataOutput#attributes #attributes} => Array&lt;Types::BatchGetAttributeOutput&gt;
+    #   * {Types::BatchGetAttributesMetadataOutput#errors #errors} => Array&lt;Types::AttributeError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_attributes_metadata({
+    #     attribute_identifiers: ["AttributeIdentifier"], # required
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityId", # required
+    #     entity_revision: "Revision",
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].attribute_identifier #=> String
+    #   resp.attributes[0].forms #=> Array
+    #   resp.attributes[0].forms[0].content #=> String
+    #   resp.attributes[0].forms[0].form_name #=> String
+    #   resp.attributes[0].forms[0].type_name #=> String
+    #   resp.attributes[0].forms[0].type_revision #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].attribute_identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributesMetadata AWS API Documentation
+    #
+    # @overload batch_get_attributes_metadata(params = {})
+    # @param [Hash] params ({})
+    def batch_get_attributes_metadata(params = {}, options = {})
+      req = build_request(:batch_get_attributes_metadata, params)
+      req.send_request(options)
+    end
+
+    # Writes the attribute metadata.
+    #
+    # @option params [required, Array<Types::AttributeInput>] :attributes
+    #   The attributes of the metadata.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where you want to write the attribute metadata.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The entity ID for which you want to write the attribute metadata.
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which you want to write the attribute metadata.
+    #
+    # @return [Types::BatchPutAttributesMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutAttributesMetadataOutput#attributes #attributes} => Array&lt;Types::BatchPutAttributeOutput&gt;
+    #   * {Types::BatchPutAttributesMetadataOutput#errors #errors} => Array&lt;Types::AttributeError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_attributes_metadata({
+    #     attributes: [ # required
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #         forms: [ # required
+    #           {
+    #             content: "FormInputContentString",
+    #             form_name: "FormName", # required
+    #             type_identifier: "FormTypeIdentifier",
+    #             type_revision: "RevisionInput",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityId", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].attribute_identifier #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].attribute_identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributesMetadata AWS API Documentation
+    #
+    # @overload batch_put_attributes_metadata(params = {})
+    # @param [Hash] params ({})
+    def batch_put_attributes_metadata(params = {}, options = {})
+      req = build_request(:batch_put_attributes_metadata, params)
+      req.send_request(options)
+    end
+
     # Cancels the metadata generation run.
     #
     # Prerequisites:
@@ -3869,6 +3990,9 @@ module Aws::DataZone
     #     client_token: "ClientToken",
     #     description: "Description",
     #     detail: { # required
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"],
+    #       },
     #       metadata_form_enforcement_detail: {
     #         required_metadata_forms: [
     #           {
@@ -3905,12 +4029,14 @@ module Aws::DataZone
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids #=> Array
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids[0] #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms #=> Array
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_identifier #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_revision #=> String
     #   resp.identifier #=> String
     #   resp.name #=> String
-    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.scope.asset_type.specific_asset_types #=> Array
     #   resp.scope.asset_type.specific_asset_types[0] #=> String
@@ -7503,6 +7629,8 @@ module Aws::DataZone
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids #=> Array
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids[0] #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms #=> Array
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_identifier #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_revision #=> String
@@ -7510,7 +7638,7 @@ module Aws::DataZone
     #   resp.last_updated_by #=> String
     #   resp.name #=> String
     #   resp.revision #=> String
-    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.scope.asset_type.specific_asset_types #=> Array
     #   resp.scope.asset_type.specific_asset_types[0] #=> String
@@ -10064,7 +10192,7 @@ module Aws::DataZone
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #     project_ids: ["ProjectId"],
-    #     rule_type: "METADATA_FORM_ENFORCEMENT", # accepts METADATA_FORM_ENFORCEMENT
+    #     rule_type: "METADATA_FORM_ENFORCEMENT", # accepts METADATA_FORM_ENFORCEMENT, GLOSSARY_TERM_ENFORCEMENT
     #     target_identifier: "String", # required
     #     target_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT
     #   })
@@ -10077,7 +10205,7 @@ module Aws::DataZone
     #   resp.items[0].last_updated_by #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].revision #=> String
-    #   resp.items[0].rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.items[0].rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.items[0].scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.items[0].scope.asset_type.specific_asset_types #=> Array
     #   resp.items[0].scope.asset_type.specific_asset_types[0] #=> String
@@ -13986,6 +14114,45 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Updates the owner of the root domain unit.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :current_owner
+    #   The current owner of the root domain unit.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the root domain unit owner is to be
+    #   updated.
+    #
+    # @option params [required, String] :new_owner
+    #   The new owner of the root domain unit.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_root_domain_unit_owner({
+    #     client_token: "ClientToken",
+    #     current_owner: "UserIdentifier", # required
+    #     domain_identifier: "DomainId", # required
+    #     new_owner: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateRootDomainUnitOwner AWS API Documentation
+    #
+    # @overload update_root_domain_unit_owner(params = {})
+    # @param [Hash] params ({})
+    def update_root_domain_unit_owner(params = {}, options = {})
+      req = build_request(:update_root_domain_unit_owner, params)
+      req.send_request(options)
+    end
+
     # Updates a rule. In Amazon DataZone, a rule is a formal agreement that
     # enforces specific requirements across user workflows (e.g., publishing
     # assets to the catalog, requesting subscriptions, creating projects)
@@ -14038,6 +14205,9 @@ module Aws::DataZone
     #   resp = client.update_rule({
     #     description: "Description",
     #     detail: {
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"],
+    #       },
     #       metadata_form_enforcement_detail: {
     #         required_metadata_forms: [
     #           {
@@ -14070,6 +14240,8 @@ module Aws::DataZone
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids #=> Array
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids[0] #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms #=> Array
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_identifier #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_revision #=> String
@@ -14077,7 +14249,7 @@ module Aws::DataZone
     #   resp.last_updated_by #=> String
     #   resp.name #=> String
     #   resp.revision #=> String
-    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.scope.asset_type.specific_asset_types #=> Array
     #   resp.scope.asset_type.specific_asset_types[0] #=> String
@@ -14476,7 +14648,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

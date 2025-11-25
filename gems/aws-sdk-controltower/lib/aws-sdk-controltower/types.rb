@@ -253,16 +253,6 @@ module Aws::ControlTower
     #   The landing zone version, for example, 3.0.
     #   @return [String]
     #
-    # @!attribute [rw] manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
-    #   @return [Hash,Array,String,Numeric,Boolean]
-    #
     # @!attribute [rw] remediation_types
     #   Specifies the types of remediation actions to apply when creating
     #   the landing zone, such as automatic drift correction or compliance
@@ -273,13 +263,23 @@ module Aws::ControlTower
     #   Tags to be applied to the landing zone.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] manifest
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/CreateLandingZoneInput AWS API Documentation
     #
     class CreateLandingZoneInput < Struct.new(
       :version,
-      :manifest,
       :remediation_types,
-      :tags)
+      :tags,
+      :manifest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1291,11 +1291,6 @@ module Aws::ControlTower
     #   The landing zone's current deployed version.
     #   @return [String]
     #
-    # @!attribute [rw] manifest
-    #   The landing zone manifest JSON text file that specifies the landing
-    #   zone configurations.
-    #   @return [Hash,Array,String,Numeric,Boolean]
-    #
     # @!attribute [rw] remediation_types
     #   The types of remediation actions configured for the landing zone,
     #   such as automatic drift correction or compliance enforcement.
@@ -1318,16 +1313,21 @@ module Aws::ControlTower
     #   The drift status of the landing zone.
     #   @return [Types::LandingZoneDriftStatusSummary]
     #
+    # @!attribute [rw] manifest
+    #   The landing zone manifest JSON text file that specifies the landing
+    #   zone configurations.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneDetail AWS API Documentation
     #
     class LandingZoneDetail < Struct.new(
       :version,
-      :manifest,
       :remediation_types,
       :arn,
       :status,
       :latest_available_version,
-      :drift_status)
+      :drift_status,
+      :manifest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2029,6 +2029,15 @@ module Aws::ControlTower
     #   The landing zone version, for example, 3.2.
     #   @return [String]
     #
+    # @!attribute [rw] remediation_types
+    #   Specifies the types of remediation actions to apply when updating
+    #   the landing zone configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #   @return [String]
+    #
     # @!attribute [rw] manifest
     #   The manifest file (JSON) is a text file that describes your Amazon
     #   Web Services resources. For an example, review [Launch your landing
@@ -2041,22 +2050,13 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
-    # @!attribute [rw] remediation_types
-    #   Specifies the types of remediation actions to apply when updating
-    #   the landing zone configuration.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] landing_zone_identifier
-    #   The unique identifier of the landing zone.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateLandingZoneInput AWS API Documentation
     #
     class UpdateLandingZoneInput < Struct.new(
       :version,
-      :manifest,
       :remediation_types,
-      :landing_zone_identifier)
+      :landing_zone_identifier,
+      :manifest)
       SENSITIVE = []
       include Aws::Structure
     end

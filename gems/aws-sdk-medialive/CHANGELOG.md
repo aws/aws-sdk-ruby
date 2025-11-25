@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.169.0 (2025-11-19)
+------------------
+
+* Feature - MediaLive is adding support for MediaConnect Router by supporting a new input type called MEDIACONNECT_ROUTER. This new input type will provide seamless encrypted transport between MediaConnect Router and your MediaLive channel.
+
 1.168.0 (2025-11-17)
 ------------------
 

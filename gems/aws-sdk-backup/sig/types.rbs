@@ -14,6 +14,13 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class AggregatedScanResult
+      attr_accessor failed_scan: bool
+      attr_accessor findings: ::Array[("MALWARE")]
+      attr_accessor last_computed: ::Time
+      SENSITIVE: []
+    end
+
     class AlreadyExistsException
       attr_accessor code: ::String
       attr_accessor message: ::String
@@ -81,6 +88,7 @@ module Aws::Backup
       attr_accessor backup_plan_name: ::String
       attr_accessor rules: ::Array[Types::BackupRule]
       attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      attr_accessor scan_settings: ::Array[Types::ScanSetting]
       SENSITIVE: []
     end
 
@@ -88,6 +96,7 @@ module Aws::Backup
       attr_accessor backup_plan_name: ::String
       attr_accessor rules: ::Array[Types::BackupRuleInput]
       attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      attr_accessor scan_settings: ::Array[Types::ScanSetting]
       SENSITIVE: []
     end
 
@@ -124,6 +133,7 @@ module Aws::Backup
       attr_accessor enable_continuous_backup: bool
       attr_accessor schedule_expression_timezone: ::String
       attr_accessor index_actions: ::Array[Types::IndexAction]
+      attr_accessor scan_actions: ::Array[Types::ScanAction]
       SENSITIVE: [:recovery_point_tags]
     end
 
@@ -140,6 +150,7 @@ module Aws::Backup
       attr_accessor enable_continuous_backup: bool
       attr_accessor schedule_expression_timezone: ::String
       attr_accessor index_actions: ::Array[Types::IndexAction]
+      attr_accessor scan_actions: ::Array[Types::ScanAction]
       SENSITIVE: [:recovery_point_tags]
     end
 
@@ -708,6 +719,7 @@ module Aws::Backup
       attr_accessor index_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor index_status_message: ::String
       attr_accessor encryption_key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      attr_accessor scan_results: ::Array[Types::ScanResult]
       SENSITIVE: []
     end
 
@@ -769,6 +781,35 @@ module Aws::Backup
       attr_accessor deletion_status_message: ::String
       attr_accessor is_parent: bool
       attr_accessor parent_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScanJobInput
+      attr_accessor scan_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScanJobOutput
+      attr_accessor account_id: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor completion_date: ::Time
+      attr_accessor created_by: Types::ScanJobCreator
+      attr_accessor creation_date: ::Time
+      attr_accessor iam_role_arn: ::String
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ("EBS" | "EC2" | "S3")
+      attr_accessor scan_base_recovery_point_arn: ::String
+      attr_accessor scan_id: ::String
+      attr_accessor scan_job_id: ::String
+      attr_accessor scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      attr_accessor scan_result: Types::ScanResultInfo
+      attr_accessor scanner_role_arn: ::String
+      attr_accessor state: ("CANCELED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "CREATED" | "FAILED" | "RUNNING")
+      attr_accessor status_message: ::String
       SENSITIVE: []
     end
 
@@ -1485,6 +1526,47 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class ListScanJobSummariesInput
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND")
+      attr_accessor state: ("CREATED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "RUNNING" | "FAILED" | "CANCELED" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScanJobSummariesOutput
+      attr_accessor scan_job_summaries: ::Array[Types::ScanJobSummary]
+      attr_accessor aggregation_period: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScanJobsInput
+      attr_accessor by_account_id: ::String
+      attr_accessor by_backup_vault_name: ::String
+      attr_accessor by_complete_after: ::Time
+      attr_accessor by_complete_before: ::Time
+      attr_accessor by_malware_scanner: ("GUARDDUTY")
+      attr_accessor by_recovery_point_arn: ::String
+      attr_accessor by_resource_arn: ::String
+      attr_accessor by_resource_type: ("EBS" | "EC2" | "S3")
+      attr_accessor by_scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND")
+      attr_accessor by_state: ("CANCELED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "CREATED" | "FAILED" | "RUNNING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScanJobsOutput
+      attr_accessor next_token: ::String
+      attr_accessor scan_jobs: ::Array[Types::ScanJob]
+      SENSITIVE: []
+    end
+
     class ListTagsInput
       attr_accessor resource_arn: ::String
       attr_accessor next_token: ::String
@@ -1590,6 +1672,7 @@ module Aws::Backup
       attr_accessor index_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor index_status_message: ::String
       attr_accessor encryption_key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      attr_accessor aggregated_scan_result: Types::AggregatedScanResult
       SENSITIVE: []
     end
 
@@ -1608,6 +1691,7 @@ module Aws::Backup
       attr_accessor index_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor index_status_message: ::String
       attr_accessor encryption_key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      attr_accessor aggregated_scan_result: Types::AggregatedScanResult
       SENSITIVE: []
     end
 
@@ -1856,6 +1940,77 @@ module Aws::Backup
       SENSITIVE: [:requester_comment]
     end
 
+    class ScanAction
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      SENSITIVE: []
+    end
+
+    class ScanJob
+      attr_accessor account_id: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor completion_date: ::Time
+      attr_accessor created_by: Types::ScanJobCreator
+      attr_accessor creation_date: ::Time
+      attr_accessor iam_role_arn: ::String
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ("EBS" | "EC2" | "S3")
+      attr_accessor scan_base_recovery_point_arn: ::String
+      attr_accessor scan_id: ::String
+      attr_accessor scan_job_id: ::String
+      attr_accessor scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      attr_accessor scan_result: Types::ScanResultInfo
+      attr_accessor scanner_role_arn: ::String
+      attr_accessor state: ("CANCELED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "CREATED" | "FAILED" | "RUNNING")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ScanJobCreator
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan_version: ::String
+      attr_accessor backup_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScanJobSummary
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "RUNNING" | "FAILED" | "CANCELED" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor count: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND")
+      SENSITIVE: []
+    end
+
+    class ScanResult
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor scan_job_state: ("COMPLETED" | "COMPLETED_WITH_ISSUES" | "FAILED" | "CANCELED")
+      attr_accessor last_scan_timestamp: ::Time
+      attr_accessor findings: ::Array[("MALWARE")]
+      SENSITIVE: []
+    end
+
+    class ScanResultInfo
+      attr_accessor scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND")
+      SENSITIVE: []
+    end
+
+    class ScanSetting
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor scanner_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class ScheduledPlanExecutionMember
       attr_accessor execution_time: ::Time
       attr_accessor rule_id: ::String
@@ -1937,6 +2092,24 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class StartScanJobInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor malware_scanner: ("GUARDDUTY")
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor scan_base_recovery_point_arn: ::String
+      attr_accessor scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      attr_accessor scanner_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartScanJobOutput
+      attr_accessor creation_date: ::Time
+      attr_accessor scan_job_id: ::String
+      SENSITIVE: []
+    end
+
     class StopBackupJobInput
       attr_accessor backup_job_id: ::String
       SENSITIVE: []
@@ -1999,6 +2172,7 @@ module Aws::Backup
       attr_accessor creation_date: ::Time
       attr_accessor version_id: ::String
       attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      attr_accessor scan_settings: ::Array[Types::ScanSetting]
       SENSITIVE: []
     end
 

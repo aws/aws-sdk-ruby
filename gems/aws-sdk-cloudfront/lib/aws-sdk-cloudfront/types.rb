@@ -240,6 +240,11 @@ module Aws::CloudFront
     #   The IP address type for the Anycast static IP list.
     #   @return [String]
     #
+    # @!attribute [rw] ipam_config
+    #   The IPAM configuration for the Anycast static IP list, that contains
+    #   the quantity and list of IPAM CIDR configurations.
+    #   @return [Types::IpamConfig]
+    #
     # @!attribute [rw] anycast_ips
     #   The static IP addresses that are allocated to the Anycast static IP
     #   list.
@@ -261,6 +266,7 @@ module Aws::CloudFront
       :status,
       :arn,
       :ip_address_type,
+      :ipam_config,
       :anycast_ips,
       :ip_count,
       :last_modified_time)
@@ -352,6 +358,11 @@ module Aws::CloudFront
     #   The current version (ETag value) of the Anycast static IP list.
     #   @return [String]
     #
+    # @!attribute [rw] ipam_config
+    #   The IPAM configuration for the Anycast static IP list, that contains
+    #   the quantity and list of IPAM CIDR configurations.
+    #   @return [Types::IpamConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AnycastIpListSummary AWS API Documentation
     #
     class AnycastIpListSummary < Struct.new(
@@ -362,7 +373,8 @@ module Aws::CloudFront
       :ip_count,
       :last_modified_time,
       :ip_address_type,
-      :etag)
+      :etag,
+      :ipam_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -503,6 +515,56 @@ module Aws::CloudFront
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The CA certificates bundle location in Amazon S3.
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The location's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The location's Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The location's version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CaCertificatesBundleS3Location AWS API Documentation
+    #
+    class CaCertificatesBundleS3Location < Struct.new(
+      :bucket,
+      :key,
+      :region,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CA certificates bundle source.
+    #
+    # @note CaCertificatesBundleSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] ca_certificates_bundle_s3_location
+    #   The CA certificates bundle location in Amazon S3.
+    #   @return [Types::CaCertificatesBundleS3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CaCertificatesBundleSource AWS API Documentation
+    #
+    class CaCertificatesBundleSource < Struct.new(
+      :ca_certificates_bundle_s3_location,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CaCertificatesBundleS3Location < CaCertificatesBundleSource; end
+      class Unknown < CaCertificatesBundleSource; end
     end
 
     # A complex type that describes how CloudFront processes requests.
@@ -1632,6 +1694,103 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A connection function association.
+    #
+    # @!attribute [rw] id
+    #   The association's ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionFunctionAssociation AWS API Documentation
+    #
+    class ConnectionFunctionAssociation < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A connection function summary.
+    #
+    # @!attribute [rw] name
+    #   The connection function name.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The connection function ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_function_config
+    #   Contains configuration information about a CloudFront function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] connection_function_arn
+    #   The connection function Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The connection function status.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The connection function stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The connection function created time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The connection function last modified time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionFunctionSummary AWS API Documentation
+    #
+    class ConnectionFunctionSummary < Struct.new(
+      :name,
+      :id,
+      :connection_function_config,
+      :connection_function_arn,
+      :status,
+      :stage,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A connection function test result.
+    #
+    # @!attribute [rw] connection_function_summary
+    #   The connection function summary.
+    #   @return [Types::ConnectionFunctionSummary]
+    #
+    # @!attribute [rw] compute_utilization
+    #   The connection function compute utilization.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_function_execution_logs
+    #   The connection function execution logs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_function_error_message
+    #   The connection function error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_function_output
+    #   The connection function output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionFunctionTestResult AWS API Documentation
+    #
+    class ConnectionFunctionTestResult < Struct.new(
+      :connection_function_summary,
+      :compute_utilization,
+      :connection_function_execution_logs,
+      :connection_function_error_message,
+      :connection_function_output)
+      SENSITIVE = [:connection_function_execution_logs, :connection_function_error_message, :connection_function_output]
+      include Aws::Structure
+    end
+
     # The connection group for your distribution tenants. When you first
     # create a distribution tenant and you don't specify a connection
     # group, CloudFront will automatically create a default connection group
@@ -2235,12 +2394,18 @@ module Aws::CloudFront
     #   The IP address type for the Anycast static IP list. You can specify
     #   one of the following options:
     #
-    #   * `ipv4` - Allocate a list of only IPv4 addresses
+    #   * `ipv4` only
     #
-    #   * `ipv6` - Allocate a list of only IPv4 addresses
+    #   * `ipv6` only
     #
     #   * `dualstack` - Allocate a list of both IPv4 and IPv6 addresses
     #   @return [String]
+    #
+    # @!attribute [rw] ipam_cidr_configs
+    #   A list of IPAM CIDR configurations that specify the IP address
+    #   ranges and IPAM pool settings for creating the Anycast static IP
+    #   list.
+    #   @return [Array<Types::IpamCidrConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateAnycastIpListRequest AWS API Documentation
     #
@@ -2248,7 +2413,8 @@ module Aws::CloudFront
       :name,
       :ip_count,
       :tags,
-      :ip_address_type)
+      :ip_address_type,
+      :ipam_cidr_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2348,6 +2514,56 @@ module Aws::CloudFront
     #
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A name for the connection function.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_function_config
+    #   Contains configuration information about a CloudFront function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] connection_function_code
+    #   The code for the connection function.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateConnectionFunctionRequest AWS API Documentation
+    #
+    class CreateConnectionFunctionRequest < Struct.new(
+      :name,
+      :connection_function_config,
+      :connection_function_code,
+      :tags)
+      SENSITIVE = [:connection_function_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_function_summary
+    #   The summary for the connection function.
+    #   @return [Types::ConnectionFunctionSummary]
+    #
+    # @!attribute [rw] location
+    #   The location of the connection function.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the connection
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateConnectionFunctionResult AWS API Documentation
+    #
+    class CreateConnectionFunctionResult < Struct.new(
+      :connection_function_summary,
       :location,
       :etag)
       SENSITIVE = []
@@ -3187,6 +3403,45 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   A name for the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_source
+    #   The CA certificates bundle source for the trust store.
+    #   @return [Types::CaCertificatesBundleSource]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateTrustStoreRequest AWS API Documentation
+    #
+    class CreateTrustStoreRequest < Struct.new(
+      :name,
+      :ca_certificates_bundle_source,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store
+    #   The trust store.
+    #   @return [Types::TrustStore]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the trust store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateTrustStoreResult AWS API Documentation
+    #
+    class CreateTrustStoreResult < Struct.new(
+      :trust_store,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] vpc_origin_endpoint_config
     #   The VPC origin endpoint configuration.
     #   @return [Types::VpcOriginEndpointConfig]
@@ -3928,6 +4183,24 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] id
+    #   The connection function's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the connection function you
+    #   are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteConnectionFunctionRequest AWS API Documentation
+    #
+    class DeleteConnectionFunctionRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The ID of the connection group to delete.
     #   @return [String]
     #
@@ -4287,6 +4560,24 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] id
+    #   The trust store's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the trust store you are
+    #   deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteTrustStoreRequest AWS API Documentation
+    #
+    class DeleteTrustStoreRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The VPC origin ID.
     #   @return [String]
     #
@@ -4316,6 +4607,41 @@ module Aws::CloudFront
     #
     class DeleteVpcOriginResult < Struct.new(
       :vpc_origin,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The connection function's identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The connection function's stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeConnectionFunctionRequest AWS API Documentation
+    #
+    class DescribeConnectionFunctionRequest < Struct.new(
+      :identifier,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_function_summary
+    #   The connection function's summary.
+    #   @return [Types::ConnectionFunctionSummary]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the connection
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeConnectionFunctionResult AWS API Documentation
+    #
+    class DescribeConnectionFunctionResult < Struct.new(
+      :connection_function_summary,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -4899,6 +5225,14 @@ module Aws::CloudFront
     #   distribution tenants (tenant-only).
     #   @return [String]
     #
+    # @!attribute [rw] viewer_mtls_config
+    #   The distribution's viewer mTLS configuration.
+    #   @return [Types::ViewerMtlsConfig]
+    #
+    # @!attribute [rw] connection_function_association
+    #   The distribution's connection function association.
+    #   @return [Types::ConnectionFunctionAssociation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfig AWS API Documentation
     #
     class DistributionConfig < Struct.new(
@@ -4923,7 +5257,9 @@ module Aws::CloudFront
       :staging,
       :anycast_ip_list_id,
       :tenant_config,
-      :connection_mode)
+      :connection_mode,
+      :viewer_mtls_config,
+      :connection_function_association)
       SENSITIVE = [:comment]
       include Aws::Structure
     end
@@ -5290,6 +5626,14 @@ module Aws::CloudFront
     #   distribution.
     #   @return [String]
     #
+    # @!attribute [rw] viewer_mtls_config
+    #   The distribution's viewer mTLS configuration.
+    #   @return [Types::ViewerMtlsConfig]
+    #
+    # @!attribute [rw] connection_function_association
+    #   The distribution's connection function association.
+    #   @return [Types::ConnectionFunctionAssociation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionSummary AWS API Documentation
     #
     class DistributionSummary < Struct.new(
@@ -5316,7 +5660,9 @@ module Aws::CloudFront
       :alias_icp_recordals,
       :staging,
       :connection_mode,
-      :anycast_ip_list_id)
+      :anycast_ip_list_id,
+      :viewer_mtls_config,
+      :connection_function_association)
       SENSITIVE = [:comment]
       include Aws::Structure
     end
@@ -6708,6 +7054,46 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The connection function's identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The connection function's stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionFunctionRequest AWS API Documentation
+    #
+    class GetConnectionFunctionRequest < Struct.new(
+      :identifier,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_function_code
+    #   The connection function's code.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the connection
+    #   function.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The connection function's content type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionFunctionResult AWS API Documentation
+    #
+    class GetConnectionFunctionResult < Struct.new(
+      :connection_function_code,
+      :etag,
+      :content_type)
+      SENSITIVE = [:connection_function_code]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] routing_endpoint
     #   The routing endpoint for the target connection group, such as
     #   d111111abcdef8.cloudfront.net.
@@ -7694,6 +8080,35 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The trust store's identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetTrustStoreRequest AWS API Documentation
+    #
+    class GetTrustStoreRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store
+    #   The trust store.
+    #   @return [Types::TrustStore]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the trust store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetTrustStoreResult AWS API Documentation
+    #
+    class GetTrustStoreResult < Struct.new(
+      :trust_store,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The VPC origin ID.
     #   @return [String]
@@ -8376,6 +8791,61 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # Configuration for an IPAM CIDR that defines a specific IP address
+    # range, IPAM pool, and associated Anycast IP address.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR that specifies the IP address range for this IPAM
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_pool_arn
+    #   The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block
+    #   is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] anycast_ip
+    #   The specified Anycast IP address allocated from the IPAM pool for
+    #   this CIDR configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the IPAM CIDR configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/IpamCidrConfig AWS API Documentation
+    #
+    class IpamCidrConfig < Struct.new(
+      :cidr,
+      :ipam_pool_arn,
+      :anycast_ip,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration IPAM settings that includes the quantity of CIDR
+    # configurations and the list of IPAM CIDR configurations.
+    #
+    # @!attribute [rw] quantity
+    #   The number of IPAM CIDR configurations in the `IpamCidrConfigs`
+    #   list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipam_cidr_configs
+    #   A list of IPAM CIDR configurations that define the IP address
+    #   ranges, IPAM pools, and associated Anycast IP addresses.
+    #   @return [Array<Types::IpamCidrConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/IpamConfig AWS API Documentation
+    #
+    class IpamConfig < Struct.new(
+      :quantity,
+      :ipam_cidr_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of identifiers for the public keys that CloudFront can use to
     # verify the signatures of signed URLs and signed cookies.
     #
@@ -8922,6 +9392,52 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list. The response includes items in the list that occur after
+    #   the marker. To get the next page of the list, set this field's
+    #   value to the value of `NextMarker` from the current page's
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of connection functions that you want returned in
+    #   the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stage
+    #   The connection function's stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConnectionFunctionsRequest AWS API Documentation
+    #
+    class ListConnectionFunctionsRequest < Struct.new(
+      :marker,
+      :max_items,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   Indicates the next page of connection functions. To get the next
+    #   page of the list, use this value in the `Marker` field of your
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_functions
+    #   A list of connection functions.
+    #   @return [Array<Types::ConnectionFunctionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConnectionFunctionsResult AWS API Documentation
+    #
+    class ListConnectionFunctionsResult < Struct.new(
+      :next_marker,
+      :connection_functions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] association_filter
     #   Filter by associated Anycast IP list ID.
     #   @return [Types::ConnectionGroupAssociationFilter]
@@ -9165,6 +9681,45 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list. The response includes items in the list that occur after
+    #   the marker. To get the next page of the list, set this field's
+    #   value to the value of `NextMarker` from the current page's
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distributions that you want returned in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] connection_function_identifier
+    #   The distributions by connection function identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionFunctionRequest AWS API Documentation
+    #
+    class ListDistributionsByConnectionFunctionRequest < Struct.new(
+      :marker,
+      :max_items,
+      :connection_function_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_list
+    #   A distribution list.
+    #   @return [Types::DistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionFunctionResult AWS API Documentation
+    #
+    class ListDistributionsByConnectionFunctionResult < Struct.new(
+      :distribution_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
     #   The marker for the next set of distributions to retrieve.
     #   @return [String]
     #
@@ -9400,6 +9955,45 @@ module Aws::CloudFront
     #
     class ListDistributionsByResponseHeadersPolicyIdResult < Struct.new(
       :distribution_id_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store_identifier
+    #   The distributions by trust store identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list. The response includes items in the list that occur after
+    #   the marker. To get the next page of the list, set this field's
+    #   value to the value of `NextMarker` from the current page's
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distributions that you want returned in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByTrustStoreRequest AWS API Documentation
+    #
+    class ListDistributionsByTrustStoreRequest < Struct.new(
+      :trust_store_identifier,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_list
+    #   A distribution list.
+    #   @return [Types::DistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByTrustStoreResult AWS API Documentation
+    #
+    class ListDistributionsByTrustStoreResult < Struct.new(
+      :distribution_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10104,6 +10698,46 @@ module Aws::CloudFront
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list. The response includes items in the list that occur after
+    #   the marker. To get the next page of the list, set this field's
+    #   value to the value of `NextMarker` from the current page's
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of trust stores that you want returned in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTrustStoresRequest AWS API Documentation
+    #
+    class ListTrustStoresRequest < Struct.new(
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   Indicates the next page of trust stores. To get the next page of the
+    #   list, use this value in the `Marker` field of your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_store_list
+    #   The trust store list.
+    #   @return [Array<Types::TrustStoreSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTrustStoresResult AWS API Documentation
+    #
+    class ListTrustStoresResult < Struct.new(
+      :next_marker,
+      :trust_store_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11913,6 +12547,35 @@ module Aws::CloudFront
       :created_time,
       :encoded_key,
       :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The connection function ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the connection function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishConnectionFunctionRequest AWS API Documentation
+    #
+    class PublishConnectionFunctionRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_function_summary
+    #   The connection function summary.
+    #   @return [Types::ConnectionFunctionSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishConnectionFunctionResult AWS API Documentation
+    #
+    class PublishConnectionFunctionResult < Struct.new(
+      :connection_function_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13918,6 +14581,45 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The connection function ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the connection function.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The connection function stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_object
+    #   The connection object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestConnectionFunctionRequest AWS API Documentation
+    #
+    class TestConnectionFunctionRequest < Struct.new(
+      :id,
+      :if_match,
+      :stage,
+      :connection_object)
+      SENSITIVE = [:connection_object]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_function_test_result
+    #   The connection function test result.
+    #   @return [Types::ConnectionFunctionTestResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestConnectionFunctionResult AWS API Documentation
+    #
+    class TestConnectionFunctionResult < Struct.new(
+      :connection_function_test_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The CloudFront function failed.
     #
     # @!attribute [rw] message
@@ -14915,6 +15617,123 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A trust store.
+    #
+    # @!attribute [rw] id
+    #   The trust store's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The trust store's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The trust store's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The trust store's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_ca_certificates
+    #   The trust store's number of CA certificates.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The trust store's last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The trust store's reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustStore AWS API Documentation
+    #
+    class TrustStore < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :number_of_ca_certificates,
+      :last_modified_time,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A trust store configuration.
+    #
+    # @!attribute [rw] trust_store_id
+    #   The trust store ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] advertise_trust_store_ca_names
+    #   The configuration to use to advertise trust store CA names.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ignore_certificate_expiry
+    #   The configuration to use to ignore certificate expiration.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustStoreConfig AWS API Documentation
+    #
+    class TrustStoreConfig < Struct.new(
+      :trust_store_id,
+      :advertise_trust_store_ca_names,
+      :ignore_certificate_expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A trust store summary.
+    #
+    # @!attribute [rw] id
+    #   The trust store's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The trust store's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The trust store's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The trust store's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_ca_certificates
+    #   The trust store's number of CA certificates.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The trust store's last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The trust store's reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the trust store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustStoreSummary AWS API Documentation
+    #
+    class TrustStoreSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :number_of_ca_certificates,
+      :last_modified_time,
+      :reason,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified key group does not exist.
     #
     # @!attribute [rw] message
@@ -15035,9 +15854,9 @@ module Aws::CloudFront
     #   The IP address type for the Anycast static IP list. You can specify
     #   one of the following options:
     #
-    #   * `ipv4` - Allocate a list of only IPv4 addresses
+    #   * `ipv4` only
     #
-    #   * `ipv6` - Allocate a list of only IPv4 addresses
+    #   * `ipv6` only
     #
     #   * `dualstack` - Allocate a list of both IPv4 and IPv6 addresses
     #   @return [String]
@@ -15163,6 +15982,52 @@ module Aws::CloudFront
     #
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The connection function ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the connection function you
+    #   are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_function_config
+    #   Contains configuration information about a CloudFront function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] connection_function_code
+    #   The connection function code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateConnectionFunctionRequest AWS API Documentation
+    #
+    class UpdateConnectionFunctionRequest < Struct.new(
+      :id,
+      :if_match,
+      :connection_function_config,
+      :connection_function_code)
+      SENSITIVE = [:connection_function_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_function_summary
+    #   The connection function summary.
+    #   @return [Types::ConnectionFunctionSummary]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the connection
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateConnectionFunctionResult AWS API Documentation
+    #
+    class UpdateConnectionFunctionResult < Struct.new(
+      :connection_function_summary,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -15972,6 +16837,46 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The trust store ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_certificates_bundle_source
+    #   The CA certificates bundle source.
+    #   @return [Types::CaCertificatesBundleSource]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the trust store you are
+    #   updating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateTrustStoreRequest AWS API Documentation
+    #
+    class UpdateTrustStoreRequest < Struct.new(
+      :id,
+      :ca_certificates_bundle_source,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_store
+    #   The trust store.
+    #   @return [Types::TrustStore]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the trust store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateTrustStoreResult AWS API Documentation
+    #
+    class UpdateTrustStoreResult < Struct.new(
+      :trust_store,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] vpc_origin_endpoint_config
     #   The VPC origin endpoint configuration.
     #   @return [Types::VpcOriginEndpointConfig]
@@ -16272,6 +17177,26 @@ module Aws::CloudFront
       :minimum_protocol_version,
       :certificate,
       :certificate_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A viewer mTLS configuration.
+    #
+    # @!attribute [rw] mode
+    #   The viewer mTLS mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_store_config
+    #   The trust store configuration associated with the viewer mTLS
+    #   configuration.
+    #   @return [Types::TrustStoreConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ViewerMtlsConfig AWS API Documentation
+    #
+    class ViewerMtlsConfig < Struct.new(
+      :mode,
+      :trust_store_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-11-24)
+------------------
+
+* Feature - Add TrustStore, ConnectionFunction APIs to CloudFront SDK
+
+1.135.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2025-11-20)
+------------------
+
+* Feature - This release adds support for bring your own IP (BYOIP) to CloudFront's CreateAnycastIpList API through an optional IpamCidrConfigs field.
+
 1.133.0 (2025-11-05)
 ------------------
 

@@ -23,6 +23,89 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Account-level enforced guardrail input configuration.
+    #
+    # @!attribute [rw] guardrail_identifier
+    #   Identifier for the guardrail, could be the ID or the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   Numerical guardrail version.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_tags
+    #   Whether to honor or ignore input tags at runtime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AccountEnforcedGuardrailInferenceInputConfiguration AWS API Documentation
+    #
+    class AccountEnforcedGuardrailInferenceInputConfiguration < Struct.new(
+      :guardrail_identifier,
+      :guardrail_version,
+      :input_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Account enforced guardrail output configuration.
+    #
+    # @!attribute [rw] config_id
+    #   Unique ID for the account enforced configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_arn
+    #   ARN representation for the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_id
+    #   Unique ID for the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_tags
+    #   Whether to honor or ignore input tags at runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   Numerical guardrail version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The ARN of the role used to update the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The ARN of the role used to update the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   Configuration owner type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AccountEnforcedGuardrailOutputConfiguration AWS API Documentation
+    #
+    class AccountEnforcedGuardrailOutputConfiguration < Struct.new(
+      :config_id,
+      :guardrail_arn,
+      :guardrail_id,
+      :input_tags,
+      :guardrail_version,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the agreement availability
     #
     # @!attribute [rw] status
@@ -4019,6 +4102,22 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteCustomModelResponse AWS API Documentation
     #
     class DeleteCustomModelResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] config_id
+    #   Unique ID for the account enforced configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteEnforcedGuardrailConfigurationRequest AWS API Documentation
+    #
+    class DeleteEnforcedGuardrailConfigurationRequest < Struct.new(
+      :config_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteEnforcedGuardrailConfigurationResponse AWS API Documentation
+    #
+    class DeleteEnforcedGuardrailConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] model_id
     #   Model Id of the model access to delete.
@@ -9274,6 +9373,35 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   Opaque continuation token of previous paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEnforcedGuardrailsConfigurationRequest AWS API Documentation
+    #
+    class ListEnforcedGuardrailsConfigurationRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] guardrails_config
+    #   Array of AccountEnforcedGuardrailOutputConfiguration objects.
+    #   @return [Array<Types::AccountEnforcedGuardrailOutputConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque continuation token of previous paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEnforcedGuardrailsConfigurationResponse AWS API Documentation
+    #
+    class ListEnforcedGuardrailsConfigurationResponse < Struct.new(
+      :guardrails_config,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_after
     #   A filter to only list evaluation jobs created after a specified
     #   time.
@@ -11100,6 +11228,45 @@ module Aws::Bedrock
       :commitment_expiration_time,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] config_id
+    #   Unique ID for the account enforced configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_inference_config
+    #   Account-level enforced guardrail input configuration.
+    #   @return [Types::AccountEnforcedGuardrailInferenceInputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutEnforcedGuardrailConfigurationRequest AWS API Documentation
+    #
+    class PutEnforcedGuardrailConfigurationRequest < Struct.new(
+      :config_id,
+      :guardrail_inference_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] config_id
+    #   Unique ID for the account enforced configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The ARN of the role used to update the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutEnforcedGuardrailConfigurationResponse AWS API Documentation
+    #
+    class PutEnforcedGuardrailConfigurationResponse < Struct.new(
+      :config_id,
+      :updated_at,
+      :updated_by)
       SENSITIVE = []
       include Aws::Structure
     end

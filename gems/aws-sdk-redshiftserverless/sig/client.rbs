@@ -852,6 +852,24 @@ module Aws
                                   ) -> _UpdateEndpointAccessResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEndpointAccessResponseSuccess
 
+      interface _UpdateLakehouseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLakehouseConfigurationResponse]
+        def catalog_arn: () -> ::String
+        def lakehouse_idc_application_arn: () -> ::String
+        def lakehouse_registration_status: () -> ::String
+        def namespace_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_lakehouse_configuration-instance_method
+      def update_lakehouse_configuration: (
+                                            ?catalog_name: ::String,
+                                            ?dry_run: bool,
+                                            ?lakehouse_idc_application_arn: ::String,
+                                            ?lakehouse_idc_registration: ("Associate" | "Disassociate"),
+                                            ?lakehouse_registration: ("Register" | "Deregister"),
+                                            namespace_name: ::String
+                                          ) -> _UpdateLakehouseConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLakehouseConfigurationResponseSuccess
+
       interface _UpdateNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNamespaceResponse]
         def namespace: () -> Types::Namespace

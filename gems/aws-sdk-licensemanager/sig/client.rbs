@@ -264,6 +264,176 @@ module Aws
                           ) -> _CreateLicenseResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseResponseSuccess
 
+      interface _CreateLicenseAssetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseAssetGroupResponse]
+        def license_asset_group_arn: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_asset_group-instance_method
+      def create_license_asset_group: (
+                                        name: ::String,
+                                        ?description: ::String,
+                                        license_asset_group_configurations: Array[
+                                          {
+                                            usage_dimension: ::String?
+                                          },
+                                        ],
+                                        associated_license_asset_ruleset_arns: Array[::String],
+                                        ?properties: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        ?tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ],
+                                        client_token: ::String
+                                      ) -> _CreateLicenseAssetGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseAssetGroupResponseSuccess
+
+      interface _CreateLicenseAssetRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseAssetRulesetResponse]
+        def license_asset_ruleset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_asset_ruleset-instance_method
+      def create_license_asset_ruleset: (
+                                          name: ::String,
+                                          ?description: ::String,
+                                          rules: Array[
+                                            {
+                                              rule_statement: {
+                                                license_configuration_rule_statement: {
+                                                  and_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  or_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  matching_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    constraint: ::String,
+                                                    value_to_match: Array[::String]
+                                                  }?
+                                                }?,
+                                                license_rule_statement: {
+                                                  and_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  or_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  matching_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    constraint: ::String,
+                                                    value_to_match: Array[::String]
+                                                  }?
+                                                }?,
+                                                instance_rule_statement: {
+                                                  and_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  or_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  matching_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    constraint: ::String,
+                                                    value_to_match: Array[::String]
+                                                  }?,
+                                                  script_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    script: ::String
+                                                  }?
+                                                }?
+                                              }
+                                            },
+                                          ],
+                                          ?tags: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            },
+                                          ],
+                                          client_token: ::String
+                                        ) -> _CreateLicenseAssetRulesetResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseAssetRulesetResponseSuccess
+
       interface _CreateLicenseConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseConfigurationResponse]
         def license_configuration_arn: () -> ::String
@@ -294,7 +464,8 @@ module Aws
                                                 },
                                               ]
                                             },
-                                          ]
+                                          ],
+                                          ?license_expiry: ::Integer
                                         ) -> _CreateLicenseConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseConfigurationResponseSuccess
 
@@ -333,13 +504,16 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_manager_report_generator-instance_method
       def create_license_manager_report_generator: (
                                                      report_generator_name: ::String,
-                                                     type: Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")],
+                                                     type: Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport" | "LicenseAssetGroupUsageReport")],
                                                      report_context: {
-                                                       license_configuration_arns: Array[::String]
+                                                       license_configuration_arns: Array[::String]?,
+                                                       license_asset_group_arns: Array[::String]?,
+                                                       report_start_date: ::Time?,
+                                                       report_end_date: ::Time?
                                                      },
                                                      report_frequency: {
                                                        value: ::Integer?,
-                                                       period: ("DAY" | "WEEK" | "MONTH")?
+                                                       period: ("DAY" | "WEEK" | "MONTH" | "ONE_TIME")?
                                                      },
                                                      client_token: ::String,
                                                      ?description: ::String,
@@ -446,6 +620,25 @@ module Aws
                           ) -> _DeleteLicenseResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseResponseSuccess
 
+      interface _DeleteLicenseAssetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLicenseAssetGroupResponse]
+        def status: () -> ("ACTIVE" | "DISABLED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_license_asset_group-instance_method
+      def delete_license_asset_group: (
+                                        license_asset_group_arn: ::String
+                                      ) -> _DeleteLicenseAssetGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseAssetGroupResponseSuccess
+
+      interface _DeleteLicenseAssetRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLicenseAssetRulesetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_license_asset_ruleset-instance_method
+      def delete_license_asset_ruleset: (
+                                          license_asset_ruleset_arn: ::String
+                                        ) -> _DeleteLicenseAssetRulesetResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseAssetRulesetResponseSuccess
+
       interface _DeleteLicenseConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLicenseConfigurationResponse]
       end
@@ -518,6 +711,26 @@ module Aws
                        ) -> _GetLicenseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseResponseSuccess
 
+      interface _GetLicenseAssetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseAssetGroupResponse]
+        def license_asset_group: () -> Types::LicenseAssetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_asset_group-instance_method
+      def get_license_asset_group: (
+                                     license_asset_group_arn: ::String
+                                   ) -> _GetLicenseAssetGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseAssetGroupResponseSuccess
+
+      interface _GetLicenseAssetRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseAssetRulesetResponse]
+        def license_asset_ruleset: () -> Types::LicenseAssetRuleset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_asset_ruleset-instance_method
+      def get_license_asset_ruleset: (
+                                       license_asset_ruleset_arn: ::String
+                                     ) -> _GetLicenseAssetRulesetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseAssetRulesetResponseSuccess
+
       interface _GetLicenseConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseConfigurationResponse]
         def license_configuration_id: () -> ::String
@@ -537,6 +750,7 @@ module Aws
         def product_information_list: () -> ::Array[Types::ProductInformation]
         def automated_discovery_information: () -> Types::AutomatedDiscoveryInformation
         def disassociate_when_not_found: () -> bool
+        def license_expiry: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_configuration-instance_method
       def get_license_configuration: (
@@ -589,11 +803,28 @@ module Aws
         def organization_configuration: () -> Types::OrganizationConfiguration
         def enable_cross_accounts_discovery: () -> bool
         def license_manager_resource_share_arn: () -> ::String
+        def cross_region_discovery_home_region: () -> ::String
+        def cross_region_discovery_source_regions: () -> ::Array[::String]
+        def service_status: () -> Types::ServiceStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_service_settings-instance_method
       def get_service_settings: (
                                 ) -> _GetServiceSettingsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceSettingsResponseSuccess
+
+      interface _ListAssetsForLicenseAssetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetsForLicenseAssetGroupResponse]
+        def assets: () -> ::Array[Types::Asset]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_assets_for_license_asset_group-instance_method
+      def list_assets_for_license_asset_group: (
+                                                 license_asset_group_arn: ::String,
+                                                 asset_type: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListAssetsForLicenseAssetGroupResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetsForLicenseAssetGroupResponseSuccess
 
       interface _ListAssociationsForLicenseConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociationsForLicenseConfigurationResponse]
@@ -640,6 +871,43 @@ module Aws
                                                               ) -> _ListFailuresForLicenseConfigurationOperationsResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFailuresForLicenseConfigurationOperationsResponseSuccess
 
+      interface _ListLicenseAssetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseAssetGroupsResponse]
+        def license_asset_groups: () -> ::Array[Types::LicenseAssetGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_asset_groups-instance_method
+      def list_license_asset_groups: (
+                                       ?filters: Array[
+                                         {
+                                           name: ::String?,
+                                           values: Array[::String]?
+                                         },
+                                       ],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListLicenseAssetGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseAssetGroupsResponseSuccess
+
+      interface _ListLicenseAssetRulesetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseAssetRulesetsResponse]
+        def license_asset_rulesets: () -> ::Array[Types::LicenseAssetRuleset]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_asset_rulesets-instance_method
+      def list_license_asset_rulesets: (
+                                         ?filters: Array[
+                                           {
+                                             name: ::String?,
+                                             values: Array[::String]?
+                                           },
+                                         ],
+                                         ?show_aws_managed_license_asset_rulesets: bool,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListLicenseAssetRulesetsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseAssetRulesetsResponseSuccess
+
       interface _ListLicenseConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseConfigurationsResponse]
         def license_configurations: () -> ::Array[Types::LicenseConfiguration]
@@ -658,6 +926,25 @@ module Aws
                                          ]
                                        ) -> _ListLicenseConfigurationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConfigurationsResponseSuccess
+
+      interface _ListLicenseConfigurationsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseConfigurationsForOrganizationResponse]
+        def license_configurations: () -> ::Array[Types::LicenseConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_configurations_for_organization-instance_method
+      def list_license_configurations_for_organization: (
+                                                          ?license_configuration_arns: Array[::String],
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          ?filters: Array[
+                                                            {
+                                                              name: ::String?,
+                                                              values: Array[::String]?
+                                                            },
+                                                          ]
+                                                        ) -> _ListLicenseConfigurationsForOrganizationResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConfigurationsForOrganizationResponseSuccess
 
       interface _ListLicenseConversionTasksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseConversionTasksResponse]
@@ -919,6 +1206,167 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateLicenseAssetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLicenseAssetGroupResponse]
+        def license_asset_group_arn: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#update_license_asset_group-instance_method
+      def update_license_asset_group: (
+                                        ?name: ::String,
+                                        ?description: ::String,
+                                        ?license_asset_group_configurations: Array[
+                                          {
+                                            usage_dimension: ::String?
+                                          },
+                                        ],
+                                        associated_license_asset_ruleset_arns: Array[::String],
+                                        ?properties: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        license_asset_group_arn: ::String,
+                                        ?status: ("ACTIVE" | "DISABLED" | "DELETED"),
+                                        client_token: ::String
+                                      ) -> _UpdateLicenseAssetGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseAssetGroupResponseSuccess
+
+      interface _UpdateLicenseAssetRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLicenseAssetRulesetResponse]
+        def license_asset_ruleset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#update_license_asset_ruleset-instance_method
+      def update_license_asset_ruleset: (
+                                          ?name: ::String,
+                                          ?description: ::String,
+                                          rules: Array[
+                                            {
+                                              rule_statement: {
+                                                license_configuration_rule_statement: {
+                                                  and_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  or_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  matching_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    constraint: ::String,
+                                                    value_to_match: Array[::String]
+                                                  }?
+                                                }?,
+                                                license_rule_statement: {
+                                                  and_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  or_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  matching_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    constraint: ::String,
+                                                    value_to_match: Array[::String]
+                                                  }?
+                                                }?,
+                                                instance_rule_statement: {
+                                                  and_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  or_rule_statement: {
+                                                    matching_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        constraint: ::String,
+                                                        value_to_match: Array[::String]
+                                                      },
+                                                    ]?,
+                                                    script_rule_statements: Array[
+                                                      {
+                                                        key_to_match: ::String,
+                                                        script: ::String
+                                                      },
+                                                    ]?
+                                                  }?,
+                                                  matching_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    constraint: ::String,
+                                                    value_to_match: Array[::String]
+                                                  }?,
+                                                  script_rule_statement: {
+                                                    key_to_match: ::String,
+                                                    script: ::String
+                                                  }?
+                                                }?
+                                              }
+                                            },
+                                          ],
+                                          license_asset_ruleset_arn: ::String,
+                                          client_token: ::String
+                                        ) -> _UpdateLicenseAssetRulesetResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseAssetRulesetResponseSuccess
+
       interface _UpdateLicenseConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLicenseConfigurationResponse]
       end
@@ -943,7 +1391,8 @@ module Aws
                                               ]
                                             },
                                           ],
-                                          ?disassociate_when_not_found: bool
+                                          ?disassociate_when_not_found: bool,
+                                          ?license_expiry: ::Integer
                                         ) -> _UpdateLicenseConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseConfigurationResponseSuccess
 
@@ -954,13 +1403,16 @@ module Aws
       def update_license_manager_report_generator: (
                                                      license_manager_report_generator_arn: ::String,
                                                      report_generator_name: ::String,
-                                                     type: Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")],
+                                                     type: Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport" | "LicenseAssetGroupUsageReport")],
                                                      report_context: {
-                                                       license_configuration_arns: Array[::String]
+                                                       license_configuration_arns: Array[::String]?,
+                                                       license_asset_group_arns: Array[::String]?,
+                                                       report_start_date: ::Time?,
+                                                       report_end_date: ::Time?
                                                      },
                                                      report_frequency: {
                                                        value: ::Integer?,
-                                                       period: ("DAY" | "WEEK" | "MONTH")?
+                                                       period: ("DAY" | "WEEK" | "MONTH" | "ONE_TIME")?
                                                      },
                                                      client_token: ::String,
                                                      ?description: ::String
@@ -998,7 +1450,8 @@ module Aws
                                      ?organization_configuration: {
                                        enable_integration: bool
                                      },
-                                     ?enable_cross_accounts_discovery: bool
+                                     ?enable_cross_accounts_discovery: bool,
+                                     ?enabled_discovery_source_regions: Array[::String]
                                    ) -> _UpdateServiceSettingsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceSettingsResponseSuccess
     end

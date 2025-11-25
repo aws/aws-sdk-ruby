@@ -107,9 +107,31 @@ module Aws::Braket
       SENSITIVE: []
     end
 
+    class CreateSpendingLimitRequest
+      attr_accessor client_token: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor spending_limit: ::String
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSpendingLimitResponse
+      attr_accessor spending_limit_arn: ::String
+      SENSITIVE: []
+    end
+
     class DataSource
       attr_accessor s3_data_source: Types::S3DataSource
       SENSITIVE: []
+    end
+
+    class DeleteSpendingLimitRequest
+      attr_accessor spending_limit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpendingLimitResponse < Aws::EmptyStructure
     end
 
     class DeviceConfig
@@ -404,8 +426,41 @@ module Aws::Braket
       SENSITIVE: []
     end
 
+    class SearchSpendingLimitsFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("EQUAL")
+      SENSITIVE: []
+    end
+
+    class SearchSpendingLimitsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::SearchSpendingLimitsFilter]
+      SENSITIVE: []
+    end
+
+    class SearchSpendingLimitsResponse
+      attr_accessor spending_limits: ::Array[Types::SpendingLimitSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SpendingLimitSummary
+      attr_accessor spending_limit_arn: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor spending_limit: ::String
+      attr_accessor queued_spend: ::String
+      attr_accessor total_spend: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -423,6 +478,12 @@ module Aws::Braket
       SENSITIVE: []
     end
 
+    class TimePeriod
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -430,6 +491,17 @@ module Aws::Braket
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSpendingLimitRequest
+      attr_accessor spending_limit_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor spending_limit: ::String
+      attr_accessor time_period: Types::TimePeriod
+      SENSITIVE: []
+    end
+
+    class UpdateSpendingLimitResponse < Aws::EmptyStructure
     end
 
     class ValidationException

@@ -1378,6 +1378,11 @@ module Aws::Transfer
     #   (US) Region, you can set this parameter to `FIPS`.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_details
+    #   The endpoint configuration for the web app. You can specify whether
+    #   the web app endpoint is publicly accessible or hosted within a VPC.
+    #   @return [Types::WebAppEndpointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateWebAppRequest AWS API Documentation
     #
     class CreateWebAppRequest < Struct.new(
@@ -1385,7 +1390,8 @@ module Aws::Transfer
       :access_endpoint,
       :web_app_units,
       :tags,
-      :web_app_endpoint_policy)
+      :web_app_endpoint_policy,
+      :endpoint_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3531,6 +3537,17 @@ module Aws::Transfer
     #   the web app endpoint is FIPS-compliant.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint hosting the web app. Valid values are `PUBLIC`
+    #   for publicly accessible endpoints and `VPC` for VPC-hosted endpoints
+    #   that provide network isolation.
+    #   @return [String]
+    #
+    # @!attribute [rw] described_endpoint_details
+    #   The endpoint configuration details for the web app, including VPC
+    #   settings if the endpoint is hosted within a VPC.
+    #   @return [Types::DescribedWebAppEndpointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedWebApp AWS API Documentation
     #
     class DescribedWebApp < Struct.new(
@@ -3541,7 +3558,9 @@ module Aws::Transfer
       :web_app_endpoint,
       :web_app_units,
       :tags,
-      :web_app_endpoint_policy)
+      :web_app_endpoint_policy,
+      :endpoint_type,
+      :described_endpoint_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3582,6 +3601,30 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Contains the endpoint configuration details for a web app, including
+    # VPC configuration when the endpoint is hosted within a VPC.
+    #
+    # @note DescribedWebAppEndpointDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DescribedWebAppEndpointDetails corresponding to the set member.
+    #
+    # @!attribute [rw] vpc
+    #   The VPC configuration details when the web app endpoint is hosted
+    #   within a VPC. This includes the VPC ID, subnet IDs, and VPC endpoint
+    #   ID.
+    #   @return [Types::DescribedWebAppVpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedWebAppEndpointDetails AWS API Documentation
+    #
+    class DescribedWebAppEndpointDetails < Struct.new(
+      :vpc,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Vpc < DescribedWebAppEndpointDetails; end
+      class Unknown < DescribedWebAppEndpointDetails; end
+    end
+
     # Returns a structure that contains the identity provider details for
     # your web app.
     #
@@ -3604,6 +3647,34 @@ module Aws::Transfer
 
       class IdentityCenterConfig < DescribedWebAppIdentityProviderDetails; end
       class Unknown < DescribedWebAppIdentityProviderDetails; end
+    end
+
+    # Contains the VPC configuration details for a web app endpoint,
+    # including the VPC identifier, subnet IDs, and VPC endpoint ID used for
+    # hosting the endpoint.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of subnet IDs within the VPC where the web app endpoint is
+    #   deployed. These subnets must be in the same VPC and provide network
+    #   connectivity for the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC where the web app endpoint is hosted.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The identifier of the VPC endpoint created for the web app.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedWebAppVpcConfig AWS API Documentation
+    #
+    class DescribedWebAppVpcConfig < Struct.new(
+      :subnet_ids,
+      :vpc_id,
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Describes the properties of the specified workflow
@@ -5514,13 +5585,20 @@ module Aws::Transfer
     #   on CloudFront.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint hosting the web app. Valid values are `PUBLIC`
+    #   for publicly accessible endpoints and `VPC` for VPC-hosted
+    #   endpoints.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedWebApp AWS API Documentation
     #
     class ListedWebApp < Struct.new(
       :arn,
       :web_app_id,
       :access_endpoint,
-      :web_app_endpoint)
+      :web_app_endpoint,
+      :endpoint_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7692,6 +7770,29 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Contains the endpoint configuration details for updating a web app,
+    # including VPC settings for endpoints hosted within a VPC.
+    #
+    # @note UpdateWebAppEndpointDetails is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] vpc
+    #   The VPC configuration details for updating a web app endpoint hosted
+    #   within a VPC. This includes the subnet IDs for endpoint deployment.
+    #   @return [Types::UpdateWebAppVpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateWebAppEndpointDetails AWS API Documentation
+    #
+    class UpdateWebAppEndpointDetails < Struct.new(
+      :vpc,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Vpc < UpdateWebAppEndpointDetails; end
+      class Unknown < UpdateWebAppEndpointDetails; end
+    end
+
     # A structure that describes the values to use for the IAM Identity
     # Center settings when you update a web app.
     #
@@ -7749,13 +7850,19 @@ module Aws::Transfer
     #   or the user sessions on your web app.
     #   @return [Types::WebAppUnits]
     #
+    # @!attribute [rw] endpoint_details
+    #   The updated endpoint configuration for the web app. You can modify
+    #   the endpoint type and VPC configuration settings.
+    #   @return [Types::UpdateWebAppEndpointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateWebAppRequest AWS API Documentation
     #
     class UpdateWebAppRequest < Struct.new(
       :web_app_id,
       :identity_provider_details,
       :access_endpoint,
-      :web_app_units)
+      :web_app_units,
+      :endpoint_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7768,6 +7875,23 @@ module Aws::Transfer
     #
     class UpdateWebAppResponse < Struct.new(
       :web_app_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the VPC configuration settings for updating a web app
+    # endpoint, including the subnet IDs where the endpoint should be
+    # deployed.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of subnet IDs within the VPC where the web app endpoint
+    #   should be deployed during the update operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateWebAppVpcConfig AWS API Documentation
+    #
+    class UpdateWebAppVpcConfig < Struct.new(
+      :subnet_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7797,6 +7921,28 @@ module Aws::Transfer
       :session_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains the endpoint configuration for a web app, including VPC
+    # settings when the endpoint is hosted within a VPC.
+    #
+    # @note WebAppEndpointDetails is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] vpc
+    #   The VPC configuration for hosting the web app endpoint within a VPC.
+    #   @return [Types::WebAppVpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WebAppEndpointDetails AWS API Documentation
+    #
+    class WebAppEndpointDetails < Struct.new(
+      :vpc,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Vpc < WebAppEndpointDetails; end
+      class Unknown < WebAppEndpointDetails; end
     end
 
     # A union that contains the `IdentityCenterConfig` object.
@@ -7849,6 +7995,36 @@ module Aws::Transfer
 
       class Provisioned < WebAppUnits; end
       class Unknown < WebAppUnits; end
+    end
+
+    # Contains the VPC configuration settings for hosting a web app
+    # endpoint, including the VPC ID, subnet IDs, and security group IDs for
+    # access control.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of subnet IDs within the VPC where the web app endpoint
+    #   will be deployed. These subnets must be in the same VPC specified in
+    #   the VpcId parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC where the web app endpoint will be hosted.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The list of security group IDs that control access to the web app
+    #   endpoint. These security groups determine which sources can access
+    #   the endpoint based on IP addresses and port configurations.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WebAppVpcConfig AWS API Documentation
+    #
+    class WebAppVpcConfig < Struct.new(
+      :subnet_ids,
+      :vpc_id,
+      :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Specifies the workflow ID for the workflow to assign and the execution

@@ -19,6 +19,7 @@ module Aws::DeviceFarm
     AccountsCleanup = Shapes::BooleanShape.new(name: 'AccountsCleanup')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AmazonResourceNames = Shapes::ListShape.new(name: 'AmazonResourceNames')
+    AmazonRoleResourceName = Shapes::StringShape.new(name: 'AmazonRoleResourceName')
     AndroidPaths = Shapes::ListShape.new(name: 'AndroidPaths')
     AppPackagesCleanup = Shapes::BooleanShape.new(name: 'AppPackagesCleanup')
     ArgumentException = Shapes::StructureShape.new(name: 'ArgumentException')
@@ -99,6 +100,10 @@ module Aws::DeviceFarm
     DeviceSelectionResult = Shapes::StructureShape.new(name: 'DeviceSelectionResult')
     Devices = Shapes::ListShape.new(name: 'Devices')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
+    EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
+    EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExecutionConfiguration = Shapes::StructureShape.new(name: 'ExecutionConfiguration')
     ExecutionResult = Shapes::StringShape.new(name: 'ExecutionResult')
@@ -438,6 +443,8 @@ module Aws::DeviceFarm
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     CreateProjectRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    CreateProjectRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    CreateProjectRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -626,6 +633,12 @@ module Aws::DeviceFarm
     DeviceSelectionResult.struct_class = Types::DeviceSelectionResult
 
     Devices.member = Shapes::ShapeRef.new(shape: Device)
+
+    EnvironmentVariable.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentVariableName, required: true, location_name: "name"))
+    EnvironmentVariable.add_member(:value, Shapes::ShapeRef.new(shape: EnvironmentVariableValue, required: true, location_name: "value"))
+    EnvironmentVariable.struct_class = Types::EnvironmentVariable
+
+    EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
 
     ExecutionConfiguration.add_member(:job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "jobTimeoutMinutes"))
     ExecutionConfiguration.add_member(:accounts_cleanup, Shapes::ShapeRef.new(shape: AccountsCleanup, location_name: "accountsCleanup"))
@@ -1098,6 +1111,8 @@ module Aws::DeviceFarm
     Project.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     Project.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
     Project.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Project.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    Project.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     Project.struct_class = Types::Project
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
@@ -1204,6 +1219,8 @@ module Aws::DeviceFarm
     Run.add_member(:test_spec_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testSpecArn"))
     Run.add_member(:device_selection_result, Shapes::ShapeRef.new(shape: DeviceSelectionResult, location_name: "deviceSelectionResult"))
     Run.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Run.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
+    Run.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -1225,6 +1242,8 @@ module Aws::DeviceFarm
     ScheduleRunConfiguration.add_member(:radios, Shapes::ShapeRef.new(shape: Radios, location_name: "radios"))
     ScheduleRunConfiguration.add_member(:auxiliary_apps, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "auxiliaryApps"))
     ScheduleRunConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
+    ScheduleRunConfiguration.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    ScheduleRunConfiguration.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     ScheduleRunConfiguration.struct_class = Types::ScheduleRunConfiguration
 
     ScheduleRunRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
@@ -1441,6 +1460,8 @@ module Aws::DeviceFarm
     UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     UpdateProjectRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    UpdateProjectRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    UpdateProjectRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
 
     UpdateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))

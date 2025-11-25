@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2025-11-20)
+------------------
+
+* Feature - Added support for customer-managed KMS key (CMK) for encryption for import private key certificate. Additionally added Amazon SageMaker Lakehouse endpoint used for zero-ETL integrations with data warehouses.
+
 1.134.0 (2025-11-17)
 ------------------
 

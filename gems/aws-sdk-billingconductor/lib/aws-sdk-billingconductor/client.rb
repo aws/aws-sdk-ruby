@@ -689,8 +689,9 @@ module Aws::BillingConductor
     #     client_token: "ClientToken",
     #     name: "BillingGroupName", # required
     #     account_grouping: { # required
-    #       linked_account_ids: ["AccountId"], # required
+    #       linked_account_ids: ["AccountId"],
     #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn",
     #     },
     #     computation_preference: { # required
     #       pricing_plan_arn: "PricingPlanFullArn", # required
@@ -757,10 +758,12 @@ module Aws::BillingConductor
     #   applied to.
     #
     # @option params [String] :computation_rule
-    #   The display settings of the custom line item
+    #   Specifies how the custom line item charges are computed.
     #
     # @option params [Types::PresentationObject] :presentation_details
-    #   The presentation configuration of the custom line item
+    #   Details controlling how the custom line item charges are presented in
+    #   the bill. Contains specifications for which service the charges will
+    #   be shown under.
     #
     # @return [Types::CreateCustomLineItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1388,8 +1391,17 @@ module Aws::BillingConductor
     #     filters: {
     #       arns: ["BillingGroupArn"],
     #       pricing_plan: "PricingPlanFullArn",
-    #       statuses: ["ACTIVE"], # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING, PENDING
     #       auto_associate: false,
+    #       primary_account_ids: ["AccountId"],
+    #       billing_group_types: ["STANDARD"], # accepts STANDARD, TRANSFER_BILLING
+    #       names: [
+    #         {
+    #           search_option: "STARTS_WITH", # required, accepts STARTS_WITH
+    #           search_value: "SearchValue", # required
+    #         },
+    #       ],
+    #       responsibility_transfer_arns: ["ResponsibilityTransferArn"],
     #     },
     #   })
     #
@@ -1404,9 +1416,11 @@ module Aws::BillingConductor
     #   resp.billing_groups[0].size #=> Integer
     #   resp.billing_groups[0].creation_time #=> Integer
     #   resp.billing_groups[0].last_modified_time #=> Integer
-    #   resp.billing_groups[0].status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING"
+    #   resp.billing_groups[0].status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"
     #   resp.billing_groups[0].status_reason #=> String
     #   resp.billing_groups[0].account_grouping.auto_associate #=> Boolean
+    #   resp.billing_groups[0].account_grouping.responsibility_transfer_arn #=> String
+    #   resp.billing_groups[0].billing_group_type #=> String, one of "STANDARD", "TRANSFER_BILLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroups AWS API Documentation
@@ -1978,13 +1992,14 @@ module Aws::BillingConductor
     #   resp = client.update_billing_group({
     #     arn: "BillingGroupArn", # required
     #     name: "BillingGroupName",
-    #     status: "ACTIVE", # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
+    #     status: "ACTIVE", # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING, PENDING
     #     computation_preference: {
     #       pricing_plan_arn: "PricingPlanFullArn", # required
     #     },
     #     description: "BillingGroupDescription",
     #     account_grouping: {
     #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn",
     #     },
     #   })
     #
@@ -1997,9 +2012,10 @@ module Aws::BillingConductor
     #   resp.pricing_plan_arn #=> String
     #   resp.size #=> Integer
     #   resp.last_modified_time #=> Integer
-    #   resp.status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING"
+    #   resp.status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"
     #   resp.status_reason #=> String
     #   resp.account_grouping.auto_associate #=> Boolean
+    #   resp.account_grouping.responsibility_transfer_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroup AWS API Documentation
     #
@@ -2235,7 +2251,7 @@ module Aws::BillingConductor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

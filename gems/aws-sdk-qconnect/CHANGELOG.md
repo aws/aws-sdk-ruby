@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2025-11-21)
+------------------
+
+* Feature - This release introduces two new messaging channel subtypes: Push, WhatsApp, under MessageTemplate which is a resource in Amazon Q in Connect.
+
 1.42.0 (2025-10-21)
 ------------------
 

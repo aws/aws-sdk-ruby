@@ -55,7 +55,7 @@ module Aws::NetworkMonitor
   autoload :EndpointProvider, 'aws-sdk-networkmonitor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkmonitor/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

@@ -464,12 +464,32 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] environment_variables
+    #   A set of environment variables which are used by default for all
+    #   runs in the project. These environment variables are applied to the
+    #   test run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectRequest AWS API Documentation
     #
     class CreateProjectRequest < Struct.new(
       :name,
       :default_job_timeout_minutes,
-      :vpc_config)
+      :vpc_config,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1597,6 +1617,25 @@ module Aws::DeviceFarm
       :filters,
       :matched_devices_count,
       :max_devices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an environment variable for a project or a run.
+    #
+    # @!attribute [rw] name
+    #   The name of the environment variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the environment variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/EnvironmentVariable AWS API Documentation
+    #
+    class EnvironmentVariable < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3266,9 +3305,9 @@ module Aws::DeviceFarm
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources for
     #   which to list tags. You can associate tags with the following Device
-    #   Farm resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`,
-    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
-    #   `DEVICE`, and `VPCE_CONFIGURATION`.
+    #   Farm resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`,
+    #   `NETWORK_PROFILE`, `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`,
+    #   `DEVICE_POOL`, `DEVICE`, and `VPCE_CONFIGURATION`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResourceRequest AWS API Documentation
@@ -4097,6 +4136,14 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] environment_variables
+    #   Environment variables associated with the project.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The IAM execution role associated with the project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -4104,7 +4151,9 @@ module Aws::DeviceFarm
       :name,
       :default_job_timeout_minutes,
       :created,
-      :vpc_config)
+      :vpc_config,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4800,6 +4849,14 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The IAM role associated with the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_variables
+    #   Environment variables associated with the run.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
     class Run < Struct.new(
@@ -4835,7 +4892,9 @@ module Aws::DeviceFarm
       :skip_app_resign,
       :test_spec_arn,
       :device_selection_result,
-      :vpc_config)
+      :vpc_config,
+      :execution_role_arn,
+      :environment_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4962,6 +5021,14 @@ module Aws::DeviceFarm
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] environment_variables
+    #   Environment variables associated with the run.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   An IAM role to be assumed by the test host for the run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration AWS API Documentation
     #
     class ScheduleRunConfiguration < Struct.new(
@@ -4974,7 +5041,9 @@ module Aws::DeviceFarm
       :customer_artifact_paths,
       :radios,
       :auxiliary_apps,
-      :billing_method)
+      :billing_method,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5466,9 +5535,9 @@ module Aws::DeviceFarm
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources to which
     #   to add tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5847,9 +5916,9 @@ module Aws::DeviceFarm
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources from
     #   which to delete tags. You can associate tags with the following
-    #   Device Farm resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`,
-    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
-    #   `DEVICE`, and `VPCE_CONFIGURATION`.
+    #   Device Farm resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`,
+    #   `NETWORK_PROFILE`, `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`,
+    #   `DEVICE_POOL`, `DEVICE`, and `VPCE_CONFIGURATION`.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -6145,13 +6214,33 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] environment_variables
+    #   A set of environment variables which are used by default for all
+    #   runs in the project. These environment variables are applied to the
+    #   test run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectRequest AWS API Documentation
     #
     class UpdateProjectRequest < Struct.new(
       :arn,
       :name,
       :default_job_timeout_minutes,
-      :vpc_config)
+      :vpc_config,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

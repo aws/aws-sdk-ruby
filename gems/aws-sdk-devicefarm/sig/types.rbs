@@ -110,6 +110,8 @@ module Aws::DeviceFarm
       attr_accessor name: ::String
       attr_accessor default_job_timeout_minutes: ::Integer
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
+      attr_accessor execution_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -354,6 +356,12 @@ module Aws::DeviceFarm
       attr_accessor filters: ::Array[Types::DeviceFilter]
       attr_accessor matched_devices_count: ::Integer
       attr_accessor max_devices: ::Integer
+      SENSITIVE: []
+    end
+
+    class EnvironmentVariable
+      attr_accessor name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -1010,6 +1018,8 @@ module Aws::DeviceFarm
       attr_accessor default_job_timeout_minutes: ::Integer
       attr_accessor created: ::Time
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
+      attr_accessor execution_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1127,6 +1137,8 @@ module Aws::DeviceFarm
       attr_accessor test_spec_arn: ::String
       attr_accessor device_selection_result: Types::DeviceSelectionResult
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor execution_role_arn: ::String
+      attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
       SENSITIVE: []
     end
 
@@ -1148,6 +1160,8 @@ module Aws::DeviceFarm
       attr_accessor radios: Types::Radios
       attr_accessor auxiliary_apps: ::Array[::String]
       attr_accessor billing_method: ("METERED" | "UNMETERED")
+      attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
+      attr_accessor execution_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1406,6 +1420,8 @@ module Aws::DeviceFarm
       attr_accessor name: ::String
       attr_accessor default_job_timeout_minutes: ::Integer
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
+      attr_accessor execution_role_arn: ::String
       SENSITIVE: []
     end
 

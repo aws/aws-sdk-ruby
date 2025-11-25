@@ -1836,7 +1836,7 @@ module Aws::AppFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appfabric'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

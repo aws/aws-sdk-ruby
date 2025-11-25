@@ -146,7 +146,14 @@ module Aws
                               security_group_ids: Array[::String],
                               subnet_ids: Array[::String],
                               vpc_id: ::String
-                            }
+                            },
+                            ?environment_variables: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?execution_role_arn: ::String
                           ) -> _CreateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
 
@@ -391,7 +398,14 @@ module Aws
                                                gps: bool?
                                              }?,
                                              auxiliary_apps: Array[::String]?,
-                                             billing_method: ("METERED" | "UNMETERED")?
+                                             billing_method: ("METERED" | "UNMETERED")?,
+                                             environment_variables: Array[
+                                               {
+                                                 name: ::String,
+                                                 value: ::String
+                                               },
+                                             ]?,
+                                             execution_role_arn: ::String?
                                            },
                                            ?project_arn: ::String
                                          ) -> _GetDevicePoolCompatibilityResponseSuccess
@@ -920,7 +934,14 @@ module Aws
                               gps: bool?
                             }?,
                             auxiliary_apps: Array[::String]?,
-                            billing_method: ("METERED" | "UNMETERED")?
+                            billing_method: ("METERED" | "UNMETERED")?,
+                            environment_variables: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ]?,
+                            execution_role_arn: ::String?
                           },
                           ?execution_configuration: {
                             job_timeout_minutes: ::Integer?,
@@ -1069,7 +1090,14 @@ module Aws
                               security_group_ids: Array[::String],
                               subnet_ids: Array[::String],
                               vpc_id: ::String
-                            }
+                            },
+                            ?environment_variables: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?execution_role_arn: ::String
                           ) -> _UpdateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
 

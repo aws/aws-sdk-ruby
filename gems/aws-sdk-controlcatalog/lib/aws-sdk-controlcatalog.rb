@@ -55,7 +55,7 @@ module Aws::ControlCatalog
   autoload :EndpointProvider, 'aws-sdk-controlcatalog/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-controlcatalog/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

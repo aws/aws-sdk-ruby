@@ -49,12 +49,13 @@ module Aws::CloudWatchRUM
   end
   autoload :Client, 'aws-sdk-cloudwatchrum/client'
   autoload :Errors, 'aws-sdk-cloudwatchrum/errors'
+  autoload :Waiters, 'aws-sdk-cloudwatchrum/waiters'
   autoload :Resource, 'aws-sdk-cloudwatchrum/resource'
   autoload :EndpointParameters, 'aws-sdk-cloudwatchrum/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-cloudwatchrum/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchrum/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

@@ -728,6 +728,12 @@ module Aws::BedrockRuntime
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   resp.assessments[0].applied_guardrail_details.guardrail_id #=> String
+    #   resp.assessments[0].applied_guardrail_details.guardrail_version #=> String
+    #   resp.assessments[0].applied_guardrail_details.guardrail_arn #=> String
+    #   resp.assessments[0].applied_guardrail_details.guardrail_origin #=> Array
+    #   resp.assessments[0].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   resp.assessments[0].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.guardrail_coverage.text_characters.guarded #=> Integer
     #   resp.guardrail_coverage.text_characters.total #=> Integer
     #   resp.guardrail_coverage.images.guarded #=> Integer
@@ -1035,6 +1041,18 @@ module Aws::BedrockRuntime
     #                       },
     #                     },
     #                   },
+    #                   search_result: {
+    #                     source: "String", # required
+    #                     title: "String", # required
+    #                     content: [ # required
+    #                       {
+    #                         text: "String", # required
+    #                       },
+    #                     ],
+    #                     citations: {
+    #                       enabled: false, # required
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               status: "success", # accepts success, error
@@ -1071,6 +1089,7 @@ module Aws::BedrockRuntime
     #               citations: [
     #                 {
     #                   title: "String",
+    #                   source: "String",
     #                   source_content: [
     #                     {
     #                       text: "String",
@@ -1096,9 +1115,26 @@ module Aws::BedrockRuntime
     #                       start: 1,
     #                       end: 1,
     #                     },
+    #                     search_result_location: {
+    #                       search_result_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
     #                   },
     #                 },
     #               ],
+    #             },
+    #             search_result: {
+    #               source: "String", # required
+    #               title: "String", # required
+    #               content: [ # required
+    #                 {
+    #                   text: "String", # required
+    #                 },
+    #               ],
+    #               citations: {
+    #                 enabled: false, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -1160,8 +1196,8 @@ module Aws::BedrockRuntime
     #       },
     #     },
     #     guardrail_config: {
-    #       guardrail_identifier: "GuardrailIdentifier", # required
-    #       guardrail_version: "GuardrailVersion", # required
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled", # accepts enabled, disabled, enabled_full
     #     },
     #     additional_model_request_fields: {
@@ -1230,6 +1266,11 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].video.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.content[0].video.source.s3_location.uri #=> String
     #   resp.output.message.content[0].tool_result.content[0].video.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.source #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.title #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.content #=> Array
+    #   resp.output.message.content[0].tool_result.content[0].search_result.content[0].text #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.citations.enabled #=> Boolean
     #   resp.output.message.content[0].tool_result.status #=> String, one of "success", "error"
     #   resp.output.message.content[0].tool_result.type #=> String
     #   resp.output.message.content[0].guard_content.text.text #=> String
@@ -1245,6 +1286,7 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].citations_content.content[0].text #=> String
     #   resp.output.message.content[0].citations_content.citations #=> Array
     #   resp.output.message.content[0].citations_content.citations[0].title #=> String
+    #   resp.output.message.content[0].citations_content.citations[0].source #=> String
     #   resp.output.message.content[0].citations_content.citations[0].source_content #=> Array
     #   resp.output.message.content[0].citations_content.citations[0].source_content[0].text #=> String
     #   resp.output.message.content[0].citations_content.citations[0].location.web.url #=> String
@@ -1258,6 +1300,14 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.document_index #=> Integer
     #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.start #=> Integer
     #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.end #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.search_result_location.search_result_index #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.search_result_location.start #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.search_result_location.end #=> Integer
+    #   resp.output.message.content[0].search_result.source #=> String
+    #   resp.output.message.content[0].search_result.title #=> String
+    #   resp.output.message.content[0].search_result.content #=> Array
+    #   resp.output.message.content[0].search_result.content[0].text #=> String
+    #   resp.output.message.content[0].search_result.citations.enabled #=> Boolean
     #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "model_context_window_exceeded"
     #   resp.usage.input_tokens #=> Integer
     #   resp.usage.output_tokens #=> Integer
@@ -1427,6 +1477,12 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_id #=> String
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_version #=> String
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_arn #=> String
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.trace.guardrail.output_assessments #=> Hash
     #   resp.trace.guardrail.output_assessments["String"] #=> Array
     #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -1588,6 +1644,12 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_id #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_version #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_arn #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.trace.guardrail.action_reason #=> String
     #   resp.trace.prompt_router.invoked_model_id #=> String
     #   resp.performance_config.latency #=> String, one of "standard", "optimized"
@@ -2078,6 +2140,18 @@ module Aws::BedrockRuntime
     #                       },
     #                     },
     #                   },
+    #                   search_result: {
+    #                     source: "String", # required
+    #                     title: "String", # required
+    #                     content: [ # required
+    #                       {
+    #                         text: "String", # required
+    #                       },
+    #                     ],
+    #                     citations: {
+    #                       enabled: false, # required
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               status: "success", # accepts success, error
@@ -2114,6 +2188,7 @@ module Aws::BedrockRuntime
     #               citations: [
     #                 {
     #                   title: "String",
+    #                   source: "String",
     #                   source_content: [
     #                     {
     #                       text: "String",
@@ -2139,9 +2214,26 @@ module Aws::BedrockRuntime
     #                       start: 1,
     #                       end: 1,
     #                     },
+    #                     search_result_location: {
+    #                       search_result_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
     #                   },
     #                 },
     #               ],
+    #             },
+    #             search_result: {
+    #               source: "String", # required
+    #               title: "String", # required
+    #               content: [ # required
+    #                 {
+    #                   text: "String", # required
+    #                 },
+    #               ],
+    #               citations: {
+    #                 enabled: false, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -2203,8 +2295,8 @@ module Aws::BedrockRuntime
     #       },
     #     },
     #     guardrail_config: {
-    #       guardrail_identifier: "GuardrailIdentifier", # required
-    #       guardrail_version: "GuardrailVersion", # required
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled", # accepts enabled, disabled, enabled_full
     #       stream_processing_mode: "sync", # accepts sync, async
     #     },
@@ -2254,6 +2346,7 @@ module Aws::BedrockRuntime
     #   event.delta.reasoning_content.redacted_content #=> String
     #   event.delta.reasoning_content.signature #=> String
     #   event.delta.citation.title #=> String
+    #   event.delta.citation.source #=> String
     #   event.delta.citation.source_content #=> Array
     #   event.delta.citation.source_content[0].text #=> String
     #   event.delta.citation.location.web.url #=> String
@@ -2267,6 +2360,9 @@ module Aws::BedrockRuntime
     #   event.delta.citation.location.document_chunk.document_index #=> Integer
     #   event.delta.citation.location.document_chunk.start #=> Integer
     #   event.delta.citation.location.document_chunk.end #=> Integer
+    #   event.delta.citation.location.search_result_location.search_result_index #=> Integer
+    #   event.delta.citation.location.search_result_location.start #=> Integer
+    #   event.delta.citation.location.search_result_location.end #=> Integer
     #   event.content_block_index #=> Integer
     #
     #   # For :content_block_stop event available at #on_content_block_stop_event callback and response eventstream enumerator:
@@ -2444,6 +2540,12 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_id #=> String
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_version #=> String
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_arn #=> String
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin #=> Array
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   event.trace.guardrail.output_assessments #=> Hash
     #   event.trace.guardrail.output_assessments["String"] #=> Array
     #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -2605,6 +2707,12 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_id #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_version #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_arn #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   event.trace.guardrail.action_reason #=> String
     #   event.trace.prompt_router.invoked_model_id #=> String
     #   event.performance_config.latency #=> String, one of "standard", "optimized"
@@ -2823,6 +2931,18 @@ module Aws::BedrockRuntime
     #                           },
     #                         },
     #                       },
+    #                       search_result: {
+    #                         source: "String", # required
+    #                         title: "String", # required
+    #                         content: [ # required
+    #                           {
+    #                             text: "String", # required
+    #                           },
+    #                         ],
+    #                         citations: {
+    #                           enabled: false, # required
+    #                         },
+    #                       },
     #                     },
     #                   ],
     #                   status: "success", # accepts success, error
@@ -2859,6 +2979,7 @@ module Aws::BedrockRuntime
     #                   citations: [
     #                     {
     #                       title: "String",
+    #                       source: "String",
     #                       source_content: [
     #                         {
     #                           text: "String",
@@ -2884,9 +3005,26 @@ module Aws::BedrockRuntime
     #                           start: 1,
     #                           end: 1,
     #                         },
+    #                         search_result_location: {
+    #                           search_result_index: 1,
+    #                           start: 1,
+    #                           end: 1,
+    #                         },
     #                       },
     #                     },
     #                   ],
+    #                 },
+    #                 search_result: {
+    #                   source: "String", # required
+    #                   title: "String", # required
+    #                   content: [ # required
+    #                     {
+    #                       text: "String", # required
+    #                     },
+    #                   ],
+    #                   citations: {
+    #                     enabled: false, # required
+    #                   },
     #                 },
     #               },
     #             ],
@@ -3670,7 +3808,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

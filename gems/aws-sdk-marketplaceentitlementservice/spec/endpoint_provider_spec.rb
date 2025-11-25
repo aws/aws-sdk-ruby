@@ -182,7 +182,7 @@ module Aws::MarketplaceEntitlementService
 
     context "For region eusc-de-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://entitlement.marketplace.eusc-de-east-1.amazonaws.eu"}}
+        {"endpoint" => {"url" => "https://entitlement-marketplace.eusc-de-east-1.amazonaws.eu"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

@@ -45,8 +45,25 @@ module Aws::MediaConnect
     AddOutputRequest = Shapes::StructureShape.new(name: 'AddOutputRequest')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     AudioMonitoringSetting = Shapes::StructureShape.new(name: 'AudioMonitoringSetting')
+    AutomaticEncryptionKeyConfiguration = Shapes::StructureShape.new(name: 'AutomaticEncryptionKeyConfiguration')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchGetRouterInputError = Shapes::StructureShape.new(name: 'BatchGetRouterInputError')
+    BatchGetRouterInputErrorList = Shapes::ListShape.new(name: 'BatchGetRouterInputErrorList')
+    BatchGetRouterInputRequest = Shapes::StructureShape.new(name: 'BatchGetRouterInputRequest')
+    BatchGetRouterInputRequestArnsList = Shapes::ListShape.new(name: 'BatchGetRouterInputRequestArnsList')
+    BatchGetRouterInputResponse = Shapes::StructureShape.new(name: 'BatchGetRouterInputResponse')
+    BatchGetRouterNetworkInterfaceError = Shapes::StructureShape.new(name: 'BatchGetRouterNetworkInterfaceError')
+    BatchGetRouterNetworkInterfaceErrorList = Shapes::ListShape.new(name: 'BatchGetRouterNetworkInterfaceErrorList')
+    BatchGetRouterNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'BatchGetRouterNetworkInterfaceRequest')
+    BatchGetRouterNetworkInterfaceRequestArnsList = Shapes::ListShape.new(name: 'BatchGetRouterNetworkInterfaceRequestArnsList')
+    BatchGetRouterNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'BatchGetRouterNetworkInterfaceResponse')
+    BatchGetRouterOutputError = Shapes::StructureShape.new(name: 'BatchGetRouterOutputError')
+    BatchGetRouterOutputErrorList = Shapes::ListShape.new(name: 'BatchGetRouterOutputErrorList')
+    BatchGetRouterOutputRequest = Shapes::StructureShape.new(name: 'BatchGetRouterOutputRequest')
+    BatchGetRouterOutputRequestArnsList = Shapes::ListShape.new(name: 'BatchGetRouterOutputRequestArnsList')
+    BatchGetRouterOutputResponse = Shapes::StructureShape.new(name: 'BatchGetRouterOutputResponse')
     BlackFrames = Shapes::StructureShape.new(name: 'BlackFrames')
+    Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Bridge = Shapes::StructureShape.new(name: 'Bridge')
     BridgeArn = Shapes::StringShape.new(name: 'BridgeArn')
@@ -71,6 +88,17 @@ module Aws::MediaConnect
     CreateGateway420Exception = Shapes::StructureShape.new(name: 'CreateGateway420Exception')
     CreateGatewayRequest = Shapes::StructureShape.new(name: 'CreateGatewayRequest')
     CreateGatewayResponse = Shapes::StructureShape.new(name: 'CreateGatewayResponse')
+    CreateRouterInputRequest = Shapes::StructureShape.new(name: 'CreateRouterInputRequest')
+    CreateRouterInputRequestNameString = Shapes::StringShape.new(name: 'CreateRouterInputRequestNameString')
+    CreateRouterInputResponse = Shapes::StructureShape.new(name: 'CreateRouterInputResponse')
+    CreateRouterNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'CreateRouterNetworkInterfaceRequest')
+    CreateRouterNetworkInterfaceRequestNameString = Shapes::StringShape.new(name: 'CreateRouterNetworkInterfaceRequestNameString')
+    CreateRouterNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'CreateRouterNetworkInterfaceResponse')
+    CreateRouterOutputRequest = Shapes::StructureShape.new(name: 'CreateRouterOutputRequest')
+    CreateRouterOutputRequestNameString = Shapes::StringShape.new(name: 'CreateRouterOutputRequestNameString')
+    CreateRouterOutputResponse = Shapes::StructureShape.new(name: 'CreateRouterOutputResponse')
+    Day = Shapes::StringShape.new(name: 'Day')
+    DefaultMaintenanceConfiguration = Shapes::StructureShape.new(name: 'DefaultMaintenanceConfiguration')
     DeleteBridgeRequest = Shapes::StructureShape.new(name: 'DeleteBridgeRequest')
     DeleteBridgeRequestBridgeArnString = Shapes::StringShape.new(name: 'DeleteBridgeRequestBridgeArnString')
     DeleteBridgeResponse = Shapes::StructureShape.new(name: 'DeleteBridgeResponse')
@@ -80,6 +108,12 @@ module Aws::MediaConnect
     DeleteGatewayRequest = Shapes::StructureShape.new(name: 'DeleteGatewayRequest')
     DeleteGatewayRequestGatewayArnString = Shapes::StringShape.new(name: 'DeleteGatewayRequestGatewayArnString')
     DeleteGatewayResponse = Shapes::StructureShape.new(name: 'DeleteGatewayResponse')
+    DeleteRouterInputRequest = Shapes::StructureShape.new(name: 'DeleteRouterInputRequest')
+    DeleteRouterInputResponse = Shapes::StructureShape.new(name: 'DeleteRouterInputResponse')
+    DeleteRouterNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteRouterNetworkInterfaceRequest')
+    DeleteRouterNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'DeleteRouterNetworkInterfaceResponse')
+    DeleteRouterOutputRequest = Shapes::StructureShape.new(name: 'DeleteRouterOutputRequest')
+    DeleteRouterOutputResponse = Shapes::StructureShape.new(name: 'DeleteRouterOutputResponse')
     DeregisterGatewayInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterGatewayInstanceRequest')
     DeregisterGatewayInstanceRequestGatewayInstanceArnString = Shapes::StringShape.new(name: 'DeregisterGatewayInstanceRequestGatewayInstanceArnString')
     DeregisterGatewayInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterGatewayInstanceResponse')
@@ -117,13 +151,26 @@ module Aws::MediaConnect
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
+    FailoverInputSourcePriorityMode = Shapes::StringShape.new(name: 'FailoverInputSourcePriorityMode')
     FailoverMode = Shapes::StringShape.new(name: 'FailoverMode')
+    FailoverRouterInputConfiguration = Shapes::StructureShape.new(name: 'FailoverRouterInputConfiguration')
+    FailoverRouterInputConfigurationPrimarySourceIndexInteger = Shapes::IntegerShape.new(name: 'FailoverRouterInputConfigurationPrimarySourceIndexInteger')
+    FailoverRouterInputIndexedStreamDetails = Shapes::StructureShape.new(name: 'FailoverRouterInputIndexedStreamDetails')
+    FailoverRouterInputProtocolConfiguration = Shapes::UnionShape.new(name: 'FailoverRouterInputProtocolConfiguration')
+    FailoverRouterInputProtocolConfigurationList = Shapes::ListShape.new(name: 'FailoverRouterInputProtocolConfigurationList')
+    FailoverRouterInputStreamDetails = Shapes::StructureShape.new(name: 'FailoverRouterInputStreamDetails')
     Flow = Shapes::StructureShape.new(name: 'Flow')
     FlowArn = Shapes::StringShape.new(name: 'FlowArn')
+    FlowOutputArn = Shapes::StringShape.new(name: 'FlowOutputArn')
     FlowSize = Shapes::StringShape.new(name: 'FlowSize')
+    FlowSourceArn = Shapes::StringShape.new(name: 'FlowSourceArn')
+    FlowTransitEncryption = Shapes::StructureShape.new(name: 'FlowTransitEncryption')
+    FlowTransitEncryptionKeyConfiguration = Shapes::UnionShape.new(name: 'FlowTransitEncryptionKeyConfiguration')
+    FlowTransitEncryptionKeyType = Shapes::StringShape.new(name: 'FlowTransitEncryptionKeyType')
     Fmtp = Shapes::StructureShape.new(name: 'Fmtp')
     FmtpRequest = Shapes::StructureShape.new(name: 'FmtpRequest')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    ForwardErrorCorrectionState = Shapes::StringShape.new(name: 'ForwardErrorCorrectionState')
     FrameResolution = Shapes::StructureShape.new(name: 'FrameResolution')
     FrozenFrames = Shapes::StructureShape.new(name: 'FrozenFrames')
     Gateway = Shapes::StructureShape.new(name: 'Gateway')
@@ -131,6 +178,16 @@ module Aws::MediaConnect
     GatewayInstance = Shapes::StructureShape.new(name: 'GatewayInstance')
     GatewayNetwork = Shapes::StructureShape.new(name: 'GatewayNetwork')
     GatewayState = Shapes::StringShape.new(name: 'GatewayState')
+    GetRouterInputRequest = Shapes::StructureShape.new(name: 'GetRouterInputRequest')
+    GetRouterInputResponse = Shapes::StructureShape.new(name: 'GetRouterInputResponse')
+    GetRouterInputSourceMetadataRequest = Shapes::StructureShape.new(name: 'GetRouterInputSourceMetadataRequest')
+    GetRouterInputSourceMetadataResponse = Shapes::StructureShape.new(name: 'GetRouterInputSourceMetadataResponse')
+    GetRouterInputThumbnailRequest = Shapes::StructureShape.new(name: 'GetRouterInputThumbnailRequest')
+    GetRouterInputThumbnailResponse = Shapes::StructureShape.new(name: 'GetRouterInputThumbnailResponse')
+    GetRouterNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'GetRouterNetworkInterfaceRequest')
+    GetRouterNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'GetRouterNetworkInterfaceResponse')
+    GetRouterOutputRequest = Shapes::StructureShape.new(name: 'GetRouterOutputRequest')
+    GetRouterOutputResponse = Shapes::StructureShape.new(name: 'GetRouterOutputResponse')
     GrantEntitlementRequest = Shapes::StructureShape.new(name: 'GrantEntitlementRequest')
     GrantFlowEntitlements420Exception = Shapes::StructureShape.new(name: 'GrantFlowEntitlements420Exception')
     GrantFlowEntitlementsRequest = Shapes::StructureShape.new(name: 'GrantFlowEntitlementsRequest')
@@ -159,6 +216,17 @@ module Aws::MediaConnect
     ListOfferingsResponse = Shapes::StructureShape.new(name: 'ListOfferingsResponse')
     ListReservationsRequest = Shapes::StructureShape.new(name: 'ListReservationsRequest')
     ListReservationsResponse = Shapes::StructureShape.new(name: 'ListReservationsResponse')
+    ListRouterInputsRequest = Shapes::StructureShape.new(name: 'ListRouterInputsRequest')
+    ListRouterInputsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRouterInputsRequestMaxResultsInteger')
+    ListRouterInputsResponse = Shapes::StructureShape.new(name: 'ListRouterInputsResponse')
+    ListRouterNetworkInterfacesRequest = Shapes::StructureShape.new(name: 'ListRouterNetworkInterfacesRequest')
+    ListRouterNetworkInterfacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRouterNetworkInterfacesRequestMaxResultsInteger')
+    ListRouterNetworkInterfacesResponse = Shapes::StructureShape.new(name: 'ListRouterNetworkInterfacesResponse')
+    ListRouterOutputsRequest = Shapes::StructureShape.new(name: 'ListRouterOutputsRequest')
+    ListRouterOutputsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRouterOutputsRequestMaxResultsInteger')
+    ListRouterOutputsResponse = Shapes::StructureShape.new(name: 'ListRouterOutputsResponse')
+    ListTagsForGlobalResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForGlobalResourceRequest')
+    ListTagsForGlobalResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForGlobalResourceResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListedBridge = Shapes::StructureShape.new(name: 'ListedBridge')
@@ -166,9 +234,31 @@ module Aws::MediaConnect
     ListedFlow = Shapes::StructureShape.new(name: 'ListedFlow')
     ListedGateway = Shapes::StructureShape.new(name: 'ListedGateway')
     ListedGatewayInstance = Shapes::StructureShape.new(name: 'ListedGatewayInstance')
+    ListedRouterInput = Shapes::StructureShape.new(name: 'ListedRouterInput')
+    ListedRouterInputList = Shapes::ListShape.new(name: 'ListedRouterInputList')
+    ListedRouterNetworkInterface = Shapes::StructureShape.new(name: 'ListedRouterNetworkInterface')
+    ListedRouterNetworkInterfaceList = Shapes::ListShape.new(name: 'ListedRouterNetworkInterfaceList')
+    ListedRouterOutput = Shapes::StructureShape.new(name: 'ListedRouterOutput')
+    ListedRouterOutputList = Shapes::ListShape.new(name: 'ListedRouterOutputList')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     Maintenance = Shapes::StructureShape.new(name: 'Maintenance')
+    MaintenanceConfiguration = Shapes::UnionShape.new(name: 'MaintenanceConfiguration')
     MaintenanceDay = Shapes::StringShape.new(name: 'MaintenanceDay')
+    MaintenanceSchedule = Shapes::UnionShape.new(name: 'MaintenanceSchedule')
+    MaintenanceScheduleType = Shapes::StringShape.new(name: 'MaintenanceScheduleType')
+    MaintenanceType = Shapes::StringShape.new(name: 'MaintenanceType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MediaConnectFlowRouterInputConfiguration = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterInputConfiguration')
+    MediaConnectFlowRouterInputStreamDetails = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterInputStreamDetails')
+    MediaConnectFlowRouterOutputConfiguration = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterOutputConfiguration')
+    MediaConnectFlowRouterOutputStreamDetails = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterOutputStreamDetails')
+    MediaLiveInputArn = Shapes::StringShape.new(name: 'MediaLiveInputArn')
+    MediaLiveInputPipelineId = Shapes::StringShape.new(name: 'MediaLiveInputPipelineId')
+    MediaLiveInputRouterOutputConfiguration = Shapes::StructureShape.new(name: 'MediaLiveInputRouterOutputConfiguration')
+    MediaLiveInputRouterOutputStreamDetails = Shapes::StructureShape.new(name: 'MediaLiveInputRouterOutputStreamDetails')
+    MediaLiveTransitEncryption = Shapes::StructureShape.new(name: 'MediaLiveTransitEncryption')
+    MediaLiveTransitEncryptionKeyConfiguration = Shapes::UnionShape.new(name: 'MediaLiveTransitEncryptionKeyConfiguration')
+    MediaLiveTransitEncryptionKeyType = Shapes::StringShape.new(name: 'MediaLiveTransitEncryptionKeyType')
     MediaStream = Shapes::StructureShape.new(name: 'MediaStream')
     MediaStreamAttributes = Shapes::StructureShape.new(name: 'MediaStreamAttributes')
     MediaStreamAttributesRequest = Shapes::StructureShape.new(name: 'MediaStreamAttributesRequest')
@@ -177,6 +267,11 @@ module Aws::MediaConnect
     MediaStreamSourceConfiguration = Shapes::StructureShape.new(name: 'MediaStreamSourceConfiguration')
     MediaStreamSourceConfigurationRequest = Shapes::StructureShape.new(name: 'MediaStreamSourceConfigurationRequest')
     MediaStreamType = Shapes::StringShape.new(name: 'MediaStreamType')
+    MergeRouterInputConfiguration = Shapes::StructureShape.new(name: 'MergeRouterInputConfiguration')
+    MergeRouterInputIndexedStreamDetails = Shapes::StructureShape.new(name: 'MergeRouterInputIndexedStreamDetails')
+    MergeRouterInputProtocolConfiguration = Shapes::UnionShape.new(name: 'MergeRouterInputProtocolConfiguration')
+    MergeRouterInputProtocolConfigurationList = Shapes::ListShape.new(name: 'MergeRouterInputProtocolConfigurationList')
+    MergeRouterInputStreamDetails = Shapes::StructureShape.new(name: 'MergeRouterInputStreamDetails')
     MessageDetail = Shapes::StructureShape.new(name: 'MessageDetail')
     Messages = Shapes::StructureShape.new(name: 'Messages')
     MonitoringConfig = Shapes::StructureShape.new(name: 'MonitoringConfig')
@@ -190,8 +285,12 @@ module Aws::MediaConnect
     OfferingArn = Shapes::StringShape.new(name: 'OfferingArn')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputStatus = Shapes::StringShape.new(name: 'OutputStatus')
+    PreferredDayTimeMaintenanceConfiguration = Shapes::StructureShape.new(name: 'PreferredDayTimeMaintenanceConfiguration')
     PriceUnits = Shapes::StringShape.new(name: 'PriceUnits')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    PublicRouterNetworkInterfaceConfiguration = Shapes::StructureShape.new(name: 'PublicRouterNetworkInterfaceConfiguration')
+    PublicRouterNetworkInterfaceConfigurationAllowRulesList = Shapes::ListShape.new(name: 'PublicRouterNetworkInterfaceConfigurationAllowRulesList')
+    PublicRouterNetworkInterfaceRule = Shapes::StructureShape.new(name: 'PublicRouterNetworkInterfaceRule')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
     Range = Shapes::StringShape.new(name: 'Range')
@@ -220,11 +319,80 @@ module Aws::MediaConnect
     ReservationState = Shapes::StringShape.new(name: 'ReservationState')
     ResourceSpecification = Shapes::StructureShape.new(name: 'ResourceSpecification')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RestartRouterInputRequest = Shapes::StructureShape.new(name: 'RestartRouterInputRequest')
+    RestartRouterInputResponse = Shapes::StructureShape.new(name: 'RestartRouterInputResponse')
+    RestartRouterOutputRequest = Shapes::StructureShape.new(name: 'RestartRouterOutputRequest')
+    RestartRouterOutputResponse = Shapes::StructureShape.new(name: 'RestartRouterOutputResponse')
     RevokeFlowEntitlementRequest = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementRequest')
     RevokeFlowEntitlementRequestEntitlementArnString = Shapes::StringShape.new(name: 'RevokeFlowEntitlementRequestEntitlementArnString')
     RevokeFlowEntitlementRequestFlowArnString = Shapes::StringShape.new(name: 'RevokeFlowEntitlementRequestFlowArnString')
     RevokeFlowEntitlementResponse = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementResponse')
+    RistRouterInputConfiguration = Shapes::StructureShape.new(name: 'RistRouterInputConfiguration')
+    RistRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'RistRouterInputConfigurationPortInteger')
+    RistRouterInputConfigurationRecoveryLatencyMillisecondsLong = Shapes::IntegerShape.new(name: 'RistRouterInputConfigurationRecoveryLatencyMillisecondsLong')
+    RistRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RistRouterOutputConfiguration')
+    RistRouterOutputConfigurationDestinationPortInteger = Shapes::IntegerShape.new(name: 'RistRouterOutputConfigurationDestinationPortInteger')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RouterInput = Shapes::StructureShape.new(name: 'RouterInput')
+    RouterInputArn = Shapes::StringShape.new(name: 'RouterInputArn')
+    RouterInputArnList = Shapes::ListShape.new(name: 'RouterInputArnList')
+    RouterInputConfiguration = Shapes::UnionShape.new(name: 'RouterInputConfiguration')
+    RouterInputFilter = Shapes::UnionShape.new(name: 'RouterInputFilter')
+    RouterInputFilterList = Shapes::ListShape.new(name: 'RouterInputFilterList')
+    RouterInputList = Shapes::ListShape.new(name: 'RouterInputList')
+    RouterInputMessage = Shapes::StructureShape.new(name: 'RouterInputMessage')
+    RouterInputMessages = Shapes::ListShape.new(name: 'RouterInputMessages')
+    RouterInputMetadata = Shapes::UnionShape.new(name: 'RouterInputMetadata')
+    RouterInputProtocol = Shapes::StringShape.new(name: 'RouterInputProtocol')
+    RouterInputProtocolConfiguration = Shapes::UnionShape.new(name: 'RouterInputProtocolConfiguration')
+    RouterInputServiceQuotaExceededException = Shapes::StructureShape.new(name: 'RouterInputServiceQuotaExceededException')
+    RouterInputSourceMetadataDetails = Shapes::StructureShape.new(name: 'RouterInputSourceMetadataDetails')
+    RouterInputState = Shapes::StringShape.new(name: 'RouterInputState')
+    RouterInputStreamDetails = Shapes::UnionShape.new(name: 'RouterInputStreamDetails')
+    RouterInputThumbnailDetails = Shapes::StructureShape.new(name: 'RouterInputThumbnailDetails')
+    RouterInputTier = Shapes::StringShape.new(name: 'RouterInputTier')
+    RouterInputTransitEncryption = Shapes::StructureShape.new(name: 'RouterInputTransitEncryption')
+    RouterInputTransitEncryptionKeyConfiguration = Shapes::UnionShape.new(name: 'RouterInputTransitEncryptionKeyConfiguration')
+    RouterInputTransitEncryptionKeyType = Shapes::StringShape.new(name: 'RouterInputTransitEncryptionKeyType')
+    RouterInputType = Shapes::StringShape.new(name: 'RouterInputType')
+    RouterInputTypeList = Shapes::ListShape.new(name: 'RouterInputTypeList')
+    RouterNetworkInterface = Shapes::StructureShape.new(name: 'RouterNetworkInterface')
+    RouterNetworkInterfaceArn = Shapes::StringShape.new(name: 'RouterNetworkInterfaceArn')
+    RouterNetworkInterfaceArnList = Shapes::ListShape.new(name: 'RouterNetworkInterfaceArnList')
+    RouterNetworkInterfaceConfiguration = Shapes::UnionShape.new(name: 'RouterNetworkInterfaceConfiguration')
+    RouterNetworkInterfaceFilter = Shapes::UnionShape.new(name: 'RouterNetworkInterfaceFilter')
+    RouterNetworkInterfaceFilterList = Shapes::ListShape.new(name: 'RouterNetworkInterfaceFilterList')
+    RouterNetworkInterfaceList = Shapes::ListShape.new(name: 'RouterNetworkInterfaceList')
+    RouterNetworkInterfaceServiceQuotaExceededException = Shapes::StructureShape.new(name: 'RouterNetworkInterfaceServiceQuotaExceededException')
+    RouterNetworkInterfaceState = Shapes::StringShape.new(name: 'RouterNetworkInterfaceState')
+    RouterNetworkInterfaceType = Shapes::StringShape.new(name: 'RouterNetworkInterfaceType')
+    RouterNetworkInterfaceTypeList = Shapes::ListShape.new(name: 'RouterNetworkInterfaceTypeList')
+    RouterOutput = Shapes::StructureShape.new(name: 'RouterOutput')
+    RouterOutputArn = Shapes::StringShape.new(name: 'RouterOutputArn')
+    RouterOutputConfiguration = Shapes::UnionShape.new(name: 'RouterOutputConfiguration')
+    RouterOutputFilter = Shapes::UnionShape.new(name: 'RouterOutputFilter')
+    RouterOutputFilterList = Shapes::ListShape.new(name: 'RouterOutputFilterList')
+    RouterOutputList = Shapes::ListShape.new(name: 'RouterOutputList')
+    RouterOutputMessage = Shapes::StructureShape.new(name: 'RouterOutputMessage')
+    RouterOutputMessages = Shapes::ListShape.new(name: 'RouterOutputMessages')
+    RouterOutputProtocol = Shapes::StringShape.new(name: 'RouterOutputProtocol')
+    RouterOutputProtocolConfiguration = Shapes::UnionShape.new(name: 'RouterOutputProtocolConfiguration')
+    RouterOutputRoutedState = Shapes::StringShape.new(name: 'RouterOutputRoutedState')
+    RouterOutputServiceQuotaExceededException = Shapes::StructureShape.new(name: 'RouterOutputServiceQuotaExceededException')
+    RouterOutputState = Shapes::StringShape.new(name: 'RouterOutputState')
+    RouterOutputStreamDetails = Shapes::UnionShape.new(name: 'RouterOutputStreamDetails')
+    RouterOutputTier = Shapes::StringShape.new(name: 'RouterOutputTier')
+    RouterOutputType = Shapes::StringShape.new(name: 'RouterOutputType')
+    RouterOutputTypeList = Shapes::ListShape.new(name: 'RouterOutputTypeList')
+    RoutingScope = Shapes::StringShape.new(name: 'RoutingScope')
+    RoutingScopeList = Shapes::ListShape.new(name: 'RoutingScopeList')
+    RtpRouterInputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterInputConfiguration')
+    RtpRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'RtpRouterInputConfigurationPortInteger')
+    RtpRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterOutputConfiguration')
+    RtpRouterOutputConfigurationDestinationPortInteger = Shapes::IntegerShape.new(name: 'RtpRouterOutputConfigurationDestinationPortInteger')
     ScanMode = Shapes::StringShape.new(name: 'ScanMode')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
+    SecretsManagerEncryptionKeyConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerEncryptionKeyConfiguration')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetGatewayBridgeSourceRequest = Shapes::StructureShape.new(name: 'SetGatewayBridgeSourceRequest')
     SetGatewayBridgeSourceRequestBridgeArnString = Shapes::StringShape.new(name: 'SetGatewayBridgeSourceRequestBridgeArnString')
@@ -234,17 +402,47 @@ module Aws::MediaConnect
     Source = Shapes::StructureShape.new(name: 'Source')
     SourcePriority = Shapes::StructureShape.new(name: 'SourcePriority')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    SrtCallerRouterInputConfiguration = Shapes::StructureShape.new(name: 'SrtCallerRouterInputConfiguration')
+    SrtCallerRouterInputConfigurationMinimumLatencyMillisecondsLong = Shapes::IntegerShape.new(name: 'SrtCallerRouterInputConfigurationMinimumLatencyMillisecondsLong')
+    SrtCallerRouterInputConfigurationSourcePortInteger = Shapes::IntegerShape.new(name: 'SrtCallerRouterInputConfigurationSourcePortInteger')
+    SrtCallerRouterOutputConfiguration = Shapes::StructureShape.new(name: 'SrtCallerRouterOutputConfiguration')
+    SrtCallerRouterOutputConfigurationDestinationPortInteger = Shapes::IntegerShape.new(name: 'SrtCallerRouterOutputConfigurationDestinationPortInteger')
+    SrtCallerRouterOutputConfigurationMinimumLatencyMillisecondsLong = Shapes::IntegerShape.new(name: 'SrtCallerRouterOutputConfigurationMinimumLatencyMillisecondsLong')
+    SrtDecryptionConfiguration = Shapes::StructureShape.new(name: 'SrtDecryptionConfiguration')
+    SrtEncryptionConfiguration = Shapes::StructureShape.new(name: 'SrtEncryptionConfiguration')
+    SrtListenerRouterInputConfiguration = Shapes::StructureShape.new(name: 'SrtListenerRouterInputConfiguration')
+    SrtListenerRouterInputConfigurationMinimumLatencyMillisecondsLong = Shapes::IntegerShape.new(name: 'SrtListenerRouterInputConfigurationMinimumLatencyMillisecondsLong')
+    SrtListenerRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'SrtListenerRouterInputConfigurationPortInteger')
+    SrtListenerRouterOutputConfiguration = Shapes::StructureShape.new(name: 'SrtListenerRouterOutputConfiguration')
+    SrtListenerRouterOutputConfigurationMinimumLatencyMillisecondsLong = Shapes::IntegerShape.new(name: 'SrtListenerRouterOutputConfigurationMinimumLatencyMillisecondsLong')
+    SrtListenerRouterOutputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'SrtListenerRouterOutputConfigurationPortInteger')
+    StandardRouterInputConfiguration = Shapes::StructureShape.new(name: 'StandardRouterInputConfiguration')
+    StandardRouterInputStreamDetails = Shapes::StructureShape.new(name: 'StandardRouterInputStreamDetails')
+    StandardRouterOutputConfiguration = Shapes::StructureShape.new(name: 'StandardRouterOutputConfiguration')
+    StandardRouterOutputStreamDetails = Shapes::StructureShape.new(name: 'StandardRouterOutputStreamDetails')
     StartFlowRequest = Shapes::StructureShape.new(name: 'StartFlowRequest')
     StartFlowRequestFlowArnString = Shapes::StringShape.new(name: 'StartFlowRequestFlowArnString')
     StartFlowResponse = Shapes::StructureShape.new(name: 'StartFlowResponse')
+    StartRouterInputRequest = Shapes::StructureShape.new(name: 'StartRouterInputRequest')
+    StartRouterInputResponse = Shapes::StructureShape.new(name: 'StartRouterInputResponse')
+    StartRouterOutputRequest = Shapes::StructureShape.new(name: 'StartRouterOutputRequest')
+    StartRouterOutputResponse = Shapes::StructureShape.new(name: 'StartRouterOutputResponse')
     State = Shapes::StringShape.new(name: 'State')
     Status = Shapes::StringShape.new(name: 'Status')
     StopFlowRequest = Shapes::StructureShape.new(name: 'StopFlowRequest')
     StopFlowRequestFlowArnString = Shapes::StringShape.new(name: 'StopFlowRequestFlowArnString')
     StopFlowResponse = Shapes::StructureShape.new(name: 'StopFlowResponse')
+    StopRouterInputRequest = Shapes::StructureShape.new(name: 'StopRouterInputRequest')
+    StopRouterInputResponse = Shapes::StructureShape.new(name: 'StopRouterInputResponse')
+    StopRouterOutputRequest = Shapes::StructureShape.new(name: 'StopRouterOutputRequest')
+    StopRouterOutputResponse = Shapes::StructureShape.new(name: 'StopRouterOutputResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
+    TagGlobalResourceRequest = Shapes::StructureShape.new(name: 'TagGlobalResourceRequest')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TakeRouterInputRequest = Shapes::StructureShape.new(name: 'TakeRouterInputRequest')
+    TakeRouterInputResponse = Shapes::StructureShape.new(name: 'TakeRouterInputResponse')
     Tcs = Shapes::StringShape.new(name: 'Tcs')
     ThumbnailDetails = Shapes::StructureShape.new(name: 'ThumbnailDetails')
     ThumbnailState = Shapes::StringShape.new(name: 'ThumbnailState')
@@ -253,6 +451,7 @@ module Aws::MediaConnect
     TransportMediaInfo = Shapes::StructureShape.new(name: 'TransportMediaInfo')
     TransportStream = Shapes::StructureShape.new(name: 'TransportStream')
     TransportStreamProgram = Shapes::StructureShape.new(name: 'TransportStreamProgram')
+    UntagGlobalResourceRequest = Shapes::StructureShape.new(name: 'UntagGlobalResourceRequest')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateBridgeFlowSourceRequest = Shapes::StructureShape.new(name: 'UpdateBridgeFlowSourceRequest')
     UpdateBridgeFlowSourceRequestFlowArnString = Shapes::StringShape.new(name: 'UpdateBridgeFlowSourceRequestFlowArnString')
@@ -299,10 +498,22 @@ module Aws::MediaConnect
     UpdateGatewayInstanceResponse = Shapes::StructureShape.new(name: 'UpdateGatewayInstanceResponse')
     UpdateIngressGatewayBridgeRequest = Shapes::StructureShape.new(name: 'UpdateIngressGatewayBridgeRequest')
     UpdateMaintenance = Shapes::StructureShape.new(name: 'UpdateMaintenance')
+    UpdateRouterInputRequest = Shapes::StructureShape.new(name: 'UpdateRouterInputRequest')
+    UpdateRouterInputRequestNameString = Shapes::StringShape.new(name: 'UpdateRouterInputRequestNameString')
+    UpdateRouterInputResponse = Shapes::StructureShape.new(name: 'UpdateRouterInputResponse')
+    UpdateRouterNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'UpdateRouterNetworkInterfaceRequest')
+    UpdateRouterNetworkInterfaceRequestNameString = Shapes::StringShape.new(name: 'UpdateRouterNetworkInterfaceRequestNameString')
+    UpdateRouterNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'UpdateRouterNetworkInterfaceResponse')
+    UpdateRouterOutputRequest = Shapes::StructureShape.new(name: 'UpdateRouterOutputRequest')
+    UpdateRouterOutputRequestNameString = Shapes::StringShape.new(name: 'UpdateRouterOutputRequestNameString')
+    UpdateRouterOutputResponse = Shapes::StructureShape.new(name: 'UpdateRouterOutputResponse')
     VideoMonitoringSetting = Shapes::StructureShape.new(name: 'VideoMonitoringSetting')
     VpcInterface = Shapes::StructureShape.new(name: 'VpcInterface')
     VpcInterfaceAttachment = Shapes::StructureShape.new(name: 'VpcInterfaceAttachment')
     VpcInterfaceRequest = Shapes::StructureShape.new(name: 'VpcInterfaceRequest')
+    VpcRouterNetworkInterfaceConfiguration = Shapes::StructureShape.new(name: 'VpcRouterNetworkInterfaceConfiguration')
+    VpcRouterNetworkInterfaceConfigurationSecurityGroupIdsList = Shapes::ListShape.new(name: 'VpcRouterNetworkInterfaceConfigurationSecurityGroupIdsList')
+    WindowMaintenanceSchedule = Shapes::StructureShape.new(name: 'WindowMaintenanceSchedule')
     __listOfAddBridgeOutputRequest = Shapes::ListShape.new(name: '__listOfAddBridgeOutputRequest')
     __listOfAddBridgeSourceRequest = Shapes::ListShape.new(name: '__listOfAddBridgeSourceRequest')
     __listOfAddMediaStreamRequest = Shapes::ListShape.new(name: '__listOfAddMediaStreamRequest')
@@ -462,13 +673,65 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:ndi_speed_hq_quality, Shapes::ShapeRef.new(shape: Integer, location_name: "ndiSpeedHqQuality"))
     AddOutputRequest.add_member(:ndi_program_name, Shapes::ShapeRef.new(shape: String, location_name: "ndiProgramName"))
     AddOutputRequest.add_member(:output_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "outputTags"))
+    AddOutputRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
+    AddOutputRequest.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
 
     AudioMonitoringSetting.add_member(:silent_audio, Shapes::ShapeRef.new(shape: SilentAudio, location_name: "silentAudio"))
     AudioMonitoringSetting.struct_class = Types::AudioMonitoringSetting
 
+    AutomaticEncryptionKeyConfiguration.struct_class = Types::AutomaticEncryptionKeyConfiguration
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    BatchGetRouterInputError.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    BatchGetRouterInputError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchGetRouterInputError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetRouterInputError.struct_class = Types::BatchGetRouterInputError
+
+    BatchGetRouterInputErrorList.member = Shapes::ShapeRef.new(shape: BatchGetRouterInputError)
+
+    BatchGetRouterInputRequest.add_member(:arns, Shapes::ShapeRef.new(shape: BatchGetRouterInputRequestArnsList, required: true, location: "querystring", location_name: "arns"))
+    BatchGetRouterInputRequest.struct_class = Types::BatchGetRouterInputRequest
+
+    BatchGetRouterInputRequestArnsList.member = Shapes::ShapeRef.new(shape: RouterInputArn)
+
+    BatchGetRouterInputResponse.add_member(:router_inputs, Shapes::ShapeRef.new(shape: RouterInputList, required: true, location_name: "routerInputs"))
+    BatchGetRouterInputResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetRouterInputErrorList, required: true, location_name: "errors"))
+    BatchGetRouterInputResponse.struct_class = Types::BatchGetRouterInputResponse
+
+    BatchGetRouterNetworkInterfaceError.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "arn"))
+    BatchGetRouterNetworkInterfaceError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchGetRouterNetworkInterfaceError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetRouterNetworkInterfaceError.struct_class = Types::BatchGetRouterNetworkInterfaceError
+
+    BatchGetRouterNetworkInterfaceErrorList.member = Shapes::ShapeRef.new(shape: BatchGetRouterNetworkInterfaceError)
+
+    BatchGetRouterNetworkInterfaceRequest.add_member(:arns, Shapes::ShapeRef.new(shape: BatchGetRouterNetworkInterfaceRequestArnsList, required: true, location: "querystring", location_name: "arns"))
+    BatchGetRouterNetworkInterfaceRequest.struct_class = Types::BatchGetRouterNetworkInterfaceRequest
+
+    BatchGetRouterNetworkInterfaceRequestArnsList.member = Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn)
+
+    BatchGetRouterNetworkInterfaceResponse.add_member(:router_network_interfaces, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceList, required: true, location_name: "routerNetworkInterfaces"))
+    BatchGetRouterNetworkInterfaceResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetRouterNetworkInterfaceErrorList, required: true, location_name: "errors"))
+    BatchGetRouterNetworkInterfaceResponse.struct_class = Types::BatchGetRouterNetworkInterfaceResponse
+
+    BatchGetRouterOutputError.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    BatchGetRouterOutputError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchGetRouterOutputError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetRouterOutputError.struct_class = Types::BatchGetRouterOutputError
+
+    BatchGetRouterOutputErrorList.member = Shapes::ShapeRef.new(shape: BatchGetRouterOutputError)
+
+    BatchGetRouterOutputRequest.add_member(:arns, Shapes::ShapeRef.new(shape: BatchGetRouterOutputRequestArnsList, required: true, location: "querystring", location_name: "arns"))
+    BatchGetRouterOutputRequest.struct_class = Types::BatchGetRouterOutputRequest
+
+    BatchGetRouterOutputRequestArnsList.member = Shapes::ShapeRef.new(shape: RouterOutputArn)
+
+    BatchGetRouterOutputResponse.add_member(:router_outputs, Shapes::ShapeRef.new(shape: RouterOutputList, required: true, location_name: "routerOutputs"))
+    BatchGetRouterOutputResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetRouterOutputErrorList, required: true, location_name: "errors"))
+    BatchGetRouterOutputResponse.struct_class = Types::BatchGetRouterOutputResponse
 
     BlackFrames.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     BlackFrames.add_member(:threshold_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "thresholdSeconds"))
@@ -572,6 +835,49 @@ module Aws::MediaConnect
     CreateGatewayResponse.add_member(:gateway, Shapes::ShapeRef.new(shape: Gateway, location_name: "gateway"))
     CreateGatewayResponse.struct_class = Types::CreateGatewayResponse
 
+    CreateRouterInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateRouterInputRequestNameString, required: true, location_name: "name"))
+    CreateRouterInputRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterInputConfiguration, required: true, location_name: "configuration"))
+    CreateRouterInputRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "maximumBitrate"))
+    CreateRouterInputRequest.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, required: true, location_name: "routingScope"))
+    CreateRouterInputRequest.add_member(:tier, Shapes::ShapeRef.new(shape: RouterInputTier, required: true, location_name: "tier"))
+    CreateRouterInputRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
+    CreateRouterInputRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    CreateRouterInputRequest.add_member(:transit_encryption, Shapes::ShapeRef.new(shape: RouterInputTransitEncryption, location_name: "transitEncryption"))
+    CreateRouterInputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
+    CreateRouterInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "tags"))
+    CreateRouterInputRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRouterInputRequest.struct_class = Types::CreateRouterInputRequest
+
+    CreateRouterInputResponse.add_member(:router_input, Shapes::ShapeRef.new(shape: RouterInput, required: true, location_name: "routerInput"))
+    CreateRouterInputResponse.struct_class = Types::CreateRouterInputResponse
+
+    CreateRouterNetworkInterfaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateRouterNetworkInterfaceRequestNameString, required: true, location_name: "name"))
+    CreateRouterNetworkInterfaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceConfiguration, required: true, location_name: "configuration"))
+    CreateRouterNetworkInterfaceRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
+    CreateRouterNetworkInterfaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "tags"))
+    CreateRouterNetworkInterfaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRouterNetworkInterfaceRequest.struct_class = Types::CreateRouterNetworkInterfaceRequest
+
+    CreateRouterNetworkInterfaceResponse.add_member(:router_network_interface, Shapes::ShapeRef.new(shape: RouterNetworkInterface, required: true, location_name: "routerNetworkInterface"))
+    CreateRouterNetworkInterfaceResponse.struct_class = Types::CreateRouterNetworkInterfaceResponse
+
+    CreateRouterOutputRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateRouterOutputRequestNameString, required: true, location_name: "name"))
+    CreateRouterOutputRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterOutputConfiguration, required: true, location_name: "configuration"))
+    CreateRouterOutputRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "maximumBitrate"))
+    CreateRouterOutputRequest.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, required: true, location_name: "routingScope"))
+    CreateRouterOutputRequest.add_member(:tier, Shapes::ShapeRef.new(shape: RouterOutputTier, required: true, location_name: "tier"))
+    CreateRouterOutputRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
+    CreateRouterOutputRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    CreateRouterOutputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
+    CreateRouterOutputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "tags"))
+    CreateRouterOutputRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRouterOutputRequest.struct_class = Types::CreateRouterOutputRequest
+
+    CreateRouterOutputResponse.add_member(:router_output, Shapes::ShapeRef.new(shape: RouterOutput, required: true, location_name: "routerOutput"))
+    CreateRouterOutputResponse.struct_class = Types::CreateRouterOutputResponse
+
+    DefaultMaintenanceConfiguration.struct_class = Types::DefaultMaintenanceConfiguration
+
     DeleteBridgeRequest.add_member(:bridge_arn, Shapes::ShapeRef.new(shape: DeleteBridgeRequestBridgeArnString, required: true, location: "uri", location_name: "BridgeArn"))
     DeleteBridgeRequest.struct_class = Types::DeleteBridgeRequest
 
@@ -590,6 +896,30 @@ module Aws::MediaConnect
 
     DeleteGatewayResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
     DeleteGatewayResponse.struct_class = Types::DeleteGatewayResponse
+
+    DeleteRouterInputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    DeleteRouterInputRequest.struct_class = Types::DeleteRouterInputRequest
+
+    DeleteRouterInputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    DeleteRouterInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    DeleteRouterInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterInputState, required: true, location_name: "state"))
+    DeleteRouterInputResponse.struct_class = Types::DeleteRouterInputResponse
+
+    DeleteRouterNetworkInterfaceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location: "uri", location_name: "Arn"))
+    DeleteRouterNetworkInterfaceRequest.struct_class = Types::DeleteRouterNetworkInterfaceRequest
+
+    DeleteRouterNetworkInterfaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "arn"))
+    DeleteRouterNetworkInterfaceResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    DeleteRouterNetworkInterfaceResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceState, required: true, location_name: "state"))
+    DeleteRouterNetworkInterfaceResponse.struct_class = Types::DeleteRouterNetworkInterfaceResponse
+
+    DeleteRouterOutputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "Arn"))
+    DeleteRouterOutputRequest.struct_class = Types::DeleteRouterOutputRequest
+
+    DeleteRouterOutputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    DeleteRouterOutputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    DeleteRouterOutputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterOutputState, required: true, location_name: "state"))
+    DeleteRouterOutputResponse.struct_class = Types::DeleteRouterOutputResponse
 
     DeregisterGatewayInstanceRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "force"))
     DeregisterGatewayInstanceRequest.add_member(:gateway_instance_arn, Shapes::ShapeRef.new(shape: DeregisterGatewayInstanceRequestGatewayInstanceArnString, required: true, location: "uri", location_name: "GatewayInstanceArn"))
@@ -700,6 +1030,34 @@ module Aws::MediaConnect
     FailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     FailoverConfig.struct_class = Types::FailoverConfig
 
+    FailoverRouterInputConfiguration.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "networkInterfaceArn"))
+    FailoverRouterInputConfiguration.add_member(:protocol_configurations, Shapes::ShapeRef.new(shape: FailoverRouterInputProtocolConfigurationList, required: true, location_name: "protocolConfigurations"))
+    FailoverRouterInputConfiguration.add_member(:source_priority_mode, Shapes::ShapeRef.new(shape: FailoverInputSourcePriorityMode, required: true, location_name: "sourcePriorityMode"))
+    FailoverRouterInputConfiguration.add_member(:primary_source_index, Shapes::ShapeRef.new(shape: FailoverRouterInputConfigurationPrimarySourceIndexInteger, location_name: "primarySourceIndex"))
+    FailoverRouterInputConfiguration.struct_class = Types::FailoverRouterInputConfiguration
+
+    FailoverRouterInputIndexedStreamDetails.add_member(:source_index, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "sourceIndex"))
+    FailoverRouterInputIndexedStreamDetails.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "sourceIpAddress"))
+    FailoverRouterInputIndexedStreamDetails.struct_class = Types::FailoverRouterInputIndexedStreamDetails
+
+    FailoverRouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
+    FailoverRouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
+    FailoverRouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
+    FailoverRouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
+    FailoverRouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::FailoverRouterInputProtocolConfiguration::Rtp)
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:rist, Types::FailoverRouterInputProtocolConfiguration::Rist)
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::FailoverRouterInputProtocolConfiguration::SrtListener)
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::FailoverRouterInputProtocolConfiguration::SrtCaller)
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::FailoverRouterInputProtocolConfiguration::Unknown)
+    FailoverRouterInputProtocolConfiguration.struct_class = Types::FailoverRouterInputProtocolConfiguration
+
+    FailoverRouterInputProtocolConfigurationList.member = Shapes::ShapeRef.new(shape: FailoverRouterInputProtocolConfiguration)
+
+    FailoverRouterInputStreamDetails.add_member(:source_index_zero_stream_details, Shapes::ShapeRef.new(shape: FailoverRouterInputIndexedStreamDetails, required: true, location_name: "sourceIndexZeroStreamDetails"))
+    FailoverRouterInputStreamDetails.add_member(:source_index_one_stream_details, Shapes::ShapeRef.new(shape: FailoverRouterInputIndexedStreamDetails, required: true, location_name: "sourceIndexOneStreamDetails"))
+    FailoverRouterInputStreamDetails.struct_class = Types::FailoverRouterInputStreamDetails
+
     Flow.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
     Flow.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     Flow.add_member(:egress_ip, Shapes::ShapeRef.new(shape: String, location_name: "egressIp"))
@@ -718,6 +1076,18 @@ module Aws::MediaConnect
     Flow.add_member(:flow_size, Shapes::ShapeRef.new(shape: FlowSize, location_name: "flowSize"))
     Flow.add_member(:ndi_config, Shapes::ShapeRef.new(shape: NdiConfig, location_name: "ndiConfig"))
     Flow.struct_class = Types::Flow
+
+    FlowTransitEncryption.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: FlowTransitEncryptionKeyType, location_name: "encryptionKeyType"))
+    FlowTransitEncryption.add_member(:encryption_key_configuration, Shapes::ShapeRef.new(shape: FlowTransitEncryptionKeyConfiguration, required: true, location_name: "encryptionKeyConfiguration"))
+    FlowTransitEncryption.struct_class = Types::FlowTransitEncryption
+
+    FlowTransitEncryptionKeyConfiguration.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerEncryptionKeyConfiguration, location_name: "secretsManager"))
+    FlowTransitEncryptionKeyConfiguration.add_member(:automatic, Shapes::ShapeRef.new(shape: AutomaticEncryptionKeyConfiguration, location_name: "automatic"))
+    FlowTransitEncryptionKeyConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowTransitEncryptionKeyConfiguration.add_member_subclass(:secrets_manager, Types::FlowTransitEncryptionKeyConfiguration::SecretsManager)
+    FlowTransitEncryptionKeyConfiguration.add_member_subclass(:automatic, Types::FlowTransitEncryptionKeyConfiguration::Automatic)
+    FlowTransitEncryptionKeyConfiguration.add_member_subclass(:unknown, Types::FlowTransitEncryptionKeyConfiguration::Unknown)
+    FlowTransitEncryptionKeyConfiguration.struct_class = Types::FlowTransitEncryptionKeyConfiguration
 
     Fmtp.add_member(:channel_order, Shapes::ShapeRef.new(shape: String, location_name: "channelOrder"))
     Fmtp.add_member(:colorimetry, Shapes::ShapeRef.new(shape: Colorimetry, location_name: "colorimetry"))
@@ -773,6 +1143,40 @@ module Aws::MediaConnect
     GatewayNetwork.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cidrBlock"))
     GatewayNetwork.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     GatewayNetwork.struct_class = Types::GatewayNetwork
+
+    GetRouterInputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    GetRouterInputRequest.struct_class = Types::GetRouterInputRequest
+
+    GetRouterInputResponse.add_member(:router_input, Shapes::ShapeRef.new(shape: RouterInput, required: true, location_name: "routerInput"))
+    GetRouterInputResponse.struct_class = Types::GetRouterInputResponse
+
+    GetRouterInputSourceMetadataRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    GetRouterInputSourceMetadataRequest.struct_class = Types::GetRouterInputSourceMetadataRequest
+
+    GetRouterInputSourceMetadataResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    GetRouterInputSourceMetadataResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    GetRouterInputSourceMetadataResponse.add_member(:source_metadata_details, Shapes::ShapeRef.new(shape: RouterInputSourceMetadataDetails, required: true, location_name: "sourceMetadataDetails"))
+    GetRouterInputSourceMetadataResponse.struct_class = Types::GetRouterInputSourceMetadataResponse
+
+    GetRouterInputThumbnailRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    GetRouterInputThumbnailRequest.struct_class = Types::GetRouterInputThumbnailRequest
+
+    GetRouterInputThumbnailResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    GetRouterInputThumbnailResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    GetRouterInputThumbnailResponse.add_member(:thumbnail_details, Shapes::ShapeRef.new(shape: RouterInputThumbnailDetails, required: true, location_name: "thumbnailDetails"))
+    GetRouterInputThumbnailResponse.struct_class = Types::GetRouterInputThumbnailResponse
+
+    GetRouterNetworkInterfaceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location: "uri", location_name: "Arn"))
+    GetRouterNetworkInterfaceRequest.struct_class = Types::GetRouterNetworkInterfaceRequest
+
+    GetRouterNetworkInterfaceResponse.add_member(:router_network_interface, Shapes::ShapeRef.new(shape: RouterNetworkInterface, required: true, location_name: "routerNetworkInterface"))
+    GetRouterNetworkInterfaceResponse.struct_class = Types::GetRouterNetworkInterfaceResponse
+
+    GetRouterOutputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "Arn"))
+    GetRouterOutputRequest.struct_class = Types::GetRouterOutputRequest
+
+    GetRouterOutputResponse.add_member(:router_output, Shapes::ShapeRef.new(shape: RouterOutput, required: true, location_name: "routerOutput"))
+    GetRouterOutputResponse.struct_class = Types::GetRouterOutputResponse
 
     GrantEntitlementRequest.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "dataTransferSubscriberFeePercent"))
     GrantEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -875,6 +1279,39 @@ module Aws::MediaConnect
     ListReservationsResponse.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
     ListReservationsResponse.struct_class = Types::ListReservationsResponse
 
+    ListRouterInputsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRouterInputsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListRouterInputsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListRouterInputsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RouterInputFilterList, location_name: "filters"))
+    ListRouterInputsRequest.struct_class = Types::ListRouterInputsRequest
+
+    ListRouterInputsResponse.add_member(:router_inputs, Shapes::ShapeRef.new(shape: ListedRouterInputList, required: true, location_name: "routerInputs"))
+    ListRouterInputsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListRouterInputsResponse.struct_class = Types::ListRouterInputsResponse
+
+    ListRouterNetworkInterfacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRouterNetworkInterfacesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListRouterNetworkInterfacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListRouterNetworkInterfacesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceFilterList, location_name: "filters"))
+    ListRouterNetworkInterfacesRequest.struct_class = Types::ListRouterNetworkInterfacesRequest
+
+    ListRouterNetworkInterfacesResponse.add_member(:router_network_interfaces, Shapes::ShapeRef.new(shape: ListedRouterNetworkInterfaceList, required: true, location_name: "routerNetworkInterfaces"))
+    ListRouterNetworkInterfacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListRouterNetworkInterfacesResponse.struct_class = Types::ListRouterNetworkInterfacesResponse
+
+    ListRouterOutputsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRouterOutputsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListRouterOutputsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListRouterOutputsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RouterOutputFilterList, location_name: "filters"))
+    ListRouterOutputsRequest.struct_class = Types::ListRouterOutputsRequest
+
+    ListRouterOutputsResponse.add_member(:router_outputs, Shapes::ShapeRef.new(shape: ListedRouterOutputList, required: true, location_name: "routerOutputs"))
+    ListRouterOutputsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListRouterOutputsResponse.struct_class = Types::ListRouterOutputsResponse
+
+    ListTagsForGlobalResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForGlobalResourceRequest.struct_class = Types::ListTagsForGlobalResourceRequest
+
+    ListTagsForGlobalResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "tags"))
+    ListTagsForGlobalResourceResponse.struct_class = Types::ListTagsForGlobalResourceResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -913,11 +1350,113 @@ module Aws::MediaConnect
     ListedGatewayInstance.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
     ListedGatewayInstance.struct_class = Types::ListedGatewayInstance
 
+    ListedRouterInput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ListedRouterInput.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    ListedRouterInput.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    ListedRouterInput.add_member(:input_type, Shapes::ShapeRef.new(shape: RouterInputType, required: true, location_name: "inputType"))
+    ListedRouterInput.add_member(:state, Shapes::ShapeRef.new(shape: RouterInputState, required: true, location_name: "state"))
+    ListedRouterInput.add_member(:routed_outputs, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "routedOutputs"))
+    ListedRouterInput.add_member(:region_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "regionName"))
+    ListedRouterInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
+    ListedRouterInput.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "maximumBitrate"))
+    ListedRouterInput.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, required: true, location_name: "routingScope"))
+    ListedRouterInput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    ListedRouterInput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    ListedRouterInput.add_member(:message_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "messageCount"))
+    ListedRouterInput.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, location_name: "networkInterfaceArn"))
+    ListedRouterInput.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, location_name: "maintenanceScheduleType"))
+    ListedRouterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    ListedRouterInput.struct_class = Types::ListedRouterInput
+
+    ListedRouterInputList.member = Shapes::ShapeRef.new(shape: ListedRouterInput)
+
+    ListedRouterNetworkInterface.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ListedRouterNetworkInterface.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "arn"))
+    ListedRouterNetworkInterface.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    ListedRouterNetworkInterface.add_member(:network_interface_type, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceType, required: true, location_name: "networkInterfaceType"))
+    ListedRouterNetworkInterface.add_member(:associated_output_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "associatedOutputCount"))
+    ListedRouterNetworkInterface.add_member(:associated_input_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "associatedInputCount"))
+    ListedRouterNetworkInterface.add_member(:state, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceState, required: true, location_name: "state"))
+    ListedRouterNetworkInterface.add_member(:region_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "regionName"))
+    ListedRouterNetworkInterface.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    ListedRouterNetworkInterface.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    ListedRouterNetworkInterface.struct_class = Types::ListedRouterNetworkInterface
+
+    ListedRouterNetworkInterfaceList.member = Shapes::ShapeRef.new(shape: ListedRouterNetworkInterface)
+
+    ListedRouterOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ListedRouterOutput.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    ListedRouterOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    ListedRouterOutput.add_member(:output_type, Shapes::ShapeRef.new(shape: RouterOutputType, required: true, location_name: "outputType"))
+    ListedRouterOutput.add_member(:state, Shapes::ShapeRef.new(shape: RouterOutputState, required: true, location_name: "state"))
+    ListedRouterOutput.add_member(:routed_state, Shapes::ShapeRef.new(shape: RouterOutputRoutedState, required: true, location_name: "routedState"))
+    ListedRouterOutput.add_member(:region_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "regionName"))
+    ListedRouterOutput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
+    ListedRouterOutput.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "maximumBitrate"))
+    ListedRouterOutput.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, required: true, location_name: "routingScope"))
+    ListedRouterOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    ListedRouterOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    ListedRouterOutput.add_member(:message_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "messageCount"))
+    ListedRouterOutput.add_member(:routed_input_arn, Shapes::ShapeRef.new(shape: RouterInputArn, location_name: "routedInputArn"))
+    ListedRouterOutput.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, location_name: "networkInterfaceArn"))
+    ListedRouterOutput.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, location_name: "maintenanceScheduleType"))
+    ListedRouterOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    ListedRouterOutput.struct_class = Types::ListedRouterOutput
+
+    ListedRouterOutputList.member = Shapes::ShapeRef.new(shape: ListedRouterOutput)
+
     Maintenance.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
     Maintenance.add_member(:maintenance_deadline, Shapes::ShapeRef.new(shape: String, location_name: "maintenanceDeadline"))
     Maintenance.add_member(:maintenance_scheduled_date, Shapes::ShapeRef.new(shape: String, location_name: "maintenanceScheduledDate"))
     Maintenance.add_member(:maintenance_start_hour, Shapes::ShapeRef.new(shape: String, location_name: "maintenanceStartHour"))
     Maintenance.struct_class = Types::Maintenance
+
+    MaintenanceConfiguration.add_member(:preferred_day_time, Shapes::ShapeRef.new(shape: PreferredDayTimeMaintenanceConfiguration, location_name: "preferredDayTime"))
+    MaintenanceConfiguration.add_member(:default, Shapes::ShapeRef.new(shape: DefaultMaintenanceConfiguration, location_name: "default"))
+    MaintenanceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MaintenanceConfiguration.add_member_subclass(:preferred_day_time, Types::MaintenanceConfiguration::PreferredDayTime)
+    MaintenanceConfiguration.add_member_subclass(:default, Types::MaintenanceConfiguration::Default)
+    MaintenanceConfiguration.add_member_subclass(:unknown, Types::MaintenanceConfiguration::Unknown)
+    MaintenanceConfiguration.struct_class = Types::MaintenanceConfiguration
+
+    MaintenanceSchedule.add_member(:window, Shapes::ShapeRef.new(shape: WindowMaintenanceSchedule, location_name: "window"))
+    MaintenanceSchedule.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MaintenanceSchedule.add_member_subclass(:window, Types::MaintenanceSchedule::Window)
+    MaintenanceSchedule.add_member_subclass(:unknown, Types::MaintenanceSchedule::Unknown)
+    MaintenanceSchedule.struct_class = Types::MaintenanceSchedule
+
+    MediaConnectFlowRouterInputConfiguration.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
+    MediaConnectFlowRouterInputConfiguration.add_member(:flow_output_arn, Shapes::ShapeRef.new(shape: FlowOutputArn, location_name: "flowOutputArn"))
+    MediaConnectFlowRouterInputConfiguration.add_member(:source_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, required: true, location_name: "sourceTransitDecryption"))
+    MediaConnectFlowRouterInputConfiguration.struct_class = Types::MediaConnectFlowRouterInputConfiguration
+
+    MediaConnectFlowRouterInputStreamDetails.struct_class = Types::MediaConnectFlowRouterInputStreamDetails
+
+    MediaConnectFlowRouterOutputConfiguration.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
+    MediaConnectFlowRouterOutputConfiguration.add_member(:flow_source_arn, Shapes::ShapeRef.new(shape: FlowSourceArn, location_name: "flowSourceArn"))
+    MediaConnectFlowRouterOutputConfiguration.add_member(:destination_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, required: true, location_name: "destinationTransitEncryption"))
+    MediaConnectFlowRouterOutputConfiguration.struct_class = Types::MediaConnectFlowRouterOutputConfiguration
+
+    MediaConnectFlowRouterOutputStreamDetails.struct_class = Types::MediaConnectFlowRouterOutputStreamDetails
+
+    MediaLiveInputRouterOutputConfiguration.add_member(:media_live_input_arn, Shapes::ShapeRef.new(shape: MediaLiveInputArn, location_name: "mediaLiveInputArn"))
+    MediaLiveInputRouterOutputConfiguration.add_member(:media_live_pipeline_id, Shapes::ShapeRef.new(shape: MediaLiveInputPipelineId, location_name: "mediaLivePipelineId"))
+    MediaLiveInputRouterOutputConfiguration.add_member(:destination_transit_encryption, Shapes::ShapeRef.new(shape: MediaLiveTransitEncryption, required: true, location_name: "destinationTransitEncryption"))
+    MediaLiveInputRouterOutputConfiguration.struct_class = Types::MediaLiveInputRouterOutputConfiguration
+
+    MediaLiveInputRouterOutputStreamDetails.struct_class = Types::MediaLiveInputRouterOutputStreamDetails
+
+    MediaLiveTransitEncryption.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: MediaLiveTransitEncryptionKeyType, location_name: "encryptionKeyType"))
+    MediaLiveTransitEncryption.add_member(:encryption_key_configuration, Shapes::ShapeRef.new(shape: MediaLiveTransitEncryptionKeyConfiguration, required: true, location_name: "encryptionKeyConfiguration"))
+    MediaLiveTransitEncryption.struct_class = Types::MediaLiveTransitEncryption
+
+    MediaLiveTransitEncryptionKeyConfiguration.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerEncryptionKeyConfiguration, location_name: "secretsManager"))
+    MediaLiveTransitEncryptionKeyConfiguration.add_member(:automatic, Shapes::ShapeRef.new(shape: AutomaticEncryptionKeyConfiguration, location_name: "automatic"))
+    MediaLiveTransitEncryptionKeyConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MediaLiveTransitEncryptionKeyConfiguration.add_member_subclass(:secrets_manager, Types::MediaLiveTransitEncryptionKeyConfiguration::SecretsManager)
+    MediaLiveTransitEncryptionKeyConfiguration.add_member_subclass(:automatic, Types::MediaLiveTransitEncryptionKeyConfiguration::Automatic)
+    MediaLiveTransitEncryptionKeyConfiguration.add_member_subclass(:unknown, Types::MediaLiveTransitEncryptionKeyConfiguration::Unknown)
+    MediaLiveTransitEncryptionKeyConfiguration.struct_class = Types::MediaLiveTransitEncryptionKeyConfiguration
 
     MediaStream.add_member(:attributes, Shapes::ShapeRef.new(shape: MediaStreamAttributes, location_name: "attributes"))
     MediaStream.add_member(:clock_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "clockRate"))
@@ -958,6 +1497,29 @@ module Aws::MediaConnect
     MediaStreamSourceConfigurationRequest.add_member(:input_configurations, Shapes::ShapeRef.new(shape: __listOfInputConfigurationRequest, location_name: "inputConfigurations"))
     MediaStreamSourceConfigurationRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "mediaStreamName"))
     MediaStreamSourceConfigurationRequest.struct_class = Types::MediaStreamSourceConfigurationRequest
+
+    MergeRouterInputConfiguration.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "networkInterfaceArn"))
+    MergeRouterInputConfiguration.add_member(:protocol_configurations, Shapes::ShapeRef.new(shape: MergeRouterInputProtocolConfigurationList, required: true, location_name: "protocolConfigurations"))
+    MergeRouterInputConfiguration.add_member(:merge_recovery_window_milliseconds, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "mergeRecoveryWindowMilliseconds"))
+    MergeRouterInputConfiguration.struct_class = Types::MergeRouterInputConfiguration
+
+    MergeRouterInputIndexedStreamDetails.add_member(:source_index, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "sourceIndex"))
+    MergeRouterInputIndexedStreamDetails.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "sourceIpAddress"))
+    MergeRouterInputIndexedStreamDetails.struct_class = Types::MergeRouterInputIndexedStreamDetails
+
+    MergeRouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
+    MergeRouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
+    MergeRouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MergeRouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::MergeRouterInputProtocolConfiguration::Rtp)
+    MergeRouterInputProtocolConfiguration.add_member_subclass(:rist, Types::MergeRouterInputProtocolConfiguration::Rist)
+    MergeRouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::MergeRouterInputProtocolConfiguration::Unknown)
+    MergeRouterInputProtocolConfiguration.struct_class = Types::MergeRouterInputProtocolConfiguration
+
+    MergeRouterInputProtocolConfigurationList.member = Shapes::ShapeRef.new(shape: MergeRouterInputProtocolConfiguration)
+
+    MergeRouterInputStreamDetails.add_member(:source_index_zero_stream_details, Shapes::ShapeRef.new(shape: MergeRouterInputIndexedStreamDetails, required: true, location_name: "sourceIndexZeroStreamDetails"))
+    MergeRouterInputStreamDetails.add_member(:source_index_one_stream_details, Shapes::ShapeRef.new(shape: MergeRouterInputIndexedStreamDetails, required: true, location_name: "sourceIndexOneStreamDetails"))
+    MergeRouterInputStreamDetails.struct_class = Types::MergeRouterInputStreamDetails
 
     MessageDetail.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     MessageDetail.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1016,7 +1578,22 @@ module Aws::MediaConnect
     Output.add_member(:bridge_ports, Shapes::ShapeRef.new(shape: __listOfInteger, location_name: "bridgePorts"))
     Output.add_member(:output_status, Shapes::ShapeRef.new(shape: OutputStatus, location_name: "outputStatus"))
     Output.add_member(:peer_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "peerIpAddress"))
+    Output.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
+    Output.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
+    Output.add_member(:connected_router_input_arn, Shapes::ShapeRef.new(shape: String, location_name: "connectedRouterInputArn"))
     Output.struct_class = Types::Output
+
+    PreferredDayTimeMaintenanceConfiguration.add_member(:day, Shapes::ShapeRef.new(shape: Day, required: true, location_name: "day"))
+    PreferredDayTimeMaintenanceConfiguration.add_member(:time, Shapes::ShapeRef.new(shape: String, required: true, location_name: "time"))
+    PreferredDayTimeMaintenanceConfiguration.struct_class = Types::PreferredDayTimeMaintenanceConfiguration
+
+    PublicRouterNetworkInterfaceConfiguration.add_member(:allow_rules, Shapes::ShapeRef.new(shape: PublicRouterNetworkInterfaceConfigurationAllowRulesList, required: true, location_name: "allowRules"))
+    PublicRouterNetworkInterfaceConfiguration.struct_class = Types::PublicRouterNetworkInterfaceConfiguration
+
+    PublicRouterNetworkInterfaceConfigurationAllowRulesList.member = Shapes::ShapeRef.new(shape: PublicRouterNetworkInterfaceRule)
+
+    PublicRouterNetworkInterfaceRule.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cidr"))
+    PublicRouterNetworkInterfaceRule.struct_class = Types::PublicRouterNetworkInterfaceRule
 
     PurchaseOfferingRequest.add_member(:offering_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "OfferingArn"))
     PurchaseOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reservationName"))
@@ -1094,6 +1671,22 @@ module Aws::MediaConnect
     ResourceSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ResourceSpecification.struct_class = Types::ResourceSpecification
 
+    RestartRouterInputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    RestartRouterInputRequest.struct_class = Types::RestartRouterInputRequest
+
+    RestartRouterInputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    RestartRouterInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RestartRouterInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterInputState, required: true, location_name: "state"))
+    RestartRouterInputResponse.struct_class = Types::RestartRouterInputResponse
+
+    RestartRouterOutputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "Arn"))
+    RestartRouterOutputRequest.struct_class = Types::RestartRouterOutputRequest
+
+    RestartRouterOutputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    RestartRouterOutputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RestartRouterOutputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterOutputState, required: true, location_name: "state"))
+    RestartRouterOutputResponse.struct_class = Types::RestartRouterOutputResponse
+
     RevokeFlowEntitlementRequest.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: RevokeFlowEntitlementRequestEntitlementArnString, required: true, location: "uri", location_name: "EntitlementArn"))
     RevokeFlowEntitlementRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: RevokeFlowEntitlementRequestFlowArnString, required: true, location: "uri", location_name: "FlowArn"))
     RevokeFlowEntitlementRequest.struct_class = Types::RevokeFlowEntitlementRequest
@@ -1101,6 +1694,282 @@ module Aws::MediaConnect
     RevokeFlowEntitlementResponse.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: String, location_name: "entitlementArn"))
     RevokeFlowEntitlementResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))
     RevokeFlowEntitlementResponse.struct_class = Types::RevokeFlowEntitlementResponse
+
+    RistRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: RistRouterInputConfigurationPortInteger, required: true, location_name: "port"))
+    RistRouterInputConfiguration.add_member(:recovery_latency_milliseconds, Shapes::ShapeRef.new(shape: RistRouterInputConfigurationRecoveryLatencyMillisecondsLong, required: true, location_name: "recoveryLatencyMilliseconds"))
+    RistRouterInputConfiguration.struct_class = Types::RistRouterInputConfiguration
+
+    RistRouterOutputConfiguration.add_member(:destination_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationAddress"))
+    RistRouterOutputConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: RistRouterOutputConfigurationDestinationPortInteger, required: true, location_name: "destinationPort"))
+    RistRouterOutputConfiguration.struct_class = Types::RistRouterOutputConfiguration
+
+    RouterInput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RouterInput.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    RouterInput.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    RouterInput.add_member(:state, Shapes::ShapeRef.new(shape: RouterInputState, required: true, location_name: "state"))
+    RouterInput.add_member(:input_type, Shapes::ShapeRef.new(shape: RouterInputType, required: true, location_name: "inputType"))
+    RouterInput.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterInputConfiguration, required: true, location_name: "configuration"))
+    RouterInput.add_member(:routed_outputs, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "routedOutputs"))
+    RouterInput.add_member(:maximum_routed_outputs, Shapes::ShapeRef.new(shape: Integer, location_name: "maximumRoutedOutputs"))
+    RouterInput.add_member(:region_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "regionName"))
+    RouterInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
+    RouterInput.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "maximumBitrate"))
+    RouterInput.add_member(:tier, Shapes::ShapeRef.new(shape: RouterInputTier, required: true, location_name: "tier"))
+    RouterInput.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, required: true, location_name: "routingScope"))
+    RouterInput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    RouterInput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    RouterInput.add_member(:messages, Shapes::ShapeRef.new(shape: RouterInputMessages, required: true, location_name: "messages"))
+    RouterInput.add_member(:transit_encryption, Shapes::ShapeRef.new(shape: RouterInputTransitEncryption, required: true, location_name: "transitEncryption"))
+    RouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, required: true, location_name: "tags"))
+    RouterInput.add_member(:stream_details, Shapes::ShapeRef.new(shape: RouterInputStreamDetails, required: true, location_name: "streamDetails"))
+    RouterInput.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ipAddress"))
+    RouterInput.add_member(:maintenance_type, Shapes::ShapeRef.new(shape: MaintenanceType, required: true, location_name: "maintenanceType"))
+    RouterInput.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, required: true, location_name: "maintenanceConfiguration"))
+    RouterInput.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, location_name: "maintenanceScheduleType"))
+    RouterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    RouterInput.struct_class = Types::RouterInput
+
+    RouterInputArnList.member = Shapes::ShapeRef.new(shape: RouterInputArn)
+
+    RouterInputConfiguration.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterInputConfiguration, location_name: "standard"))
+    RouterInputConfiguration.add_member(:failover, Shapes::ShapeRef.new(shape: FailoverRouterInputConfiguration, location_name: "failover"))
+    RouterInputConfiguration.add_member(:merge, Shapes::ShapeRef.new(shape: MergeRouterInputConfiguration, location_name: "merge"))
+    RouterInputConfiguration.add_member(:media_connect_flow, Shapes::ShapeRef.new(shape: MediaConnectFlowRouterInputConfiguration, location_name: "mediaConnectFlow"))
+    RouterInputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterInputConfiguration.add_member_subclass(:standard, Types::RouterInputConfiguration::Standard)
+    RouterInputConfiguration.add_member_subclass(:failover, Types::RouterInputConfiguration::Failover)
+    RouterInputConfiguration.add_member_subclass(:merge, Types::RouterInputConfiguration::Merge)
+    RouterInputConfiguration.add_member_subclass(:media_connect_flow, Types::RouterInputConfiguration::MediaConnectFlow)
+    RouterInputConfiguration.add_member_subclass(:unknown, Types::RouterInputConfiguration::Unknown)
+    RouterInputConfiguration.struct_class = Types::RouterInputConfiguration
+
+    RouterInputFilter.add_member(:region_names, Shapes::ShapeRef.new(shape: StringList, location_name: "regionNames"))
+    RouterInputFilter.add_member(:input_types, Shapes::ShapeRef.new(shape: RouterInputTypeList, location_name: "inputTypes"))
+    RouterInputFilter.add_member(:name_contains, Shapes::ShapeRef.new(shape: StringList, location_name: "nameContains"))
+    RouterInputFilter.add_member(:network_interface_arns, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArnList, location_name: "networkInterfaceArns"))
+    RouterInputFilter.add_member(:routing_scopes, Shapes::ShapeRef.new(shape: RoutingScopeList, location_name: "routingScopes"))
+    RouterInputFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterInputFilter.add_member_subclass(:region_names, Types::RouterInputFilter::RegionNames)
+    RouterInputFilter.add_member_subclass(:input_types, Types::RouterInputFilter::InputTypes)
+    RouterInputFilter.add_member_subclass(:name_contains, Types::RouterInputFilter::NameContains)
+    RouterInputFilter.add_member_subclass(:network_interface_arns, Types::RouterInputFilter::NetworkInterfaceArns)
+    RouterInputFilter.add_member_subclass(:routing_scopes, Types::RouterInputFilter::RoutingScopes)
+    RouterInputFilter.add_member_subclass(:unknown, Types::RouterInputFilter::Unknown)
+    RouterInputFilter.struct_class = Types::RouterInputFilter
+
+    RouterInputFilterList.member = Shapes::ShapeRef.new(shape: RouterInputFilter)
+
+    RouterInputList.member = Shapes::ShapeRef.new(shape: RouterInput)
+
+    RouterInputMessage.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    RouterInputMessage.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RouterInputMessage.struct_class = Types::RouterInputMessage
+
+    RouterInputMessages.member = Shapes::ShapeRef.new(shape: RouterInputMessage)
+
+    RouterInputMetadata.add_member(:transport_stream_media_info, Shapes::ShapeRef.new(shape: TransportMediaInfo, location_name: "transportStreamMediaInfo"))
+    RouterInputMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterInputMetadata.add_member_subclass(:transport_stream_media_info, Types::RouterInputMetadata::TransportStreamMediaInfo)
+    RouterInputMetadata.add_member_subclass(:unknown, Types::RouterInputMetadata::Unknown)
+    RouterInputMetadata.struct_class = Types::RouterInputMetadata
+
+    RouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
+    RouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
+    RouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
+    RouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
+    RouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterInputProtocolConfiguration::Rtp)
+    RouterInputProtocolConfiguration.add_member_subclass(:rist, Types::RouterInputProtocolConfiguration::Rist)
+    RouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterInputProtocolConfiguration::SrtListener)
+    RouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterInputProtocolConfiguration::SrtCaller)
+    RouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterInputProtocolConfiguration::Unknown)
+    RouterInputProtocolConfiguration.struct_class = Types::RouterInputProtocolConfiguration
+
+    RouterInputServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RouterInputServiceQuotaExceededException.struct_class = Types::RouterInputServiceQuotaExceededException
+
+    RouterInputSourceMetadataDetails.add_member(:source_metadata_messages, Shapes::ShapeRef.new(shape: RouterInputMessages, required: true, location_name: "sourceMetadataMessages"))
+    RouterInputSourceMetadataDetails.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "timestamp"))
+    RouterInputSourceMetadataDetails.add_member(:router_input_metadata, Shapes::ShapeRef.new(shape: RouterInputMetadata, location_name: "routerInputMetadata"))
+    RouterInputSourceMetadataDetails.struct_class = Types::RouterInputSourceMetadataDetails
+
+    RouterInputStreamDetails.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterInputStreamDetails, location_name: "standard"))
+    RouterInputStreamDetails.add_member(:failover, Shapes::ShapeRef.new(shape: FailoverRouterInputStreamDetails, location_name: "failover"))
+    RouterInputStreamDetails.add_member(:merge, Shapes::ShapeRef.new(shape: MergeRouterInputStreamDetails, location_name: "merge"))
+    RouterInputStreamDetails.add_member(:media_connect_flow, Shapes::ShapeRef.new(shape: MediaConnectFlowRouterInputStreamDetails, location_name: "mediaConnectFlow"))
+    RouterInputStreamDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterInputStreamDetails.add_member_subclass(:standard, Types::RouterInputStreamDetails::Standard)
+    RouterInputStreamDetails.add_member_subclass(:failover, Types::RouterInputStreamDetails::Failover)
+    RouterInputStreamDetails.add_member_subclass(:merge, Types::RouterInputStreamDetails::Merge)
+    RouterInputStreamDetails.add_member_subclass(:media_connect_flow, Types::RouterInputStreamDetails::MediaConnectFlow)
+    RouterInputStreamDetails.add_member_subclass(:unknown, Types::RouterInputStreamDetails::Unknown)
+    RouterInputStreamDetails.struct_class = Types::RouterInputStreamDetails
+
+    RouterInputThumbnailDetails.add_member(:thumbnail_messages, Shapes::ShapeRef.new(shape: RouterInputMessages, required: true, location_name: "thumbnailMessages"))
+    RouterInputThumbnailDetails.add_member(:thumbnail, Shapes::ShapeRef.new(shape: Blob, location_name: "thumbnail"))
+    RouterInputThumbnailDetails.add_member(:timecode, Shapes::ShapeRef.new(shape: String, location_name: "timecode"))
+    RouterInputThumbnailDetails.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timestamp"))
+    RouterInputThumbnailDetails.struct_class = Types::RouterInputThumbnailDetails
+
+    RouterInputTransitEncryption.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: RouterInputTransitEncryptionKeyType, location_name: "encryptionKeyType"))
+    RouterInputTransitEncryption.add_member(:encryption_key_configuration, Shapes::ShapeRef.new(shape: RouterInputTransitEncryptionKeyConfiguration, required: true, location_name: "encryptionKeyConfiguration"))
+    RouterInputTransitEncryption.struct_class = Types::RouterInputTransitEncryption
+
+    RouterInputTransitEncryptionKeyConfiguration.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerEncryptionKeyConfiguration, location_name: "secretsManager"))
+    RouterInputTransitEncryptionKeyConfiguration.add_member(:automatic, Shapes::ShapeRef.new(shape: AutomaticEncryptionKeyConfiguration, location_name: "automatic"))
+    RouterInputTransitEncryptionKeyConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterInputTransitEncryptionKeyConfiguration.add_member_subclass(:secrets_manager, Types::RouterInputTransitEncryptionKeyConfiguration::SecretsManager)
+    RouterInputTransitEncryptionKeyConfiguration.add_member_subclass(:automatic, Types::RouterInputTransitEncryptionKeyConfiguration::Automatic)
+    RouterInputTransitEncryptionKeyConfiguration.add_member_subclass(:unknown, Types::RouterInputTransitEncryptionKeyConfiguration::Unknown)
+    RouterInputTransitEncryptionKeyConfiguration.struct_class = Types::RouterInputTransitEncryptionKeyConfiguration
+
+    RouterInputTypeList.member = Shapes::ShapeRef.new(shape: RouterInputType)
+
+    RouterNetworkInterface.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RouterNetworkInterface.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "arn"))
+    RouterNetworkInterface.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    RouterNetworkInterface.add_member(:state, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceState, required: true, location_name: "state"))
+    RouterNetworkInterface.add_member(:network_interface_type, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceType, required: true, location_name: "networkInterfaceType"))
+    RouterNetworkInterface.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceConfiguration, required: true, location_name: "configuration"))
+    RouterNetworkInterface.add_member(:associated_output_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "associatedOutputCount"))
+    RouterNetworkInterface.add_member(:associated_input_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "associatedInputCount"))
+    RouterNetworkInterface.add_member(:region_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "regionName"))
+    RouterNetworkInterface.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    RouterNetworkInterface.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    RouterNetworkInterface.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, required: true, location_name: "tags"))
+    RouterNetworkInterface.struct_class = Types::RouterNetworkInterface
+
+    RouterNetworkInterfaceArnList.member = Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn)
+
+    RouterNetworkInterfaceConfiguration.add_member(:public, Shapes::ShapeRef.new(shape: PublicRouterNetworkInterfaceConfiguration, location_name: "public"))
+    RouterNetworkInterfaceConfiguration.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcRouterNetworkInterfaceConfiguration, location_name: "vpc"))
+    RouterNetworkInterfaceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterNetworkInterfaceConfiguration.add_member_subclass(:public, Types::RouterNetworkInterfaceConfiguration::Public)
+    RouterNetworkInterfaceConfiguration.add_member_subclass(:vpc, Types::RouterNetworkInterfaceConfiguration::Vpc)
+    RouterNetworkInterfaceConfiguration.add_member_subclass(:unknown, Types::RouterNetworkInterfaceConfiguration::Unknown)
+    RouterNetworkInterfaceConfiguration.struct_class = Types::RouterNetworkInterfaceConfiguration
+
+    RouterNetworkInterfaceFilter.add_member(:region_names, Shapes::ShapeRef.new(shape: StringList, location_name: "regionNames"))
+    RouterNetworkInterfaceFilter.add_member(:network_interface_types, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceTypeList, location_name: "networkInterfaceTypes"))
+    RouterNetworkInterfaceFilter.add_member(:name_contains, Shapes::ShapeRef.new(shape: StringList, location_name: "nameContains"))
+    RouterNetworkInterfaceFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterNetworkInterfaceFilter.add_member_subclass(:region_names, Types::RouterNetworkInterfaceFilter::RegionNames)
+    RouterNetworkInterfaceFilter.add_member_subclass(:network_interface_types, Types::RouterNetworkInterfaceFilter::NetworkInterfaceTypes)
+    RouterNetworkInterfaceFilter.add_member_subclass(:name_contains, Types::RouterNetworkInterfaceFilter::NameContains)
+    RouterNetworkInterfaceFilter.add_member_subclass(:unknown, Types::RouterNetworkInterfaceFilter::Unknown)
+    RouterNetworkInterfaceFilter.struct_class = Types::RouterNetworkInterfaceFilter
+
+    RouterNetworkInterfaceFilterList.member = Shapes::ShapeRef.new(shape: RouterNetworkInterfaceFilter)
+
+    RouterNetworkInterfaceList.member = Shapes::ShapeRef.new(shape: RouterNetworkInterface)
+
+    RouterNetworkInterfaceServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RouterNetworkInterfaceServiceQuotaExceededException.struct_class = Types::RouterNetworkInterfaceServiceQuotaExceededException
+
+    RouterNetworkInterfaceTypeList.member = Shapes::ShapeRef.new(shape: RouterNetworkInterfaceType)
+
+    RouterOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RouterOutput.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    RouterOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    RouterOutput.add_member(:state, Shapes::ShapeRef.new(shape: RouterOutputState, required: true, location_name: "state"))
+    RouterOutput.add_member(:output_type, Shapes::ShapeRef.new(shape: RouterOutputType, required: true, location_name: "outputType"))
+    RouterOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterOutputConfiguration, required: true, location_name: "configuration"))
+    RouterOutput.add_member(:routed_state, Shapes::ShapeRef.new(shape: RouterOutputRoutedState, required: true, location_name: "routedState"))
+    RouterOutput.add_member(:region_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "regionName"))
+    RouterOutput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
+    RouterOutput.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "maximumBitrate"))
+    RouterOutput.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, required: true, location_name: "routingScope"))
+    RouterOutput.add_member(:tier, Shapes::ShapeRef.new(shape: RouterOutputTier, required: true, location_name: "tier"))
+    RouterOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    RouterOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    RouterOutput.add_member(:messages, Shapes::ShapeRef.new(shape: RouterOutputMessages, required: true, location_name: "messages"))
+    RouterOutput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, required: true, location_name: "tags"))
+    RouterOutput.add_member(:stream_details, Shapes::ShapeRef.new(shape: RouterOutputStreamDetails, required: true, location_name: "streamDetails"))
+    RouterOutput.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ipAddress"))
+    RouterOutput.add_member(:routed_input_arn, Shapes::ShapeRef.new(shape: RouterInputArn, location_name: "routedInputArn"))
+    RouterOutput.add_member(:maintenance_type, Shapes::ShapeRef.new(shape: MaintenanceType, required: true, location_name: "maintenanceType"))
+    RouterOutput.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, required: true, location_name: "maintenanceConfiguration"))
+    RouterOutput.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, location_name: "maintenanceScheduleType"))
+    RouterOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    RouterOutput.struct_class = Types::RouterOutput
+
+    RouterOutputConfiguration.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterOutputConfiguration, location_name: "standard"))
+    RouterOutputConfiguration.add_member(:media_connect_flow, Shapes::ShapeRef.new(shape: MediaConnectFlowRouterOutputConfiguration, location_name: "mediaConnectFlow"))
+    RouterOutputConfiguration.add_member(:media_live_input, Shapes::ShapeRef.new(shape: MediaLiveInputRouterOutputConfiguration, location_name: "mediaLiveInput"))
+    RouterOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterOutputConfiguration.add_member_subclass(:standard, Types::RouterOutputConfiguration::Standard)
+    RouterOutputConfiguration.add_member_subclass(:media_connect_flow, Types::RouterOutputConfiguration::MediaConnectFlow)
+    RouterOutputConfiguration.add_member_subclass(:media_live_input, Types::RouterOutputConfiguration::MediaLiveInput)
+    RouterOutputConfiguration.add_member_subclass(:unknown, Types::RouterOutputConfiguration::Unknown)
+    RouterOutputConfiguration.struct_class = Types::RouterOutputConfiguration
+
+    RouterOutputFilter.add_member(:region_names, Shapes::ShapeRef.new(shape: StringList, location_name: "regionNames"))
+    RouterOutputFilter.add_member(:output_types, Shapes::ShapeRef.new(shape: RouterOutputTypeList, location_name: "outputTypes"))
+    RouterOutputFilter.add_member(:name_contains, Shapes::ShapeRef.new(shape: StringList, location_name: "nameContains"))
+    RouterOutputFilter.add_member(:network_interface_arns, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArnList, location_name: "networkInterfaceArns"))
+    RouterOutputFilter.add_member(:routed_input_arns, Shapes::ShapeRef.new(shape: RouterInputArnList, location_name: "routedInputArns"))
+    RouterOutputFilter.add_member(:routing_scopes, Shapes::ShapeRef.new(shape: RoutingScopeList, location_name: "routingScopes"))
+    RouterOutputFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterOutputFilter.add_member_subclass(:region_names, Types::RouterOutputFilter::RegionNames)
+    RouterOutputFilter.add_member_subclass(:output_types, Types::RouterOutputFilter::OutputTypes)
+    RouterOutputFilter.add_member_subclass(:name_contains, Types::RouterOutputFilter::NameContains)
+    RouterOutputFilter.add_member_subclass(:network_interface_arns, Types::RouterOutputFilter::NetworkInterfaceArns)
+    RouterOutputFilter.add_member_subclass(:routed_input_arns, Types::RouterOutputFilter::RoutedInputArns)
+    RouterOutputFilter.add_member_subclass(:routing_scopes, Types::RouterOutputFilter::RoutingScopes)
+    RouterOutputFilter.add_member_subclass(:unknown, Types::RouterOutputFilter::Unknown)
+    RouterOutputFilter.struct_class = Types::RouterOutputFilter
+
+    RouterOutputFilterList.member = Shapes::ShapeRef.new(shape: RouterOutputFilter)
+
+    RouterOutputList.member = Shapes::ShapeRef.new(shape: RouterOutput)
+
+    RouterOutputMessage.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    RouterOutputMessage.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RouterOutputMessage.struct_class = Types::RouterOutputMessage
+
+    RouterOutputMessages.member = Shapes::ShapeRef.new(shape: RouterOutputMessage)
+
+    RouterOutputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterOutputConfiguration, location_name: "rtp"))
+    RouterOutputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterOutputConfiguration, location_name: "rist"))
+    RouterOutputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfiguration, location_name: "srtListener"))
+    RouterOutputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterOutputConfiguration, location_name: "srtCaller"))
+    RouterOutputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterOutputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterOutputProtocolConfiguration::Rtp)
+    RouterOutputProtocolConfiguration.add_member_subclass(:rist, Types::RouterOutputProtocolConfiguration::Rist)
+    RouterOutputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterOutputProtocolConfiguration::SrtListener)
+    RouterOutputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterOutputProtocolConfiguration::SrtCaller)
+    RouterOutputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterOutputProtocolConfiguration::Unknown)
+    RouterOutputProtocolConfiguration.struct_class = Types::RouterOutputProtocolConfiguration
+
+    RouterOutputServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RouterOutputServiceQuotaExceededException.struct_class = Types::RouterOutputServiceQuotaExceededException
+
+    RouterOutputStreamDetails.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterOutputStreamDetails, location_name: "standard"))
+    RouterOutputStreamDetails.add_member(:media_connect_flow, Shapes::ShapeRef.new(shape: MediaConnectFlowRouterOutputStreamDetails, location_name: "mediaConnectFlow"))
+    RouterOutputStreamDetails.add_member(:media_live_input, Shapes::ShapeRef.new(shape: MediaLiveInputRouterOutputStreamDetails, location_name: "mediaLiveInput"))
+    RouterOutputStreamDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RouterOutputStreamDetails.add_member_subclass(:standard, Types::RouterOutputStreamDetails::Standard)
+    RouterOutputStreamDetails.add_member_subclass(:media_connect_flow, Types::RouterOutputStreamDetails::MediaConnectFlow)
+    RouterOutputStreamDetails.add_member_subclass(:media_live_input, Types::RouterOutputStreamDetails::MediaLiveInput)
+    RouterOutputStreamDetails.add_member_subclass(:unknown, Types::RouterOutputStreamDetails::Unknown)
+    RouterOutputStreamDetails.struct_class = Types::RouterOutputStreamDetails
+
+    RouterOutputTypeList.member = Shapes::ShapeRef.new(shape: RouterOutputType)
+
+    RoutingScopeList.member = Shapes::ShapeRef.new(shape: RoutingScope)
+
+    RtpRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: RtpRouterInputConfigurationPortInteger, required: true, location_name: "port"))
+    RtpRouterInputConfiguration.add_member(:forward_error_correction, Shapes::ShapeRef.new(shape: ForwardErrorCorrectionState, location_name: "forwardErrorCorrection"))
+    RtpRouterInputConfiguration.struct_class = Types::RtpRouterInputConfiguration
+
+    RtpRouterOutputConfiguration.add_member(:destination_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationAddress"))
+    RtpRouterOutputConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: RtpRouterOutputConfigurationDestinationPortInteger, required: true, location_name: "destinationPort"))
+    RtpRouterOutputConfiguration.add_member(:forward_error_correction, Shapes::ShapeRef.new(shape: ForwardErrorCorrectionState, location_name: "forwardErrorCorrection"))
+    RtpRouterOutputConfiguration.struct_class = Types::RtpRouterOutputConfiguration
+
+    SecretsManagerEncryptionKeyConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretArn"))
+    SecretsManagerEncryptionKeyConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    SecretsManagerEncryptionKeyConfiguration.struct_class = Types::SecretsManagerEncryptionKeyConfiguration
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -1129,6 +1998,8 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: String, location_name: "whitelistCidr"))
     SetSourceRequest.add_member(:gateway_bridge_source, Shapes::ShapeRef.new(shape: SetGatewayBridgeSourceRequest, location_name: "gatewayBridgeSource"))
     SetSourceRequest.add_member(:source_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "sourceTags"))
+    SetSourceRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
+    SetSourceRequest.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
     SetSourceRequest.struct_class = Types::SetSourceRequest
 
     SilentAudio.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
@@ -1151,10 +2022,59 @@ module Aws::MediaConnect
     Source.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: String, location_name: "whitelistCidr"))
     Source.add_member(:gateway_bridge_source, Shapes::ShapeRef.new(shape: GatewayBridgeSource, location_name: "gatewayBridgeSource"))
     Source.add_member(:peer_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "peerIpAddress"))
+    Source.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
+    Source.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
+    Source.add_member(:connected_router_output_arn, Shapes::ShapeRef.new(shape: String, location_name: "connectedRouterOutputArn"))
     Source.struct_class = Types::Source
 
     SourcePriority.add_member(:primary_source, Shapes::ShapeRef.new(shape: String, location_name: "primarySource"))
     SourcePriority.struct_class = Types::SourcePriority
+
+    SrtCallerRouterInputConfiguration.add_member(:source_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceAddress"))
+    SrtCallerRouterInputConfiguration.add_member(:source_port, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfigurationSourcePortInteger, required: true, location_name: "sourcePort"))
+    SrtCallerRouterInputConfiguration.add_member(:minimum_latency_milliseconds, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfigurationMinimumLatencyMillisecondsLong, required: true, location_name: "minimumLatencyMilliseconds"))
+    SrtCallerRouterInputConfiguration.add_member(:stream_id, Shapes::ShapeRef.new(shape: String, location_name: "streamId"))
+    SrtCallerRouterInputConfiguration.add_member(:decryption_configuration, Shapes::ShapeRef.new(shape: SrtDecryptionConfiguration, location_name: "decryptionConfiguration"))
+    SrtCallerRouterInputConfiguration.struct_class = Types::SrtCallerRouterInputConfiguration
+
+    SrtCallerRouterOutputConfiguration.add_member(:destination_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationAddress"))
+    SrtCallerRouterOutputConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: SrtCallerRouterOutputConfigurationDestinationPortInteger, required: true, location_name: "destinationPort"))
+    SrtCallerRouterOutputConfiguration.add_member(:minimum_latency_milliseconds, Shapes::ShapeRef.new(shape: SrtCallerRouterOutputConfigurationMinimumLatencyMillisecondsLong, required: true, location_name: "minimumLatencyMilliseconds"))
+    SrtCallerRouterOutputConfiguration.add_member(:stream_id, Shapes::ShapeRef.new(shape: String, location_name: "streamId"))
+    SrtCallerRouterOutputConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: SrtEncryptionConfiguration, location_name: "encryptionConfiguration"))
+    SrtCallerRouterOutputConfiguration.struct_class = Types::SrtCallerRouterOutputConfiguration
+
+    SrtDecryptionConfiguration.add_member(:encryption_key, Shapes::ShapeRef.new(shape: SecretsManagerEncryptionKeyConfiguration, required: true, location_name: "encryptionKey"))
+    SrtDecryptionConfiguration.struct_class = Types::SrtDecryptionConfiguration
+
+    SrtEncryptionConfiguration.add_member(:encryption_key, Shapes::ShapeRef.new(shape: SecretsManagerEncryptionKeyConfiguration, required: true, location_name: "encryptionKey"))
+    SrtEncryptionConfiguration.struct_class = Types::SrtEncryptionConfiguration
+
+    SrtListenerRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfigurationPortInteger, required: true, location_name: "port"))
+    SrtListenerRouterInputConfiguration.add_member(:minimum_latency_milliseconds, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfigurationMinimumLatencyMillisecondsLong, required: true, location_name: "minimumLatencyMilliseconds"))
+    SrtListenerRouterInputConfiguration.add_member(:decryption_configuration, Shapes::ShapeRef.new(shape: SrtDecryptionConfiguration, location_name: "decryptionConfiguration"))
+    SrtListenerRouterInputConfiguration.struct_class = Types::SrtListenerRouterInputConfiguration
+
+    SrtListenerRouterOutputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfigurationPortInteger, required: true, location_name: "port"))
+    SrtListenerRouterOutputConfiguration.add_member(:minimum_latency_milliseconds, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfigurationMinimumLatencyMillisecondsLong, required: true, location_name: "minimumLatencyMilliseconds"))
+    SrtListenerRouterOutputConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: SrtEncryptionConfiguration, location_name: "encryptionConfiguration"))
+    SrtListenerRouterOutputConfiguration.struct_class = Types::SrtListenerRouterOutputConfiguration
+
+    StandardRouterInputConfiguration.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "networkInterfaceArn"))
+    StandardRouterInputConfiguration.add_member(:protocol_configuration, Shapes::ShapeRef.new(shape: RouterInputProtocolConfiguration, required: true, location_name: "protocolConfiguration"))
+    StandardRouterInputConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: RouterInputProtocol, location_name: "protocol"))
+    StandardRouterInputConfiguration.struct_class = Types::StandardRouterInputConfiguration
+
+    StandardRouterInputStreamDetails.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "sourceIpAddress"))
+    StandardRouterInputStreamDetails.struct_class = Types::StandardRouterInputStreamDetails
+
+    StandardRouterOutputConfiguration.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "networkInterfaceArn"))
+    StandardRouterOutputConfiguration.add_member(:protocol_configuration, Shapes::ShapeRef.new(shape: RouterOutputProtocolConfiguration, required: true, location_name: "protocolConfiguration"))
+    StandardRouterOutputConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: RouterOutputProtocol, location_name: "protocol"))
+    StandardRouterOutputConfiguration.struct_class = Types::StandardRouterOutputConfiguration
+
+    StandardRouterOutputStreamDetails.add_member(:destination_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpAddress"))
+    StandardRouterOutputStreamDetails.struct_class = Types::StandardRouterOutputStreamDetails
 
     StartFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: StartFlowRequestFlowArnString, required: true, location: "uri", location_name: "FlowArn"))
     StartFlowRequest.struct_class = Types::StartFlowRequest
@@ -1163,6 +2083,26 @@ module Aws::MediaConnect
     StartFlowResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     StartFlowResponse.struct_class = Types::StartFlowResponse
 
+    StartRouterInputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    StartRouterInputRequest.struct_class = Types::StartRouterInputRequest
+
+    StartRouterInputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    StartRouterInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    StartRouterInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterInputState, required: true, location_name: "state"))
+    StartRouterInputResponse.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, required: true, location_name: "maintenanceScheduleType"))
+    StartRouterInputResponse.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, required: true, location_name: "maintenanceSchedule"))
+    StartRouterInputResponse.struct_class = Types::StartRouterInputResponse
+
+    StartRouterOutputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "Arn"))
+    StartRouterOutputRequest.struct_class = Types::StartRouterOutputRequest
+
+    StartRouterOutputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    StartRouterOutputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    StartRouterOutputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterOutputState, required: true, location_name: "state"))
+    StartRouterOutputResponse.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, required: true, location_name: "maintenanceScheduleType"))
+    StartRouterOutputResponse.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, required: true, location_name: "maintenanceSchedule"))
+    StartRouterOutputResponse.struct_class = Types::StartRouterOutputResponse
+
     StopFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: StopFlowRequestFlowArnString, required: true, location: "uri", location_name: "FlowArn"))
     StopFlowRequest.struct_class = Types::StopFlowRequest
 
@@ -1170,9 +2110,42 @@ module Aws::MediaConnect
     StopFlowResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     StopFlowResponse.struct_class = Types::StopFlowResponse
 
+    StopRouterInputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    StopRouterInputRequest.struct_class = Types::StopRouterInputRequest
+
+    StopRouterInputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location_name: "arn"))
+    StopRouterInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    StopRouterInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterInputState, required: true, location_name: "state"))
+    StopRouterInputResponse.struct_class = Types::StopRouterInputResponse
+
+    StopRouterOutputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "Arn"))
+    StopRouterOutputRequest.struct_class = Types::StopRouterOutputRequest
+
+    StopRouterOutputResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "arn"))
+    StopRouterOutputResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    StopRouterOutputResponse.add_member(:state, Shapes::ShapeRef.new(shape: RouterOutputState, required: true, location_name: "state"))
+    StopRouterOutputResponse.struct_class = Types::StopRouterOutputResponse
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    TagGlobalResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ResourceArn"))
+    TagGlobalResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, required: true, location_name: "tags"))
+    TagGlobalResourceRequest.struct_class = Types::TagGlobalResourceRequest
+
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TakeRouterInputRequest.add_member(:router_output_arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "RouterOutputArn"))
+    TakeRouterInputRequest.add_member(:router_input_arn, Shapes::ShapeRef.new(shape: RouterInputArn, location_name: "routerInputArn"))
+    TakeRouterInputRequest.struct_class = Types::TakeRouterInputRequest
+
+    TakeRouterInputResponse.add_member(:routed_state, Shapes::ShapeRef.new(shape: RouterOutputRoutedState, required: true, location_name: "routedState"))
+    TakeRouterInputResponse.add_member(:router_output_arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location_name: "routerOutputArn"))
+    TakeRouterInputResponse.add_member(:router_output_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "routerOutputName"))
+    TakeRouterInputResponse.add_member(:router_input_arn, Shapes::ShapeRef.new(shape: RouterInputArn, location_name: "routerInputArn"))
+    TakeRouterInputResponse.add_member(:router_input_name, Shapes::ShapeRef.new(shape: String, location_name: "routerInputName"))
+    TakeRouterInputResponse.struct_class = Types::TakeRouterInputResponse
 
     ThumbnailDetails.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "flowArn"))
     ThumbnailDetails.add_member(:thumbnail, Shapes::ShapeRef.new(shape: String, location_name: "thumbnail"))
@@ -1220,6 +2193,10 @@ module Aws::MediaConnect
     TransportStreamProgram.add_member(:program_pid, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "programPid"))
     TransportStreamProgram.add_member(:streams, Shapes::ShapeRef.new(shape: __listOfTransportStream, required: true, location_name: "streams"))
     TransportStreamProgram.struct_class = Types::TransportStreamProgram
+
+    UntagGlobalResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagGlobalResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOfString, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagGlobalResourceRequest.struct_class = Types::UntagGlobalResourceRequest
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOfString, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1344,6 +2321,8 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:output_status, Shapes::ShapeRef.new(shape: OutputStatus, location_name: "outputStatus"))
     UpdateFlowOutputRequest.add_member(:ndi_program_name, Shapes::ShapeRef.new(shape: String, location_name: "ndiProgramName"))
     UpdateFlowOutputRequest.add_member(:ndi_speed_hq_quality, Shapes::ShapeRef.new(shape: Integer, location_name: "ndiSpeedHqQuality"))
+    UpdateFlowOutputRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
+    UpdateFlowOutputRequest.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest
 
     UpdateFlowOutputResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))
@@ -1381,6 +2360,8 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: String, location_name: "vpcInterfaceName"))
     UpdateFlowSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: String, location_name: "whitelistCidr"))
     UpdateFlowSourceRequest.add_member(:gateway_bridge_source, Shapes::ShapeRef.new(shape: UpdateGatewayBridgeSourceRequest, location_name: "gatewayBridgeSource"))
+    UpdateFlowSourceRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
+    UpdateFlowSourceRequest.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
     UpdateFlowSourceRequest.struct_class = Types::UpdateFlowSourceRequest
 
     UpdateFlowSourceResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))
@@ -1408,6 +2389,39 @@ module Aws::MediaConnect
     UpdateMaintenance.add_member(:maintenance_start_hour, Shapes::ShapeRef.new(shape: String, location_name: "maintenanceStartHour"))
     UpdateMaintenance.struct_class = Types::UpdateMaintenance
 
+    UpdateRouterInputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterInputArn, required: true, location: "uri", location_name: "Arn"))
+    UpdateRouterInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: UpdateRouterInputRequestNameString, location_name: "name"))
+    UpdateRouterInputRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterInputConfiguration, location_name: "configuration"))
+    UpdateRouterInputRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, location_name: "maximumBitrate"))
+    UpdateRouterInputRequest.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, location_name: "routingScope"))
+    UpdateRouterInputRequest.add_member(:tier, Shapes::ShapeRef.new(shape: RouterInputTier, location_name: "tier"))
+    UpdateRouterInputRequest.add_member(:transit_encryption, Shapes::ShapeRef.new(shape: RouterInputTransitEncryption, location_name: "transitEncryption"))
+    UpdateRouterInputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
+    UpdateRouterInputRequest.struct_class = Types::UpdateRouterInputRequest
+
+    UpdateRouterInputResponse.add_member(:router_input, Shapes::ShapeRef.new(shape: RouterInput, required: true, location_name: "routerInput"))
+    UpdateRouterInputResponse.struct_class = Types::UpdateRouterInputResponse
+
+    UpdateRouterNetworkInterfaceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location: "uri", location_name: "Arn"))
+    UpdateRouterNetworkInterfaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: UpdateRouterNetworkInterfaceRequestNameString, location_name: "name"))
+    UpdateRouterNetworkInterfaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceConfiguration, location_name: "configuration"))
+    UpdateRouterNetworkInterfaceRequest.struct_class = Types::UpdateRouterNetworkInterfaceRequest
+
+    UpdateRouterNetworkInterfaceResponse.add_member(:router_network_interface, Shapes::ShapeRef.new(shape: RouterNetworkInterface, required: true, location_name: "routerNetworkInterface"))
+    UpdateRouterNetworkInterfaceResponse.struct_class = Types::UpdateRouterNetworkInterfaceResponse
+
+    UpdateRouterOutputRequest.add_member(:arn, Shapes::ShapeRef.new(shape: RouterOutputArn, required: true, location: "uri", location_name: "Arn"))
+    UpdateRouterOutputRequest.add_member(:name, Shapes::ShapeRef.new(shape: UpdateRouterOutputRequestNameString, location_name: "name"))
+    UpdateRouterOutputRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RouterOutputConfiguration, location_name: "configuration"))
+    UpdateRouterOutputRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: Long, location_name: "maximumBitrate"))
+    UpdateRouterOutputRequest.add_member(:routing_scope, Shapes::ShapeRef.new(shape: RoutingScope, location_name: "routingScope"))
+    UpdateRouterOutputRequest.add_member(:tier, Shapes::ShapeRef.new(shape: RouterOutputTier, location_name: "tier"))
+    UpdateRouterOutputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
+    UpdateRouterOutputRequest.struct_class = Types::UpdateRouterOutputRequest
+
+    UpdateRouterOutputResponse.add_member(:router_output, Shapes::ShapeRef.new(shape: RouterOutput, required: true, location_name: "routerOutput"))
+    UpdateRouterOutputResponse.struct_class = Types::UpdateRouterOutputResponse
+
     VideoMonitoringSetting.add_member(:black_frames, Shapes::ShapeRef.new(shape: BlackFrames, location_name: "blackFrames"))
     VideoMonitoringSetting.add_member(:frozen_frames, Shapes::ShapeRef.new(shape: FrozenFrames, location_name: "frozenFrames"))
     VideoMonitoringSetting.struct_class = Types::VideoMonitoringSetting
@@ -1430,6 +2444,17 @@ module Aws::MediaConnect
     VpcInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
     VpcInterfaceRequest.add_member(:vpc_interface_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "vpcInterfaceTags"))
     VpcInterfaceRequest.struct_class = Types::VpcInterfaceRequest
+
+    VpcRouterNetworkInterfaceConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcRouterNetworkInterfaceConfigurationSecurityGroupIdsList, required: true, location_name: "securityGroupIds"))
+    VpcRouterNetworkInterfaceConfiguration.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
+    VpcRouterNetworkInterfaceConfiguration.struct_class = Types::VpcRouterNetworkInterfaceConfiguration
+
+    VpcRouterNetworkInterfaceConfigurationSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: String)
+
+    WindowMaintenanceSchedule.add_member(:start, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "start"))
+    WindowMaintenanceSchedule.add_member(:end, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "end"))
+    WindowMaintenanceSchedule.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "scheduledTime"))
+    WindowMaintenanceSchedule.struct_class = Types::WindowMaintenanceSchedule
 
     __listOfAddBridgeOutputRequest.member = Shapes::ShapeRef.new(shape: AddBridgeOutputRequest)
 
@@ -1616,6 +2641,45 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:batch_get_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetRouterInput"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerInputs"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:batch_get_router_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetRouterNetworkInterface"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerNetworkInterfaces"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetRouterNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetRouterNetworkInterfaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:batch_get_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetRouterOutput"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerOutputs"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetRouterOutputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:create_bridge, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBridge"
         o.http_method = "POST"
@@ -1660,6 +2724,51 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:create_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRouterInput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerInput"
+        o.input = Shapes::ShapeRef.new(shape: CreateRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: RouterInputServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_router_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRouterNetworkInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerNetworkInterface"
+        o.input = Shapes::ShapeRef.new(shape: CreateRouterNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRouterNetworkInterfaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: RouterNetworkInterfaceServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRouterOutput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerOutput"
+        o.input = Shapes::ShapeRef.new(shape: CreateRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRouterOutputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RouterOutputServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_bridge, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBridge"
         o.http_method = "DELETE"
@@ -1695,6 +2804,51 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/gateways/{GatewayArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRouterInput"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/routerInput/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_router_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRouterNetworkInterface"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/routerNetworkInterface/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRouterNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRouterNetworkInterfaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRouterOutput"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/routerOutput/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRouterOutputResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1827,6 +2981,79 @@ module Aws::MediaConnect
         o.output = Shapes::ShapeRef.new(shape: DescribeReservationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRouterInput"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerInput/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: GetRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_router_input_source_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRouterInputSourceMetadata"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerInput/{Arn}/source-metadata"
+        o.input = Shapes::ShapeRef.new(shape: GetRouterInputSourceMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRouterInputSourceMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_router_input_thumbnail, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRouterInputThumbnail"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerInput/{Arn}/thumbnail"
+        o.input = Shapes::ShapeRef.new(shape: GetRouterInputThumbnailRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRouterInputThumbnailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_router_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRouterNetworkInterface"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerNetworkInterface/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: GetRouterNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRouterNetworkInterfaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRouterOutput"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/routerOutput/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: GetRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRouterOutputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1976,6 +3203,74 @@ module Aws::MediaConnect
         )
       end)
 
+      api.add_operation(:list_router_inputs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRouterInputs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerInputs"
+        o.input = Shapes::ShapeRef.new(shape: ListRouterInputsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRouterInputsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_router_network_interfaces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRouterNetworkInterfaces"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerNetworkInterfaces"
+        o.input = Shapes::ShapeRef.new(shape: ListRouterNetworkInterfacesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRouterNetworkInterfacesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_router_outputs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRouterOutputs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerOutputs"
+        o.input = Shapes::ShapeRef.new(shape: ListRouterOutputsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRouterOutputsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_global_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForGlobalResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/global/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForGlobalResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForGlobalResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -2087,6 +3382,36 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:restart_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestartRouterInput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerInput/restart/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: RestartRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestartRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:restart_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestartRouterOutput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerOutput/restart/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: RestartRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestartRouterOutputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:revoke_flow_entitlement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RevokeFlowEntitlement"
         o.http_method = "DELETE"
@@ -2115,6 +3440,36 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:start_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRouterInput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerInput/start/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: StartRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:start_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRouterOutput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerOutput/start/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: StartRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRouterOutputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:stop_flow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopFlow"
         o.http_method = "POST"
@@ -2129,11 +3484,78 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:stop_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopRouterInput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerInput/stop/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: StopRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:stop_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopRouterOutput"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/routerOutput/stop/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: StopRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopRouterOutputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:tag_global_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagGlobalResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/global/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagGlobalResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags/{ResourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:take_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TakeRouterInput"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/routerOutput/takeRouterInput/{RouterOutputArn}"
+        o.input = Shapes::ShapeRef.new(shape: TakeRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: TakeRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:untag_global_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagGlobalResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/global/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagGlobalResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
@@ -2287,6 +3709,50 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/gateway-instances/{GatewayInstanceArn}"
         o.input = Shapes::ShapeRef.new(shape: UpdateGatewayInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateGatewayInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_router_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRouterInput"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/routerInput/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRouterInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRouterInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_router_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRouterNetworkInterface"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/routerNetworkInterface/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRouterNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRouterNetworkInterfaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_router_output, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRouterOutput"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/routerOutput/{Arn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRouterOutputRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRouterOutputResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

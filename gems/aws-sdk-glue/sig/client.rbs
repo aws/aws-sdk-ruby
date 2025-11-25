@@ -3060,6 +3060,7 @@ module Aws
                                             function_name: ::String?,
                                             class_name: ::String?,
                                             owner_name: ::String?,
+                                            function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")?,
                                             owner_type: ("USER" | "ROLE" | "GROUP")?,
                                             resource_uris: Array[
                                               {
@@ -4746,6 +4747,7 @@ module Aws
                                         ?catalog_id: ::String,
                                         ?database_name: ::String,
                                         pattern: ::String,
+                                        ?function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE"),
                                         ?next_token: ::String,
                                         ?max_results: ::Integer
                                       ) -> _GetUserDefinedFunctionsResponseSuccess
@@ -8437,6 +8439,7 @@ module Aws
                                             function_name: ::String?,
                                             class_name: ::String?,
                                             owner_name: ::String?,
+                                            function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")?,
                                             owner_type: ("USER" | "ROLE" | "GROUP")?,
                                             resource_uris: Array[
                                               {

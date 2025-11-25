@@ -491,7 +491,8 @@ module Aws::KinesisVideo
     #
     # @option params [Types::SingleMasterConfiguration] :single_master_configuration
     #   A structure containing the configuration for the `SINGLE_MASTER`
-    #   channel type.
+    #   channel type. The default configuration for the channel message's
+    #   time to live is 60 seconds (1 minute).
     #
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags (key-value pairs) that you want to associate with this
@@ -549,7 +550,7 @@ module Aws::KinesisVideo
     # @option params [String] :device_name
     #   The name of the device that is writing to the stream.
     #
-    #   <note markdown="1"> In the current implementation, Kinesis Video Streams does not use this
+    #   <note markdown="1"> In the current implementation, Kinesis Video Streams doesn't use this
     #   name.
     #
     #    </note>
@@ -582,7 +583,7 @@ module Aws::KinesisVideo
     #   Video Streams to use to encrypt stream data.
     #
     #   If no key ID is specified, the default, Kinesis Video-managed key
-    #   (`Amazon Web Services/kinesisvideo`) is used.
+    #   (`aws/kinesisvideo`) is used.
     #
     #   For more information, see [DescribeKey][1].
     #
@@ -596,7 +597,7 @@ module Aws::KinesisVideo
     #   associated with the stream.
     #
     #   The default value is 0, indicating that the stream does not persist
-    #   data.
+    #   data. The minimum is 1 hour.
     #
     #   When the `DataRetentionInHours` value is 0, consumers can still
     #   consume the fragments that remain in the service host buffer, which
@@ -607,6 +608,15 @@ module Aws::KinesisVideo
     # @option params [Hash<String,String>] :tags
     #   A list of tags to associate with the specified stream. Each tag is a
     #   key-value pair (the value is optional).
+    #
+    # @option params [Types::StreamStorageConfiguration] :stream_storage_configuration
+    #   The configuration for the stream's storage, including the default
+    #   storage tier for stream data. This configuration determines how stream
+    #   data is stored and accessed, with different tiers offering varying
+    #   levels of performance and cost optimization.
+    #
+    #   If not specified, the stream will use the default storage
+    #   configuration with HOT tier for optimal performance.
     #
     # @return [Types::CreateStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -622,6 +632,9 @@ module Aws::KinesisVideo
     #     data_retention_in_hours: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     stream_storage_configuration: {
+    #       default_storage_tier: "HOT", # required, accepts HOT, WARM
     #     },
     #   })
     #
@@ -1070,6 +1083,51 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Retrieves the current storage configuration for the specified Kinesis
+    # video stream.
+    #
+    # In the request, you must specify either the `StreamName` or the
+    # `StreamARN`.
+    #
+    # You must have permissions for the
+    # `KinesisVideo:DescribeStreamStorageConfiguration` action.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream for which you want to retrieve the storage
+    #   configuration.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which you want to
+    #   retrieve the storage configuration.
+    #
+    # @return [Types::DescribeStreamStorageConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStreamStorageConfigurationOutput#stream_name #stream_name} => String
+    #   * {Types::DescribeStreamStorageConfigurationOutput#stream_arn #stream_arn} => String
+    #   * {Types::DescribeStreamStorageConfigurationOutput#stream_storage_configuration #stream_storage_configuration} => Types::StreamStorageConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stream_storage_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.stream_storage_configuration.default_storage_tier #=> String, one of "HOT", "WARM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStreamStorageConfiguration AWS API Documentation
+    #
+    # @overload describe_stream_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_stream_storage_configuration(params = {}, options = {})
+      req = build_request(:describe_stream_storage_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets an endpoint for a specified stream for either reading or writing.
     # Use this endpoint in your application to read from the specified
     # stream (using the `GetMedia` or `GetMediaForFragmentList` operations)
@@ -1128,7 +1186,9 @@ module Aws::KinesisVideo
     # `Protocols` is used to determine the communication mechanism. For
     # example, if you specify `WSS` as the protocol, this API produces a
     # secure websocket endpoint. If you specify `HTTPS` as the protocol,
-    # this API generates an HTTPS endpoint.
+    # this API generates an HTTPS endpoint. If you specify `WEBRTC` as the
+    # protocol, but the signaling channel isn't configured for ingestion,
+    # you will receive the error `InvalidArgumentException`.
     #
     # `Role` determines the messaging permissions. A `MASTER` role results
     # in this API generating an endpoint that a client can use to
@@ -1920,7 +1980,9 @@ module Aws::KinesisVideo
     #
     # @option params [Types::SingleMasterConfiguration] :single_master_configuration
     #   The structure containing the configuration for the `SINGLE_MASTER`
-    #   type of the signaling channel that you want to update.
+    #   type of the signaling channel that you want to update. This parameter
+    #   and the channel message's time-to-live are required for channels with
+    #   the `SINGLE_MASTER` channel type.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2013,6 +2075,61 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Updates the storage configuration for an existing Kinesis video
+    # stream.
+    #
+    # This operation allows you to modify the storage tier settings for a
+    # stream, enabling you to optimize storage costs and performance based
+    # on your access patterns.
+    #
+    # `UpdateStreamStorageConfiguration` is an asynchronous operation.
+    #
+    # You must have permissions for the
+    # `KinesisVideo:UpdateStreamStorageConfiguration` action.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream for which you want to update the storage
+    #   configuration.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which you want to
+    #   update the storage configuration.
+    #
+    # @option params [required, String] :current_version
+    #   The version of the stream whose storage configuration you want to
+    #   change. To get the version, call either the `DescribeStream` or the
+    #   `ListStreams` API.
+    #
+    # @option params [required, Types::StreamStorageConfiguration] :stream_storage_configuration
+    #   The new storage configuration for the stream. This includes the
+    #   default storage tier that determines how stream data is stored and
+    #   accessed.
+    #
+    #   Different storage tiers offer varying levels of performance and cost
+    #   optimization to match your specific use case requirements.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream_storage_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     current_version: "Version", # required
+    #     stream_storage_configuration: { # required
+    #       default_storage_tier: "HOT", # required, accepts HOT, WARM
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamStorageConfiguration AWS API Documentation
+    #
+    # @overload update_stream_storage_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_stream_storage_configuration(params = {}, options = {})
+      req = build_request(:update_stream_storage_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2031,7 +2148,7 @@ module Aws::KinesisVideo
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

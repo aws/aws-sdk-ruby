@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2025-11-24)
+------------------
+
+* Feature - New CloudWatch Logs feature - LogGroup Deletion Protection, a capability that allows customers to safeguard their critical CloudWatch log groups from accidental or unintended deletion.
+
+1.132.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2025-11-19)
+------------------
+
+* Feature - Adding support for ocsf version 1.5, add optional parameter MappingVersion
+
 1.130.0 (2025-11-18)
 ------------------
 

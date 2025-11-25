@@ -14,54 +14,56 @@ module Aws::CloudWatchRUM
     end
 
     class AppMonitor
-      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
-      attr_accessor created: ::String
-      attr_accessor custom_events: Types::CustomEvents
-      attr_accessor data_storage: Types::DataStorage
-      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
+      attr_accessor name: ::String
       attr_accessor domain: ::String
       attr_accessor domain_list: ::Array[::String]
       attr_accessor id: ::String
+      attr_accessor created: ::String
       attr_accessor last_modified: ::String
-      attr_accessor name: ::String
-      attr_accessor state: ("CREATED" | "DELETING" | "ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor state: ("CREATED" | "DELETING" | "ACTIVE")
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
+      attr_accessor data_storage: Types::DataStorage
+      attr_accessor custom_events: Types::CustomEvents
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
+      attr_accessor platform: ("Web" | "Android" | "iOS")
       SENSITIVE: []
     end
 
     class AppMonitorConfiguration
-      attr_accessor allow_cookies: bool
-      attr_accessor enable_x_ray: bool
-      attr_accessor excluded_pages: ::Array[::String]
-      attr_accessor favorite_pages: ::Array[::String]
-      attr_accessor guest_role_arn: ::String
       attr_accessor identity_pool_id: ::String
+      attr_accessor excluded_pages: ::Array[::String]
       attr_accessor included_pages: ::Array[::String]
+      attr_accessor favorite_pages: ::Array[::String]
       attr_accessor session_sample_rate: ::Float
+      attr_accessor guest_role_arn: ::String
+      attr_accessor allow_cookies: bool
       attr_accessor telemetries: ::Array[("errors" | "performance" | "http")]
+      attr_accessor enable_x_ray: bool
       SENSITIVE: []
     end
 
     class AppMonitorDetails
-      attr_accessor id: ::String
       attr_accessor name: ::String
+      attr_accessor id: ::String
       attr_accessor version: ::String
       SENSITIVE: []
     end
 
     class AppMonitorSummary
-      attr_accessor created: ::String
-      attr_accessor id: ::String
-      attr_accessor last_modified: ::String
       attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
       attr_accessor state: ("CREATED" | "DELETING" | "ACTIVE")
+      attr_accessor platform: ("Web" | "Android" | "iOS")
       SENSITIVE: []
     end
 
     class BatchCreateRumMetricDefinitionsError
+      attr_accessor metric_definition: Types::MetricDefinitionRequest
       attr_accessor error_code: ::String
       attr_accessor error_message: ::String
-      attr_accessor metric_definition: Types::MetricDefinitionRequest
       SENSITIVE: []
     end
 
@@ -80,9 +82,9 @@ module Aws::CloudWatchRUM
     end
 
     class BatchDeleteRumMetricDefinitionsError
+      attr_accessor metric_definition_id: ::String
       attr_accessor error_code: ::String
       attr_accessor error_message: ::String
-      attr_accessor metric_definition_id: ::String
       SENSITIVE: []
     end
 
@@ -123,14 +125,15 @@ module Aws::CloudWatchRUM
     end
 
     class CreateAppMonitorRequest
-      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
-      attr_accessor custom_events: Types::CustomEvents
-      attr_accessor cw_log_enabled: bool
-      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
+      attr_accessor name: ::String
       attr_accessor domain: ::String
       attr_accessor domain_list: ::Array[::String]
-      attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
+      attr_accessor cw_log_enabled: bool
+      attr_accessor custom_events: Types::CustomEvents
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
+      attr_accessor platform: ("Web" | "Android" | "iOS")
       SENSITIVE: []
     end
 
@@ -190,11 +193,11 @@ module Aws::CloudWatchRUM
     end
 
     class GetAppMonitorDataRequest
+      attr_accessor name: ::String
+      attr_accessor time_range: Types::TimeRange
       attr_accessor filters: ::Array[Types::QueryFilter]
       attr_accessor max_results: ::Integer
-      attr_accessor name: ::String
       attr_accessor next_token: ::String
-      attr_accessor time_range: Types::TimeRange
       SENSITIVE: []
     end
 
@@ -237,8 +240,8 @@ module Aws::CloudWatchRUM
     end
 
     class JavaScriptSourceMaps
-      attr_accessor s3_uri: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor s3_uri: ::String
       SENSITIVE: []
     end
 
@@ -249,8 +252,8 @@ module Aws::CloudWatchRUM
     end
 
     class ListAppMonitorsResponse
-      attr_accessor app_monitor_summaries: ::Array[Types::AppMonitorSummary]
       attr_accessor next_token: ::String
+      attr_accessor app_monitor_summaries: ::Array[Types::AppMonitorSummary]
       SENSITIVE: []
     end
 
@@ -284,23 +287,23 @@ module Aws::CloudWatchRUM
     end
 
     class MetricDefinition
-      attr_accessor dimension_keys: ::Hash[::String, ::String]
-      attr_accessor event_pattern: ::String
       attr_accessor metric_definition_id: ::String
       attr_accessor name: ::String
-      attr_accessor namespace: ::String
-      attr_accessor unit_label: ::String
       attr_accessor value_key: ::String
+      attr_accessor unit_label: ::String
+      attr_accessor dimension_keys: ::Hash[::String, ::String]
+      attr_accessor event_pattern: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
     class MetricDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor value_key: ::String
+      attr_accessor unit_label: ::String
       attr_accessor dimension_keys: ::Hash[::String, ::String]
       attr_accessor event_pattern: ::String
-      attr_accessor name: ::String
       attr_accessor namespace: ::String
-      attr_accessor unit_label: ::String
-      attr_accessor value_key: ::String
       SENSITIVE: []
     end
 
@@ -335,12 +338,12 @@ module Aws::CloudWatchRUM
     end
 
     class PutRumEventsRequest
-      attr_accessor alias: ::String
-      attr_accessor app_monitor_details: Types::AppMonitorDetails
-      attr_accessor batch_id: ::String
       attr_accessor id: ::String
-      attr_accessor rum_events: ::Array[Types::RumEvent]
+      attr_accessor batch_id: ::String
+      attr_accessor app_monitor_details: Types::AppMonitorDetails
       attr_accessor user_details: Types::UserDetails
+      attr_accessor rum_events: ::Array[Types::RumEvent]
+      attr_accessor alias: ::String
       SENSITIVE: []
     end
 
@@ -372,11 +375,11 @@ module Aws::CloudWatchRUM
     end
 
     class RumEvent
-      attr_accessor details: ::String
       attr_accessor id: ::String
-      attr_accessor metadata: ::String
       attr_accessor timestamp: ::Time
       attr_accessor type: ::String
+      attr_accessor metadata: ::String
+      attr_accessor details: ::String
       SENSITIVE: []
     end
 
@@ -396,9 +399,9 @@ module Aws::CloudWatchRUM
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -418,13 +421,13 @@ module Aws::CloudWatchRUM
     end
 
     class UpdateAppMonitorRequest
-      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
-      attr_accessor custom_events: Types::CustomEvents
-      attr_accessor cw_log_enabled: bool
-      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
+      attr_accessor name: ::String
       attr_accessor domain: ::String
       attr_accessor domain_list: ::Array[::String]
-      attr_accessor name: ::String
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
+      attr_accessor cw_log_enabled: bool
+      attr_accessor custom_events: Types::CustomEvents
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
       SENSITIVE: []
     end
 
@@ -444,8 +447,8 @@ module Aws::CloudWatchRUM
     end
 
     class UserDetails
-      attr_accessor session_id: ::String
       attr_accessor user_id: ::String
+      attr_accessor session_id: ::String
       SENSITIVE: []
     end
 

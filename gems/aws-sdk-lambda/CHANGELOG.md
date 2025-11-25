@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2025-11-21)
+------------------
+
+* Feature - Launching Enhanced Error Handling and ESM Grouping capabilities for Kafka ESMs
+
+1.166.0 (2025-11-19)
+------------------
+
+* Feature - Added support for creating and invoking Tenant Isolated functions in AWS Lambda APIs.
+
 1.165.0 (2025-10-31)
 ------------------
 

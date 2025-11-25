@@ -115,7 +115,8 @@ module Aws
                                    answer_machine_detection_config: {
                                      enable_answer_machine_detection: bool,
                                      await_answer_machine_prompt: bool?
-                                   }?
+                                   }?,
+                                   ring_timeout: ::Integer?
                                  }
                                }?,
                                sms: {
@@ -447,7 +448,8 @@ module Aws
                                                 answer_machine_detection_config: {
                                                   enable_answer_machine_detection: bool,
                                                   await_answer_machine_prompt: bool?
-                                                }?
+                                                }?,
+                                                ring_timeout: ::Integer?
                                               }?,
                                               sms: {
                                                 destination_phone_number: ::String,
@@ -562,7 +564,8 @@ module Aws
                                                           answer_machine_detection_config: {
                                                             enable_answer_machine_detection: bool,
                                                             await_answer_machine_prompt: bool?
-                                                          }?
+                                                          }?,
+                                                          ring_timeout: ::Integer?
                                                         }
                                                       }?,
                                                       sms: {

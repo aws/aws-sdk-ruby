@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2025-11-20)
+------------------
+
+* Feature - Add support for Braket spending limits.
+
 1.62.0 (2025-11-10)
 ------------------
 

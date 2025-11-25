@@ -8,6 +8,11 @@
 module Aws::Imagebuilder
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class AccountAggregation
       attr_accessor account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
@@ -220,6 +225,7 @@ module Aws::Imagebuilder
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -227,6 +233,7 @@ module Aws::Imagebuilder
       attr_accessor request_id: ::String
       attr_accessor client_token: ::String
       attr_accessor component_build_version_arn: ::String
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -254,6 +261,7 @@ module Aws::Imagebuilder
       attr_accessor request_id: ::String
       attr_accessor client_token: ::String
       attr_accessor container_recipe_arn: ::String
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -319,6 +327,7 @@ module Aws::Imagebuilder
       attr_accessor request_id: ::String
       attr_accessor client_token: ::String
       attr_accessor image_recipe_arn: ::String
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -342,6 +351,7 @@ module Aws::Imagebuilder
       attr_accessor request_id: ::String
       attr_accessor client_token: ::String
       attr_accessor image_build_version_arn: ::String
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -401,12 +411,14 @@ module Aws::Imagebuilder
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
     class CreateWorkflowResponse
       attr_accessor client_token: ::String
       attr_accessor workflow_build_version_arn: ::String
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -531,6 +543,22 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class DistributeImageRequest
+      attr_accessor source_image: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class DistributeImageResponse
+      attr_accessor client_token: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
     class Distribution
       attr_accessor region: ::String
       attr_accessor ami_distribution_configuration: Types::AmiDistributionConfiguration
@@ -563,6 +591,11 @@ module Aws::Imagebuilder
       attr_accessor date_updated: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DryRunOperationException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -635,6 +668,7 @@ module Aws::Imagebuilder
     class GetComponentResponse
       attr_accessor request_id: ::String
       attr_accessor component: Types::Component
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -657,6 +691,7 @@ module Aws::Imagebuilder
     class GetContainerRecipeResponse
       attr_accessor request_id: ::String
       attr_accessor container_recipe: Types::ContainerRecipe
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -712,6 +747,7 @@ module Aws::Imagebuilder
     class GetImageRecipeResponse
       attr_accessor request_id: ::String
       attr_accessor image_recipe: Types::ImageRecipe
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -723,6 +759,7 @@ module Aws::Imagebuilder
     class GetImageResponse
       attr_accessor request_id: ::String
       attr_accessor image: Types::Image
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -801,6 +838,7 @@ module Aws::Imagebuilder
 
     class GetWorkflowResponse
       attr_accessor workflow: Types::Workflow
+      attr_accessor latest_version_references: Types::LatestVersionReferences
       SENSITIVE: []
     end
 
@@ -1187,6 +1225,14 @@ module Aws::Imagebuilder
 
     class InvalidVersionNumberException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LatestVersionReferences
+      attr_accessor latest_version_arn: ::String
+      attr_accessor latest_major_version_arn: ::String
+      attr_accessor latest_minor_version_arn: ::String
+      attr_accessor latest_patch_version_arn: ::String
       SENSITIVE: []
     end
 
@@ -1806,6 +1852,18 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class RetryImageRequest
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RetryImageResponse
+      attr_accessor client_token: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
     class S3ExportConfiguration
       attr_accessor role_name: ::String
       attr_accessor disk_image_format: ("VMDK" | "RAW" | "VHD")
@@ -1922,6 +1980,11 @@ module Aws::Imagebuilder
     class TargetContainerRepository
       attr_accessor service: ("ECR")
       attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -2075,6 +2138,7 @@ module Aws::Imagebuilder
       attr_accessor start_time: ::String
       attr_accessor end_time: ::String
       attr_accessor parallel_group: ::String
+      attr_accessor retried: bool
       SENSITIVE: []
     end
 

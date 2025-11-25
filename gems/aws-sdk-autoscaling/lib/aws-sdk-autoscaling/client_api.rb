@@ -181,6 +181,7 @@ module Aws::AutoScaling
     HeartbeatTimeout = Shapes::IntegerShape.new(name: 'HeartbeatTimeout')
     HonorCooldown = Shapes::BooleanShape.new(name: 'HonorCooldown')
     IdempotentParameterMismatchError = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchError', error: {"code" => "IdempotentParameterMismatch", "httpStatusCode" => 400, "senderFault" => true})
+    ImageId = Shapes::StringShape.new(name: 'ImageId')
     ImpairedZoneHealthCheckBehavior = Shapes::StringShape.new(name: 'ImpairedZoneHealthCheckBehavior')
     IncludeDeletedGroups = Shapes::BooleanShape.new(name: 'IncludeDeletedGroups')
     IncludeInstances = Shapes::BooleanShape.new(name: 'IncludeInstances')
@@ -190,6 +191,7 @@ module Aws::AutoScaling
     InstanceGeneration = Shapes::StringShape.new(name: 'InstanceGeneration')
     InstanceGenerations = Shapes::ListShape.new(name: 'InstanceGenerations')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
+    InstanceLifecyclePolicy = Shapes::StructureShape.new(name: 'InstanceLifecyclePolicy')
     InstanceMaintenancePolicy = Shapes::StructureShape.new(name: 'InstanceMaintenancePolicy')
     InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
     InstanceMetadataHttpPutResponseHopLimit = Shapes::IntegerShape.new(name: 'InstanceMetadataHttpPutResponseHopLimit')
@@ -346,6 +348,8 @@ module Aws::AutoScaling
     ResourceContentionFault = Shapes::StructureShape.new(name: 'ResourceContentionFault', error: {"code" => "ResourceContention", "httpStatusCode" => 500, "senderFault" => true})
     ResourceInUseFault = Shapes::StructureShape.new(name: 'ResourceInUseFault', error: {"code" => "ResourceInUse", "httpStatusCode" => 400, "senderFault" => true})
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    RetentionAction = Shapes::StringShape.new(name: 'RetentionAction')
+    RetentionTriggers = Shapes::StructureShape.new(name: 'RetentionTriggers')
     RetryStrategy = Shapes::StringShape.new(name: 'RetryStrategy')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ReuseOnScaleIn = Shapes::BooleanShape.new(name: 'ReuseOnScaleIn')
@@ -554,6 +558,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:availability_zone_distribution, Shapes::ShapeRef.new(shape: AvailabilityZoneDistribution, location_name: "AvailabilityZoneDistribution"))
     AutoScalingGroup.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
     AutoScalingGroup.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecification, location_name: "CapacityReservationSpecification"))
+    AutoScalingGroup.add_member(:instance_lifecycle_policy, Shapes::ShapeRef.new(shape: InstanceLifecyclePolicy, location_name: "InstanceLifecyclePolicy"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -579,6 +584,7 @@ module Aws::AutoScaling
     AutoScalingInstanceDetails.add_member(:health_status, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "HealthStatus"))
     AutoScalingInstanceDetails.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
     AutoScalingInstanceDetails.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    AutoScalingInstanceDetails.add_member(:image_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "ImageId"))
     AutoScalingInstanceDetails.add_member(:protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, required: true, location_name: "ProtectedFromScaleIn"))
     AutoScalingInstanceDetails.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "WeightedCapacity"))
     AutoScalingInstanceDetails.struct_class = Types::AutoScalingInstanceDetails
@@ -706,6 +712,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
     CreateAutoScalingGroupType.add_member(:skip_zonal_shift_validation, Shapes::ShapeRef.new(shape: SkipZonalShiftValidation, location_name: "SkipZonalShiftValidation"))
     CreateAutoScalingGroupType.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecification, location_name: "CapacityReservationSpecification"))
+    CreateAutoScalingGroupType.add_member(:instance_lifecycle_policy, Shapes::ShapeRef.new(shape: InstanceLifecyclePolicy, location_name: "InstanceLifecyclePolicy"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -1002,6 +1009,7 @@ module Aws::AutoScaling
     Instance.add_member(:health_status, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "HealthStatus"))
     Instance.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
     Instance.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    Instance.add_member(:image_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "ImageId"))
     Instance.add_member(:protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, required: true, location_name: "ProtectedFromScaleIn"))
     Instance.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "WeightedCapacity"))
     Instance.struct_class = Types::Instance
@@ -1019,6 +1027,9 @@ module Aws::AutoScaling
     InstanceGenerations.member = Shapes::ShapeRef.new(shape: InstanceGeneration)
 
     InstanceIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen19)
+
+    InstanceLifecyclePolicy.add_member(:retention_triggers, Shapes::ShapeRef.new(shape: RetentionTriggers, location_name: "RetentionTriggers"))
+    InstanceLifecyclePolicy.struct_class = Types::InstanceLifecyclePolicy
 
     InstanceMaintenancePolicy.add_member(:min_healthy_percentage, Shapes::ShapeRef.new(shape: IntPercentResettable, location_name: "MinHealthyPercentage"))
     InstanceMaintenancePolicy.add_member(:max_healthy_percentage, Shapes::ShapeRef.new(shape: IntPercent100To200Resettable, location_name: "MaxHealthyPercentage"))
@@ -1044,6 +1055,7 @@ module Aws::AutoScaling
     InstanceRefresh.add_member(:preferences, Shapes::ShapeRef.new(shape: RefreshPreferences, location_name: "Preferences"))
     InstanceRefresh.add_member(:desired_configuration, Shapes::ShapeRef.new(shape: DesiredConfiguration, location_name: "DesiredConfiguration"))
     InstanceRefresh.add_member(:rollback_details, Shapes::ShapeRef.new(shape: RollbackDetails, location_name: "RollbackDetails"))
+    InstanceRefresh.add_member(:strategy, Shapes::ShapeRef.new(shape: RefreshStrategy, location_name: "Strategy"))
     InstanceRefresh.struct_class = Types::InstanceRefresh
 
     InstanceRefreshIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -1183,6 +1195,7 @@ module Aws::AutoScaling
     LaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "WeightedCapacity"))
     LaunchTemplateOverrides.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplateSpecification"))
     LaunchTemplateOverrides.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirements, location_name: "InstanceRequirements"))
+    LaunchTemplateOverrides.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
     LaunchTemplateOverrides.struct_class = Types::LaunchTemplateOverrides
 
     LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchTemplateId"))
@@ -1463,6 +1476,9 @@ module Aws::AutoScaling
     ResourceInUseFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     ResourceInUseFault.struct_class = Types::ResourceInUseFault
 
+    RetentionTriggers.add_member(:terminate_hook_abandon, Shapes::ShapeRef.new(shape: RetentionAction, location_name: "TerminateHookAbandon"))
+    RetentionTriggers.struct_class = Types::RetentionTriggers
+
     RollbackDetails.add_member(:rollback_reason, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "RollbackReason"))
     RollbackDetails.add_member(:rollback_start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "RollbackStartTime"))
     RollbackDetails.add_member(:percentage_complete_on_rollback, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageCompleteOnRollback"))
@@ -1678,6 +1694,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
     UpdateAutoScalingGroupType.add_member(:skip_zonal_shift_validation, Shapes::ShapeRef.new(shape: SkipZonalShiftValidation, location_name: "SkipZonalShiftValidation"))
     UpdateAutoScalingGroupType.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecification, location_name: "CapacityReservationSpecification"))
+    UpdateAutoScalingGroupType.add_member(:instance_lifecycle_policy, Shapes::ShapeRef.new(shape: InstanceLifecyclePolicy, location_name: "InstanceLifecyclePolicy"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     VCpuCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, required: true, location_name: "Min"))
@@ -1730,6 +1747,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancerTargetGroupsResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceRefreshInProgressFault)
       end)
 
       api.add_operation(:attach_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -1740,6 +1758,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancersResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceRefreshInProgressFault)
       end)
 
       api.add_operation(:attach_traffic_sources, Seahorse::Model::Operation.new.tap do |o|
@@ -1750,6 +1769,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: AttachTrafficSourcesResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceRefreshInProgressFault)
       end)
 
       api.add_operation(:batch_delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
@@ -2341,6 +2361,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: PutWarmPoolAnswer)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceRefreshInProgressFault)
       end)
 
       api.add_operation(:record_lifecycle_action_heartbeat, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2025-11-19)
+------------------
+
+* Feature - This release adds support for Billing Transfers, enabling management of billing transfers with billing groups on AWS Billing Conductor.
+
 1.47.0 (2025-10-21)
 ------------------
 

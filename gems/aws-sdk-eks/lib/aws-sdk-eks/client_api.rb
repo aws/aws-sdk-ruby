@@ -84,6 +84,7 @@ module Aws::EKS
     ConnectorConfigResponse = Shapes::StructureShape.new(name: 'ConnectorConfigResponse')
     ControlPlanePlacementRequest = Shapes::StructureShape.new(name: 'ControlPlanePlacementRequest')
     ControlPlanePlacementResponse = Shapes::StructureShape.new(name: 'ControlPlanePlacementResponse')
+    ControlPlaneScalingConfig = Shapes::StructureShape.new(name: 'ControlPlaneScalingConfig')
     CreateAccessConfigRequest = Shapes::StructureShape.new(name: 'CreateAccessConfigRequest')
     CreateAccessEntryRequest = Shapes::StructureShape.new(name: 'CreateAccessEntryRequest')
     CreateAccessEntryResponse = Shapes::StructureShape.new(name: 'CreateAccessEntryResponse')
@@ -269,6 +270,7 @@ module Aws::EKS
     PodIdentityAssociationSummaries = Shapes::ListShape.new(name: 'PodIdentityAssociationSummaries')
     PodIdentityAssociationSummary = Shapes::StructureShape.new(name: 'PodIdentityAssociationSummary')
     Provider = Shapes::StructureShape.new(name: 'Provider')
+    ProvisionedControlPlaneTier = Shapes::StringShape.new(name: 'ProvisionedControlPlaneTier')
     RegisterClusterRequest = Shapes::StructureShape.new(name: 'RegisterClusterRequest')
     RegisterClusterResponse = Shapes::StructureShape.new(name: 'RegisterClusterResponse')
     RemoteAccessConfig = Shapes::StructureShape.new(name: 'RemoteAccessConfig')
@@ -551,6 +553,7 @@ module Aws::EKS
     Cluster.add_member(:compute_config, Shapes::ShapeRef.new(shape: ComputeConfigResponse, location_name: "computeConfig"))
     Cluster.add_member(:storage_config, Shapes::ShapeRef.new(shape: StorageConfigResponse, location_name: "storageConfig"))
     Cluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "deletionProtection"))
+    Cluster.add_member(:control_plane_scaling_config, Shapes::ShapeRef.new(shape: ControlPlaneScalingConfig, location_name: "controlPlaneScalingConfig"))
     Cluster.struct_class = Types::Cluster
 
     ClusterHealth.add_member(:issues, Shapes::ShapeRef.new(shape: ClusterIssueList, location_name: "issues"))
@@ -611,6 +614,9 @@ module Aws::EKS
     ControlPlanePlacementResponse.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     ControlPlanePlacementResponse.struct_class = Types::ControlPlanePlacementResponse
 
+    ControlPlaneScalingConfig.add_member(:tier, Shapes::ShapeRef.new(shape: ProvisionedControlPlaneTier, location_name: "tier"))
+    ControlPlaneScalingConfig.struct_class = Types::ControlPlaneScalingConfig
+
     CreateAccessConfigRequest.add_member(:bootstrap_cluster_creator_admin_permissions, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapClusterCreatorAdminPermissions"))
     CreateAccessConfigRequest.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "authenticationMode"))
     CreateAccessConfigRequest.struct_class = Types::CreateAccessConfigRequest
@@ -660,6 +666,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:compute_config, Shapes::ShapeRef.new(shape: ComputeConfigRequest, location_name: "computeConfig"))
     CreateClusterRequest.add_member(:storage_config, Shapes::ShapeRef.new(shape: StorageConfigRequest, location_name: "storageConfig"))
     CreateClusterRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "deletionProtection"))
+    CreateClusterRequest.add_member(:control_plane_scaling_config, Shapes::ShapeRef.new(shape: ControlPlaneScalingConfig, location_name: "controlPlaneScalingConfig"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -1520,6 +1527,7 @@ module Aws::EKS
     UpdateClusterConfigRequest.add_member(:storage_config, Shapes::ShapeRef.new(shape: StorageConfigRequest, location_name: "storageConfig"))
     UpdateClusterConfigRequest.add_member(:remote_network_config, Shapes::ShapeRef.new(shape: RemoteNetworkConfigRequest, location_name: "remoteNetworkConfig"))
     UpdateClusterConfigRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "deletionProtection"))
+    UpdateClusterConfigRequest.add_member(:control_plane_scaling_config, Shapes::ShapeRef.new(shape: ControlPlaneScalingConfig, location_name: "controlPlaneScalingConfig"))
     UpdateClusterConfigRequest.struct_class = Types::UpdateClusterConfigRequest
 
     UpdateClusterConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))

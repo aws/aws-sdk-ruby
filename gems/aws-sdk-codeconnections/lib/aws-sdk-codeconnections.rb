@@ -54,7 +54,7 @@ module Aws::CodeConnections
   autoload :EndpointProvider, 'aws-sdk-codeconnections/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codeconnections/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

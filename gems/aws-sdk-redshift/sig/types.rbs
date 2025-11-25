@@ -250,6 +250,8 @@ module Aws::Redshift
       attr_accessor ip_address_type: ::String
       attr_accessor multi_az: ::String
       attr_accessor multi_az_secondary: Types::SecondaryClusterInfo
+      attr_accessor lakehouse_registration_status: ::String
+      attr_accessor catalog_arn: ::String
       SENSITIVE: []
     end
 
@@ -460,6 +462,11 @@ module Aws::Redshift
     class ConflictPolicyUpdateFault < Aws::EmptyStructure
     end
 
+    class Connect
+      attr_accessor authorization: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
     class CopyClusterSnapshotMessage
       attr_accessor source_snapshot_identifier: ::String
       attr_accessor source_snapshot_cluster_identifier: ::String
@@ -528,6 +535,7 @@ module Aws::Redshift
       attr_accessor ip_address_type: ::String
       attr_accessor multi_az: bool
       attr_accessor redshift_idc_application_arn: ::String
+      attr_accessor catalog_name: ::String
       SENSITIVE: [:master_user_password]
     end
 
@@ -674,6 +682,7 @@ module Aws::Redshift
       attr_accessor iam_role_arn: ::String
       attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
       attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      attr_accessor application_type: ("None" | "Lakehouse")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sso_tag_keys: ::Array[::String]
       SENSITIVE: []
@@ -1846,6 +1855,14 @@ module Aws::Redshift
       end
     end
 
+    class LakehouseConfiguration
+      attr_accessor cluster_identifier: ::String
+      attr_accessor lakehouse_idc_application_arn: ::String
+      attr_accessor lakehouse_registration_status: ::String
+      attr_accessor catalog_arn: ::String
+      SENSITIVE: []
+    end
+
     class LimitExceededFault < Aws::EmptyStructure
     end
 
@@ -2060,6 +2077,16 @@ module Aws::Redshift
       attr_accessor integration_arn: ::String
       attr_accessor description: ::String
       attr_accessor integration_name: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyLakehouseConfigurationMessage
+      attr_accessor cluster_identifier: ::String
+      attr_accessor lakehouse_registration: ("Register" | "Deregister")
+      attr_accessor catalog_name: ::String
+      attr_accessor lakehouse_idc_registration: ("Associate" | "Disassociate")
+      attr_accessor lakehouse_idc_application_arn: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -2327,6 +2354,7 @@ module Aws::Redshift
       attr_accessor idc_onboard_status: ::String
       attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
       attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      attr_accessor application_type: ("None" | "Lakehouse")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sso_tag_keys: ::Array[::String]
       SENSITIVE: []
@@ -2342,6 +2370,17 @@ module Aws::Redshift
     end
 
     class RedshiftInvalidParameterFault < Aws::EmptyStructure
+    end
+
+    class RedshiftScopeUnion
+      attr_accessor connect: Types::Connect
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Connect < RedshiftScopeUnion
+      end
+      class Unknown < RedshiftScopeUnion
+      end
     end
 
     class ReferenceLink
@@ -2545,6 +2584,8 @@ module Aws::Redshift
       attr_accessor master_password_secret_kms_key_id: ::String
       attr_accessor ip_address_type: ::String
       attr_accessor multi_az: bool
+      attr_accessor catalog_name: ::String
+      attr_accessor redshift_idc_application_arn: ::String
       SENSITIVE: []
     end
 
@@ -2724,12 +2765,15 @@ module Aws::Redshift
     class ServiceIntegrationsUnion
       attr_accessor lake_formation: ::Array[Types::LakeFormationScopeUnion]
       attr_accessor s3_access_grants: ::Array[Types::S3AccessGrantsScopeUnion]
+      attr_accessor redshift: ::Array[Types::RedshiftScopeUnion]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class LakeFormation < ServiceIntegrationsUnion
       end
       class S3AccessGrants < ServiceIntegrationsUnion
+      end
+      class Redshift < ServiceIntegrationsUnion
       end
       class Unknown < ServiceIntegrationsUnion
       end

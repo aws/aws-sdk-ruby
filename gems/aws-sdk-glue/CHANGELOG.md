@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.243.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.242.0 (2025-11-20)
+------------------
+
+* Feature - Added FunctionType parameter to Glue GetuserDefinedFunctions.
+
 1.241.0 (2025-11-17)
 ------------------
 

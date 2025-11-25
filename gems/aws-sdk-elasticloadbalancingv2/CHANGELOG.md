@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2025-11-21)
+------------------
+
+* Feature - This release adds the health check log feature in ALB, allowing customers to send detailed target health check log data directly to their designated Amazon S3 bucket.
+
+1.144.0 (2025-11-20)
+------------------
+
+* Feature - This release adds the target optimizer feature in ALB, enabling strict concurrency enforcement on targets.
+
 1.143.0 (2025-11-13)
 ------------------
 

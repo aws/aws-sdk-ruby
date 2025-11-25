@@ -313,7 +313,8 @@ module Aws
                             ?master_password_secret_kms_key_id: ::String,
                             ?ip_address_type: ::String,
                             ?multi_az: bool,
-                            ?redshift_idc_application_arn: ::String
+                            ?redshift_idc_application_arn: ::String,
+                            ?catalog_name: ::String
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -548,9 +549,17 @@ module Aws
                                                        authorization: ("Enabled" | "Disabled")
                                                      }?
                                                    },
+                                                 ]?,
+                                                 redshift: Array[
+                                                   {
+                                                     connect: {
+                                                       authorization: ("Enabled" | "Disabled")
+                                                     }?
+                                                   },
                                                  ]?
                                                },
                                              ],
+                                             ?application_type: ("None" | "Lakehouse"),
                                              ?tags: Array[
                                                {
                                                  key: ::String?,
@@ -1930,6 +1939,24 @@ module Aws
                               ) -> _ModifyIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIntegrationResponseSuccess
 
+      interface _ModifyLakehouseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LakehouseConfiguration]
+        def cluster_identifier: () -> ::String
+        def lakehouse_idc_application_arn: () -> ::String
+        def lakehouse_registration_status: () -> ::String
+        def catalog_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_lakehouse_configuration-instance_method
+      def modify_lakehouse_configuration: (
+                                            cluster_identifier: ::String,
+                                            ?lakehouse_registration: ("Register" | "Deregister"),
+                                            ?catalog_name: ::String,
+                                            ?lakehouse_idc_registration: ("Associate" | "Disassociate"),
+                                            ?lakehouse_idc_application_arn: ::String,
+                                            ?dry_run: bool
+                                          ) -> _ModifyLakehouseConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyLakehouseConfigurationResponseSuccess
+
       interface _ModifyRedshiftIdcApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyRedshiftIdcApplicationResult]
         def redshift_idc_application: () -> Types::RedshiftIdcApplication
@@ -1958,6 +1985,13 @@ module Aws
                                                  s3_access_grants: Array[
                                                    {
                                                      read_write_access: {
+                                                       authorization: ("Enabled" | "Disabled")
+                                                     }?
+                                                   },
+                                                 ]?,
+                                                 redshift: Array[
+                                                   {
+                                                     connect: {
                                                        authorization: ("Enabled" | "Disabled")
                                                      }?
                                                    },
@@ -2215,7 +2249,9 @@ module Aws
                                            ?manage_master_password: bool,
                                            ?master_password_secret_kms_key_id: ::String,
                                            ?ip_address_type: ::String,
-                                           ?multi_az: bool
+                                           ?multi_az: bool,
+                                           ?catalog_name: ::String,
+                                           ?redshift_idc_application_arn: ::String
                                          ) -> _RestoreFromClusterSnapshotResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFromClusterSnapshotResponseSuccess
 

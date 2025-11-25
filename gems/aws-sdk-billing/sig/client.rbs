@@ -179,7 +179,13 @@ module Aws
                                   active_before_inclusive: ::Time
                                 },
                                 ?arns: Array[::String],
-                                ?billing_view_types: Array[("PRIMARY" | "BILLING_GROUP" | "CUSTOM")],
+                                ?billing_view_types: Array[("PRIMARY" | "BILLING_GROUP" | "CUSTOM" | "BILLING_TRANSFER" | "BILLING_TRANSFER_SHOWBACK")],
+                                ?names: Array[
+                                  {
+                                    search_option: ("STARTS_WITH"),
+                                    search_value: ::String
+                                  },
+                                ],
                                 ?owner_account_id: ::String,
                                 ?source_account_id: ::String,
                                 ?max_results: ::Integer,

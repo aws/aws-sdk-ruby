@@ -700,8 +700,9 @@ module Aws::QConnect
       attr_accessor name: ::String
       attr_accessor content: Types::MessageTemplateContentProvider
       attr_accessor description: ::String
-      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH")
       attr_accessor language: ::String
+      attr_accessor source_configuration: Types::MessageTemplateSourceConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor client_token: ::String
@@ -1114,13 +1115,15 @@ module Aws::QConnect
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor channel: ::String
+      attr_accessor channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_by: ::String
       attr_accessor content: Types::MessageTemplateContentProvider
       attr_accessor description: ::String
       attr_accessor language: ::String
+      attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
       attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
@@ -1129,7 +1132,7 @@ module Aws::QConnect
       attr_accessor version_number: ::Integer
       attr_accessor message_template_content_sha_256: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channel]
     end
 
     class ExternalSourceConfiguration
@@ -1815,12 +1818,18 @@ module Aws::QConnect
     class MessageTemplateContentProvider
       attr_accessor email: Types::EmailMessageTemplateContent
       attr_accessor sms: Types::SMSMessageTemplateContent
+      attr_accessor whats_app: Types::WhatsAppMessageTemplateContent
+      attr_accessor push: Types::PushMessageTemplateContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Email < MessageTemplateContentProvider
       end
       class Sms < MessageTemplateContentProvider
+      end
+      class WhatsApp < MessageTemplateContentProvider
+      end
+      class Push < MessageTemplateContentProvider
       end
       class Unknown < MessageTemplateContentProvider
       end
@@ -1832,19 +1841,21 @@ module Aws::QConnect
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor channel: ::String
+      attr_accessor channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_by: ::String
       attr_accessor content: Types::MessageTemplateContentProvider
       attr_accessor description: ::String
       attr_accessor language: ::String
+      attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
       attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
       attr_accessor message_template_content_sha_256: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channel]
     end
 
     class MessageTemplateFilterField
@@ -1883,17 +1894,41 @@ module Aws::QConnect
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor channel: ::String
+      attr_accessor channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_by: ::String
       attr_accessor is_active: bool
       attr_accessor version_number: ::Integer
       attr_accessor description: ::String
+      attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor language: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:channel]
+    end
+
+    class MessageTemplateSourceConfiguration
+      attr_accessor whats_app: Types::WhatsAppMessageTemplateSourceConfiguration
+      attr_accessor unknown: untyped
       SENSITIVE: []
+
+      class WhatsApp < MessageTemplateSourceConfiguration
+      end
+      class Unknown < MessageTemplateSourceConfiguration
+      end
+    end
+
+    class MessageTemplateSourceConfigurationSummary
+      attr_accessor whats_app: Types::WhatsAppMessageTemplateSourceConfigurationSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class WhatsApp < MessageTemplateSourceConfigurationSummary
+      end
+      class Unknown < MessageTemplateSourceConfigurationSummary
+      end
     end
 
     class MessageTemplateSummary
@@ -1902,14 +1937,16 @@ module Aws::QConnect
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor channel: ::String
+      attr_accessor channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_by: ::String
+      attr_accessor source_configuration: Types::MessageTemplateSourceConfiguration
       attr_accessor active_version_number: ::Integer
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channel]
     end
 
     class MessageTemplateVersionSummary
@@ -1918,10 +1955,11 @@ module Aws::QConnect
       attr_accessor knowledge_base_arn: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor channel: ::String
+      attr_accessor channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH")
       attr_accessor is_active: bool
       attr_accessor version_number: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:channel]
     end
 
     class NotifyRecommendationsReceivedError
@@ -1970,6 +2008,64 @@ module Aws::QConnect
 
     class PreconditionFailedException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PushADMMessageTemplateContent
+      attr_accessor title: ::String
+      attr_accessor body: Types::MessageTemplateBodyContentProvider
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor sound: ::String
+      attr_accessor url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor raw_content: Types::MessageTemplateBodyContentProvider
+      SENSITIVE: [:title, :sound, :url, :image_url, :image_icon_url, :small_image_icon_url]
+    end
+
+    class PushAPNSMessageTemplateContent
+      attr_accessor title: ::String
+      attr_accessor body: Types::MessageTemplateBodyContentProvider
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor sound: ::String
+      attr_accessor url: ::String
+      attr_accessor media_url: ::String
+      attr_accessor raw_content: Types::MessageTemplateBodyContentProvider
+      SENSITIVE: [:title, :sound, :url, :media_url]
+    end
+
+    class PushBaiduMessageTemplateContent
+      attr_accessor title: ::String
+      attr_accessor body: Types::MessageTemplateBodyContentProvider
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor sound: ::String
+      attr_accessor url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor raw_content: Types::MessageTemplateBodyContentProvider
+      SENSITIVE: [:title, :sound, :url, :image_url, :image_icon_url, :small_image_icon_url]
+    end
+
+    class PushFCMMessageTemplateContent
+      attr_accessor title: ::String
+      attr_accessor body: Types::MessageTemplateBodyContentProvider
+      attr_accessor action: ("OPEN_APP" | "DEEP_LINK" | "URL")
+      attr_accessor sound: ::String
+      attr_accessor url: ::String
+      attr_accessor image_url: ::String
+      attr_accessor image_icon_url: ::String
+      attr_accessor small_image_icon_url: ::String
+      attr_accessor raw_content: Types::MessageTemplateBodyContentProvider
+      SENSITIVE: [:title, :sound, :url, :image_url, :image_icon_url, :small_image_icon_url]
+    end
+
+    class PushMessageTemplateContent
+      attr_accessor adm: Types::PushADMMessageTemplateContent
+      attr_accessor apns: Types::PushAPNSMessageTemplateContent
+      attr_accessor fcm: Types::PushFCMMessageTemplateContent
+      attr_accessor baidu: Types::PushBaiduMessageTemplateContent
       SENSITIVE: []
     end
 
@@ -2234,6 +2330,7 @@ module Aws::QConnect
 
     class RenderMessageTemplateResponse
       attr_accessor content: Types::MessageTemplateContentProvider
+      attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor attributes_not_interpolated: ::Array[::String]
       attr_accessor attachments: ::Array[Types::MessageTemplateAttachment]
       SENSITIVE: [:attributes_not_interpolated]
@@ -2683,6 +2780,7 @@ module Aws::QConnect
       attr_accessor message_template_id: ::String
       attr_accessor content: Types::MessageTemplateContentProvider
       attr_accessor language: ::String
+      attr_accessor source_configuration: Types::MessageTemplateSourceConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
       SENSITIVE: []
     end
@@ -2773,6 +2871,29 @@ module Aws::QConnect
     class WebCrawlerLimits
       attr_accessor rate_limit: ::Integer
       SENSITIVE: []
+    end
+
+    class WhatsAppMessageTemplateContent
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class WhatsAppMessageTemplateSourceConfiguration
+      attr_accessor business_account_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor components: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WhatsAppMessageTemplateSourceConfigurationSummary
+      attr_accessor business_account_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor language: ::String
+      attr_accessor components: ::Array[::String]
+      attr_accessor status: ("VALID" | "INVALID" | "REJECTED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: [:status_reason]
     end
   end
 end

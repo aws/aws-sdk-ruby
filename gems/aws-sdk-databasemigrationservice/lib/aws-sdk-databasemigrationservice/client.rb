@@ -1920,6 +1920,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.service_access_role_arn #=> String
     #   resp.endpoint.external_table_definition #=> String
     #   resp.endpoint.external_id #=> String
+    #   resp.endpoint.is_read_only #=> Boolean
     #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.external_table_definition #=> String
@@ -2222,6 +2223,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.timestream_settings.magnetic_duration #=> Integer
     #   resp.endpoint.timestream_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.timestream_settings.enable_magnetic_store_writes #=> Boolean
+    #   resp.endpoint.lakehouse_settings.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -2856,6 +2858,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_config.table_mappings #=> String
     #   resp.replication_config.replication_config_create_time #=> Time
     #   resp.replication_config.replication_config_update_time #=> Time
+    #   resp.replication_config.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationConfig AWS API Documentation
     #
@@ -3153,6 +3156,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_instance.replication_subnet_group.is_read_only #=> Boolean
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
@@ -3287,6 +3291,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_subnet_group.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup AWS API Documentation
     #
@@ -3562,6 +3567,7 @@ module Aws::DatabaseMigrationService
     #   resp.certificate.valid_to_date #=> Time
     #   resp.certificate.signing_algorithm #=> String
     #   resp.certificate.key_length #=> Integer
+    #   resp.certificate.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificate AWS API Documentation
     #
@@ -3893,6 +3899,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.service_access_role_arn #=> String
     #   resp.endpoint.external_table_definition #=> String
     #   resp.endpoint.external_id #=> String
+    #   resp.endpoint.is_read_only #=> Boolean
     #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.external_table_definition #=> String
@@ -4195,6 +4202,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.timestream_settings.magnetic_duration #=> Integer
     #   resp.endpoint.timestream_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.timestream_settings.enable_magnetic_store_writes #=> Boolean
+    #   resp.endpoint.lakehouse_settings.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -4515,6 +4523,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_config.table_mappings #=> String
     #   resp.replication_config.replication_config_create_time #=> Time
     #   resp.replication_config.replication_config_update_time #=> Time
+    #   resp.replication_config.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationConfig AWS API Documentation
     #
@@ -4631,6 +4640,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_instance.replication_subnet_group.is_read_only #=> Boolean
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
@@ -5073,6 +5083,7 @@ module Aws::DatabaseMigrationService
     #   resp.certificates[0].valid_to_date #=> Time
     #   resp.certificates[0].signing_algorithm #=> String
     #   resp.certificates[0].key_length #=> Integer
+    #   resp.certificates[0].kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificates AWS API Documentation
     #
@@ -5743,6 +5754,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].service_access_role_arn #=> String
     #   resp.endpoints[0].external_table_definition #=> String
     #   resp.endpoints[0].external_id #=> String
+    #   resp.endpoints[0].is_read_only #=> Boolean
     #   resp.endpoints[0].dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].s3_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].s3_settings.external_table_definition #=> String
@@ -6045,6 +6057,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].timestream_settings.magnetic_duration #=> Integer
     #   resp.endpoints[0].timestream_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoints[0].timestream_settings.enable_magnetic_store_writes #=> Boolean
+    #   resp.endpoints[0].lakehouse_settings.arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -8226,6 +8239,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_configs[0].table_mappings #=> String
     #   resp.replication_configs[0].replication_config_create_time #=> Time
     #   resp.replication_configs[0].replication_config_update_time #=> Time
+    #   resp.replication_configs[0].is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationConfigs AWS API Documentation
     #
@@ -8384,6 +8398,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_instances[0].replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_instances[0].replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_instances[0].replication_subnet_group.is_read_only #=> Boolean
     #   resp.replication_instances[0].preferred_maintenance_window #=> String
     #   resp.replication_instances[0].pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instances[0].pending_modified_values.allocated_storage #=> Integer
@@ -8509,6 +8524,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.replication_subnet_groups[0].supported_network_types #=> Array
     #   resp.replication_subnet_groups[0].supported_network_types[0] #=> String
+    #   resp.replication_subnet_groups[0].is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups AWS API Documentation
     #
@@ -9047,6 +9063,7 @@ module Aws::DatabaseMigrationService
     #   resp.replications[0].replication_update_time #=> Time
     #   resp.replications[0].replication_last_stop_time #=> Time
     #   resp.replications[0].replication_deprovision_time #=> Time
+    #   resp.replications[0].is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplications AWS API Documentation
     #
@@ -9374,6 +9391,16 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the certificate.
     #
+    # @option params [String] :kms_key_id
+    #   An KMS key identifier that is used to encrypt the certificate.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #
     # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportCertificateResponse#certificate #certificate} => Types::Certificate
@@ -9407,6 +9434,7 @@ module Aws::DatabaseMigrationService
     #         resource_arn: "String",
     #       },
     #     ],
+    #     kms_key_id: "String",
     #   })
     #
     # @example Response structure
@@ -9421,6 +9449,7 @@ module Aws::DatabaseMigrationService
     #   resp.certificate.valid_to_date #=> Time
     #   resp.certificate.signing_algorithm #=> String
     #   resp.certificate.key_length #=> Integer
+    #   resp.certificate.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificate AWS API Documentation
     #
@@ -10618,6 +10647,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.service_access_role_arn #=> String
     #   resp.endpoint.external_table_definition #=> String
     #   resp.endpoint.external_id #=> String
+    #   resp.endpoint.is_read_only #=> Boolean
     #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.external_table_definition #=> String
@@ -10920,6 +10950,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.timestream_settings.magnetic_duration #=> Integer
     #   resp.endpoint.timestream_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.timestream_settings.enable_magnetic_store_writes #=> Boolean
+    #   resp.endpoint.lakehouse_settings.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -11372,6 +11403,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_config.table_mappings #=> String
     #   resp.replication_config.replication_config_create_time #=> Time
     #   resp.replication_config.replication_config_update_time #=> Time
+    #   resp.replication_config.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationConfig AWS API Documentation
     #
@@ -11605,6 +11637,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_instance.replication_subnet_group.is_read_only #=> Boolean
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
@@ -11695,6 +11728,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_subnet_group.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup AWS API Documentation
     #
@@ -11975,6 +12009,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
     #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
     #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
+    #   resp.replication_instance.replication_subnet_group.is_read_only #=> Boolean
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
@@ -12898,6 +12933,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication.replication_update_time #=> Time
     #   resp.replication.replication_last_stop_time #=> Time
     #   resp.replication.replication_deprovision_time #=> Time
+    #   resp.replication.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplication AWS API Documentation
     #
@@ -13424,6 +13460,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication.replication_update_time #=> Time
     #   resp.replication.replication_last_stop_time #=> Time
     #   resp.replication.replication_deprovision_time #=> Time
+    #   resp.replication.is_read_only #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplication AWS API Documentation
     #
@@ -13637,7 +13674,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

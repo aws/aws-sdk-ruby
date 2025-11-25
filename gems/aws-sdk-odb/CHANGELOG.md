@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2025-11-21)
+------------------
+
+* Feature - Adds AssociateIamRoleToResource and DisassociateIamRoleFromResource APIs for managing IAM roles. Enhances CreateOdbNetwork and UpdateOdbNetwork APIs with KMS, STS, and cross-region S3 parameters. Adds OCI identity domain support to InitializeService API.
+
 1.8.0 (2025-10-23)
 ------------------
 

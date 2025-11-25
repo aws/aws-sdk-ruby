@@ -23,6 +23,7 @@ module Aws::CloudWatchRUM
     AppMonitorDomainList = Shapes::ListShape.new(name: 'AppMonitorDomainList')
     AppMonitorId = Shapes::StringShape.new(name: 'AppMonitorId')
     AppMonitorName = Shapes::StringShape.new(name: 'AppMonitorName')
+    AppMonitorPlatform = Shapes::StringShape.new(name: 'AppMonitorPlatform')
     AppMonitorSummary = Shapes::StructureShape.new(name: 'AppMonitorSummary')
     AppMonitorSummaryList = Shapes::ListShape.new(name: 'AppMonitorSummaryList')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -150,50 +151,52 @@ module Aws::CloudWatchRUM
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AppMonitor.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
-    AppMonitor.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
-    AppMonitor.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
-    AppMonitor.add_member(:data_storage, Shapes::ShapeRef.new(shape: DataStorage, location_name: "DataStorage"))
-    AppMonitor.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
+    AppMonitor.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, location_name: "Name"))
     AppMonitor.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
     AppMonitor.add_member(:domain_list, Shapes::ShapeRef.new(shape: AppMonitorDomainList, location_name: "DomainList"))
     AppMonitor.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
+    AppMonitor.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
     AppMonitor.add_member(:last_modified, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "LastModified"))
-    AppMonitor.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, location_name: "Name"))
-    AppMonitor.add_member(:state, Shapes::ShapeRef.new(shape: StateEnum, location_name: "State"))
     AppMonitor.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AppMonitor.add_member(:state, Shapes::ShapeRef.new(shape: StateEnum, location_name: "State"))
+    AppMonitor.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
+    AppMonitor.add_member(:data_storage, Shapes::ShapeRef.new(shape: DataStorage, location_name: "DataStorage"))
+    AppMonitor.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
+    AppMonitor.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
+    AppMonitor.add_member(:platform, Shapes::ShapeRef.new(shape: AppMonitorPlatform, location_name: "Platform"))
     AppMonitor.struct_class = Types::AppMonitor
 
-    AppMonitorConfiguration.add_member(:allow_cookies, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowCookies"))
-    AppMonitorConfiguration.add_member(:enable_x_ray, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableXRay"))
-    AppMonitorConfiguration.add_member(:excluded_pages, Shapes::ShapeRef.new(shape: Pages, location_name: "ExcludedPages"))
-    AppMonitorConfiguration.add_member(:favorite_pages, Shapes::ShapeRef.new(shape: FavoritePages, location_name: "FavoritePages"))
-    AppMonitorConfiguration.add_member(:guest_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GuestRoleArn"))
     AppMonitorConfiguration.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
+    AppMonitorConfiguration.add_member(:excluded_pages, Shapes::ShapeRef.new(shape: Pages, location_name: "ExcludedPages"))
     AppMonitorConfiguration.add_member(:included_pages, Shapes::ShapeRef.new(shape: Pages, location_name: "IncludedPages"))
+    AppMonitorConfiguration.add_member(:favorite_pages, Shapes::ShapeRef.new(shape: FavoritePages, location_name: "FavoritePages"))
     AppMonitorConfiguration.add_member(:session_sample_rate, Shapes::ShapeRef.new(shape: SessionSampleRate, location_name: "SessionSampleRate"))
+    AppMonitorConfiguration.add_member(:guest_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GuestRoleArn"))
+    AppMonitorConfiguration.add_member(:allow_cookies, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowCookies"))
     AppMonitorConfiguration.add_member(:telemetries, Shapes::ShapeRef.new(shape: Telemetries, location_name: "Telemetries"))
+    AppMonitorConfiguration.add_member(:enable_x_ray, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableXRay"))
     AppMonitorConfiguration.struct_class = Types::AppMonitorConfiguration
 
-    AppMonitorDetails.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     AppMonitorDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AppMonitorDetails.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     AppMonitorDetails.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     AppMonitorDetails.struct_class = Types::AppMonitorDetails
 
     AppMonitorDomainList.member = Shapes::ShapeRef.new(shape: AppMonitorDomain)
 
-    AppMonitorSummary.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
-    AppMonitorSummary.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
-    AppMonitorSummary.add_member(:last_modified, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "LastModified"))
     AppMonitorSummary.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, location_name: "Name"))
+    AppMonitorSummary.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
+    AppMonitorSummary.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
+    AppMonitorSummary.add_member(:last_modified, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "LastModified"))
     AppMonitorSummary.add_member(:state, Shapes::ShapeRef.new(shape: StateEnum, location_name: "State"))
+    AppMonitorSummary.add_member(:platform, Shapes::ShapeRef.new(shape: AppMonitorPlatform, location_name: "Platform"))
     AppMonitorSummary.struct_class = Types::AppMonitorSummary
 
     AppMonitorSummaryList.member = Shapes::ShapeRef.new(shape: AppMonitorSummary)
 
+    BatchCreateRumMetricDefinitionsError.add_member(:metric_definition, Shapes::ShapeRef.new(shape: MetricDefinitionRequest, required: true, location_name: "MetricDefinition"))
     BatchCreateRumMetricDefinitionsError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
     BatchCreateRumMetricDefinitionsError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorMessage"))
-    BatchCreateRumMetricDefinitionsError.add_member(:metric_definition, Shapes::ShapeRef.new(shape: MetricDefinitionRequest, required: true, location_name: "MetricDefinition"))
     BatchCreateRumMetricDefinitionsError.struct_class = Types::BatchCreateRumMetricDefinitionsError
 
     BatchCreateRumMetricDefinitionsErrors.member = Shapes::ShapeRef.new(shape: BatchCreateRumMetricDefinitionsError)
@@ -208,9 +211,9 @@ module Aws::CloudWatchRUM
     BatchCreateRumMetricDefinitionsResponse.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitions, location_name: "MetricDefinitions"))
     BatchCreateRumMetricDefinitionsResponse.struct_class = Types::BatchCreateRumMetricDefinitionsResponse
 
+    BatchDeleteRumMetricDefinitionsError.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
     BatchDeleteRumMetricDefinitionsError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
     BatchDeleteRumMetricDefinitionsError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorMessage"))
-    BatchDeleteRumMetricDefinitionsError.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
     BatchDeleteRumMetricDefinitionsError.struct_class = Types::BatchDeleteRumMetricDefinitionsError
 
     BatchDeleteRumMetricDefinitionsErrors.member = Shapes::ShapeRef.new(shape: BatchDeleteRumMetricDefinitionsError)
@@ -241,14 +244,15 @@ module Aws::CloudWatchRUM
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
-    CreateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
-    CreateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
-    CreateAppMonitorRequest.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
+    CreateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location_name: "Name"))
     CreateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
     CreateAppMonitorRequest.add_member(:domain_list, Shapes::ShapeRef.new(shape: AppMonitorDomainList, location_name: "DomainList"))
-    CreateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location_name: "Name"))
     CreateAppMonitorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
+    CreateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
+    CreateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
+    CreateAppMonitorRequest.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
+    CreateAppMonitorRequest.add_member(:platform, Shapes::ShapeRef.new(shape: AppMonitorPlatform, location_name: "Platform"))
     CreateAppMonitorRequest.struct_class = Types::CreateAppMonitorRequest
 
     CreateAppMonitorResponse.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
@@ -293,11 +297,11 @@ module Aws::CloudWatchRUM
 
     FavoritePages.member = Shapes::ShapeRef.new(shape: String)
 
+    GetAppMonitorDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
+    GetAppMonitorDataRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, required: true, location_name: "TimeRange"))
     GetAppMonitorDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: QueryFilters, location_name: "Filters"))
     GetAppMonitorDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxQueryResults, location_name: "MaxResults"))
-    GetAppMonitorDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
     GetAppMonitorDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    GetAppMonitorDataRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, required: true, location_name: "TimeRange"))
     GetAppMonitorDataRequest.struct_class = Types::GetAppMonitorDataRequest
 
     GetAppMonitorDataResponse.add_member(:events, Shapes::ShapeRef.new(shape: EventDataList, location_name: "Events"))
@@ -324,16 +328,16 @@ module Aws::CloudWatchRUM
     InvalidPolicyRevisionIdException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidPolicyRevisionIdException.struct_class = Types::InvalidPolicyRevisionIdException
 
-    JavaScriptSourceMaps.add_member(:s3_uri, Shapes::ShapeRef.new(shape: DeobfuscationS3Uri, location_name: "S3Uri"))
     JavaScriptSourceMaps.add_member(:status, Shapes::ShapeRef.new(shape: DeobfuscationStatus, required: true, location_name: "Status"))
+    JavaScriptSourceMaps.add_member(:s3_uri, Shapes::ShapeRef.new(shape: DeobfuscationS3Uri, location_name: "S3Uri"))
     JavaScriptSourceMaps.struct_class = Types::JavaScriptSourceMaps
 
     ListAppMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAppMonitorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListAppMonitorsRequest.struct_class = Types::ListAppMonitorsRequest
 
-    ListAppMonitorsResponse.add_member(:app_monitor_summaries, Shapes::ShapeRef.new(shape: AppMonitorSummaryList, location_name: "AppMonitorSummaries"))
     ListAppMonitorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAppMonitorsResponse.add_member(:app_monitor_summaries, Shapes::ShapeRef.new(shape: AppMonitorSummaryList, location_name: "AppMonitorSummaries"))
     ListAppMonitorsResponse.struct_class = Types::ListAppMonitorsResponse
 
     ListRumMetricsDestinationsRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
@@ -355,23 +359,23 @@ module Aws::CloudWatchRUM
     MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
 
-    MetricDefinition.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
-    MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
     MetricDefinition.add_member(:metric_definition_id, Shapes::ShapeRef.new(shape: MetricDefinitionId, required: true, location_name: "MetricDefinitionId"))
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
-    MetricDefinition.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
-    MetricDefinition.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
     MetricDefinition.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
+    MetricDefinition.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
+    MetricDefinition.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
+    MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
+    MetricDefinition.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     MetricDefinition.struct_class = Types::MetricDefinition
 
     MetricDefinitionIds.member = Shapes::ShapeRef.new(shape: MetricDefinitionId)
 
+    MetricDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
+    MetricDefinitionRequest.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
+    MetricDefinitionRequest.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
     MetricDefinitionRequest.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
     MetricDefinitionRequest.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
-    MetricDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
     MetricDefinitionRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
-    MetricDefinitionRequest.add_member(:unit_label, Shapes::ShapeRef.new(shape: UnitLabel, location_name: "UnitLabel"))
-    MetricDefinitionRequest.add_member(:value_key, Shapes::ShapeRef.new(shape: ValueKey, location_name: "ValueKey"))
     MetricDefinitionRequest.struct_class = Types::MetricDefinitionRequest
 
     MetricDefinitions.member = Shapes::ShapeRef.new(shape: MetricDefinition)
@@ -402,12 +406,12 @@ module Aws::CloudWatchRUM
     PutResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
-    PutRumEventsRequest.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
-    PutRumEventsRequest.add_member(:app_monitor_details, Shapes::ShapeRef.new(shape: AppMonitorDetails, required: true, location_name: "AppMonitorDetails"))
-    PutRumEventsRequest.add_member(:batch_id, Shapes::ShapeRef.new(shape: PutRumEventsRequestBatchIdString, required: true, location_name: "BatchId"))
     PutRumEventsRequest.add_member(:id, Shapes::ShapeRef.new(shape: PutRumEventsRequestIdString, required: true, location: "uri", location_name: "Id"))
-    PutRumEventsRequest.add_member(:rum_events, Shapes::ShapeRef.new(shape: RumEventList, required: true, location_name: "RumEvents"))
+    PutRumEventsRequest.add_member(:batch_id, Shapes::ShapeRef.new(shape: PutRumEventsRequestBatchIdString, required: true, location_name: "BatchId"))
+    PutRumEventsRequest.add_member(:app_monitor_details, Shapes::ShapeRef.new(shape: AppMonitorDetails, required: true, location_name: "AppMonitorDetails"))
     PutRumEventsRequest.add_member(:user_details, Shapes::ShapeRef.new(shape: UserDetails, required: true, location_name: "UserDetails"))
+    PutRumEventsRequest.add_member(:rum_events, Shapes::ShapeRef.new(shape: RumEventList, required: true, location_name: "RumEvents"))
+    PutRumEventsRequest.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     PutRumEventsRequest.struct_class = Types::PutRumEventsRequest
 
     PutRumEventsResponse.struct_class = Types::PutRumEventsResponse
@@ -433,11 +437,11 @@ module Aws::CloudWatchRUM
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    RumEvent.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "details", metadata: {"jsonvalue" => true}))
     RumEvent.add_member(:id, Shapes::ShapeRef.new(shape: RumEventIdString, required: true, location_name: "id"))
-    RumEvent.add_member(:metadata, Shapes::ShapeRef.new(shape: JsonValue, location_name: "metadata", metadata: {"jsonvalue" => true}))
     RumEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
     RumEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    RumEvent.add_member(:metadata, Shapes::ShapeRef.new(shape: JsonValue, location_name: "metadata", metadata: {"jsonvalue" => true}))
+    RumEvent.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "details", metadata: {"jsonvalue" => true}))
     RumEvent.struct_class = Types::RumEvent
 
     RumEventList.member = Shapes::ShapeRef.new(shape: RumEvent)
@@ -459,9 +463,9 @@ module Aws::CloudWatchRUM
     Telemetries.member = Shapes::ShapeRef.new(shape: Telemetry)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
-    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TimeRange.add_member(:after, Shapes::ShapeRef.new(shape: QueryTimestamp, required: true, location_name: "After"))
@@ -474,13 +478,13 @@ module Aws::CloudWatchRUM
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
-    UpdateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
-    UpdateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
-    UpdateAppMonitorRequest.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
+    UpdateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
     UpdateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
     UpdateAppMonitorRequest.add_member(:domain_list, Shapes::ShapeRef.new(shape: AppMonitorDomainList, location_name: "DomainList"))
-    UpdateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
+    UpdateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
+    UpdateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
+    UpdateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
+    UpdateAppMonitorRequest.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
     UpdateAppMonitorRequest.struct_class = Types::UpdateAppMonitorRequest
 
     UpdateAppMonitorResponse.struct_class = Types::UpdateAppMonitorResponse
@@ -494,8 +498,8 @@ module Aws::CloudWatchRUM
 
     UpdateRumMetricDefinitionResponse.struct_class = Types::UpdateRumMetricDefinitionResponse
 
-    UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: UserDetailsSessionIdString, location_name: "sessionId"))
     UserDetails.add_member(:user_id, Shapes::ShapeRef.new(shape: UserDetailsUserIdString, location_name: "userId"))
+    UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: UserDetailsSessionIdString, location_name: "sessionId"))
     UserDetails.struct_class = Types::UserDetails
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -511,7 +515,6 @@ module Aws::CloudWatchRUM
         "apiVersion" => "2018-05-10",
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rum",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "CloudWatch RUM",
@@ -732,8 +735,8 @@ module Aws::CloudWatchRUM
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)

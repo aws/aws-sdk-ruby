@@ -953,6 +953,17 @@ module Aws::Redshift
     #   turned on.
     #   @return [Types::SecondaryClusterInfo]
     #
+    # @!attribute [rw] lakehouse_registration_status
+    #   The status of the lakehouse registration for the cluster. Indicates
+    #   whether the cluster is successfully registered with Amazon Redshift
+    #   federated permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_arn
+    #   The Amazon Resource Name (ARN) of the Glue data catalog associated
+    #   with the cluster enabled with Amazon Redshift federated permissions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1015,7 +1026,9 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :ip_address_type,
       :multi_az,
-      :multi_az_secondary)
+      :multi_az_secondary,
+      :lakehouse_registration_status,
+      :catalog_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1794,6 +1807,22 @@ module Aws::Redshift
     #
     class ConflictPolicyUpdateFault < Aws::EmptyStructure; end
 
+    # A structure that defines the Amazon Redshift connect service
+    # integration scope.
+    #
+    # @!attribute [rw] authorization
+    #   Determines whether the Amazon Redshift connect integration is
+    #   enabled or disabled for the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Connect AWS API Documentation
+    #
+    class Connect < Struct.new(
+      :authorization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_snapshot_identifier
     #   The identifier for the source snapshot.
     #
@@ -2340,6 +2369,22 @@ module Aws::Redshift
     #   Center application.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_name
+    #   The name of the Glue data catalog that will be associated with the
+    #   cluster enabled with Amazon Redshift federated permissions.
+    #
+    #   Constraints:
+    #
+    #   * Must contain at least one lowercase letter.
+    #
+    #   * Can only contain lowercase letters (a-z), numbers (0-9),
+    #     underscores (\_), and hyphens (-).
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    #   Example: `my-catalog_01`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2381,7 +2426,8 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :ip_address_type,
       :multi_az,
-      :redshift_idc_application_arn)
+      :redshift_idc_application_arn,
+      :catalog_name)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -2991,6 +3037,12 @@ module Aws::Redshift
     #   Center application.
     #   @return [Array<Types::ServiceIntegrationsUnion>]
     #
+    # @!attribute [rw] application_type
+    #   The type of application being created. Valid values are `None` or
+    #   `Lakehouse`. Use `Lakehouse` to enable Amazon Redshift federated
+    #   permissions on cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tags.
     #   @return [Array<Types::Tag>]
@@ -3011,6 +3063,7 @@ module Aws::Redshift
       :iam_role_arn,
       :authorized_token_issuer_list,
       :service_integrations,
+      :application_type,
       :tags,
       :sso_tag_keys)
       SENSITIVE = []
@@ -7884,6 +7937,43 @@ module Aws::Redshift
       class Unknown < LakeFormationScopeUnion; end
     end
 
+    # Contains configuration information for lakehouse integration,
+    # including the cluster identifier, catalog ARN, and registration
+    # status.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster associated with this lakehouse
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center
+    #   application used for enabling Amazon Web Services IAM Identity
+    #   Center trusted identity propagation on a cluster enabled with Amazon
+    #   Redshift federated permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_registration_status
+    #   The current status of the lakehouse registration. Indicates whether
+    #   the cluster is successfully registered with the lakehouse.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_arn
+    #   The Amazon Resource Name (ARN) of the Glue data catalog associated
+    #   with the lakehouse configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LakehouseConfiguration AWS API Documentation
+    #
+    class LakehouseConfiguration < Struct.new(
+      :cluster_identifier,
+      :lakehouse_idc_application_arn,
+      :lakehouse_registration_status,
+      :catalog_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The encryption key has exceeded its grant limit in Amazon Web Services
     # KMS.
     #
@@ -8918,6 +9008,66 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster whose lakehouse configuration
+    #   you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_registration
+    #   Specifies whether to register or deregister the cluster with Amazon
+    #   Redshift federated permissions. Valid values are `Register` or
+    #   `Deregister`.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_name
+    #   The name of the Glue data catalog that will be associated with the
+    #   cluster enabled with Amazon Redshift federated permissions.
+    #
+    #   Constraints:
+    #
+    #   * Must contain at least one lowercase letter.
+    #
+    #   * Can only contain lowercase letters (a-z), numbers (0-9),
+    #     underscores (\_), and hyphens (-).
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    #   Example: `my-catalog_01`
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_idc_registration
+    #   Modifies the Amazon Web Services IAM Identity Center trusted
+    #   identity propagation on a cluster enabled with Amazon Redshift
+    #   federated permissions. Valid values are `Associate` or
+    #   `Disassociate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center
+    #   application used for enabling Amazon Web Services IAM Identity
+    #   Center trusted identity propagation on a cluster enabled with Amazon
+    #   Redshift federated permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   A boolean value that, if `true`, validates the request without
+    #   actually modifying the lakehouse configuration. Use this to check
+    #   for errors before making changes.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyLakehouseConfigurationMessage AWS API Documentation
+    #
+    class ModifyLakehouseConfigurationMessage < Struct.new(
+      :cluster_identifier,
+      :lakehouse_registration,
+      :catalog_name,
+      :lakehouse_idc_registration,
+      :lakehouse_idc_application_arn,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] redshift_idc_application_arn
     #   The ARN for the Redshift application that integrates with IAM
     #   Identity Center.
@@ -9915,6 +10065,12 @@ module Aws::Redshift
     #   application.
     #   @return [Array<Types::ServiceIntegrationsUnion>]
     #
+    # @!attribute [rw] application_type
+    #   The type of application being created. Valid values are `None` or
+    #   `Lakehouse`. Use `Lakehouse` to enable Amazon Redshift federated
+    #   permissions on cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tags.
     #   @return [Array<Types::Tag>]
@@ -9938,6 +10094,7 @@ module Aws::Redshift
       :idc_onboard_status,
       :authorized_token_issuer_list,
       :service_integrations,
+      :application_type,
       :tags,
       :sso_tag_keys)
       SENSITIVE = []
@@ -9970,6 +10127,33 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftInvalidParameterFault AWS API Documentation
     #
     class RedshiftInvalidParameterFault < Aws::EmptyStructure; end
+
+    # A union structure that defines the scope of Amazon Redshift service
+    # integrations. Contains configuration for different integration types
+    # such as Amazon Redshift.
+    #
+    # @note RedshiftScopeUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RedshiftScopeUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RedshiftScopeUnion corresponding to the set member.
+    #
+    # @!attribute [rw] connect
+    #   The Amazon Redshift connect integration scope configuration. Defines
+    #   authorization settings for Amazon Redshift connect service
+    #   integration.
+    #   @return [Types::Connect]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftScopeUnion AWS API Documentation
+    #
+    class RedshiftScopeUnion < Struct.new(
+      :connect,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Connect < RedshiftScopeUnion; end
+      class Unknown < RedshiftScopeUnion; end
+    end
 
     # A link to an Amazon Redshift Advisor reference for more information
     # about a recommendation.
@@ -10936,6 +11120,29 @@ module Aws::Redshift
     #   Availability Zones.
     #   @return [Boolean]
     #
+    # @!attribute [rw] catalog_name
+    #   The name of the Glue Data Catalog that will be associated with the
+    #   cluster enabled with Amazon Redshift federated permissions.
+    #
+    #   Constraints:
+    #
+    #   * Must contain at least one lowercase letter.
+    #
+    #   * Can only contain lowercase letters (a-z), numbers (0-9),
+    #     underscores (\_), and hyphens (-).
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    #   Example: `my-catalog_01`
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center
+    #   application used for enabling Amazon Web Services IAM Identity
+    #   Center trusted identity propagation on a cluster enabled with Amazon
+    #   Redshift federated permissions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -10975,7 +11182,9 @@ module Aws::Redshift
       :manage_master_password,
       :master_password_secret_kms_key_id,
       :ip_address_type,
-      :multi_az)
+      :multi_az,
+      :catalog_name,
+      :redshift_idc_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11606,11 +11815,16 @@ module Aws::Redshift
     #   A list of scopes set up for S3 Access Grants integration.
     #   @return [Array<Types::S3AccessGrantsScopeUnion>]
     #
+    # @!attribute [rw] redshift
+    #   A list of scopes set up for Amazon Redshift integration.
+    #   @return [Array<Types::RedshiftScopeUnion>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ServiceIntegrationsUnion AWS API Documentation
     #
     class ServiceIntegrationsUnion < Struct.new(
       :lake_formation,
       :s3_access_grants,
+      :redshift,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -11618,6 +11832,7 @@ module Aws::Redshift
 
       class LakeFormation < ServiceIntegrationsUnion; end
       class S3AccessGrants < ServiceIntegrationsUnion; end
+      class Redshift < ServiceIntegrationsUnion; end
       class Unknown < ServiceIntegrationsUnion; end
     end
 

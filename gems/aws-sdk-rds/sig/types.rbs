@@ -787,6 +787,7 @@ module Aws::RDS
       attr_accessor db_cluster_option_group_memberships: ::Array[Types::DBClusterOptionGroupStatus]
       attr_accessor preferred_backup_window: ::String
       attr_accessor preferred_maintenance_window: ::String
+      attr_accessor upgrade_rollout_order: ("first" | "second" | "last")
       attr_accessor replication_source_identifier: ::String
       attr_accessor read_replica_identifiers: ::Array[::String]
       attr_accessor status_infos: ::Array[Types::DBClusterStatusInfo]
@@ -1147,6 +1148,7 @@ module Aws::RDS
       attr_accessor availability_zone: ::String
       attr_accessor db_subnet_group: Types::DBSubnetGroup
       attr_accessor preferred_maintenance_window: ::String
+      attr_accessor upgrade_rollout_order: ("first" | "second" | "last")
       attr_accessor pending_modified_values: Types::PendingModifiedValues
       attr_accessor latest_restorable_time: ::Time
       attr_accessor multi_az: bool
@@ -4402,6 +4404,9 @@ module Aws::RDS
       attr_accessor storage_throughput_to_iops_ratio: ::Array[Types::DoubleRange]
       attr_accessor supports_storage_autoscaling: bool
       SENSITIVE: []
+    end
+
+    class VpcEncryptionControlViolationException < Aws::EmptyStructure
     end
 
     class VpcSecurityGroupMembership

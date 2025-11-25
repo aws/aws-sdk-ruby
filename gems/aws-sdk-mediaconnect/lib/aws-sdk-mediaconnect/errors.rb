@@ -37,6 +37,9 @@ module Aws::MediaConnect
   # * {GrantFlowEntitlements420Exception}
   # * {InternalServerErrorException}
   # * {NotFoundException}
+  # * {RouterInputServiceQuotaExceededException}
+  # * {RouterNetworkInterfaceServiceQuotaExceededException}
+  # * {RouterOutputServiceQuotaExceededException}
   # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
   #
@@ -194,6 +197,51 @@ module Aws::MediaConnect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MediaConnect::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RouterInputServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::RouterInputServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RouterNetworkInterfaceServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::RouterNetworkInterfaceServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RouterOutputServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::RouterOutputServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

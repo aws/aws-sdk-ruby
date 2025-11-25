@@ -92,7 +92,7 @@ module Aws
                                       last_updated_date: ::String?,
                                       last_evaluated_date: ::String?,
                                       monitor_type: ("DIMENSIONAL" | "CUSTOM"),
-                                      monitor_dimension: ("SERVICE")?,
+                                      monitor_dimension: ("SERVICE" | "LINKED_ACCOUNT" | "TAG" | "COST_CATEGORY")?,
                                       monitor_specification: {
                                         or: Array[
                                           untyped,

@@ -24,17 +24,33 @@ module Aws::Invoicing
     BatchGetInvoiceProfileRequest = Shapes::StructureShape.new(name: 'BatchGetInvoiceProfileRequest')
     BatchGetInvoiceProfileResponse = Shapes::StructureShape.new(name: 'BatchGetInvoiceProfileResponse')
     BillingPeriod = Shapes::StructureShape.new(name: 'BillingPeriod')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BuyerDomain = Shapes::StringShape.new(name: 'BuyerDomain')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionTestingMethod = Shapes::StringShape.new(name: 'ConnectionTestingMethod')
+    Contact = Shapes::StructureShape.new(name: 'Contact')
+    Contacts = Shapes::ListShape.new(name: 'Contacts')
     CreateInvoiceUnitRequest = Shapes::StructureShape.new(name: 'CreateInvoiceUnitRequest')
     CreateInvoiceUnitResponse = Shapes::StructureShape.new(name: 'CreateInvoiceUnitResponse')
+    CreateProcurementPortalPreferenceRequest = Shapes::StructureShape.new(name: 'CreateProcurementPortalPreferenceRequest')
+    CreateProcurementPortalPreferenceResponse = Shapes::StructureShape.new(name: 'CreateProcurementPortalPreferenceResponse')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     CurrencyExchangeDetails = Shapes::StructureShape.new(name: 'CurrencyExchangeDetails')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
     DeleteInvoiceUnitRequest = Shapes::StructureShape.new(name: 'DeleteInvoiceUnitRequest')
     DeleteInvoiceUnitResponse = Shapes::StructureShape.new(name: 'DeleteInvoiceUnitResponse')
+    DeleteProcurementPortalPreferenceRequest = Shapes::StructureShape.new(name: 'DeleteProcurementPortalPreferenceRequest')
+    DeleteProcurementPortalPreferenceResponse = Shapes::StructureShape.new(name: 'DeleteProcurementPortalPreferenceResponse')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     DiscountsBreakdown = Shapes::StructureShape.new(name: 'DiscountsBreakdown')
     DiscountsBreakdownAmount = Shapes::StructureShape.new(name: 'DiscountsBreakdownAmount')
     DiscountsBreakdownAmountList = Shapes::ListShape.new(name: 'DiscountsBreakdownAmountList')
+    EinvoiceDeliveryAttachmentType = Shapes::StringShape.new(name: 'EinvoiceDeliveryAttachmentType')
+    EinvoiceDeliveryAttachmentTypes = Shapes::ListShape.new(name: 'EinvoiceDeliveryAttachmentTypes')
+    EinvoiceDeliveryDocumentType = Shapes::StringShape.new(name: 'EinvoiceDeliveryDocumentType')
+    EinvoiceDeliveryDocumentTypes = Shapes::ListShape.new(name: 'EinvoiceDeliveryDocumentTypes')
+    EinvoiceDeliveryPreference = Shapes::StructureShape.new(name: 'EinvoiceDeliveryPreference')
+    EmailString = Shapes::StringShape.new(name: 'EmailString')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     FeesBreakdown = Shapes::StructureShape.new(name: 'FeesBreakdown')
     FeesBreakdownAmount = Shapes::StructureShape.new(name: 'FeesBreakdownAmount')
@@ -44,6 +60,8 @@ module Aws::Invoicing
     GetInvoicePDFResponse = Shapes::StructureShape.new(name: 'GetInvoicePDFResponse')
     GetInvoiceUnitRequest = Shapes::StructureShape.new(name: 'GetInvoiceUnitRequest')
     GetInvoiceUnitResponse = Shapes::StructureShape.new(name: 'GetInvoiceUnitResponse')
+    GetProcurementPortalPreferenceRequest = Shapes::StructureShape.new(name: 'GetProcurementPortalPreferenceRequest')
+    GetProcurementPortalPreferenceResponse = Shapes::StructureShape.new(name: 'GetProcurementPortalPreferenceResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvoiceCurrencyAmount = Shapes::StructureShape.new(name: 'InvoiceCurrencyAmount')
@@ -57,6 +75,7 @@ module Aws::Invoicing
     InvoiceType = Shapes::StringShape.new(name: 'InvoiceType')
     InvoiceUnit = Shapes::StructureShape.new(name: 'InvoiceUnit')
     InvoiceUnitArnString = Shapes::StringShape.new(name: 'InvoiceUnitArnString')
+    InvoiceUnitArns = Shapes::ListShape.new(name: 'InvoiceUnitArns')
     InvoiceUnitName = Shapes::StringShape.new(name: 'InvoiceUnitName')
     InvoiceUnitNames = Shapes::ListShape.new(name: 'InvoiceUnitNames')
     InvoiceUnitRule = Shapes::StructureShape.new(name: 'InvoiceUnitRule')
@@ -67,12 +86,29 @@ module Aws::Invoicing
     ListInvoiceSummariesResponse = Shapes::StructureShape.new(name: 'ListInvoiceSummariesResponse')
     ListInvoiceUnitsRequest = Shapes::StructureShape.new(name: 'ListInvoiceUnitsRequest')
     ListInvoiceUnitsResponse = Shapes::StructureShape.new(name: 'ListInvoiceUnitsResponse')
+    ListProcurementPortalPreferencesRequest = Shapes::StructureShape.new(name: 'ListProcurementPortalPreferencesRequest')
+    ListProcurementPortalPreferencesResponse = Shapes::StructureShape.new(name: 'ListProcurementPortalPreferencesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     Month = Shapes::IntegerShape.new(name: 'Month')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
+    ProcurementPortalName = Shapes::StringShape.new(name: 'ProcurementPortalName')
+    ProcurementPortalPreference = Shapes::StructureShape.new(name: 'ProcurementPortalPreference')
+    ProcurementPortalPreferenceArnString = Shapes::StringShape.new(name: 'ProcurementPortalPreferenceArnString')
+    ProcurementPortalPreferenceSelector = Shapes::StructureShape.new(name: 'ProcurementPortalPreferenceSelector')
+    ProcurementPortalPreferenceStatus = Shapes::StringShape.new(name: 'ProcurementPortalPreferenceStatus')
+    ProcurementPortalPreferenceSummaries = Shapes::ListShape.new(name: 'ProcurementPortalPreferenceSummaries')
+    ProcurementPortalPreferenceSummary = Shapes::StructureShape.new(name: 'ProcurementPortalPreferenceSummary')
     ProfileList = Shapes::ListShape.new(name: 'ProfileList')
+    Protocol = Shapes::StringShape.new(name: 'Protocol')
+    PurchaseOrderDataSource = Shapes::StructureShape.new(name: 'PurchaseOrderDataSource')
+    PurchaseOrderDataSourceType = Shapes::StringShape.new(name: 'PurchaseOrderDataSourceType')
+    PurchaseOrderDataSources = Shapes::ListShape.new(name: 'PurchaseOrderDataSources')
+    PutProcurementPortalPreferenceRequest = Shapes::StructureShape.new(name: 'PutProcurementPortalPreferenceRequest')
+    PutProcurementPortalPreferenceResponse = Shapes::StructureShape.new(name: 'PutProcurementPortalPreferenceResponse')
     ReceiverAddress = Shapes::StructureShape.new(name: 'ReceiverAddress')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
@@ -80,11 +116,14 @@ module Aws::Invoicing
     ResourceTagKeyList = Shapes::ListShape.new(name: 'ResourceTagKeyList')
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
     ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
+    RuleAccountIdList = Shapes::ListShape.new(name: 'RuleAccountIdList')
+    SellerOfRecords = Shapes::ListShape.new(name: 'SellerOfRecords')
     SensitiveBasicStringWithoutSpace = Shapes::StringShape.new(name: 'SensitiveBasicStringWithoutSpace')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StringWithoutNewLine = Shapes::StringShape.new(name: 'StringWithoutNewLine')
     SupplementalDocument = Shapes::StructureShape.new(name: 'SupplementalDocument')
     SupplementalDocuments = Shapes::ListShape.new(name: 'SupplementalDocuments')
+    SupplierDomain = Shapes::StringShape.new(name: 'SupplierDomain')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagrisArn = Shapes::StringShape.new(name: 'TagrisArn')
@@ -92,12 +131,16 @@ module Aws::Invoicing
     TaxesBreakdown = Shapes::StructureShape.new(name: 'TaxesBreakdown')
     TaxesBreakdownAmount = Shapes::StructureShape.new(name: 'TaxesBreakdownAmount')
     TaxesBreakdownAmountList = Shapes::ListShape.new(name: 'TaxesBreakdownAmountList')
+    TestEnvPreference = Shapes::StructureShape.new(name: 'TestEnvPreference')
+    TestEnvPreferenceInput = Shapes::StructureShape.new(name: 'TestEnvPreferenceInput')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateInvoiceUnitRequest = Shapes::StructureShape.new(name: 'UpdateInvoiceUnitRequest')
     UpdateInvoiceUnitResponse = Shapes::StructureShape.new(name: 'UpdateInvoiceUnitResponse')
+    UpdateProcurementPortalPreferenceStatusRequest = Shapes::StructureShape.new(name: 'UpdateProcurementPortalPreferenceStatusRequest')
+    UpdateProcurementPortalPreferenceStatusResponse = Shapes::StructureShape.new(name: 'UpdateProcurementPortalPreferenceStatusResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -126,6 +169,17 @@ module Aws::Invoicing
     BillingPeriod.add_member(:year, Shapes::ShapeRef.new(shape: Year, required: true, location_name: "Year"))
     BillingPeriod.struct_class = Types::BillingPeriod
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, location_name: "message"))
+    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: BasicString, location_name: "resourceId"))
+    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: BasicString, location_name: "resourceType"))
+    ConflictException.struct_class = Types::ConflictException
+
+    Contact.add_member(:name, Shapes::ShapeRef.new(shape: BasicString, location_name: "Name"))
+    Contact.add_member(:email, Shapes::ShapeRef.new(shape: EmailString, location_name: "Email"))
+    Contact.struct_class = Types::Contact
+
+    Contacts.member = Shapes::ShapeRef.new(shape: Contact)
+
     CreateInvoiceUnitRequest.add_member(:name, Shapes::ShapeRef.new(shape: InvoiceUnitName, required: true, location_name: "Name"))
     CreateInvoiceUnitRequest.add_member(:invoice_receiver, Shapes::ShapeRef.new(shape: AccountIdString, required: true, location_name: "InvoiceReceiver"))
     CreateInvoiceUnitRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -136,6 +190,26 @@ module Aws::Invoicing
 
     CreateInvoiceUnitResponse.add_member(:invoice_unit_arn, Shapes::ShapeRef.new(shape: InvoiceUnitArnString, location_name: "InvoiceUnitArn"))
     CreateInvoiceUnitResponse.struct_class = Types::CreateInvoiceUnitResponse
+
+    CreateProcurementPortalPreferenceRequest.add_member(:procurement_portal_name, Shapes::ShapeRef.new(shape: ProcurementPortalName, required: true, location_name: "ProcurementPortalName"))
+    CreateProcurementPortalPreferenceRequest.add_member(:buyer_domain, Shapes::ShapeRef.new(shape: BuyerDomain, required: true, location_name: "BuyerDomain"))
+    CreateProcurementPortalPreferenceRequest.add_member(:buyer_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "BuyerIdentifier"))
+    CreateProcurementPortalPreferenceRequest.add_member(:supplier_domain, Shapes::ShapeRef.new(shape: SupplierDomain, required: true, location_name: "SupplierDomain"))
+    CreateProcurementPortalPreferenceRequest.add_member(:supplier_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "SupplierIdentifier"))
+    CreateProcurementPortalPreferenceRequest.add_member(:selector, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSelector, location_name: "Selector"))
+    CreateProcurementPortalPreferenceRequest.add_member(:procurement_portal_shared_secret, Shapes::ShapeRef.new(shape: SensitiveBasicStringWithoutSpace, location_name: "ProcurementPortalSharedSecret"))
+    CreateProcurementPortalPreferenceRequest.add_member(:procurement_portal_instance_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalInstanceEndpoint"))
+    CreateProcurementPortalPreferenceRequest.add_member(:test_env_preference, Shapes::ShapeRef.new(shape: TestEnvPreferenceInput, location_name: "TestEnvPreference"))
+    CreateProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
+    CreateProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_preference, Shapes::ShapeRef.new(shape: EinvoiceDeliveryPreference, location_name: "EinvoiceDeliveryPreference"))
+    CreateProcurementPortalPreferenceRequest.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    CreateProcurementPortalPreferenceRequest.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, required: true, location_name: "Contacts"))
+    CreateProcurementPortalPreferenceRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
+    CreateProcurementPortalPreferenceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateProcurementPortalPreferenceRequest.struct_class = Types::CreateProcurementPortalPreferenceRequest
+
+    CreateProcurementPortalPreferenceResponse.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    CreateProcurementPortalPreferenceResponse.struct_class = Types::CreateProcurementPortalPreferenceResponse
 
     CurrencyExchangeDetails.add_member(:source_currency_code, Shapes::ShapeRef.new(shape: BasicString, location_name: "SourceCurrencyCode"))
     CurrencyExchangeDetails.add_member(:target_currency_code, Shapes::ShapeRef.new(shape: BasicString, location_name: "TargetCurrencyCode"))
@@ -152,6 +226,12 @@ module Aws::Invoicing
     DeleteInvoiceUnitResponse.add_member(:invoice_unit_arn, Shapes::ShapeRef.new(shape: InvoiceUnitArnString, location_name: "InvoiceUnitArn"))
     DeleteInvoiceUnitResponse.struct_class = Types::DeleteInvoiceUnitResponse
 
+    DeleteProcurementPortalPreferenceRequest.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    DeleteProcurementPortalPreferenceRequest.struct_class = Types::DeleteProcurementPortalPreferenceRequest
+
+    DeleteProcurementPortalPreferenceResponse.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    DeleteProcurementPortalPreferenceResponse.struct_class = Types::DeleteProcurementPortalPreferenceResponse
+
     DiscountsBreakdown.add_member(:breakdown, Shapes::ShapeRef.new(shape: DiscountsBreakdownAmountList, location_name: "Breakdown"))
     DiscountsBreakdown.add_member(:total_amount, Shapes::ShapeRef.new(shape: BasicString, location_name: "TotalAmount"))
     DiscountsBreakdown.struct_class = Types::DiscountsBreakdown
@@ -162,6 +242,18 @@ module Aws::Invoicing
     DiscountsBreakdownAmount.struct_class = Types::DiscountsBreakdownAmount
 
     DiscountsBreakdownAmountList.member = Shapes::ShapeRef.new(shape: DiscountsBreakdownAmount)
+
+    EinvoiceDeliveryAttachmentTypes.member = Shapes::ShapeRef.new(shape: EinvoiceDeliveryAttachmentType)
+
+    EinvoiceDeliveryDocumentTypes.member = Shapes::ShapeRef.new(shape: EinvoiceDeliveryDocumentType)
+
+    EinvoiceDeliveryPreference.add_member(:einvoice_delivery_document_types, Shapes::ShapeRef.new(shape: EinvoiceDeliveryDocumentTypes, required: true, location_name: "EinvoiceDeliveryDocumentTypes"))
+    EinvoiceDeliveryPreference.add_member(:einvoice_delivery_attachment_types, Shapes::ShapeRef.new(shape: EinvoiceDeliveryAttachmentTypes, location_name: "EinvoiceDeliveryAttachmentTypes"))
+    EinvoiceDeliveryPreference.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
+    EinvoiceDeliveryPreference.add_member(:purchase_order_data_sources, Shapes::ShapeRef.new(shape: PurchaseOrderDataSources, required: true, location_name: "PurchaseOrderDataSources"))
+    EinvoiceDeliveryPreference.add_member(:connection_testing_method, Shapes::ShapeRef.new(shape: ConnectionTestingMethod, required: true, location_name: "ConnectionTestingMethod"))
+    EinvoiceDeliveryPreference.add_member(:einvoice_delivery_activation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EinvoiceDeliveryActivationDate"))
+    EinvoiceDeliveryPreference.struct_class = Types::EinvoiceDeliveryPreference
 
     Entity.add_member(:invoicing_entity, Shapes::ShapeRef.new(shape: BasicString, location_name: "InvoicingEntity"))
     Entity.struct_class = Types::Entity
@@ -180,6 +272,7 @@ module Aws::Invoicing
     Filters.add_member(:names, Shapes::ShapeRef.new(shape: InvoiceUnitNames, location_name: "Names"))
     Filters.add_member(:invoice_receivers, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "InvoiceReceivers"))
     Filters.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "Accounts"))
+    Filters.add_member(:bill_source_accounts, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "BillSourceAccounts"))
     Filters.struct_class = Types::Filters
 
     GetInvoicePDFRequest.add_member(:invoice_id, Shapes::ShapeRef.new(shape: StringWithoutNewLine, required: true, location_name: "InvoiceId"))
@@ -200,6 +293,12 @@ module Aws::Invoicing
     GetInvoiceUnitResponse.add_member(:rule, Shapes::ShapeRef.new(shape: InvoiceUnitRule, location_name: "Rule"))
     GetInvoiceUnitResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
     GetInvoiceUnitResponse.struct_class = Types::GetInvoiceUnitResponse
+
+    GetProcurementPortalPreferenceRequest.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    GetProcurementPortalPreferenceRequest.struct_class = Types::GetProcurementPortalPreferenceRequest
+
+    GetProcurementPortalPreferenceResponse.add_member(:procurement_portal_preference, Shapes::ShapeRef.new(shape: ProcurementPortalPreference, required: true, location_name: "ProcurementPortalPreference"))
+    GetProcurementPortalPreferenceResponse.struct_class = Types::GetProcurementPortalPreferenceResponse
 
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "retryAfterSeconds"))
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, location_name: "message"))
@@ -260,9 +359,12 @@ module Aws::Invoicing
     InvoiceUnit.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
     InvoiceUnit.struct_class = Types::InvoiceUnit
 
+    InvoiceUnitArns.member = Shapes::ShapeRef.new(shape: InvoiceUnitArnString)
+
     InvoiceUnitNames.member = Shapes::ShapeRef.new(shape: InvoiceUnitName)
 
-    InvoiceUnitRule.add_member(:linked_accounts, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "LinkedAccounts"))
+    InvoiceUnitRule.add_member(:linked_accounts, Shapes::ShapeRef.new(shape: RuleAccountIdList, location_name: "LinkedAccounts"))
+    InvoiceUnitRule.add_member(:bill_source_accounts, Shapes::ShapeRef.new(shape: RuleAccountIdList, location_name: "BillSourceAccounts"))
     InvoiceUnitRule.struct_class = Types::InvoiceUnitRule
 
     InvoiceUnits.member = Shapes::ShapeRef.new(shape: InvoiceUnit)
@@ -287,13 +389,91 @@ module Aws::Invoicing
     ListInvoiceUnitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
     ListInvoiceUnitsResponse.struct_class = Types::ListInvoiceUnitsResponse
 
+    ListProcurementPortalPreferencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "NextToken"))
+    ListProcurementPortalPreferencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListProcurementPortalPreferencesRequest.struct_class = Types::ListProcurementPortalPreferencesRequest
+
+    ListProcurementPortalPreferencesResponse.add_member(:procurement_portal_preferences, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSummaries, location_name: "ProcurementPortalPreferences"))
+    ListProcurementPortalPreferencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "NextToken"))
+    ListProcurementPortalPreferencesResponse.struct_class = Types::ListProcurementPortalPreferencesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagrisArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ProcurementPortalPreference.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AccountIdString, required: true, location_name: "AwsAccountId"))
+    ProcurementPortalPreference.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    ProcurementPortalPreference.add_member(:procurement_portal_name, Shapes::ShapeRef.new(shape: ProcurementPortalName, required: true, location_name: "ProcurementPortalName"))
+    ProcurementPortalPreference.add_member(:buyer_domain, Shapes::ShapeRef.new(shape: BuyerDomain, required: true, location_name: "BuyerDomain"))
+    ProcurementPortalPreference.add_member(:buyer_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "BuyerIdentifier"))
+    ProcurementPortalPreference.add_member(:supplier_domain, Shapes::ShapeRef.new(shape: SupplierDomain, required: true, location_name: "SupplierDomain"))
+    ProcurementPortalPreference.add_member(:supplier_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "SupplierIdentifier"))
+    ProcurementPortalPreference.add_member(:selector, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSelector, location_name: "Selector"))
+    ProcurementPortalPreference.add_member(:procurement_portal_shared_secret, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalSharedSecret"))
+    ProcurementPortalPreference.add_member(:procurement_portal_instance_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalInstanceEndpoint"))
+    ProcurementPortalPreference.add_member(:purchase_order_retrieval_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "PurchaseOrderRetrievalEndpoint"))
+    ProcurementPortalPreference.add_member(:test_env_preference, Shapes::ShapeRef.new(shape: TestEnvPreference, location_name: "TestEnvPreference"))
+    ProcurementPortalPreference.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
+    ProcurementPortalPreference.add_member(:einvoice_delivery_preference, Shapes::ShapeRef.new(shape: EinvoiceDeliveryPreference, location_name: "EinvoiceDeliveryPreference"))
+    ProcurementPortalPreference.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    ProcurementPortalPreference.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, location_name: "Contacts"))
+    ProcurementPortalPreference.add_member(:einvoice_delivery_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "EinvoiceDeliveryPreferenceStatus"))
+    ProcurementPortalPreference.add_member(:einvoice_delivery_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "EinvoiceDeliveryPreferenceStatusReason"))
+    ProcurementPortalPreference.add_member(:purchase_order_retrieval_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "PurchaseOrderRetrievalPreferenceStatus"))
+    ProcurementPortalPreference.add_member(:purchase_order_retrieval_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "PurchaseOrderRetrievalPreferenceStatusReason"))
+    ProcurementPortalPreference.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "Version"))
+    ProcurementPortalPreference.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateDate"))
+    ProcurementPortalPreference.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdateDate"))
+    ProcurementPortalPreference.struct_class = Types::ProcurementPortalPreference
+
+    ProcurementPortalPreferenceSelector.add_member(:invoice_unit_arns, Shapes::ShapeRef.new(shape: InvoiceUnitArns, location_name: "InvoiceUnitArns"))
+    ProcurementPortalPreferenceSelector.add_member(:seller_of_records, Shapes::ShapeRef.new(shape: SellerOfRecords, location_name: "SellerOfRecords"))
+    ProcurementPortalPreferenceSelector.struct_class = Types::ProcurementPortalPreferenceSelector
+
+    ProcurementPortalPreferenceSummaries.member = Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSummary)
+
+    ProcurementPortalPreferenceSummary.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AccountIdString, required: true, location_name: "AwsAccountId"))
+    ProcurementPortalPreferenceSummary.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    ProcurementPortalPreferenceSummary.add_member(:procurement_portal_name, Shapes::ShapeRef.new(shape: ProcurementPortalName, required: true, location_name: "ProcurementPortalName"))
+    ProcurementPortalPreferenceSummary.add_member(:buyer_domain, Shapes::ShapeRef.new(shape: BuyerDomain, required: true, location_name: "BuyerDomain"))
+    ProcurementPortalPreferenceSummary.add_member(:buyer_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "BuyerIdentifier"))
+    ProcurementPortalPreferenceSummary.add_member(:supplier_domain, Shapes::ShapeRef.new(shape: SupplierDomain, required: true, location_name: "SupplierDomain"))
+    ProcurementPortalPreferenceSummary.add_member(:supplier_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "SupplierIdentifier"))
+    ProcurementPortalPreferenceSummary.add_member(:selector, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSelector, location_name: "Selector"))
+    ProcurementPortalPreferenceSummary.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
+    ProcurementPortalPreferenceSummary.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    ProcurementPortalPreferenceSummary.add_member(:einvoice_delivery_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "EinvoiceDeliveryPreferenceStatus"))
+    ProcurementPortalPreferenceSummary.add_member(:einvoice_delivery_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "EinvoiceDeliveryPreferenceStatusReason"))
+    ProcurementPortalPreferenceSummary.add_member(:purchase_order_retrieval_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "PurchaseOrderRetrievalPreferenceStatus"))
+    ProcurementPortalPreferenceSummary.add_member(:purchase_order_retrieval_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "PurchaseOrderRetrievalPreferenceStatusReason"))
+    ProcurementPortalPreferenceSummary.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "Version"))
+    ProcurementPortalPreferenceSummary.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateDate"))
+    ProcurementPortalPreferenceSummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdateDate"))
+    ProcurementPortalPreferenceSummary.struct_class = Types::ProcurementPortalPreferenceSummary
+
     ProfileList.member = Shapes::ShapeRef.new(shape: InvoiceProfile)
+
+    PurchaseOrderDataSource.add_member(:einvoice_delivery_document_type, Shapes::ShapeRef.new(shape: EinvoiceDeliveryDocumentType, location_name: "EinvoiceDeliveryDocumentType"))
+    PurchaseOrderDataSource.add_member(:purchase_order_data_source_type, Shapes::ShapeRef.new(shape: PurchaseOrderDataSourceType, location_name: "PurchaseOrderDataSourceType"))
+    PurchaseOrderDataSource.struct_class = Types::PurchaseOrderDataSource
+
+    PurchaseOrderDataSources.member = Shapes::ShapeRef.new(shape: PurchaseOrderDataSource)
+
+    PutProcurementPortalPreferenceRequest.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    PutProcurementPortalPreferenceRequest.add_member(:selector, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceSelector, location_name: "Selector"))
+    PutProcurementPortalPreferenceRequest.add_member(:procurement_portal_shared_secret, Shapes::ShapeRef.new(shape: SensitiveBasicStringWithoutSpace, location_name: "ProcurementPortalSharedSecret"))
+    PutProcurementPortalPreferenceRequest.add_member(:procurement_portal_instance_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalInstanceEndpoint"))
+    PutProcurementPortalPreferenceRequest.add_member(:test_env_preference, Shapes::ShapeRef.new(shape: TestEnvPreferenceInput, location_name: "TestEnvPreference"))
+    PutProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EinvoiceDeliveryEnabled"))
+    PutProcurementPortalPreferenceRequest.add_member(:einvoice_delivery_preference, Shapes::ShapeRef.new(shape: EinvoiceDeliveryPreference, location_name: "EinvoiceDeliveryPreference"))
+    PutProcurementPortalPreferenceRequest.add_member(:purchase_order_retrieval_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PurchaseOrderRetrievalEnabled"))
+    PutProcurementPortalPreferenceRequest.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, required: true, location_name: "Contacts"))
+    PutProcurementPortalPreferenceRequest.struct_class = Types::PutProcurementPortalPreferenceRequest
+
+    PutProcurementPortalPreferenceResponse.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    PutProcurementPortalPreferenceResponse.struct_class = Types::PutProcurementPortalPreferenceResponse
 
     ReceiverAddress.add_member(:address_line_1, Shapes::ShapeRef.new(shape: BasicString, location_name: "AddressLine1"))
     ReceiverAddress.add_member(:address_line_2, Shapes::ShapeRef.new(shape: BasicString, location_name: "AddressLine2"))
@@ -317,6 +497,10 @@ module Aws::Invoicing
     ResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
 
     ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
+
+    RuleAccountIdList.member = Shapes::ShapeRef.new(shape: AccountIdString)
+
+    SellerOfRecords.member = Shapes::ShapeRef.new(shape: BasicStringWithoutSpace)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -344,6 +528,23 @@ module Aws::Invoicing
 
     TaxesBreakdownAmountList.member = Shapes::ShapeRef.new(shape: TaxesBreakdownAmount)
 
+    TestEnvPreference.add_member(:buyer_domain, Shapes::ShapeRef.new(shape: BuyerDomain, required: true, location_name: "BuyerDomain"))
+    TestEnvPreference.add_member(:buyer_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "BuyerIdentifier"))
+    TestEnvPreference.add_member(:supplier_domain, Shapes::ShapeRef.new(shape: SupplierDomain, required: true, location_name: "SupplierDomain"))
+    TestEnvPreference.add_member(:supplier_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "SupplierIdentifier"))
+    TestEnvPreference.add_member(:procurement_portal_shared_secret, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalSharedSecret"))
+    TestEnvPreference.add_member(:procurement_portal_instance_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalInstanceEndpoint"))
+    TestEnvPreference.add_member(:purchase_order_retrieval_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "PurchaseOrderRetrievalEndpoint"))
+    TestEnvPreference.struct_class = Types::TestEnvPreference
+
+    TestEnvPreferenceInput.add_member(:buyer_domain, Shapes::ShapeRef.new(shape: BuyerDomain, required: true, location_name: "BuyerDomain"))
+    TestEnvPreferenceInput.add_member(:buyer_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "BuyerIdentifier"))
+    TestEnvPreferenceInput.add_member(:supplier_domain, Shapes::ShapeRef.new(shape: SupplierDomain, required: true, location_name: "SupplierDomain"))
+    TestEnvPreferenceInput.add_member(:supplier_identifier, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, required: true, location_name: "SupplierIdentifier"))
+    TestEnvPreferenceInput.add_member(:procurement_portal_shared_secret, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalSharedSecret"))
+    TestEnvPreferenceInput.add_member(:procurement_portal_instance_endpoint, Shapes::ShapeRef.new(shape: BasicStringWithoutSpace, location_name: "ProcurementPortalInstanceEndpoint"))
+    TestEnvPreferenceInput.struct_class = Types::TestEnvPreferenceInput
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -361,6 +562,16 @@ module Aws::Invoicing
 
     UpdateInvoiceUnitResponse.add_member(:invoice_unit_arn, Shapes::ShapeRef.new(shape: InvoiceUnitArnString, location_name: "InvoiceUnitArn"))
     UpdateInvoiceUnitResponse.struct_class = Types::UpdateInvoiceUnitResponse
+
+    UpdateProcurementPortalPreferenceStatusRequest.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    UpdateProcurementPortalPreferenceStatusRequest.add_member(:einvoice_delivery_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "EinvoiceDeliveryPreferenceStatus"))
+    UpdateProcurementPortalPreferenceStatusRequest.add_member(:einvoice_delivery_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "EinvoiceDeliveryPreferenceStatusReason"))
+    UpdateProcurementPortalPreferenceStatusRequest.add_member(:purchase_order_retrieval_preference_status, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceStatus, location_name: "PurchaseOrderRetrievalPreferenceStatus"))
+    UpdateProcurementPortalPreferenceStatusRequest.add_member(:purchase_order_retrieval_preference_status_reason, Shapes::ShapeRef.new(shape: BasicString, location_name: "PurchaseOrderRetrievalPreferenceStatusReason"))
+    UpdateProcurementPortalPreferenceStatusRequest.struct_class = Types::UpdateProcurementPortalPreferenceStatusRequest
+
+    UpdateProcurementPortalPreferenceStatusResponse.add_member(:procurement_portal_preference_arn, Shapes::ShapeRef.new(shape: ProcurementPortalPreferenceArnString, required: true, location_name: "ProcurementPortalPreferenceArn"))
+    UpdateProcurementPortalPreferenceStatusResponse.struct_class = Types::UpdateProcurementPortalPreferenceStatusResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, location_name: "message"))
     ValidationException.add_member(:resource_name, Shapes::ShapeRef.new(shape: InvoiceUnitArnString, location_name: "resourceName"))
@@ -420,6 +631,20 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_procurement_portal_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProcurementPortalPreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProcurementPortalPreferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProcurementPortalPreferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_invoice_unit, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteInvoiceUnit"
         o.http_method = "POST"
@@ -429,6 +654,20 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_procurement_portal_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProcurementPortalPreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProcurementPortalPreferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProcurementPortalPreferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -455,6 +694,21 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_procurement_portal_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProcurementPortalPreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProcurementPortalPreferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProcurementPortalPreferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -496,6 +750,26 @@ module Aws::Invoicing
         )
       end)
 
+      api.add_operation(:list_procurement_portal_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProcurementPortalPreferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProcurementPortalPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProcurementPortalPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -505,6 +779,21 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:put_procurement_portal_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutProcurementPortalPreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutProcurementPortalPreferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutProcurementPortalPreferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -545,6 +834,21 @@ module Aws::Invoicing
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_procurement_portal_preference_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProcurementPortalPreferenceStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProcurementPortalPreferenceStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProcurementPortalPreferenceStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)

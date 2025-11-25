@@ -66,6 +66,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#preferred_maintenance_window-instance_method
       def preferred_maintenance_window: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#upgrade_rollout_order-instance_method
+      def upgrade_rollout_order: () -> ("first" | "second" | "last")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#pending_modified_values-instance_method
       def pending_modified_values: () -> Types::PendingModifiedValues
 

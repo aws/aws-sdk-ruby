@@ -608,6 +608,9 @@ module Aws::BedrockDataAutomation
     # @option params [String] :project_stage
     #   Stage of the Project
     #
+    # @option params [String] :project_type
+    #   Type of the DataAutomationProject
+    #
     # @option params [required, Types::StandardOutputConfiguration] :standard_output_configuration
     #   Standard output configuration
     #
@@ -641,6 +644,7 @@ module Aws::BedrockDataAutomation
     #     project_name: "DataAutomationProjectName", # required
     #     project_description: "DataAutomationProjectDescription",
     #     project_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     project_type: "ASYNC", # accepts ASYNC, SYNC
     #     standard_output_configuration: { # required
     #       document: {
     #         extraction: {
@@ -733,15 +737,39 @@ module Aws::BedrockDataAutomation
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       image: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       video: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       audio: {
@@ -752,6 +780,14 @@ module Aws::BedrockDataAutomation
     #           input_languages: ["EN"], # accepts EN, DE, ES, FR, IT, PT, JA, KO, CN, TW, HK
     #           generative_output_language: "DEFAULT", # accepts DEFAULT, EN
     #           identify_multiple_languages: false,
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       modality_routing: {
@@ -921,6 +957,7 @@ module Aws::BedrockDataAutomation
     #   resp.project.last_modified_time #=> Time
     #   resp.project.project_name #=> String
     #   resp.project.project_stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.project.project_type #=> String, one of "ASYNC", "SYNC"
     #   resp.project.project_description #=> String
     #   resp.project.standard_output_configuration.document.extraction.granularity.types #=> Array
     #   resp.project.standard_output_configuration.document.extraction.granularity.types[0] #=> String, one of "DOCUMENT", "PAGE", "ELEMENT", "WORD", "LINE"
@@ -957,13 +994,37 @@ module Aws::BedrockDataAutomation
     #   resp.project.custom_output_configuration.blueprints[0].blueprint_stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.project.override_configuration.document.splitter.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.override_configuration.document.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.document.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.document.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.image.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.image.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.image.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.video.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.video.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.video.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.audio.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.override_configuration.audio.language_configuration.input_languages #=> Array
     #   resp.project.override_configuration.audio.language_configuration.input_languages[0] #=> String, one of "EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"
     #   resp.project.override_configuration.audio.language_configuration.generative_output_language #=> String, one of "DEFAULT", "EN"
     #   resp.project.override_configuration.audio.language_configuration.identify_multiple_languages #=> Boolean
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.modality_routing.jpeg #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
     #   resp.project.override_configuration.modality_routing.png #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
     #   resp.project.override_configuration.modality_routing.mp4 #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
@@ -1086,6 +1147,7 @@ module Aws::BedrockDataAutomation
     #   resp.projects #=> Array
     #   resp.projects[0].project_arn #=> String
     #   resp.projects[0].project_stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.projects[0].project_type #=> String, one of "ASYNC", "SYNC"
     #   resp.projects[0].project_name #=> String
     #   resp.projects[0].creation_time #=> Time
     #   resp.next_token #=> String
@@ -1369,15 +1431,39 @@ module Aws::BedrockDataAutomation
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       image: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       video: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       audio: {
@@ -1388,6 +1474,14 @@ module Aws::BedrockDataAutomation
     #           input_languages: ["EN"], # accepts EN, DE, ES, FR, IT, PT, JA, KO, CN, TW, HK
     #           generative_output_language: "DEFAULT", # accepts DEFAULT, EN
     #           identify_multiple_languages: false,
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       modality_routing: {
@@ -1438,7 +1532,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

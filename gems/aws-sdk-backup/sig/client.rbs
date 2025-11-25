@@ -141,6 +141,12 @@ module Aws
                                         {
                                           resource_types: Array[::String]?
                                         },
+                                      ]?,
+                                      scan_actions: Array[
+                                        {
+                                          malware_scanner: ("GUARDDUTY")?,
+                                          scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")?
+                                        },
                                       ]?
                                     },
                                   ],
@@ -148,6 +154,13 @@ module Aws
                                     {
                                       resource_type: ::String?,
                                       backup_options: Hash[::String, ::String]?
+                                    },
+                                  ]?,
+                                  scan_settings: Array[
+                                    {
+                                      malware_scanner: ("GUARDDUTY")?,
+                                      resource_types: Array[::String]?,
+                                      scanner_role_arn: ::String?
                                     },
                                   ]?
                                 },
@@ -667,6 +680,7 @@ module Aws
         def index_status: () -> ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
         def index_status_message: () -> ::String
         def encryption_key_type: () -> ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+        def scan_results: () -> ::Array[Types::ScanResult]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_recovery_point-instance_method
       def describe_recovery_point: (
@@ -737,6 +751,35 @@ module Aws
                                   restore_job_id: ::String
                                 ) -> _DescribeRestoreJobResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRestoreJobResponseSuccess
+
+      interface _DescribeScanJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScanJobOutput]
+        def account_id: () -> ::String
+        def backup_vault_arn: () -> ::String
+        def backup_vault_name: () -> ::String
+        def completion_date: () -> ::Time
+        def created_by: () -> Types::ScanJobCreator
+        def creation_date: () -> ::Time
+        def iam_role_arn: () -> ::String
+        def malware_scanner: () -> ("GUARDDUTY")
+        def recovery_point_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_name: () -> ::String
+        def resource_type: () -> ("EBS" | "EC2" | "S3")
+        def scan_base_recovery_point_arn: () -> ::String
+        def scan_id: () -> ::String
+        def scan_job_id: () -> ::String
+        def scan_mode: () -> ("FULL_SCAN" | "INCREMENTAL_SCAN")
+        def scan_result: () -> Types::ScanResultInfo
+        def scanner_role_arn: () -> ::String
+        def state: () -> ("CANCELED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "CREATED" | "FAILED" | "RUNNING")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_scan_job-instance_method
+      def describe_scan_job: (
+                               scan_job_id: ::String
+                             ) -> _DescribeScanJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScanJobResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#disassociate_backup_vault_mpa_approval_team-instance_method
       def disassociate_backup_vault_mpa_approval_team: (
@@ -1347,6 +1390,47 @@ module Aws
                                            ) -> _ListRestoreTestingSelectionsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRestoreTestingSelectionsResponseSuccess
 
+      interface _ListScanJobSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScanJobSummariesOutput]
+        def scan_job_summaries: () -> ::Array[Types::ScanJobSummary]
+        def aggregation_period: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_scan_job_summaries-instance_method
+      def list_scan_job_summaries: (
+                                     ?account_id: ::String,
+                                     ?resource_type: ::String,
+                                     ?malware_scanner: ("GUARDDUTY"),
+                                     ?scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND"),
+                                     ?state: ("CREATED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "RUNNING" | "FAILED" | "CANCELED" | "AGGREGATE_ALL" | "ANY"),
+                                     ?aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListScanJobSummariesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScanJobSummariesResponseSuccess
+
+      interface _ListScanJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScanJobsOutput]
+        def next_token: () -> ::String
+        def scan_jobs: () -> ::Array[Types::ScanJob]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_scan_jobs-instance_method
+      def list_scan_jobs: (
+                            ?by_account_id: ::String,
+                            ?by_backup_vault_name: ::String,
+                            ?by_complete_after: ::Time,
+                            ?by_complete_before: ::Time,
+                            ?by_malware_scanner: ("GUARDDUTY"),
+                            ?by_recovery_point_arn: ::String,
+                            ?by_resource_arn: ::String,
+                            ?by_resource_type: ("EBS" | "EC2" | "S3"),
+                            ?by_scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND"),
+                            ?by_state: ("CANCELED" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "CREATED" | "FAILED" | "RUNNING"),
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListScanJobsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScanJobsResponseSuccess
+
       interface _ListTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsOutput]
         def next_token: () -> ::String
@@ -1488,6 +1572,24 @@ module Aws
                              ) -> _StartRestoreJobResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRestoreJobResponseSuccess
 
+      interface _StartScanJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartScanJobOutput]
+        def creation_date: () -> ::Time
+        def scan_job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#start_scan_job-instance_method
+      def start_scan_job: (
+                            backup_vault_name: ::String,
+                            iam_role_arn: ::String,
+                            ?idempotency_token: ::String,
+                            malware_scanner: ("GUARDDUTY"),
+                            recovery_point_arn: ::String,
+                            ?scan_base_recovery_point_arn: ::String,
+                            scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN"),
+                            scanner_role_arn: ::String
+                          ) -> _StartScanJobResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartScanJobResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#stop_backup_job-instance_method
       def stop_backup_job: (
                              backup_job_id: ::String
@@ -1515,6 +1617,7 @@ module Aws
         def creation_date: () -> ::Time
         def version_id: () -> ::String
         def advanced_backup_settings: () -> ::Array[Types::AdvancedBackupSetting]
+        def scan_settings: () -> ::Array[Types::ScanSetting]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_backup_plan-instance_method
       def update_backup_plan: (
@@ -1553,6 +1656,12 @@ module Aws
                                         {
                                           resource_types: Array[::String]?
                                         },
+                                      ]?,
+                                      scan_actions: Array[
+                                        {
+                                          malware_scanner: ("GUARDDUTY")?,
+                                          scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")?
+                                        },
                                       ]?
                                     },
                                   ],
@@ -1560,6 +1669,13 @@ module Aws
                                     {
                                       resource_type: ::String?,
                                       backup_options: Hash[::String, ::String]?
+                                    },
+                                  ]?,
+                                  scan_settings: Array[
+                                    {
+                                      malware_scanner: ("GUARDDUTY")?,
+                                      resource_types: Array[::String]?,
+                                      scanner_role_arn: ::String?
                                     },
                                   ]?
                                 }

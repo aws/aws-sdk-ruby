@@ -760,7 +760,7 @@ module Aws::CloudFrontKeyValueStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfrontkeyvaluestore'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

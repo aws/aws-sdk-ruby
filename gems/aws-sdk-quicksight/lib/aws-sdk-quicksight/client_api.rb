@@ -287,6 +287,7 @@ module Aws::QuickSight
     BookmarksConfigurations = Shapes::StructureShape.new(name: 'BookmarksConfigurations')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
+    BorderRadius = Shapes::StringShape.new(name: 'BorderRadius')
     BorderStyle = Shapes::StructureShape.new(name: 'BorderStyle')
     BoxPlotAggregatedFieldWells = Shapes::StructureShape.new(name: 'BoxPlotAggregatedFieldWells')
     BoxPlotChartConfiguration = Shapes::StructureShape.new(name: 'BoxPlotChartConfiguration')
@@ -354,6 +355,7 @@ module Aws::QuickSight
     CollectiveConstant = Shapes::StructureShape.new(name: 'CollectiveConstant')
     CollectiveConstantEntry = Shapes::StructureShape.new(name: 'CollectiveConstantEntry')
     CollectiveConstantEntryList = Shapes::ListShape.new(name: 'CollectiveConstantEntryList')
+    Color = Shapes::StringShape.new(name: 'Color')
     ColorFillType = Shapes::StringShape.new(name: 'ColorFillType')
     ColorList = Shapes::ListShape.new(name: 'ColorList')
     ColorScale = Shapes::StructureShape.new(name: 'ColorScale')
@@ -1108,6 +1110,8 @@ module Aws::QuickSight
     GridLayoutCanvasSizeOptions = Shapes::StructureShape.new(name: 'GridLayoutCanvasSizeOptions')
     GridLayoutConfiguration = Shapes::StructureShape.new(name: 'GridLayoutConfiguration')
     GridLayoutElement = Shapes::StructureShape.new(name: 'GridLayoutElement')
+    GridLayoutElementBackgroundStyle = Shapes::StructureShape.new(name: 'GridLayoutElementBackgroundStyle')
+    GridLayoutElementBorderStyle = Shapes::StructureShape.new(name: 'GridLayoutElementBorderStyle')
     GridLayoutElementColumnIndex = Shapes::IntegerShape.new(name: 'GridLayoutElementColumnIndex')
     GridLayoutElementColumnSpan = Shapes::IntegerShape.new(name: 'GridLayoutElementColumnSpan')
     GridLayoutElementList = Shapes::ListShape.new(name: 'GridLayoutElementList')
@@ -1465,6 +1469,7 @@ module Aws::QuickSight
     OutputColumnNameOverride = Shapes::StructureShape.new(name: 'OutputColumnNameOverride')
     OutputColumnNameOverrideList = Shapes::ListShape.new(name: 'OutputColumnNameOverrideList')
     OverrideDatasetParameterOperation = Shapes::StructureShape.new(name: 'OverrideDatasetParameterOperation')
+    Padding = Shapes::StringShape.new(name: 'Padding')
     PageNumber = Shapes::IntegerShape.new(name: 'PageNumber')
     PaginationConfiguration = Shapes::StructureShape.new(name: 'PaginationConfiguration')
     Palette = Shapes::StructureShape.new(name: 'Palette')
@@ -1673,6 +1678,7 @@ module Aws::QuickSight
     RegisteredUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserEmbeddingExperienceConfiguration')
     RegisteredUserGenerativeQnAEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserGenerativeQnAEmbeddingConfiguration')
     RegisteredUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQSearchBarEmbeddingConfiguration')
+    RegisteredUserQuickChatEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickChatEmbeddingConfiguration')
     RegisteredUserQuickSightConsoleEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickSightConsoleEmbeddingConfiguration')
     RelationalTable = Shapes::StructureShape.new(name: 'RelationalTable')
     RelationalTableCatalog = Shapes::StringShape.new(name: 'RelationalTableCatalog')
@@ -1818,6 +1824,7 @@ module Aws::QuickSight
     SharedViewConfigurations = Shapes::StructureShape.new(name: 'SharedViewConfigurations')
     SharingModel = Shapes::StringShape.new(name: 'SharingModel')
     Sheet = Shapes::StructureShape.new(name: 'Sheet')
+    SheetBackgroundStyle = Shapes::StructureShape.new(name: 'SheetBackgroundStyle')
     SheetContentType = Shapes::StringShape.new(name: 'SheetContentType')
     SheetControlDateTimePickerType = Shapes::StringShape.new(name: 'SheetControlDateTimePickerType')
     SheetControlInfoIconLabelOptions = Shapes::StructureShape.new(name: 'SheetControlInfoIconLabelOptions')
@@ -2034,6 +2041,7 @@ module Aws::QuickSight
     TextControlPlaceholderOptions = Shapes::StructureShape.new(name: 'TextControlPlaceholderOptions')
     TextFieldControlDisplayOptions = Shapes::StructureShape.new(name: 'TextFieldControlDisplayOptions')
     TextQualifier = Shapes::StringShape.new(name: 'TextQualifier')
+    TextTransform = Shapes::StringShape.new(name: 'TextTransform')
     TextWrap = Shapes::StringShape.new(name: 'TextWrap')
     Theme = Shapes::StructureShape.new(name: 'Theme')
     ThemeAlias = Shapes::StructureShape.new(name: 'ThemeAlias')
@@ -2318,8 +2326,10 @@ module Aws::QuickSight
     VisualPalette = Shapes::StructureShape.new(name: 'VisualPalette')
     VisualRole = Shapes::StringShape.new(name: 'VisualRole')
     VisualSubtitle = Shapes::StringShape.new(name: 'VisualSubtitle')
+    VisualSubtitleFontConfiguration = Shapes::StructureShape.new(name: 'VisualSubtitleFontConfiguration')
     VisualSubtitleLabelOptions = Shapes::StructureShape.new(name: 'VisualSubtitleLabelOptions')
     VisualTitle = Shapes::StringShape.new(name: 'VisualTitle')
+    VisualTitleFontConfiguration = Shapes::StructureShape.new(name: 'VisualTitleFontConfiguration')
     VisualTitleLabelOptions = Shapes::StructureShape.new(name: 'VisualTitleLabelOptions')
     VpcConnectionProperties = Shapes::StructureShape.new(name: 'VpcConnectionProperties')
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
@@ -2343,6 +2353,7 @@ module Aws::QuickSight
     WhatIfPointScenario = Shapes::StructureShape.new(name: 'WhatIfPointScenario')
     WhatIfRangeScenario = Shapes::StructureShape.new(name: 'WhatIfRangeScenario')
     WidgetStatus = Shapes::StringShape.new(name: 'WidgetStatus')
+    Width = Shapes::StringShape.new(name: 'Width')
     WordCloudAggregatedFieldWells = Shapes::StructureShape.new(name: 'WordCloudAggregatedFieldWells')
     WordCloudChartConfiguration = Shapes::StructureShape.new(name: 'WordCloudChartConfiguration')
     WordCloudCloudLayout = Shapes::StringShape.new(name: 'WordCloudCloudLayout')
@@ -3224,7 +3235,9 @@ module Aws::QuickSight
     BookmarksConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     BookmarksConfigurations.struct_class = Types::BookmarksConfigurations
 
+    BorderStyle.add_member(:color, Shapes::ShapeRef.new(shape: Color, location_name: "Color"))
     BorderStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box" => true}))
+    BorderStyle.add_member(:width, Shapes::ShapeRef.new(shape: Width, location_name: "Width"))
     BorderStyle.struct_class = Types::BorderStyle
 
     BoxPlotAggregatedFieldWells.add_member(:group_by, Shapes::ShapeRef.new(shape: BoxPlotDimensionFieldList, location_name: "GroupBy"))
@@ -6265,6 +6278,8 @@ module Aws::QuickSight
     FreeFormLayoutElement.add_member(:selected_border_style, Shapes::ShapeRef.new(shape: FreeFormLayoutElementBorderStyle, location_name: "SelectedBorderStyle"))
     FreeFormLayoutElement.add_member(:background_style, Shapes::ShapeRef.new(shape: FreeFormLayoutElementBackgroundStyle, location_name: "BackgroundStyle"))
     FreeFormLayoutElement.add_member(:loading_animation, Shapes::ShapeRef.new(shape: LoadingAnimation, location_name: "LoadingAnimation"))
+    FreeFormLayoutElement.add_member(:border_radius, Shapes::ShapeRef.new(shape: BorderRadius, location_name: "BorderRadius"))
+    FreeFormLayoutElement.add_member(:padding, Shapes::ShapeRef.new(shape: Padding, location_name: "Padding"))
     FreeFormLayoutElement.struct_class = Types::FreeFormLayoutElement
 
     FreeFormLayoutElementBackgroundStyle.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -6273,6 +6288,7 @@ module Aws::QuickSight
 
     FreeFormLayoutElementBorderStyle.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     FreeFormLayoutElementBorderStyle.add_member(:color, Shapes::ShapeRef.new(shape: HexColorWithTransparency, location_name: "Color"))
+    FreeFormLayoutElementBorderStyle.add_member(:width, Shapes::ShapeRef.new(shape: Width, location_name: "Width"))
     FreeFormLayoutElementBorderStyle.struct_class = Types::FreeFormLayoutElementBorderStyle
 
     FreeFormLayoutScreenCanvasSizeOptions.add_member(:optimized_view_port_width, Shapes::ShapeRef.new(shape: PixelLength, required: true, location_name: "OptimizedViewPortWidth", metadata: {"box" => true}))
@@ -6703,7 +6719,22 @@ module Aws::QuickSight
     GridLayoutElement.add_member(:column_span, Shapes::ShapeRef.new(shape: GridLayoutElementColumnSpan, required: true, location_name: "ColumnSpan"))
     GridLayoutElement.add_member(:row_index, Shapes::ShapeRef.new(shape: GridLayoutElementRowIndex, location_name: "RowIndex"))
     GridLayoutElement.add_member(:row_span, Shapes::ShapeRef.new(shape: GridLayoutElementRowSpan, required: true, location_name: "RowSpan"))
+    GridLayoutElement.add_member(:border_style, Shapes::ShapeRef.new(shape: GridLayoutElementBorderStyle, location_name: "BorderStyle"))
+    GridLayoutElement.add_member(:selected_border_style, Shapes::ShapeRef.new(shape: GridLayoutElementBorderStyle, location_name: "SelectedBorderStyle"))
+    GridLayoutElement.add_member(:background_style, Shapes::ShapeRef.new(shape: GridLayoutElementBackgroundStyle, location_name: "BackgroundStyle"))
+    GridLayoutElement.add_member(:loading_animation, Shapes::ShapeRef.new(shape: LoadingAnimation, location_name: "LoadingAnimation"))
+    GridLayoutElement.add_member(:border_radius, Shapes::ShapeRef.new(shape: BorderRadius, location_name: "BorderRadius"))
+    GridLayoutElement.add_member(:padding, Shapes::ShapeRef.new(shape: Padding, location_name: "Padding"))
     GridLayoutElement.struct_class = Types::GridLayoutElement
+
+    GridLayoutElementBackgroundStyle.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    GridLayoutElementBackgroundStyle.add_member(:color, Shapes::ShapeRef.new(shape: HexColorWithTransparency, location_name: "Color"))
+    GridLayoutElementBackgroundStyle.struct_class = Types::GridLayoutElementBackgroundStyle
+
+    GridLayoutElementBorderStyle.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    GridLayoutElementBorderStyle.add_member(:color, Shapes::ShapeRef.new(shape: HexColorWithTransparency, location_name: "Color"))
+    GridLayoutElementBorderStyle.add_member(:width, Shapes::ShapeRef.new(shape: Width, location_name: "Width"))
+    GridLayoutElementBorderStyle.struct_class = Types::GridLayoutElementBorderStyle
 
     GridLayoutElementList.member = Shapes::ShapeRef.new(shape: GridLayoutElement)
 
@@ -8706,6 +8737,7 @@ module Aws::QuickSight
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:q_search_bar, Shapes::ShapeRef.new(shape: RegisteredUserQSearchBarEmbeddingConfiguration, location_name: "QSearchBar"))
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: RegisteredUserDashboardVisualEmbeddingConfiguration, location_name: "DashboardVisual"))
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:generative_qn_a, Shapes::ShapeRef.new(shape: RegisteredUserGenerativeQnAEmbeddingConfiguration, location_name: "GenerativeQnA"))
+    RegisteredUserEmbeddingExperienceConfiguration.add_member(:quick_chat, Shapes::ShapeRef.new(shape: RegisteredUserQuickChatEmbeddingConfiguration, location_name: "QuickChat"))
     RegisteredUserEmbeddingExperienceConfiguration.struct_class = Types::RegisteredUserEmbeddingExperienceConfiguration
 
     RegisteredUserGenerativeQnAEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "InitialTopicId"))
@@ -8713,6 +8745,8 @@ module Aws::QuickSight
 
     RegisteredUserQSearchBarEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "InitialTopicId"))
     RegisteredUserQSearchBarEmbeddingConfiguration.struct_class = Types::RegisteredUserQSearchBarEmbeddingConfiguration
+
+    RegisteredUserQuickChatEmbeddingConfiguration.struct_class = Types::RegisteredUserQuickChatEmbeddingConfiguration
 
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:initial_path, Shapes::ShapeRef.new(shape: EntryPath, location_name: "InitialPath"))
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:feature_configurations, Shapes::ShapeRef.new(shape: RegisteredUserConsoleFeatureConfigurations, location_name: "FeatureConfigurations"))
@@ -9169,6 +9203,10 @@ module Aws::QuickSight
     Sheet.add_member(:images, Shapes::ShapeRef.new(shape: SheetImageList, location_name: "Images"))
     Sheet.struct_class = Types::Sheet
 
+    SheetBackgroundStyle.add_member(:color, Shapes::ShapeRef.new(shape: Color, location_name: "Color"))
+    SheetBackgroundStyle.add_member(:gradient, Shapes::ShapeRef.new(shape: String, location_name: "Gradient"))
+    SheetBackgroundStyle.struct_class = Types::SheetBackgroundStyle
+
     SheetControlInfoIconLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     SheetControlInfoIconLabelOptions.add_member(:info_icon_text, Shapes::ShapeRef.new(shape: SheetControlInfoIconText, location_name: "InfoIconText"))
     SheetControlInfoIconLabelOptions.struct_class = Types::SheetControlInfoIconLabelOptions
@@ -9244,6 +9282,7 @@ module Aws::QuickSight
 
     SheetStyle.add_member(:tile, Shapes::ShapeRef.new(shape: TileStyle, location_name: "Tile"))
     SheetStyle.add_member(:tile_layout, Shapes::ShapeRef.new(shape: TileLayoutStyle, location_name: "TileLayout"))
+    SheetStyle.add_member(:background, Shapes::ShapeRef.new(shape: SheetBackgroundStyle, location_name: "Background"))
     SheetStyle.struct_class = Types::SheetStyle
 
     SheetTextBox.add_member(:sheet_text_box_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SheetTextBoxId"))
@@ -9909,7 +9948,10 @@ module Aws::QuickSight
     TileLayoutStyle.add_member(:margin, Shapes::ShapeRef.new(shape: MarginStyle, location_name: "Margin"))
     TileLayoutStyle.struct_class = Types::TileLayoutStyle
 
+    TileStyle.add_member(:background_color, Shapes::ShapeRef.new(shape: Color, location_name: "BackgroundColor"))
     TileStyle.add_member(:border, Shapes::ShapeRef.new(shape: BorderStyle, location_name: "Border"))
+    TileStyle.add_member(:border_radius, Shapes::ShapeRef.new(shape: BorderRadius, location_name: "BorderRadius"))
+    TileStyle.add_member(:padding, Shapes::ShapeRef.new(shape: Padding, location_name: "Padding"))
     TileStyle.struct_class = Types::TileStyle
 
     TimeBasedForecastProperties.add_member(:periods_forward, Shapes::ShapeRef.new(shape: PeriodsForward, location_name: "PeriodsForward", metadata: {"box" => true}))
@@ -10359,6 +10401,13 @@ module Aws::QuickSight
     TypeParameters.value = Shapes::ShapeRef.new(shape: LimitedString)
 
     Typography.add_member(:font_families, Shapes::ShapeRef.new(shape: FontList, location_name: "FontFamilies"))
+    Typography.add_member(:axis_title_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "AxisTitleFontConfiguration"))
+    Typography.add_member(:axis_label_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "AxisLabelFontConfiguration"))
+    Typography.add_member(:legend_title_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "LegendTitleFontConfiguration"))
+    Typography.add_member(:legend_value_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "LegendValueFontConfiguration"))
+    Typography.add_member(:data_label_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "DataLabelFontConfiguration"))
+    Typography.add_member(:visual_title_font_configuration, Shapes::ShapeRef.new(shape: VisualTitleFontConfiguration, location_name: "VisualTitleFontConfiguration"))
+    Typography.add_member(:visual_subtitle_font_configuration, Shapes::ShapeRef.new(shape: VisualSubtitleFontConfiguration, location_name: "VisualSubtitleFontConfiguration"))
     Typography.struct_class = Types::Typography
 
     UIColorPalette.add_member(:primary_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "PrimaryForeground"))
@@ -11156,9 +11205,19 @@ module Aws::QuickSight
     VisualPalette.add_member(:color_map, Shapes::ShapeRef.new(shape: DataPathColorList, location_name: "ColorMap"))
     VisualPalette.struct_class = Types::VisualPalette
 
+    VisualSubtitleFontConfiguration.add_member(:font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "FontConfiguration"))
+    VisualSubtitleFontConfiguration.add_member(:text_alignment, Shapes::ShapeRef.new(shape: HorizontalTextAlignment, location_name: "TextAlignment"))
+    VisualSubtitleFontConfiguration.add_member(:text_transform, Shapes::ShapeRef.new(shape: TextTransform, location_name: "TextTransform"))
+    VisualSubtitleFontConfiguration.struct_class = Types::VisualSubtitleFontConfiguration
+
     VisualSubtitleLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     VisualSubtitleLabelOptions.add_member(:format_text, Shapes::ShapeRef.new(shape: LongFormatText, location_name: "FormatText"))
     VisualSubtitleLabelOptions.struct_class = Types::VisualSubtitleLabelOptions
+
+    VisualTitleFontConfiguration.add_member(:font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "FontConfiguration"))
+    VisualTitleFontConfiguration.add_member(:text_alignment, Shapes::ShapeRef.new(shape: HorizontalTextAlignment, location_name: "TextAlignment"))
+    VisualTitleFontConfiguration.add_member(:text_transform, Shapes::ShapeRef.new(shape: TextTransform, location_name: "TextTransform"))
+    VisualTitleFontConfiguration.struct_class = Types::VisualTitleFontConfiguration
 
     VisualTitleLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     VisualTitleLabelOptions.add_member(:format_text, Shapes::ShapeRef.new(shape: ShortFormatText, location_name: "FormatText"))

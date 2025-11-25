@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2025-11-21)
+------------------
+
+* Feature - Added support for new SES regions - Asia Pacific (Malaysia) and Canada (Calgary)
+
 1.87.0 (2025-10-23)
 ------------------
 

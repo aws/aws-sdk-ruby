@@ -2858,7 +2858,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task-how-to.html#understand-task-creation-statuses
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4792,7 +4792,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-execution-statuses
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   @return [String]
     #
     # @!attribute [rw] task_mode

@@ -228,6 +228,18 @@ module Aws
                                           bucket_owner: ::String?
                                         }?
                                       }
+                                    }?,
+                                    search_result: {
+                                      source: ::String,
+                                      title: ::String,
+                                      content: Array[
+                                        {
+                                          text: ::String
+                                        },
+                                      ],
+                                      citations: {
+                                        enabled: bool
+                                      }?
                                     }?
                                   },
                                 ],
@@ -265,6 +277,7 @@ module Aws
                                 citations: Array[
                                   {
                                     title: ::String?,
+                                    source: ::String?,
                                     source_content: Array[
                                       {
                                         text: ::String?
@@ -289,10 +302,27 @@ module Aws
                                         document_index: ::Integer?,
                                         start: ::Integer?,
                                         end: ::Integer?
+                                      }?,
+                                      search_result_location: {
+                                        search_result_index: ::Integer?,
+                                        start: ::Integer?,
+                                        end: ::Integer?
                                       }?
                                     }?
                                   },
                                 ]?
+                              }?,
+                              search_result: {
+                                source: ::String,
+                                title: ::String,
+                                content: Array[
+                                  {
+                                    text: ::String
+                                  },
+                                ],
+                                citations: {
+                                  enabled: bool
+                                }?
                               }?
                             },
                           ]
@@ -354,8 +384,8 @@ module Aws
                         }?
                       },
                       ?guardrail_config: {
-                        guardrail_identifier: ::String,
-                        guardrail_version: ::String,
+                        guardrail_identifier: ::String?,
+                        guardrail_version: ::String?,
                         trace: ("enabled" | "disabled" | "enabled_full")?
                       },
                       ?additional_model_request_fields: {
@@ -482,6 +512,18 @@ module Aws
                                                  bucket_owner: ::String?
                                                }?
                                              }
+                                           }?,
+                                           search_result: {
+                                             source: ::String,
+                                             title: ::String,
+                                             content: Array[
+                                               {
+                                                 text: ::String
+                                               },
+                                             ],
+                                             citations: {
+                                               enabled: bool
+                                             }?
                                            }?
                                          },
                                        ],
@@ -519,6 +561,7 @@ module Aws
                                        citations: Array[
                                          {
                                            title: ::String?,
+                                           source: ::String?,
                                            source_content: Array[
                                              {
                                                text: ::String?
@@ -543,10 +586,27 @@ module Aws
                                                document_index: ::Integer?,
                                                start: ::Integer?,
                                                end: ::Integer?
+                                             }?,
+                                             search_result_location: {
+                                               search_result_index: ::Integer?,
+                                               start: ::Integer?,
+                                               end: ::Integer?
                                              }?
                                            }?
                                          },
                                        ]?
+                                     }?,
+                                     search_result: {
+                                       source: ::String,
+                                       title: ::String,
+                                       content: Array[
+                                         {
+                                           text: ::String
+                                         },
+                                       ],
+                                       citations: {
+                                         enabled: bool
+                                       }?
                                      }?
                                    },
                                  ]
@@ -608,8 +668,8 @@ module Aws
                                }?
                              },
                              ?guardrail_config: {
-                               guardrail_identifier: ::String,
-                               guardrail_version: ::String,
+                               guardrail_identifier: ::String?,
+                               guardrail_version: ::String?,
                                trace: ("enabled" | "disabled" | "enabled_full")?,
                                stream_processing_mode: ("sync" | "async")?
                              },
@@ -742,6 +802,18 @@ module Aws
                                                   bucket_owner: ::String?
                                                 }?
                                               }
+                                            }?,
+                                            search_result: {
+                                              source: ::String,
+                                              title: ::String,
+                                              content: Array[
+                                                {
+                                                  text: ::String
+                                                },
+                                              ],
+                                              citations: {
+                                                enabled: bool
+                                              }?
                                             }?
                                           },
                                         ],
@@ -779,6 +851,7 @@ module Aws
                                         citations: Array[
                                           {
                                             title: ::String?,
+                                            source: ::String?,
                                             source_content: Array[
                                               {
                                                 text: ::String?
@@ -803,10 +876,27 @@ module Aws
                                                 document_index: ::Integer?,
                                                 start: ::Integer?,
                                                 end: ::Integer?
+                                              }?,
+                                              search_result_location: {
+                                                search_result_index: ::Integer?,
+                                                start: ::Integer?,
+                                                end: ::Integer?
                                               }?
                                             }?
                                           },
                                         ]?
+                                      }?,
+                                      search_result: {
+                                        source: ::String,
+                                        title: ::String,
+                                        content: Array[
+                                          {
+                                            text: ::String
+                                          },
+                                        ],
+                                        citations: {
+                                          enabled: bool
+                                        }?
                                       }?
                                     },
                                   ]

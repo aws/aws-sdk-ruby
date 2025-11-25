@@ -235,9 +235,9 @@ module Aws::ControlTower
     ControlOperations.member = Shapes::ShapeRef.new(shape: ControlOperationSummary)
 
     CreateLandingZoneInput.add_member(:version, Shapes::ShapeRef.new(shape: LandingZoneVersion, required: true, location_name: "version"))
-    CreateLandingZoneInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "manifest"))
     CreateLandingZoneInput.add_member(:remediation_types, Shapes::ShapeRef.new(shape: RemediationTypes, location_name: "remediationTypes"))
     CreateLandingZoneInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateLandingZoneInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, location_name: "manifest"))
     CreateLandingZoneInput.struct_class = Types::CreateLandingZoneInput
 
     CreateLandingZoneOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
@@ -456,12 +456,12 @@ module Aws::ControlTower
     InternalServerException.struct_class = Types::InternalServerException
 
     LandingZoneDetail.add_member(:version, Shapes::ShapeRef.new(shape: LandingZoneVersion, required: true, location_name: "version"))
-    LandingZoneDetail.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "manifest"))
     LandingZoneDetail.add_member(:remediation_types, Shapes::ShapeRef.new(shape: RemediationTypes, location_name: "remediationTypes"))
     LandingZoneDetail.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     LandingZoneDetail.add_member(:status, Shapes::ShapeRef.new(shape: LandingZoneStatus, location_name: "status"))
     LandingZoneDetail.add_member(:latest_available_version, Shapes::ShapeRef.new(shape: LandingZoneVersion, location_name: "latestAvailableVersion"))
     LandingZoneDetail.add_member(:drift_status, Shapes::ShapeRef.new(shape: LandingZoneDriftStatusSummary, location_name: "driftStatus"))
+    LandingZoneDetail.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "manifest"))
     LandingZoneDetail.struct_class = Types::LandingZoneDetail
 
     LandingZoneDriftStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: LandingZoneDriftStatus, location_name: "status"))
@@ -630,9 +630,9 @@ module Aws::ControlTower
     UpdateEnabledControlOutput.struct_class = Types::UpdateEnabledControlOutput
 
     UpdateLandingZoneInput.add_member(:version, Shapes::ShapeRef.new(shape: LandingZoneVersion, required: true, location_name: "version"))
-    UpdateLandingZoneInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "manifest"))
     UpdateLandingZoneInput.add_member(:remediation_types, Shapes::ShapeRef.new(shape: RemediationTypes, location_name: "remediationTypes"))
     UpdateLandingZoneInput.add_member(:landing_zone_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "landingZoneIdentifier"))
+    UpdateLandingZoneInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, location_name: "manifest"))
     UpdateLandingZoneInput.struct_class = Types::UpdateLandingZoneInput
 
     UpdateLandingZoneOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))

@@ -161,6 +161,7 @@ module Aws::ConnectCampaignsV2
     RestrictedPeriodName = Shapes::StringShape.new(name: 'RestrictedPeriodName')
     RestrictedPeriods = Shapes::UnionShape.new(name: 'RestrictedPeriods')
     ResumeCampaignRequest = Shapes::StructureShape.new(name: 'ResumeCampaignRequest')
+    RingTimeout = Shapes::IntegerShape.new(name: 'RingTimeout')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ServiceLinkedRoleArn = Shapes::StringShape.new(name: 'ServiceLinkedRoleArn')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -704,11 +705,13 @@ module Aws::ConnectCampaignsV2
     TelephonyChannelSubtypeParameters.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "attributes"))
     TelephonyChannelSubtypeParameters.add_member(:connect_source_phone_number, Shapes::ShapeRef.new(shape: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
     TelephonyChannelSubtypeParameters.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
+    TelephonyChannelSubtypeParameters.add_member(:ring_timeout, Shapes::ShapeRef.new(shape: RingTimeout, location_name: "ringTimeout"))
     TelephonyChannelSubtypeParameters.struct_class = Types::TelephonyChannelSubtypeParameters
 
     TelephonyOutboundConfig.add_member(:connect_contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "connectContactFlowId"))
     TelephonyOutboundConfig.add_member(:connect_source_phone_number, Shapes::ShapeRef.new(shape: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
     TelephonyOutboundConfig.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
+    TelephonyOutboundConfig.add_member(:ring_timeout, Shapes::ShapeRef.new(shape: RingTimeout, location_name: "ringTimeout"))
     TelephonyOutboundConfig.struct_class = Types::TelephonyOutboundConfig
 
     TelephonyOutboundMode.add_member(:progressive, Shapes::ShapeRef.new(shape: ProgressiveConfig, location_name: "progressive"))

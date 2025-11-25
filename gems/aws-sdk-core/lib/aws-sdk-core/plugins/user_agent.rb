@@ -55,7 +55,9 @@ module Aws
           "CREDENTIALS_IMDS" : "0",
           "SSO_LOGIN_DEVICE" : "1",
           "SSO_LOGIN_AUTH" : "2",
-          "BEARER_SERVICE_ENV_VARS": "3"
+          "BEARER_SERVICE_ENV_VARS": "3",
+          "CREDENTIALS_PROFILE_LOGIN": "AC",
+          "CREDENTIALS_LOGIN": "AD"
         }
       METRICS
 

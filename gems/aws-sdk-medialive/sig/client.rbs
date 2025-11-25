@@ -1642,7 +1642,7 @@ module Aws
                             },
                           ],
                           ?tags: Hash[::String, ::String],
-                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI"),
+                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER"),
                           ?vpc: {
                             security_group_ids: Array[::String]?,
                             subnet_ids: Array[::String]
@@ -1694,7 +1694,16 @@ module Aws
                               },
                             ]?
                           },
-                          ?sdi_sources: Array[::String]
+                          ?sdi_sources: Array[::String],
+                          ?router_settings: {
+                            destinations: Array[
+                              {
+                                availability_zone_name: ::String
+                              },
+                            ]?,
+                            encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")?,
+                            secret_arn: ::String?
+                          }
                         ) -> _CreateInputResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInputResponseSuccess
 
@@ -1959,12 +1968,13 @@ module Aws
         def sources: () -> ::Array[Types::InputSource]
         def state: () -> ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
-        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
         def srt_settings: () -> Types::SrtSettings
         def input_network_location: () -> ("AWS" | "ON_PREMISES")
         def multicast_settings: () -> Types::MulticastSettings
         def smpte_2110_receiver_group_settings: () -> Types::Smpte2110ReceiverGroupSettings
         def sdi_sources: () -> ::Array[::String]
+        def router_settings: () -> Types::RouterInputSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_input-instance_method
       def describe_input: (
@@ -3867,7 +3877,10 @@ module Aws
                               },
                             ]?
                           },
-                          ?sdi_sources: Array[::String]
+                          ?sdi_sources: Array[::String],
+                          ?special_router_settings: {
+                            router_arn: ::String?
+                          }
                         ) -> _UpdateInputResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInputResponseSuccess
 

@@ -54,7 +54,7 @@ module Aws::CloudWatchEvidently
   autoload :EndpointProvider, 'aws-sdk-cloudwatchevidently/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchevidently/endpoints'
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end
 

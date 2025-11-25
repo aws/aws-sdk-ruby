@@ -4344,7 +4344,7 @@ module Aws::IoTManagedIntegrations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotmanagedintegrations'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

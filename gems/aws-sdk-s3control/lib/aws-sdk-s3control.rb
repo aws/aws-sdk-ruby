@@ -54,7 +54,7 @@ module Aws::S3Control
   autoload :EndpointProvider, 'aws-sdk-s3control/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3control/endpoints'
 
-  GEM_VERSION = '1.120.0'
+  GEM_VERSION = '1.121.0'
 
 end
 

@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+3.247.0 (2025-11-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerruntimehttp2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-computeoptimizerautomation` gem.
+
+3.246.0 (2025-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-signin` gem.
+
+3.245.0 (2025-11-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signin` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralchannel` gem.
+
 3.244.0 (2025-11-17)
 ------------------
 

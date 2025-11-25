@@ -55,7 +55,7 @@ module Aws::CostExplorer
       attr_accessor last_updated_date: ::String
       attr_accessor last_evaluated_date: ::String
       attr_accessor monitor_type: ("DIMENSIONAL" | "CUSTOM")
-      attr_accessor monitor_dimension: ("SERVICE")
+      attr_accessor monitor_dimension: ("SERVICE" | "LINKED_ACCOUNT" | "TAG" | "COST_CATEGORY")
       attr_accessor monitor_specification: Types::Expression
       attr_accessor dimensional_value_count: ::Integer
       SENSITIVE: []

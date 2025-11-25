@@ -143,6 +143,31 @@ module Aws::SecurityIR
       include Aws::Structure
     end
 
+    # Represents a single metadata entry associated with a case. Each entry
+    # consists of a key-value pair that provides additional contextual
+    # information about the case, such as classification tags, custom
+    # attributes, or system-generated properties.
+    #
+    # @!attribute [rw] key
+    #   The identifier for the metadata field. This key uniquely identifies
+    #   the type of metadata being stored, such as "severity",
+    #   "category", or "assignee".
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with the metadata key. This contains the actual
+    #   data for the metadata field identified by the key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/CaseMetadataEntry AWS API Documentation
+    #
+    class CaseMetadataEntry < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] case_id
     #   Required element used in combination with CloseCase to identify the
     #   case ID to close.
@@ -622,6 +647,10 @@ module Aws::SecurityIR
     #   was closed.
     #   @return [Time]
     #
+    # @!attribute [rw] case_metadata
+    #   Case response metadata
+    #   @return [Array<Types::CaseMetadataEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/GetCaseResponse AWS API Documentation
     #
     class GetCaseResponse < Struct.new(
@@ -643,7 +672,8 @@ module Aws::SecurityIR
       :resolver_type,
       :impacted_services,
       :case_attachments,
-      :closed_date)
+      :closed_date,
+      :case_metadata)
       SENSITIVE = [:title, :description]
       include Aws::Structure
     end
@@ -851,6 +881,97 @@ module Aws::SecurityIR
     #
     class InvalidTokenException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an investigation action performed within a case. This
+    # structure captures the details of an automated or manual
+    # investigation, including its status, results, and user feedback.
+    #
+    # @!attribute [rw] investigation_id
+    #   The unique identifier for this investigation action. This ID is used
+    #   to track and reference the specific investigation throughout its
+    #   lifecycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_type
+    #   The type of investigation action being performed. This categorizes
+    #   the investigation method or approach used in the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   Human-readable summary of the investigation focus. This provides a
+    #   brief description of what the investigation is examining or
+    #   analyzing.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   Detailed investigation results in rich markdown format. This field
+    #   contains the comprehensive findings, analysis, and conclusions from
+    #   the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current execution status of the investigation. This indicates
+    #   whether the investigation is pending, in progress, completed, or
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   ISO 8601 timestamp of the most recent status update. This indicates
+    #   when the investigation was last modified or when its status last
+    #   changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] feedback
+    #   User feedback for this investigation result. This contains the
+    #   user's assessment and comments about the quality and usefulness of
+    #   the investigation findings.
+    #   @return [Types::InvestigationFeedback]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/InvestigationAction AWS API Documentation
+    #
+    class InvestigationAction < Struct.new(
+      :investigation_id,
+      :action_type,
+      :title,
+      :content,
+      :status,
+      :last_updated,
+      :feedback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents user feedback for an investigation result. This structure
+    # captures the user's evaluation of the investigation's quality,
+    # usefulness, and any additional comments.
+    #
+    # @!attribute [rw] usefulness
+    #   User assessment of the investigation result's quality and
+    #   helpfulness. This rating indicates how valuable the investigation
+    #   findings were in addressing the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   Optional user comments providing additional context about the
+    #   investigation feedback. This allows users to explain their rating or
+    #   provide suggestions for improvement.
+    #   @return [String]
+    #
+    # @!attribute [rw] submitted_at
+    #   ISO 8601 timestamp when the feedback was submitted. This records
+    #   when the user provided their assessment of the investigation
+    #   results.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/InvestigationFeedback AWS API Documentation
+    #
+    class InvestigationFeedback < Struct.new(
+      :usefulness,
+      :comment,
+      :submitted_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1076,6 +1197,49 @@ module Aws::SecurityIR
       :next_token,
       :items,
       :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Investigation performed by an agent for a security incident request
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Investigation performed by an agent for a security incident request,
+    #   returning max results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] case_id
+    #   Investigation performed by an agent for a security incident per
+    #   caseID
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/ListInvestigationsRequest AWS API Documentation
+    #
+    class ListInvestigationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Investigation performed by an agent for a security incident for next
+    #   Token
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_actions
+    #   Investigation performed by an agent for a security incid…Unique
+    #   identifier for the specific investigation&gt;
+    #   @return [Array<Types::InvestigationAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/ListInvestigationsResponse AWS API Documentation
+    #
+    class ListInvestigationsResponse < Struct.new(
+      :next_token,
+      :investigation_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1319,6 +1483,37 @@ module Aws::SecurityIR
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] case_id
+    #   Send feedback based on request caseID
+    #   @return [String]
+    #
+    # @!attribute [rw] result_id
+    #   Send feedback based on request result ID
+    #   @return [String]
+    #
+    # @!attribute [rw] usefulness
+    #   Required enum value indicating user assessment of result q.....
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   Send feedback based on request comments
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/SendFeedbackRequest AWS API Documentation
+    #
+    class SendFeedbackRequest < Struct.new(
+      :case_id,
+      :result_id,
+      :usefulness,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/SendFeedbackResponse AWS API Documentation
+    #
+    class SendFeedbackResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] message
     #   The exception message.
@@ -1579,6 +1774,10 @@ module Aws::SecurityIR
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] case_metadata
+    #   Update the case request with case metadata
+    #   @return [Array<Types::CaseMetadataEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/UpdateCaseRequest AWS API Documentation
     #
     class UpdateCaseRequest < Struct.new(
@@ -1597,7 +1796,8 @@ module Aws::SecurityIR
       :impacted_aws_regions_to_add,
       :impacted_aws_regions_to_delete,
       :impacted_accounts_to_add,
-      :impacted_accounts_to_delete)
+      :impacted_accounts_to_delete,
+      :case_metadata)
       SENSITIVE = [:title, :description]
       include Aws::Structure
     end

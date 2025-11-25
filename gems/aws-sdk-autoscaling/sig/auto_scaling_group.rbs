@@ -123,6 +123,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#capacity_reservation_specification-instance_method
       def capacity_reservation_specification: () -> Types::CapacityReservationSpecification
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#instance_lifecycle_policy-instance_method
+      def instance_lifecycle_policy: () -> Types::InstanceLifecyclePolicy
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#load-instance_method
@@ -463,7 +466,8 @@ module Aws
                                   ]?
                                 }?
                               }?
-                            }?
+                            }?,
+                            image_id: ::String?
                           },
                         ]?
                       }?,
@@ -510,6 +514,11 @@ module Aws
                       capacity_reservation_target: {
                         capacity_reservation_ids: Array[::String]?,
                         capacity_reservation_resource_group_arns: Array[::String]?
+                      }?
+                    },
+                    ?instance_lifecycle_policy: {
+                      retention_triggers: {
+                        terminate_hook_abandon: ("retain" | "terminate")?
                       }?
                     }
                   ) -> AutoScalingGroup

@@ -55,7 +55,7 @@ module Aws::ElastiCache
   autoload :EndpointProvider, 'aws-sdk-elasticache/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticache/endpoints'
 
-  GEM_VERSION = '1.135.0'
+  GEM_VERSION = '1.136.0'
 
 end
 

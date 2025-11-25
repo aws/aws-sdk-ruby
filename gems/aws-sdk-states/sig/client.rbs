@@ -573,7 +573,23 @@ module Aws
                         ?input: ::String,
                         ?inspection_level: ("INFO" | "DEBUG" | "TRACE"),
                         ?reveal_secrets: bool,
-                        ?variables: ::String
+                        ?variables: ::String,
+                        ?state_name: ::String,
+                        ?mock: {
+                          result: ::String?,
+                          error_output: {
+                            error: ::String?,
+                            cause: ::String?
+                          }?,
+                          field_validation_mode: ("STRICT" | "PRESENT" | "NONE")?
+                        },
+                        ?context: ::String,
+                        ?state_configuration: {
+                          retrier_retry_count: ::Integer?,
+                          error_caused_by_state: ::String?,
+                          map_iteration_failure_count: ::Integer?,
+                          map_item_reader_data: ::String?
+                        }
                       ) -> _TestStateResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestStateResponseSuccess
 

@@ -21,6 +21,16 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class AssociateIamRoleToResourceInput
+      attr_accessor iam_role_arn: ::String
+      attr_accessor aws_integration: ("KmsTde")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateIamRoleToResourceOutput < Aws::EmptyStructure
+    end
+
     class AutonomousVirtualMachineSummary
       attr_accessor autonomous_virtual_machine_id: ::String
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
@@ -286,6 +296,7 @@ module Aws::Odb
       attr_accessor odb_network_id: ::String
       attr_accessor percent_progress: ::Float
       attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor iam_roles: ::Array[Types::IamRole]
       SENSITIVE: []
     end
 
@@ -330,6 +341,7 @@ module Aws::Odb
       attr_accessor odb_network_id: ::String
       attr_accessor percent_progress: ::Float
       attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor iam_roles: ::Array[Types::IamRole]
       SENSITIVE: []
     end
 
@@ -437,7 +449,12 @@ module Aws::Odb
       attr_accessor client_token: ::String
       attr_accessor s3_access: ("ENABLED" | "DISABLED")
       attr_accessor zero_etl_access: ("ENABLED" | "DISABLED")
+      attr_accessor sts_access: ("ENABLED" | "DISABLED")
+      attr_accessor kms_access: ("ENABLED" | "DISABLED")
       attr_accessor s3_policy_document: ::String
+      attr_accessor sts_policy_document: ::String
+      attr_accessor kms_policy_document: ::String
+      attr_accessor cross_region_s3_restore_sources_to_enable: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -465,6 +482,13 @@ module Aws::Odb
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor odb_peering_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class CrossRegionS3RestoreSourcesAccess
+      attr_accessor region: ::String
+      attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
       SENSITIVE: []
     end
 
@@ -679,6 +703,16 @@ module Aws::Odb
     class DeleteOdbPeeringConnectionOutput < Aws::EmptyStructure
     end
 
+    class DisassociateIamRoleFromResourceInput
+      attr_accessor iam_role_arn: ::String
+      attr_accessor aws_integration: ("KmsTde")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateIamRoleFromResourceOutput < Aws::EmptyStructure
+    end
+
     class ExadataIormConfig
       attr_accessor db_plans: ::Array[Types::DbIormConfig]
       attr_accessor lifecycle_details: ::String
@@ -757,6 +791,7 @@ module Aws::Odb
       attr_accessor status: ("NOT_STARTED" | "PENDING_LINK_GENERATION" | "PENDING_CUSTOMER_ACTION" | "PENDING_INITIALIZATION" | "ACTIVATING" | "ACTIVE_IN_HOME_REGION" | "ACTIVE" | "ACTIVE_LIMITED" | "FAILED" | "PUBLIC_OFFER_UNSUPPORTED" | "SUSPENDED" | "CANCELED")
       attr_accessor existing_tenancy_activation_link: ::String
       attr_accessor new_tenancy_activation_link: ::String
+      attr_accessor oci_identity_domain: Types::OciIdentityDomain
       SENSITIVE: []
     end
 
@@ -785,7 +820,17 @@ module Aws::Odb
       SENSITIVE: []
     end
 
-    class InitializeServiceInput < Aws::EmptyStructure
+    class IamRole
+      attr_accessor iam_role_arn: ::String
+      attr_accessor status: ("ASSOCIATING" | "DISASSOCIATING" | "FAILED" | "CONNECTED" | "DISCONNECTED" | "PARTIALLY_CONNECTED" | "UNKNOWN")
+      attr_accessor status_reason: ::String
+      attr_accessor aws_integration: ("KmsTde")
+      SENSITIVE: []
+    end
+
+    class InitializeServiceInput
+      attr_accessor oci_identity_domain: bool
+      SENSITIVE: []
     end
 
     class InitializeServiceOutput < Aws::EmptyStructure
@@ -794,6 +839,14 @@ module Aws::Odb
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class KmsAccess
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor domain_name: ::String
+      attr_accessor kms_policy_document: ::String
       SENSITIVE: []
     end
 
@@ -978,6 +1031,9 @@ module Aws::Odb
       attr_accessor managed_s3_backup_access: Types::ManagedS3BackupAccess
       attr_accessor zero_etl_access: Types::ZeroEtlAccess
       attr_accessor s3_access: Types::S3Access
+      attr_accessor sts_access: Types::StsAccess
+      attr_accessor kms_access: Types::KmsAccess
+      attr_accessor cross_region_s3_restore_sources_access: ::Array[Types::CrossRegionS3RestoreSourcesAccess]
       SENSITIVE: []
     end
 
@@ -989,6 +1045,16 @@ module Aws::Odb
     class OciDnsForwardingConfig
       attr_accessor domain_name: ::String
       attr_accessor oci_dns_listener_ip: ::String
+      SENSITIVE: []
+    end
+
+    class OciIdentityDomain
+      attr_accessor oci_identity_domain_id: ::String
+      attr_accessor oci_identity_domain_resource_url: ::String
+      attr_accessor oci_identity_domain_url: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor account_setup_cloud_formation_url: ::String
       SENSITIVE: []
     end
 
@@ -1140,6 +1206,14 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class StsAccess
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor domain_name: ::String
+      attr_accessor sts_policy_document: ::String
+      SENSITIVE: []
+    end
+
     class SystemVersionSummary
       attr_accessor gi_version: ::String
       attr_accessor shape: ::String
@@ -1192,7 +1266,13 @@ module Aws::Odb
       attr_accessor peered_cidrs_to_be_removed: ::Array[::String]
       attr_accessor s3_access: ("ENABLED" | "DISABLED")
       attr_accessor zero_etl_access: ("ENABLED" | "DISABLED")
+      attr_accessor sts_access: ("ENABLED" | "DISABLED")
+      attr_accessor kms_access: ("ENABLED" | "DISABLED")
       attr_accessor s3_policy_document: ::String
+      attr_accessor sts_policy_document: ::String
+      attr_accessor kms_policy_document: ::String
+      attr_accessor cross_region_s3_restore_sources_to_enable: ::Array[::String]
+      attr_accessor cross_region_s3_restore_sources_to_disable: ::Array[::String]
       SENSITIVE: []
     end
 

@@ -7353,6 +7353,39 @@ module Aws
                         ) -> _GetFindingsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsResponseSuccess
 
+      interface _GetFindingsTrendsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsTrendsV2Response]
+        def granularity: () -> ("Daily" | "Weekly" | "Monthly")
+        def trends_metrics: () -> ::Array[Types::TrendsMetricsResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_findings_trends_v2-instance_method
+      def get_findings_trends_v2: (
+                                    ?filters: {
+                                      composite_filters: Array[
+                                        {
+                                          string_filters: Array[
+                                            {
+                                              field_name: ("account_id" | "region" | "finding_types" | "finding_status" | "finding_cve_ids" | "finding_compliance_status" | "finding_control_id" | "finding_class_name" | "finding_provider" | "finding_activity_name")?,
+                                              filter: {
+                                                value: ::String?,
+                                                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+                                              }?
+                                            },
+                                          ]?,
+                                          nested_composite_filters: untyped?,
+                                          operator: ("AND" | "OR")?
+                                        },
+                                      ]?,
+                                      composite_operator: ("AND" | "OR")?
+                                    },
+                                    start_time: ::Time,
+                                    end_time: ::Time,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _GetFindingsTrendsV2ResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsTrendsV2ResponseSuccess
+
       interface _GetFindingsV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsV2Response]
         def findings: () -> ::Array[untyped]
@@ -7560,6 +7593,39 @@ module Aws
                                          ?max_statistic_results: ::Integer
                                        ) -> _GetResourcesStatisticsV2ResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcesStatisticsV2ResponseSuccess
+
+      interface _GetResourcesTrendsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcesTrendsV2Response]
+        def granularity: () -> ("Daily" | "Weekly" | "Monthly")
+        def trends_metrics: () -> ::Array[Types::ResourcesTrendsMetricsResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_resources_trends_v2-instance_method
+      def get_resources_trends_v2: (
+                                     ?filters: {
+                                       composite_filters: Array[
+                                         {
+                                           string_filters: Array[
+                                             {
+                                               field_name: ("account_id" | "region" | "resource_type" | "resource_category")?,
+                                               filter: {
+                                                 value: ::String?,
+                                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+                                               }?
+                                             },
+                                           ]?,
+                                           nested_composite_filters: untyped?,
+                                           operator: ("AND" | "OR")?
+                                         },
+                                       ]?,
+                                       composite_operator: ("AND" | "OR")?
+                                     },
+                                     start_time: ::Time,
+                                     end_time: ::Time,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _GetResourcesTrendsV2ResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcesTrendsV2ResponseSuccess
 
       interface _GetResourcesV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcesV2Response]

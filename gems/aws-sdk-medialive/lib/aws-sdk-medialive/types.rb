@@ -2409,6 +2409,11 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   This is the collection of settings that are used during the creation
+    #   of a MediaConnect router input.
+    #   @return [Types::RouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
     class CreateInput < Struct.new(
@@ -2427,7 +2432,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2498,6 +2504,11 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   This is the collection of settings that are used during the creation
+    #   of a MediaConnect router input.
+    #   @return [Types::RouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest AWS API Documentation
     #
     class CreateInputRequest < Struct.new(
@@ -2516,7 +2527,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3556,6 +3568,10 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   The settings for a MediaConnect Router Input.
+    #   @return [Types::RouterInputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputResponse AWS API Documentation
     #
     class DescribeInputResponse < Struct.new(
@@ -3579,7 +3595,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6675,6 +6692,11 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   Information about any MediaConnect router association with this
+    #   input.
+    #   @return [Types::RouterInputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input AWS API Documentation
     #
     class Input < Struct.new(
@@ -6698,7 +6720,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13023,6 +13046,14 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
     class UpdateInput < Struct.new(
@@ -13036,7 +13067,8 @@ module Aws::MediaLive
       :srt_settings,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :special_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13229,6 +13261,14 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputRequest AWS API Documentation
     #
     class UpdateInputRequest < Struct.new(
@@ -13243,7 +13283,8 @@ module Aws::MediaLive
       :srt_settings,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :special_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22269,6 +22310,113 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Hlg2020Settings AWS API Documentation
     #
     class Hlg2020Settings < Aws::EmptyStructure; end
+
+    # @!attribute [rw] availability_zone_name
+    #   The Availability Zone (AZ) names of the AZs this destination is
+    #   created in.
+    #   @return [String]
+    #
+    # @!attribute [rw] router_output_arn
+    #   ARN of the output from MediaConnect Router currently connected to
+    #   this input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterDestination AWS API Documentation
+    #
+    class RouterDestination < Struct.new(
+      :availability_zone_name,
+      :router_output_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] availability_zone_name
+    #   Availability Zone for this MediaConnect Router destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterDestinationSettings AWS API Documentation
+    #
+    class RouterDestinationSettings < Struct.new(
+      :availability_zone_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for a MediaConnect Router Input.
+    #
+    # @!attribute [rw] destinations
+    #   MediaConnect Router destinations associated with the MediaLive
+    #   Input.
+    #   @return [Array<Types::RouterDestination>]
+    #
+    # @!attribute [rw] encryption_type
+    #   Encryption configuration for MediaConnect router. When using
+    #   SECRETS\_MANAGER encryption, you must provide the ARN of the secret
+    #   used to encrypt data in transit. When using AUTOMATIC encryption, a
+    #   service-managed secret will be used instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   ARN of the secret used to encrypt this input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterInputSettings AWS API Documentation
+    #
+    class RouterInputSettings < Struct.new(
+      :destinations,
+      :encryption_type,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is the collection of settings that are used during the creation
+    # of a MediaConnect router input.
+    #
+    # @!attribute [rw] destinations
+    #   Destinations for the input from MediaConnect Router. Provide one for
+    #   a single-pipeline input and two for a standard input.
+    #   @return [Array<Types::RouterDestinationSettings>]
+    #
+    # @!attribute [rw] encryption_type
+    #   Encryption configuration for MediaConnect router. When using
+    #   SECRETS\_MANAGER encryption, you must provide the ARN of the secret
+    #   used to encrypt data in transit. When using AUTOMATIC encryption, a
+    #   service-managed secret will be used instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   ARN of the secret used to encrypt this input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterSettings AWS API Documentation
+    #
+    class RouterSettings < Struct.new(
+      :destinations,
+      :encryption_type,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # When using MediaConnect Router as the source of a MediaLive input
+    # there's a special handoff that occurs when a router output is
+    # created. This group of settings is set on your behalf by the
+    # MediaConnect Router service using this set of settings. This setting
+    # object can only by used by that service.
+    #
+    # @!attribute [rw] router_arn
+    #   This is the arn of the MediaConnect Router resource being associated
+    #   with the MediaLive Input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SpecialRouterSettings AWS API Documentation
+    #
+    class SpecialRouterSettings < Struct.new(
+      :router_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

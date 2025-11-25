@@ -319,7 +319,14 @@ module Aws
                                 value: ::String
                               },
                             ],
-                            ?web_app_endpoint_policy: ("FIPS" | "STANDARD")
+                            ?web_app_endpoint_policy: ("FIPS" | "STANDARD"),
+                            ?endpoint_details: {
+                              vpc: {
+                                subnet_ids: Array[::String]?,
+                                vpc_id: ::String?,
+                                security_group_ids: Array[::String]?
+                              }?
+                            }
                           ) -> _CreateWebAppResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebAppResponseSuccess
 
@@ -1257,6 +1264,11 @@ module Aws
                             ?access_endpoint: ::String,
                             ?web_app_units: {
                               provisioned: ::Integer?
+                            },
+                            ?endpoint_details: {
+                              vpc: {
+                                subnet_ids: Array[::String]?
+                              }?
                             }
                           ) -> _UpdateWebAppResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebAppResponseSuccess

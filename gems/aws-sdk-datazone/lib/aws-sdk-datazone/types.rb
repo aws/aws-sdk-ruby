@@ -1388,6 +1388,49 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The attribute error.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The attribute ID as part of the attribute error.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The code generated as part of the attribute error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message generated as part of the attribute error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AttributeError AWS API Documentation
+    #
+    class AttributeError < Struct.new(
+      :attribute_identifier,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The attribute input.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The ID of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The metadata forms as part of the attribute input.
+    #   @return [Array<Types::FormInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AttributeInput AWS API Documentation
+    #
+    class AttributeInput < Struct.new(
+      :attribute_identifier,
+      :forms)
+      SENSITIVE = [:forms]
+      include Aws::Structure
+    end
+
     # The authentication configuration of a connection.
     #
     # @!attribute [rw] authentication_type
@@ -1578,6 +1621,144 @@ module Aws::DataZone
     class BasicAuthenticationCredentials < Struct.new(
       :password,
       :user_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The results of the BatchGetAttribute action.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The attribute ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The metadata forms that are part of the results of the
+    #   BatchGetAttribute action.
+    #   @return [Array<Types::FormOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributeOutput AWS API Documentation
+    #
+    class BatchGetAttributeOutput < Struct.new(
+      :attribute_identifier,
+      :forms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attribute_identifiers
+    #   The attribute identifier.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where you want to get the attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The entity ID for which you want to get attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The entity revision for which you want to get attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which you want to get attribute metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributesMetadataInput AWS API Documentation
+    #
+    class BatchGetAttributesMetadataInput < Struct.new(
+      :attribute_identifiers,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_revision,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The results of the BatchGetAttributesMetadata action.
+    #   @return [Array<Types::BatchGetAttributeOutput>]
+    #
+    # @!attribute [rw] errors
+    #   The errors generated when the BatchGetAttributesMetadata action is
+    #   invoked.
+    #   @return [Array<Types::AttributeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributesMetadataOutput AWS API Documentation
+    #
+    class BatchGetAttributesMetadataOutput < Struct.new(
+      :attributes,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The results of the BatchPutAttribute action.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The attribute ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributeOutput AWS API Documentation
+    #
+    class BatchPutAttributeOutput < Struct.new(
+      :attribute_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes of the metadata.
+    #   @return [Array<Types::AttributeInput>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where you want to write the attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The entity ID for which you want to write the attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which you want to write the attribute metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributesMetadataInput AWS API Documentation
+    #
+    class BatchPutAttributesMetadataInput < Struct.new(
+      :attributes,
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The results of the BatchPutAttributeMetadata action.
+    #   @return [Array<Types::BatchPutAttributeOutput>]
+    #
+    # @!attribute [rw] errors
+    #   The errors generated when the BatchPutAttributeMetadata action is
+    #   invoked.
+    #   @return [Array<Types::AttributeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributesMetadataOutput AWS API Documentation
+    #
+    class BatchPutAttributesMetadataOutput < Struct.new(
+      :attributes,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11193,6 +11374,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The enforcement details of a glossary term.
+    #
+    # @!attribute [rw] required_glossary_term_ids
+    #   The ID of the required glossary term.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryTermEnforcementDetail AWS API Documentation
+    #
+    class GlossaryTermEnforcementDetail < Struct.new(
+      :required_glossary_term_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a business glossary term.
     #
     # @!attribute [rw] additional_attributes
@@ -11895,6 +12090,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of the IAM user profile.
+    #
     # @!attribute [rw] arn
     #   The ARN of the IAM user.
     #   @return [String]
@@ -17546,6 +17743,11 @@ module Aws::DataZone
     #
     # @note RuleDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RuleDetail corresponding to the set member.
     #
+    # @!attribute [rw] glossary_term_enforcement_detail
+    #   The enforcement details of a glossary term that's part of the
+    #   metadata rule.
+    #   @return [Types::GlossaryTermEnforcementDetail]
+    #
     # @!attribute [rw] metadata_form_enforcement_detail
     #   The enforcement detail of the metadata form.
     #   @return [Types::MetadataFormEnforcementDetail]
@@ -17553,12 +17755,14 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RuleDetail AWS API Documentation
     #
     class RuleDetail < Struct.new(
+      :glossary_term_enforcement_detail,
       :metadata_form_enforcement_detail,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class GlossaryTermEnforcementDetail < RuleDetail; end
       class MetadataFormEnforcementDetail < RuleDetail; end
       class Unknown < RuleDetail; end
     end
@@ -21629,6 +21833,42 @@ module Aws::DataZone
       SENSITIVE = [:description, :name, :project_resource_tags_description]
       include Aws::Structure
     end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_owner
+    #   The current owner of the root domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the root domain unit owner is to be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_owner
+    #   The new owner of the root domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateRootDomainUnitOwnerInput AWS API Documentation
+    #
+    class UpdateRootDomainUnitOwnerInput < Struct.new(
+      :client_token,
+      :current_owner,
+      :domain_identifier,
+      :new_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateRootDomainUnitOwnerOutput AWS API Documentation
+    #
+    class UpdateRootDomainUnitOwnerOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] description
     #   The description of the rule.

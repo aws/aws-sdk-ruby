@@ -55,7 +55,7 @@ module Aws::Artifact
   autoload :EndpointProvider, 'aws-sdk-artifact/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-artifact/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

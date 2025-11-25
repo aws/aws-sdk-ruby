@@ -61,6 +61,7 @@ module Aws::CloudFormation
     class AutoDeployment
       attr_accessor enabled: bool
       attr_accessor retain_stacks_on_account_removal: bool
+      attr_accessor depends_on: ::Array[::String]
       SENSITIVE: []
     end
 

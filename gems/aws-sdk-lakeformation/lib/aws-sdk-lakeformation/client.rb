@@ -595,7 +595,17 @@ module Aws::LakeFormation
     # virtual API `GetDataAccess`. Therefore, all SAML roles that can be
     # assumed via `AssumeDecoratedRoleWithSAML` must at a minimum include
     # `lakeformation:GetDataAccess` in their role policies. A typical IAM
-    # policy attached to such a role would look as follows:
+    # policy attached to such a role would include the following actions:
+    #
+    # * glue:*Database*
+    #
+    # * glue:*Table*
+    #
+    # * glue:*Partition*
+    #
+    # * glue:*UserDefinedFunction*
+    #
+    # * lakeformation:GetDataAccess
     #
     # @option params [required, String] :saml_assertion
     #   A SAML assertion consisting of an assertion statement for the user who
@@ -1144,6 +1154,10 @@ module Aws::LakeFormation
     #   If the `ShareRecipients` value is null or the list is empty, no
     #   resource share is created.
     #
+    # @option params [Array<Types::ServiceIntegrationUnion>] :service_integrations
+    #   A list of service integrations for enabling trusted identity
+    #   propagation with external services such as Redshift.
+    #
     # @return [Types::CreateLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
@@ -1160,6 +1174,17 @@ module Aws::LakeFormation
     #     share_recipients: [
     #       {
     #         data_lake_principal_identifier: "DataLakePrincipalString",
+    #       },
+    #     ],
+    #     service_integrations: [
+    #       {
+    #         redshift: [
+    #           {
+    #             redshift_connect: {
+    #               authorization: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1302,12 +1327,13 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Deletes the specified LF-tag given a key name. If the input parameter
-    # tag key was not found, then the operation will throw an exception.
-    # When you delete an LF-tag, the `LFTagPolicy` attached to the LF-tag
-    # becomes invalid. If the deleted LF-tag was still assigned to any
-    # resource, the tag policy attach to the deleted LF-tag will no longer
-    # be applied to the resource.
+    # Deletes an LF-tag by its key name. The operation fails if the
+    # specified tag key doesn't exist. When you delete an LF-Tag:
+    #
+    # * The associated LF-Tag policy becomes invalid.
+    #
+    # * Resources that had this tag assigned will no longer have the tag
+    #   policy applied to them.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -1581,6 +1607,7 @@ module Aws::LakeFormation
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#external_filtering #external_filtering} => Types::ExternalFilteringConfiguration
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#share_recipients #share_recipients} => Array&lt;Types::DataLakePrincipal&gt;
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#service_integrations #service_integrations} => Array&lt;Types::ServiceIntegrationUnion&gt;
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#resource_share #resource_share} => String
     #
     # @example Request syntax with placeholder values
@@ -1599,6 +1626,9 @@ module Aws::LakeFormation
     #   resp.external_filtering.authorized_targets[0] #=> String
     #   resp.share_recipients #=> Array
     #   resp.share_recipients[0].data_lake_principal_identifier #=> String
+    #   resp.service_integrations #=> Array
+    #   resp.service_integrations[0].redshift #=> Array
+    #   resp.service_integrations[0].redshift[0].redshift_connect.authorization #=> String, one of "ENABLED", "DISABLED"
     #   resp.resource_share #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeLakeFormationIdentityCenterConfiguration AWS API Documentation
@@ -2943,7 +2973,9 @@ module Aws::LakeFormation
     # for ALTER.
     #
     # This operation returns only those permissions that have been
-    # explicitly granted.
+    # explicitly granted. If both `Principal` and `Resource` parameters are
+    # provided, the response returns effective permissions rather than the
+    # explicitly granted permissions.
     #
     # For information about permissions, see [Security and Access Control to
     # Metadata and Data][1].
@@ -2979,7 +3011,12 @@ module Aws::LakeFormation
     #   The maximum number of results to return.
     #
     # @option params [String] :include_related
-    #   Indicates that related permissions should be included in the results.
+    #   Indicates that related permissions should be included in the results
+    #   when listing permissions on a table resource.
+    #
+    #   Set the field to `TRUE` to show the cell filters on a table resource.
+    #   Default is `FALSE`. The Principal parameter must not be specified when
+    #   requesting cell filter information.
     #
     # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4026,6 +4063,10 @@ module Aws::LakeFormation
     #   share recipients list will be cleared, and the resource share will be
     #   deleted.
     #
+    # @option params [Array<Types::ServiceIntegrationUnion>] :service_integrations
+    #   A list of service integrations for enabling trusted identity
+    #   propagation with external services such as Redshift.
+    #
     # @option params [String] :application_status
     #   Allows to enable or disable the IAM Identity Center connection.
     #
@@ -4043,6 +4084,17 @@ module Aws::LakeFormation
     #     share_recipients: [
     #       {
     #         data_lake_principal_identifier: "DataLakePrincipalString",
+    #       },
+    #     ],
+    #     service_integrations: [
+    #       {
+    #         redshift: [
+    #           {
+    #             redshift_connect: {
+    #               authorization: "ENABLED", # required, accepts ENABLED, DISABLED
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     application_status: "ENABLED", # accepts ENABLED, DISABLED
@@ -4216,7 +4268,7 @@ module Aws::LakeFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

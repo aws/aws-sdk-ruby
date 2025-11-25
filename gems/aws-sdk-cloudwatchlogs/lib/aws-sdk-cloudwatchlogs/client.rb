@@ -1093,6 +1093,12 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   Use this parameter to enable deletion protection for the new log
+    #   group. When enabled on a log group, deletion protection blocks all
+    #   deletion operations until it is explicitly disabled. By default log
+    #   groups are created without deletion protection enabled.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1104,6 +1110,7 @@ module Aws::CloudWatchLogs
     #       "TagKey" => "TagValue",
     #     },
     #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     deletion_protection_enabled: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup AWS API Documentation
@@ -2554,6 +2561,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].inherited_properties[0] #=> String, one of "ACCOUNT_DATA_PROTECTION"
     #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
     #   resp.log_groups[0].log_group_arn #=> String
+    #   resp.log_groups[0].deletion_protection_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -4303,7 +4311,8 @@ module Aws::CloudWatchLogs
     #   resp.transformer_config[0].parse_route_53.source #=> String
     #   resp.transformer_config[0].parse_to_ocsf.source #=> String
     #   resp.transformer_config[0].parse_to_ocsf.event_source #=> String, one of "CloudTrail", "Route53Resolver", "VPCFlow", "EKSAudit", "AWSWAF"
-    #   resp.transformer_config[0].parse_to_ocsf.ocsf_version #=> String, one of "V1.1"
+    #   resp.transformer_config[0].parse_to_ocsf.ocsf_version #=> String, one of "V1.1", "V1.5"
+    #   resp.transformer_config[0].parse_to_ocsf.mapping_version #=> String
     #   resp.transformer_config[0].parse_postgres.source #=> String
     #   resp.transformer_config[0].parse_vpc.source #=> String
     #   resp.transformer_config[0].parse_waf.source #=> String
@@ -5665,8 +5674,13 @@ module Aws::CloudWatchLogs
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
+    #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
+    #
+    #   * For Amazon Web Services RTB Fabric, the valid values is
+    #     `APPLICATION_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
     #
@@ -6145,6 +6159,53 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def put_log_events(params = {}, options = {})
       req = build_request(:put_log_events, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables deletion protection for the specified log group.
+    # When enabled on a log group, deletion protection blocks all deletion
+    # operations until it is explicitly disabled.
+    #
+    # For information about the parameters that are common to all actions,
+    # see [Common Parameters][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html
+    #
+    # @option params [required, String] :log_group_identifier
+    #   The name or ARN of the log group.
+    #
+    #   Type: String
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
+    #
+    #   Pattern: `[\.\-_/#A-Za-z0-9]+`
+    #
+    #   Required: Yes
+    #
+    # @option params [required, Boolean] :deletion_protection_enabled
+    #   Whether to enable deletion protection.
+    #
+    #   Type: Boolean
+    #
+    #   Required: Yes
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_log_group_deletion_protection({
+    #     log_group_identifier: "LogGroupIdentifier", # required
+    #     deletion_protection_enabled: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogGroupDeletionProtection AWS API Documentation
+    #
+    # @overload put_log_group_deletion_protection(params = {})
+    # @param [Hash] params ({})
+    def put_log_group_deletion_protection(params = {}, options = {})
+      req = build_request(:put_log_group_deletion_protection, params)
       req.send_request(options)
     end
 
@@ -6822,7 +6883,8 @@ module Aws::CloudWatchLogs
     #         parse_to_ocsf: {
     #           source: "Source",
     #           event_source: "CloudTrail", # required, accepts CloudTrail, Route53Resolver, VPCFlow, EKSAudit, AWSWAF
-    #           ocsf_version: "V1.1", # required, accepts V1.1
+    #           ocsf_version: "V1.1", # required, accepts V1.1, V1.5
+    #           mapping_version: "MappingVersion",
     #         },
     #         parse_postgres: {
     #           source: "Source",
@@ -7627,7 +7689,8 @@ module Aws::CloudWatchLogs
     #         parse_to_ocsf: {
     #           source: "Source",
     #           event_source: "CloudTrail", # required, accepts CloudTrail, Route53Resolver, VPCFlow, EKSAudit, AWSWAF
-    #           ocsf_version: "V1.1", # required, accepts V1.1
+    #           ocsf_version: "V1.1", # required, accepts V1.1, V1.5
+    #           mapping_version: "MappingVersion",
     #         },
     #         parse_postgres: {
     #           source: "Source",
@@ -8099,7 +8162,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

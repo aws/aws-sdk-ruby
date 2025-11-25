@@ -1068,6 +1068,8 @@ module Aws::BedrockAgentCoreControl
     #
     #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM
     #     credentials.
+    #
+    #   * `NONE` - No authorization
     #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
@@ -1079,6 +1081,12 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Resource Name (ARN) of the KMS key used to encrypt data
     #   associated with the gateway.
     #   @return [String]
+    #
+    # @!attribute [rw] interceptor_configurations
+    #   A list of configuration settings for a gateway interceptor. Gateway
+    #   interceptors allow custom code to be invoked during gateway
+    #   invocations.
+    #   @return [Array<Types::GatewayInterceptorConfiguration>]
     #
     # @!attribute [rw] exception_level
     #   The level of detail in error messages returned when invoking the
@@ -1108,6 +1116,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :kms_key_arn,
+      :interceptor_configurations,
       :exception_level,
       :tags)
       SENSITIVE = [:name, :description]
@@ -1176,6 +1185,10 @@ module Aws::BedrockAgentCoreControl
     #   associated with the gateway.
     #   @return [String]
     #
+    # @!attribute [rw] interceptor_configurations
+    #   The list of interceptor configurations for the created gateway.
+    #   @return [Array<Types::GatewayInterceptorConfiguration>]
+    #
     # @!attribute [rw] workload_identity_details
     #   The workload identity details for the created gateway.
     #   @return [Types::WorkloadIdentityDetails]
@@ -1209,6 +1222,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :kms_key_arn,
+      :interceptor_configurations,
       :workload_identity_details,
       :exception_level)
       SENSITIVE = [:name, :description]
@@ -2234,6 +2248,35 @@ module Aws::BedrockAgentCoreControl
       class Unknown < ExtractionConfiguration; end
     end
 
+    # The configuration for an interceptor on a gateway. This structure
+    # defines settings for an interceptor that will be invoked during the
+    # invocation of the gateway.
+    #
+    # @!attribute [rw] interceptor
+    #   The infrastructure settings of an interceptor configuration. This
+    #   structure defines how the interceptor can be invoked.
+    #   @return [Types::InterceptorConfiguration]
+    #
+    # @!attribute [rw] interception_points
+    #   The supported points of interception. This field specifies which
+    #   points during the gateway invocation to invoke the interceptor
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_configuration
+    #   The configuration for the input of the interceptor. This field
+    #   specifies how the input to the interceptor is constructed
+    #   @return [Types::InterceptorInputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayInterceptorConfiguration AWS API Documentation
+    #
+    class GatewayInterceptorConfiguration < Struct.new(
+      :interceptor,
+      :interception_points,
+      :input_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a gateway protocol. This structure defines how
     # the gateway communicates with external services.
     #
@@ -2839,6 +2882,10 @@ module Aws::BedrockAgentCoreControl
     #   gateway.
     #   @return [String]
     #
+    # @!attribute [rw] interceptor_configurations
+    #   The interceptors configured on the gateway.
+    #   @return [Array<Types::GatewayInterceptorConfiguration>]
+    #
     # @!attribute [rw] workload_identity_details
     #   The workload identity details for the gateway.
     #   @return [Types::WorkloadIdentityDetails]
@@ -2872,6 +2919,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :kms_key_arn,
+      :interceptor_configurations,
       :workload_identity_details,
       :exception_level)
       SENSITIVE = [:name, :description]
@@ -3263,6 +3311,44 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The interceptor configuration.
+    #
+    # @note InterceptorConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note InterceptorConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InterceptorConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] lambda
+    #   The details of the lambda function used for the interceptor.
+    #   @return [Types::LambdaInterceptorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/InterceptorConfiguration AWS API Documentation
+    #
+    class InterceptorConfiguration < Struct.new(
+      :lambda,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Lambda < InterceptorConfiguration; end
+      class Unknown < InterceptorConfiguration; end
+    end
+
+    # The input configuration of the interceptor.
+    #
+    # @!attribute [rw] pass_request_headers
+    #   Indicates whether to pass request headers as input into the
+    #   interceptor. When set to true, request headers will be passed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/InterceptorInputConfiguration AWS API Documentation
+    #
+    class InterceptorInputConfiguration < Struct.new(
+      :pass_request_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown if there was an unexpected error during
     # processing of request
     #
@@ -3332,6 +3418,20 @@ module Aws::BedrockAgentCoreControl
     class KmsConfiguration < Struct.new(
       :key_type,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lambda configuration for the interceptor
+    #
+    # @!attribute [rw] arn
+    #   The arn of the lambda function to be invoked for the interceptor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LambdaInterceptorConfiguration AWS API Documentation
+    #
+    class LambdaInterceptorConfiguration < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5953,6 +6053,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated ARN of the KMS key used to encrypt the gateway.
     #   @return [String]
     #
+    # @!attribute [rw] interceptor_configurations
+    #   The updated interceptor configurations for the gateway.
+    #   @return [Array<Types::GatewayInterceptorConfiguration>]
+    #
     # @!attribute [rw] exception_level
     #   The level of detail in error messages returned when invoking the
     #   gateway.
@@ -5976,6 +6080,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :kms_key_arn,
+      :interceptor_configurations,
       :exception_level)
       SENSITIVE = [:name, :description]
       include Aws::Structure
@@ -6042,6 +6147,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated ARN of the KMS key used to encrypt the gateway.
     #   @return [String]
     #
+    # @!attribute [rw] interceptor_configurations
+    #   The updated interceptor configurations for the gateway.
+    #   @return [Array<Types::GatewayInterceptorConfiguration>]
+    #
     # @!attribute [rw] workload_identity_details
     #   The workload identity details for the updated gateway.
     #   @return [Types::WorkloadIdentityDetails]
@@ -6075,6 +6184,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :kms_key_arn,
+      :interceptor_configurations,
       :workload_identity_details,
       :exception_level)
       SENSITIVE = [:name, :description]

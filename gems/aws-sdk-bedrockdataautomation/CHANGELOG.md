@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2025-11-20)
+------------------
+
+* Feature - Added support for Synchronous project type and PII Detection and Redaction
+
 1.20.0 (2025-11-11)
 ------------------
 

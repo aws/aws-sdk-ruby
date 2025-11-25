@@ -61,6 +61,7 @@ module Aws::BedrockDataAutomation
     DataAutomationProjectStatus = Shapes::StringShape.new(name: 'DataAutomationProjectStatus')
     DataAutomationProjectSummaries = Shapes::ListShape.new(name: 'DataAutomationProjectSummaries')
     DataAutomationProjectSummary = Shapes::StructureShape.new(name: 'DataAutomationProjectSummary')
+    DataAutomationProjectType = Shapes::StringShape.new(name: 'DataAutomationProjectType')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
     DeleteBlueprintRequest = Shapes::StructureShape.new(name: 'DeleteBlueprintRequest')
     DeleteBlueprintResponse = Shapes::StructureShape.new(name: 'DeleteBlueprintResponse')
@@ -113,8 +114,16 @@ module Aws::BedrockDataAutomation
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     OverrideConfiguration = Shapes::StructureShape.new(name: 'OverrideConfiguration')
+    PIIEntitiesConfiguration = Shapes::StructureShape.new(name: 'PIIEntitiesConfiguration')
+    PIIEntityType = Shapes::StringShape.new(name: 'PIIEntityType')
+    PIIEntityTypes = Shapes::ListShape.new(name: 'PIIEntityTypes')
+    PIIRedactionMaskMode = Shapes::StringShape.new(name: 'PIIRedactionMaskMode')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
+    SensitiveDataConfiguration = Shapes::StructureShape.new(name: 'SensitiveDataConfiguration')
+    SensitiveDataDetectionMode = Shapes::StringShape.new(name: 'SensitiveDataDetectionMode')
+    SensitiveDataDetectionScope = Shapes::ListShape.new(name: 'SensitiveDataDetectionScope')
+    SensitiveDataDetectionScopeType = Shapes::StringShape.new(name: 'SensitiveDataDetectionScopeType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SpeakerLabelingConfiguration = Shapes::StructureShape.new(name: 'SpeakerLabelingConfiguration')
     SplitterConfiguration = Shapes::StructureShape.new(name: 'SplitterConfiguration')
@@ -173,6 +182,7 @@ module Aws::BedrockDataAutomation
 
     AudioOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
     AudioOverrideConfiguration.add_member(:language_configuration, Shapes::ShapeRef.new(shape: AudioLanguageConfiguration, location_name: "languageConfiguration"))
+    AudioOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     AudioOverrideConfiguration.struct_class = Types::AudioOverrideConfiguration
 
     AudioStandardExtraction.add_member(:category, Shapes::ShapeRef.new(shape: AudioExtractionCategory, required: true, location_name: "category"))
@@ -250,6 +260,7 @@ module Aws::BedrockDataAutomation
     CreateDataAutomationProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: DataAutomationProjectName, required: true, location_name: "projectName"))
     CreateDataAutomationProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: DataAutomationProjectDescription, location_name: "projectDescription"))
     CreateDataAutomationProjectRequest.add_member(:project_stage, Shapes::ShapeRef.new(shape: DataAutomationProjectStage, location_name: "projectStage"))
+    CreateDataAutomationProjectRequest.add_member(:project_type, Shapes::ShapeRef.new(shape: DataAutomationProjectType, location_name: "projectType"))
     CreateDataAutomationProjectRequest.add_member(:standard_output_configuration, Shapes::ShapeRef.new(shape: StandardOutputConfiguration, required: true, location_name: "standardOutputConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "customOutputConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:override_configuration, Shapes::ShapeRef.new(shape: OverrideConfiguration, location_name: "overrideConfiguration"))
@@ -271,6 +282,7 @@ module Aws::BedrockDataAutomation
     DataAutomationProject.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastModifiedTime"))
     DataAutomationProject.add_member(:project_name, Shapes::ShapeRef.new(shape: DataAutomationProjectName, required: true, location_name: "projectName"))
     DataAutomationProject.add_member(:project_stage, Shapes::ShapeRef.new(shape: DataAutomationProjectStage, location_name: "projectStage"))
+    DataAutomationProject.add_member(:project_type, Shapes::ShapeRef.new(shape: DataAutomationProjectType, location_name: "projectType"))
     DataAutomationProject.add_member(:project_description, Shapes::ShapeRef.new(shape: DataAutomationProjectDescription, location_name: "projectDescription"))
     DataAutomationProject.add_member(:standard_output_configuration, Shapes::ShapeRef.new(shape: StandardOutputConfiguration, location_name: "standardOutputConfiguration"))
     DataAutomationProject.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "customOutputConfiguration"))
@@ -288,6 +300,7 @@ module Aws::BedrockDataAutomation
 
     DataAutomationProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: DataAutomationProjectArn, required: true, location_name: "projectArn"))
     DataAutomationProjectSummary.add_member(:project_stage, Shapes::ShapeRef.new(shape: DataAutomationProjectStage, location_name: "projectStage"))
+    DataAutomationProjectSummary.add_member(:project_type, Shapes::ShapeRef.new(shape: DataAutomationProjectType, location_name: "projectType"))
     DataAutomationProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: DataAutomationProjectName, location_name: "projectName"))
     DataAutomationProjectSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "creationTime"))
     DataAutomationProjectSummary.struct_class = Types::DataAutomationProjectSummary
@@ -327,6 +340,7 @@ module Aws::BedrockDataAutomation
 
     DocumentOverrideConfiguration.add_member(:splitter, Shapes::ShapeRef.new(shape: SplitterConfiguration, location_name: "splitter"))
     DocumentOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    DocumentOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     DocumentOverrideConfiguration.struct_class = Types::DocumentOverrideConfiguration
 
     DocumentStandardExtraction.add_member(:granularity, Shapes::ShapeRef.new(shape: DocumentExtractionGranularity, required: true, location_name: "granularity"))
@@ -370,6 +384,7 @@ module Aws::BedrockDataAutomation
     ImageExtractionCategoryTypes.member = Shapes::ShapeRef.new(shape: ImageExtractionCategoryType)
 
     ImageOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    ImageOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     ImageOverrideConfiguration.struct_class = Types::ImageOverrideConfiguration
 
     ImageStandardExtraction.add_member(:category, Shapes::ShapeRef.new(shape: ImageExtractionCategory, required: true, location_name: "category"))
@@ -437,8 +452,21 @@ module Aws::BedrockDataAutomation
     OverrideConfiguration.add_member(:modality_routing, Shapes::ShapeRef.new(shape: ModalityRoutingConfiguration, location_name: "modalityRouting"))
     OverrideConfiguration.struct_class = Types::OverrideConfiguration
 
+    PIIEntitiesConfiguration.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PIIEntityTypes, location_name: "piiEntityTypes"))
+    PIIEntitiesConfiguration.add_member(:redaction_mask_mode, Shapes::ShapeRef.new(shape: PIIRedactionMaskMode, location_name: "redactionMaskMode"))
+    PIIEntitiesConfiguration.struct_class = Types::PIIEntitiesConfiguration
+
+    PIIEntityTypes.member = Shapes::ShapeRef.new(shape: PIIEntityType)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SensitiveDataConfiguration.add_member(:detection_mode, Shapes::ShapeRef.new(shape: SensitiveDataDetectionMode, required: true, location_name: "detectionMode"))
+    SensitiveDataConfiguration.add_member(:detection_scope, Shapes::ShapeRef.new(shape: SensitiveDataDetectionScope, location_name: "detectionScope"))
+    SensitiveDataConfiguration.add_member(:pii_entities_configuration, Shapes::ShapeRef.new(shape: PIIEntitiesConfiguration, location_name: "piiEntitiesConfiguration"))
+    SensitiveDataConfiguration.struct_class = Types::SensitiveDataConfiguration
+
+    SensitiveDataDetectionScope.member = Shapes::ShapeRef.new(shape: SensitiveDataDetectionScopeType)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -525,6 +553,7 @@ module Aws::BedrockDataAutomation
     VideoExtractionCategoryTypes.member = Shapes::ShapeRef.new(shape: VideoExtractionCategoryType)
 
     VideoOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    VideoOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     VideoOverrideConfiguration.struct_class = Types::VideoOverrideConfiguration
 
     VideoStandardExtraction.add_member(:category, Shapes::ShapeRef.new(shape: VideoExtractionCategory, required: true, location_name: "category"))

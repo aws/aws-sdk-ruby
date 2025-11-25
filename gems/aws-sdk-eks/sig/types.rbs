@@ -238,6 +238,7 @@ module Aws::EKS
       attr_accessor compute_config: Types::ComputeConfigResponse
       attr_accessor storage_config: Types::StorageConfigResponse
       attr_accessor deletion_protection: bool
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig
       SENSITIVE: []
     end
 
@@ -313,6 +314,11 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class ControlPlaneScalingConfig
+      attr_accessor tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")
+      SENSITIVE: []
+    end
+
     class CreateAccessConfigRequest
       attr_accessor bootstrap_cluster_creator_admin_permissions: bool
       attr_accessor authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")
@@ -373,6 +379,7 @@ module Aws::EKS
       attr_accessor compute_config: Types::ComputeConfigRequest
       attr_accessor storage_config: Types::StorageConfigRequest
       attr_accessor deletion_protection: bool
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig
       SENSITIVE: []
     end
 
@@ -1443,7 +1450,7 @@ module Aws::EKS
     class Update
       attr_accessor id: ::String
       attr_accessor status: ("InProgress" | "Failed" | "Cancelled" | "Successful")
-      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate")
+      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate" | "ControlPlaneScalingConfigUpdate")
       attr_accessor params: ::Array[Types::UpdateParam]
       attr_accessor created_at: ::Time
       attr_accessor errors: ::Array[Types::ErrorDetail]
@@ -1499,6 +1506,7 @@ module Aws::EKS
       attr_accessor storage_config: Types::StorageConfigRequest
       attr_accessor remote_network_config: Types::RemoteNetworkConfigRequest
       attr_accessor deletion_protection: bool
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig
       SENSITIVE: []
     end
 
@@ -1572,7 +1580,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig" | "UpdatedTier" | "PreviousTier")
       attr_accessor value: ::String
       SENSITIVE: []
     end

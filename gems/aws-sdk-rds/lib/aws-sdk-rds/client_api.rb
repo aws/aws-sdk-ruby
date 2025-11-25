@@ -767,6 +767,7 @@ module Aws::RDS
     TenantDatabasesMessage = Shapes::StructureShape.new(name: 'TenantDatabasesMessage')
     Timezone = Shapes::StructureShape.new(name: 'Timezone')
     UnsupportedDBEngineVersionFault = Shapes::StructureShape.new(name: 'UnsupportedDBEngineVersionFault', error: {"code" => "UnsupportedDBEngineVersion", "httpStatusCode" => 400, "senderFault" => true})
+    UpgradeRolloutOrder = Shapes::StringShape.new(name: 'UpgradeRolloutOrder')
     UpgradeTarget = Shapes::StructureShape.new(name: 'UpgradeTarget')
     UserAuthConfig = Shapes::StructureShape.new(name: 'UserAuthConfig')
     UserAuthConfigInfo = Shapes::StructureShape.new(name: 'UserAuthConfigInfo')
@@ -776,6 +777,7 @@ module Aws::RDS
     ValidStorageOptions = Shapes::StructureShape.new(name: 'ValidStorageOptions')
     ValidStorageOptionsList = Shapes::ListShape.new(name: 'ValidStorageOptionsList')
     ValidUpgradeTargetList = Shapes::ListShape.new(name: 'ValidUpgradeTargetList')
+    VpcEncryptionControlViolationException = Shapes::StructureShape.new(name: 'VpcEncryptionControlViolationException', error: {"code" => "VpcEncryptionControlViolationException", "httpStatusCode" => 400, "senderFault" => true})
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
@@ -1423,6 +1425,7 @@ module Aws::RDS
     DBCluster.add_member(:db_cluster_option_group_memberships, Shapes::ShapeRef.new(shape: DBClusterOptionGroupMemberships, location_name: "DBClusterOptionGroupMemberships"))
     DBCluster.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
     DBCluster.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
+    DBCluster.add_member(:upgrade_rollout_order, Shapes::ShapeRef.new(shape: UpgradeRolloutOrder, location_name: "UpgradeRolloutOrder"))
     DBCluster.add_member(:replication_source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationSourceIdentifier"))
     DBCluster.add_member(:read_replica_identifiers, Shapes::ShapeRef.new(shape: ReadReplicaIdentifierList, location_name: "ReadReplicaIdentifiers"))
     DBCluster.add_member(:status_infos, Shapes::ShapeRef.new(shape: DBClusterStatusInfoList, location_name: "StatusInfos"))
@@ -1746,6 +1749,7 @@ module Aws::RDS
     DBInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     DBInstance.add_member(:db_subnet_group, Shapes::ShapeRef.new(shape: DBSubnetGroup, location_name: "DBSubnetGroup"))
     DBInstance.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
+    DBInstance.add_member(:upgrade_rollout_order, Shapes::ShapeRef.new(shape: UpgradeRolloutOrder, location_name: "UpgradeRolloutOrder"))
     DBInstance.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: PendingModifiedValues, location_name: "PendingModifiedValues"))
     DBInstance.add_member(:latest_restorable_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LatestRestorableTime"))
     DBInstance.add_member(:multi_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAZ"))
@@ -4421,6 +4425,8 @@ module Aws::RDS
 
     ValidUpgradeTargetList.member = Shapes::ShapeRef.new(shape: UpgradeTarget, location_name: "UpgradeTarget")
 
+    VpcEncryptionControlViolationException.struct_class = Types::VpcEncryptionControlViolationException
+
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
 
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId"))
@@ -4673,6 +4679,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:create_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -4740,6 +4747,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:create_db_instance_read_replica, Seahorse::Model::Operation.new.tap do |o|
@@ -4772,6 +4780,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:create_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5958,6 +5967,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotAvailableFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:modify_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -6021,6 +6031,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:modify_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6403,6 +6414,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:restore_db_cluster_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -6433,6 +6445,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:restore_db_instance_from_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -6465,6 +6478,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:restore_db_instance_from_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -6492,6 +6506,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:restore_db_instance_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -6525,6 +6540,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:revoke_db_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -6563,6 +6579,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:start_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6582,6 +6599,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:start_db_instance_automated_backups_replication, Seahorse::Model::Operation.new.tap do |o|

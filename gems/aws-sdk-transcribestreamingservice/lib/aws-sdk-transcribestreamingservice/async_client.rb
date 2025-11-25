@@ -1452,7 +1452,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_medical_stream_transcription({
-    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA
+    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA, am-ET, be-BY, bg-BG, bn-IN, bs-BA, ckb-IQ, ckb-IR, cy-WL, es-MX, et-ET, fa-AF, gu-IN, ht-HT, hu-HU, hy-AM, is-IS, jv-ID, ka-GE, kab-DZ, kk-KZ, km-KH, kn-IN, lg-IN, lt-LT, mk-MK, ml-IN, mr-IN, my-MM, ne-NP, or-IN, pa-IN, ps-AF, si-LK, sl-SI, sq-AL, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, ta-IN, te-IN, tr-TR, uz-UZ
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #     vocabulary_name: "VocabularyName",
@@ -1473,7 +1473,7 @@ module Aws::TranscribeStreamingService
     # @example Response structure
     #
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"
+    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
     #   resp.vocabulary_name #=> String
@@ -2039,7 +2039,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_stream_transcription({
-    #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA
+    #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA, am-ET, be-BY, bg-BG, bn-IN, bs-BA, ckb-IQ, ckb-IR, cy-WL, es-MX, et-ET, fa-AF, gu-IN, ht-HT, hu-HU, hy-AM, is-IS, jv-ID, ka-GE, kab-DZ, kk-KZ, km-KH, kn-IN, lg-IN, lt-LT, mk-MK, ml-IN, mr-IN, my-MM, ne-NP, or-IN, pa-IN, ps-AF, si-LK, sl-SI, sq-AL, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, ta-IN, te-IN, tr-TR, uz-UZ
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #     vocabulary_name: "VocabularyName",
@@ -2058,7 +2058,7 @@ module Aws::TranscribeStreamingService
     #     language_model_name: "ModelName",
     #     identify_language: false,
     #     language_options: "LanguageOptions",
-    #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA
+    #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, es-ES, ar-SA, pt-PT, ca-ES, ar-AE, hi-IN, zh-HK, nl-NL, no-NO, sv-SE, pl-PL, fi-FI, zh-TW, en-IN, en-IE, en-NZ, en-AB, en-ZA, en-WL, de-CH, af-ZA, eu-ES, hr-HR, cs-CZ, da-DK, fa-IR, gl-ES, el-GR, he-IL, id-ID, lv-LV, ms-MY, ro-RO, ru-RU, sr-RS, sk-SK, so-SO, tl-PH, uk-UA, vi-VN, zu-ZA, am-ET, be-BY, bg-BG, bn-IN, bs-BA, ckb-IQ, ckb-IR, cy-WL, es-MX, et-ET, fa-AF, gu-IN, ht-HT, hu-HU, hy-AM, is-IS, jv-ID, ka-GE, kab-DZ, kk-KZ, km-KH, kn-IN, lg-IN, lt-LT, mk-MK, ml-IN, mr-IN, my-MM, ne-NP, or-IN, pa-IN, ps-AF, si-LK, sl-SI, sq-AL, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, ta-IN, te-IN, tr-TR, uz-UZ
     #     identify_multiple_languages: false,
     #     vocabulary_names: "VocabularyNames",
     #     vocabulary_filter_names: "VocabularyFilterNames",
@@ -2071,7 +2071,7 @@ module Aws::TranscribeStreamingService
     # @example Response structure
     #
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"
+    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
     #   resp.vocabulary_name #=> String
@@ -2105,9 +2105,9 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].entities[0].content #=> String
     #   event.transcript.results[0].alternatives[0].entities[0].confidence #=> Float
     #   event.transcript.results[0].channel_id #=> String
-    #   event.transcript.results[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"
+    #   event.transcript.results[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   event.transcript.results[0].language_identification #=> Array
-    #   event.transcript.results[0].language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"
+    #   event.transcript.results[0].language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   event.transcript.results[0].language_identification[0].score #=> Float
     #
     #   # For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
@@ -2138,7 +2138,7 @@ module Aws::TranscribeStreamingService
     #   resp.language_model_name #=> String
     #   resp.identify_language #=> Boolean
     #   resp.language_options #=> String
-    #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"
+    #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"
     #   resp.identify_multiple_languages #=> Boolean
     #   resp.vocabulary_names #=> String
     #   resp.vocabulary_filter_names #=> String
@@ -2191,7 +2191,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

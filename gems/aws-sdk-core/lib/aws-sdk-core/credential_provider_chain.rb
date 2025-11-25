@@ -25,12 +25,14 @@ module Aws
         [:static_profile_sso_credentials, {}],
         [:static_profile_assume_role_credentials, {}],
         [:static_profile_credentials, {}],
+        [:static_profile_login_credentials, {}],
         [:static_profile_process_credentials, {}],
         [:env_credentials, {}],
         [:assume_role_web_identity_credentials, {}],
         [:sso_credentials, {}],
         [:assume_role_credentials, {}],
         [:shared_credentials, {}],
+        [:login_credentials, {}],
         [:process_credentials, {}],
         [:instance_profile_credentials, {
           retries: @config ? @config.instance_profile_credentials_retries : 0,
@@ -104,6 +106,21 @@ module Aws
       nil
     end
 
+    def static_profile_login_credentials(options)
+      return unless Aws.shared_config.config_enabled? && options[:config]&.profile
+
+      with_metrics('CREDENTIALS_CODE') do
+        creds = Aws.shared_config.login_credentials_from_config(
+          profile: options[:config].profile,
+          region: options[:config].region
+        )
+        return unless creds
+
+        creds.metrics << 'CREDENTIALS_CODE'
+        creds
+      end
+    end
+
     def static_profile_process_credentials(options)
       return unless Aws.shared_config.config_enabled? && options[:config]&.profile
 
@@ -148,6 +165,16 @@ module Aws
       creds = SharedCredentials.new(profile_name: profile_name)
       creds.metrics = ['CREDENTIALS_PROFILE']
       creds
+    rescue Errors::NoSuchProfileError
+      nil
+    end
+
+    def login_credentials(options)
+      return unless Aws.shared_config.config_enabled?
+
+      profile_name = determine_profile_name(options)
+      region = options[:config].region if options[:config]
+      Aws.shared_config.login_credentials_from_config(profile: profile_name, region: region)
     rescue Errors::NoSuchProfileError
       nil
     end

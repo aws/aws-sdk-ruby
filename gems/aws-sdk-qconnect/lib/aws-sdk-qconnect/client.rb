@@ -2127,10 +2127,10 @@ module Aws::QConnect
     #   The identifier of the knowledge base. Can be either the ID or the ARN.
     #   URLs cannot contain the ARN.
     #
-    # @option params [required, String] :name
+    # @option params [String] :name
     #   The name of the message template.
     #
-    # @option params [required, Types::MessageTemplateContentProvider] :content
+    # @option params [Types::MessageTemplateContentProvider] :content
     #   The content of the message template.
     #
     # @option params [String] :description
@@ -2144,6 +2144,10 @@ module Aws::QConnect
     #   is written. The supported language codes include `de_DE`, `en_US`,
     #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
     #   `zh_CN`, `zh_TW`
+    #
+    # @option params [Types::MessageTemplateSourceConfiguration] :source_configuration
+    #   The source configuration of the message template. Only set this
+    #   argument for WHATSAPP channel subtype.
     #
     # @option params [Types::MessageTemplateAttributes] :default_attributes
     #   An object that specifies the default values to use for variables in
@@ -2180,8 +2184,8 @@ module Aws::QConnect
     #
     #   resp = client.create_message_template({
     #     knowledge_base_id: "UuidOrArn", # required
-    #     name: "Name", # required
-    #     content: { # required
+    #     name: "Name",
+    #     content: {
     #       email: {
     #         subject: "NonEmptyUnlimitedString",
     #         body: {
@@ -2206,10 +2210,80 @@ module Aws::QConnect
     #           },
     #         },
     #       },
+    #       whats_app: {
+    #         data: "WhatsAppMessageTemplateContentData",
+    #       },
+    #       push: {
+    #         adm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         apns: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           media_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         fcm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         baidu: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #       },
     #     },
     #     description: "Description",
-    #     channel_subtype: "EMAIL", # required, accepts EMAIL, SMS
+    #     channel_subtype: "EMAIL", # required, accepts EMAIL, SMS, WHATSAPP, PUSH
     #     language: "LanguageCode",
+    #     source_configuration: {
+    #       whats_app: {
+    #         business_account_id: "WhatsAppBusinessAccountId", # required
+    #         template_id: "WhatsAppMessageTemplateId", # required
+    #         components: ["WhatsAppMessageTemplateComponent"],
+    #       },
+    #     },
     #     default_attributes: {
     #       system_attributes: {
     #         name: "MessageTemplateAttributeValue",
@@ -2307,7 +2381,8 @@ module Aws::QConnect
     #   resp.message_template.knowledge_base_arn #=> String
     #   resp.message_template.knowledge_base_id #=> String
     #   resp.message_template.name #=> String
-    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.channel #=> String
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template.created_time #=> Time
     #   resp.message_template.last_modified_time #=> Time
     #   resp.message_template.last_modified_by #=> String
@@ -2318,8 +2393,51 @@ module Aws::QConnect
     #   resp.message_template.content.email.headers[0].name #=> String
     #   resp.message_template.content.email.headers[0].value #=> String
     #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.content.whats_app.data #=> String
+    #   resp.message_template.content.push.adm.title #=> String
+    #   resp.message_template.content.push.adm.body.content #=> String
+    #   resp.message_template.content.push.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.adm.sound #=> String
+    #   resp.message_template.content.push.adm.url #=> String
+    #   resp.message_template.content.push.adm.image_url #=> String
+    #   resp.message_template.content.push.adm.image_icon_url #=> String
+    #   resp.message_template.content.push.adm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.adm.raw_content.content #=> String
+    #   resp.message_template.content.push.apns.title #=> String
+    #   resp.message_template.content.push.apns.body.content #=> String
+    #   resp.message_template.content.push.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.apns.sound #=> String
+    #   resp.message_template.content.push.apns.url #=> String
+    #   resp.message_template.content.push.apns.media_url #=> String
+    #   resp.message_template.content.push.apns.raw_content.content #=> String
+    #   resp.message_template.content.push.fcm.title #=> String
+    #   resp.message_template.content.push.fcm.body.content #=> String
+    #   resp.message_template.content.push.fcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.fcm.sound #=> String
+    #   resp.message_template.content.push.fcm.url #=> String
+    #   resp.message_template.content.push.fcm.image_url #=> String
+    #   resp.message_template.content.push.fcm.image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.raw_content.content #=> String
+    #   resp.message_template.content.push.baidu.title #=> String
+    #   resp.message_template.content.push.baidu.body.content #=> String
+    #   resp.message_template.content.push.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.baidu.sound #=> String
+    #   resp.message_template.content.push.baidu.url #=> String
+    #   resp.message_template.content.push.baidu.image_url #=> String
+    #   resp.message_template.content.push.baidu.image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.small_image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.raw_content.content #=> String
     #   resp.message_template.description #=> String
     #   resp.message_template.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.template_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.name #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.components #=> Array
+    #   resp.message_template.source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.message_template.source_configuration_summary.whats_app.status_reason #=> String
     #   resp.message_template.grouping_configuration.criteria #=> String
     #   resp.message_template.grouping_configuration.values #=> Array
     #   resp.message_template.grouping_configuration.values[0] #=> String
@@ -2523,7 +2641,8 @@ module Aws::QConnect
     #   resp.message_template.knowledge_base_arn #=> String
     #   resp.message_template.knowledge_base_id #=> String
     #   resp.message_template.name #=> String
-    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.channel #=> String
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template.created_time #=> Time
     #   resp.message_template.last_modified_time #=> Time
     #   resp.message_template.last_modified_by #=> String
@@ -2534,8 +2653,51 @@ module Aws::QConnect
     #   resp.message_template.content.email.headers[0].name #=> String
     #   resp.message_template.content.email.headers[0].value #=> String
     #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.content.whats_app.data #=> String
+    #   resp.message_template.content.push.adm.title #=> String
+    #   resp.message_template.content.push.adm.body.content #=> String
+    #   resp.message_template.content.push.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.adm.sound #=> String
+    #   resp.message_template.content.push.adm.url #=> String
+    #   resp.message_template.content.push.adm.image_url #=> String
+    #   resp.message_template.content.push.adm.image_icon_url #=> String
+    #   resp.message_template.content.push.adm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.adm.raw_content.content #=> String
+    #   resp.message_template.content.push.apns.title #=> String
+    #   resp.message_template.content.push.apns.body.content #=> String
+    #   resp.message_template.content.push.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.apns.sound #=> String
+    #   resp.message_template.content.push.apns.url #=> String
+    #   resp.message_template.content.push.apns.media_url #=> String
+    #   resp.message_template.content.push.apns.raw_content.content #=> String
+    #   resp.message_template.content.push.fcm.title #=> String
+    #   resp.message_template.content.push.fcm.body.content #=> String
+    #   resp.message_template.content.push.fcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.fcm.sound #=> String
+    #   resp.message_template.content.push.fcm.url #=> String
+    #   resp.message_template.content.push.fcm.image_url #=> String
+    #   resp.message_template.content.push.fcm.image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.raw_content.content #=> String
+    #   resp.message_template.content.push.baidu.title #=> String
+    #   resp.message_template.content.push.baidu.body.content #=> String
+    #   resp.message_template.content.push.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.baidu.sound #=> String
+    #   resp.message_template.content.push.baidu.url #=> String
+    #   resp.message_template.content.push.baidu.image_url #=> String
+    #   resp.message_template.content.push.baidu.image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.small_image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.raw_content.content #=> String
     #   resp.message_template.description #=> String
     #   resp.message_template.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.template_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.name #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.components #=> Array
+    #   resp.message_template.source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.message_template.source_configuration_summary.whats_app.status_reason #=> String
     #   resp.message_template.grouping_configuration.criteria #=> String
     #   resp.message_template.grouping_configuration.values #=> Array
     #   resp.message_template.grouping_configuration.values[0] #=> String
@@ -4024,7 +4186,8 @@ module Aws::QConnect
     #   resp.message_template.knowledge_base_arn #=> String
     #   resp.message_template.knowledge_base_id #=> String
     #   resp.message_template.name #=> String
-    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.channel #=> String
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template.created_time #=> Time
     #   resp.message_template.last_modified_time #=> Time
     #   resp.message_template.last_modified_by #=> String
@@ -4035,8 +4198,51 @@ module Aws::QConnect
     #   resp.message_template.content.email.headers[0].name #=> String
     #   resp.message_template.content.email.headers[0].value #=> String
     #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.content.whats_app.data #=> String
+    #   resp.message_template.content.push.adm.title #=> String
+    #   resp.message_template.content.push.adm.body.content #=> String
+    #   resp.message_template.content.push.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.adm.sound #=> String
+    #   resp.message_template.content.push.adm.url #=> String
+    #   resp.message_template.content.push.adm.image_url #=> String
+    #   resp.message_template.content.push.adm.image_icon_url #=> String
+    #   resp.message_template.content.push.adm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.adm.raw_content.content #=> String
+    #   resp.message_template.content.push.apns.title #=> String
+    #   resp.message_template.content.push.apns.body.content #=> String
+    #   resp.message_template.content.push.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.apns.sound #=> String
+    #   resp.message_template.content.push.apns.url #=> String
+    #   resp.message_template.content.push.apns.media_url #=> String
+    #   resp.message_template.content.push.apns.raw_content.content #=> String
+    #   resp.message_template.content.push.fcm.title #=> String
+    #   resp.message_template.content.push.fcm.body.content #=> String
+    #   resp.message_template.content.push.fcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.fcm.sound #=> String
+    #   resp.message_template.content.push.fcm.url #=> String
+    #   resp.message_template.content.push.fcm.image_url #=> String
+    #   resp.message_template.content.push.fcm.image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.raw_content.content #=> String
+    #   resp.message_template.content.push.baidu.title #=> String
+    #   resp.message_template.content.push.baidu.body.content #=> String
+    #   resp.message_template.content.push.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.baidu.sound #=> String
+    #   resp.message_template.content.push.baidu.url #=> String
+    #   resp.message_template.content.push.baidu.image_url #=> String
+    #   resp.message_template.content.push.baidu.image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.small_image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.raw_content.content #=> String
     #   resp.message_template.description #=> String
     #   resp.message_template.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.template_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.name #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.components #=> Array
+    #   resp.message_template.source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.message_template.source_configuration_summary.whats_app.status_reason #=> String
     #   resp.message_template.grouping_configuration.criteria #=> String
     #   resp.message_template.grouping_configuration.values #=> Array
     #   resp.message_template.grouping_configuration.values[0] #=> String
@@ -5411,7 +5617,8 @@ module Aws::QConnect
     #   resp.message_template_version_summaries[0].knowledge_base_arn #=> String
     #   resp.message_template_version_summaries[0].knowledge_base_id #=> String
     #   resp.message_template_version_summaries[0].name #=> String
-    #   resp.message_template_version_summaries[0].channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template_version_summaries[0].channel #=> String
+    #   resp.message_template_version_summaries[0].channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template_version_summaries[0].is_active #=> Boolean
     #   resp.message_template_version_summaries[0].version_number #=> Integer
     #   resp.next_token #=> String
@@ -5463,10 +5670,15 @@ module Aws::QConnect
     #   resp.message_template_summaries[0].knowledge_base_arn #=> String
     #   resp.message_template_summaries[0].knowledge_base_id #=> String
     #   resp.message_template_summaries[0].name #=> String
-    #   resp.message_template_summaries[0].channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template_summaries[0].channel #=> String
+    #   resp.message_template_summaries[0].channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template_summaries[0].created_time #=> Time
     #   resp.message_template_summaries[0].last_modified_time #=> Time
     #   resp.message_template_summaries[0].last_modified_by #=> String
+    #   resp.message_template_summaries[0].source_configuration.whats_app.business_account_id #=> String
+    #   resp.message_template_summaries[0].source_configuration.whats_app.template_id #=> String
+    #   resp.message_template_summaries[0].source_configuration.whats_app.components #=> Array
+    #   resp.message_template_summaries[0].source_configuration.whats_app.components[0] #=> String
     #   resp.message_template_summaries[0].active_version_number #=> Integer
     #   resp.message_template_summaries[0].description #=> String
     #   resp.message_template_summaries[0].tags #=> Hash
@@ -5961,6 +6173,7 @@ module Aws::QConnect
     # @return [Types::RenderMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RenderMessageTemplateResponse#content #content} => Types::MessageTemplateContentProvider
+    #   * {Types::RenderMessageTemplateResponse#source_configuration_summary #source_configuration_summary} => Types::MessageTemplateSourceConfigurationSummary
     #   * {Types::RenderMessageTemplateResponse#attributes_not_interpolated #attributes_not_interpolated} => Array&lt;String&gt;
     #   * {Types::RenderMessageTemplateResponse#attachments #attachments} => Array&lt;Types::MessageTemplateAttachment&gt;
     #
@@ -6060,6 +6273,49 @@ module Aws::QConnect
     #   resp.content.email.headers[0].name #=> String
     #   resp.content.email.headers[0].value #=> String
     #   resp.content.sms.body.plain_text.content #=> String
+    #   resp.content.whats_app.data #=> String
+    #   resp.content.push.adm.title #=> String
+    #   resp.content.push.adm.body.content #=> String
+    #   resp.content.push.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.content.push.adm.sound #=> String
+    #   resp.content.push.adm.url #=> String
+    #   resp.content.push.adm.image_url #=> String
+    #   resp.content.push.adm.image_icon_url #=> String
+    #   resp.content.push.adm.small_image_icon_url #=> String
+    #   resp.content.push.adm.raw_content.content #=> String
+    #   resp.content.push.apns.title #=> String
+    #   resp.content.push.apns.body.content #=> String
+    #   resp.content.push.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.content.push.apns.sound #=> String
+    #   resp.content.push.apns.url #=> String
+    #   resp.content.push.apns.media_url #=> String
+    #   resp.content.push.apns.raw_content.content #=> String
+    #   resp.content.push.fcm.title #=> String
+    #   resp.content.push.fcm.body.content #=> String
+    #   resp.content.push.fcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.content.push.fcm.sound #=> String
+    #   resp.content.push.fcm.url #=> String
+    #   resp.content.push.fcm.image_url #=> String
+    #   resp.content.push.fcm.image_icon_url #=> String
+    #   resp.content.push.fcm.small_image_icon_url #=> String
+    #   resp.content.push.fcm.raw_content.content #=> String
+    #   resp.content.push.baidu.title #=> String
+    #   resp.content.push.baidu.body.content #=> String
+    #   resp.content.push.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.content.push.baidu.sound #=> String
+    #   resp.content.push.baidu.url #=> String
+    #   resp.content.push.baidu.image_url #=> String
+    #   resp.content.push.baidu.image_icon_url #=> String
+    #   resp.content.push.baidu.small_image_icon_url #=> String
+    #   resp.content.push.baidu.raw_content.content #=> String
+    #   resp.source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.source_configuration_summary.whats_app.template_id #=> String
+    #   resp.source_configuration_summary.whats_app.name #=> String
+    #   resp.source_configuration_summary.whats_app.language #=> String
+    #   resp.source_configuration_summary.whats_app.components #=> Array
+    #   resp.source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.source_configuration_summary.whats_app.status_reason #=> String
     #   resp.attributes_not_interpolated #=> Array
     #   resp.attributes_not_interpolated[0] #=> String
     #   resp.attachments #=> Array
@@ -6213,13 +6469,22 @@ module Aws::QConnect
     #   resp.results[0].knowledge_base_arn #=> String
     #   resp.results[0].knowledge_base_id #=> String
     #   resp.results[0].name #=> String
-    #   resp.results[0].channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.results[0].channel #=> String
+    #   resp.results[0].channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.results[0].created_time #=> Time
     #   resp.results[0].last_modified_time #=> Time
     #   resp.results[0].last_modified_by #=> String
     #   resp.results[0].is_active #=> Boolean
     #   resp.results[0].version_number #=> Integer
     #   resp.results[0].description #=> String
+    #   resp.results[0].source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.results[0].source_configuration_summary.whats_app.template_id #=> String
+    #   resp.results[0].source_configuration_summary.whats_app.name #=> String
+    #   resp.results[0].source_configuration_summary.whats_app.language #=> String
+    #   resp.results[0].source_configuration_summary.whats_app.components #=> Array
+    #   resp.results[0].source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.results[0].source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.results[0].source_configuration_summary.whats_app.status_reason #=> String
     #   resp.results[0].grouping_configuration.criteria #=> String
     #   resp.results[0].grouping_configuration.values #=> Array
     #   resp.results[0].grouping_configuration.values[0] #=> String
@@ -7600,6 +7865,10 @@ module Aws::QConnect
     #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
     #   `zh_CN`, `zh_TW`
     #
+    # @option params [Types::MessageTemplateSourceConfiguration] :source_configuration
+    #   The source configuration of the message template. Only set this
+    #   argument for WHATSAPP channel subtype.
+    #
     # @option params [Types::MessageTemplateAttributes] :default_attributes
     #   An object that specifies the default values to use for variables in
     #   the message template. This object contains different categories of
@@ -7641,8 +7910,78 @@ module Aws::QConnect
     #           },
     #         },
     #       },
+    #       whats_app: {
+    #         data: "WhatsAppMessageTemplateContentData",
+    #       },
+    #       push: {
+    #         adm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         apns: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           media_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         fcm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         baidu: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #       },
     #     },
     #     language: "LanguageCode",
+    #     source_configuration: {
+    #       whats_app: {
+    #         business_account_id: "WhatsAppBusinessAccountId", # required
+    #         template_id: "WhatsAppMessageTemplateId", # required
+    #         components: ["WhatsAppMessageTemplateComponent"],
+    #       },
+    #     },
     #     default_attributes: {
     #       system_attributes: {
     #         name: "MessageTemplateAttributeValue",
@@ -7732,7 +8071,8 @@ module Aws::QConnect
     #   resp.message_template.knowledge_base_arn #=> String
     #   resp.message_template.knowledge_base_id #=> String
     #   resp.message_template.name #=> String
-    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.channel #=> String
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template.created_time #=> Time
     #   resp.message_template.last_modified_time #=> Time
     #   resp.message_template.last_modified_by #=> String
@@ -7743,8 +8083,51 @@ module Aws::QConnect
     #   resp.message_template.content.email.headers[0].name #=> String
     #   resp.message_template.content.email.headers[0].value #=> String
     #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.content.whats_app.data #=> String
+    #   resp.message_template.content.push.adm.title #=> String
+    #   resp.message_template.content.push.adm.body.content #=> String
+    #   resp.message_template.content.push.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.adm.sound #=> String
+    #   resp.message_template.content.push.adm.url #=> String
+    #   resp.message_template.content.push.adm.image_url #=> String
+    #   resp.message_template.content.push.adm.image_icon_url #=> String
+    #   resp.message_template.content.push.adm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.adm.raw_content.content #=> String
+    #   resp.message_template.content.push.apns.title #=> String
+    #   resp.message_template.content.push.apns.body.content #=> String
+    #   resp.message_template.content.push.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.apns.sound #=> String
+    #   resp.message_template.content.push.apns.url #=> String
+    #   resp.message_template.content.push.apns.media_url #=> String
+    #   resp.message_template.content.push.apns.raw_content.content #=> String
+    #   resp.message_template.content.push.fcm.title #=> String
+    #   resp.message_template.content.push.fcm.body.content #=> String
+    #   resp.message_template.content.push.fcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.fcm.sound #=> String
+    #   resp.message_template.content.push.fcm.url #=> String
+    #   resp.message_template.content.push.fcm.image_url #=> String
+    #   resp.message_template.content.push.fcm.image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.raw_content.content #=> String
+    #   resp.message_template.content.push.baidu.title #=> String
+    #   resp.message_template.content.push.baidu.body.content #=> String
+    #   resp.message_template.content.push.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.baidu.sound #=> String
+    #   resp.message_template.content.push.baidu.url #=> String
+    #   resp.message_template.content.push.baidu.image_url #=> String
+    #   resp.message_template.content.push.baidu.image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.small_image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.raw_content.content #=> String
     #   resp.message_template.description #=> String
     #   resp.message_template.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.template_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.name #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.components #=> Array
+    #   resp.message_template.source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.message_template.source_configuration_summary.whats_app.status_reason #=> String
     #   resp.message_template.grouping_configuration.criteria #=> String
     #   resp.message_template.grouping_configuration.values #=> Array
     #   resp.message_template.grouping_configuration.values[0] #=> String
@@ -7878,7 +8261,8 @@ module Aws::QConnect
     #   resp.message_template.knowledge_base_arn #=> String
     #   resp.message_template.knowledge_base_id #=> String
     #   resp.message_template.name #=> String
-    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.channel #=> String
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS", "WHATSAPP", "PUSH"
     #   resp.message_template.created_time #=> Time
     #   resp.message_template.last_modified_time #=> Time
     #   resp.message_template.last_modified_by #=> String
@@ -7889,8 +8273,51 @@ module Aws::QConnect
     #   resp.message_template.content.email.headers[0].name #=> String
     #   resp.message_template.content.email.headers[0].value #=> String
     #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.content.whats_app.data #=> String
+    #   resp.message_template.content.push.adm.title #=> String
+    #   resp.message_template.content.push.adm.body.content #=> String
+    #   resp.message_template.content.push.adm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.adm.sound #=> String
+    #   resp.message_template.content.push.adm.url #=> String
+    #   resp.message_template.content.push.adm.image_url #=> String
+    #   resp.message_template.content.push.adm.image_icon_url #=> String
+    #   resp.message_template.content.push.adm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.adm.raw_content.content #=> String
+    #   resp.message_template.content.push.apns.title #=> String
+    #   resp.message_template.content.push.apns.body.content #=> String
+    #   resp.message_template.content.push.apns.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.apns.sound #=> String
+    #   resp.message_template.content.push.apns.url #=> String
+    #   resp.message_template.content.push.apns.media_url #=> String
+    #   resp.message_template.content.push.apns.raw_content.content #=> String
+    #   resp.message_template.content.push.fcm.title #=> String
+    #   resp.message_template.content.push.fcm.body.content #=> String
+    #   resp.message_template.content.push.fcm.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.fcm.sound #=> String
+    #   resp.message_template.content.push.fcm.url #=> String
+    #   resp.message_template.content.push.fcm.image_url #=> String
+    #   resp.message_template.content.push.fcm.image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.small_image_icon_url #=> String
+    #   resp.message_template.content.push.fcm.raw_content.content #=> String
+    #   resp.message_template.content.push.baidu.title #=> String
+    #   resp.message_template.content.push.baidu.body.content #=> String
+    #   resp.message_template.content.push.baidu.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
+    #   resp.message_template.content.push.baidu.sound #=> String
+    #   resp.message_template.content.push.baidu.url #=> String
+    #   resp.message_template.content.push.baidu.image_url #=> String
+    #   resp.message_template.content.push.baidu.image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.small_image_icon_url #=> String
+    #   resp.message_template.content.push.baidu.raw_content.content #=> String
     #   resp.message_template.description #=> String
     #   resp.message_template.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.business_account_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.template_id #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.name #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.language #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.components #=> Array
+    #   resp.message_template.source_configuration_summary.whats_app.components[0] #=> String
+    #   resp.message_template.source_configuration_summary.whats_app.status #=> String, one of "VALID", "INVALID", "REJECTED"
+    #   resp.message_template.source_configuration_summary.whats_app.status_reason #=> String
     #   resp.message_template.grouping_configuration.criteria #=> String
     #   resp.message_template.grouping_configuration.values #=> Array
     #   resp.message_template.grouping_configuration.values[0] #=> String
@@ -8270,7 +8697,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

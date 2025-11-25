@@ -186,6 +186,7 @@ module Aws::Transfer
       attr_accessor web_app_units: Types::WebAppUnits
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor web_app_endpoint_policy: ("FIPS" | "STANDARD")
+      attr_accessor endpoint_details: Types::WebAppEndpointDetails
       SENSITIVE: []
     end
 
@@ -627,6 +628,8 @@ module Aws::Transfer
       attr_accessor web_app_units: Types::WebAppUnits
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor web_app_endpoint_policy: ("FIPS" | "STANDARD")
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC")
+      attr_accessor described_endpoint_details: Types::DescribedWebAppEndpointDetails
       SENSITIVE: []
     end
 
@@ -639,6 +642,17 @@ module Aws::Transfer
       SENSITIVE: [:logo_file, :favicon_file]
     end
 
+    class DescribedWebAppEndpointDetails
+      attr_accessor vpc: Types::DescribedWebAppVpcConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vpc < DescribedWebAppEndpointDetails
+      end
+      class Unknown < DescribedWebAppEndpointDetails
+      end
+    end
+
     class DescribedWebAppIdentityProviderDetails
       attr_accessor identity_center_config: Types::DescribedIdentityCenterConfig
       attr_accessor unknown: untyped
@@ -648,6 +662,13 @@ module Aws::Transfer
       end
       class Unknown < DescribedWebAppIdentityProviderDetails
       end
+    end
+
+    class DescribedWebAppVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
     end
 
     class DescribedWorkflow
@@ -1061,6 +1082,7 @@ module Aws::Transfer
       attr_accessor web_app_id: ::String
       attr_accessor access_endpoint: ::String
       attr_accessor web_app_endpoint: ::String
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC")
       SENSITIVE: []
     end
 
@@ -1458,6 +1480,17 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class UpdateWebAppEndpointDetails
+      attr_accessor vpc: Types::UpdateWebAppVpcConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vpc < UpdateWebAppEndpointDetails
+      end
+      class Unknown < UpdateWebAppEndpointDetails
+      end
+    end
+
     class UpdateWebAppIdentityCenterConfig
       attr_accessor role: ::String
       SENSITIVE: []
@@ -1479,6 +1512,7 @@ module Aws::Transfer
       attr_accessor identity_provider_details: Types::UpdateWebAppIdentityProviderDetails
       attr_accessor access_endpoint: ::String
       attr_accessor web_app_units: Types::WebAppUnits
+      attr_accessor endpoint_details: Types::UpdateWebAppEndpointDetails
       SENSITIVE: []
     end
 
@@ -1487,11 +1521,27 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class UpdateWebAppVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class UserDetails
       attr_accessor user_name: ::String
       attr_accessor server_id: ::String
       attr_accessor session_id: ::String
       SENSITIVE: []
+    end
+
+    class WebAppEndpointDetails
+      attr_accessor vpc: Types::WebAppVpcConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vpc < WebAppEndpointDetails
+      end
+      class Unknown < WebAppEndpointDetails
+      end
     end
 
     class WebAppIdentityProviderDetails
@@ -1514,6 +1564,13 @@ module Aws::Transfer
       end
       class Unknown < WebAppUnits
       end
+    end
+
+    class WebAppVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
     end
 
     class WorkflowDetail

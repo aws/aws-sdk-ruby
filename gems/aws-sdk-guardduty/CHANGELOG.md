@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2025-11-19)
+------------------
+
+* Feature - Add support for scanning and viewing scan results for backup resource types
+
 1.133.0 (2025-11-17)
 ------------------
 

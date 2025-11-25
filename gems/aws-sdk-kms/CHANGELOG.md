@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-11-21)
+------------------
+
+* Feature - Support for on-demand rotation of AWS KMS Multi-Region keys with imported key material
+
 1.117.0 (2025-11-07)
 ------------------
 

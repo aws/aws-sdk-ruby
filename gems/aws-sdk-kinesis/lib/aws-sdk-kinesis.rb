@@ -27,6 +27,22 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:kinesis)
 #
 # See {Client} for more information.
 #
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+#
+#     kinesis = Aws::Kinesis::AsyncClient.new
+#     resp = kinesis.add_tags_to_stream(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+#
+# See {AsyncClient} for more information.
+#
 # # Errors
 #
 # Errors returned from Amazon Kinesis are defined in the
@@ -57,7 +73,7 @@ module Aws::Kinesis
   autoload :AsyncClient, 'aws-sdk-kinesis/async_client'
   autoload :EventStreams, 'aws-sdk-kinesis/event_streams'
 
-  GEM_VERSION = '1.91.0'
+  GEM_VERSION = '1.93.0'
 
 end
 

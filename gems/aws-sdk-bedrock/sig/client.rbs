@@ -1106,6 +1106,15 @@ module Aws
                                           ) -> _DeleteCustomModelDeploymentResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelDeploymentResponseSuccess
 
+      interface _DeleteEnforcedGuardrailConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnforcedGuardrailConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_enforced_guardrail_configuration-instance_method
+      def delete_enforced_guardrail_configuration: (
+                                                     config_id: ::String
+                                                   ) -> _DeleteEnforcedGuardrailConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnforcedGuardrailConfigurationResponseSuccess
+
       interface _DeleteFoundationModelAgreementResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFoundationModelAgreementResponse]
       end
@@ -1717,6 +1726,17 @@ module Aws
                               ) -> _ListCustomModelsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelsResponseSuccess
 
+      interface _ListEnforcedGuardrailsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnforcedGuardrailsConfigurationResponse]
+        def guardrails_config: () -> ::Array[Types::AccountEnforcedGuardrailOutputConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_enforced_guardrails_configuration-instance_method
+      def list_enforced_guardrails_configuration: (
+                                                    ?next_token: ::String
+                                                  ) -> _ListEnforcedGuardrailsConfigurationResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnforcedGuardrailsConfigurationResponseSuccess
+
       interface _ListEvaluationJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationJobsResponse]
         def next_token: () -> ::String
@@ -1932,6 +1952,23 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutEnforcedGuardrailConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEnforcedGuardrailConfigurationResponse]
+        def config_id: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_enforced_guardrail_configuration-instance_method
+      def put_enforced_guardrail_configuration: (
+                                                  ?config_id: ::String,
+                                                  guardrail_inference_config: {
+                                                    guardrail_identifier: ::String,
+                                                    guardrail_version: ::String,
+                                                    input_tags: ("HONOR" | "IGNORE")
+                                                  }
+                                                ) -> _PutEnforcedGuardrailConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEnforcedGuardrailConfigurationResponseSuccess
 
       interface _PutModelInvocationLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutModelInvocationLoggingConfigurationResponse]

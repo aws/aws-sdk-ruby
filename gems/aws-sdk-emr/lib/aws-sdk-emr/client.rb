@@ -774,6 +774,12 @@ module Aws::EMR
     #           main_class: "XmlString",
     #           args: ["XmlString"],
     #         },
+    #         step_monitoring_configuration: {
+    #           s3_monitoring_configuration: {
+    #             log_uri: "XmlString",
+    #             encryption_key_arn: "XmlString",
+    #           },
+    #         },
     #       },
     #     ],
     #     execution_role_arn: "ArnType",
@@ -1375,6 +1381,13 @@ module Aws::EMR
     #   resp.cluster.ebs_root_volume_iops #=> Integer
     #   resp.cluster.ebs_root_volume_throughput #=> Integer
     #   resp.cluster.extended_support #=> Boolean
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.enabled #=> Boolean
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_group_name #=> String
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_stream_name_prefix #=> String
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.encryption_key_arn #=> String
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_types #=> Hash
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_types["XmlString"] #=> Array
+    #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_types["XmlString"][0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1493,6 +1506,8 @@ module Aws::EMR
     #   resp.job_flows[0].steps[0].step_config.hadoop_jar_step.main_class #=> String
     #   resp.job_flows[0].steps[0].step_config.hadoop_jar_step.args #=> Array
     #   resp.job_flows[0].steps[0].step_config.hadoop_jar_step.args[0] #=> String
+    #   resp.job_flows[0].steps[0].step_config.step_monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.job_flows[0].steps[0].step_config.step_monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
     #   resp.job_flows[0].steps[0].execution_status_detail.state #=> String, one of "PENDING", "RUNNING", "CONTINUE", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
     #   resp.job_flows[0].steps[0].execution_status_detail.creation_date_time #=> Time
     #   resp.job_flows[0].steps[0].execution_status_detail.start_date_time #=> Time
@@ -1731,6 +1746,8 @@ module Aws::EMR
     #   resp.step.status.timeline.start_date_time #=> Time
     #   resp.step.status.timeline.end_date_time #=> Time
     #   resp.step.execution_role_arn #=> String
+    #   resp.step.log_uri #=> String
+    #   resp.step.encryption_key_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2733,6 +2750,8 @@ module Aws::EMR
     #   resp.steps[0].status.timeline.creation_date_time #=> Time
     #   resp.steps[0].status.timeline.start_date_time #=> Time
     #   resp.steps[0].status.timeline.end_date_time #=> Time
+    #   resp.steps[0].log_uri #=> String
+    #   resp.steps[0].encryption_key_arn #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSteps AWS API Documentation
@@ -3729,6 +3748,9 @@ module Aws::EMR
     # @option params [Boolean] :extended_support
     #   Reserved.
     #
+    # @option params [Types::MonitoringConfiguration] :monitoring_configuration
+    #   Contains CloudWatch log configuration metadata and settings.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -3928,6 +3950,12 @@ module Aws::EMR
     #           main_class: "XmlString",
     #           args: ["XmlString"],
     #         },
+    #         step_monitoring_configuration: {
+    #           s3_monitoring_configuration: {
+    #             log_uri: "XmlString",
+    #             encryption_key_arn: "XmlString",
+    #           },
+    #         },
     #       },
     #     ],
     #     bootstrap_actions: [
@@ -4014,6 +4042,17 @@ module Aws::EMR
     #     ebs_root_volume_iops: 1,
     #     ebs_root_volume_throughput: 1,
     #     extended_support: false,
+    #     monitoring_configuration: {
+    #       cloud_watch_log_configuration: {
+    #         enabled: false, # required
+    #         log_group_name: "XmlString",
+    #         log_stream_name_prefix: "XmlString",
+    #         encryption_key_arn: "XmlString",
+    #         log_types: {
+    #           "XmlString" => ["XmlString"],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -4514,7 +4553,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,22 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:lexruntimev2)
 #
 # See {Client} for more information.
 #
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+#
+#     lex_runtime_v2 = Aws::LexRuntimeV2::AsyncClient.new
+#     resp = lex_runtime_v2.delete_session(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+#
+# See {AsyncClient} for more information.
+#
 # # Errors
 #
 # Errors returned from Amazon Lex Runtime V2 are defined in the
@@ -56,7 +72,7 @@ module Aws::LexRuntimeV2
   autoload :AsyncClient, 'aws-sdk-lexruntimev2/async_client'
   autoload :EventStreams, 'aws-sdk-lexruntimev2/event_streams'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

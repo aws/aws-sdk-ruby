@@ -761,6 +761,119 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Represents the metadata of a memory extraction job such as the message
+    # identifiers that compose this job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the extraction job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJob AWS API Documentation
+    #
+    class ExtractionJob < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for querying memory extraction jobs based on various criteria.
+    #
+    # @!attribute [rw] strategy_id
+    #   The memory strategy identifier to filter extraction jobs by. If
+    #   specified, only extraction jobs with this strategy ID are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session. If specified, only extraction
+    #   jobs with this session ID are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_id
+    #   The identifier of the actor. If specified, only extraction jobs with
+    #   this actor ID are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the extraction job. If specified, only extraction jobs
+    #   with this status are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJobFilterInput AWS API Documentation
+    #
+    class ExtractionJobFilterInput < Struct.new(
+      :strategy_id,
+      :session_id,
+      :actor_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of messages that compose this extraction job.
+    #
+    # @note ExtractionJobMessages is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExtractionJobMessages corresponding to the set member.
+    #
+    # @!attribute [rw] messages_list
+    #   The list of messages that compose this extraction job.
+    #   @return [Array<Types::MessageMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJobMessages AWS API Documentation
+    #
+    class ExtractionJobMessages < Struct.new(
+      :messages_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MessagesList < ExtractionJobMessages; end
+      class Unknown < ExtractionJobMessages; end
+    end
+
+    # Metadata information associated with this extraction job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier for the extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   The messages associated with the extraction job.
+    #   @return [Types::ExtractionJobMessages]
+    #
+    # @!attribute [rw] status
+    #   The current status of the extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The cause of failure, if the job did not complete successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy_id
+    #   The identifier of the memory strategy for this extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session for this extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_id
+    #   The identifier of the actor for this extraction job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJobMetadata AWS API Documentation
+    #
+    class ExtractionJobMetadata < Struct.new(
+      :job_id,
+      :messages,
+      :status,
+      :failure_reason,
+      :strategy_id,
+      :session_id,
+      :actor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains filter criteria for listing events.
     #
     # @!attribute [rw] branch
@@ -1552,8 +1665,8 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1708,13 +1821,11 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   The identifier of the session for which to list events. If
-    #   specified, only events from this session are returned.
+    #   The identifier of the session for which to list events.
     #   @return [String]
     #
     # @!attribute [rw] actor_id
-    #   The identifier of the actor for which to list events. If specified,
-    #   only events from this actor are returned.
+    #   The identifier of the actor for which to list events.
     #   @return [String]
     #
     # @!attribute [rw] include_payloads
@@ -1727,8 +1838,8 @@ module Aws::BedrockAgentCore
     #   @return [Types::FilterInput]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1771,6 +1882,53 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
+    #   The unique identifier of the memory to list extraction jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   Filter criteria to apply when listing extraction jobs.
+    #   @return [Types::ExtractionJobFilterInput]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListMemoryExtractionJobsInput AWS API Documentation
+    #
+    class ListMemoryExtractionJobsInput < Struct.new(
+      :memory_id,
+      :max_results,
+      :filter,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] jobs
+    #   List of extraction job metadata matching the specified criteria.
+    #   @return [Array<Types::ExtractionJobMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of results, if available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListMemoryExtractionJobsOutput AWS API Documentation
+    #
+    class ListMemoryExtractionJobsOutput < Struct.new(
+      :jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] memory_id
     #   The identifier of the AgentCore Memory resource for which to list
     #   memory records.
     #   @return [String]
@@ -1786,8 +1944,8 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1834,13 +1992,12 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] actor_id
-    #   The identifier of the actor for which to list sessions. If
-    #   specified, only sessions involving this actor are returned.
+    #   The identifier of the actor for which to list sessions.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2122,6 +2279,26 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Metadata information associated with this message.
+    #
+    # @!attribute [rw] event_id
+    #   The identifier of the event associated with this message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_index
+    #   The position of this message within that event’s ordered list of
+    #   messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MessageMetadata AWS API Documentation
+    #
+    class MessageMetadata < Struct.new(
+      :event_id,
+      :message_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Value associated with the `eventMetadata` key.
     #
     # @note MetadataValue is a union - when making an API calls you must set exactly one of the members.
@@ -2165,7 +2342,7 @@ module Aws::BedrockAgentCore
       :conversational,
       :blob,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:blob]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -2230,8 +2407,7 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace to filter memory records by. If specified, only memory
-    #   records in this namespace are searched.
+    #   The namespace to filter memory records by.
     #   @return [String]
     #
     # @!attribute [rw] search_criteria
@@ -2247,8 +2423,8 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RetrieveMemoryRecordsInput AWS API Documentation
@@ -2555,6 +2731,45 @@ module Aws::BedrockAgentCore
       :code_interpreter_identifier,
       :session_id,
       :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] memory_id
+    #   The unique identifier of the memory for which to start extraction
+    #   jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_job
+    #   Extraction job to start in this operation.
+    #   @return [Types::ExtractionJob]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotent processing
+    #   of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartMemoryExtractionJobInput AWS API Documentation
+    #
+    class StartMemoryExtractionJobInput < Struct.new(
+      :memory_id,
+      :extraction_job,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Extraction Job ID that was attempted to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartMemoryExtractionJobOutput AWS API Documentation
+    #
+    class StartMemoryExtractionJobOutput < Struct.new(
+      :job_id)
       SENSITIVE = []
       include Aws::Structure
     end

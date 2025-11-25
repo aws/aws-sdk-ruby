@@ -49,6 +49,12 @@ module Aws::CloudTrail
       SENSITIVE: []
     end
 
+    class AggregationConfiguration
+      attr_accessor templates: ::Array[("API_ACTIVITY" | "RESOURCE_ACCESS" | "USER_ACTIONS")]
+      attr_accessor event_category: ("Data")
+      SENSITIVE: []
+    end
+
     class CancelQueryRequest
       attr_accessor event_data_store: ::String
       attr_accessor query_id: ::String
@@ -445,14 +451,17 @@ module Aws::CloudTrail
     end
 
     class GetEventConfigurationRequest
+      attr_accessor trail_name: ::String
       attr_accessor event_data_store: ::String
       SENSITIVE: []
     end
 
     class GetEventConfigurationResponse
+      attr_accessor trail_arn: ::String
       attr_accessor event_data_store_arn: ::String
       attr_accessor max_event_size: ("Standard" | "Large")
       attr_accessor context_key_selectors: ::Array[Types::ContextKeySelector]
+      attr_accessor aggregation_configurations: ::Array[Types::AggregationConfiguration]
       SENSITIVE: []
     end
 
@@ -645,6 +654,7 @@ module Aws::CloudTrail
 
     class InsightSelector
       attr_accessor insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")
+      attr_accessor event_categories: ::Array[("Management" | "Data")]
       SENSITIVE: []
     end
 
@@ -815,7 +825,25 @@ module Aws::CloudTrail
       SENSITIVE: []
     end
 
+    class ListInsightsDataRequest
+      attr_accessor insight_source: ::String
+      attr_accessor data_type: ("InsightsEvents")
+      attr_accessor dimensions: ::Hash[("EventId" | "EventName" | "EventSource"), ::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsDataResponse
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListInsightsMetricDataRequest
+      attr_accessor trail_name: ::String
       attr_accessor event_source: ::String
       attr_accessor event_name: ::String
       attr_accessor insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")
@@ -830,6 +858,7 @@ module Aws::CloudTrail
     end
 
     class ListInsightsMetricDataResponse
+      attr_accessor trail_arn: ::String
       attr_accessor event_source: ::String
       attr_accessor event_name: ::String
       attr_accessor insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")
@@ -953,16 +982,20 @@ module Aws::CloudTrail
     end
 
     class PutEventConfigurationRequest
+      attr_accessor trail_name: ::String
       attr_accessor event_data_store: ::String
       attr_accessor max_event_size: ("Standard" | "Large")
       attr_accessor context_key_selectors: ::Array[Types::ContextKeySelector]
+      attr_accessor aggregation_configurations: ::Array[Types::AggregationConfiguration]
       SENSITIVE: []
     end
 
     class PutEventConfigurationResponse
+      attr_accessor trail_arn: ::String
       attr_accessor event_data_store_arn: ::String
       attr_accessor max_event_size: ("Standard" | "Large")
       attr_accessor context_key_selectors: ::Array[Types::ContextKeySelector]
+      attr_accessor aggregation_configurations: ::Array[Types::AggregationConfiguration]
       SENSITIVE: []
     end
 

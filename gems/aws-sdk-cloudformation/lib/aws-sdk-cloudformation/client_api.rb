@@ -555,6 +555,7 @@ module Aws::CloudFormation
     StackResources = Shapes::ListShape.new(name: 'StackResources')
     StackSet = Shapes::StructureShape.new(name: 'StackSet')
     StackSetARN = Shapes::StringShape.new(name: 'StackSetARN')
+    StackSetARNList = Shapes::ListShape.new(name: 'StackSetARNList')
     StackSetAutoDeploymentTargetSummaries = Shapes::ListShape.new(name: 'StackSetAutoDeploymentTargetSummaries')
     StackSetAutoDeploymentTargetSummary = Shapes::StructureShape.new(name: 'StackSetAutoDeploymentTargetSummary')
     StackSetDriftDetectionDetails = Shapes::StructureShape.new(name: 'StackSetDriftDetectionDetails')
@@ -724,6 +725,7 @@ module Aws::CloudFormation
 
     AutoDeployment.add_member(:enabled, Shapes::ShapeRef.new(shape: AutoDeploymentNullable, location_name: "Enabled"))
     AutoDeployment.add_member(:retain_stacks_on_account_removal, Shapes::ShapeRef.new(shape: RetainStacksOnAccountRemovalNullable, location_name: "RetainStacksOnAccountRemoval"))
+    AutoDeployment.add_member(:depends_on, Shapes::ShapeRef.new(shape: StackSetARNList, location_name: "DependsOn"))
     AutoDeployment.struct_class = Types::AutoDeployment
 
     BatchDescribeTypeConfigurationsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
@@ -2194,6 +2196,8 @@ module Aws::CloudFormation
     StackSet.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     StackSet.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
     StackSet.struct_class = Types::StackSet
+
+    StackSetARNList.member = Shapes::ShapeRef.new(shape: StackSetARN)
 
     StackSetAutoDeploymentTargetSummaries.member = Shapes::ShapeRef.new(shape: StackSetAutoDeploymentTargetSummary)
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-11-21)
+------------------
+
+* Feature - Adds support for excluding session key tags from HLS multivariant playlists
+
 1.53.0 (2025-11-17)
 ------------------
 

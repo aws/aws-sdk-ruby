@@ -186,7 +186,7 @@ module Aws
                            content: ::String,
                            description: ::String,
                            name: ::String,
-                           type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                           type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
                            ?tags: Array[
                              {
                                key: ::String,
@@ -259,7 +259,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#describe_effective_policy-instance_method
       def describe_effective_policy: (
-                                       policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                                       policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
                                        ?target_id: ::String
                                      ) -> _DescribeEffectivePolicyResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEffectivePolicyResponseSuccess
@@ -310,6 +310,16 @@ module Aws
       def describe_resource_policy: () -> _DescribeResourcePolicyResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePolicyResponseSuccess
 
+      interface _DescribeResponsibilityTransferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResponsibilityTransferResponse]
+        def responsibility_transfer: () -> Types::ResponsibilityTransfer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#describe_responsibility_transfer-instance_method
+      def describe_responsibility_transfer: (
+                                              id: ::String
+                                            ) -> _DescribeResponsibilityTransferResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResponsibilityTransferResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#detach_policy-instance_method
       def detach_policy: (
                            policy_id: ::String,
@@ -330,7 +340,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#disable_policy_type-instance_method
       def disable_policy_type: (
                                  root_id: ::String,
-                                 policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+                                 policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
                                ) -> _DisablePolicyTypeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisablePolicyTypeResponseSuccess
 
@@ -356,7 +366,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#enable_policy_type-instance_method
       def enable_policy_type: (
                                 root_id: ::String,
-                                policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+                                policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
                               ) -> _EnablePolicyTypeResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnablePolicyTypeResponseSuccess
 
@@ -379,6 +389,29 @@ module Aws
                                             ]
                                           ) -> _InviteAccountToOrganizationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InviteAccountToOrganizationResponseSuccess
+
+      interface _InviteOrganizationToTransferResponsibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InviteOrganizationToTransferResponsibilityResponse]
+        def handshake: () -> Types::Handshake
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#invite_organization_to_transfer_responsibility-instance_method
+      def invite_organization_to_transfer_responsibility: (
+                                                            type: ("BILLING"),
+                                                            target: {
+                                                              id: ::String,
+                                                              type: ("ACCOUNT" | "ORGANIZATION" | "EMAIL")
+                                                            },
+                                                            ?notes: ::String,
+                                                            start_timestamp: ::Time,
+                                                            source_name: ::String,
+                                                            ?tags: Array[
+                                                              {
+                                                                key: ::String,
+                                                                value: ::String
+                                                              },
+                                                            ]
+                                                          ) -> _InviteOrganizationToTransferResponsibilityResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InviteOrganizationToTransferResponsibilityResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#leave_organization-instance_method
       def leave_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -424,12 +457,12 @@ module Aws
       interface _ListAccountsWithInvalidEffectivePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountsWithInvalidEffectivePolicyResponse]
         def accounts: () -> ::Array[Types::Account]
-        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_accounts_with_invalid_effective_policy-instance_method
       def list_accounts_with_invalid_effective_policy: (
-                                                         policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                                                         policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
                                                          ?next_token: ::String,
                                                          ?max_results: ::Integer
                                                        ) -> _ListAccountsWithInvalidEffectivePolicyResponseSuccess
@@ -491,7 +524,7 @@ module Aws
       interface _ListEffectivePolicyValidationErrorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEffectivePolicyValidationErrorsResponse]
         def account_id: () -> ::String
-        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
         def path: () -> ::String
         def evaluation_timestamp: () -> ::Time
         def next_token: () -> ::String
@@ -500,7 +533,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_effective_policy_validation_errors-instance_method
       def list_effective_policy_validation_errors: (
                                                      account_id: ::String,
-                                                     policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                                                     policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
                                                      ?next_token: ::String,
                                                      ?max_results: ::Integer
                                                    ) -> _ListEffectivePolicyValidationErrorsResponseSuccess
@@ -514,7 +547,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_handshakes_for_account-instance_method
       def list_handshakes_for_account: (
                                          ?filter: {
-                                           action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE")?,
+                                           action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE" | "TRANSFER_RESPONSIBILITY")?,
                                            parent_handshake_id: ::String?
                                          },
                                          ?next_token: ::String,
@@ -530,13 +563,27 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_handshakes_for_organization-instance_method
       def list_handshakes_for_organization: (
                                               ?filter: {
-                                                action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE")?,
+                                                action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE" | "TRANSFER_RESPONSIBILITY")?,
                                                 parent_handshake_id: ::String?
                                               },
                                               ?next_token: ::String,
                                               ?max_results: ::Integer
                                             ) -> _ListHandshakesForOrganizationResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHandshakesForOrganizationResponseSuccess
+
+      interface _ListInboundResponsibilityTransfersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInboundResponsibilityTransfersResponse]
+        def responsibility_transfers: () -> ::Array[Types::ResponsibilityTransfer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_inbound_responsibility_transfers-instance_method
+      def list_inbound_responsibility_transfers: (
+                                                   type: ("BILLING"),
+                                                   ?id: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListInboundResponsibilityTransfersResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInboundResponsibilityTransfersResponseSuccess
 
       interface _ListOrganizationalUnitsForParentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationalUnitsForParentResponse]
@@ -550,6 +597,19 @@ module Aws
                                                   ?max_results: ::Integer
                                                 ) -> _ListOrganizationalUnitsForParentResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationalUnitsForParentResponseSuccess
+
+      interface _ListOutboundResponsibilityTransfersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOutboundResponsibilityTransfersResponse]
+        def responsibility_transfers: () -> ::Array[Types::ResponsibilityTransfer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_outbound_responsibility_transfers-instance_method
+      def list_outbound_responsibility_transfers: (
+                                                    type: ("BILLING"),
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer
+                                                  ) -> _ListOutboundResponsibilityTransfersResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOutboundResponsibilityTransfersResponseSuccess
 
       interface _ListParentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListParentsResponse]
@@ -571,7 +631,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_policies-instance_method
       def list_policies: (
-                           filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                           filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListPoliciesResponseSuccess
@@ -585,7 +645,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_policies_for_target-instance_method
       def list_policies_for_target: (
                                       target_id: ::String,
-                                      filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY"),
+                                      filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
                                       ?next_token: ::String,
                                       ?max_results: ::Integer
                                     ) -> _ListPoliciesForTargetResponseSuccess
@@ -677,6 +737,17 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _TerminateResponsibilityTransferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateResponsibilityTransferResponse]
+        def responsibility_transfer: () -> Types::ResponsibilityTransfer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#terminate_responsibility_transfer-instance_method
+      def terminate_responsibility_transfer: (
+                                               id: ::String,
+                                               ?end_timestamp: ::Time
+                                             ) -> _TerminateResponsibilityTransferResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateResponsibilityTransferResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#untag_resource-instance_method
       def untag_resource: (
                             resource_id: ::String,
@@ -707,6 +778,17 @@ module Aws
                            ?content: ::String
                          ) -> _UpdatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyResponseSuccess
+
+      interface _UpdateResponsibilityTransferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResponsibilityTransferResponse]
+        def responsibility_transfer: () -> Types::ResponsibilityTransfer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#update_responsibility_transfer-instance_method
+      def update_responsibility_transfer: (
+                                            id: ::String,
+                                            name: ::String
+                                          ) -> _UpdateResponsibilityTransferResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponsibilityTransferResponseSuccess
     end
   end
 end

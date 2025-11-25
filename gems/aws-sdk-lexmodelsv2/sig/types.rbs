@@ -461,6 +461,7 @@ module Aws::LexModelsV2
       attr_accessor locale_id: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
     end
 
@@ -756,6 +757,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
     end
 
@@ -770,6 +772,7 @@ module Aws::LexModelsV2
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
       attr_accessor creation_date_time: ::Time
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
     end
 
@@ -854,6 +857,7 @@ module Aws::LexModelsV2
 
     class CreateIntentRequest
       attr_accessor intent_name: ::String
+      attr_accessor intent_display_name: ::String
       attr_accessor description: ::String
       attr_accessor parent_intent_signature: ::String
       attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
@@ -876,6 +880,7 @@ module Aws::LexModelsV2
     class CreateIntentResponse
       attr_accessor intent_id: ::String
       attr_accessor intent_name: ::String
+      attr_accessor intent_display_name: ::String
       attr_accessor description: ::String
       attr_accessor parent_intent_signature: ::String
       attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
@@ -1293,6 +1298,7 @@ module Aws::LexModelsV2
       attr_accessor bot_locale_history_events: ::Array[Types::BotLocaleHistoryEvent]
       attr_accessor recommended_actions: ::Array[::String]
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
     end
 
@@ -1466,6 +1472,7 @@ module Aws::LexModelsV2
     class DescribeIntentResponse
       attr_accessor intent_id: ::String
       attr_accessor intent_name: ::String
+      attr_accessor intent_display_name: ::String
       attr_accessor description: ::String
       attr_accessor parent_intent_signature: ::String
       attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
@@ -1929,6 +1936,13 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class IntentDisambiguationSettings
+      attr_accessor enabled: bool
+      attr_accessor max_disambiguation_intents: ::Integer
+      attr_accessor custom_disambiguation_message: ::String
+      SENSITIVE: []
+    end
+
     class IntentFilter
       attr_accessor name: ("IntentName")
       attr_accessor values: ::Array[::String]
@@ -1968,6 +1982,7 @@ module Aws::LexModelsV2
     class IntentSummary
       attr_accessor intent_id: ::String
       attr_accessor intent_name: ::String
+      attr_accessor intent_display_name: ::String
       attr_accessor description: ::String
       attr_accessor parent_intent_signature: ::String
       attr_accessor input_contexts: ::Array[Types::InputContext]
@@ -2569,6 +2584,7 @@ module Aws::LexModelsV2
     class NluImprovementSpecification
       attr_accessor enabled: bool
       attr_accessor assisted_nlu_mode: ("Primary" | "Fallback")
+      attr_accessor intent_disambiguation_settings: Types::IntentDisambiguationSettings
       SENSITIVE: []
     end
 
@@ -3363,6 +3379,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
     end
 
@@ -3380,6 +3397,7 @@ module Aws::LexModelsV2
       attr_accessor last_updated_date_time: ::Time
       attr_accessor recommended_actions: ::Array[::String]
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
+      attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
     end
 
@@ -3453,6 +3471,7 @@ module Aws::LexModelsV2
     class UpdateIntentRequest
       attr_accessor intent_id: ::String
       attr_accessor intent_name: ::String
+      attr_accessor intent_display_name: ::String
       attr_accessor description: ::String
       attr_accessor parent_intent_signature: ::String
       attr_accessor sample_utterances: ::Array[Types::SampleUtterance]
@@ -3476,6 +3495,7 @@ module Aws::LexModelsV2
     class UpdateIntentResponse
       attr_accessor intent_id: ::String
       attr_accessor intent_name: ::String
+      attr_accessor intent_display_name: ::String
       attr_accessor description: ::String
       attr_accessor parent_intent_signature: ::String
       attr_accessor sample_utterances: ::Array[Types::SampleUtterance]

@@ -54,7 +54,7 @@ module Aws::CodeCatalyst
   autoload :EndpointProvider, 'aws-sdk-codecatalyst/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codecatalyst/endpoints'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
 

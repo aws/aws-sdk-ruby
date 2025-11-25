@@ -1682,6 +1682,21 @@ module Aws::Redshift
     #   The Amazon resource name (ARN) of the Amazon Redshift IAM Identity
     #   Center application.
     #
+    # @option params [String] :catalog_name
+    #   The name of the Glue data catalog that will be associated with the
+    #   cluster enabled with Amazon Redshift federated permissions.
+    #
+    #   Constraints:
+    #
+    #   * Must contain at least one lowercase letter.
+    #
+    #   * Can only contain lowercase letters (a-z), numbers (0-9), underscores
+    #     (\_), and hyphens (-).
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    #   Example: `my-catalog_01`
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1733,6 +1748,7 @@ module Aws::Redshift
     #     ip_address_type: "String",
     #     multi_az: false,
     #     redshift_idc_application_arn: "String",
+    #     catalog_name: "CatalogNameString",
     #   })
     #
     # @example Response structure
@@ -1868,6 +1884,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2766,6 +2784,11 @@ module Aws::Redshift
     #   A collection of service integrations for the Redshift IAM Identity
     #   Center application.
     #
+    # @option params [String] :application_type
+    #   The type of application being created. Valid values are `None` or
+    #   `Lakehouse`. Use `Lakehouse` to enable Amazon Redshift federated
+    #   permissions on cluster.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags.
     #
@@ -2808,8 +2831,16 @@ module Aws::Redshift
     #             },
     #           },
     #         ],
+    #         redshift: [
+    #           {
+    #             connect: {
+    #               authorization: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
+    #     application_type: "None", # accepts None, Lakehouse
     #     tags: [
     #       {
     #         key: "String",
@@ -2838,6 +2869,9 @@ module Aws::Redshift
     #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants #=> Array
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.service_integrations[0].redshift #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].redshift[0].connect.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.application_type #=> String, one of "None", "Lakehouse"
     #   resp.redshift_idc_application.tags #=> Array
     #   resp.redshift_idc_application.tags[0].key #=> String
     #   resp.redshift_idc_application.tags[0].value #=> String
@@ -3534,6 +3568,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -5292,6 +5328,8 @@ module Aws::Redshift
     #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.clusters[0].lakehouse_registration_status #=> String
+    #   resp.clusters[0].catalog_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6736,6 +6774,9 @@ module Aws::Redshift
     #   resp.redshift_idc_applications[0].service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.redshift_idc_applications[0].service_integrations[0].s3_access_grants #=> Array
     #   resp.redshift_idc_applications[0].service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_applications[0].service_integrations[0].redshift #=> Array
+    #   resp.redshift_idc_applications[0].service_integrations[0].redshift[0].connect.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_applications[0].application_type #=> String, one of "None", "Lakehouse"
     #   resp.redshift_idc_applications[0].tags #=> Array
     #   resp.redshift_idc_applications[0].tags[0].key #=> String
     #   resp.redshift_idc_applications[0].tags[0].value #=> String
@@ -7847,6 +7888,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -8185,6 +8228,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -8345,6 +8390,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryCompute AWS API Documentation
     #
@@ -9486,6 +9533,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -9653,6 +9702,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -9836,6 +9887,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -10019,6 +10072,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -10544,6 +10599,84 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modifies the lakehouse configuration for a cluster. This operation
+    # allows you to manage Amazon Redshift federated permissions and Amazon
+    # Web Services IAM Identity Center trusted identity propagation.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of the cluster whose lakehouse configuration you
+    #   want to modify.
+    #
+    # @option params [String] :lakehouse_registration
+    #   Specifies whether to register or deregister the cluster with Amazon
+    #   Redshift federated permissions. Valid values are `Register` or
+    #   `Deregister`.
+    #
+    # @option params [String] :catalog_name
+    #   The name of the Glue data catalog that will be associated with the
+    #   cluster enabled with Amazon Redshift federated permissions.
+    #
+    #   Constraints:
+    #
+    #   * Must contain at least one lowercase letter.
+    #
+    #   * Can only contain lowercase letters (a-z), numbers (0-9), underscores
+    #     (\_), and hyphens (-).
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    #   Example: `my-catalog_01`
+    #
+    # @option params [String] :lakehouse_idc_registration
+    #   Modifies the Amazon Web Services IAM Identity Center trusted identity
+    #   propagation on a cluster enabled with Amazon Redshift federated
+    #   permissions. Valid values are `Associate` or `Disassociate`.
+    #
+    # @option params [String] :lakehouse_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center application
+    #   used for enabling Amazon Web Services IAM Identity Center trusted
+    #   identity propagation on a cluster enabled with Amazon Redshift
+    #   federated permissions.
+    #
+    # @option params [Boolean] :dry_run
+    #   A boolean value that, if `true`, validates the request without
+    #   actually modifying the lakehouse configuration. Use this to check for
+    #   errors before making changes.
+    #
+    # @return [Types::LakehouseConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LakehouseConfiguration#cluster_identifier #cluster_identifier} => String
+    #   * {Types::LakehouseConfiguration#lakehouse_idc_application_arn #lakehouse_idc_application_arn} => String
+    #   * {Types::LakehouseConfiguration#lakehouse_registration_status #lakehouse_registration_status} => String
+    #   * {Types::LakehouseConfiguration#catalog_arn #catalog_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_lakehouse_configuration({
+    #     cluster_identifier: "String", # required
+    #     lakehouse_registration: "Register", # accepts Register, Deregister
+    #     catalog_name: "CatalogNameString",
+    #     lakehouse_idc_registration: "Associate", # accepts Associate, Disassociate
+    #     lakehouse_idc_application_arn: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.lakehouse_idc_application_arn #=> String
+    #   resp.lakehouse_registration_status #=> String
+    #   resp.catalog_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyLakehouseConfiguration AWS API Documentation
+    #
+    # @overload modify_lakehouse_configuration(params = {})
+    # @param [Hash] params ({})
+    def modify_lakehouse_configuration(params = {}, options = {})
+      req = build_request(:modify_lakehouse_configuration, params)
+      req.send_request(options)
+    end
+
     # Changes an existing Amazon Redshift IAM Identity Center application.
     #
     # @option params [required, String] :redshift_idc_application_arn
@@ -10604,6 +10737,13 @@ module Aws::Redshift
     #             },
     #           },
     #         ],
+    #         redshift: [
+    #           {
+    #             connect: {
+    #               authorization: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -10627,6 +10767,9 @@ module Aws::Redshift
     #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants #=> Array
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.service_integrations[0].redshift #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].redshift[0].connect.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.application_type #=> String, one of "None", "Lakehouse"
     #   resp.redshift_idc_application.tags #=> Array
     #   resp.redshift_idc_application.tags[0].key #=> String
     #   resp.redshift_idc_application.tags[0].value #=> String
@@ -10938,6 +11081,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -11204,6 +11349,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -11467,6 +11614,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -11824,6 +11973,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -12150,6 +12301,27 @@ module Aws::Redshift
     #   If true, the snapshot will be restored to a cluster deployed in two
     #   Availability Zones.
     #
+    # @option params [String] :catalog_name
+    #   The name of the Glue Data Catalog that will be associated with the
+    #   cluster enabled with Amazon Redshift federated permissions.
+    #
+    #   Constraints:
+    #
+    #   * Must contain at least one lowercase letter.
+    #
+    #   * Can only contain lowercase letters (a-z), numbers (0-9), underscores
+    #     (\_), and hyphens (-).
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    #   Example: `my-catalog_01`
+    #
+    # @option params [String] :redshift_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center application
+    #   used for enabling Amazon Web Services IAM Identity Center trusted
+    #   identity propagation on a cluster enabled with Amazon Redshift
+    #   federated permissions.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -12194,6 +12366,8 @@ module Aws::Redshift
     #     master_password_secret_kms_key_id: "String",
     #     ip_address_type: "String",
     #     multi_az: false,
+    #     catalog_name: "CatalogNameString",
+    #     redshift_idc_application_arn: "String",
     #   })
     #
     # @example Response structure
@@ -12329,6 +12503,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -12587,6 +12763,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -12982,6 +13160,8 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].node_role #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].private_ip_address #=> String
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.lakehouse_registration_status #=> String
+    #   resp.cluster.catalog_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -13062,7 +13242,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

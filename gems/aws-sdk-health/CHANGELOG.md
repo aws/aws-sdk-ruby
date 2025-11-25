@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2025-11-19)
+------------------
+
+* Feature - Adds actionability and personas properties to Health events exposed through DescribeEvents, DescribeEventsForOrganization, DescribeEventDetails, and DescribeEventTypes APIs. Adds filtering by actionabilities and personas in EventFilter, OrganizationEventFilter, EventTypeFilter.
+
 1.88.0 (2025-10-31)
 ------------------
 

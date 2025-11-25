@@ -794,6 +794,33 @@ module Aws::Connect
       attr_accessor state: ("ACTIVE" | "ARCHIVED")
       attr_accessor status: ("PUBLISHED" | "SAVED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor flow_module_content_sha_256: ::String
+      attr_accessor version: ::Integer
+      attr_accessor version_description: ::String
+      attr_accessor settings: ::String
+      attr_accessor external_invocation_configuration: Types::ExternalInvocationConfiguration
+      SENSITIVE: []
+    end
+
+    class ContactFlowModuleAliasInfo
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor contact_flow_module_arn: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_region: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ContactFlowModuleAliasSummary
+      attr_accessor arn: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor alias_name: ::String
+      attr_accessor alias_description: ::String
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -816,6 +843,13 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class ContactFlowModuleVersionSummary
+      attr_accessor arn: ::String
+      attr_accessor version_description: ::String
+      attr_accessor version: ::Integer
       SENSITIVE: []
     end
 
@@ -963,6 +997,21 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CreateContactFlowModuleAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor contact_flow_module_version: ::Integer
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowModuleAliasResponse
+      attr_accessor contact_flow_module_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
     class CreateContactFlowModuleRequest
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -970,12 +1019,28 @@ module Aws::Connect
       attr_accessor content: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
+      attr_accessor settings: ::String
+      attr_accessor external_invocation_configuration: Types::ExternalInvocationConfiguration
       SENSITIVE: []
     end
 
     class CreateContactFlowModuleResponse
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowModuleVersionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor flow_module_content_sha_256: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowModuleVersionResponse
+      attr_accessor contact_flow_module_arn: ::String
+      attr_accessor version: ::Integer
       SENSITIVE: []
     end
 
@@ -1559,6 +1624,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeleteContactFlowModuleAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowModuleAliasResponse < Aws::EmptyStructure
+    end
+
     class DeleteContactFlowModuleRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_module_id: ::String
@@ -1566,6 +1641,16 @@ module Aws::Connect
     end
 
     class DeleteContactFlowModuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteContactFlowModuleVersionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor contact_flow_module_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowModuleVersionResponse < Aws::EmptyStructure
     end
 
     class DeleteContactFlowRequest
@@ -1779,6 +1864,18 @@ module Aws::Connect
     class DescribeContactEvaluationResponse
       attr_accessor evaluation: Types::Evaluation
       attr_accessor evaluation_form: Types::EvaluationFormContent
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowModuleAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowModuleAliasResponse
+      attr_accessor contact_flow_module_alias: Types::ContactFlowModuleAliasInfo
       SENSITIVE: []
     end
 
@@ -2826,6 +2923,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ExternalInvocationConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class FailedRequest
       attr_accessor request_identifier: ::String
       attr_accessor failure_reason_code: ("INVALID_ATTRIBUTE_KEY" | "INVALID_CUSTOMER_ENDPOINT" | "INVALID_SYSTEM_ENDPOINT" | "INVALID_QUEUE" | "INVALID_OUTBOUND_STRATEGY" | "MISSING_CAMPAIGN" | "MISSING_CUSTOMER_ENDPOINT" | "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT" | "REQUEST_THROTTLED" | "IDEMPOTENCY_EXCEPTION" | "INTERNAL_ERROR")
@@ -3566,6 +3668,34 @@ module Aws::Connect
 
     class ListContactEvaluationsResponse
       attr_accessor evaluation_summary_list: ::Array[Types::EvaluationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactFlowModuleAliasesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactFlowModuleAliasesResponse
+      attr_accessor contact_flow_module_alias_summary_list: ::Array[Types::ContactFlowModuleAliasSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactFlowModuleVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactFlowModuleVersionsResponse
+      attr_accessor contact_flow_module_version_summary_list: ::Array[Types::ContactFlowModuleVersionSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -5612,6 +5742,7 @@ module Aws::Connect
       attr_accessor content: ::String
       attr_accessor content_type: ("PLAIN_TEXT")
       attr_accessor recipient: Types::NotificationRecipientType
+      attr_accessor exclusion: Types::NotificationRecipientType
       SENSITIVE: []
     end
 
@@ -6277,10 +6408,24 @@ module Aws::Connect
     class UpdateContactFlowMetadataResponse < Aws::EmptyStructure
     end
 
+    class UpdateContactFlowModuleAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_module_id: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_module_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowModuleAliasResponse < Aws::EmptyStructure
+    end
+
     class UpdateContactFlowModuleContentRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_module_id: ::String
       attr_accessor content: ::String
+      attr_accessor settings: ::String
       SENSITIVE: []
     end
 

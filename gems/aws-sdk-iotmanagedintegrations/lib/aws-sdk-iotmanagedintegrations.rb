@@ -54,7 +54,7 @@ module Aws::IoTManagedIntegrations
   autoload :EndpointProvider, 'aws-sdk-iotmanagedintegrations/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotmanagedintegrations/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

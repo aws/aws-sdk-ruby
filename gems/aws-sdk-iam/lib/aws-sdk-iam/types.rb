@@ -3145,6 +3145,22 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] issuer_identifier
+    #   A unique issuer URL for your Amazon Web Services account that hosts
+    #   the OpenID Connect (OIDC) discovery endpoints at
+    #   `/.well-known/openid-configuration and /.well-known/jwks.json`. The
+    #   OpenID Connect (OIDC) discovery endpoints contain verification keys
+    #   and metadata necessary for token verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOutboundWebIdentityFederationResponse AWS API Documentation
+    #
+    class EnableOutboundWebIdentityFederationResponse < Struct.new(
+      :issuer_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because it attempted to create a resource
     # that already exists.
     #
@@ -3397,6 +3413,38 @@ module Aws::IAM
       :permissions_boundary_decision_detail,
       :eval_decision_details,
       :resource_specific_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because outbound identity federation is already
+    # disabled for your Amazon Web Services account. You cannot disable the
+    # feature multiple times
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/FeatureDisabledException AWS API Documentation
+    #
+    class FeatureDisabledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because outbound identity federation is already
+    # enabled for your Amazon Web Services account. You cannot enable the
+    # feature multiple times. To fetch the current configuration (including
+    # the unique issuer URL), use the `GetOutboundWebIdentityFederationInfo`
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/FeatureEnabledException AWS API Documentation
+    #
+    class FeatureEnabledException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4463,6 +4511,30 @@ module Aws::IAM
       :is_truncated,
       :marker,
       :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] issuer_identifier
+    #   A unique issuer URL for your Amazon Web Services account that hosts
+    #   the OpenID Connect (OIDC) discovery endpoints at
+    #   `/.well-known/openid-configuration and /.well-known/jwks.json`. The
+    #   OpenID Connect (OIDC) discovery endpoints contain verification keys
+    #   and metadata necessary for token verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] jwt_vending_enabled
+    #   Indicates whether outbound identity federation is currently enabled
+    #   for your Amazon Web Services account. When true, IAM principals in
+    #   the account can call the `GetWebIdentityToken` API to obtain JSON
+    #   Web Tokens (JWTs) for authentication with external services.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOutboundWebIdentityFederationInfoResponse AWS API Documentation
+    #
+    class GetOutboundWebIdentityFederationInfoResponse < Struct.new(
+      :issuer_identifier,
+      :jwt_vending_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-11-21)
+------------------
+
+* Feature - Added the CreateProcurementPortalPreference, GetProcurementPortalPreference, PutProcurementPortalPreference, UpdateProcurementPortalPreferenceStatus, ListProcurementPortalPreferences and DeleteProcurementPortalPreference APIs for procurement portal preference management.
+
+1.16.0 (2025-11-19)
+------------------
+
+* Feature - Add support for adding Billing transfers in Invoice configuration
+
 1.15.0 (2025-11-10)
 ------------------
 

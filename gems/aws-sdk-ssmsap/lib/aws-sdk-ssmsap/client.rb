@@ -1797,7 +1797,7 @@ module Aws::SsmSap
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

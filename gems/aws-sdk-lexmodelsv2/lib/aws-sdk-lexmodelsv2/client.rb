@@ -1078,6 +1078,12 @@ module Aws::LexModelsV2
     #   Contains specifications about the generative AI capabilities from
     #   Amazon Bedrock that you can turn on for your bot.
     #
+    # @option params [String] :speech_detection_sensitivity
+    #   The sensitivity level for voice activity detection (VAD) in the bot
+    #   locale. This setting helps optimize speech recognition accuracy by
+    #   adjusting how the system responds to background noise during voice
+    #   interactions.
+    #
     # @return [Types::CreateBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBotLocaleResponse#bot_id #bot_id} => String
@@ -1090,6 +1096,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateBotLocaleResponse#bot_locale_status #bot_locale_status} => String
     #   * {Types::CreateBotLocaleResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
+    #   * {Types::CreateBotLocaleResponse#speech_detection_sensitivity #speech_detection_sensitivity} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1120,6 +1127,11 @@ module Aws::LexModelsV2
     #         nlu_improvement: {
     #           enabled: false, # required
     #           assisted_nlu_mode: "Primary", # accepts Primary, Fallback
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage",
+    #           },
     #         },
     #       },
     #       buildtime_settings: {
@@ -1149,6 +1161,7 @@ module Aws::LexModelsV2
     #         },
     #       },
     #     },
+    #     speech_detection_sensitivity: "Default", # accepts Default, HighNoiseTolerance, MaximumNoiseTolerance
     #   })
     #
     # @example Response structure
@@ -1171,6 +1184,9 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback"
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.enabled #=> Boolean
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.max_disambiguation_intents #=> Integer
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.custom_disambiguation_message #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
@@ -1183,6 +1199,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.version #=> String
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
+    #   resp.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocale AWS API Documentation
     #
@@ -1418,6 +1435,12 @@ module Aws::LexModelsV2
     #   The name of the intent. Intent names must be unique in the locale that
     #   contains the intent and cannot match the name of any built-in intent.
     #
+    # @option params [String] :intent_display_name
+    #   A display name for the intent. If configured, This name will be shown
+    #   to users during Intent Disambiguation instead of the intent name.
+    #   Display names should be user-friendly, descriptive and match the
+    #   intent's purpose to improve user experience during disambiguation.
+    #
     # @option params [String] :description
     #   A description of the intent. Use the description to help identify the
     #   intent in lists.
@@ -1533,6 +1556,7 @@ module Aws::LexModelsV2
     #
     #   * {Types::CreateIntentResponse#intent_id #intent_id} => String
     #   * {Types::CreateIntentResponse#intent_name #intent_name} => String
+    #   * {Types::CreateIntentResponse#intent_display_name #intent_display_name} => String
     #   * {Types::CreateIntentResponse#description #description} => String
     #   * {Types::CreateIntentResponse#parent_intent_signature #parent_intent_signature} => String
     #   * {Types::CreateIntentResponse#sample_utterances #sample_utterances} => Array&lt;Types::SampleUtterance&gt;
@@ -3584,6 +3608,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#bot_locale_history_events #bot_locale_history_events} => Array&lt;Types::BotLocaleHistoryEvent&gt;
     #   * {Types::DescribeBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #   * {Types::DescribeBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
+    #   * {Types::DescribeBotLocaleResponse#speech_detection_sensitivity #speech_detection_sensitivity} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3624,6 +3649,9 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback"
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.enabled #=> Boolean
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.max_disambiguation_intents #=> Integer
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.custom_disambiguation_message #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
@@ -3636,6 +3664,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.version #=> String
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
+    #   resp.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4061,6 +4090,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -4122,6 +4152,7 @@ module Aws::LexModelsV2
     #
     #   * {Types::DescribeIntentResponse#intent_id #intent_id} => String
     #   * {Types::DescribeIntentResponse#intent_name #intent_name} => String
+    #   * {Types::DescribeIntentResponse#intent_display_name #intent_display_name} => String
     #   * {Types::DescribeIntentResponse#description #description} => String
     #   * {Types::DescribeIntentResponse#parent_intent_signature #parent_intent_signature} => String
     #   * {Types::DescribeIntentResponse#sample_utterances #sample_utterances} => Array&lt;Types::SampleUtterance&gt;
@@ -6921,6 +6952,7 @@ module Aws::LexModelsV2
     #   resp.intent_summaries #=> Array
     #   resp.intent_summaries[0].intent_id #=> String
     #   resp.intent_summaries[0].intent_name #=> String
+    #   resp.intent_summaries[0].intent_display_name #=> String
     #   resp.intent_summaries[0].description #=> String
     #   resp.intent_summaries[0].parent_intent_signature #=> String
     #   resp.intent_summaries[0].input_contexts #=> Array
@@ -8487,6 +8519,7 @@ module Aws::LexModelsV2
     #           voice_id: "VoiceId", # required
     #           engine: "standard", # accepts standard, neural, long-form, generative
     #         },
+    #         speech_detection_sensitivity: "Default", # accepts Default, HighNoiseTolerance, MaximumNoiseTolerance
     #       },
     #       custom_vocabulary_import_specification: {
     #         bot_id: "Id", # required
@@ -8534,6 +8567,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -9111,6 +9145,12 @@ module Aws::LexModelsV2
     #   and off. Pricing may differ if you turn a feature on. For more
     #   information, see LINK.
     #
+    # @option params [String] :speech_detection_sensitivity
+    #   The new sensitivity level for voice activity detection (VAD) in the
+    #   bot locale. This setting helps optimize speech recognition accuracy by
+    #   adjusting how the system responds to background noise during voice
+    #   interactions.
+    #
     # @return [Types::UpdateBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBotLocaleResponse#bot_id #bot_id} => String
@@ -9126,6 +9166,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::UpdateBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #   * {Types::UpdateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
+    #   * {Types::UpdateBotLocaleResponse#speech_detection_sensitivity #speech_detection_sensitivity} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -9156,6 +9197,11 @@ module Aws::LexModelsV2
     #         nlu_improvement: {
     #           enabled: false, # required
     #           assisted_nlu_mode: "Primary", # accepts Primary, Fallback
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage",
+    #           },
     #         },
     #       },
     #       buildtime_settings: {
@@ -9185,6 +9231,7 @@ module Aws::LexModelsV2
     #         },
     #       },
     #     },
+    #     speech_detection_sensitivity: "Default", # accepts Default, HighNoiseTolerance, MaximumNoiseTolerance
     #   })
     #
     # @example Response structure
@@ -9212,6 +9259,9 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback"
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.enabled #=> Boolean
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.max_disambiguation_intents #=> Integer
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.custom_disambiguation_message #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
@@ -9224,6 +9274,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.version #=> String
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
+    #   resp.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocale AWS API Documentation
     #
@@ -9383,6 +9434,9 @@ module Aws::LexModelsV2
     # @option params [required, String] :intent_name
     #   The new name for the intent.
     #
+    # @option params [String] :intent_display_name
+    #   The new display name for the intent.
+    #
     # @option params [String] :description
     #   The new description of the intent.
     #
@@ -9456,6 +9510,7 @@ module Aws::LexModelsV2
     #
     #   * {Types::UpdateIntentResponse#intent_id #intent_id} => String
     #   * {Types::UpdateIntentResponse#intent_name #intent_name} => String
+    #   * {Types::UpdateIntentResponse#intent_display_name #intent_display_name} => String
     #   * {Types::UpdateIntentResponse#description #description} => String
     #   * {Types::UpdateIntentResponse#parent_intent_signature #parent_intent_signature} => String
     #   * {Types::UpdateIntentResponse#sample_utterances #sample_utterances} => Array&lt;Types::SampleUtterance&gt;
@@ -10575,7 +10630,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

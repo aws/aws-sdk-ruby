@@ -15531,6 +15531,16 @@ module Aws::Glue
     #   definitions returned.
     #   @return [String]
     #
+    # @!attribute [rw] function_type
+    #   An optional function-type pattern string that filters the function
+    #   definitions returned from Amazon Redshift Federated Permissions
+    #   Catalog.
+    #
+    #   Specify a value of `REGULAR_FUNCTION` or `STORED_PROCEDURE`. The
+    #   `STORED_PROCEDURE` function type is only compatible with Amazon
+    #   Redshift Federated Permissions Catalog.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation call.
     #   @return [String]
@@ -15545,6 +15555,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :pattern,
+      :function_type,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -29725,6 +29736,10 @@ module Aws::Glue
     #   The owner of the function.
     #   @return [String]
     #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_type
     #   The owner type.
     #   @return [String]
@@ -29748,6 +29763,7 @@ module Aws::Glue
       :database_name,
       :class_name,
       :owner_name,
+      :function_type,
       :owner_type,
       :create_time,
       :resource_uris,
@@ -29770,6 +29786,10 @@ module Aws::Glue
     #   The owner of the function.
     #   @return [String]
     #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_type
     #   The owner type.
     #   @return [String]
@@ -29784,6 +29804,7 @@ module Aws::Glue
       :function_name,
       :class_name,
       :owner_name,
+      :function_type,
       :owner_type,
       :resource_uris)
       SENSITIVE = []

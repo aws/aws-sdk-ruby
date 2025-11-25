@@ -314,6 +314,133 @@ module Aws
                         ) -> _CreateModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelResponseSuccess
 
+      interface _CreatePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortalResponse]
+        def authorization: () -> Types::Authorization
+        def endpoint_configuration: () -> Types::EndpointConfigurationResponse
+        def included_portal_product_arns: () -> ::Array[::String]
+        def last_modified: () -> ::Time
+        def last_published: () -> ::Time
+        def last_published_description: () -> ::String
+        def portal_arn: () -> ::String
+        def portal_content: () -> Types::PortalContent
+        def portal_id: () -> ::String
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+        def rum_app_monitor_name: () -> ::String
+        def status_exception: () -> Types::StatusException
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_portal-instance_method
+      def create_portal: (
+                           authorization: {
+                             cognito_config: {
+                               app_client_id: ::String,
+                               user_pool_arn: ::String,
+                               user_pool_domain: ::String
+                             }?,
+                             none: {
+                             }?
+                           },
+                           endpoint_configuration: {
+                             acm_managed: {
+                               certificate_arn: ::String,
+                               domain_name: ::String
+                             }?,
+                             none: {
+                             }?
+                           },
+                           ?included_portal_product_arns: Array[::String],
+                           ?logo_uri: ::String,
+                           portal_content: {
+                             description: ::String?,
+                             display_name: ::String,
+                             theme: {
+                               custom_colors: {
+                                 accent_color: ::String,
+                                 background_color: ::String,
+                                 error_validation_color: ::String,
+                                 header_color: ::String,
+                                 navigation_color: ::String,
+                                 text_color: ::String
+                               },
+                               logo_last_uploaded: ::Time?
+                             }
+                           },
+                           ?rum_app_monitor_name: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreatePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalResponseSuccess
+
+      interface _CreatePortalProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortalProductResponse]
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def display_order: () -> Types::DisplayOrder
+        def last_modified: () -> ::Time
+        def portal_product_arn: () -> ::String
+        def portal_product_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_portal_product-instance_method
+      def create_portal_product: (
+                                   ?description: ::String,
+                                   display_name: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreatePortalProductResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalProductResponseSuccess
+
+      interface _CreateProductPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProductPageResponse]
+        def display_content: () -> Types::DisplayContent
+        def last_modified: () -> ::Time
+        def product_page_arn: () -> ::String
+        def product_page_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_product_page-instance_method
+      def create_product_page: (
+                                 display_content: {
+                                   body: ::String,
+                                   title: ::String
+                                 },
+                                 portal_product_id: ::String
+                               ) -> _CreateProductPageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductPageResponseSuccess
+
+      interface _CreateProductRestEndpointPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProductRestEndpointPageResponse]
+        def display_content: () -> Types::EndpointDisplayContentResponse
+        def last_modified: () -> ::Time
+        def product_rest_endpoint_page_arn: () -> ::String
+        def product_rest_endpoint_page_id: () -> ::String
+        def rest_endpoint_identifier: () -> Types::RestEndpointIdentifier
+        def status: () -> ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+        def status_exception: () -> Types::StatusException
+        def try_it_state: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_product_rest_endpoint_page-instance_method
+      def create_product_rest_endpoint_page: (
+                                               ?display_content: {
+                                                 none: {
+                                                 }?,
+                                                 overrides: {
+                                                   body: ::String?,
+                                                   endpoint: ::String?,
+                                                   operation_name: ::String?
+                                                 }?
+                                               },
+                                               portal_product_id: ::String,
+                                               rest_endpoint_identifier: {
+                                                 identifier_parts: {
+                                                   method: ::String,
+                                                   path: ::String,
+                                                   rest_api_id: ::String,
+                                                   stage: ::String
+                                                 }?
+                                               },
+                                               ?try_it_state: ("ENABLED" | "DISABLED")
+                                             ) -> _CreateProductRestEndpointPageResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductRestEndpointPageResponseSuccess
+
       interface _CreateRouteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRouteResult]
         def api_gateway_managed: () -> bool
@@ -547,6 +674,38 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_portal-instance_method
+      def delete_portal: (
+                           portal_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_portal_product-instance_method
+      def delete_portal_product: (
+                                   portal_product_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_portal_product_sharing_policy-instance_method
+      def delete_portal_product_sharing_policy: (
+                                                  portal_product_id: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_product_page-instance_method
+      def delete_product_page: (
+                                 portal_product_id: ::String,
+                                 product_page_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_product_rest_endpoint_page-instance_method
+      def delete_product_rest_endpoint_page: (
+                                               portal_product_id: ::String,
+                                               product_rest_endpoint_page_id: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#delete_route-instance_method
       def delete_route: (
                           api_id: ::String,
@@ -616,6 +775,12 @@ module Aws
                         ?stage_name: ::String
                       ) -> _ExportApiResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportApiResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#disable_portal-instance_method
+      def disable_portal: (
+                            portal_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#reset_authorizers_cache-instance_method
       def reset_authorizers_cache: (
@@ -893,6 +1058,93 @@ module Aws
                       ) -> _GetModelsResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelsResponseSuccess
 
+      interface _GetPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPortalResponse]
+        def authorization: () -> Types::Authorization
+        def endpoint_configuration: () -> Types::EndpointConfigurationResponse
+        def included_portal_product_arns: () -> ::Array[::String]
+        def last_modified: () -> ::Time
+        def last_published: () -> ::Time
+        def last_published_description: () -> ::String
+        def portal_arn: () -> ::String
+        def portal_content: () -> Types::PortalContent
+        def portal_id: () -> ::String
+        def preview: () -> Types::Preview
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+        def rum_app_monitor_name: () -> ::String
+        def status_exception: () -> Types::StatusException
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_portal-instance_method
+      def get_portal: (
+                        portal_id: ::String
+                      ) -> _GetPortalResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortalResponseSuccess
+
+      interface _GetPortalProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPortalProductResponse]
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def display_order: () -> Types::DisplayOrder
+        def last_modified: () -> ::Time
+        def portal_product_arn: () -> ::String
+        def portal_product_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_portal_product-instance_method
+      def get_portal_product: (
+                                portal_product_id: ::String,
+                                ?resource_owner_account_id: ::String
+                              ) -> _GetPortalProductResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortalProductResponseSuccess
+
+      interface _GetPortalProductSharingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPortalProductSharingPolicyResponse]
+        def policy_document: () -> ::String
+        def portal_product_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_portal_product_sharing_policy-instance_method
+      def get_portal_product_sharing_policy: (
+                                               portal_product_id: ::String
+                                             ) -> _GetPortalProductSharingPolicyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortalProductSharingPolicyResponseSuccess
+
+      interface _GetProductPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductPageResponse]
+        def display_content: () -> Types::DisplayContent
+        def last_modified: () -> ::Time
+        def product_page_arn: () -> ::String
+        def product_page_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_product_page-instance_method
+      def get_product_page: (
+                              portal_product_id: ::String,
+                              product_page_id: ::String,
+                              ?resource_owner_account_id: ::String
+                            ) -> _GetProductPageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductPageResponseSuccess
+
+      interface _GetProductRestEndpointPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductRestEndpointPageResponse]
+        def display_content: () -> Types::EndpointDisplayContentResponse
+        def last_modified: () -> ::Time
+        def product_rest_endpoint_page_arn: () -> ::String
+        def product_rest_endpoint_page_id: () -> ::String
+        def raw_display_content: () -> ::String
+        def rest_endpoint_identifier: () -> Types::RestEndpointIdentifier
+        def status: () -> ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+        def status_exception: () -> Types::StatusException
+        def try_it_state: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#get_product_rest_endpoint_page-instance_method
+      def get_product_rest_endpoint_page: (
+                                            ?include_raw_display_content: ::String,
+                                            portal_product_id: ::String,
+                                            product_rest_endpoint_page_id: ::String,
+                                            ?resource_owner_account_id: ::String
+                                          ) -> _GetProductRestEndpointPageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductRestEndpointPageResponseSuccess
+
       interface _GetRouteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRouteResult]
         def api_gateway_managed: () -> bool
@@ -974,20 +1226,6 @@ module Aws
                               routing_rule_id: ::String
                             ) -> _GetRoutingRuleResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoutingRuleResponseSuccess
-
-      interface _ListRoutingRulesResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingRulesResponse]
-        def next_token: () -> ::String
-        def routing_rules: () -> ::Array[Types::RoutingRule]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_routing_rules-instance_method
-      def list_routing_rules: (
-                                domain_name: ::String,
-                                ?domain_name_id: ::String,
-                                ?max_results: ::Integer,
-                                ?next_token: ::String
-                              ) -> _ListRoutingRulesResponseSuccess
-                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutingRulesResponseSuccess
 
       interface _GetStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStageResponse]
@@ -1093,6 +1331,102 @@ module Aws
                         ?fail_on_warnings: bool
                       ) -> _ImportApiResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportApiResponseSuccess
+
+      interface _ListPortalProductsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalProductsResponse]
+        def items: () -> ::Array[Types::PortalProductSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_portal_products-instance_method
+      def list_portal_products: (
+                                  ?max_results: ::String,
+                                  ?next_token: ::String,
+                                  ?resource_owner: ::String
+                                ) -> _ListPortalProductsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortalProductsResponseSuccess
+
+      interface _ListPortalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalsResponse]
+        def items: () -> ::Array[Types::PortalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_portals-instance_method
+      def list_portals: (
+                          ?max_results: ::String,
+                          ?next_token: ::String
+                        ) -> _ListPortalsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortalsResponseSuccess
+
+      interface _ListProductPagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProductPagesResponse]
+        def items: () -> ::Array[Types::ProductPageSummaryNoBody]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_product_pages-instance_method
+      def list_product_pages: (
+                                ?max_results: ::String,
+                                ?next_token: ::String,
+                                portal_product_id: ::String,
+                                ?resource_owner_account_id: ::String
+                              ) -> _ListProductPagesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProductPagesResponseSuccess
+
+      interface _ListProductRestEndpointPagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProductRestEndpointPagesResponse]
+        def items: () -> ::Array[Types::ProductRestEndpointPageSummaryNoBody]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_product_rest_endpoint_pages-instance_method
+      def list_product_rest_endpoint_pages: (
+                                              ?max_results: ::String,
+                                              ?next_token: ::String,
+                                              portal_product_id: ::String,
+                                              ?resource_owner_account_id: ::String
+                                            ) -> _ListProductRestEndpointPagesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProductRestEndpointPagesResponseSuccess
+
+      interface _ListRoutingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingRulesResponse]
+        def next_token: () -> ::String
+        def routing_rules: () -> ::Array[Types::RoutingRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#list_routing_rules-instance_method
+      def list_routing_rules: (
+                                domain_name: ::String,
+                                ?domain_name_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListRoutingRulesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutingRulesResponseSuccess
+
+      interface _PreviewPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PreviewPortalResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#preview_portal-instance_method
+      def preview_portal: (
+                            portal_id: ::String
+                          ) -> _PreviewPortalResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PreviewPortalResponseSuccess
+
+      interface _PublishPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishPortalResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#publish_portal-instance_method
+      def publish_portal: (
+                            ?description: ::String,
+                            portal_id: ::String
+                          ) -> _PublishPortalResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishPortalResponseSuccess
+
+      interface _PutPortalProductSharingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPortalProductSharingPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#put_portal_product_sharing_policy-instance_method
+      def put_portal_product_sharing_policy: (
+                                               policy_document: ::String,
+                                               portal_product_id: ::String
+                                             ) -> _PutPortalProductSharingPolicyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPortalProductSharingPolicyResponseSuccess
 
       interface _PutRoutingRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutRoutingRuleResponse]
@@ -1419,6 +1753,138 @@ module Aws
                           ?schema: ::String
                         ) -> _UpdateModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelResponseSuccess
+
+      interface _UpdatePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortalResponse]
+        def authorization: () -> Types::Authorization
+        def endpoint_configuration: () -> Types::EndpointConfigurationResponse
+        def included_portal_product_arns: () -> ::Array[::String]
+        def last_modified: () -> ::Time
+        def last_published: () -> ::Time
+        def last_published_description: () -> ::String
+        def portal_arn: () -> ::String
+        def portal_content: () -> Types::PortalContent
+        def portal_id: () -> ::String
+        def preview: () -> Types::Preview
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+        def rum_app_monitor_name: () -> ::String
+        def status_exception: () -> Types::StatusException
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_portal-instance_method
+      def update_portal: (
+                           ?authorization: {
+                             cognito_config: {
+                               app_client_id: ::String,
+                               user_pool_arn: ::String,
+                               user_pool_domain: ::String
+                             }?,
+                             none: {
+                             }?
+                           },
+                           ?endpoint_configuration: {
+                             acm_managed: {
+                               certificate_arn: ::String,
+                               domain_name: ::String
+                             }?,
+                             none: {
+                             }?
+                           },
+                           ?included_portal_product_arns: Array[::String],
+                           ?logo_uri: ::String,
+                           ?portal_content: {
+                             description: ::String?,
+                             display_name: ::String,
+                             theme: {
+                               custom_colors: {
+                                 accent_color: ::String,
+                                 background_color: ::String,
+                                 error_validation_color: ::String,
+                                 header_color: ::String,
+                                 navigation_color: ::String,
+                                 text_color: ::String
+                               },
+                               logo_last_uploaded: ::Time?
+                             }
+                           },
+                           portal_id: ::String,
+                           ?rum_app_monitor_name: ::String
+                         ) -> _UpdatePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess
+
+      interface _UpdatePortalProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortalProductResponse]
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def display_order: () -> Types::DisplayOrder
+        def last_modified: () -> ::Time
+        def portal_product_arn: () -> ::String
+        def portal_product_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_portal_product-instance_method
+      def update_portal_product: (
+                                   ?description: ::String,
+                                   ?display_name: ::String,
+                                   ?display_order: {
+                                     contents: Array[
+                                       {
+                                         product_rest_endpoint_page_arns: Array[::String],
+                                         section_name: ::String
+                                       },
+                                     ]?,
+                                     overview_page_arn: ::String?,
+                                     product_page_arns: Array[::String]?
+                                   },
+                                   portal_product_id: ::String
+                                 ) -> _UpdatePortalProductResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalProductResponseSuccess
+
+      interface _UpdateProductPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProductPageResponse]
+        def display_content: () -> Types::DisplayContent
+        def last_modified: () -> ::Time
+        def product_page_arn: () -> ::String
+        def product_page_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_product_page-instance_method
+      def update_product_page: (
+                                 ?display_content: {
+                                   body: ::String,
+                                   title: ::String
+                                 },
+                                 portal_product_id: ::String,
+                                 product_page_id: ::String
+                               ) -> _UpdateProductPageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductPageResponseSuccess
+
+      interface _UpdateProductRestEndpointPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProductRestEndpointPageResponse]
+        def display_content: () -> Types::EndpointDisplayContentResponse
+        def last_modified: () -> ::Time
+        def product_rest_endpoint_page_arn: () -> ::String
+        def product_rest_endpoint_page_id: () -> ::String
+        def rest_endpoint_identifier: () -> Types::RestEndpointIdentifier
+        def status: () -> ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+        def status_exception: () -> Types::StatusException
+        def try_it_state: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_product_rest_endpoint_page-instance_method
+      def update_product_rest_endpoint_page: (
+                                               ?display_content: {
+                                                 none: {
+                                                 }?,
+                                                 overrides: {
+                                                   body: ::String?,
+                                                   endpoint: ::String?,
+                                                   operation_name: ::String?
+                                                 }?
+                                               },
+                                               portal_product_id: ::String,
+                                               product_rest_endpoint_page_id: ::String,
+                                               ?try_it_state: ("ENABLED" | "DISABLED")
+                                             ) -> _UpdateProductRestEndpointPageResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductRestEndpointPageResponseSuccess
 
       interface _UpdateRouteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRouteResult]

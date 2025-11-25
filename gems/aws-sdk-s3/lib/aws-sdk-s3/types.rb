@@ -10,6 +10,29 @@
 module Aws::S3
   module Types
 
+    # The ABAC status of the general purpose bucket. When ABAC is enabled
+    # for the general purpose bucket, you can use tags to manage access to
+    # the general purpose buckets as well as for cost tracking purposes.
+    # When ABAC is disabled for the general purpose buckets, you can only
+    # use tags for cost tracking purposes. For more information, see [Using
+    # tags with S3 general purpose buckets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+    #
+    # @!attribute [rw] status
+    #   The ABAC status of the general purpose bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbacStatus AWS API Documentation
+    #
+    class AbacStatus < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the days since the initiation of an incomplete multipart
     # upload that Amazon S3 will wait before permanently removing all parts
     # of the upload. For more information, see [ Aborting Incomplete
@@ -351,6 +374,63 @@ module Aws::S3
       :bucket_account_id,
       :bucket,
       :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A bucket-level setting for Amazon S3 general purpose buckets used to
+    # prevent the upload of new objects encrypted with the specified
+    # server-side encryption type. For example, blocking an encryption type
+    # will block `PutObject`, `CopyObject`, `PostObject`, multipart upload,
+    # and replication requests to the bucket for objects with the specified
+    # encryption type. However, you can continue to read and list any
+    # pre-existing objects already encrypted with the specified encryption
+    # type. For more information, see [Blocking an encryption type for a
+    # general purpose bucket][1].
+    #
+    # This data type is used with the following actions:
+    #
+    # * [PutBucketEncryption][2]
+    #
+    # * [GetBucketEncryption][3]
+    #
+    # * [DeleteBucketEncryption][4]
+    #
+    # Permissions
+    #
+    # : You must have the `s3:PutEncryptionConfiguration` permission to
+    #   block or unblock an encryption type for a bucket.
+    #
+    #   You must have the `s3:GetEncryptionConfiguration` permission to view
+    #   a bucket's encryption type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/userguide/block-encryption-type.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
+    #
+    # @!attribute [rw] encryption_type
+    #   The object encryption type that you want to block or unblock for an
+    #   Amazon S3 general purpose bucket.
+    #
+    #   <note markdown="1"> Currently, this parameter only supports blocking or unblocking
+    #   server side encryption with customer-provided keys (SSE-C). For more
+    #   information about SSE-C, see [Using server-side encryption with
+    #   customer-provided keys (SSE-C)][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BlockedEncryptionTypes AWS API Documentation
+    #
+    class BlockedEncryptionTypes < Struct.new(
+      :encryption_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2740,11 +2820,11 @@ module Aws::S3
     #   creating. Tags are key-value pairs of metadata used to categorize
     #   and organize your buckets, track costs, and control access.
     #
-    #   <note markdown="1"> * This parameter is only supported for S3 directory buckets. For
-    #     more information, see [Using tags with directory buckets][1].
+    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
+    #   information, see [Using tags with directory buckets][1].
     #
-    #   * You must have the `s3express:TagResource` permission to create a
-    #     directory bucket with tags.
+    #    You must have the `s3express:TagResource` permission to create a
+    #   directory bucket with tags.
     #
     #    </note>
     #
@@ -6361,6 +6441,36 @@ module Aws::S3
     class FilterRule < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] abac_status
+    #   The ABAC status of the general purpose bucket.
+    #   @return [Types::AbacStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAbacOutput AWS API Documentation
+    #
+    class GetBucketAbacOutput < Struct.new(
+      :abac_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The name of the general purpose bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID of the general purpose bucket's
+    #   owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAbacRequest AWS API Documentation
+    #
+    class GetBucketAbacRequest < Struct.new(
+      :bucket,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14240,6 +14350,58 @@ module Aws::S3
     end
 
     # @!attribute [rw] bucket
+    #   The name of the general purpose bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The MD5 hash of the `PutBucketAbac` request body.
+    #
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm that you want Amazon S3 to use to create the
+    #   checksum. For more information, see [ Checking object integrity][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID of the general purpose bucket's
+    #   owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] abac_status
+    #   The ABAC status of the general purpose bucket. When ABAC is enabled
+    #   for the general purpose bucket, you can use tags to manage access to
+    #   the general purpose buckets as well as for cost tracking purposes.
+    #   When ABAC is disabled for the general purpose buckets, you can only
+    #   use tags for cost tracking purposes. For more information, see
+    #   [Using tags with S3 general purpose buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+    #   @return [Types::AbacStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAbacRequest AWS API Documentation
+    #
+    class PutBucketAbacRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :expected_bucket_owner,
+      :abac_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
     #   The name of the bucket for which the accelerate configuration is
     #   set.
     #   @return [String]
@@ -17253,7 +17415,7 @@ module Aws::S3
     #   record frame. To ensure continuous streaming of data, S3 Select
     #   might split the same record across multiple record frames instead of
     #   aggregating the results in memory. Some S3 clients (for example, the
-    #   SDKforJava) handle this behavior by creating a `ByteStream` out of
+    #   SDK for Java) handle this behavior by creating a `ByteStream` out of
     #   the response by default. Other clients might not handle this
     #   behavior by default. In those cases, you must aggregate the results
     #   on the client side and parse the response.
@@ -18745,11 +18907,36 @@ module Aws::S3
     #   [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job
     #   @return [Boolean]
     #
+    # @!attribute [rw] blocked_encryption_types
+    #   A bucket-level setting for Amazon S3 general purpose buckets used to
+    #   prevent the upload of new objects encrypted with the specified
+    #   server-side encryption type. For example, blocking an encryption
+    #   type will block `PutObject`, `CopyObject`, `PostObject`, multipart
+    #   upload, and replication requests to the bucket for objects with the
+    #   specified encryption type. However, you can continue to read and
+    #   list any pre-existing objects already encrypted with the specified
+    #   encryption type. For more information, see [Blocking an encryption
+    #   type for a general purpose bucket][1].
+    #
+    #   <note markdown="1"> Currently, this parameter only supports blocking or unblocking
+    #   Server Side Encryption with Customer Provided Keys (SSE-C). For more
+    #   information about SSE-C, see [Using server-side encryption with
+    #   customer-provided keys (SSE-C)][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/userguide/block-encryption-type.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
+    #   @return [Types::BlockedEncryptionTypes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule AWS API Documentation
     #
     class ServerSideEncryptionRule < Struct.new(
       :apply_server_side_encryption_by_default,
-      :bucket_key_enabled)
+      :bucket_key_enabled,
+      :blocked_encryption_types)
       SENSITIVE = []
       include Aws::Structure
     end

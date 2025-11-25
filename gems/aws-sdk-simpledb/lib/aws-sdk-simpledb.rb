@@ -48,7 +48,7 @@ module Aws::SimpleDB
   autoload :Errors, 'aws-sdk-simpledb/errors'
   autoload :Resource, 'aws-sdk-simpledb/resource'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
 

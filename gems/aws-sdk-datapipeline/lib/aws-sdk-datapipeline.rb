@@ -54,7 +54,7 @@ module Aws::DataPipeline
   autoload :EndpointProvider, 'aws-sdk-datapipeline/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datapipeline/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

@@ -545,6 +545,7 @@ module Aws::ConnectCampaignsV2
     #             enable_answer_machine_detection: false, # required
     #             await_answer_machine_prompt: false,
     #           },
+    #           ring_timeout: 1,
     #         },
     #       },
     #       sms: {
@@ -904,6 +905,7 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.connect_source_phone_number #=> String
     #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.answer_machine_detection_config.enable_answer_machine_detection #=> Boolean
     #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.answer_machine_detection_config.await_answer_machine_prompt #=> Boolean
+    #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.ring_timeout #=> Integer
     #   resp.campaign.channel_subtype_config.sms.capacity #=> Float
     #   resp.campaign.channel_subtype_config.sms.default_outbound_config.connect_source_phone_number_arn #=> String
     #   resp.campaign.channel_subtype_config.sms.default_outbound_config.wisdom_template_arn #=> String
@@ -1374,6 +1376,7 @@ module Aws::ConnectCampaignsV2
     #               enable_answer_machine_detection: false, # required
     #               await_answer_machine_prompt: false,
     #             },
+    #             ring_timeout: 1,
     #           },
     #           sms: {
     #             destination_phone_number: "DestinationPhoneNumber", # required
@@ -1665,6 +1668,7 @@ module Aws::ConnectCampaignsV2
     #             enable_answer_machine_detection: false, # required
     #             await_answer_machine_prompt: false,
     #           },
+    #           ring_timeout: 1,
     #         },
     #       },
     #       sms: {
@@ -1967,7 +1971,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

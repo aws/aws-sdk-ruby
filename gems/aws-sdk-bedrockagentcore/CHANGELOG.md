@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2025-11-20)
+------------------
+
+* Feature - Bedrock AgentCore Memory release for redriving memory extraction jobs (StartMemoryExtractionJob and ListMemoryExtractionJob)
+
 1.10.0 (2025-10-23)
 ------------------
 

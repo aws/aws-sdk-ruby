@@ -1,0 +1,92 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerRuntimeHTTP2
+  module Types
+
+    class InputValidationError
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class InternalStreamFailure
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvokeEndpointWithBidirectionalStreamInput
+      attr_accessor endpoint_name: ::String
+      attr_accessor body: Types::RequestStreamEvent
+      attr_accessor target_variant: ::String
+      attr_accessor model_invocation_path: ::String
+      attr_accessor model_query_string: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeEndpointWithBidirectionalStreamOutput
+      attr_accessor body: Types::ResponseStreamEvent
+      attr_accessor invoked_production_variant: ::String
+      SENSITIVE: []
+    end
+
+    class ModelError
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor original_message: ::String
+      attr_accessor log_stream_arn: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ModelStreamError
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class RequestPayloadPart
+      attr_accessor bytes: ::String
+      attr_accessor data_type: ::String
+      attr_accessor completion_state: ::String
+      attr_accessor p: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class ResponsePayloadPart
+      attr_accessor bytes: ::String
+      attr_accessor data_type: ::String
+      attr_accessor completion_state: ::String
+      attr_accessor p: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class ServiceUnavailableError
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class RequestStreamEvent < Enumerator[untyped, untyped]
+      def event_types: () -> [:payload_part]
+    end
+
+    class ResponseStreamEvent < Enumerator[untyped, untyped]
+      def event_types: () -> [:payload_part, :model_stream_error, :internal_stream_failure]
+    end
+  end
+end

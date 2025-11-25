@@ -54,7 +54,7 @@ module Aws::AuditManager
   autoload :EndpointProvider, 'aws-sdk-auditmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-auditmanager/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

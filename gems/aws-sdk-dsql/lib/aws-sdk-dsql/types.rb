@@ -413,10 +413,15 @@ module Aws::DSQL
     #   The VPC endpoint service name.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_vpc_endpoint
+    #   The VPC connection endpoint for the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetVpcEndpointServiceNameOutput AWS API Documentation
     #
     class GetVpcEndpointServiceNameOutput < Struct.new(
-      :service_name)
+      :service_name,
+      :cluster_vpc_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2099,13 +2099,18 @@ module Aws::ConnectCampaignsV2
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
     #
+    # @!attribute [rw] ring_timeout
+    #   Ring timeout for outbound calls
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/TelephonyChannelSubtypeParameters AWS API Documentation
     #
     class TelephonyChannelSubtypeParameters < Struct.new(
       :destination_phone_number,
       :attributes,
       :connect_source_phone_number,
-      :answer_machine_detection_config)
+      :answer_machine_detection_config,
+      :ring_timeout)
       SENSITIVE = [:destination_phone_number, :attributes]
       include Aws::Structure
     end
@@ -2126,12 +2131,17 @@ module Aws::ConnectCampaignsV2
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
     #
+    # @!attribute [rw] ring_timeout
+    #   Ring timeout for outbound calls
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/TelephonyOutboundConfig AWS API Documentation
     #
     class TelephonyOutboundConfig < Struct.new(
       :connect_contact_flow_id,
       :connect_source_phone_number,
-      :answer_machine_detection_config)
+      :answer_machine_detection_config,
+      :ring_timeout)
       SENSITIVE = []
       include Aws::Structure
     end

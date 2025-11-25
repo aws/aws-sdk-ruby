@@ -162,6 +162,7 @@ module Aws
       interface _GetVpcEndpointServiceNameResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcEndpointServiceNameOutput]
         def service_name: () -> ::String
+        def cluster_vpc_endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_vpc_endpoint_service_name-instance_method
       def get_vpc_endpoint_service_name: (

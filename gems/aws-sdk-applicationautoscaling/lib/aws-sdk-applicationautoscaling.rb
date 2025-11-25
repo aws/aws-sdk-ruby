@@ -54,7 +54,7 @@ module Aws::ApplicationAutoScaling
   autoload :EndpointProvider, 'aws-sdk-applicationautoscaling/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationautoscaling/endpoints'
 
-  GEM_VERSION = '1.114.0'
+  GEM_VERSION = '1.115.0'
 
 end
 

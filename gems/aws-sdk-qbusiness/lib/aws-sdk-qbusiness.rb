@@ -27,6 +27,22 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:qbusiness)
 #
 # See {Client} for more information.
 #
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+#
+#     q_business = Aws::QBusiness::AsyncClient.new
+#     resp = q_business.associate_permission(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+#
+# See {AsyncClient} for more information.
+#
 # # Errors
 #
 # Errors returned from QBusiness are defined in the
@@ -57,7 +73,7 @@ module Aws::QBusiness
   autoload :AsyncClient, 'aws-sdk-qbusiness/async_client'
   autoload :EventStreams, 'aws-sdk-qbusiness/event_streams'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

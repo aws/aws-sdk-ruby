@@ -51,6 +51,18 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#connectivity_type-instance_method
       def connectivity_type: () -> ("private" | "public")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#availability_mode-instance_method
+      def availability_mode: () -> ("zonal" | "regional")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#auto_scaling_ips-instance_method
+      def auto_scaling_ips: () -> ("enabled" | "disabled")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#auto_provision_zones-instance_method
+      def auto_provision_zones: () -> ("enabled" | "disabled")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#route_table_id-instance_method
+      def route_table_id: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#load-instance_method

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2025-11-19)
+------------------
+
+* Feature - Adds support to create, update, retrieve, rotate, and delete managed external secrets.
+
 1.122.0 (2025-10-27)
 ------------------
 

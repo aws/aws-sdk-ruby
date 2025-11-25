@@ -48,7 +48,7 @@ module Aws::ImportExport
   autoload :Errors, 'aws-sdk-importexport/errors'
   autoload :Resource, 'aws-sdk-importexport/resource'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

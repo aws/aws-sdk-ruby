@@ -226,7 +226,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] invoked_via_function_url
     #   Restricts the `lambda:InvokeFunction` action to function URL calls.
-    #   When set to `true`, this prevents the principal from invoking the
+    #   When specified, this option prevents the principal from invoking the
     #   function by any means other than the function URL. For more
     #   information, see [Control access to Lambda function URLs][1].
     #
@@ -791,26 +791,28 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
-    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only)
-    #   A configuration object that specifies the destination of an event
-    #   after Lambda processes it.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) A configuration object that specifies the destination of an
+    #   event after Lambda processes it.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Kinesis and DynamoDB Streams only) Discard records older than the
-    #   specified age. The default value is infinite (-1).
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
-    #   (Kinesis and DynamoDB Streams only) If the function returns an
-    #   error, split the batch in two and retry.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) If the function returns an error, split the batch in two and
+    #   retry.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Kinesis and DynamoDB Streams only) Discard records after the
-    #   specified number of retries. The default value is infinite (-1).
-    #   When set to infinite (-1), failed records are retried until the
-    #   record expires.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records are retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -841,8 +843,9 @@ module Aws::Lambda
     #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] function_response_types
-    #   (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current
-    #   response type enums applied to the event source mapping.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka,
+    #   and Amazon SQS) A list of current response type enums applied to the
+    #   event source mapping.
     #   @return [Array<String>]
     #
     # @!attribute [rw] amazon_managed_kafka_event_source_config
@@ -891,9 +894,9 @@ module Aws::Lambda
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
     # @!attribute [rw] provisioned_poller_config
-    #   (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
-    #   configuration for the event source. For more information, see
-    #   [provisioned mode][1].
+    #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
+    #   provisioned mode configuration for the event source. For more
+    #   information, see [provisioned mode][1].
     #
     #
     #
@@ -1161,6 +1164,12 @@ module Aws::Lambda
     #   The function's Amazon CloudWatch Logs configuration settings.
     #   @return [Types::LoggingConfig]
     #
+    # @!attribute [rw] tenancy_config
+    #   Configuration for multi-tenant applications that use Lambda
+    #   functions. Defines tenant isolation settings and resource
+    #   allocations. Required for functions supporting multiple tenants.
+    #   @return [Types::TenancyConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -1187,7 +1196,8 @@ module Aws::Lambda
       :architectures,
       :ephemeral_storage,
       :snap_start,
-      :logging_config)
+      :logging_config,
+      :tenancy_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1982,8 +1992,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] destination_config
     #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
-    #   Kafka event sources only) A configuration object that specifies the
-    #   destination of an event after Lambda processes it.
+    #   Kafka) A configuration object that specifies the destination of an
+    #   event after Lambda processes it.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] topics
@@ -2005,10 +2015,10 @@ module Aws::Lambda
     #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Kinesis and DynamoDB Streams only) Discard records older than the
-    #   specified age. The default value is -1, which sets the maximum age
-    #   to infinite. When the value is set to infinite, Lambda never
-    #   discards old records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) Discard records older than the specified age. The default
+    #   value is -1, which sets the maximum age to infinite. When the value
+    #   is set to infinite, Lambda never discards old records.
     #
     #   <note markdown="1"> The minimum valid value for maximum record age is 60s. Although
     #   values less than 60 and greater than -1 fall within the parameter's
@@ -2018,16 +2028,17 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
-    #   (Kinesis and DynamoDB Streams only) If the function returns an
-    #   error, split the batch in two and retry. The default value is false.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) If the function returns an error, split the batch in two and
+    #   retry. The default value is false.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Kinesis and DynamoDB Streams only) Discard records after the
-    #   specified number of retries. The default value is -1, which sets the
-    #   maximum number of retries to infinite. When MaximumRetryAttempts is
-    #   infinite, Lambda retries failed records until the record expires in
-    #   the event source.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) Discard records after the specified number of retries. The
+    #   default value is -1, which sets the maximum number of retries to
+    #   infinite. When MaximumRetryAttempts is infinite, Lambda retries
+    #   failed records until the record expires in the event source.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
@@ -2037,8 +2048,9 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
-    #   (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current
-    #   response type enums applied to the event source mapping.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka,
+    #   and Amazon SQS) A list of current response type enums applied to the
+    #   event source mapping.
     #   @return [Array<String>]
     #
     # @!attribute [rw] amazon_managed_kafka_event_source_config
@@ -2093,9 +2105,9 @@ module Aws::Lambda
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
     # @!attribute [rw] provisioned_poller_config
-    #   (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
-    #   configuration for the event source. For more information, see
-    #   [provisioned mode][1].
+    #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
+    #   provisioned mode configuration for the event source. For more
+    #   information, see [provisioned mode][1].
     #
     #
     #
@@ -2575,6 +2587,12 @@ module Aws::Lambda
     #   The function's Amazon CloudWatch Logs configuration settings.
     #   @return [Types::LoggingConfig]
     #
+    # @!attribute [rw] tenancy_config
+    #   The function's tenant isolation configuration settings. Determines
+    #   whether the Lambda function runs on a shared or dedicated
+    #   infrastructure per unique tenant.
+    #   @return [Types::TenancyConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -2613,7 +2631,8 @@ module Aws::Lambda
       :ephemeral_storage,
       :snap_start,
       :runtime_version_config,
-      :logging_config)
+      :logging_config,
+      :tenancy_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3775,6 +3794,10 @@ module Aws::Lambda
     #   function.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_id
+    #   The identifier of the tenant in a multi-tenant Lambda function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest AWS API Documentation
     #
     class InvocationRequest < Struct.new(
@@ -3783,7 +3806,8 @@ module Aws::Lambda
       :log_type,
       :client_context,
       :payload,
-      :qualifier)
+      :qualifier,
+      :tenant_id)
       SENSITIVE = [:payload]
       include Aws::Structure
     end
@@ -3961,6 +3985,10 @@ module Aws::Lambda
     #   `--payload file://payload.json`.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_id
+    #   The identifier of the tenant in a multi-tenant Lambda function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeWithResponseStreamRequest AWS API Documentation
     #
     class InvokeWithResponseStreamRequest < Struct.new(
@@ -3969,7 +3997,8 @@ module Aws::Lambda
       :log_type,
       :client_context,
       :qualifier,
-      :payload)
+      :payload,
+      :tenant_id)
       SENSITIVE = [:payload]
       include Aws::Structure
     end
@@ -5055,30 +5084,30 @@ module Aws::Lambda
     # @!attribute [rw] destination
     #   The Amazon Resource Name (ARN) of the destination resource.
     #
-    #   To retain records of unsuccessful [asynchronous invocations][1], you
-    #   can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3
-    #   bucket, Lambda function, or Amazon EventBridge event bus as the
-    #   destination.
+    #   To retain records of failed invocations from [Kinesis][1],
+    #   [DynamoDB][2], [self-managed Apache Kafka][3], or [Amazon MSK][3],
+    #   you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3
+    #   bucket, or Kafka topic as the destination.
     #
     #   <note markdown="1"> Amazon SNS destinations have a message size limit of 256 KB. If the
     #   combined size of the function request and response payload exceeds
     #   the limit, Lambda will drop the payload when sending `OnFailure`
     #   event to the destination. For details on this behavior, refer to
-    #   [Retaining records of asynchronous invocations][2].
+    #   [Retaining records of asynchronous invocations][4].
     #
     #    </note>
     #
-    #   To retain records of failed invocations from [Kinesis][3],
-    #   [DynamoDB][4], [self-managed Kafka][5] or [Amazon MSK][6], you can
+    #   To retain records of failed invocations from [Kinesis][1],
+    #   [DynamoDB][2], [self-managed Kafka][5] or [Amazon MSK][6], you can
     #   configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket
     #   as the destination.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
-    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html
-    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
-    #   [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-on-failure.html
+    #   [4]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html
     #   [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination
     #   [6]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination
     #   @return [String]
@@ -5251,8 +5280,7 @@ module Aws::Lambda
 
     # The [ provisioned mode][1] configuration for the event source. Use
     # Provisioned Mode to customize the minimum and maximum number of event
-    # pollers for your event source. An event poller is a compute unit that
-    # provides approximately 5 MBps of throughput.
+    # pollers for your event source.
     #
     #
     #
@@ -5260,19 +5288,34 @@ module Aws::Lambda
     #
     # @!attribute [rw] minimum_pollers
     #   The minimum number of event pollers this event source can scale down
-    #   to.
+    #   to. For Amazon SQS events source mappings, default is 2, and minimum
+    #   2 required. For Amazon MSK and self-managed Apache Kafka event
+    #   source mappings, default is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_pollers
     #   The maximum number of event pollers this event source can scale up
-    #   to.
+    #   to. For Amazon SQS events source mappings, default is 200, and
+    #   minimum value allowed is 2. For Amazon MSK and self-managed Apache
+    #   Kafka event source mappings, default is 200, and minimum value
+    #   allowed is 1.
     #   @return [Integer]
+    #
+    # @!attribute [rw] poller_group_name
+    #   (Amazon MSK and self-managed Apache Kafka) The name of the
+    #   provisioned poller group. Use this option to group multiple ESMs
+    #   within the VPC to share Event Poller Unit (EPU) capacity. This
+    #   option is used to optimize Provisioned mode costs for your ESMs. You
+    #   can group up to 100 ESMs per poller group and aggregate maximum
+    #   pollers across all ESMs in a group cannot exceed 2000.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ProvisionedPollerConfig AWS API Documentation
     #
     class ProvisionedPollerConfig < Struct.new(
       :minimum_pollers,
-      :maximum_pollers)
+      :maximum_pollers,
+      :poller_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6423,6 +6466,25 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Specifies the tenant isolation mode configuration for a Lambda
+    # function. This allows you to configure specific tenant isolation
+    # strategies for your function invocations. Tenant isolation
+    # configuration cannot be modified after function creation.
+    #
+    # @!attribute [rw] tenant_isolation_mode
+    #   Tenant isolation mode allows for invocation to be sent to a
+    #   corresponding execution environment dedicated to a specific tenant
+    #   ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TenancyConfig AWS API Documentation
+    #
+    class TenancyConfig < Struct.new(
+      :tenant_isolation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request throughput limit was exceeded. For more information, see
     # [Lambda quotas][1].
     #
@@ -6700,26 +6762,28 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
-    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only)
-    #   A configuration object that specifies the destination of an event
-    #   after Lambda processes it.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) A configuration object that specifies the destination of an
+    #   event after Lambda processes it.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Kinesis and DynamoDB Streams only) Discard records older than the
-    #   specified age. The default value is infinite (-1).
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) Discard records older than the specified age. The default
+    #   value is infinite (-1).
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
-    #   (Kinesis and DynamoDB Streams only) If the function returns an
-    #   error, split the batch in two and retry.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) If the function returns an error, split the batch in two and
+    #   retry.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Kinesis and DynamoDB Streams only) Discard records after the
-    #   specified number of retries. The default value is infinite (-1).
-    #   When set to infinite (-1), failed records are retried until the
-    #   record expires.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka) Discard records after the specified number of retries. The
+    #   default value is infinite (-1). When set to infinite (-1), failed
+    #   records are retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -6739,8 +6803,9 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
-    #   (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current
-    #   response type enums applied to the event source mapping.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka,
+    #   and Amazon SQS) A list of current response type enums applied to the
+    #   event source mapping.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scaling_config
@@ -6789,9 +6854,9 @@ module Aws::Lambda
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
     # @!attribute [rw] provisioned_poller_config
-    #   (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
-    #   configuration for the event source. For more information, see
-    #   [provisioned mode][1].
+    #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
+    #   provisioned mode configuration for the event source. For more
+    #   information, see [provisioned mode][1].
     #
     #
     #

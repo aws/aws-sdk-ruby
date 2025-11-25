@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2025-11-20)
+------------------
+
+* Feature - Kinesis Data Streams now supports up to 50 Enhance Fan-out consumers for On-demand Advantage Streams. On-demand Standard and Provisioned streams will continue with the existing limit of 20 consumers for Enhanced Fan-out.
+
 1.91.0 (2025-11-03)
 ------------------
 

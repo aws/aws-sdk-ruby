@@ -196,6 +196,7 @@ module Aws::NetworkFirewall
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVpcEndpointAssociationsRequest = Shapes::StructureShape.new(name: 'ListVpcEndpointAssociationsRequest')
     ListVpcEndpointAssociationsResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointAssociationsResponse')
+    ListingName = Shapes::StringShape.new(name: 'ListingName')
     LogDestinationConfig = Shapes::StructureShape.new(name: 'LogDestinationConfig')
     LogDestinationConfigs = Shapes::ListShape.new(name: 'LogDestinationConfigs')
     LogDestinationMap = Shapes::MapShape.new(name: 'LogDestinationMap')
@@ -220,6 +221,7 @@ module Aws::NetworkFirewall
     PortSet = Shapes::StructureShape.new(name: 'PortSet')
     PortSets = Shapes::MapShape.new(name: 'PortSets')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
+    ProductId = Shapes::StringShape.new(name: 'ProductId')
     ProtocolNumber = Shapes::IntegerShape.new(name: 'ProtocolNumber')
     ProtocolNumbers = Shapes::ListShape.new(name: 'ProtocolNumbers')
     ProtocolString = Shapes::StringShape.new(name: 'ProtocolString')
@@ -299,6 +301,7 @@ module Aws::NetworkFirewall
     StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     SubnetMapping = Shapes::StructureShape.new(name: 'SubnetMapping')
     SubnetMappings = Shapes::ListShape.new(name: 'SubnetMappings')
+    SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
     Summary = Shapes::StructureShape.new(name: 'Summary')
     SummaryConfiguration = Shapes::StructureShape.new(name: 'SummaryConfiguration')
     SummaryRuleOption = Shapes::StringShape.new(name: 'SummaryRuleOption')
@@ -361,6 +364,7 @@ module Aws::NetworkFirewall
     UpdateToken = Shapes::StringShape.new(name: 'UpdateToken')
     VariableDefinition = Shapes::StringShape.new(name: 'VariableDefinition')
     VariableDefinitionList = Shapes::ListShape.new(name: 'VariableDefinitionList')
+    VendorName = Shapes::StringShape.new(name: 'VendorName')
     VpcEndpointAssociation = Shapes::StructureShape.new(name: 'VpcEndpointAssociation')
     VpcEndpointAssociationMetadata = Shapes::StructureShape.new(name: 'VpcEndpointAssociationMetadata')
     VpcEndpointAssociationStatus = Shapes::StructureShape.new(name: 'VpcEndpointAssociationStatus')
@@ -683,6 +687,9 @@ module Aws::NetworkFirewall
     DescribeRuleGroupMetadataResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "Capacity"))
     DescribeRuleGroupMetadataResponse.add_member(:stateful_rule_options, Shapes::ShapeRef.new(shape: StatefulRuleOptions, location_name: "StatefulRuleOptions"))
     DescribeRuleGroupMetadataResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "LastModifiedTime"))
+    DescribeRuleGroupMetadataResponse.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, location_name: "VendorName"))
+    DescribeRuleGroupMetadataResponse.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
+    DescribeRuleGroupMetadataResponse.add_member(:listing_name, Shapes::ShapeRef.new(shape: ListingName, location_name: "ListingName"))
     DescribeRuleGroupMetadataResponse.struct_class = Types::DescribeRuleGroupMetadataResponse
 
     DescribeRuleGroupRequest.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "RuleGroupName"))
@@ -991,6 +998,7 @@ module Aws::NetworkFirewall
     ListRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ResourceManagedStatus, location_name: "Scope"))
     ListRuleGroupsRequest.add_member(:managed_type, Shapes::ShapeRef.new(shape: ResourceManagedType, location_name: "ManagedType"))
+    ListRuleGroupsRequest.add_member(:subscription_status, Shapes::ShapeRef.new(shape: SubscriptionStatus, location_name: "SubscriptionStatus"))
     ListRuleGroupsRequest.add_member(:type, Shapes::ShapeRef.new(shape: RuleGroupType, location_name: "Type"))
     ListRuleGroupsRequest.struct_class = Types::ListRuleGroupsRequest
 
@@ -1108,6 +1116,7 @@ module Aws::NetworkFirewall
 
     RuleGroupMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     RuleGroupMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    RuleGroupMetadata.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, location_name: "VendorName"))
     RuleGroupMetadata.struct_class = Types::RuleGroupMetadata
 
     RuleGroupResponse.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RuleGroupArn"))
@@ -2211,6 +2220,7 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
       end)
 
       api.add_operation(:update_firewall_delete_protection, Seahorse::Model::Operation.new.tap do |o|

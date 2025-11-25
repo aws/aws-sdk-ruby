@@ -775,6 +775,91 @@ module Aws::Braket
       req.send_request(options)
     end
 
+    # Creates a spending limit for a specified quantum device. Spending
+    # limits help you control costs by setting maximum amounts that can be
+    # spent on quantum computing tasks within a specified time period.
+    # Simulators do not support spending limits.
+    #
+    # @option params [required, String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Braket ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :device_arn
+    #   The Amazon Resource Name (ARN) of the quantum device to apply the
+    #   spending limit to.
+    #
+    # @option params [required, String] :spending_limit
+    #   The maximum amount that can be spent on the specified device, in USD.
+    #
+    # @option params [Types::TimePeriod] :time_period
+    #   The time period during which the spending limit is active, including
+    #   start and end dates.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the spending limit. Each tag consists of a key
+    #   and an optional value.
+    #
+    # @return [Types::CreateSpendingLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSpendingLimitResponse#spending_limit_arn #spending_limit_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_spending_limit({
+    #     client_token: "String64", # required
+    #     device_arn: "DeviceArn", # required
+    #     spending_limit: "CreateSpendingLimitRequestSpendingLimitString", # required
+    #     time_period: {
+    #       start_at: Time.now, # required
+    #       end_at: Time.now, # required
+    #     },
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.spending_limit_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CreateSpendingLimit AWS API Documentation
+    #
+    # @overload create_spending_limit(params = {})
+    # @param [Hash] params ({})
+    def create_spending_limit(params = {}, options = {})
+      req = build_request(:create_spending_limit, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing spending limit. This operation permanently removes
+    # the spending limit and cannot be undone. After deletion, the
+    # associated device becomes unrestricted for spending.
+    #
+    # @option params [required, String] :spending_limit_arn
+    #   The Amazon Resource Name (ARN) of the spending limit to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_spending_limit({
+    #     spending_limit_arn: "SpendingLimitArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/DeleteSpendingLimit AWS API Documentation
+    #
+    # @overload delete_spending_limit(params = {})
+    # @param [Hash] params ({})
+    def delete_spending_limit(params = {}, options = {})
+      req = build_request(:delete_spending_limit, params)
+      req.send_request(options)
+    end
+
     # Retrieves the devices available in Amazon Braket.
     #
     # <note markdown="1"> For backwards compatibility with older versions of BraketSchemas,
@@ -1195,6 +1280,70 @@ module Aws::Braket
       req.send_request(options)
     end
 
+    # Searches and lists spending limits based on specified filters. This
+    # operation supports pagination and allows filtering by various criteria
+    # to find specific spending limits. We recommend using pagination to
+    # ensure that the operation returns quickly and successfully.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results. This value is returned
+    #   from a previous call to SearchSpendingLimits when there are more
+    #   results available.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Minimum
+    #   value of 1, maximum value of 100. Default is 20.
+    #
+    # @option params [Array<Types::SearchSpendingLimitsFilter>] :filters
+    #   The filters to apply when searching for spending limits. Use filters
+    #   to narrow down the results based on specific criteria.
+    #
+    # @return [Types::SearchSpendingLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchSpendingLimitsResponse#spending_limits #spending_limits} => Array&lt;Types::SpendingLimitSummary&gt;
+    #   * {Types::SearchSpendingLimitsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_spending_limits({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String64", # required
+    #         values: ["String256"], # required
+    #         operator: "EQUAL", # required, accepts EQUAL
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.spending_limits #=> Array
+    #   resp.spending_limits[0].spending_limit_arn #=> String
+    #   resp.spending_limits[0].device_arn #=> String
+    #   resp.spending_limits[0].time_period.start_at #=> Time
+    #   resp.spending_limits[0].time_period.end_at #=> Time
+    #   resp.spending_limits[0].spending_limit #=> String
+    #   resp.spending_limits[0].queued_spend #=> String
+    #   resp.spending_limits[0].total_spend #=> String
+    #   resp.spending_limits[0].created_at #=> Time
+    #   resp.spending_limits[0].updated_at #=> Time
+    #   resp.spending_limits[0].tags #=> Hash
+    #   resp.spending_limits[0].tags["String"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchSpendingLimits AWS API Documentation
+    #
+    # @overload search_spending_limits(params = {})
+    # @param [Hash] params ({})
+    def search_spending_limits(params = {}, options = {})
+      req = build_request(:search_spending_limits, params)
+      req.send_request(options)
+    end
+
     # Add a tag to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -1252,6 +1401,52 @@ module Aws::Braket
       req.send_request(options)
     end
 
+    # Updates an existing spending limit. You can modify the spending amount
+    # or time period. Changes take effect immediately.
+    #
+    # @option params [required, String] :spending_limit_arn
+    #   The Amazon Resource Name (ARN) of the spending limit to update.
+    #
+    # @option params [required, String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Braket ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :spending_limit
+    #   The new maximum amount that can be spent on the specified device, in
+    #   USD.
+    #
+    # @option params [Types::TimePeriod] :time_period
+    #   The new time period during which the spending limit is active,
+    #   including start and end dates.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_spending_limit({
+    #     spending_limit_arn: "SpendingLimitArn", # required
+    #     client_token: "String64", # required
+    #     spending_limit: "UpdateSpendingLimitRequestSpendingLimitString",
+    #     time_period: {
+    #       start_at: Time.now, # required
+    #       end_at: Time.now, # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UpdateSpendingLimit AWS API Documentation
+    #
+    # @overload update_spending_limit(params = {})
+    # @param [Hash] params ({})
+    def update_spending_limit(params = {}, options = {})
+      req = build_request(:update_spending_limit, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1270,7 +1465,7 @@ module Aws::Braket
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

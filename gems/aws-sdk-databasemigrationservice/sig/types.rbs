@@ -106,6 +106,7 @@ module Aws::DatabaseMigrationService
       attr_accessor valid_to_date: ::Time
       attr_accessor signing_algorithm: ::String
       attr_accessor key_length: ::Integer
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -1375,6 +1376,7 @@ module Aws::DatabaseMigrationService
       attr_accessor service_access_role_arn: ::String
       attr_accessor external_table_definition: ::String
       attr_accessor external_id: ::String
+      attr_accessor is_read_only: bool
       attr_accessor dynamo_db_settings: Types::DynamoDbSettings
       attr_accessor s3_settings: Types::S3Settings
       attr_accessor dms_transfer_settings: Types::DmsTransferSettings
@@ -1394,6 +1396,7 @@ module Aws::DatabaseMigrationService
       attr_accessor redis_settings: Types::RedisSettings
       attr_accessor gcp_my_sql_settings: Types::GcpMySQLSettings
       attr_accessor timestream_settings: Types::TimestreamSettings
+      attr_accessor lakehouse_settings: Types::LakehouseSettings
       SENSITIVE: []
     end
 
@@ -1587,6 +1590,7 @@ module Aws::DatabaseMigrationService
       attr_accessor certificate_pem: ::String
       attr_accessor certificate_wallet: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: [:certificate_pem]
     end
 
@@ -1719,6 +1723,11 @@ module Aws::DatabaseMigrationService
       attr_accessor include_null_and_empty: bool
       attr_accessor no_hex_prefix: bool
       attr_accessor use_large_integer_value: bool
+      SENSITIVE: []
+    end
+
+    class LakehouseSettings
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -2471,6 +2480,7 @@ module Aws::DatabaseMigrationService
       attr_accessor replication_update_time: ::Time
       attr_accessor replication_last_stop_time: ::Time
       attr_accessor replication_deprovision_time: ::Time
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 
@@ -2486,6 +2496,7 @@ module Aws::DatabaseMigrationService
       attr_accessor table_mappings: ::String
       attr_accessor replication_config_create_time: ::Time
       attr_accessor replication_config_update_time: ::Time
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 
@@ -2557,6 +2568,7 @@ module Aws::DatabaseMigrationService
       attr_accessor subnet_group_status: ::String
       attr_accessor subnets: ::Array[Types::Subnet]
       attr_accessor supported_network_types: ::Array[::String]
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 

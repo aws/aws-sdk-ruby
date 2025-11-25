@@ -1980,6 +1980,10 @@ module Aws::MediaLive
     # @option params [Array<String>] :sdi_sources
     #   SDI Sources for this Input.
     #
+    # @option params [Types::RouterSettings] :router_settings
+    #   This is the collection of settings that are used during the creation
+    #   of a MediaConnect router input.
+    #
     # @return [Types::CreateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInputResponse#input #input} => Types::Input
@@ -2024,7 +2028,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE, SRT_CALLER, MULTICAST, SMPTE_2110_RECEIVER_GROUP, SDI
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE, SRT_CALLER, MULTICAST, SMPTE_2110_RECEIVER_GROUP, SDI, MEDIACONNECT_ROUTER
     #     vpc: {
     #       security_group_ids: ["__string"],
     #       subnet_ids: ["__string"], # required
@@ -2077,6 +2081,15 @@ module Aws::MediaLive
     #       ],
     #     },
     #     sdi_sources: ["__string"],
+    #     router_settings: {
+    #       destinations: [
+    #         {
+    #           availability_zone_name: "__string", # required
+    #         },
+    #       ],
+    #       encryption_type: "AUTOMATIC", # accepts AUTOMATIC, SECRETS_MANAGER
+    #       secret_arn: "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2114,7 +2127,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
     #   resp.input.srt_settings.srt_caller_sources #=> Array
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -2137,6 +2150,11 @@ module Aws::MediaLive
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.video_sdp.sdp_url #=> String
     #   resp.input.sdi_sources #=> Array
     #   resp.input.sdi_sources[0] #=> String
+    #   resp.input.router_settings.destinations #=> Array
+    #   resp.input.router_settings.destinations[0].availability_zone_name #=> String
+    #   resp.input.router_settings.destinations[0].router_output_arn #=> String
+    #   resp.input.router_settings.encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.input.router_settings.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -2402,7 +2420,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
     #   resp.input.srt_settings.srt_caller_sources #=> Array
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -2425,6 +2443,11 @@ module Aws::MediaLive
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.video_sdp.sdp_url #=> String
     #   resp.input.sdi_sources #=> Array
     #   resp.input.sdi_sources[0] #=> String
+    #   resp.input.router_settings.destinations #=> Array
+    #   resp.input.router_settings.destinations[0].availability_zone_name #=> String
+    #   resp.input.router_settings.destinations[0].router_output_arn #=> String
+    #   resp.input.router_settings.encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.input.router_settings.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInput AWS API Documentation
     #
@@ -4567,6 +4590,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#multicast_settings #multicast_settings} => Types::MulticastSettings
     #   * {Types::DescribeInputResponse#smpte_2110_receiver_group_settings #smpte_2110_receiver_group_settings} => Types::Smpte2110ReceiverGroupSettings
     #   * {Types::DescribeInputResponse#sdi_sources #sdi_sources} => Array&lt;String&gt;
+    #   * {Types::DescribeInputResponse#router_settings #router_settings} => Types::RouterInputSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -4609,7 +4633,7 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
     #   resp.srt_settings.srt_caller_sources #=> Array
     #   resp.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -4632,6 +4656,11 @@ module Aws::MediaLive
     #   resp.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.video_sdp.sdp_url #=> String
     #   resp.sdi_sources #=> Array
     #   resp.sdi_sources[0] #=> String
+    #   resp.router_settings.destinations #=> Array
+    #   resp.router_settings.destinations[0].availability_zone_name #=> String
+    #   resp.router_settings.destinations[0].router_output_arn #=> String
+    #   resp.router_settings.encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.router_settings.secret_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5603,7 +5632,7 @@ module Aws::MediaLive
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.inputs[0].tags #=> Hash
     #   resp.inputs[0].tags["__string"] #=> String
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
     #   resp.inputs[0].srt_settings.srt_caller_sources #=> Array
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -5626,6 +5655,11 @@ module Aws::MediaLive
     #   resp.inputs[0].smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.video_sdp.sdp_url #=> String
     #   resp.inputs[0].sdi_sources #=> Array
     #   resp.inputs[0].sdi_sources[0] #=> String
+    #   resp.inputs[0].router_settings.destinations #=> Array
+    #   resp.inputs[0].router_settings.destinations[0].availability_zone_name #=> String
+    #   resp.inputs[0].router_settings.destinations[0].router_output_arn #=> String
+    #   resp.inputs[0].router_settings.encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.inputs[0].router_settings.secret_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -9888,6 +9922,13 @@ module Aws::MediaLive
     # @option params [Array<String>] :sdi_sources
     #   SDI Sources for this Input.
     #
+    # @option params [Types::SpecialRouterSettings] :special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #
     # @return [Types::UpdateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateInputResponse#input #input} => Types::Input
@@ -9976,6 +10017,9 @@ module Aws::MediaLive
     #       ],
     #     },
     #     sdi_sources: ["__string"],
+    #     special_router_settings: {
+    #       router_arn: "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -10013,7 +10057,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
     #   resp.input.srt_settings.srt_caller_sources #=> Array
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -10036,6 +10080,11 @@ module Aws::MediaLive
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.video_sdp.sdp_url #=> String
     #   resp.input.sdi_sources #=> Array
     #   resp.input.sdi_sources[0] #=> String
+    #   resp.input.router_settings.destinations #=> Array
+    #   resp.input.router_settings.destinations[0].availability_zone_name #=> String
+    #   resp.input.router_settings.destinations[0].router_output_arn #=> String
+    #   resp.input.router_settings.encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.input.router_settings.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -14667,7 +14716,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.170.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

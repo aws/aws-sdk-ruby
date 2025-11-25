@@ -3873,14 +3873,24 @@ module Aws::QuickSight
 
     # The display options for tile borders for visuals.
     #
+    # @!attribute [rw] color
+    #   The option to add color for tile borders for visuals.
+    #   @return [String]
+    #
     # @!attribute [rw] show
     #   The option to enable display of borders for visuals.
     #   @return [Boolean]
     #
+    # @!attribute [rw] width
+    #   The option to set the width of tile borders for visuals.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BorderStyle AWS API Documentation
     #
     class BorderStyle < Struct.new(
-      :show)
+      :color,
+      :show,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18897,6 +18907,14 @@ module Aws::QuickSight
     #   The loading animation configuration of a free-form layout element.
     #   @return [Types::LoadingAnimation]
     #
+    # @!attribute [rw] border_radius
+    #   The border radius of a free-form layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] padding
+    #   The padding of a free-form layout element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FreeFormLayoutElement AWS API Documentation
     #
     class FreeFormLayoutElement < Struct.new(
@@ -18911,7 +18929,9 @@ module Aws::QuickSight
       :border_style,
       :selected_border_style,
       :background_style,
-      :loading_animation)
+      :loading_animation,
+      :border_radius,
+      :padding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18945,11 +18965,16 @@ module Aws::QuickSight
     #   The border color of a free-form layout element.
     #   @return [String]
     #
+    # @!attribute [rw] width
+    #   The border width of a free-form layout element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FreeFormLayoutElementBorderStyle AWS API Documentation
     #
     class FreeFormLayoutElementBorderStyle < Struct.new(
       :visibility,
-      :color)
+      :color,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21075,6 +21100,31 @@ module Aws::QuickSight
     #   The height of a grid element expressed as a number of grid rows.
     #   @return [Integer]
     #
+    # @!attribute [rw] border_style
+    #   The border style configuration of a grid layout element.
+    #   @return [Types::GridLayoutElementBorderStyle]
+    #
+    # @!attribute [rw] selected_border_style
+    #   The border style configuration of a grid layout element. This border
+    #   style is used when the element is selected.
+    #   @return [Types::GridLayoutElementBorderStyle]
+    #
+    # @!attribute [rw] background_style
+    #   The background style configuration of a grid layout element.
+    #   @return [Types::GridLayoutElementBackgroundStyle]
+    #
+    # @!attribute [rw] loading_animation
+    #   The configuration of loading animation in free-form layout.
+    #   @return [Types::LoadingAnimation]
+    #
+    # @!attribute [rw] border_radius
+    #   The border radius of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] padding
+    #   The padding of a grid layout element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GridLayoutElement AWS API Documentation
     #
     class GridLayoutElement < Struct.new(
@@ -21083,7 +21133,56 @@ module Aws::QuickSight
       :column_index,
       :column_span,
       :row_index,
-      :row_span)
+      :row_span,
+      :border_style,
+      :selected_border_style,
+      :background_style,
+      :loading_animation,
+      :border_radius,
+      :padding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The background style configuration of a grid layout element.
+    #
+    # @!attribute [rw] visibility
+    #   The background visibility of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The background color of a grid layout element.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GridLayoutElementBackgroundStyle AWS API Documentation
+    #
+    class GridLayoutElementBackgroundStyle < Struct.new(
+      :visibility,
+      :color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The border style configuration of a grid layout element.
+    #
+    # @!attribute [rw] visibility
+    #   The border visibility of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The border color of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   The border width of a grid layout element.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GridLayoutElementBorderStyle AWS API Documentation
+    #
+    class GridLayoutElementBorderStyle < Struct.new(
+      :visibility,
+      :color,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30840,6 +30939,10 @@ module Aws::QuickSight
     #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
     #   @return [Types::RegisteredUserGenerativeQnAEmbeddingConfiguration]
     #
+    # @!attribute [rw] quick_chat
+    #   The configuration details for embedding the Quick chat agent.
+    #   @return [Types::RegisteredUserQuickChatEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
@@ -30847,7 +30950,8 @@ module Aws::QuickSight
       :quick_sight_console,
       :q_search_bar,
       :dashboard_visual,
-      :generative_qn_a)
+      :generative_qn_a,
+      :quick_chat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30905,6 +31009,15 @@ module Aws::QuickSight
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # An object that provides information about the configuration of a chat
+    # agent.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserQuickChatEmbeddingConfiguration AWS API Documentation
+    #
+    class RegisteredUserQuickChatEmbeddingConfiguration < Aws::EmptyStructure; end
 
     # Information about the Amazon Quick Sight console that you want to
     # embed.
@@ -33134,6 +33247,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The background configuration for sheets.
+    #
+    # @!attribute [rw] color
+    #   The solid color background option for sheets.
+    #   @return [String]
+    #
+    # @!attribute [rw] gradient
+    #   The gradient background option for sheets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetBackgroundStyle AWS API Documentation
+    #
+    class SheetBackgroundStyle < Struct.new(
+      :color,
+      :gradient)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A control to display info icons for filters and parameters.
     #
     # @!attribute [rw] visibility
@@ -33498,11 +33630,16 @@ module Aws::QuickSight
     #   The layout options for tiles.
     #   @return [Types::TileLayoutStyle]
     #
+    # @!attribute [rw] background
+    #   The background for sheets.
+    #   @return [Types::SheetBackgroundStyle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetStyle AWS API Documentation
     #
     class SheetStyle < Struct.new(
       :tile,
-      :tile_layout)
+      :tile_layout,
+      :background)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36564,14 +36701,29 @@ module Aws::QuickSight
 
     # Display options related to tiles on a sheet.
     #
+    # @!attribute [rw] background_color
+    #   The background color of a tile.
+    #   @return [String]
+    #
     # @!attribute [rw] border
     #   The border around a tile.
     #   @return [Types::BorderStyle]
     #
+    # @!attribute [rw] border_radius
+    #   The border radius of a tile.
+    #   @return [String]
+    #
+    # @!attribute [rw] padding
+    #   The padding of a tile.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TileStyle AWS API Documentation
     #
     class TileStyle < Struct.new(
-      :border)
+      :background_color,
+      :border,
+      :border_radius,
+      :padding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38704,10 +38856,45 @@ module Aws::QuickSight
     #   Determines the list of font families.
     #   @return [Array<Types::Font>]
     #
+    # @!attribute [rw] axis_title_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] axis_label_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] legend_title_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] legend_value_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] data_label_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] visual_title_font_configuration
+    #   Configures the display properties of the visual title.
+    #   @return [Types::VisualTitleFontConfiguration]
+    #
+    # @!attribute [rw] visual_subtitle_font_configuration
+    #   Configures the display properties of the visual sub-title.
+    #   @return [Types::VisualSubtitleFontConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Typography AWS API Documentation
     #
     class Typography < Struct.new(
-      :font_families)
+      :font_families,
+      :axis_title_font_configuration,
+      :axis_label_font_configuration,
+      :legend_title_font_configuration,
+      :legend_value_font_configuration,
+      :data_label_font_configuration,
+      :visual_title_font_configuration,
+      :visual_subtitle_font_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42867,6 +43054,30 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Configures the display properties of the visual sub-title.
+    #
+    # @!attribute [rw] font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] text_alignment
+    #   Determines the alignment of visual sub-title.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transform
+    #   Determines the text transformation of visual sub-title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualSubtitleFontConfiguration AWS API Documentation
+    #
+    class VisualSubtitleFontConfiguration < Struct.new(
+      :font_configuration,
+      :text_alignment,
+      :text_transform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The subtitle label options for a visual.
     #
     # @!attribute [rw] visibility
@@ -42883,6 +43094,30 @@ module Aws::QuickSight
     class VisualSubtitleLabelOptions < Struct.new(
       :visibility,
       :format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the display properties of the visual title.
+    #
+    # @!attribute [rw] font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] text_alignment
+    #   Determines the alignment of visual title.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transform
+    #   Determines the text transformation of visual title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualTitleFontConfiguration AWS API Documentation
+    #
+    class VisualTitleFontConfiguration < Struct.new(
+      :font_configuration,
+      :text_alignment,
+      :text_transform)
       SENSITIVE = []
       include Aws::Structure
     end

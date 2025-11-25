@@ -339,6 +339,8 @@ module Aws
 
       interface _ListAuditFindingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAuditFindingsOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
         def audit_findings: () -> ::Array[Types::AuditFinding]
         def next_token: () -> ::String
       end
@@ -377,10 +379,28 @@ module Aws
                                      }
                                    },
                                  ],
+                                 ?detail_level: ("BRIEF" | "DETAILED"),
                                  ?next_token: ::String,
                                  ?max_results: ::Integer
                                ) -> _ListAuditFindingsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAuditFindingsResponseSuccess
+
+      interface _ListEntityEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntityEventsOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def change_events: () -> ::Array[Types::ChangeEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_entity_events-instance_method
+      def list_entity_events: (
+                                entity: Hash[::String, ::String],
+                                start_time: ::Time,
+                                end_time: ::Time,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListEntityEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntityEventsResponseSuccess
 
       interface _ListGroupingAttributeDefinitionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupingAttributeDefinitionsOutput]
@@ -390,7 +410,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_grouping_attribute_definitions-instance_method
       def list_grouping_attribute_definitions: (
-                                                 ?next_token: ::String
+                                                 ?next_token: ::String,
+                                                 ?aws_account_id: ::String,
+                                                 ?include_linked_accounts: bool
                                                ) -> _ListGroupingAttributeDefinitionsResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupingAttributeDefinitionsResponseSuccess
 

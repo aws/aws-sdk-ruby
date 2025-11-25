@@ -483,7 +483,15 @@ module Aws::ControlTower
     # @option params [required, String] :version
     #   The landing zone version, for example, 3.0.
     #
-    # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
+    # @option params [Array<String>] :remediation_types
+    #   Specifies the types of remediation actions to apply when creating the
+    #   landing zone, such as automatic drift correction or compliance
+    #   enforcement.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to be applied to the landing zone.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :manifest
     #   The manifest JSON file is a text file that describes your Amazon Web
     #   Services resources. For examples, review [Launch your landing
     #   zone][1].
@@ -497,14 +505,6 @@ module Aws::ControlTower
     #
     #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #
-    # @option params [Array<String>] :remediation_types
-    #   Specifies the types of remediation actions to apply when creating the
-    #   landing zone, such as automatic drift correction or compliance
-    #   enforcement.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Tags to be applied to the landing zone.
-    #
     # @return [Types::CreateLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLandingZoneOutput#arn #arn} => String
@@ -514,11 +514,11 @@ module Aws::ControlTower
     #
     #   resp = client.create_landing_zone({
     #     version: "LandingZoneVersion", # required
-    #     manifest: { # required
-    #     },
     #     remediation_types: ["INHERITANCE_DRIFT"], # accepts INHERITANCE_DRIFT
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     manifest: {
     #     },
     #   })
     #
@@ -1731,7 +1731,14 @@ module Aws::ControlTower
     # @option params [required, String] :version
     #   The landing zone version, for example, 3.2.
     #
-    # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
+    # @option params [Array<String>] :remediation_types
+    #   Specifies the types of remediation actions to apply when updating the
+    #   landing zone configuration.
+    #
+    # @option params [required, String] :landing_zone_identifier
+    #   The unique identifier of the landing zone.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :manifest
     #   The manifest file (JSON) is a text file that describes your Amazon Web
     #   Services resources. For an example, review [Launch your landing
     #   zone][1]. The example manifest file contains each of the available
@@ -1747,13 +1754,6 @@ module Aws::ControlTower
     #
     #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #
-    # @option params [Array<String>] :remediation_types
-    #   Specifies the types of remediation actions to apply when updating the
-    #   landing zone configuration.
-    #
-    # @option params [required, String] :landing_zone_identifier
-    #   The unique identifier of the landing zone.
-    #
     # @return [Types::UpdateLandingZoneOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLandingZoneOutput#operation_identifier #operation_identifier} => String
@@ -1762,10 +1762,10 @@ module Aws::ControlTower
     #
     #   resp = client.update_landing_zone({
     #     version: "LandingZoneVersion", # required
-    #     manifest: { # required
-    #     },
     #     remediation_types: ["INHERITANCE_DRIFT"], # accepts INHERITANCE_DRIFT
     #     landing_zone_identifier: "String", # required
+    #     manifest: {
+    #     },
     #   })
     #
     # @example Response structure
@@ -1799,7 +1799,7 @@ module Aws::ControlTower
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

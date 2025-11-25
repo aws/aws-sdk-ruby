@@ -1889,7 +1889,8 @@ module Aws
                                     value: ::String?,
                                     resource_arn: ::String?
                                   },
-                                ]
+                                ],
+                                ?kms_key_id: ::String
                               ) -> _ImportCertificateResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCertificateResponseSuccess
 

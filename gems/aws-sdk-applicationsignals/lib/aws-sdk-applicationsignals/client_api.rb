@@ -54,15 +54,18 @@ module Aws::ApplicationSignals
     CanaryEntity = Shapes::StructureShape.new(name: 'CanaryEntity')
     ChangeEvent = Shapes::StructureShape.new(name: 'ChangeEvent')
     ChangeEventType = Shapes::StringShape.new(name: 'ChangeEventType')
+    ChangeEvents = Shapes::ListShape.new(name: 'ChangeEvents')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CreateServiceLevelObjectiveInput = Shapes::StructureShape.new(name: 'CreateServiceLevelObjectiveInput')
     CreateServiceLevelObjectiveOutput = Shapes::StructureShape.new(name: 'CreateServiceLevelObjectiveOutput')
+    DataMap = Shapes::MapShape.new(name: 'DataMap')
     DeleteGroupingConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteGroupingConfigurationOutput')
     DeleteServiceLevelObjectiveInput = Shapes::StructureShape.new(name: 'DeleteServiceLevelObjectiveInput')
     DeleteServiceLevelObjectiveOutput = Shapes::StructureShape.new(name: 'DeleteServiceLevelObjectiveOutput')
     DependencyConfig = Shapes::StructureShape.new(name: 'DependencyConfig')
     DependencyGraph = Shapes::StructureShape.new(name: 'DependencyGraph')
+    DetailLevel = Shapes::StringShape.new(name: 'DetailLevel')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionName = Shapes::StringShape.new(name: 'DimensionName')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
@@ -101,6 +104,9 @@ module Aws::ApplicationSignals
     ListAuditFindingMaxResults = Shapes::IntegerShape.new(name: 'ListAuditFindingMaxResults')
     ListAuditFindingsInput = Shapes::StructureShape.new(name: 'ListAuditFindingsInput')
     ListAuditFindingsOutput = Shapes::StructureShape.new(name: 'ListAuditFindingsOutput')
+    ListEntityEventsInput = Shapes::StructureShape.new(name: 'ListEntityEventsInput')
+    ListEntityEventsMaxResults = Shapes::IntegerShape.new(name: 'ListEntityEventsMaxResults')
+    ListEntityEventsOutput = Shapes::StructureShape.new(name: 'ListEntityEventsOutput')
     ListGroupingAttributeDefinitionsInput = Shapes::StructureShape.new(name: 'ListGroupingAttributeDefinitionsInput')
     ListGroupingAttributeDefinitionsOutput = Shapes::StructureShape.new(name: 'ListGroupingAttributeDefinitionsOutput')
     ListServiceDependenciesInput = Shapes::StructureShape.new(name: 'ListServiceDependenciesInput')
@@ -278,6 +284,7 @@ module Aws::ApplicationSignals
 
     AuditorResult.add_member(:auditor, Shapes::ShapeRef.new(shape: String, location_name: "Auditor"))
     AuditorResult.add_member(:description, Shapes::ShapeRef.new(shape: AuditorResultDescriptionString, location_name: "Description"))
+    AuditorResult.add_member(:data, Shapes::ShapeRef.new(shape: DataMap, location_name: "Data"))
     AuditorResult.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
     AuditorResult.struct_class = Types::AuditorResult
 
@@ -333,6 +340,8 @@ module Aws::ApplicationSignals
     ChangeEvent.add_member(:event_name, Shapes::ShapeRef.new(shape: String, location_name: "EventName"))
     ChangeEvent.struct_class = Types::ChangeEvent
 
+    ChangeEvents.member = Shapes::ShapeRef.new(shape: ChangeEvent)
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -347,6 +356,9 @@ module Aws::ApplicationSignals
 
     CreateServiceLevelObjectiveOutput.add_member(:slo, Shapes::ShapeRef.new(shape: ServiceLevelObjective, required: true, location_name: "Slo"))
     CreateServiceLevelObjectiveOutput.struct_class = Types::CreateServiceLevelObjectiveOutput
+
+    DataMap.key = Shapes::ShapeRef.new(shape: String)
+    DataMap.value = Shapes::ShapeRef.new(shape: String)
 
     DeleteGroupingConfigurationOutput.struct_class = Types::DeleteGroupingConfigurationOutput
 
@@ -434,15 +446,33 @@ module Aws::ApplicationSignals
     ListAuditFindingsInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "EndTime"))
     ListAuditFindingsInput.add_member(:auditors, Shapes::ShapeRef.new(shape: Auditors, location_name: "Auditors"))
     ListAuditFindingsInput.add_member(:audit_targets, Shapes::ShapeRef.new(shape: AuditTargets, required: true, location_name: "AuditTargets"))
+    ListAuditFindingsInput.add_member(:detail_level, Shapes::ShapeRef.new(shape: DetailLevel, location_name: "DetailLevel"))
     ListAuditFindingsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAuditFindingsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAuditFindingMaxResults, location_name: "MaxResults"))
     ListAuditFindingsInput.struct_class = Types::ListAuditFindingsInput
 
+    ListAuditFindingsOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    ListAuditFindingsOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     ListAuditFindingsOutput.add_member(:audit_findings, Shapes::ShapeRef.new(shape: AuditFindings, required: true, location_name: "AuditFindings"))
     ListAuditFindingsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAuditFindingsOutput.struct_class = Types::ListAuditFindingsOutput
 
+    ListEntityEventsInput.add_member(:entity, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "Entity"))
+    ListEntityEventsInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    ListEntityEventsInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    ListEntityEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEntityEventsMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListEntityEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListEntityEventsInput.struct_class = Types::ListEntityEventsInput
+
+    ListEntityEventsOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    ListEntityEventsOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    ListEntityEventsOutput.add_member(:change_events, Shapes::ShapeRef.new(shape: ChangeEvents, required: true, location_name: "ChangeEvents"))
+    ListEntityEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEntityEventsOutput.struct_class = Types::ListEntityEventsOutput
+
     ListGroupingAttributeDefinitionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListGroupingAttributeDefinitionsInput.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location: "querystring", location_name: "AwsAccountId"))
+    ListGroupingAttributeDefinitionsInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "IncludeLinkedAccounts"))
     ListGroupingAttributeDefinitionsInput.struct_class = Types::ListGroupingAttributeDefinitionsInput
 
     ListGroupingAttributeDefinitionsOutput.add_member(:grouping_attribute_definitions, Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, required: true, location_name: "GroupingAttributeDefinitions"))
@@ -947,6 +977,22 @@ module Aws::ApplicationSignals
         o.output = Shapes::ShapeRef.new(shape: ListAuditFindingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_entity_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEntityEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/events"
+        o.input = Shapes::ShapeRef.new(shape: ListEntityEventsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListEntityEventsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_grouping_attribute_definitions, Seahorse::Model::Operation.new.tap do |o|

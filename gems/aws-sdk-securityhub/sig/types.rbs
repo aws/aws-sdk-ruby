@@ -5606,6 +5606,25 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class FindingsTrendsCompositeFilter
+      attr_accessor string_filters: ::Array[Types::FindingsTrendsStringFilter]
+      attr_accessor nested_composite_filters: ::Array[Types::FindingsTrendsCompositeFilter]
+      attr_accessor operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class FindingsTrendsFilters
+      attr_accessor composite_filters: ::Array[Types::FindingsTrendsCompositeFilter]
+      attr_accessor composite_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class FindingsTrendsStringFilter
+      attr_accessor field_name: ("account_id" | "region" | "finding_types" | "finding_status" | "finding_cve_ids" | "finding_compliance_status" | "finding_control_id" | "finding_class_name" | "finding_provider" | "finding_activity_name")
+      attr_accessor filter: Types::StringFilter
+      SENSITIVE: []
+    end
+
     class FirewallPolicyDetails
       attr_accessor stateful_rule_group_references: ::Array[Types::FirewallPolicyStatefulRuleGroupReferencesDetails]
       attr_accessor stateless_custom_actions: ::Array[Types::FirewallPolicyStatelessCustomActionsDetails]
@@ -5802,6 +5821,22 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetFindingsTrendsV2Request
+      attr_accessor filters: Types::FindingsTrendsFilters
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFindingsTrendsV2Response
+      attr_accessor granularity: ("Daily" | "Weekly" | "Monthly")
+      attr_accessor trends_metrics: ::Array[Types::TrendsMetricsResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetFindingsV2Request
       attr_accessor filters: Types::OcsfFindingFilters
       attr_accessor sort_criteria: ::Array[Types::SortCriterion]
@@ -5875,6 +5910,22 @@ module Aws::SecurityHub
 
     class GetResourcesStatisticsV2Response
       attr_accessor group_by_results: ::Array[Types::GroupByResult]
+      SENSITIVE: []
+    end
+
+    class GetResourcesTrendsV2Request
+      attr_accessor filters: Types::ResourcesTrendsFilters
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcesTrendsV2Response
+      attr_accessor granularity: ("Daily" | "Weekly" | "Monthly")
+      attr_accessor trends_metrics: ::Array[Types::ResourcesTrendsMetricsResult]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -6856,6 +6907,11 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ResourcesCount
+      attr_accessor all_resources: ::Integer
+      SENSITIVE: []
+    end
+
     class ResourcesDateFilter
       attr_accessor field_name: ("ResourceDetailCaptureTime" | "ResourceCreationTime")
       attr_accessor filter: Types::DateFilter
@@ -6883,6 +6939,36 @@ module Aws::SecurityHub
     class ResourcesStringFilter
       attr_accessor field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName")
       attr_accessor filter: Types::StringFilter
+      SENSITIVE: []
+    end
+
+    class ResourcesTrendsCompositeFilter
+      attr_accessor string_filters: ::Array[Types::ResourcesTrendsStringFilter]
+      attr_accessor nested_composite_filters: ::Array[Types::ResourcesTrendsCompositeFilter]
+      attr_accessor operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class ResourcesTrendsFilters
+      attr_accessor composite_filters: ::Array[Types::ResourcesTrendsCompositeFilter]
+      attr_accessor composite_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class ResourcesTrendsMetricsResult
+      attr_accessor timestamp: ::Time
+      attr_accessor trends_values: Types::ResourcesTrendsValues
+      SENSITIVE: []
+    end
+
+    class ResourcesTrendsStringFilter
+      attr_accessor field_name: ("account_id" | "region" | "resource_type" | "resource_category")
+      attr_accessor filter: Types::StringFilter
+      SENSITIVE: []
+    end
+
+    class ResourcesTrendsValues
+      attr_accessor resources_count: Types::ResourcesCount
       SENSITIVE: []
     end
 
@@ -7128,6 +7214,18 @@ module Aws::SecurityHub
       attr_accessor label: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
       attr_accessor normalized: ::Integer
       attr_accessor original: ::String
+      SENSITIVE: []
+    end
+
+    class SeverityTrendsCount
+      attr_accessor unknown: ::Integer
+      attr_accessor informational: ::Integer
+      attr_accessor low: ::Integer
+      attr_accessor medium: ::Integer
+      attr_accessor high: ::Integer
+      attr_accessor critical: ::Integer
+      attr_accessor fatal: ::Integer
+      attr_accessor other: ::Integer
       SENSITIVE: []
     end
 
@@ -7384,6 +7482,17 @@ module Aws::SecurityHub
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class TrendsMetricsResult
+      attr_accessor timestamp: ::Time
+      attr_accessor trends_values: Types::TrendsValues
+      SENSITIVE: []
+    end
+
+    class TrendsValues
+      attr_accessor severity_trends: Types::SeverityTrendsCount
       SENSITIVE: []
     end
 

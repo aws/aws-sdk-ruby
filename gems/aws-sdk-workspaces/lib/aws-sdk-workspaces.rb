@@ -54,7 +54,7 @@ module Aws::WorkSpaces
   autoload :EndpointProvider, 'aws-sdk-workspaces/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workspaces/endpoints'
 
-  GEM_VERSION = '1.147.0'
+  GEM_VERSION = '1.148.0'
 
 end
 

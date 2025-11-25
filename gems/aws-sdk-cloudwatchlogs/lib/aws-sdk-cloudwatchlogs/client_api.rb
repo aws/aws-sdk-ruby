@@ -100,6 +100,7 @@ module Aws::CloudWatchLogs
     DeleteSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionFilterRequest')
     DeleteTransformerRequest = Shapes::StructureShape.new(name: 'DeleteTransformerRequest')
     DeleteWithKeys = Shapes::ListShape.new(name: 'DeleteWithKeys')
+    DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
     Deliveries = Shapes::ListShape.new(name: 'Deliveries')
     Delivery = Shapes::StructureShape.new(name: 'Delivery')
@@ -344,6 +345,7 @@ module Aws::CloudWatchLogs
     LowerCaseString = Shapes::StructureShape.new(name: 'LowerCaseString')
     LowerCaseStringWithKeys = Shapes::ListShape.new(name: 'LowerCaseStringWithKeys')
     MalformedQueryException = Shapes::StructureShape.new(name: 'MalformedQueryException')
+    MappingVersion = Shapes::StringShape.new(name: 'MappingVersion')
     MatchPattern = Shapes::StringShape.new(name: 'MatchPattern')
     MatchPatterns = Shapes::ListShape.new(name: 'MatchPatterns')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -429,6 +431,7 @@ module Aws::CloudWatchLogs
     PutIntegrationResponse = Shapes::StructureShape.new(name: 'PutIntegrationResponse')
     PutLogEventsRequest = Shapes::StructureShape.new(name: 'PutLogEventsRequest')
     PutLogEventsResponse = Shapes::StructureShape.new(name: 'PutLogEventsResponse')
+    PutLogGroupDeletionProtectionRequest = Shapes::StructureShape.new(name: 'PutLogGroupDeletionProtectionRequest')
     PutMetricFilterRequest = Shapes::StructureShape.new(name: 'PutMetricFilterRequest')
     PutQueryDefinitionRequest = Shapes::StructureShape.new(name: 'PutQueryDefinitionRequest')
     PutQueryDefinitionResponse = Shapes::StructureShape.new(name: 'PutQueryDefinitionResponse')
@@ -737,6 +740,7 @@ module Aws::CloudWatchLogs
     CreateLogGroupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateLogGroupRequest.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    CreateLogGroupRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
     CreateLogGroupRequest.struct_class = Types::CreateLogGroupRequest
 
     CreateLogStreamRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
@@ -1482,6 +1486,7 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:inherited_properties, Shapes::ShapeRef.new(shape: InheritedProperties, location_name: "inheritedProperties"))
     LogGroup.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
     LogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
+    LogGroup.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
     LogGroup.struct_class = Types::LogGroup
 
     LogGroupArnList.member = Shapes::ShapeRef.new(shape: LogGroupArn)
@@ -1665,6 +1670,7 @@ module Aws::CloudWatchLogs
     ParseToOCSF.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     ParseToOCSF.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, required: true, location_name: "eventSource"))
     ParseToOCSF.add_member(:ocsf_version, Shapes::ShapeRef.new(shape: OCSFVersion, required: true, location_name: "ocsfVersion"))
+    ParseToOCSF.add_member(:mapping_version, Shapes::ShapeRef.new(shape: MappingVersion, location_name: "mappingVersion"))
     ParseToOCSF.struct_class = Types::ParseToOCSF
 
     ParseVPC.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
@@ -1798,6 +1804,10 @@ module Aws::CloudWatchLogs
     PutLogEventsResponse.add_member(:rejected_log_events_info, Shapes::ShapeRef.new(shape: RejectedLogEventsInfo, location_name: "rejectedLogEventsInfo"))
     PutLogEventsResponse.add_member(:rejected_entity_info, Shapes::ShapeRef.new(shape: RejectedEntityInfo, location_name: "rejectedEntityInfo"))
     PutLogEventsResponse.struct_class = Types::PutLogEventsResponse
+
+    PutLogGroupDeletionProtectionRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
+    PutLogGroupDeletionProtectionRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, required: true, location_name: "deletionProtectionEnabled"))
+    PutLogGroupDeletionProtectionRequest.struct_class = Types::PutLogGroupDeletionProtectionRequest
 
     PutMetricFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     PutMetricFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
@@ -2467,6 +2477,7 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_log_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -2479,6 +2490,7 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_metric_filter, Seahorse::Model::Operation.new.tap do |o|
@@ -3264,6 +3276,20 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnrecognizedClientException)
+      end)
+
+      api.add_operation(:put_log_group_deletion_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLogGroupDeletionProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutLogGroupDeletionProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:put_metric_filter, Seahorse::Model::Operation.new.tap do |o|

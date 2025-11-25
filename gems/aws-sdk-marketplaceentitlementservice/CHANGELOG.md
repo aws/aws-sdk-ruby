@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2025-11-21)
+------------------
+
+* Feature - Endpoint update for new region
+
 1.79.0 (2025-10-21)
 ------------------
 

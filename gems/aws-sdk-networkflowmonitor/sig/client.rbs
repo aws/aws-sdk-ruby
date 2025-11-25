@@ -94,7 +94,7 @@ module Aws
                             monitor_name: ::String,
                             local_resources: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster"),
                                 identifier: ::String
                               },
                             ],
@@ -406,13 +406,13 @@ module Aws
                             monitor_name: ::String,
                             ?local_resources_to_add: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster"),
                                 identifier: ::String
                               },
                             ],
                             ?local_resources_to_remove: Array[
                               {
-                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region"),
+                                type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster"),
                                 identifier: ::String
                               },
                             ],

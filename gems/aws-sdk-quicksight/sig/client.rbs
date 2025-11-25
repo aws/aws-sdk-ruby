@@ -35559,7 +35559,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -35589,11 +35608,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35601,7 +35622,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -35635,11 +35658,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35647,7 +35672,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -35688,11 +35715,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35700,7 +35729,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -35818,11 +35849,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35830,7 +35863,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -35873,7 +35908,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -73118,7 +73172,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -73148,11 +73221,13 @@ module Aws
                                                 ]?,
                                                 border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 selected_border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 background_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73160,7 +73235,9 @@ module Aws
                                                 }?,
                                                 loading_animation: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?
-                                                }?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -73194,11 +73271,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73206,7 +73285,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -73247,11 +73328,13 @@ module Aws
                                                           ]?,
                                                           border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           selected_border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           background_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73259,7 +73342,9 @@ module Aws
                                                           }?,
                                                           loading_animation: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?
-                                                          }?
+                                                          }?,
+                                                          border_radius: ::String?,
+                                                          padding: ::String?
                                                         },
                                                       ]
                                                     }
@@ -73377,11 +73462,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73389,7 +73476,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -73432,7 +73521,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -111742,7 +111850,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -111772,11 +111899,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111784,7 +111913,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -111818,11 +111949,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111830,7 +111963,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -111871,11 +112006,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111883,7 +112020,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -112001,11 +112140,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -112013,7 +112154,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -112056,7 +112199,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -114576,9 +114738,14 @@ module Aws
                             }?,
                             sheet: {
                               tile: {
+                                background_color: ::String?,
                                 border: {
-                                  show: bool?
-                                }?
+                                  color: ::String?,
+                                  show: bool?,
+                                  width: ::String?
+                                }?,
+                                border_radius: ::String?,
+                                padding: ::String?
                               }?,
                               tile_layout: {
                                 gutter: {
@@ -114587,6 +114754,10 @@ module Aws
                                 margin: {
                                   show: bool?
                                 }?
+                              }?,
+                              background: {
+                                color: ::String?,
+                                gradient: ::String?
                               }?
                             }?,
                             typography: {
@@ -114594,7 +114765,106 @@ module Aws
                                 {
                                   font_family: ::String?
                                 },
-                              ]?
+                              ]?,
+                              axis_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              axis_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_value_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              data_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              visual_title_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?,
+                              visual_subtitle_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?
                             }?
                           },
                           ?permissions: Array[
@@ -116331,6 +116601,8 @@ module Aws
                                                       }?,
                                                       generative_qn_a: {
                                                         initial_topic_id: ::String?
+                                                      }?,
+                                                      quick_chat: {
                                                       }?
                                                     },
                                                     ?allowed_domains: Array[::String]
@@ -116422,6 +116694,8 @@ module Aws
                                                                     }?,
                                                                     generative_qn_a: {
                                                                       initial_topic_id: ::String?
+                                                                    }?,
+                                                                    quick_chat: {
                                                                     }?
                                                                   },
                                                                   ?allowed_domains: Array[::String]
@@ -152661,7 +152935,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -152691,11 +152984,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -152703,7 +152998,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -152737,11 +153034,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -152749,7 +153048,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -152790,11 +153091,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -152802,7 +153105,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -152920,11 +153225,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -152932,7 +153239,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -152975,7 +153284,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -190259,7 +190587,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -190289,11 +190636,13 @@ module Aws
                                                 ]?,
                                                 border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 selected_border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 background_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
@@ -190301,7 +190650,9 @@ module Aws
                                                 }?,
                                                 loading_animation: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?
-                                                }?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -190335,11 +190686,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -190347,7 +190700,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -190388,11 +190743,13 @@ module Aws
                                                           ]?,
                                                           border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           selected_border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           background_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
@@ -190400,7 +190757,9 @@ module Aws
                                                           }?,
                                                           loading_animation: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?
-                                                          }?
+                                                          }?,
+                                                          border_radius: ::String?,
+                                                          padding: ::String?
                                                         },
                                                       ]
                                                     }
@@ -190518,11 +190877,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -190530,7 +190891,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -190573,7 +190936,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -229046,7 +229428,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -229076,11 +229477,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -229088,7 +229491,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -229122,11 +229527,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -229134,7 +229541,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -229175,11 +229584,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -229187,7 +229598,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -229305,11 +229718,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -229317,7 +229732,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -229360,7 +229777,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -231907,9 +232343,14 @@ module Aws
                             }?,
                             sheet: {
                               tile: {
+                                background_color: ::String?,
                                 border: {
-                                  show: bool?
-                                }?
+                                  color: ::String?,
+                                  show: bool?,
+                                  width: ::String?
+                                }?,
+                                border_radius: ::String?,
+                                padding: ::String?
                               }?,
                               tile_layout: {
                                 gutter: {
@@ -231918,6 +232359,10 @@ module Aws
                                 margin: {
                                   show: bool?
                                 }?
+                              }?,
+                              background: {
+                                color: ::String?,
+                                gradient: ::String?
                               }?
                             }?,
                             typography: {
@@ -231925,7 +232370,106 @@ module Aws
                                 {
                                   font_family: ::String?
                                 },
-                              ]?
+                              ]?,
+                              axis_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              axis_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_value_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              data_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              visual_title_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?,
+                              visual_subtitle_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?
                             }?
                           }
                         ) -> _UpdateThemeResponseSuccess

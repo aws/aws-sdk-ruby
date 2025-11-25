@@ -7822,6 +7822,9 @@ module Aws::Inspector2
     #   [https://docs.aws.amazon.com/inspector/latest/user/supported.html](
     #   https://docs.aws.amazon.com/inspector/latest/user/supported.html).
     #
+    #   `IMAGE_ARCHIVED` - This image has been archived in Amazon ECR and is
+    #   no longer available for scanning in Amazon Inspector.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html

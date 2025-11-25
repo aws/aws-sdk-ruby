@@ -52,6 +52,7 @@ module Aws::SecretsManager
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor add_replica_regions: ::Array[Types::ReplicaRegionType]
       attr_accessor force_overwrite_replica_secret: bool
+      attr_accessor type: ::String
       SENSITIVE: [:secret_binary, :secret_string]
     end
 
@@ -101,11 +102,14 @@ module Aws::SecretsManager
     class DescribeSecretResponse
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor type: ::String
       attr_accessor description: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor rotation_enabled: bool
       attr_accessor rotation_lambda_arn: ::String
       attr_accessor rotation_rules: Types::RotationRulesType
+      attr_accessor external_secret_rotation_metadata: ::Array[Types::ExternalSecretRotationMetadataItem]
+      attr_accessor external_secret_rotation_role_arn: ::String
       attr_accessor last_rotated_date: ::Time
       attr_accessor last_changed_date: ::Time
       attr_accessor last_accessed_date: ::Time
@@ -122,6 +126,12 @@ module Aws::SecretsManager
 
     class EncryptionFailure
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalSecretRotationMetadataItem
+      attr_accessor key: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -346,6 +356,8 @@ module Aws::SecretsManager
       attr_accessor client_request_token: ::String
       attr_accessor rotation_lambda_arn: ::String
       attr_accessor rotation_rules: Types::RotationRulesType
+      attr_accessor external_secret_rotation_metadata: ::Array[Types::ExternalSecretRotationMetadataItem]
+      attr_accessor external_secret_rotation_role_arn: ::String
       attr_accessor rotate_immediately: bool
       SENSITIVE: []
     end
@@ -367,11 +379,14 @@ module Aws::SecretsManager
     class SecretListEntry
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor type: ::String
       attr_accessor description: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor rotation_enabled: bool
       attr_accessor rotation_lambda_arn: ::String
       attr_accessor rotation_rules: Types::RotationRulesType
+      attr_accessor external_secret_rotation_metadata: ::Array[Types::ExternalSecretRotationMetadataItem]
+      attr_accessor external_secret_rotation_role_arn: ::String
       attr_accessor last_rotated_date: ::Time
       attr_accessor last_changed_date: ::Time
       attr_accessor last_accessed_date: ::Time
@@ -440,6 +455,7 @@ module Aws::SecretsManager
       attr_accessor kms_key_id: ::String
       attr_accessor secret_binary: ::String
       attr_accessor secret_string: ::String
+      attr_accessor type: ::String
       SENSITIVE: [:secret_binary, :secret_string]
     end
 

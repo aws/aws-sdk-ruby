@@ -620,13 +620,14 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterSettings
       SENSITIVE: []
     end
 
@@ -640,13 +641,14 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterSettings
       SENSITIVE: []
     end
 
@@ -982,12 +984,13 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor srt_settings: Types::SrtSettings
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettings
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterInputSettings
       SENSITIVE: []
     end
 
@@ -1645,12 +1648,13 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor srt_settings: Types::SrtSettings
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettings
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterInputSettings
       SENSITIVE: []
     end
 
@@ -3320,6 +3324,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor special_router_settings: Types::SpecialRouterSettings
       SENSITIVE: []
     end
 
@@ -3373,6 +3378,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor special_router_settings: Types::SpecialRouterSettings
       SENSITIVE: []
     end
 
@@ -5795,6 +5801,36 @@ module Aws::MediaLive
     end
 
     class Hlg2020Settings < Aws::EmptyStructure
+    end
+
+    class RouterDestination
+      attr_accessor availability_zone_name: ::String
+      attr_accessor router_output_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RouterDestinationSettings
+      attr_accessor availability_zone_name: ::String
+      SENSITIVE: []
+    end
+
+    class RouterInputSettings
+      attr_accessor destinations: ::Array[Types::RouterDestination]
+      attr_accessor encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RouterSettings
+      attr_accessor destinations: ::Array[Types::RouterDestinationSettings]
+      attr_accessor encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SpecialRouterSettings
+      attr_accessor router_arn: ::String
+      SENSITIVE: []
     end
   end
 end

@@ -242,6 +242,36 @@ module Aws
                                  }?,
                                  additional_configuration: ::String?,
                                  execution_role: ::String?,
+                                 monitoring_configuration: {
+                                   cloud_watch_logging_configuration: {
+                                     enabled: bool,
+                                     log_group: ::String?,
+                                     log_stream_name_prefix: ::String?,
+                                     log_types: Hash[::String, Array[::String]]?
+                                   }?,
+                                   managed_logging_configuration: {
+                                     enabled: bool,
+                                     kms_key: ::String?
+                                   }?,
+                                   s3_logging_configuration: {
+                                     enabled: bool,
+                                     kms_key: ::String?,
+                                     log_location: ::String?
+                                   }?
+                                 }?,
+                                 engine_configuration: {
+                                   coordinator_dpu_size: ::Integer?,
+                                   max_concurrent_dpus: ::Integer?,
+                                   default_executor_dpu_size: ::Integer?,
+                                   additional_configs: Hash[::String, ::String]?,
+                                   spark_properties: Hash[::String, ::String]?,
+                                   classifications: Array[
+                                     {
+                                       name: ::String?,
+                                       properties: Hash[::String, ::String]?
+                                     },
+                                   ]?
+                                 }?,
                                  customer_content_encryption_configuration: {
                                    kms_key: ::String
                                  }?,
@@ -481,6 +511,16 @@ module Aws
                                         ) -> _GetQueryRuntimeStatisticsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryRuntimeStatisticsResponseSuccess
 
+      interface _GetResourceDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceDashboardResponse]
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_resource_dashboard-instance_method
+      def get_resource_dashboard: (
+                                    resource_arn: ::String
+                                  ) -> _GetResourceDashboardResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceDashboardResponseSuccess
+
       interface _GetSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
         def session_id: () -> ::String
@@ -489,6 +529,7 @@ module Aws
         def engine_version: () -> ::String
         def engine_configuration: () -> Types::EngineConfiguration
         def notebook_version: () -> ::String
+        def monitoring_configuration: () -> Types::MonitoringConfiguration
         def session_configuration: () -> Types::SessionConfiguration
         def status: () -> Types::SessionStatus
         def statistics: () -> Types::SessionStatistics
@@ -498,6 +539,18 @@ module Aws
                          session_id: ::String
                        ) -> _GetSessionResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _GetSessionEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionEndpointResponse]
+        def endpoint_url: () -> ::String
+        def auth_token: () -> ::String
+        def auth_token_expiration_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_session_endpoint-instance_method
+      def get_session_endpoint: (
+                                  session_id: ::String
+                                ) -> _GetSessionEndpointResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionEndpointResponseSuccess
 
       interface _GetSessionStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionStatusResponse]
@@ -824,6 +877,19 @@ module Aws
                                        enabled: bool,
                                        max_age_in_minutes: ::Integer?
                                      }?
+                                   },
+                                   ?engine_configuration: {
+                                     coordinator_dpu_size: ::Integer?,
+                                     max_concurrent_dpus: ::Integer?,
+                                     default_executor_dpu_size: ::Integer?,
+                                     additional_configs: Hash[::String, ::String]?,
+                                     spark_properties: Hash[::String, ::String]?,
+                                     classifications: Array[
+                                       {
+                                         name: ::String?,
+                                         properties: Hash[::String, ::String]?
+                                       },
+                                     ]?
                                    }
                                  ) -> _StartQueryExecutionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryExecutionResponseSuccess
@@ -839,14 +905,45 @@ module Aws
                            work_group: ::String,
                            engine_configuration: {
                              coordinator_dpu_size: ::Integer?,
-                             max_concurrent_dpus: ::Integer,
+                             max_concurrent_dpus: ::Integer?,
                              default_executor_dpu_size: ::Integer?,
                              additional_configs: Hash[::String, ::String]?,
-                             spark_properties: Hash[::String, ::String]?
+                             spark_properties: Hash[::String, ::String]?,
+                             classifications: Array[
+                               {
+                                 name: ::String?,
+                                 properties: Hash[::String, ::String]?
+                               },
+                             ]?
+                           },
+                           ?execution_role: ::String,
+                           ?monitoring_configuration: {
+                             cloud_watch_logging_configuration: {
+                               enabled: bool,
+                               log_group: ::String?,
+                               log_stream_name_prefix: ::String?,
+                               log_types: Hash[::String, Array[::String]]?
+                             }?,
+                             managed_logging_configuration: {
+                               enabled: bool,
+                               kms_key: ::String?
+                             }?,
+                             s3_logging_configuration: {
+                               enabled: bool,
+                               kms_key: ::String?,
+                               log_location: ::String?
+                             }?
                            },
                            ?notebook_version: ::String,
                            ?session_idle_timeout_in_minutes: ::Integer,
-                           ?client_request_token: ::String
+                           ?client_request_token: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ],
+                           ?copy_work_group_tags: bool
                          ) -> _StartSessionResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSessionResponseSuccess
 
@@ -1024,6 +1121,36 @@ module Aws
                                    enable_s3_access_grants: bool,
                                    create_user_level_prefix: bool?,
                                    authentication_type: ("DIRECTORY_IDENTITY")
+                                 }?,
+                                 monitoring_configuration: {
+                                   cloud_watch_logging_configuration: {
+                                     enabled: bool,
+                                     log_group: ::String?,
+                                     log_stream_name_prefix: ::String?,
+                                     log_types: Hash[::String, Array[::String]]?
+                                   }?,
+                                   managed_logging_configuration: {
+                                     enabled: bool,
+                                     kms_key: ::String?
+                                   }?,
+                                   s3_logging_configuration: {
+                                     enabled: bool,
+                                     kms_key: ::String?,
+                                     log_location: ::String?
+                                   }?
+                                 }?,
+                                 engine_configuration: {
+                                   coordinator_dpu_size: ::Integer?,
+                                   max_concurrent_dpus: ::Integer?,
+                                   default_executor_dpu_size: ::Integer?,
+                                   additional_configs: Hash[::String, ::String]?,
+                                   spark_properties: Hash[::String, ::String]?,
+                                   classifications: Array[
+                                     {
+                                       name: ::String?,
+                                       properties: Hash[::String, ::String]?
+                                     },
+                                   ]?
                                  }?
                                },
                                ?state: ("ENABLED" | "DISABLED")

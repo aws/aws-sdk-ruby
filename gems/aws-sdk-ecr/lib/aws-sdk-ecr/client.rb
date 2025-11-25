@@ -524,7 +524,7 @@ module Aws::ECR
     #
     #   resp.layers #=> Array
     #   resp.layers[0].layer_digest #=> String
-    #   resp.layers[0].layer_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.layers[0].layer_availability #=> String, one of "AVAILABLE", "UNAVAILABLE", "ARCHIVED"
     #   resp.layers[0].layer_size #=> Integer
     #   resp.layers[0].media_type #=> String
     #   resp.failures #=> Array
@@ -617,7 +617,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable", "ImageInaccessible"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage AWS API Documentation
@@ -718,7 +718,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable", "ImageInaccessible"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage AWS API Documentation
@@ -974,10 +974,14 @@ module Aws::ECR
     #   them from being overwritten.
     #
     # @option params [Array<Types::ImageTagMutabilityExclusionFilter>] :image_tag_mutability_exclusion_filters
-    #   Creates a repository with a list of filters that define which image
-    #   tags can override the default image tag mutability setting.
+    #   A list of filters that specify which image tags should be excluded
+    #   from the repository's image tag mutability setting.
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   The `imageScanningConfiguration` parameter is being deprecated, in
+    #   favor of specifying the image scanning configuration at the registry
+    #   level. For more information, see `PutRegistryScanningConfiguration`.
+    #
     #   The image scanning configuration for the repository. This determines
     #   whether images are scanned for known vulnerabilities after being
     #   pushed to the repository.
@@ -1110,9 +1114,8 @@ module Aws::ECR
     #   them from being overwritten.
     #
     # @option params [Array<Types::ImageTagMutabilityExclusionFilter>] :image_tag_mutability_exclusion_filters
-    #   Creates a repository creation template with a list of filters that
-    #   define which image tags can override the default image tag mutability
-    #   setting.
+    #   A list of filters that specify which image tags should be excluded
+    #   from the repository creation template's image tag mutability setting.
     #
     # @option params [String] :repository_policy
     #   The repository policy to apply to repositories created using the
@@ -1561,6 +1564,91 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Deletes the registry's signing configuration. Images pushed after
+    # deletion of the signing configuration will no longer be automatically
+    # signed.
+    #
+    # For more information, see [Managed signing][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    # <note markdown="1"> Deleting the signing configuration does not affect existing image
+    # signatures.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html
+    #
+    # @return [Types::DeleteSigningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSigningConfigurationResponse#registry_id #registry_id} => String
+    #   * {Types::DeleteSigningConfigurationResponse#signing_configuration #signing_configuration} => Types::SigningConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.signing_configuration.rules #=> Array
+    #   resp.signing_configuration.rules[0].signing_profile_arn #=> String
+    #   resp.signing_configuration.rules[0].repository_filters #=> Array
+    #   resp.signing_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.signing_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "WILDCARD_MATCH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteSigningConfiguration AWS API Documentation
+    #
+    # @overload delete_signing_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_signing_configuration(params = {}, options = {})
+      req = build_request(:delete_signing_configuration, params)
+      req.send_request(options)
+    end
+
+    # Removes a principal from the pull time update exclusion list for a
+    # registry. Once removed, Amazon ECR will resume updating the pull time
+    # if the specified principal pulls an image.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal to remove from the pull time update
+    #   exclusion list.
+    #
+    # @return [Types::DeregisterPullTimeUpdateExclusionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterPullTimeUpdateExclusionResponse#principal_arn #principal_arn} => String
+    #
+    #
+    # @example Example: To remove a principal from the pull time exclusion list
+    #
+    #   # This example removes an IAM role from the pull time update exclusion list. Amazon ECR will resume recording image pull
+    #   # timestamps for this principal.
+    #
+    #   resp = client.deregister_pull_time_update_exclusion({
+    #     principal_arn: "arn:aws:iam::012345678910:role/ECRAccess", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     principal_arn: "arn:aws:iam::012345678910:role/ECRAccess", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_pull_time_update_exclusion({
+    #     principal_arn: "PrincipalArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principal_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeregisterPullTimeUpdateExclusion AWS API Documentation
+    #
+    # @overload deregister_pull_time_update_exclusion(params = {})
+    # @param [Hash] params ({})
+    def deregister_pull_time_update_exclusion(params = {}, options = {})
+      req = build_request(:deregister_pull_time_update_exclusion, params)
+      req.send_request(options)
+    end
+
     # Returns the replication status for a specified image.
     #
     # @option params [required, String] :repository_name
@@ -1674,7 +1762,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
     #   resp.image_scan_status.description #=> String
     #   resp.image_scan_findings.image_scan_completed_at #=> Time
     #   resp.image_scan_findings.vulnerability_source_updated_at #=> Time
@@ -1768,6 +1856,67 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Returns the signing status for a specified image. If the image matched
+    # signing rules that reference different signing profiles, a status is
+    # returned for each profile.
+    #
+    # For more information, see [Managed signing][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the image.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object containing identifying information for an image.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
+    #
+    # @return [Types::DescribeImageSigningStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageSigningStatusResponse#repository_name #repository_name} => String
+    #   * {Types::DescribeImageSigningStatusResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::DescribeImageSigningStatusResponse#registry_id #registry_id} => String
+    #   * {Types::DescribeImageSigningStatusResponse#signing_statuses #signing_statuses} => Array&lt;Types::ImageSigningStatus&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_signing_status({
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #     registry_id: "RegistryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.registry_id #=> String
+    #   resp.signing_statuses #=> Array
+    #   resp.signing_statuses[0].signing_profile_arn #=> String
+    #   resp.signing_statuses[0].failure_code #=> String
+    #   resp.signing_statuses[0].failure_reason #=> String
+    #   resp.signing_statuses[0].status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageSigningStatus AWS API Documentation
+    #
+    # @overload describe_image_signing_status(params = {})
+    # @param [Hash] params ({})
+    def describe_image_signing_status(params = {}, options = {})
+      req = build_request(:describe_image_signing_status, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about the images in a repository.
     #
     # <note markdown="1"> Starting with Docker version 1.9, the Docker client compresses image
@@ -1845,6 +1994,7 @@ module Aws::ECR
     #     max_results: 1,
     #     filter: {
     #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
+    #       image_status: "ACTIVE", # accepts ACTIVE, ARCHIVED, ACTIVATING, ANY
     #     },
     #   })
     #
@@ -1858,7 +2008,7 @@ module Aws::ECR
     #   resp.image_details[0].image_tags[0] #=> String
     #   resp.image_details[0].image_size_in_bytes #=> Integer
     #   resp.image_details[0].image_pushed_at #=> Time
-    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED"
+    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
     #   resp.image_details[0].image_scan_status.description #=> String
     #   resp.image_details[0].image_scan_findings_summary.image_scan_completed_at #=> Time
     #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
@@ -1867,6 +2017,10 @@ module Aws::ECR
     #   resp.image_details[0].image_manifest_media_type #=> String
     #   resp.image_details[0].artifact_media_type #=> String
     #   resp.image_details[0].last_recorded_pull_time #=> Time
+    #   resp.image_details[0].subject_manifest_digest #=> String
+    #   resp.image_details[0].image_status #=> String, one of "ACTIVE", "ARCHIVED", "ACTIVATING"
+    #   resp.image_details[0].last_archived_at #=> Time
+    #   resp.image_details[0].last_activated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
@@ -2485,9 +2639,14 @@ module Aws::ECR
     #   resp.preview_results[0].image_tags[0] #=> String
     #   resp.preview_results[0].image_digest #=> String
     #   resp.preview_results[0].image_pushed_at #=> Time
-    #   resp.preview_results[0].action.type #=> String, one of "EXPIRE"
+    #   resp.preview_results[0].action.type #=> String, one of "EXPIRE", "TRANSITION"
+    #   resp.preview_results[0].action.target_storage_class #=> String, one of "ARCHIVE"
     #   resp.preview_results[0].applied_rule_priority #=> Integer
+    #   resp.preview_results[0].storage_class #=> String, one of "ARCHIVE", "STANDARD"
     #   resp.summary.expiring_image_total_count #=> Integer
+    #   resp.summary.transitioning_image_total_counts #=> Array
+    #   resp.summary.transitioning_image_total_counts[0].target_storage_class #=> String, one of "ARCHIVE"
+    #   resp.summary.transitioning_image_total_counts[0].image_total_count #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2604,6 +2763,39 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Retrieves the registry's signing configuration, which defines rules
+    # for automatically signing images using Amazon Web Services Signer.
+    #
+    # For more information, see [Managed signing][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html
+    #
+    # @return [Types::GetSigningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSigningConfigurationResponse#registry_id #registry_id} => String
+    #   * {Types::GetSigningConfigurationResponse#signing_configuration #signing_configuration} => Types::SigningConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.signing_configuration.rules #=> Array
+    #   resp.signing_configuration.rules[0].signing_profile_arn #=> String
+    #   resp.signing_configuration.rules[0].repository_filters #=> Array
+    #   resp.signing_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.signing_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "WILDCARD_MATCH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetSigningConfiguration AWS API Documentation
+    #
+    # @overload get_signing_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_signing_configuration(params = {}, options = {})
+      req = build_request(:get_signing_configuration, params)
+      req.send_request(options)
+    end
+
     # Notifies Amazon ECR that you intend to upload an image layer.
     #
     # When an image is pushed, the InitiateLayerUpload API is called once
@@ -2648,6 +2840,200 @@ module Aws::ECR
     # @param [Hash] params ({})
     def initiate_layer_upload(params = {}, options = {})
       req = build_request(:initiate_layer_upload, params)
+      req.send_request(options)
+    end
+
+    # Lists the artifacts associated with a specified subject image.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to list image referrers. If you do
+    #   not specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the subject image.
+    #
+    # @option params [required, Types::SubjectIdentifier] :subject_id
+    #   An object containing the image digest of the subject image for which
+    #   to retrieve associated artifacts.
+    #
+    # @option params [Types::ListImageReferrersFilter] :filter
+    #   The filter key and value with which to filter your
+    #   `ListImageReferrers` results. If no filter is specified, only
+    #   artifacts with `ACTIVE` status are returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListImageReferrers` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of image referrer results returned by
+    #   `ListImageReferrers` in paginated output. When this parameter is used,
+    #   `ListImageReferrers` only returns `maxResults` results in a single
+    #   page along with a `nextToken` response element. The remaining results
+    #   of the initial request can be seen by sending another
+    #   `ListImageReferrers` request with the returned `nextToken` value. This
+    #   value can be between 1 and 50. If this parameter is not used, then
+    #   `ListImageReferrers` returns up to 50 results and a `nextToken` value,
+    #   if applicable.
+    #
+    # @return [Types::ListImageReferrersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImageReferrersResponse#referrers #referrers} => Array&lt;Types::ImageReferrer&gt;
+    #   * {Types::ListImageReferrersResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list artifacts associated with a subject image
+    #
+    #   # This example lists all artifacts (such as Sigstore signatures) that reference a specific container image in the
+    #   # sample-repo repository.
+    #
+    #   resp = client.list_image_referrers({
+    #     repository_name: "sample-repo", 
+    #     subject_id: {
+    #       image_digest: "sha256:943e640159415616581703a53fa4ed87e96740655fd67daf2d2146a35337bce5", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     referrers: [
+    #       {
+    #         annotations: {
+    #           "dev.sigstore.bundle.content" => "dsse-envelope", 
+    #           "dev.sigstore.bundle.predicateType" => "https://sigstore.dev/cosign/sign/v1", 
+    #           "org.opencontainers.image.created" => "2025-11-17T22:00:33Z", 
+    #         }, 
+    #         artifact_status: "ACTIVE", 
+    #         artifact_type: "application/vnd.dev.sigstore.bundle.v0.3+json", 
+    #         digest: "sha256:270c60be5b6ed41e6e7c505ac0c4e2577748affc14147bcba76b533604dc7a07", 
+    #         media_type: "application/vnd.oci.image.manifest.v1+json", 
+    #         size: 888, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list artifacts of a specific type
+    #
+    #   # This example lists only Sigstore bundle artifacts associated with a subject image by filtering on the artifact type.
+    #
+    #   resp = client.list_image_referrers({
+    #     filter: {
+    #       artifact_types: [
+    #         "application/vnd.dev.sigstore.bundle.v0.3+json", 
+    #       ], 
+    #     }, 
+    #     repository_name: "sample-repo", 
+    #     subject_id: {
+    #       image_digest: "sha256:943e640159415616581703a53fa4ed87e96740655fd67daf2d2146a35337bce5", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     referrers: [
+    #       {
+    #         annotations: {
+    #           "dev.sigstore.bundle.content" => "dsse-envelope", 
+    #           "dev.sigstore.bundle.predicateType" => "https://sigstore.dev/cosign/sign/v1", 
+    #           "org.opencontainers.image.created" => "2025-11-17T22:00:33Z", 
+    #         }, 
+    #         artifact_status: "ACTIVE", 
+    #         artifact_type: "application/vnd.dev.sigstore.bundle.v0.3+json", 
+    #         digest: "sha256:270c60be5b6ed41e6e7c505ac0c4e2577748affc14147bcba76b533604dc7a07", 
+    #         media_type: "application/vnd.oci.image.manifest.v1+json", 
+    #         size: 888, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list both active and archived artifacts
+    #
+    #   # This example lists all artifacts including those that have been archived, by specifying the artifactStatus filter as
+    #   # ANY.
+    #
+    #   resp = client.list_image_referrers({
+    #     filter: {
+    #       artifact_status: "ANY", 
+    #     }, 
+    #     repository_name: "sample-repo", 
+    #     subject_id: {
+    #       image_digest: "sha256:943e640159415616581703a53fa4ed87e96740655fd67daf2d2146a35337bce5", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     referrers: [
+    #       {
+    #         annotations: {
+    #           "dev.sigstore.bundle.content" => "dsse-envelope", 
+    #           "dev.sigstore.bundle.predicateType" => "https://sigstore.dev/cosign/sign/v1", 
+    #           "org.opencontainers.image.created" => "2025-11-17T22:00:33Z", 
+    #         }, 
+    #         artifact_status: "ACTIVE", 
+    #         artifact_type: "application/vnd.dev.sigstore.bundle.v0.3+json", 
+    #         digest: "sha256:270c60be5b6ed41e6e7c505ac0c4e2577748affc14147bcba76b533604dc7a07", 
+    #         media_type: "application/vnd.oci.image.manifest.v1+json", 
+    #         size: 888, 
+    #       }, 
+    #       {
+    #         annotations: {
+    #           "dev.sigstore.bundle.predicateType" => "https://sigstore.dev/cosign/sign/v1", 
+    #           "org.opencontainers.image.created" => "2025-10-15T14:30:00Z", 
+    #         }, 
+    #         artifact_status: "ARCHIVED", 
+    #         artifact_type: "application/vnd.dev.sigstore.bundle.v0.2+json", 
+    #         digest: "sha256:5a1c89f2b3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0", 
+    #         media_type: "application/vnd.oci.image.manifest.v1+json", 
+    #         size: 856, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_image_referrers({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     subject_id: { # required
+    #       image_digest: "ImageDigest", # required
+    #     },
+    #     filter: {
+    #       artifact_types: ["ArtifactType"],
+    #       artifact_status: "ACTIVE", # accepts ACTIVE, ARCHIVED, ACTIVATING, ANY
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.referrers #=> Array
+    #   resp.referrers[0].digest #=> String
+    #   resp.referrers[0].media_type #=> String
+    #   resp.referrers[0].artifact_type #=> String
+    #   resp.referrers[0].size #=> Integer
+    #   resp.referrers[0].annotations #=> Hash
+    #   resp.referrers[0].annotations["String"] #=> String
+    #   resp.referrers[0].artifact_status #=> String, one of "ACTIVE", "ARCHIVED", "ACTIVATING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImageReferrers AWS API Documentation
+    #
+    # @overload list_image_referrers(params = {})
+    # @param [Hash] params ({})
+    def list_image_referrers(params = {}, options = {})
+      req = build_request(:list_image_referrers, params)
       req.send_request(options)
     end
 
@@ -2730,6 +3116,7 @@ module Aws::ECR
     #     max_results: 1,
     #     filter: {
     #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
+    #       image_status: "ACTIVE", # accepts ACTIVE, ARCHIVED, ACTIVATING, ANY
     #     },
     #   })
     #
@@ -2746,6 +3133,93 @@ module Aws::ECR
     # @param [Hash] params ({})
     def list_images(params = {}, options = {})
       req = build_request(:list_images, params)
+      req.send_request(options)
+    end
+
+    # Lists the IAM principals that are excluded from having their image
+    # pull times recorded.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of pull time update exclusion results returned by
+    #   `ListPullTimeUpdateExclusions` in paginated output. When this
+    #   parameter is used, `ListPullTimeUpdateExclusions` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListPullTimeUpdateExclusions` request with
+    #   the returned `nextToken` value. This value can be between 1 and 1000.
+    #   If this parameter is not used, then `ListPullTimeUpdateExclusions`
+    #   returns up to 100 results and a `nextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListPullTimeUpdateExclusions` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListPullTimeUpdateExclusionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPullTimeUpdateExclusionsResponse#pull_time_update_exclusions #pull_time_update_exclusions} => Array&lt;String&gt;
+    #   * {Types::ListPullTimeUpdateExclusionsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list all pull time update exclusions
+    #
+    #   # This example lists all IAM principals that are excluded from having their image pull timestamps recorded in the
+    #   # registry.
+    #
+    #   resp = client.list_pull_time_update_exclusions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     pull_time_update_exclusions: [
+    #       "arn:aws:iam::012345678910:role/ECRAccess", 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list pull time update exclusions with pagination
+    #
+    #   # This example lists pull time update exclusions with pagination, requesting a maximum of 2 results per page.
+    #
+    #   resp = client.list_pull_time_update_exclusions({
+    #     max_results: 2, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "eyJlbmNyeXB0ZWREYXRhIjpbXX0=", 
+    #     pull_time_update_exclusions: [
+    #       "arn:aws:iam::012345678910:role/ECRAccess", 
+    #       "arn:aws:iam::012345678910:role/CICDPipeline", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pull_time_update_exclusions({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_time_update_exclusions #=> Array
+    #   resp.pull_time_update_exclusions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListPullTimeUpdateExclusions AWS API Documentation
+    #
+    # @overload list_pull_time_update_exclusions(params = {})
+    # @param [Hash] params ({})
+    def list_pull_time_update_exclusions(params = {}, options = {})
+      req = build_request(:list_pull_time_update_exclusions, params)
       req.send_request(options)
     end
 
@@ -2850,9 +3324,7 @@ module Aws::ECR
     #   `imageManifestMediaType` in the request.
     #
     # @option params [String] :image_tag
-    #   The tag to associate with the image. This parameter is required for
-    #   images that use the Docker Image Manifest V2 Schema 2 or Open
-    #   Container Initiative (OCI) formats.
+    #   The tag to associate with the image. This parameter is optional.
     #
     # @option params [String] :image_digest
     #   The image digest of the image manifest corresponding to the image.
@@ -2967,8 +3439,8 @@ module Aws::ECR
     #   prevent them from being overwritten.
     #
     # @option params [Array<Types::ImageTagMutabilityExclusionFilter>] :image_tag_mutability_exclusion_filters
-    #   Creates or updates a repository with filters that define which image
-    #   tags can override the default image tag mutability setting.
+    #   A list of filters that specify which image tags should be excluded
+    #   from the image tag mutability setting being applied.
     #
     # @return [Types::PutImageTagMutabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3235,6 +3707,114 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Creates or updates the registry's signing configuration, which
+    # defines rules for automatically signing images with Amazon Web
+    # Services Signer.
+    #
+    # For more information, see [Managed signing][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    # <note markdown="1"> To successfully generate a signature, the IAM principal pushing images
+    # must have permission to sign payloads with the Amazon Web Services
+    # Signer signing profile referenced in the signing configuration.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html
+    #
+    # @option params [required, Types::SigningConfiguration] :signing_configuration
+    #   The signing configuration to assign to the registry.
+    #
+    # @return [Types::PutSigningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSigningConfigurationResponse#signing_configuration #signing_configuration} => Types::SigningConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_signing_configuration({
+    #     signing_configuration: { # required
+    #       rules: [ # required
+    #         {
+    #           signing_profile_arn: "SigningProfileArn", # required
+    #           repository_filters: [
+    #             {
+    #               filter: "SigningRepositoryFilterValue", # required
+    #               filter_type: "WILDCARD_MATCH", # required, accepts WILDCARD_MATCH
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.signing_configuration.rules #=> Array
+    #   resp.signing_configuration.rules[0].signing_profile_arn #=> String
+    #   resp.signing_configuration.rules[0].repository_filters #=> Array
+    #   resp.signing_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.signing_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "WILDCARD_MATCH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutSigningConfiguration AWS API Documentation
+    #
+    # @overload put_signing_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_signing_configuration(params = {}, options = {})
+      req = build_request(:put_signing_configuration, params)
+      req.send_request(options)
+    end
+
+    # Adds an IAM principal to the pull time update exclusion list for a
+    # registry. Amazon ECR will not record the pull time if an excluded
+    # principal pulls an image.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal to exclude from having image pull times
+    #   recorded.
+    #
+    # @return [Types::RegisterPullTimeUpdateExclusionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterPullTimeUpdateExclusionResponse#principal_arn #principal_arn} => String
+    #   * {Types::RegisterPullTimeUpdateExclusionResponse#created_at #created_at} => Time
+    #
+    #
+    # @example Example: To exclude an IAM role from pull time tracking
+    #
+    #   # This example adds an IAM role to the pull time update exclusion list so that Amazon ECR will not record image pull
+    #   # timestamps for this principal.
+    #
+    #   resp = client.register_pull_time_update_exclusion({
+    #     principal_arn: "arn:aws:iam::012345678910:role/ECRAccess", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_at: Time.parse("2025-11-17T22:08:12.659000+00:00"), 
+    #     principal_arn: "arn:aws:iam::012345678910:role/ECRAccess", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_pull_time_update_exclusion({
+    #     principal_arn: "PrincipalArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principal_arn #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RegisterPullTimeUpdateExclusion AWS API Documentation
+    #
+    # @overload register_pull_time_update_exclusion(params = {})
+    # @param [Hash] params ({})
+    def register_pull_time_update_exclusion(params = {}, options = {})
+      req = build_request(:register_pull_time_update_exclusion, params)
+      req.send_request(options)
+    end
+
     # Applies a repository policy to the specified repository to control
     # access permissions. For more information, see [Amazon ECR Repository
     # policies][1] in the *Amazon Elastic Container Registry User Guide*.
@@ -3345,7 +3925,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
     #   resp.image_scan_status.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScan AWS API Documentation
@@ -3469,6 +4049,110 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Transitions an image between storage classes. You can transition
+    # images from Amazon ECR standard storage class to Amazon ECR archival
+    # storage class for long-term storage, or restore archived images back
+    # to Amazon ECR standard.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image to transition. If you do not specify a registry,
+    #   the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the image to transition.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
+    #
+    # @option params [required, String] :target_storage_class
+    #   The target storage class for the image.
+    #
+    # @return [Types::UpdateImageStorageClassResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateImageStorageClassResponse#registry_id #registry_id} => String
+    #   * {Types::UpdateImageStorageClassResponse#repository_name #repository_name} => String
+    #   * {Types::UpdateImageStorageClassResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::UpdateImageStorageClassResponse#image_status #image_status} => String
+    #
+    #
+    # @example Example: To transition an image to Amazon ECR Archive
+    #
+    #   # This example transitions an image with a specific digest in the hello-repository repository to Amazon ECR Archive
+    #   # storage for long-term archival.
+    #
+    #   resp = client.update_image_storage_class({
+    #     image_id: {
+    #       image_digest: "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b", 
+    #     }, 
+    #     registry_id: "724772093679", 
+    #     repository_name: "hello-repository", 
+    #     target_storage_class: "ARCHIVE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_id: {
+    #       image_digest: "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b", 
+    #     }, 
+    #     image_status: "ARCHIVED", 
+    #     registry_id: "724772093679", 
+    #     repository_name: "hello-repository", 
+    #   }
+    #
+    # @example Example: To restore an archived image to Amazon ECR Standard
+    #
+    #   # This example restores an archived image with a specific digest back to Amazon ECR Standard storage.
+    #
+    #   resp = client.update_image_storage_class({
+    #     image_id: {
+    #       image_digest: "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b", 
+    #     }, 
+    #     registry_id: "724772093679", 
+    #     repository_name: "hello-repository", 
+    #     target_storage_class: "STANDARD", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_id: {
+    #       image_digest: "sha256:0b1a4e0c81c434fa7928e5c4a2651a521ebabc4ff200c65f7e25b99373efca3b", 
+    #     }, 
+    #     image_status: "ACTIVATING", 
+    #     registry_id: "724772093679", 
+    #     repository_name: "hello-repository", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image_storage_class({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #     target_storage_class: "STANDARD", # required, accepts STANDARD, ARCHIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.image_status #=> String, one of "ACTIVE", "ARCHIVED", "ACTIVATING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdateImageStorageClass AWS API Documentation
+    #
+    # @overload update_image_storage_class(params = {})
+    # @param [Hash] params ({})
+    def update_image_storage_class(params = {}, options = {})
+      req = build_request(:update_image_storage_class, params)
+      req.send_request(options)
+    end
+
     # Updates an existing pull through cache rule.
     #
     # @option params [String] :registry_id
@@ -3562,8 +4246,8 @@ module Aws::ECR
     #   which will prevent them from being overwritten.
     #
     # @option params [Array<Types::ImageTagMutabilityExclusionFilter>] :image_tag_mutability_exclusion_filters
-    #   Updates a repository with filters that define which image tags can
-    #   override the default image tag mutability setting.
+    #   A list of filters that specify which image tags should be excluded
+    #   from the repository creation template's image tag mutability setting.
     #
     # @option params [String] :repository_policy
     #   Updates the repository policy created using the template. A repository
@@ -3834,7 +4518,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

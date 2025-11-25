@@ -9,7 +9,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.234.0"
+    MINIMUM_CORE_VERSION = "3.239.1"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
     MINIMUM_CORE_VERSION_S3 = "3.234.0"
@@ -139,7 +139,7 @@ module BuildTools
       end
 
       gems_dir = File.expand_path('../../gems', __FILE__)
-      prefix = %w[sts sso ssooidc].include?(gem) ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
+      prefix = %w[sts sso ssooidc signin].include?(gem) ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
         ["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"]
       (prefix + parts).join('/') + '.rb'
     end

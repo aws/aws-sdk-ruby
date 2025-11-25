@@ -2940,6 +2940,28 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes the account-level enforced guardrail configuration.
+    #
+    # @option params [required, String] :config_id
+    #   Unique ID for the account enforced configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_enforced_guardrail_configuration({
+    #     config_id: "AccountEnforcedGuardrailConfigurationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteEnforcedGuardrailConfiguration AWS API Documentation
+    #
+    # @overload delete_enforced_guardrail_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_enforced_guardrail_configuration(params = {}, options = {})
+      req = build_request(:delete_enforced_guardrail_configuration, params)
+      req.send_request(options)
+    end
+
     # Delete the model access agreement for the specified model.
     #
     # @option params [required, String] :model_id
@@ -5447,6 +5469,48 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Lists the account-level enforced guardrail configurations.
+    #
+    # @option params [String] :next_token
+    #   Opaque continuation token of previous paginated response.
+    #
+    # @return [Types::ListEnforcedGuardrailsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnforcedGuardrailsConfigurationResponse#guardrails_config #guardrails_config} => Array&lt;Types::AccountEnforcedGuardrailOutputConfiguration&gt;
+    #   * {Types::ListEnforcedGuardrailsConfigurationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_enforced_guardrails_configuration({
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.guardrails_config #=> Array
+    #   resp.guardrails_config[0].config_id #=> String
+    #   resp.guardrails_config[0].guardrail_arn #=> String
+    #   resp.guardrails_config[0].guardrail_id #=> String
+    #   resp.guardrails_config[0].input_tags #=> String, one of "HONOR", "IGNORE"
+    #   resp.guardrails_config[0].guardrail_version #=> String
+    #   resp.guardrails_config[0].created_at #=> Time
+    #   resp.guardrails_config[0].created_by #=> String
+    #   resp.guardrails_config[0].updated_at #=> Time
+    #   resp.guardrails_config[0].updated_by #=> String
+    #   resp.guardrails_config[0].owner #=> String, one of "ACCOUNT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEnforcedGuardrailsConfiguration AWS API Documentation
+    #
+    # @overload list_enforced_guardrails_configuration(params = {})
+    # @param [Hash] params ({})
+    def list_enforced_guardrails_configuration(params = {}, options = {})
+      req = build_request(:list_enforced_guardrails_configuration, params)
+      req.send_request(options)
+    end
+
     # Lists all existing evaluation jobs.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
@@ -6520,6 +6584,46 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Sets the account-level enforced guardrail configuration.
+    #
+    # @option params [String] :config_id
+    #   Unique ID for the account enforced configuration.
+    #
+    # @option params [required, Types::AccountEnforcedGuardrailInferenceInputConfiguration] :guardrail_inference_config
+    #   Account-level enforced guardrail input configuration.
+    #
+    # @return [Types::PutEnforcedGuardrailConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEnforcedGuardrailConfigurationResponse#config_id #config_id} => String
+    #   * {Types::PutEnforcedGuardrailConfigurationResponse#updated_at #updated_at} => Time
+    #   * {Types::PutEnforcedGuardrailConfigurationResponse#updated_by #updated_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_enforced_guardrail_configuration({
+    #     config_id: "AccountEnforcedGuardrailConfigurationId",
+    #     guardrail_inference_config: { # required
+    #       guardrail_identifier: "GuardrailIdentifier", # required
+    #       guardrail_version: "GuardrailNumericalVersion", # required
+    #       input_tags: "HONOR", # required, accepts HONOR, IGNORE
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.config_id #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutEnforcedGuardrailConfiguration AWS API Documentation
+    #
+    # @overload put_enforced_guardrail_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_enforced_guardrail_configuration(params = {}, options = {})
+      req = build_request(:put_enforced_guardrail_configuration, params)
       req.send_request(options)
     end
 
@@ -7632,7 +7736,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

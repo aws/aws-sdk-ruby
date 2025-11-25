@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-11-21)
+------------------
+
+* Feature - Adds support for creating Webapps accessible from a VPC.
+
 1.127.0 (2025-10-21)
 ------------------
 

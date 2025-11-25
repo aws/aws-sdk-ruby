@@ -963,7 +963,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
-    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
     #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
@@ -1766,7 +1766,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
-    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
     #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
@@ -2142,7 +2142,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
-    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED", "NOT_SUBSCRIBED", "DEPRECATED"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
     #   resp.firewall_status.capacity_usage_summary.cid_rs.available_cidr_count #=> Integer
     #   resp.firewall_status.capacity_usage_summary.cid_rs.utilized_cidr_count #=> Integer
@@ -2600,6 +2600,9 @@ module Aws::NetworkFirewall
     #   * {Types::DescribeRuleGroupMetadataResponse#capacity #capacity} => Integer
     #   * {Types::DescribeRuleGroupMetadataResponse#stateful_rule_options #stateful_rule_options} => Types::StatefulRuleOptions
     #   * {Types::DescribeRuleGroupMetadataResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeRuleGroupMetadataResponse#vendor_name #vendor_name} => String
+    #   * {Types::DescribeRuleGroupMetadataResponse#product_id #product_id} => String
+    #   * {Types::DescribeRuleGroupMetadataResponse#listing_name #listing_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2618,6 +2621,9 @@ module Aws::NetworkFirewall
     #   resp.capacity #=> Integer
     #   resp.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
     #   resp.last_modified_time #=> Time
+    #   resp.vendor_name #=> String
+    #   resp.product_id #=> String
+    #   resp.listing_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadata AWS API Documentation
     #
@@ -3428,6 +3434,11 @@ module Aws::NetworkFirewall
     #   Indicates the general category of the Amazon Web Services managed rule
     #   group.
     #
+    # @option params [String] :subscription_status
+    #   Filters the results to show only rule groups with the specified
+    #   subscription status. Use this to find subscribed or unsubscribed rule
+    #   groups.
+    #
     # @option params [String] :type
     #   Indicates whether the rule group is stateless or stateful. If the rule
     #   group is stateless, it contains stateless rules. If it is stateful, it
@@ -3446,7 +3457,8 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #     scope: "MANAGED", # accepts MANAGED, ACCOUNT
-    #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS, ACTIVE_THREAT_DEFENSE
+    #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS, ACTIVE_THREAT_DEFENSE, PARTNER_MANAGED
+    #     subscription_status: "NOT_SUBSCRIBED", # accepts NOT_SUBSCRIBED, SUBSCRIBED
     #     type: "STATELESS", # accepts STATELESS, STATEFUL
     #   })
     #
@@ -3456,6 +3468,7 @@ module Aws::NetworkFirewall
     #   resp.rule_groups #=> Array
     #   resp.rule_groups[0].name #=> String
     #   resp.rule_groups[0].arn #=> String
+    #   resp.rule_groups[0].vendor_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListRuleGroups AWS API Documentation
     #
@@ -5277,7 +5290,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

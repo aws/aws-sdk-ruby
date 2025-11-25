@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2025-11-21)
+------------------
+
+* Feature - Added support for Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation.
+
 1.150.0 (2025-11-12)
 ------------------
 

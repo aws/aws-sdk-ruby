@@ -246,9 +246,10 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM" | "NONE")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
+        def interceptor_configurations: () -> ::Array[Types::GatewayInterceptorConfiguration]
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
         def exception_level: () -> ("DEBUG")
       end
@@ -266,7 +267,7 @@ module Aws
                                 search_type: ("SEMANTIC")?
                               }?
                             },
-                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM" | "NONE"),
                             ?authorizer_configuration: {
                               custom_jwt_authorizer: {
                                 discovery_url: ::String,
@@ -275,6 +276,19 @@ module Aws
                               }?
                             },
                             ?kms_key_arn: ::String,
+                            ?interceptor_configurations: Array[
+                              {
+                                interceptor: {
+                                  lambda: {
+                                    arn: ::String
+                                  }?
+                                },
+                                interception_points: Array[("REQUEST" | "RESPONSE")],
+                                input_configuration: {
+                                  pass_request_headers: bool
+                                }?
+                              },
+                            ],
                             ?exception_level: ("DEBUG"),
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateGatewayResponseSuccess
@@ -774,9 +788,10 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM" | "NONE")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
+        def interceptor_configurations: () -> ::Array[Types::GatewayInterceptorConfiguration]
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
         def exception_level: () -> ("DEBUG")
       end
@@ -1163,9 +1178,10 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM" | "NONE")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
+        def interceptor_configurations: () -> ::Array[Types::GatewayInterceptorConfiguration]
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
         def exception_level: () -> ("DEBUG")
       end
@@ -1183,7 +1199,7 @@ module Aws
                                 search_type: ("SEMANTIC")?
                               }?
                             },
-                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM" | "NONE"),
                             ?authorizer_configuration: {
                               custom_jwt_authorizer: {
                                 discovery_url: ::String,
@@ -1192,6 +1208,19 @@ module Aws
                               }?
                             },
                             ?kms_key_arn: ::String,
+                            ?interceptor_configurations: Array[
+                              {
+                                interceptor: {
+                                  lambda: {
+                                    arn: ::String
+                                  }?
+                                },
+                                interception_points: Array[("REQUEST" | "RESPONSE")],
+                                input_configuration: {
+                                  pass_request_headers: bool
+                                }?
+                              },
+                            ],
                             ?exception_level: ("DEBUG")
                           ) -> _UpdateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayResponseSuccess

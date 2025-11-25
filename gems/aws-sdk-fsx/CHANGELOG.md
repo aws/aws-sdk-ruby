@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2025-11-19)
+------------------
+
+* Feature - Adding File Server Resource Manager configuration to FSx Windows
+
 1.126.0 (2025-11-05)
 ------------------
 

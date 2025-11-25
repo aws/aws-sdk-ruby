@@ -2790,40 +2790,31 @@ module Aws::RDS
     # @!attribute [rw] publicly_accessible
     #   Specifies whether the DB cluster is publicly accessible.
     #
+    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #
     #   When the DB cluster is publicly accessible and you connect from
-    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When
+    #   outside of the DB cluster's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When
     #   you connect from within the same VPC as the DB cluster, the endpoint
     #   resolves to the private IP address. Access to the DB cluster is
-    #   ultimately controlled by the security group it uses. That public
-    #   access isn't permitted if the security group assigned to the DB
-    #   cluster doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
     #
-    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults
+    #   to `true`.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB cluster is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB cluster is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -4235,36 +4226,27 @@ module Aws::RDS
     #
     #   When the DB instance is publicly accessible and you connect from
     #   outside of the DB instance's virtual private cloud (VPC), its
-    #   Domain Name System (DNS) endpoint resolves to the public IP address.
+    #   domain name system (DNS) endpoint resolves to the public IP address.
     #   When you connect from within the same VPC as the DB instance, the
     #   endpoint resolves to the private IP address. Access to the DB
-    #   instance is ultimately controlled by the security group it uses.
-    #   That public access is not permitted if the security group assigned
-    #   to the DB instance doesn't permit it.
+    #   instance is controlled by its security group settings.
     #
     #   When the DB instance isn't publicly accessible, it is an internal
     #   DB instance with a DNS name that resolves to a private IP address.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults
+    #   to `false` for Aurora instances and `true` for non-Aurora instances.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB instance is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB instance is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -7197,6 +7179,19 @@ module Aws::RDS
     #   Universal Coordinated Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] upgrade_rollout_order
+    #   This data type represents the order in which the clusters are
+    #   upgraded.
+    #
+    #   * \[first\] - Typically used for development or testing
+    #     environments.
+    #
+    #   * \[second\] - Default order for resources not specifically
+    #     configured.
+    #
+    #   * \[last\] - Usually reserved for production environments.
+    #   @return [String]
+    #
     # @!attribute [rw] replication_source_identifier
     #   The identifier of the source DB cluster if this DB cluster is a read
     #   replica.
@@ -7698,6 +7693,7 @@ module Aws::RDS
       :db_cluster_option_group_memberships,
       :preferred_backup_window,
       :preferred_maintenance_window,
+      :upgrade_rollout_order,
       :replication_source_identifier,
       :read_replica_identifiers,
       :status_infos,
@@ -9166,6 +9162,19 @@ module Aws::RDS
     #   Universal Coordinated Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] upgrade_rollout_order
+    #   This data type represents the order in which the instances are
+    #   upgraded.
+    #
+    #   * \[first\] - Typically used for development or testing
+    #     environments.
+    #
+    #   * \[second\] - Default order for resources not specifically
+    #     configured.
+    #
+    #   * \[last\] - Usually reserved for production environments.
+    #   @return [String]
+    #
     # @!attribute [rw] pending_modified_values
     #   Information about pending changes to the DB instance. This
     #   information is returned only when there are pending changes.
@@ -9713,6 +9722,7 @@ module Aws::RDS
       :availability_zone,
       :db_subnet_group,
       :preferred_maintenance_window,
+      :upgrade_rollout_order,
       :pending_modified_values,
       :latest_restorable_time,
       :multi_az,
@@ -19426,7 +19436,7 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Can't be longer than 64 characters.
+    #   ^
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
@@ -29347,6 +29357,15 @@ module Aws::RDS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The operation violates VPC encryption control settings. Make sure that
+    # your DB instance type supports the Nitro encryption-in-transit
+    # capability, or modify your VPC's encryption controls to not enforce
+    # encryption-in-transit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/VpcEncryptionControlViolationException AWS API Documentation
+    #
+    class VpcEncryptionControlViolationException < Aws::EmptyStructure; end
 
     # This data type is used as a response element for queries on VPC
     # security group membership.

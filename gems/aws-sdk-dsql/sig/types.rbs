@@ -118,6 +118,7 @@ module Aws::DSQL
 
     class GetVpcEndpointServiceNameOutput
       attr_accessor service_name: ::String
+      attr_accessor cluster_vpc_endpoint: ::String
       SENSITIVE: []
     end
 

@@ -1837,8 +1837,8 @@ module Aws::BedrockAgentCore
     #   actors.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The default
+    #   value is 20.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -2044,12 +2044,10 @@ module Aws::BedrockAgentCore
     #   events.
     #
     # @option params [required, String] :session_id
-    #   The identifier of the session for which to list events. If specified,
-    #   only events from this session are returned.
+    #   The identifier of the session for which to list events.
     #
     # @option params [required, String] :actor_id
-    #   The identifier of the actor for which to list events. If specified,
-    #   only events from this actor are returned.
+    #   The identifier of the actor for which to list events.
     #
     # @option params [Boolean] :include_payloads
     #   Specifies whether to include event payloads in the response. Set to
@@ -2059,8 +2057,8 @@ module Aws::BedrockAgentCore
     #   Filter criteria to apply when listing events.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The default
+    #   value is 20.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -2130,6 +2128,71 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Lists all long-term memory extraction jobs that are eligible to be
+    # started with optional filtering.
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:ListMemoryExtractionJobs` permission.
+    #
+    # @option params [required, String] :memory_id
+    #   The unique identifier of the memory to list extraction jobs for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. The default
+    #   value is 20.
+    #
+    # @option params [Types::ExtractionJobFilterInput] :filter
+    #   Filter criteria to apply when listing extraction jobs.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListMemoryExtractionJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMemoryExtractionJobsOutput#jobs #jobs} => Array&lt;Types::ExtractionJobMetadata&gt;
+    #   * {Types::ListMemoryExtractionJobsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_memory_extraction_jobs({
+    #     memory_id: "MemoryId", # required
+    #     max_results: 1,
+    #     filter: {
+    #       strategy_id: "String",
+    #       session_id: "String",
+    #       actor_id: "String",
+    #       status: "FAILED", # accepts FAILED
+    #     },
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].messages.messages_list #=> Array
+    #   resp.jobs[0].messages.messages_list[0].event_id #=> String
+    #   resp.jobs[0].messages.messages_list[0].message_index #=> Integer
+    #   resp.jobs[0].status #=> String, one of "FAILED"
+    #   resp.jobs[0].failure_reason #=> String
+    #   resp.jobs[0].strategy_id #=> String
+    #   resp.jobs[0].session_id #=> String
+    #   resp.jobs[0].actor_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListMemoryExtractionJobs AWS API Documentation
+    #
+    # @overload list_memory_extraction_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_memory_extraction_jobs(params = {}, options = {})
+      req = build_request(:list_memory_extraction_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists memory records in an AgentCore Memory resource based on
     # specified criteria. We recommend using pagination to ensure that the
     # operation returns quickly and successfully.
@@ -2150,8 +2213,8 @@ module Aws::BedrockAgentCore
     #   specified, only memory records with this strategy ID are returned.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The default
+    #   value is 20.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -2208,12 +2271,11 @@ module Aws::BedrockAgentCore
     #   sessions.
     #
     # @option params [required, String] :actor_id
-    #   The identifier of the actor for which to list sessions. If specified,
-    #   only sessions involving this actor are returned.
+    #   The identifier of the actor for which to list sessions.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The default
+    #   value is 20.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -2266,8 +2328,7 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [required, String] :namespace
-    #   The namespace to filter memory records by. If specified, only memory
-    #   records in this namespace are searched.
+    #   The namespace to filter memory records by.
     #
     # @option params [required, Types::SearchCriteria] :search_criteria
     #   The search criteria to use for finding relevant memory records. This
@@ -2280,8 +2341,8 @@ module Aws::BedrockAgentCore
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The default
+    #   value is 20.
     #
     # @return [Types::RetrieveMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2509,6 +2570,55 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def start_code_interpreter_session(params = {}, options = {})
       req = build_request(:start_code_interpreter_session, params)
+      req.send_request(options)
+    end
+
+    # Starts a memory extraction job that processes events that failed
+    # extraction previously in an AgentCore Memory resource and produces
+    # structured memory records. When earlier extraction attempts have left
+    # events unprocessed, this job will pick up and extract those as well.
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:StartMemoryExtractionJob` permission.
+    #
+    # @option params [required, String] :memory_id
+    #   The unique identifier of the memory for which to start extraction
+    #   jobs.
+    #
+    # @option params [required, Types::ExtractionJob] :extraction_job
+    #   Extraction job to start in this operation.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotent processing of
+    #   the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartMemoryExtractionJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMemoryExtractionJobOutput#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_memory_extraction_job({
+    #     memory_id: "MemoryId", # required
+    #     extraction_job: { # required
+    #       job_id: "String", # required
+    #     },
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartMemoryExtractionJob AWS API Documentation
+    #
+    # @overload start_memory_extraction_job(params = {})
+    # @param [Hash] params ({})
+    def start_memory_extraction_job(params = {}, options = {})
+      req = build_request(:start_memory_extraction_job, params)
       req.send_request(options)
     end
 
@@ -2782,7 +2892,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

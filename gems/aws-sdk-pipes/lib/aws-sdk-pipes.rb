@@ -55,7 +55,7 @@ module Aws::Pipes
   autoload :EndpointProvider, 'aws-sdk-pipes/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pipes/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

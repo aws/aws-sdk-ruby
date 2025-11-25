@@ -1292,7 +1292,7 @@ module Aws::ServerlessApplicationRepository
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

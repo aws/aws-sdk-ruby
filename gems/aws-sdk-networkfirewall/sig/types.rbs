@@ -419,6 +419,9 @@ module Aws::NetworkFirewall
       attr_accessor capacity: ::Integer
       attr_accessor stateful_rule_options: Types::StatefulRuleOptions
       attr_accessor last_modified_time: ::Time
+      attr_accessor vendor_name: ::String
+      attr_accessor product_id: ::String
+      attr_accessor listing_name: ::String
       SENSITIVE: []
     end
 
@@ -801,7 +804,8 @@ module Aws::NetworkFirewall
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor scope: ("MANAGED" | "ACCOUNT")
-      attr_accessor managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE")
+      attr_accessor managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE" | "PARTNER_MANAGED")
+      attr_accessor subscription_status: ("NOT_SUBSCRIBED" | "SUBSCRIBED")
       attr_accessor type: ("STATELESS" | "STATEFUL")
       SENSITIVE: []
     end
@@ -878,7 +882,7 @@ module Aws::NetworkFirewall
     end
 
     class PerObjectStatus
-      attr_accessor sync_status: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED")
+      attr_accessor sync_status: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED" | "NOT_SUBSCRIBED" | "DEPRECATED")
       attr_accessor update_token: ::String
       SENSITIVE: []
     end
@@ -956,6 +960,7 @@ module Aws::NetworkFirewall
     class RuleGroupMetadata
       attr_accessor name: ::String
       attr_accessor arn: ::String
+      attr_accessor vendor_name: ::String
       SENSITIVE: []
     end
 

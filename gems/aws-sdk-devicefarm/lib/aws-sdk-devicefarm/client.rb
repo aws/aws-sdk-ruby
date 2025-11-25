@@ -729,6 +729,22 @@ module Aws::DeviceFarm
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC security groups and subnets that are attached to a project.
     #
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables
+    #   A set of environment variables which are used by default for all runs
+    #   in the project. These environment variables are applied to the test
+    #   run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #
+    # @option params [String] :execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectResult#project #project} => Types::Project
@@ -761,6 +777,13 @@ module Aws::DeviceFarm
     #       subnet_ids: ["SubnetId"], # required
     #       vpc_id: "NonEmptyString", # required
     #     },
+    #     environment_variables: [
+    #       {
+    #         name: "EnvironmentVariableName", # required
+    #         value: "EnvironmentVariableValue", # required
+    #       },
+    #     ],
+    #     execution_role_arn: "AmazonRoleResourceName",
     #   })
     #
     # @example Response structure
@@ -774,6 +797,10 @@ module Aws::DeviceFarm
     #   resp.project.vpc_config.subnet_ids #=> Array
     #   resp.project.vpc_config.subnet_ids[0] #=> String
     #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.environment_variables #=> Array
+    #   resp.project.environment_variables[0].name #=> String
+    #   resp.project.environment_variables[0].value #=> String
+    #   resp.project.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject AWS API Documentation
     #
@@ -1860,6 +1887,13 @@ module Aws::DeviceFarm
     #       },
     #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         },
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName",
     #     },
     #     project_arn: "AmazonResourceName",
     #   })
@@ -2278,6 +2312,10 @@ module Aws::DeviceFarm
     #   resp.project.vpc_config.subnet_ids #=> Array
     #   resp.project.vpc_config.subnet_ids[0] #=> String
     #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.environment_variables #=> Array
+    #   resp.project.environment_variables[0].name #=> String
+    #   resp.project.environment_variables[0].value #=> String
+    #   resp.project.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject AWS API Documentation
     #
@@ -2522,6 +2560,10 @@ module Aws::DeviceFarm
     #   resp.run.vpc_config.subnet_ids #=> Array
     #   resp.run.vpc_config.subnet_ids[0] #=> String
     #   resp.run.vpc_config.vpc_id #=> String
+    #   resp.run.execution_role_arn #=> String
+    #   resp.run.environment_variables #=> Array
+    #   resp.run.environment_variables[0].name #=> String
+    #   resp.run.environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -3842,6 +3884,10 @@ module Aws::DeviceFarm
     #   resp.projects[0].vpc_config.subnet_ids #=> Array
     #   resp.projects[0].vpc_config.subnet_ids[0] #=> String
     #   resp.projects[0].vpc_config.vpc_id #=> String
+    #   resp.projects[0].environment_variables #=> Array
+    #   resp.projects[0].environment_variables[0].name #=> String
+    #   resp.projects[0].environment_variables[0].value #=> String
+    #   resp.projects[0].execution_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects AWS API Documentation
@@ -4111,6 +4157,10 @@ module Aws::DeviceFarm
     #   resp.runs[0].vpc_config.subnet_ids #=> Array
     #   resp.runs[0].vpc_config.subnet_ids[0] #=> String
     #   resp.runs[0].vpc_config.vpc_id #=> String
+    #   resp.runs[0].execution_role_arn #=> String
+    #   resp.runs[0].environment_variables #=> Array
+    #   resp.runs[0].environment_variables[0].name #=> String
+    #   resp.runs[0].environment_variables[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -4257,9 +4307,9 @@ module Aws::DeviceFarm
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources for which
     #   to list tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5127,6 +5177,13 @@ module Aws::DeviceFarm
     #       },
     #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         },
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName",
     #     },
     #     execution_configuration: {
     #       job_timeout_minutes: 1,
@@ -5211,6 +5268,10 @@ module Aws::DeviceFarm
     #   resp.run.vpc_config.subnet_ids #=> Array
     #   resp.run.vpc_config.subnet_ids[0] #=> String
     #   resp.run.vpc_config.vpc_id #=> String
+    #   resp.run.execution_role_arn #=> String
+    #   resp.run.environment_variables #=> Array
+    #   resp.run.environment_variables[0].name #=> String
+    #   resp.run.environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -5514,6 +5575,10 @@ module Aws::DeviceFarm
     #   resp.run.vpc_config.subnet_ids #=> Array
     #   resp.run.vpc_config.subnet_ids[0] #=> String
     #   resp.run.vpc_config.vpc_id #=> String
+    #   resp.run.execution_role_arn #=> String
+    #   resp.run.environment_variables #=> Array
+    #   resp.run.environment_variables[0].name #=> String
+    #   resp.run.environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -5532,9 +5597,9 @@ module Aws::DeviceFarm
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources to which
     #   to add tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
@@ -5569,9 +5634,9 @@ module Aws::DeviceFarm
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources from which
     #   to delete tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -5926,6 +5991,22 @@ module Aws::DeviceFarm
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC security groups and subnets that are attached to a project.
     #
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables
+    #   A set of environment variables which are used by default for all runs
+    #   in the project. These environment variables are applied to the test
+    #   run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #
+    # @option params [String] :execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #
     # @return [Types::UpdateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectResult#project #project} => Types::Project
@@ -5960,6 +6041,13 @@ module Aws::DeviceFarm
     #       subnet_ids: ["SubnetId"], # required
     #       vpc_id: "NonEmptyString", # required
     #     },
+    #     environment_variables: [
+    #       {
+    #         name: "EnvironmentVariableName", # required
+    #         value: "EnvironmentVariableValue", # required
+    #       },
+    #     ],
+    #     execution_role_arn: "AmazonRoleResourceName",
     #   })
     #
     # @example Response structure
@@ -5973,6 +6061,10 @@ module Aws::DeviceFarm
     #   resp.project.vpc_config.subnet_ids #=> Array
     #   resp.project.vpc_config.subnet_ids[0] #=> String
     #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.environment_variables #=> Array
+    #   resp.project.environment_variables[0].name #=> String
+    #   resp.project.environment_variables[0].value #=> String
+    #   resp.project.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject AWS API Documentation
     #
@@ -6159,7 +6251,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

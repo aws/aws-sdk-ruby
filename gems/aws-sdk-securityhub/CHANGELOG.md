@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2025-11-20)
+------------------
+
+* Feature - Release Findings and Resources Trends APIs- GetFindingsTrendsV2 and GetResourcesTrendsV2. This supports time-series aggregated counts with composite filtering for 1-year of historical data analysis of Findings and Resources.
+
 1.145.0 (2025-10-24)
 ------------------
 

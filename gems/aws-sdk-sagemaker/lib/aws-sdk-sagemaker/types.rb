@@ -10,6 +10,33 @@
 module Aws::SageMaker
   module Types
 
+    # Configuration for allocating accelerator partitions.
+    #
+    # @!attribute [rw] type
+    #   The Multi-Instance GPU (MIG) profile type that defines the partition
+    #   configuration. The profile specifies the compute and memory
+    #   allocation for each partition instance. The available profile types
+    #   depend on the instance type specified in the compute quota
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of accelerator partitions to allocate with the specified
+    #   partition type. If you don't specify a value for vCPU and
+    #   MemoryInGiB, SageMaker AI automatically allocates ratio-based values
+    #   for those parameters based on the accelerator partition count you
+    #   provide.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AcceleratorPartitionConfig AWS API Documentation
+    #
+    class AcceleratorPartitionConfig < Struct.new(
+      :type,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure describing the source of an action.
     #
     # @!attribute [rw] source_uri
@@ -3452,6 +3479,348 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Represents an error encountered when rebooting a node (identified by
+    # its logical node ID) from a SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] node_logical_id
+    #   The logical node ID of the node that encountered an error during the
+    #   reboot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the error encountered when rebooting
+    #   a node by logical node ID.
+    #
+    #   Possible values:
+    #
+    #   * `InstanceIdNotFound`: The node does not exist in the specified
+    #     cluster.
+    #
+    #   * `InvalidInstanceStatus`: The node is in a state that does not
+    #     allow rebooting. Wait for the node to finish any ongoing changes
+    #     before retrying.
+    #
+    #   * `InstanceIdInUse`: Another operation is already in progress for
+    #     this node. Wait for the operation to complete before retrying.
+    #
+    #   * `InternalServerError`: An internal error occurred while processing
+    #     this node.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error encountered when
+    #   rebooting a node by logical node ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchRebootClusterNodeLogicalIdsError AWS API Documentation
+    #
+    class BatchRebootClusterNodeLogicalIdsError < Struct.new(
+      :node_logical_id,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an error encountered when rebooting a node from a SageMaker
+    # HyperPod cluster.
+    #
+    # @!attribute [rw] node_id
+    #   The EC2 instance ID of the node that encountered an error during the
+    #   reboot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the error encountered when rebooting
+    #   a node.
+    #
+    #   Possible values:
+    #
+    #   * `InstanceIdNotFound`: The instance does not exist in the specified
+    #     cluster.
+    #
+    #   * `InvalidInstanceStatus`: The instance is in a state that does not
+    #     allow rebooting. Wait for the instance to finish any ongoing
+    #     changes before retrying.
+    #
+    #   * `InstanceIdInUse`: Another operation is already in progress for
+    #     this node. Wait for the operation to complete before retrying.
+    #
+    #   * `InternalServerError`: An internal error occurred while processing
+    #     this node.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error encountered when
+    #   rebooting a node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchRebootClusterNodesError AWS API Documentation
+    #
+    class BatchRebootClusterNodesError < Struct.new(
+      :node_id,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
+    #   cluster containing the nodes to reboot.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of EC2 instance IDs to reboot using soft recovery. You can
+    #   specify between 1 and 25 instance IDs.
+    #
+    #   <note markdown="1"> * Either `NodeIds` or `NodeLogicalIds` must be provided (or both),
+    #     but at least one is required.
+    #
+    #   * Each instance ID must follow the pattern `i-` followed by 17
+    #     hexadecimal characters (for example, `i-0123456789abcdef0`).
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] node_logical_ids
+    #   A list of logical node IDs to reboot using soft recovery. You can
+    #   specify between 1 and 25 logical node IDs.
+    #
+    #   The `NodeLogicalId` is a unique identifier that persists throughout
+    #   the node's lifecycle and can be used to track nodes that are still
+    #   being provisioned and don't yet have an EC2 instance ID assigned.
+    #
+    #   * This parameter is only supported for clusters using `Continuous`
+    #     as the `NodeProvisioningMode`. For clusters using the default
+    #     provisioning mode, use `NodeIds` instead.
+    #
+    #   * Either `NodeIds` or `NodeLogicalIds` must be provided (or both),
+    #     but at least one is required.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchRebootClusterNodesRequest AWS API Documentation
+    #
+    class BatchRebootClusterNodesRequest < Struct.new(
+      :cluster_name,
+      :node_ids,
+      :node_logical_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   A list of EC2 instance IDs for which the reboot operation was
+    #   successfully initiated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed
+    #   A list of errors encountered for EC2 instance IDs that could not be
+    #   rebooted. Each error includes the instance ID, an error code, and a
+    #   descriptive message.
+    #   @return [Array<Types::BatchRebootClusterNodesError>]
+    #
+    # @!attribute [rw] failed_node_logical_ids
+    #   A list of errors encountered for logical node IDs that could not be
+    #   rebooted. Each error includes the logical node ID, an error code,
+    #   and a descriptive message. This field is only present when
+    #   `NodeLogicalIds` were provided in the request.
+    #   @return [Array<Types::BatchRebootClusterNodeLogicalIdsError>]
+    #
+    # @!attribute [rw] successful_node_logical_ids
+    #   A list of logical node IDs for which the reboot operation was
+    #   successfully initiated. This field is only present when
+    #   `NodeLogicalIds` were provided in the request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchRebootClusterNodesResponse AWS API Documentation
+    #
+    class BatchRebootClusterNodesResponse < Struct.new(
+      :successful,
+      :failed,
+      :failed_node_logical_ids,
+      :successful_node_logical_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an error encountered when replacing a node (identified by
+    # its logical node ID) in a SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] node_logical_id
+    #   The logical node ID of the node that encountered an error during the
+    #   replacement operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the error encountered when replacing
+    #   a node by logical node ID.
+    #
+    #   Possible values:
+    #
+    #   * `InstanceIdNotFound`: The node does not exist in the specified
+    #     cluster.
+    #
+    #   * `InvalidInstanceStatus`: The node is in a state that does not
+    #     allow replacement. Wait for the node to finish any ongoing changes
+    #     before retrying.
+    #
+    #   * `InstanceIdInUse`: Another operation is already in progress for
+    #     this node. Wait for the operation to complete before retrying.
+    #
+    #   * `InternalServerError`: An internal error occurred while processing
+    #     this node.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error encountered when
+    #   replacing a node by logical node ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchReplaceClusterNodeLogicalIdsError AWS API Documentation
+    #
+    class BatchReplaceClusterNodeLogicalIdsError < Struct.new(
+      :node_logical_id,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an error encountered when replacing a node in a SageMaker
+    # HyperPod cluster.
+    #
+    # @!attribute [rw] node_id
+    #   The EC2 instance ID of the node that encountered an error during the
+    #   replacement operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the error encountered when replacing
+    #   a node.
+    #
+    #   Possible values:
+    #
+    #   * `InstanceIdNotFound`: The instance does not exist in the specified
+    #     cluster.
+    #
+    #   * `InvalidInstanceStatus`: The instance is in a state that does not
+    #     allow replacement. Wait for the instance to finish any ongoing
+    #     changes before retrying.
+    #
+    #   * `InstanceIdInUse`: Another operation is already in progress for
+    #     this node. Wait for the operation to complete before retrying.
+    #
+    #   * `InternalServerError`: An internal error occurred while processing
+    #     this node.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error encountered when
+    #   replacing a node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchReplaceClusterNodesError AWS API Documentation
+    #
+    class BatchReplaceClusterNodesError < Struct.new(
+      :node_id,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
+    #   cluster containing the nodes to replace.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of EC2 instance IDs to replace with new hardware. You can
+    #   specify between 1 and 25 instance IDs.
+    #
+    #   Replace operations destroy all instance volumes (root and
+    #   secondary). Ensure you have backed up any important data before
+    #   proceeding.
+    #
+    #   <note markdown="1"> * Either `NodeIds` or `NodeLogicalIds` must be provided (or both),
+    #     but at least one is required.
+    #
+    #   * Each instance ID must follow the pattern `i-` followed by 17
+    #     hexadecimal characters (for example, `i-0123456789abcdef0`).
+    #
+    #   * For SageMaker HyperPod clusters using the Slurm workload manager,
+    #     you cannot replace instances that are configured as Slurm
+    #     controller nodes.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] node_logical_ids
+    #   A list of logical node IDs to replace with new hardware. You can
+    #   specify between 1 and 25 logical node IDs.
+    #
+    #   The `NodeLogicalId` is a unique identifier that persists throughout
+    #   the node's lifecycle and can be used to track nodes that are still
+    #   being provisioned and don't yet have an EC2 instance ID assigned.
+    #
+    #   * Replace operations destroy all instance volumes (root and
+    #     secondary). Ensure you have backed up any important data before
+    #     proceeding.
+    #
+    #   * This parameter is only supported for clusters using `Continuous`
+    #     as the `NodeProvisioningMode`. For clusters using the default
+    #     provisioning mode, use `NodeIds` instead.
+    #
+    #   * Either `NodeIds` or `NodeLogicalIds` must be provided (or both),
+    #     but at least one is required.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchReplaceClusterNodesRequest AWS API Documentation
+    #
+    class BatchReplaceClusterNodesRequest < Struct.new(
+      :cluster_name,
+      :node_ids,
+      :node_logical_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   A list of EC2 instance IDs for which the replacement operation was
+    #   successfully initiated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed
+    #   A list of errors encountered for EC2 instance IDs that could not be
+    #   replaced. Each error includes the instance ID, an error code, and a
+    #   descriptive message.
+    #   @return [Array<Types::BatchReplaceClusterNodesError>]
+    #
+    # @!attribute [rw] failed_node_logical_ids
+    #   A list of errors encountered for logical node IDs that could not be
+    #   replaced. Each error includes the logical node ID, an error code,
+    #   and a descriptive message. This field is only present when
+    #   `NodeLogicalIds` were provided in the request.
+    #   @return [Array<Types::BatchReplaceClusterNodeLogicalIdsError>]
+    #
+    # @!attribute [rw] successful_node_logical_ids
+    #   A list of logical node IDs for which the replacement operation was
+    #   successfully initiated. This field is only present when
+    #   `NodeLogicalIds` were provided in the request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchReplaceClusterNodesResponse AWS API Documentation
+    #
+    class BatchReplaceClusterNodesResponse < Struct.new(
+      :successful,
+      :failed,
+      :failed_node_logical_ids,
+      :successful_node_logical_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input object for the batch transform job.
     #
     # @!attribute [rw] data_captured_destination_s3_uri
@@ -4776,6 +5145,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the instance capacity requirements for an instance group,
+    # including configurations for both Spot and On-Demand capacity types.
+    #
+    # @!attribute [rw] spot
+    #   Configuration options specific to Spot instances.
+    #   @return [Types::ClusterSpotOptions]
+    #
+    # @!attribute [rw] on_demand
+    #   Configuration options specific to On-Demand instances.
+    #   @return [Types::ClusterOnDemandOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterCapacityRequirements AWS API Documentation
+    #
+    class ClusterCapacityRequirements < Struct.new(
+      :spot,
+      :on_demand)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the configuration for attaching an additional Amazon Elastic
     # Block Store (EBS) volume to each instance of the SageMaker HyperPod
     # cluster instance group. To learn more, see [SageMaker HyperPod release
@@ -4960,6 +5349,12 @@ module Aws::SageMaker
     #   of a SageMaker HyperPod cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_count
+    #   The minimum number of instances that must be available in the
+    #   instance group of a SageMaker HyperPod cluster before it transitions
+    #   to `InService` status.
+    #   @return [Integer]
+    #
     # @!attribute [rw] instance_group_name
     #   The name of the instance group of a SageMaker HyperPod cluster.
     #   @return [String]
@@ -5054,6 +5449,23 @@ module Aws::SageMaker
     #   group.
     #   @return [String]
     #
+    # @!attribute [rw] active_operations
+    #   A map indicating active operations currently in progress for the
+    #   instance group of a SageMaker HyperPod cluster. When there is a
+    #   scaling operation in progress, this map contains a key `Scaling`
+    #   with value 1.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] kubernetes_config
+    #   The Kubernetes configuration for the instance group that contains
+    #   labels and taints to be applied for the nodes in this instance
+    #   group.
+    #   @return [Types::ClusterKubernetesConfigDetails]
+    #
+    # @!attribute [rw] capacity_requirements
+    #   The instance capacity requirements for the instance group.
+    #   @return [Types::ClusterCapacityRequirements]
+    #
     # @!attribute [rw] target_state_count
     #   The number of nodes running a specific image ID since the last
     #   software update request.
@@ -5072,6 +5484,7 @@ module Aws::SageMaker
     class ClusterInstanceGroupDetails < Struct.new(
       :current_count,
       :target_count,
+      :min_count,
       :instance_group_name,
       :instance_type,
       :life_cycle_config,
@@ -5086,6 +5499,9 @@ module Aws::SageMaker
       :scheduled_update_config,
       :current_image_id,
       :desired_image_id,
+      :active_operations,
+      :kubernetes_config,
+      :capacity_requirements,
       :target_state_count,
       :software_update_status,
       :active_software_update_config)
@@ -5098,6 +5514,16 @@ module Aws::SageMaker
     # @!attribute [rw] instance_count
     #   Specifies the number of instances to add to the instance group of a
     #   SageMaker HyperPod cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_instance_count
+    #   Defines the minimum number of instances required for an instance
+    #   group to become `InService`. If this threshold isn't met within 3
+    #   hours, the instance group rolls back to its previous state - zero
+    #   instances for new instance groups, or previous settings for existing
+    #   instance groups. `MinInstanceCount` only affects the initial
+    #   transition to `InService` and does not guarantee maintaining this
+    #   minimum afterward.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_group_name
@@ -5227,10 +5653,22 @@ module Aws::SageMaker
     #   patched with the specified image.
     #   @return [String]
     #
+    # @!attribute [rw] kubernetes_config
+    #   Specifies the Kubernetes configuration for the instance group. You
+    #   describe what you want the labels and taints to look like, and the
+    #   cluster works to reconcile the actual state with the declared state
+    #   for nodes in this instance group.
+    #   @return [Types::ClusterKubernetesConfig]
+    #
+    # @!attribute [rw] capacity_requirements
+    #   Specifies the capacity requirements for the instance group.
+    #   @return [Types::ClusterCapacityRequirements]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupSpecification AWS API Documentation
     #
     class ClusterInstanceGroupSpecification < Struct.new(
       :instance_count,
+      :min_instance_count,
       :instance_group_name,
       :instance_type,
       :life_cycle_config,
@@ -5241,7 +5679,9 @@ module Aws::SageMaker
       :training_plan_arn,
       :override_vpc_config,
       :scheduled_update_config,
-      :image_id)
+      :image_id,
+      :kubernetes_config,
+      :capacity_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5319,6 +5759,113 @@ module Aws::SageMaker
 
       class EbsVolumeConfig < ClusterInstanceStorageConfig; end
       class Unknown < ClusterInstanceStorageConfig; end
+    end
+
+    # Kubernetes configuration that specifies labels and taints to be
+    # applied to cluster nodes in an instance group.
+    #
+    # @!attribute [rw] labels
+    #   Key-value pairs of labels to be applied to cluster nodes.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] taints
+    #   List of taints to be applied to cluster nodes.
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterKubernetesConfig AWS API Documentation
+    #
+    class ClusterKubernetesConfig < Struct.new(
+      :labels,
+      :taints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed Kubernetes configuration showing both the current and desired
+    # state of labels and taints for cluster nodes.
+    #
+    # @!attribute [rw] current_labels
+    #   The current labels applied to cluster nodes of an instance group.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] desired_labels
+    #   The desired labels to be applied to cluster nodes of an instance
+    #   group.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] current_taints
+    #   The current taints applied to cluster nodes of an instance group.
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    #
+    # @!attribute [rw] desired_taints
+    #   The desired taints to be applied to cluster nodes of an instance
+    #   group.
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterKubernetesConfigDetails AWS API Documentation
+    #
+    class ClusterKubernetesConfigDetails < Struct.new(
+      :current_labels,
+      :desired_labels,
+      :current_taints,
+      :desired_taints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Node-specific Kubernetes configuration showing both current and
+    # desired state of labels and taints for an individual cluster node.
+    #
+    # @!attribute [rw] current_labels
+    #   The current labels applied to the cluster node.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] desired_labels
+    #   The desired labels to be applied to the cluster node.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] current_taints
+    #   The current taints applied to the cluster node.
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    #
+    # @!attribute [rw] desired_taints
+    #   The desired taints to be applied to the cluster node.
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterKubernetesConfigNodeDetails AWS API Documentation
+    #
+    class ClusterKubernetesConfigNodeDetails < Struct.new(
+      :current_labels,
+      :desired_labels,
+      :current_taints,
+      :desired_taints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Kubernetes taint that can be applied to cluster nodes.
+    #
+    # @!attribute [rw] key
+    #   The key of the taint.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the taint.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the taint. Valid values are `NoSchedule`,
+    #   `PreferNoSchedule`, and `NoExecute`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterKubernetesTaint AWS API Documentation
+    #
+    class ClusterKubernetesTaint < Struct.new(
+      :key,
+      :value,
+      :effect)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The lifecycle configuration for a SageMaker HyperPod cluster.
@@ -5470,6 +6017,19 @@ module Aws::SageMaker
     #   Contains information about the UltraServer.
     #   @return [Types::UltraServerInfo]
     #
+    # @!attribute [rw] kubernetes_config
+    #   The Kubernetes configuration applied to this node, showing both the
+    #   current and desired state of labels and taints. The cluster works to
+    #   reconcile the actual state with the declared state.
+    #   @return [Types::ClusterKubernetesConfigNodeDetails]
+    #
+    # @!attribute [rw] capacity_type
+    #   The capacity type of the node. Valid values are `OnDemand` and
+    #   `Spot`. When set to `OnDemand`, the node is launched as an On-Demand
+    #   instance. When set to `Spot`, the node is launched as a Spot
+    #   instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterNodeDetails AWS API Documentation
     #
     class ClusterNodeDetails < Struct.new(
@@ -5490,7 +6050,9 @@ module Aws::SageMaker
       :placement,
       :current_image_id,
       :desired_image_id,
-      :ultra_server_info)
+      :ultra_server_info,
+      :kubernetes_config,
+      :capacity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5536,6 +6098,10 @@ module Aws::SageMaker
     #   Contains information about the UltraServer.
     #   @return [Types::UltraServerInfo]
     #
+    # @!attribute [rw] private_dns_hostname
+    #   The private DNS hostname of the SageMaker HyperPod cluster node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterNodeSummary AWS API Documentation
     #
     class ClusterNodeSummary < Struct.new(
@@ -5546,10 +6112,19 @@ module Aws::SageMaker
       :launch_time,
       :last_software_update_time,
       :instance_status,
-      :ultra_server_info)
+      :ultra_server_info,
+      :private_dns_hostname)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Configuration options specific to On-Demand instances.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOnDemandOptions AWS API Documentation
+    #
+    class ClusterOnDemandOptions < Aws::EmptyStructure; end
 
     # The type of orchestrator used for the SageMaker HyperPod cluster.
     #
@@ -5846,6 +6421,14 @@ module Aws::SageMaker
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Configuration options specific to Spot instances.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterSpotOptions AWS API Documentation
+    #
+    class ClusterSpotOptions < Aws::EmptyStructure; end
 
     # Lists a summary of the properties of a SageMaker HyperPod cluster.
     #
@@ -6294,6 +6877,11 @@ module Aws::SageMaker
     #   Accelerators are set to 0.
     #   @return [Float]
     #
+    # @!attribute [rw] accelerator_partition
+    #   The accelerator partition configuration for fractional GPU
+    #   allocation.
+    #   @return [Types::AcceleratorPartitionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ComputeQuotaResourceConfig AWS API Documentation
     #
     class ComputeQuotaResourceConfig < Struct.new(
@@ -6301,7 +6889,8 @@ module Aws::SageMaker
       :count,
       :accelerators,
       :v_cpu,
-      :memory_in_gi_b)
+      :memory_in_gi_b,
+      :accelerator_partition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8318,6 +8907,10 @@ module Aws::SageMaker
     #   made to or from the model containers.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metrics_config
+    #   The configuration parameters for utilization metrics.
+    #   @return [Types::MetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
     #
     class CreateEndpointConfigInput < Struct.new(
@@ -8331,7 +8924,8 @@ module Aws::SageMaker
       :shadow_production_variants,
       :execution_role_arn,
       :vpc_config,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10804,6 +11398,10 @@ module Aws::SageMaker
     #   with the optimization job.
     #   @return [String]
     #
+    # @!attribute [rw] max_instance_count
+    #   The maximum number of instances to use for the optimization job.
+    #   @return [Integer]
+    #
     # @!attribute [rw] optimization_environment
     #   The environment variables to set in the model container.
     #   @return [Hash<String,String>]
@@ -10863,6 +11461,7 @@ module Aws::SageMaker
       :role_arn,
       :model_source,
       :deployment_instance_type,
+      :max_instance_count,
       :optimization_environment,
       :optimization_configs,
       :output_config,
@@ -16368,6 +16967,10 @@ module Aws::SageMaker
     #   made to or from the model containers.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metrics_config
+    #   The configuration parameters for utilization metrics.
+    #   @return [Types::MetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput AWS API Documentation
     #
     class DescribeEndpointConfigOutput < Struct.new(
@@ -16382,7 +16985,8 @@ module Aws::SageMaker
       :shadow_production_variants,
       :execution_role_arn,
       :vpc_config,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16524,6 +17128,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html
     #   @return [Array<Types::ProductionVariantSummary>]
     #
+    # @!attribute [rw] metrics_config
+    #   The configuration parameters for utilization metrics.
+    #   @return [Types::MetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
     #
     class DescribeEndpointOutput < Struct.new(
@@ -16540,7 +17148,8 @@ module Aws::SageMaker
       :async_inference_config,
       :pending_deployment_summary,
       :explainer_config,
-      :shadow_production_variants)
+      :shadow_production_variants,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19365,6 +19974,10 @@ module Aws::SageMaker
     #   with the optimization job.
     #   @return [String]
     #
+    # @!attribute [rw] max_instance_count
+    #   The maximum number of instances to use for the optimization job.
+    #   @return [Integer]
+    #
     # @!attribute [rw] optimization_configs
     #   Settings for each of the optimization techniques that the job
     #   applies.
@@ -19425,6 +20038,7 @@ module Aws::SageMaker
       :model_source,
       :optimization_environment,
       :deployment_instance_type,
+      :max_instance_count,
       :optimization_configs,
       :output_config,
       :optimization_output,
@@ -20801,7 +21415,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
-    #   HyperPod) that can use this training plan.
+    #   HyperPod, SageMaker Endpoints) that can use this training plan.
     #
     #   Training plans are specific to their target resource.
     #
@@ -20810,6 +21424,10 @@ module Aws::SageMaker
     #
     #   * A training plan for HyperPod clusters can be used exclusively to
     #     provide compute resources to a cluster's instance group.
+    #
+    #   * A training plan for SageMaker endpoints can be used exclusively to
+    #     provide compute resources to SageMaker endpoints for model
+    #     deployment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] reserved_capacity_summaries
@@ -28640,6 +29258,10 @@ module Aws::SageMaker
     #   The desired number of instances for the group after scaling.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_count
+    #   Minimum instance count of the instance group.
+    #   @return [Integer]
+    #
     # @!attribute [rw] failure_message
     #   An error message describing why the scaling operation failed, if
     #   applicable.
@@ -28650,6 +29272,7 @@ module Aws::SageMaker
     class InstanceGroupScalingMetadata < Struct.new(
       :instance_count,
       :target_count,
+      :min_count,
       :failure_message)
       SENSITIVE = []
       include Aws::Structure
@@ -35960,6 +36583,29 @@ module Aws::SageMaker
       class Unknown < MetricSpecification; end
     end
 
+    # The configuration for Utilization metrics.
+    #
+    # @!attribute [rw] enable_enhanced_metrics
+    #   Specifies whether to enable enhanced metrics for the endpoint.
+    #   Enhanced metrics provide utilization data at instance and container
+    #   granularity. Container granularity is supported for Inference
+    #   Components. The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] metric_publish_frequency_in_seconds
+    #   The frequency, in seconds, at which utilization metrics are
+    #   published to Amazon CloudWatch. The default is `60` seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricsConfig AWS API Documentation
+    #
+    class MetricsConfig < Struct.new(
+      :enable_enhanced_metrics,
+      :metric_publish_frequency_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the metrics source.
     #
     # @!attribute [rw] content_type
@@ -38008,6 +38654,53 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings for the model speculative decoding technique that's applied
+    # by a model optimization job.
+    #
+    # @!attribute [rw] technique
+    #   The speculative decoding technique to apply during model
+    #   optimization.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_data_source
+    #   The location of the training data to use for speculative decoding.
+    #   The data must be formatted as ShareGPT, OpenAI Completions or OpenAI
+    #   Chat Completions. The input can also be unencrypted captured data
+    #   from a SageMaker endpoint as long as the endpoint uses one of the
+    #   above formats.
+    #   @return [Types::ModelSpeculativeDecodingTrainingDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelSpeculativeDecodingConfig AWS API Documentation
+    #
+    class ModelSpeculativeDecodingConfig < Struct.new(
+      :technique,
+      :training_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the training data source for speculative
+    # decoding.
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI that points to the training data for speculative
+    #   decoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_type
+    #   The type of data stored in the Amazon S3 location. Valid values are
+    #   `S3Prefix` or `ManifestFile`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelSpeculativeDecodingTrainingDataSource AWS API Documentation
+    #
+    class ModelSpeculativeDecodingTrainingDataSource < Struct.new(
+      :s3_uri,
+      :s3_data_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata for Model steps.
     #
     # @!attribute [rw] arn
@@ -39620,12 +40313,18 @@ module Aws::SageMaker
     #   optimization job.
     #   @return [Types::ModelShardingConfig]
     #
+    # @!attribute [rw] model_speculative_decoding_config
+    #   Settings for the model speculative decoding technique that's
+    #   applied by a model optimization job.
+    #   @return [Types::ModelSpeculativeDecodingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationConfig AWS API Documentation
     #
     class OptimizationConfig < Struct.new(
       :model_quantization_config,
       :model_compilation_config,
       :model_sharding_config,
+      :model_speculative_decoding_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -39634,6 +40333,7 @@ module Aws::SageMaker
       class ModelQuantizationConfig < OptimizationConfig; end
       class ModelCompilationConfig < OptimizationConfig; end
       class ModelShardingConfig < OptimizationConfig; end
+      class ModelSpeculativeDecodingConfig < OptimizationConfig; end
       class Unknown < OptimizationConfig; end
     end
 
@@ -39644,10 +40344,16 @@ module Aws::SageMaker
     #   optimization job.
     #   @return [Types::OptimizationJobModelSourceS3]
     #
+    # @!attribute [rw] sage_maker_model
+    #   The name of an existing SageMaker model to optimize with an
+    #   optimization job.
+    #   @return [Types::OptimizationSageMakerModel]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationJobModelSource AWS API Documentation
     #
     class OptimizationJobModelSource < Struct.new(
-      :s3)
+      :s3,
+      :sage_maker_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39689,11 +40395,17 @@ module Aws::SageMaker
     #   create with an optimization job.
     #   @return [String]
     #
+    # @!attribute [rw] sage_maker_model
+    #   The name of a SageMaker model to use as the output destination for
+    #   an optimization job.
+    #   @return [Types::OptimizationSageMakerModel]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationJobOutputConfig AWS API Documentation
     #
     class OptimizationJobOutputConfig < Struct.new(
       :kms_key_id,
-      :s3_output_location)
+      :s3_output_location,
+      :sage_maker_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39734,6 +40446,10 @@ module Aws::SageMaker
     #   with the optimization job.
     #   @return [String]
     #
+    # @!attribute [rw] max_instance_count
+    #   The maximum number of instances to use for the optimization job.
+    #   @return [Integer]
+    #
     # @!attribute [rw] optimization_types
     #   The optimization techniques that are applied by the optimization
     #   job.
@@ -39750,6 +40466,7 @@ module Aws::SageMaker
       :optimization_end_time,
       :last_modified_time,
       :deployment_instance_type,
+      :max_instance_count,
       :optimization_types)
       SENSITIVE = []
       include Aws::Structure
@@ -39787,6 +40504,21 @@ module Aws::SageMaker
     #
     class OptimizationOutput < Struct.new(
       :recommended_inference_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A SageMaker model to use as the source or destination for an
+    # optimization job.
+    #
+    # @!attribute [rw] model_name
+    #   The name of a SageMaker model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationSageMakerModel AWS API Documentation
+    #
+    class OptimizationSageMakerModel < Struct.new(
+      :model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44653,9 +45385,9 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines the mapping between an in-app role and the AWS IAM Identity
-    # Center group patterns that should be assigned to that role within the
-    # SageMaker Partner AI App.
+    # Defines the mapping between an in-app role and the Amazon Web Services
+    # IAM Identity Center group patterns that should be assigned to that
+    # role within the SageMaker Partner AI App.
     #
     # @!attribute [rw] role_name
     #   The name of the in-app role within the SageMaker Partner AI App. The
@@ -44663,9 +45395,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] group_patterns
-    #   A list of AWS IAM Identity Center group patterns that should be
-    #   assigned to the specified role. Group patterns support wildcard
-    #   matching using `*`.
+    #   A list of Amazon Web Services IAM Identity Center group patterns
+    #   that should be assigned to the specified role. Group patterns
+    #   support wildcard matching using `*`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RoleGroupAssignment AWS API Documentation
@@ -45623,7 +46355,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
-    #   HyperPod) to search for in the offerings.
+    #   HyperPod, SageMaker Endpoints) to search for in the offerings.
     #
     #   Training plans are specific to their target resource.
     #
@@ -45632,6 +46364,10 @@ module Aws::SageMaker
     #
     #   * A training plan for HyperPod clusters can be used exclusively to
     #     provide compute resources to a cluster's instance group.
+    #
+    #   * A training plan for SageMaker endpoints can be used exclusively to
+    #     provide compute resources to SageMaker endpoints for model
+    #     deployment.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchTrainingPlanOfferingsRequest AWS API Documentation
@@ -48867,7 +49603,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
-    #   HyperPod) for this training plan offering.
+    #   HyperPod, SageMaker Endpoints) for this training plan offering.
     #
     #   Training plans are specific to their target resource.
     #
@@ -48876,6 +49612,10 @@ module Aws::SageMaker
     #
     #   * A training plan for HyperPod clusters can be used exclusively to
     #     provide compute resources to a cluster's instance group.
+    #
+    #   * A training plan for SageMaker endpoints can be used exclusively to
+    #     provide compute resources to SageMaker endpoints for model
+    #     deployment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] requested_start_time_after
@@ -48997,8 +49737,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] target_resources
-    #   The target resources (e.g., training jobs, HyperPod clusters) that
-    #   can use this training plan.
+    #   The target resources (e.g., training jobs, HyperPod clusters,
+    #   Endpoints) that can use this training plan.
     #
     #   Training plans are specific to their target resource.
     #
@@ -49007,6 +49747,10 @@ module Aws::SageMaker
     #
     #   * A training plan for HyperPod clusters can be used exclusively to
     #     provide compute resources to a cluster's instance group.
+    #
+    #   * A training plan for SageMaker endpoints can be used exclusively to
+    #     provide compute resources to SageMaker endpoints for model
+    #     deployment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] reserved_capacity_summaries

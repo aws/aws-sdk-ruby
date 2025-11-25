@@ -309,11 +309,19 @@ module Aws::CloudFormation
     #   resources are deleted. Specify only if `Enabled` is set to `True`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] depends_on
+    #   A list of StackSet ARNs that this StackSet depends on for
+    #   auto-deployment operations. When auto-deployment is triggered,
+    #   operations will be sequenced to ensure all dependencies complete
+    #   successfully before this StackSet's operation begins.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AutoDeployment AWS API Documentation
     #
     class AutoDeployment < Struct.new(
       :enabled,
-      :retain_stacks_on_account_removal)
+      :retain_stacks_on_account_removal,
+      :depends_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8565,10 +8573,10 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] unique_id
     #   A unique ID of the signal. When you signal Amazon EC2 instances or
-    #   Auto Scaling groups, specify the instance ID that you are signaling
-    #   as the unique ID. If you send multiple signals to a single resource
-    #   (such as signaling a wait condition), each signal requires a
-    #   different unique ID.
+    #   Amazon EC2 Auto Scaling groups, specify the instance ID that you are
+    #   signaling as the unique ID. If you send multiple signals to a single
+    #   resource (such as signaling a wait condition), each signal requires
+    #   a different unique ID.
     #   @return [String]
     #
     # @!attribute [rw] status

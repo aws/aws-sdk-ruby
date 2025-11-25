@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-11-21)
+------------------
+
+* Feature - API Gateway supports VPC link V2 for REST APIs.
+
+1.127.0 (2025-11-19)
+------------------
+
+* Feature - API Gateway now supports response streaming and new security policies for REST APIs and custom domain names.
+
 1.126.0 (2025-10-30)
 ------------------
 

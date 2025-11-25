@@ -13,6 +13,27 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AccountEnforcedGuardrailInferenceInputConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor input_tags: ("HONOR" | "IGNORE")
+      SENSITIVE: []
+    end
+
+    class AccountEnforcedGuardrailOutputConfiguration
+      attr_accessor config_id: ::String
+      attr_accessor guardrail_arn: ::String
+      attr_accessor guardrail_id: ::String
+      attr_accessor input_tags: ("HONOR" | "IGNORE")
+      attr_accessor guardrail_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor owner: ("ACCOUNT")
+      SENSITIVE: []
+    end
+
     class AgreementAvailability
       attr_accessor status: ("AVAILABLE" | "PENDING" | "NOT_AVAILABLE" | "ERROR")
       attr_accessor error_message: ::String
@@ -1083,6 +1104,14 @@ module Aws::Bedrock
     end
 
     class DeleteCustomModelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEnforcedGuardrailConfigurationRequest
+      attr_accessor config_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnforcedGuardrailConfigurationResponse < Aws::EmptyStructure
     end
 
     class DeleteFoundationModelAgreementRequest
@@ -2334,6 +2363,17 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ListEnforcedGuardrailsConfigurationRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnforcedGuardrailsConfigurationResponse
+      attr_accessor guardrails_config: ::Array[Types::AccountEnforcedGuardrailOutputConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEvaluationJobsRequest
       attr_accessor creation_time_after: ::Time
       attr_accessor creation_time_before: ::Time
@@ -2768,6 +2808,19 @@ module Aws::Bedrock
       attr_accessor commitment_expiration_time: ::Time
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PutEnforcedGuardrailConfigurationRequest
+      attr_accessor config_id: ::String
+      attr_accessor guardrail_inference_config: Types::AccountEnforcedGuardrailInferenceInputConfiguration
+      SENSITIVE: []
+    end
+
+    class PutEnforcedGuardrailConfigurationResponse
+      attr_accessor config_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
       SENSITIVE: []
     end
 

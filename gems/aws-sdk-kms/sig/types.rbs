@@ -846,7 +846,7 @@ module Aws::KMS
       attr_accessor key_material_id: ::String
       attr_accessor key_material_description: ::String
       attr_accessor import_state: ("IMPORTED" | "PENDING_IMPORT")
-      attr_accessor key_material_state: ("NON_CURRENT" | "CURRENT" | "PENDING_ROTATION")
+      attr_accessor key_material_state: ("NON_CURRENT" | "CURRENT" | "PENDING_ROTATION" | "PENDING_MULTI_REGION_IMPORT_AND_ROTATION")
       attr_accessor expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE")
       attr_accessor valid_to: ::Time
       attr_accessor rotation_date: ::Time

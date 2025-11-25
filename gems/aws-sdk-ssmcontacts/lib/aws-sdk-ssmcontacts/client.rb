@@ -2458,7 +2458,7 @@ module Aws::SSMContacts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmcontacts'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

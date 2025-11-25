@@ -54,7 +54,7 @@ module Aws::PinpointEmail
   autoload :EndpointProvider, 'aws-sdk-pinpointemail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pinpointemail/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
 

@@ -989,6 +989,245 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Creates a license asset group.
+    #
+    # @option params [required, String] :name
+    #   License asset group name.
+    #
+    # @option params [String] :description
+    #   License asset group description.
+    #
+    # @option params [required, Array<Types::LicenseAssetGroupConfiguration>] :license_asset_group_configurations
+    #   License asset group configurations.
+    #
+    # @option params [required, Array<String>] :associated_license_asset_ruleset_arns
+    #   ARNs of associated license asset rulesets.
+    #
+    # @option params [Array<Types::LicenseAssetGroupProperty>] :properties
+    #   License asset group properties.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to add to the license asset group.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::CreateLicenseAssetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLicenseAssetGroupResponse#license_asset_group_arn #license_asset_group_arn} => String
+    #   * {Types::CreateLicenseAssetGroupResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_license_asset_group({
+    #     name: "LicenseAssetResourceName", # required
+    #     description: "LicenseAssetResourceDescription",
+    #     license_asset_group_configurations: [ # required
+    #       {
+    #         usage_dimension: "String",
+    #       },
+    #     ],
+    #     associated_license_asset_ruleset_arns: ["Arn"], # required
+    #     properties: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_group_arn #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseAssetGroup AWS API Documentation
+    #
+    # @overload create_license_asset_group(params = {})
+    # @param [Hash] params ({})
+    def create_license_asset_group(params = {}, options = {})
+      req = build_request(:create_license_asset_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a license asset ruleset.
+    #
+    # @option params [required, String] :name
+    #   License asset ruleset name.
+    #
+    # @option params [String] :description
+    #   License asset ruleset description.
+    #
+    # @option params [required, Array<Types::LicenseAssetRule>] :rules
+    #   License asset rules.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to add to the license asset ruleset.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::CreateLicenseAssetRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLicenseAssetRulesetResponse#license_asset_ruleset_arn #license_asset_ruleset_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_license_asset_ruleset({
+    #     name: "LicenseAssetResourceName", # required
+    #     description: "LicenseAssetResourceDescription",
+    #     rules: [ # required
+    #       {
+    #         rule_statement: { # required
+    #           license_configuration_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #           },
+    #           license_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #           },
+    #           instance_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #             script_rule_statement: {
+    #               key_to_match: "String", # required
+    #               script: "String", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_ruleset_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseAssetRuleset AWS API Documentation
+    #
+    # @overload create_license_asset_ruleset(params = {})
+    # @param [Hash] params ({})
+    def create_license_asset_ruleset(params = {}, options = {})
+      req = build_request(:create_license_asset_ruleset, params)
+      req.send_request(options)
+    end
+
     # Creates a license configuration.
     #
     # A license configuration is an abstraction of a customer license
@@ -1046,6 +1285,9 @@ module Aws::LicenseManager
     # @option params [Array<Types::ProductInformation>] :product_information_list
     #   Product information.
     #
+    # @option params [Integer] :license_expiry
+    #   License configuration expiry.
+    #
     # @return [Types::CreateLicenseConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLicenseConfigurationResponse#license_configuration_arn #license_configuration_arn} => String
@@ -1078,6 +1320,7 @@ module Aws::LicenseManager
     #         ],
     #       },
     #     ],
+    #     license_expiry: 1,
     #   })
     #
     # @example Response structure
@@ -1198,13 +1441,16 @@ module Aws::LicenseManager
     #
     #   resp = client.create_license_manager_report_generator({
     #     report_generator_name: "ReportGeneratorName", # required
-    #     type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
+    #     type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport, LicenseAssetGroupUsageReport
     #     report_context: { # required
-    #       license_configuration_arns: ["Arn"], # required
+    #       license_configuration_arns: ["Arn"],
+    #       license_asset_group_arns: ["Arn"],
+    #       report_start_date: Time.now,
+    #       report_end_date: Time.now,
     #     },
     #     report_frequency: { # required
     #       value: 1,
-    #       period: "DAY", # accepts DAY, WEEK, MONTH
+    #       period: "DAY", # accepts DAY, WEEK, MONTH, ONE_TIME
     #     },
     #     client_token: "ClientRequestToken", # required
     #     description: "String",
@@ -1469,6 +1715,56 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Deletes a license asset group.
+    #
+    # @option params [required, String] :license_asset_group_arn
+    #   Amazon Resource Name (ARN) of the license asset group.
+    #
+    # @return [Types::DeleteLicenseAssetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLicenseAssetGroupResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_license_asset_group({
+    #     license_asset_group_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ACTIVE", "DISABLED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseAssetGroup AWS API Documentation
+    #
+    # @overload delete_license_asset_group(params = {})
+    # @param [Hash] params ({})
+    def delete_license_asset_group(params = {}, options = {})
+      req = build_request(:delete_license_asset_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a license asset ruleset.
+    #
+    # @option params [required, String] :license_asset_ruleset_arn
+    #   Amazon Resource Name (ARN) of the license asset ruleset.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_license_asset_ruleset({
+    #     license_asset_ruleset_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseAssetRuleset AWS API Documentation
+    #
+    # @overload delete_license_asset_ruleset(params = {})
+    # @param [Hash] params ({})
+    def delete_license_asset_ruleset(params = {}, options = {})
+      req = build_request(:delete_license_asset_ruleset, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified license configuration.
     #
     # You cannot delete a license configuration that is in use.
@@ -1713,6 +2009,140 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Gets a license asset group.
+    #
+    # @option params [required, String] :license_asset_group_arn
+    #   Amazon Resource Name (ARN) of the license asset group.
+    #
+    # @return [Types::GetLicenseAssetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLicenseAssetGroupResponse#license_asset_group #license_asset_group} => Types::LicenseAssetGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_license_asset_group({
+    #     license_asset_group_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_group.name #=> String
+    #   resp.license_asset_group.description #=> String
+    #   resp.license_asset_group.license_asset_group_configurations #=> Array
+    #   resp.license_asset_group.license_asset_group_configurations[0].usage_dimension #=> String
+    #   resp.license_asset_group.associated_license_asset_ruleset_arns #=> Array
+    #   resp.license_asset_group.associated_license_asset_ruleset_arns[0] #=> String
+    #   resp.license_asset_group.properties #=> Array
+    #   resp.license_asset_group.properties[0].key #=> String
+    #   resp.license_asset_group.properties[0].value #=> String
+    #   resp.license_asset_group.license_asset_group_arn #=> String
+    #   resp.license_asset_group.status #=> String, one of "ACTIVE", "DISABLED", "DELETED"
+    #   resp.license_asset_group.status_message #=> String
+    #   resp.license_asset_group.latest_usage_analysis_time #=> Time
+    #   resp.license_asset_group.latest_resource_discovery_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseAssetGroup AWS API Documentation
+    #
+    # @overload get_license_asset_group(params = {})
+    # @param [Hash] params ({})
+    def get_license_asset_group(params = {}, options = {})
+      req = build_request(:get_license_asset_group, params)
+      req.send_request(options)
+    end
+
+    # Gets a license asset ruleset.
+    #
+    # @option params [required, String] :license_asset_ruleset_arn
+    #   Amazon Resource Name (ARN) of the license asset ruleset.
+    #
+    # @return [Types::GetLicenseAssetRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLicenseAssetRulesetResponse#license_asset_ruleset #license_asset_ruleset} => Types::LicenseAssetRuleset
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_license_asset_ruleset({
+    #     license_asset_ruleset_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_ruleset.name #=> String
+    #   resp.license_asset_ruleset.description #=> String
+    #   resp.license_asset_ruleset.rules #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.and_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.or_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.matching_rule_statement.key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.matching_rule_statement.constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.matching_rule_statement.value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.license_rule_statement.matching_rule_statement.value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.and_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.or_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.matching_rule_statement.key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.matching_rule_statement.constraint #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.matching_rule_statement.value_to_match #=> Array
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.matching_rule_statement.value_to_match[0] #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.script_rule_statement.key_to_match #=> String
+    #   resp.license_asset_ruleset.rules[0].rule_statement.instance_rule_statement.script_rule_statement.script #=> String
+    #   resp.license_asset_ruleset.license_asset_ruleset_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseAssetRuleset AWS API Documentation
+    #
+    # @overload get_license_asset_ruleset(params = {})
+    # @param [Hash] params ({})
+    def get_license_asset_ruleset(params = {}, options = {})
+      req = build_request(:get_license_asset_ruleset, params)
+      req.send_request(options)
+    end
+
     # Gets detailed information about the specified license configuration.
     #
     # @option params [required, String] :license_configuration_arn
@@ -1737,6 +2167,7 @@ module Aws::LicenseManager
     #   * {Types::GetLicenseConfigurationResponse#product_information_list #product_information_list} => Array&lt;Types::ProductInformation&gt;
     #   * {Types::GetLicenseConfigurationResponse#automated_discovery_information #automated_discovery_information} => Types::AutomatedDiscoveryInformation
     #   * {Types::GetLicenseConfigurationResponse#disassociate_when_not_found #disassociate_when_not_found} => Boolean
+    #   * {Types::GetLicenseConfigurationResponse#license_expiry #license_expiry} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1776,6 +2207,7 @@ module Aws::LicenseManager
     #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_comparator #=> String
     #   resp.automated_discovery_information.last_run_time #=> Time
     #   resp.disassociate_when_not_found #=> Boolean
+    #   resp.license_expiry #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConfiguration AWS API Documentation
     #
@@ -1855,11 +2287,15 @@ module Aws::LicenseManager
     #
     #   resp.report_generator.report_generator_name #=> String
     #   resp.report_generator.report_type #=> Array
-    #   resp.report_generator.report_type[0] #=> String, one of "LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"
+    #   resp.report_generator.report_type[0] #=> String, one of "LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport", "LicenseAssetGroupUsageReport"
     #   resp.report_generator.report_context.license_configuration_arns #=> Array
     #   resp.report_generator.report_context.license_configuration_arns[0] #=> String
+    #   resp.report_generator.report_context.license_asset_group_arns #=> Array
+    #   resp.report_generator.report_context.license_asset_group_arns[0] #=> String
+    #   resp.report_generator.report_context.report_start_date #=> Time
+    #   resp.report_generator.report_context.report_end_date #=> Time
     #   resp.report_generator.report_frequency.value #=> Integer
-    #   resp.report_generator.report_frequency.period #=> String, one of "DAY", "WEEK", "MONTH"
+    #   resp.report_generator.report_frequency.period #=> String, one of "DAY", "WEEK", "MONTH", "ONE_TIME"
     #   resp.report_generator.license_manager_report_generator_arn #=> String
     #   resp.report_generator.last_run_status #=> String
     #   resp.report_generator.last_run_failure_reason #=> String
@@ -1923,6 +2359,9 @@ module Aws::LicenseManager
     #   * {Types::GetServiceSettingsResponse#organization_configuration #organization_configuration} => Types::OrganizationConfiguration
     #   * {Types::GetServiceSettingsResponse#enable_cross_accounts_discovery #enable_cross_accounts_discovery} => Boolean
     #   * {Types::GetServiceSettingsResponse#license_manager_resource_share_arn #license_manager_resource_share_arn} => String
+    #   * {Types::GetServiceSettingsResponse#cross_region_discovery_home_region #cross_region_discovery_home_region} => String
+    #   * {Types::GetServiceSettingsResponse#cross_region_discovery_source_regions #cross_region_discovery_source_regions} => Array&lt;String&gt;
+    #   * {Types::GetServiceSettingsResponse#service_status #service_status} => Types::ServiceStatus
     #
     # @example Response structure
     #
@@ -1931,6 +2370,12 @@ module Aws::LicenseManager
     #   resp.organization_configuration.enable_integration #=> Boolean
     #   resp.enable_cross_accounts_discovery #=> Boolean
     #   resp.license_manager_resource_share_arn #=> String
+    #   resp.cross_region_discovery_home_region #=> String
+    #   resp.cross_region_discovery_source_regions #=> Array
+    #   resp.cross_region_discovery_source_regions[0] #=> String
+    #   resp.service_status.cross_account_discovery.message #=> String
+    #   resp.service_status.cross_region_discovery.message #=> Hash
+    #   resp.service_status.cross_region_discovery.message["String"].status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetServiceSettings AWS API Documentation
     #
@@ -1938,6 +2383,51 @@ module Aws::LicenseManager
     # @param [Hash] params ({})
     def get_service_settings(params = {}, options = {})
       req = build_request(:get_service_settings, params)
+      req.send_request(options)
+    end
+
+    # Lists assets for a license asset group.
+    #
+    # @option params [required, String] :license_asset_group_arn
+    #   Amazon Resource Name (ARN) of the license asset group.
+    #
+    # @option params [required, String] :asset_type
+    #   Asset type. The possible values are `Instance` \| `License` \|
+    #   `LicenseConfiguration`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @return [Types::ListAssetsForLicenseAssetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetsForLicenseAssetGroupResponse#assets #assets} => Array&lt;Types::Asset&gt;
+    #   * {Types::ListAssetsForLicenseAssetGroupResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_assets_for_license_asset_group({
+    #     license_asset_group_arn: "String", # required
+    #     asset_type: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assets #=> Array
+    #   resp.assets[0].asset_arn #=> String
+    #   resp.assets[0].latest_asset_discovery_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListAssetsForLicenseAssetGroup AWS API Documentation
+    #
+    # @overload list_assets_for_license_asset_group(params = {})
+    # @param [Hash] params ({})
+    def list_assets_for_license_asset_group(params = {}, options = {})
+      req = build_request(:list_assets_for_license_asset_group, params)
       req.send_request(options)
     end
 
@@ -2106,6 +2596,185 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Lists license asset groups.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results. Following filters are supported
+    #
+    #   * `LicenseAssetRulesetArn`
+    #
+    #   ^
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @return [Types::ListLicenseAssetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLicenseAssetGroupsResponse#license_asset_groups #license_asset_groups} => Array&lt;Types::LicenseAssetGroup&gt;
+    #   * {Types::ListLicenseAssetGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_license_asset_groups({
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_groups #=> Array
+    #   resp.license_asset_groups[0].name #=> String
+    #   resp.license_asset_groups[0].description #=> String
+    #   resp.license_asset_groups[0].license_asset_group_configurations #=> Array
+    #   resp.license_asset_groups[0].license_asset_group_configurations[0].usage_dimension #=> String
+    #   resp.license_asset_groups[0].associated_license_asset_ruleset_arns #=> Array
+    #   resp.license_asset_groups[0].associated_license_asset_ruleset_arns[0] #=> String
+    #   resp.license_asset_groups[0].properties #=> Array
+    #   resp.license_asset_groups[0].properties[0].key #=> String
+    #   resp.license_asset_groups[0].properties[0].value #=> String
+    #   resp.license_asset_groups[0].license_asset_group_arn #=> String
+    #   resp.license_asset_groups[0].status #=> String, one of "ACTIVE", "DISABLED", "DELETED"
+    #   resp.license_asset_groups[0].status_message #=> String
+    #   resp.license_asset_groups[0].latest_usage_analysis_time #=> Time
+    #   resp.license_asset_groups[0].latest_resource_discovery_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseAssetGroups AWS API Documentation
+    #
+    # @overload list_license_asset_groups(params = {})
+    # @param [Hash] params ({})
+    def list_license_asset_groups(params = {}, options = {})
+      req = build_request(:list_license_asset_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists license asset rulesets.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results. Following filters are supported
+    #
+    #   * `Name`
+    #
+    #   ^
+    #
+    # @option params [Boolean] :show_aws_managed_license_asset_rulesets
+    #   Specifies whether to show License Manager managed license asset
+    #   rulesets.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @return [Types::ListLicenseAssetRulesetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLicenseAssetRulesetsResponse#license_asset_rulesets #license_asset_rulesets} => Array&lt;Types::LicenseAssetRuleset&gt;
+    #   * {Types::ListLicenseAssetRulesetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_license_asset_rulesets({
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     show_aws_managed_license_asset_rulesets: false,
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_rulesets #=> Array
+    #   resp.license_asset_rulesets[0].name #=> String
+    #   resp.license_asset_rulesets[0].description #=> String
+    #   resp.license_asset_rulesets[0].rules #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.and_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.or_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_configuration_rule_statement.matching_rule_statement.value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.and_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.or_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.matching_rule_statement.key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.matching_rule_statement.constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.matching_rule_statement.value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.license_rule_statement.matching_rule_statement.value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.and_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.matching_rule_statements[0].value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.script_rule_statements #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.script_rule_statements[0].key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.or_rule_statement.script_rule_statements[0].script #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.matching_rule_statement.key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.matching_rule_statement.constraint #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.matching_rule_statement.value_to_match #=> Array
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.matching_rule_statement.value_to_match[0] #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.script_rule_statement.key_to_match #=> String
+    #   resp.license_asset_rulesets[0].rules[0].rule_statement.instance_rule_statement.script_rule_statement.script #=> String
+    #   resp.license_asset_rulesets[0].license_asset_ruleset_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseAssetRulesets AWS API Documentation
+    #
+    # @overload list_license_asset_rulesets(params = {})
+    # @param [Hash] params ({})
+    def list_license_asset_rulesets(params = {}, options = {})
+      req = build_request(:list_license_asset_rulesets, params)
+      req.send_request(options)
+    end
+
     # Lists the license configurations for your account.
     #
     # @option params [Array<String>] :license_configuration_arns
@@ -2180,6 +2849,7 @@ module Aws::LicenseManager
     #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_value[0] #=> String
     #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_comparator #=> String
     #   resp.license_configurations[0].automated_discovery_information.last_run_time #=> Time
+    #   resp.license_configurations[0].license_expiry #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurations AWS API Documentation
@@ -2188,6 +2858,81 @@ module Aws::LicenseManager
     # @param [Hash] params ({})
     def list_license_configurations(params = {}, options = {})
       req = build_request(:list_license_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists license configurations for an organization.
+    #
+    # @option params [Array<String>] :license_configuration_arns
+    #   License configuration ARNs.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results.
+    #
+    # @return [Types::ListLicenseConfigurationsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLicenseConfigurationsForOrganizationResponse#license_configurations #license_configurations} => Array&lt;Types::LicenseConfiguration&gt;
+    #   * {Types::ListLicenseConfigurationsForOrganizationResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_license_configurations_for_organization({
+    #     license_configuration_arns: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_configurations #=> Array
+    #   resp.license_configurations[0].license_configuration_id #=> String
+    #   resp.license_configurations[0].license_configuration_arn #=> String
+    #   resp.license_configurations[0].name #=> String
+    #   resp.license_configurations[0].description #=> String
+    #   resp.license_configurations[0].license_counting_type #=> String, one of "vCPU", "Instance", "Core", "Socket"
+    #   resp.license_configurations[0].license_rules #=> Array
+    #   resp.license_configurations[0].license_rules[0] #=> String
+    #   resp.license_configurations[0].license_count #=> Integer
+    #   resp.license_configurations[0].license_count_hard_limit #=> Boolean
+    #   resp.license_configurations[0].disassociate_when_not_found #=> Boolean
+    #   resp.license_configurations[0].consumed_licenses #=> Integer
+    #   resp.license_configurations[0].status #=> String
+    #   resp.license_configurations[0].owner_account_id #=> String
+    #   resp.license_configurations[0].consumed_license_summary_list #=> Array
+    #   resp.license_configurations[0].consumed_license_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
+    #   resp.license_configurations[0].consumed_license_summary_list[0].consumed_licenses #=> Integer
+    #   resp.license_configurations[0].managed_resource_summary_list #=> Array
+    #   resp.license_configurations[0].managed_resource_summary_list[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"
+    #   resp.license_configurations[0].managed_resource_summary_list[0].association_count #=> Integer
+    #   resp.license_configurations[0].product_information_list #=> Array
+    #   resp.license_configurations[0].product_information_list[0].resource_type #=> String
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list #=> Array
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_name #=> String
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_value #=> Array
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_value[0] #=> String
+    #   resp.license_configurations[0].product_information_list[0].product_information_filter_list[0].product_information_filter_comparator #=> String
+    #   resp.license_configurations[0].automated_discovery_information.last_run_time #=> Time
+    #   resp.license_configurations[0].license_expiry #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurationsForOrganization AWS API Documentation
+    #
+    # @overload list_license_configurations_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_license_configurations_for_organization(params = {}, options = {})
+      req = build_request(:list_license_configurations_for_organization, params)
       req.send_request(options)
     end
 
@@ -2288,11 +3033,15 @@ module Aws::LicenseManager
     #   resp.report_generators #=> Array
     #   resp.report_generators[0].report_generator_name #=> String
     #   resp.report_generators[0].report_type #=> Array
-    #   resp.report_generators[0].report_type[0] #=> String, one of "LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"
+    #   resp.report_generators[0].report_type[0] #=> String, one of "LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport", "LicenseAssetGroupUsageReport"
     #   resp.report_generators[0].report_context.license_configuration_arns #=> Array
     #   resp.report_generators[0].report_context.license_configuration_arns[0] #=> String
+    #   resp.report_generators[0].report_context.license_asset_group_arns #=> Array
+    #   resp.report_generators[0].report_context.license_asset_group_arns[0] #=> String
+    #   resp.report_generators[0].report_context.report_start_date #=> Time
+    #   resp.report_generators[0].report_context.report_end_date #=> Time
     #   resp.report_generators[0].report_frequency.value #=> Integer
-    #   resp.report_generators[0].report_frequency.period #=> String, one of "DAY", "WEEK", "MONTH"
+    #   resp.report_generators[0].report_frequency.period #=> String, one of "DAY", "WEEK", "MONTH", "ONE_TIME"
     #   resp.report_generators[0].license_manager_report_generator_arn #=> String
     #   resp.report_generators[0].last_run_status #=> String
     #   resp.report_generators[0].last_run_failure_reason #=> String
@@ -2870,6 +3619,13 @@ module Aws::LicenseManager
     #   resp.resource_inventory_list[0].platform #=> String
     #   resp.resource_inventory_list[0].platform_version #=> String
     #   resp.resource_inventory_list[0].resource_owning_account_id #=> String
+    #   resp.resource_inventory_list[0].marketplace_product_codes #=> Array
+    #   resp.resource_inventory_list[0].marketplace_product_codes[0] #=> String
+    #   resp.resource_inventory_list[0].usage_operation #=> String
+    #   resp.resource_inventory_list[0].ami_id #=> String
+    #   resp.resource_inventory_list[0].host_id #=> String
+    #   resp.resource_inventory_list[0].region #=> String
+    #   resp.resource_inventory_list[0].instance_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListResourceInventory AWS API Documentation
@@ -3152,6 +3908,240 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Updates a license asset group.
+    #
+    # @option params [String] :name
+    #   License asset group name.
+    #
+    # @option params [String] :description
+    #   License asset group description.
+    #
+    # @option params [Array<Types::LicenseAssetGroupConfiguration>] :license_asset_group_configurations
+    #   License asset group configurations.
+    #
+    # @option params [required, Array<String>] :associated_license_asset_ruleset_arns
+    #   ARNs of associated license asset rulesets.
+    #
+    # @option params [Array<Types::LicenseAssetGroupProperty>] :properties
+    #   License asset group properties.
+    #
+    # @option params [required, String] :license_asset_group_arn
+    #   Amazon Resource Name (ARN) of the license asset group.
+    #
+    # @option params [String] :status
+    #   License asset group status. The possible values are `ACTIVE` \|
+    #   `DISABLED`.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::UpdateLicenseAssetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLicenseAssetGroupResponse#license_asset_group_arn #license_asset_group_arn} => String
+    #   * {Types::UpdateLicenseAssetGroupResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_license_asset_group({
+    #     name: "LicenseAssetResourceName",
+    #     description: "LicenseAssetResourceDescription",
+    #     license_asset_group_configurations: [
+    #       {
+    #         usage_dimension: "String",
+    #       },
+    #     ],
+    #     associated_license_asset_ruleset_arns: ["Arn"], # required
+    #     properties: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     license_asset_group_arn: "Arn", # required
+    #     status: "ACTIVE", # accepts ACTIVE, DISABLED, DELETED
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_group_arn #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseAssetGroup AWS API Documentation
+    #
+    # @overload update_license_asset_group(params = {})
+    # @param [Hash] params ({})
+    def update_license_asset_group(params = {}, options = {})
+      req = build_request(:update_license_asset_group, params)
+      req.send_request(options)
+    end
+
+    # Updates a license asset ruleset.
+    #
+    # @option params [String] :name
+    #   License asset ruleset name.
+    #
+    # @option params [String] :description
+    #   License asset ruleset description.
+    #
+    # @option params [required, Array<Types::LicenseAssetRule>] :rules
+    #   License asset rules.
+    #
+    # @option params [required, String] :license_asset_ruleset_arn
+    #   Amazon Resource Name (ARN) of the license asset ruleset.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::UpdateLicenseAssetRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLicenseAssetRulesetResponse#license_asset_ruleset_arn #license_asset_ruleset_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_license_asset_ruleset({
+    #     name: "LicenseAssetResourceName",
+    #     description: "LicenseAssetResourceDescription",
+    #     rules: [ # required
+    #       {
+    #         rule_statement: { # required
+    #           license_configuration_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #           },
+    #           license_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #           },
+    #           instance_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 },
+    #               ],
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #             script_rule_statement: {
+    #               key_to_match: "String", # required
+    #               script: "String", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     license_asset_ruleset_arn: "Arn", # required
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_asset_ruleset_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseAssetRuleset AWS API Documentation
+    #
+    # @overload update_license_asset_ruleset(params = {})
+    # @param [Hash] params ({})
+    def update_license_asset_ruleset(params = {}, options = {})
+      req = build_request(:update_license_asset_ruleset, params)
+      req.send_request(options)
+    end
+
     # Modifies the attributes of an existing license configuration.
     #
     # @option params [required, String] :license_configuration_arn
@@ -3182,6 +4172,9 @@ module Aws::LicenseManager
     # @option params [Boolean] :disassociate_when_not_found
     #   When true, disassociates a resource when software is uninstalled.
     #
+    # @option params [Integer] :license_expiry
+    #   License configuration expiry time.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3207,6 +4200,7 @@ module Aws::LicenseManager
     #       },
     #     ],
     #     disassociate_when_not_found: false,
+    #     license_expiry: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfiguration AWS API Documentation
@@ -3258,13 +4252,16 @@ module Aws::LicenseManager
     #   resp = client.update_license_manager_report_generator({
     #     license_manager_report_generator_arn: "String", # required
     #     report_generator_name: "ReportGeneratorName", # required
-    #     type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
+    #     type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport, LicenseAssetGroupUsageReport
     #     report_context: { # required
-    #       license_configuration_arns: ["Arn"], # required
+    #       license_configuration_arns: ["Arn"],
+    #       license_asset_group_arns: ["Arn"],
+    #       report_start_date: Time.now,
+    #       report_end_date: Time.now,
     #     },
     #     report_frequency: { # required
     #       value: 1,
-    #       period: "DAY", # accepts DAY, WEEK, MONTH
+    #       period: "DAY", # accepts DAY, WEEK, MONTH, ONE_TIME
     #     },
     #     client_token: "ClientRequestToken", # required
     #     description: "String",
@@ -3341,6 +4338,9 @@ module Aws::LicenseManager
     # @option params [Boolean] :enable_cross_accounts_discovery
     #   Activates cross-account discovery.
     #
+    # @option params [Array<String>] :enabled_discovery_source_regions
+    #   Cross region discovery enabled source regions.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3352,6 +4352,7 @@ module Aws::LicenseManager
     #       enable_integration: false, # required
     #     },
     #     enable_cross_accounts_discovery: false,
+    #     enabled_discovery_source_regions: ["String"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateServiceSettings AWS API Documentation
@@ -3381,7 +4382,7 @@ module Aws::LicenseManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

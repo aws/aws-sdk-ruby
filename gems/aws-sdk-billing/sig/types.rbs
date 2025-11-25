@@ -34,7 +34,7 @@ module Aws::Billing
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP" | "CUSTOM")
+      attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP" | "CUSTOM" | "BILLING_TRANSFER" | "BILLING_TRANSFER_SHOWBACK")
       attr_accessor owner_account_id: ::String
       attr_accessor source_account_id: ::String
       attr_accessor data_filter_expression: Types::Expression
@@ -64,7 +64,7 @@ module Aws::Billing
       attr_accessor description: ::String
       attr_accessor owner_account_id: ::String
       attr_accessor source_account_id: ::String
-      attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP" | "CUSTOM")
+      attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP" | "CUSTOM" | "BILLING_TRANSFER" | "BILLING_TRANSFER_SHOWBACK")
       attr_accessor health_status: Types::BillingViewHealthStatus
       SENSITIVE: [:name, :description]
     end
@@ -156,7 +156,8 @@ module Aws::Billing
     class ListBillingViewsRequest
       attr_accessor active_time_range: Types::ActiveTimeRange
       attr_accessor arns: ::Array[::String]
-      attr_accessor billing_view_types: ::Array[("PRIMARY" | "BILLING_GROUP" | "CUSTOM")]
+      attr_accessor billing_view_types: ::Array[("PRIMARY" | "BILLING_GROUP" | "CUSTOM" | "BILLING_TRANSFER" | "BILLING_TRANSFER_SHOWBACK")]
+      attr_accessor names: ::Array[Types::StringSearch]
       attr_accessor owner_account_id: ::String
       attr_accessor source_account_id: ::String
       attr_accessor max_results: ::Integer
@@ -212,6 +213,12 @@ module Aws::Billing
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class StringSearch
+      attr_accessor search_option: ("STARTS_WITH")
+      attr_accessor search_value: ::String
       SENSITIVE: []
     end
 

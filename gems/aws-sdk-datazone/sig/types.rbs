@@ -392,6 +392,19 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class AttributeError
+      attr_accessor attribute_identifier: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeInput
+      attr_accessor attribute_identifier: ::String
+      attr_accessor forms: ::Array[Types::FormInput]
+      SENSITIVE: [:forms]
+    end
+
     class AuthenticationConfiguration
       attr_accessor authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")
       attr_accessor o_auth_2_properties: Types::OAuth2Properties
@@ -451,6 +464,47 @@ module Aws::DataZone
     class BasicAuthenticationCredentials
       attr_accessor password: ::String
       attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAttributeOutput
+      attr_accessor attribute_identifier: ::String
+      attr_accessor forms: ::Array[Types::FormOutput]
+      SENSITIVE: []
+    end
+
+    class BatchGetAttributesMetadataInput
+      attr_accessor attribute_identifiers: ::Array[::String]
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      SENSITIVE: []
+    end
+
+    class BatchGetAttributesMetadataOutput
+      attr_accessor attributes: ::Array[Types::BatchGetAttributeOutput]
+      attr_accessor errors: ::Array[Types::AttributeError]
+      SENSITIVE: []
+    end
+
+    class BatchPutAttributeOutput
+      attr_accessor attribute_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutAttributesMetadataInput
+      attr_accessor attributes: ::Array[Types::AttributeInput]
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      SENSITIVE: []
+    end
+
+    class BatchPutAttributesMetadataOutput
+      attr_accessor attributes: ::Array[Types::BatchPutAttributeOutput]
+      attr_accessor errors: ::Array[Types::AttributeError]
       SENSITIVE: []
     end
 
@@ -1320,7 +1374,7 @@ module Aws::DataZone
       attr_accessor detail: Types::RuleDetail
       attr_accessor identifier: ::String
       attr_accessor name: ::String
-      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT")
+      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
       attr_accessor scope: Types::RuleScope
       attr_accessor target: Types::RuleTarget
       attr_accessor target_type: ("DOMAIN_UNIT")
@@ -2857,7 +2911,7 @@ module Aws::DataZone
       attr_accessor last_updated_by: ::String
       attr_accessor name: ::String
       attr_accessor revision: ::String
-      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT")
+      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
       attr_accessor scope: Types::RuleScope
       attr_accessor target: Types::RuleTarget
       attr_accessor target_type: ("DOMAIN_UNIT")
@@ -3010,6 +3064,11 @@ module Aws::DataZone
 
     class GlossaryItemAdditionalAttributes
       attr_accessor match_rationale: ::Array[Types::MatchRationaleItem]
+      SENSITIVE: []
+    end
+
+    class GlossaryTermEnforcementDetail
+      attr_accessor required_glossary_term_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -3796,7 +3855,7 @@ module Aws::DataZone
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor project_ids: ::Array[::String]
-      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT")
+      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
       attr_accessor target_identifier: ::String
       attr_accessor target_type: ("DOMAIN_UNIT")
       SENSITIVE: []
@@ -4806,10 +4865,13 @@ module Aws::DataZone
     end
 
     class RuleDetail
+      attr_accessor glossary_term_enforcement_detail: Types::GlossaryTermEnforcementDetail
       attr_accessor metadata_form_enforcement_detail: Types::MetadataFormEnforcementDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class GlossaryTermEnforcementDetail < RuleDetail
+      end
       class MetadataFormEnforcementDetail < RuleDetail
       end
       class Unknown < RuleDetail
@@ -4829,7 +4891,7 @@ module Aws::DataZone
       attr_accessor last_updated_by: ::String
       attr_accessor name: ::String
       attr_accessor revision: ::String
-      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT")
+      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
       attr_accessor scope: Types::RuleScope
       attr_accessor target: Types::RuleTarget
       attr_accessor target_type: ("DOMAIN_UNIT")
@@ -5883,6 +5945,17 @@ module Aws::DataZone
       SENSITIVE: [:description, :name, :project_resource_tags_description]
     end
 
+    class UpdateRootDomainUnitOwnerInput
+      attr_accessor client_token: ::String
+      attr_accessor current_owner: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor new_owner: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRootDomainUnitOwnerOutput < Aws::EmptyStructure
+    end
+
     class UpdateRuleInput
       attr_accessor description: ::String
       attr_accessor detail: Types::RuleDetail
@@ -5904,7 +5977,7 @@ module Aws::DataZone
       attr_accessor last_updated_by: ::String
       attr_accessor name: ::String
       attr_accessor revision: ::String
-      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT")
+      attr_accessor rule_type: ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
       attr_accessor scope: Types::RuleScope
       attr_accessor target: Types::RuleTarget
       attr_accessor updated_at: ::Time

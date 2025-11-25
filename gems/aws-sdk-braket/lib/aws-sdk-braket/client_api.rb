@@ -41,7 +41,12 @@ module Aws::Braket
     CreateQuantumTaskRequestOutputS3KeyPrefixString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestOutputS3KeyPrefixString')
     CreateQuantumTaskRequestShotsLong = Shapes::IntegerShape.new(name: 'CreateQuantumTaskRequestShotsLong')
     CreateQuantumTaskResponse = Shapes::StructureShape.new(name: 'CreateQuantumTaskResponse')
+    CreateSpendingLimitRequest = Shapes::StructureShape.new(name: 'CreateSpendingLimitRequest')
+    CreateSpendingLimitRequestSpendingLimitString = Shapes::StringShape.new(name: 'CreateSpendingLimitRequestSpendingLimitString')
+    CreateSpendingLimitResponse = Shapes::StructureShape.new(name: 'CreateSpendingLimitResponse')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DeleteSpendingLimitRequest = Shapes::StructureShape.new(name: 'DeleteSpendingLimitRequest')
+    DeleteSpendingLimitResponse = Shapes::StructureShape.new(name: 'DeleteSpendingLimitResponse')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
     DeviceConfig = Shapes::StructureShape.new(name: 'DeviceConfig')
     DeviceOfflineException = Shapes::StructureShape.new(name: 'DeviceOfflineException')
@@ -130,7 +135,17 @@ module Aws::Braket
     SearchQuantumTasksRequestFiltersList = Shapes::ListShape.new(name: 'SearchQuantumTasksRequestFiltersList')
     SearchQuantumTasksRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchQuantumTasksRequestMaxResultsInteger')
     SearchQuantumTasksResponse = Shapes::StructureShape.new(name: 'SearchQuantumTasksResponse')
+    SearchSpendingLimitsFilter = Shapes::StructureShape.new(name: 'SearchSpendingLimitsFilter')
+    SearchSpendingLimitsFilterOperator = Shapes::StringShape.new(name: 'SearchSpendingLimitsFilterOperator')
+    SearchSpendingLimitsFilterValuesList = Shapes::ListShape.new(name: 'SearchSpendingLimitsFilterValuesList')
+    SearchSpendingLimitsRequest = Shapes::StructureShape.new(name: 'SearchSpendingLimitsRequest')
+    SearchSpendingLimitsRequestFiltersList = Shapes::ListShape.new(name: 'SearchSpendingLimitsRequestFiltersList')
+    SearchSpendingLimitsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchSpendingLimitsRequestMaxResultsInteger')
+    SearchSpendingLimitsResponse = Shapes::StructureShape.new(name: 'SearchSpendingLimitsResponse')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SpendingLimitArn = Shapes::StringShape.new(name: 'SpendingLimitArn')
+    SpendingLimitSummary = Shapes::StructureShape.new(name: 'SpendingLimitSummary')
+    SpendingLimitSummaryList = Shapes::ListShape.new(name: 'SpendingLimitSummaryList')
     String = Shapes::StringShape.new(name: 'String')
     String1024 = Shapes::StringShape.new(name: 'String1024')
     String2048 = Shapes::StringShape.new(name: 'String2048')
@@ -138,13 +153,18 @@ module Aws::Braket
     String4096 = Shapes::StringShape.new(name: 'String4096')
     String64 = Shapes::StringShape.new(name: 'String64')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
+    SyntheticTimestamp_epoch_seconds = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_epoch_seconds', timestampFormat: "unixTimestamp")
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateSpendingLimitRequest = Shapes::StructureShape.new(name: 'UpdateSpendingLimitRequest')
+    UpdateSpendingLimitRequestSpendingLimitString = Shapes::StringShape.new(name: 'UpdateSpendingLimitRequestSpendingLimitString')
+    UpdateSpendingLimitResponse = Shapes::StructureShape.new(name: 'UpdateSpendingLimitResponse')
     Uri = Shapes::StringShape.new(name: 'Uri')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
@@ -228,8 +248,23 @@ module Aws::Braket
     CreateQuantumTaskResponse.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location_name: "quantumTaskArn"))
     CreateQuantumTaskResponse.struct_class = Types::CreateQuantumTaskResponse
 
+    CreateSpendingLimitRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateSpendingLimitRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
+    CreateSpendingLimitRequest.add_member(:spending_limit, Shapes::ShapeRef.new(shape: CreateSpendingLimitRequestSpendingLimitString, required: true, location_name: "spendingLimit"))
+    CreateSpendingLimitRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "timePeriod"))
+    CreateSpendingLimitRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateSpendingLimitRequest.struct_class = Types::CreateSpendingLimitRequest
+
+    CreateSpendingLimitResponse.add_member(:spending_limit_arn, Shapes::ShapeRef.new(shape: SpendingLimitArn, required: true, location_name: "spendingLimitArn"))
+    CreateSpendingLimitResponse.struct_class = Types::CreateSpendingLimitResponse
+
     DataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, required: true, location_name: "s3DataSource"))
     DataSource.struct_class = Types::DataSource
+
+    DeleteSpendingLimitRequest.add_member(:spending_limit_arn, Shapes::ShapeRef.new(shape: SpendingLimitArn, required: true, location: "uri", location_name: "spendingLimitArn"))
+    DeleteSpendingLimitRequest.struct_class = Types::DeleteSpendingLimitRequest
+
+    DeleteSpendingLimitResponse.struct_class = Types::DeleteSpendingLimitResponse
 
     DeviceConfig.add_member(:device, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "device"))
     DeviceConfig.struct_class = Types::DeviceConfig
@@ -479,8 +514,39 @@ module Aws::Braket
     SearchQuantumTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchQuantumTasksResponse.struct_class = Types::SearchQuantumTasksResponse
 
+    SearchSpendingLimitsFilter.add_member(:name, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "name"))
+    SearchSpendingLimitsFilter.add_member(:values, Shapes::ShapeRef.new(shape: SearchSpendingLimitsFilterValuesList, required: true, location_name: "values"))
+    SearchSpendingLimitsFilter.add_member(:operator, Shapes::ShapeRef.new(shape: SearchSpendingLimitsFilterOperator, required: true, location_name: "operator"))
+    SearchSpendingLimitsFilter.struct_class = Types::SearchSpendingLimitsFilter
+
+    SearchSpendingLimitsFilterValuesList.member = Shapes::ShapeRef.new(shape: String256)
+
+    SearchSpendingLimitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    SearchSpendingLimitsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchSpendingLimitsRequestMaxResultsInteger, location_name: "maxResults"))
+    SearchSpendingLimitsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchSpendingLimitsRequestFiltersList, location_name: "filters"))
+    SearchSpendingLimitsRequest.struct_class = Types::SearchSpendingLimitsRequest
+
+    SearchSpendingLimitsRequestFiltersList.member = Shapes::ShapeRef.new(shape: SearchSpendingLimitsFilter)
+
+    SearchSpendingLimitsResponse.add_member(:spending_limits, Shapes::ShapeRef.new(shape: SpendingLimitSummaryList, required: true, location_name: "spendingLimits"))
+    SearchSpendingLimitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    SearchSpendingLimitsResponse.struct_class = Types::SearchSpendingLimitsResponse
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SpendingLimitSummary.add_member(:spending_limit_arn, Shapes::ShapeRef.new(shape: SpendingLimitArn, required: true, location_name: "spendingLimitArn"))
+    SpendingLimitSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
+    SpendingLimitSummary.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "timePeriod"))
+    SpendingLimitSummary.add_member(:spending_limit, Shapes::ShapeRef.new(shape: String, required: true, location_name: "spendingLimit"))
+    SpendingLimitSummary.add_member(:queued_spend, Shapes::ShapeRef.new(shape: String, required: true, location_name: "queuedSpend"))
+    SpendingLimitSummary.add_member(:total_spend, Shapes::ShapeRef.new(shape: String, required: true, location_name: "totalSpend"))
+    SpendingLimitSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    SpendingLimitSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    SpendingLimitSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    SpendingLimitSummary.struct_class = Types::SpendingLimitSummary
+
+    SpendingLimitSummaryList.member = Shapes::ShapeRef.new(shape: SpendingLimitSummary)
 
     TagKeys.member = Shapes::ShapeRef.new(shape: String)
 
@@ -496,11 +562,23 @@ module Aws::Braket
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TimePeriod.add_member(:start_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "startAt"))
+    TimePeriod.add_member(:end_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "endAt"))
+    TimePeriod.struct_class = Types::TimePeriod
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateSpendingLimitRequest.add_member(:spending_limit_arn, Shapes::ShapeRef.new(shape: SpendingLimitArn, required: true, location: "uri", location_name: "spendingLimitArn"))
+    UpdateSpendingLimitRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateSpendingLimitRequest.add_member(:spending_limit, Shapes::ShapeRef.new(shape: UpdateSpendingLimitRequestSpendingLimitString, location_name: "spendingLimit"))
+    UpdateSpendingLimitRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "timePeriod"))
+    UpdateSpendingLimitRequest.struct_class = Types::UpdateSpendingLimitRequest
+
+    UpdateSpendingLimitResponse.struct_class = Types::UpdateSpendingLimitResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
@@ -581,6 +659,32 @@ module Aws::Braket
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceRetiredException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:create_spending_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSpendingLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/spending-limit"
+        o.input = Shapes::ShapeRef.new(shape: CreateSpendingLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSpendingLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceRetiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_spending_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSpendingLimit"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/spending-limit/{spendingLimitArn}/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSpendingLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSpendingLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -689,6 +793,24 @@ module Aws::Braket
         )
       end)
 
+      api.add_operation(:search_spending_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchSpendingLimits"
+        o.http_method = "POST"
+        o.http_request_uri = "/spending-limits"
+        o.input = Shapes::ShapeRef.new(shape: SearchSpendingLimitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchSpendingLimitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -707,6 +829,19 @@ module Aws::Braket
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_spending_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSpendingLimit"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/spending-limit/{spendingLimitArn}/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSpendingLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSpendingLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

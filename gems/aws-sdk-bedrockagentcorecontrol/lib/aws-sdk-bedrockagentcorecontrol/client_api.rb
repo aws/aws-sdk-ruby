@@ -155,6 +155,10 @@ module Aws::BedrockAgentCoreControl
     GatewayDescription = Shapes::StringShape.new(name: 'GatewayDescription')
     GatewayId = Shapes::StringShape.new(name: 'GatewayId')
     GatewayIdentifier = Shapes::StringShape.new(name: 'GatewayIdentifier')
+    GatewayInterceptionPoint = Shapes::StringShape.new(name: 'GatewayInterceptionPoint')
+    GatewayInterceptionPoints = Shapes::ListShape.new(name: 'GatewayInterceptionPoints')
+    GatewayInterceptorConfiguration = Shapes::StructureShape.new(name: 'GatewayInterceptorConfiguration')
+    GatewayInterceptorConfigurations = Shapes::ListShape.new(name: 'GatewayInterceptorConfigurations')
     GatewayMaxResults = Shapes::IntegerShape.new(name: 'GatewayMaxResults')
     GatewayName = Shapes::StringShape.new(name: 'GatewayName')
     GatewayNextToken = Shapes::StringShape.new(name: 'GatewayNextToken')
@@ -197,6 +201,8 @@ module Aws::BedrockAgentCoreControl
     IncludedOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'IncludedOauth2ProviderConfigOutput')
     InlinePayload = Shapes::StringShape.new(name: 'InlinePayload')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InterceptorConfiguration = Shapes::UnionShape.new(name: 'InterceptorConfiguration')
+    InterceptorInputConfiguration = Shapes::StructureShape.new(name: 'InterceptorInputConfiguration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvocationConfiguration = Shapes::StructureShape.new(name: 'InvocationConfiguration')
     InvocationConfigurationInput = Shapes::StructureShape.new(name: 'InvocationConfigurationInput')
@@ -206,6 +212,7 @@ module Aws::BedrockAgentCoreControl
     KmsConfiguration = Shapes::StructureShape.new(name: 'KmsConfiguration')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
+    LambdaInterceptorConfiguration = Shapes::StructureShape.new(name: 'LambdaInterceptorConfiguration')
     LifecycleConfiguration = Shapes::StructureShape.new(name: 'LifecycleConfiguration')
     LifecycleConfigurationIdleRuntimeSessionTimeoutInteger = Shapes::IntegerShape.new(name: 'LifecycleConfigurationIdleRuntimeSessionTimeoutInteger')
     LifecycleConfigurationMaxLifetimeInteger = Shapes::IntegerShape.new(name: 'LifecycleConfigurationMaxLifetimeInteger')
@@ -663,6 +670,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayRequest.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: AuthorizerType, required: true, location_name: "authorizerType"))
     CreateGatewayRequest.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     CreateGatewayRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateGatewayRequest.add_member(:interceptor_configurations, Shapes::ShapeRef.new(shape: GatewayInterceptorConfigurations, location_name: "interceptorConfigurations"))
     CreateGatewayRequest.add_member(:exception_level, Shapes::ShapeRef.new(shape: ExceptionLevel, location_name: "exceptionLevel"))
     CreateGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateGatewayRequest.struct_class = Types::CreateGatewayRequest
@@ -682,6 +690,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayResponse.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: AuthorizerType, required: true, location_name: "authorizerType"))
     CreateGatewayResponse.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     CreateGatewayResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateGatewayResponse.add_member(:interceptor_configurations, Shapes::ShapeRef.new(shape: GatewayInterceptorConfigurations, location_name: "interceptorConfigurations"))
     CreateGatewayResponse.add_member(:workload_identity_details, Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: "workloadIdentityDetails"))
     CreateGatewayResponse.add_member(:exception_level, Shapes::ShapeRef.new(shape: ExceptionLevel, location_name: "exceptionLevel"))
     CreateGatewayResponse.struct_class = Types::CreateGatewayResponse
@@ -922,6 +931,15 @@ module Aws::BedrockAgentCoreControl
     ExtractionConfiguration.add_member_subclass(:unknown, Types::ExtractionConfiguration::Unknown)
     ExtractionConfiguration.struct_class = Types::ExtractionConfiguration
 
+    GatewayInterceptionPoints.member = Shapes::ShapeRef.new(shape: GatewayInterceptionPoint)
+
+    GatewayInterceptorConfiguration.add_member(:interceptor, Shapes::ShapeRef.new(shape: InterceptorConfiguration, required: true, location_name: "interceptor"))
+    GatewayInterceptorConfiguration.add_member(:interception_points, Shapes::ShapeRef.new(shape: GatewayInterceptionPoints, required: true, location_name: "interceptionPoints"))
+    GatewayInterceptorConfiguration.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InterceptorInputConfiguration, location_name: "inputConfiguration"))
+    GatewayInterceptorConfiguration.struct_class = Types::GatewayInterceptorConfiguration
+
+    GatewayInterceptorConfigurations.member = Shapes::ShapeRef.new(shape: GatewayInterceptorConfiguration)
+
     GatewayProtocolConfiguration.add_member(:mcp, Shapes::ShapeRef.new(shape: MCPGatewayConfiguration, location_name: "mcp"))
     GatewayProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     GatewayProtocolConfiguration.add_member_subclass(:mcp, Types::GatewayProtocolConfiguration::Mcp)
@@ -1055,6 +1073,7 @@ module Aws::BedrockAgentCoreControl
     GetGatewayResponse.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: AuthorizerType, required: true, location_name: "authorizerType"))
     GetGatewayResponse.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     GetGatewayResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    GetGatewayResponse.add_member(:interceptor_configurations, Shapes::ShapeRef.new(shape: GatewayInterceptorConfigurations, location_name: "interceptorConfigurations"))
     GetGatewayResponse.add_member(:workload_identity_details, Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: "workloadIdentityDetails"))
     GetGatewayResponse.add_member(:exception_level, Shapes::ShapeRef.new(shape: ExceptionLevel, location_name: "exceptionLevel"))
     GetGatewayResponse.struct_class = Types::GetGatewayResponse
@@ -1140,6 +1159,15 @@ module Aws::BedrockAgentCoreControl
     IncludedOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     IncludedOauth2ProviderConfigOutput.struct_class = Types::IncludedOauth2ProviderConfigOutput
 
+    InterceptorConfiguration.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaInterceptorConfiguration, location_name: "lambda"))
+    InterceptorConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    InterceptorConfiguration.add_member_subclass(:lambda, Types::InterceptorConfiguration::Lambda)
+    InterceptorConfiguration.add_member_subclass(:unknown, Types::InterceptorConfiguration::Unknown)
+    InterceptorConfiguration.struct_class = Types::InterceptorConfiguration
+
+    InterceptorInputConfiguration.add_member(:pass_request_headers, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "passRequestHeaders"))
+    InterceptorInputConfiguration.struct_class = Types::InterceptorInputConfiguration
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -1154,6 +1182,9 @@ module Aws::BedrockAgentCoreControl
     KmsConfiguration.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, required: true, location_name: "keyType"))
     KmsConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     KmsConfiguration.struct_class = Types::KmsConfiguration
+
+    LambdaInterceptorConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "arn"))
+    LambdaInterceptorConfiguration.struct_class = Types::LambdaInterceptorConfiguration
 
     LifecycleConfiguration.add_member(:idle_runtime_session_timeout, Shapes::ShapeRef.new(shape: LifecycleConfigurationIdleRuntimeSessionTimeoutInteger, location_name: "idleRuntimeSessionTimeout"))
     LifecycleConfiguration.add_member(:max_lifetime, Shapes::ShapeRef.new(shape: LifecycleConfigurationMaxLifetimeInteger, location_name: "maxLifetime"))
@@ -1786,6 +1817,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayRequest.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: AuthorizerType, required: true, location_name: "authorizerType"))
     UpdateGatewayRequest.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     UpdateGatewayRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    UpdateGatewayRequest.add_member(:interceptor_configurations, Shapes::ShapeRef.new(shape: GatewayInterceptorConfigurations, location_name: "interceptorConfigurations"))
     UpdateGatewayRequest.add_member(:exception_level, Shapes::ShapeRef.new(shape: ExceptionLevel, location_name: "exceptionLevel"))
     UpdateGatewayRequest.struct_class = Types::UpdateGatewayRequest
 
@@ -1804,6 +1836,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayResponse.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: AuthorizerType, required: true, location_name: "authorizerType"))
     UpdateGatewayResponse.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     UpdateGatewayResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    UpdateGatewayResponse.add_member(:interceptor_configurations, Shapes::ShapeRef.new(shape: GatewayInterceptorConfigurations, location_name: "interceptorConfigurations"))
     UpdateGatewayResponse.add_member(:workload_identity_details, Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: "workloadIdentityDetails"))
     UpdateGatewayResponse.add_member(:exception_level, Shapes::ShapeRef.new(shape: ExceptionLevel, location_name: "exceptionLevel"))
     UpdateGatewayResponse.struct_class = Types::UpdateGatewayResponse

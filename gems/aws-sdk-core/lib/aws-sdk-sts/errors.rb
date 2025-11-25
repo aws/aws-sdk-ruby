@@ -36,11 +36,14 @@ module Aws::STS
   # * {InvalidAuthorizationMessageException}
   # * {InvalidIdentityTokenException}
   #    * This error class is not used. `InvalidIdentityToken` is used during parsing instead.
+  # * {JWTPayloadSizeExceededException}
   # * {MalformedPolicyDocumentException}
   #    * This error class is not used. `MalformedPolicyDocument` is used during parsing instead.
+  # * {OutboundWebIdentityFederationDisabledException}
   # * {PackedPolicyTooLargeException}
   #    * This error class is not used. `PackedPolicyTooLarge` is used during parsing instead.
   # * {RegionDisabledException}
+  # * {SessionDurationEscalationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -144,6 +147,21 @@ module Aws::STS
       end
     end
 
+    class JWTPayloadSizeExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::STS::Types::JWTPayloadSizeExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     # @deprecated This error class is not used during parsing.
     #   Please use `MalformedPolicyDocument` instead.
     class MalformedPolicyDocumentException < ServiceError
@@ -151,6 +169,21 @@ module Aws::STS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::STS::Types::MalformedPolicyDocumentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OutboundWebIdentityFederationDisabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::STS::Types::OutboundWebIdentityFederationDisabledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -183,6 +216,21 @@ module Aws::STS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::STS::Types::RegionDisabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SessionDurationEscalationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::STS::Types::SessionDurationEscalationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

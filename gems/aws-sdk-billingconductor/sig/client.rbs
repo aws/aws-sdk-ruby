@@ -141,8 +141,9 @@ module Aws
                                   ?client_token: ::String,
                                   name: ::String,
                                   account_grouping: {
-                                    linked_account_ids: Array[::String],
-                                    auto_associate: bool?
+                                    linked_account_ids: Array[::String]?,
+                                    auto_associate: bool?,
+                                    responsibility_transfer_arn: ::String?
                                   },
                                   computation_preference: {
                                     pricing_plan_arn: ::String
@@ -362,8 +363,17 @@ module Aws
                                  ?filters: {
                                    arns: Array[::String]?,
                                    pricing_plan: ::String?,
-                                   statuses: Array[("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")]?,
-                                   auto_associate: bool?
+                                   statuses: Array[("ACTIVE" | "PRIMARY_ACCOUNT_MISSING" | "PENDING")]?,
+                                   auto_associate: bool?,
+                                   primary_account_ids: Array[::String]?,
+                                   billing_group_types: Array[("STANDARD" | "TRANSFER_BILLING")]?,
+                                   names: Array[
+                                     {
+                                       search_option: ("STARTS_WITH"),
+                                       search_value: ::String
+                                     },
+                                   ]?,
+                                   responsibility_transfer_arns: Array[::String]?
                                  }
                                ) -> _ListBillingGroupsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingGroupsResponseSuccess
@@ -529,7 +539,7 @@ module Aws
         def pricing_plan_arn: () -> ::String
         def size: () -> ::Integer
         def last_modified_time: () -> ::Integer
-        def status: () -> ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")
+        def status: () -> ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING" | "PENDING")
         def status_reason: () -> ::String
         def account_grouping: () -> Types::UpdateBillingGroupAccountGrouping
       end
@@ -537,13 +547,14 @@ module Aws
       def update_billing_group: (
                                   arn: ::String,
                                   ?name: ::String,
-                                  ?status: ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING"),
+                                  ?status: ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING" | "PENDING"),
                                   ?computation_preference: {
                                     pricing_plan_arn: ::String
                                   },
                                   ?description: ::String,
                                   ?account_grouping: {
-                                    auto_associate: bool?
+                                    auto_associate: bool?,
+                                    responsibility_transfer_arn: ::String?
                                   }
                                 ) -> _UpdateBillingGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillingGroupResponseSuccess

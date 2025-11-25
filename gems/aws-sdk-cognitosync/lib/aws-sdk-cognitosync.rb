@@ -54,7 +54,7 @@ module Aws::CognitoSync
   autoload :EndpointProvider, 'aws-sdk-cognitosync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cognitosync/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

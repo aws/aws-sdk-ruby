@@ -264,7 +264,8 @@ module Aws
                                                      ]?
                                                    }?
                                                  }?
-                                               }?
+                                               }?,
+                                               image_id: ::String?
                                              },
                                            ]?
                                          }?,
@@ -340,6 +341,11 @@ module Aws
                                          capacity_reservation_target: {
                                            capacity_reservation_ids: Array[::String]?,
                                            capacity_reservation_resource_group_arns: Array[::String]?
+                                         }?
+                                       },
+                                       ?instance_lifecycle_policy: {
+                                         retention_triggers: {
+                                           terminate_hook_abandon: ("retain" | "terminate")?
                                          }?
                                        }
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1148,7 +1154,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#start_instance_refresh-instance_method
       def start_instance_refresh: (
                                     auto_scaling_group_name: ::String,
-                                    ?strategy: ("Rolling"),
+                                    ?strategy: ("Rolling" | "ReplaceRootVolume"),
                                     ?desired_configuration: {
                                       launch_template: {
                                         launch_template_id: ::String?,
@@ -1232,7 +1238,8 @@ module Aws
                                                     ]?
                                                   }?
                                                 }?
-                                              }?
+                                              }?,
+                                              image_id: ::String?
                                             },
                                           ]?
                                         }?,
@@ -1368,7 +1375,8 @@ module Aws
                                                      ]?
                                                    }?
                                                  }?
-                                               }?
+                                               }?,
+                                               image_id: ::String?
                                              },
                                            ]?
                                          }?,
@@ -1415,6 +1423,11 @@ module Aws
                                          capacity_reservation_target: {
                                            capacity_reservation_ids: Array[::String]?,
                                            capacity_reservation_resource_group_arns: Array[::String]?
+                                         }?
+                                       },
+                                       ?instance_lifecycle_policy: {
+                                         retention_triggers: {
+                                           terminate_hook_abandon: ("retain" | "terminate")?
                                          }?
                                        }
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

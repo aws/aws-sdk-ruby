@@ -2145,6 +2145,20 @@ module Aws::NetworkFirewall
     #   A timestamp indicating when the rule group was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] vendor_name
+    #   The name of the Amazon Web Services Marketplace vendor that provides
+    #   this rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The unique identifier for the product listing associated with this
+    #   rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_name
+    #   The display name of the product listing for this rule group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadataResponse AWS API Documentation
     #
     class DescribeRuleGroupMetadataResponse < Struct.new(
@@ -2154,7 +2168,10 @@ module Aws::NetworkFirewall
       :type,
       :capacity,
       :stateful_rule_options,
-      :last_modified_time)
+      :last_modified_time,
+      :vendor_name,
+      :product_id,
+      :listing_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4156,6 +4173,12 @@ module Aws::NetworkFirewall
     #   rule group.
     #   @return [String]
     #
+    # @!attribute [rw] subscription_status
+    #   Filters the results to show only rule groups with the specified
+    #   subscription status. Use this to find subscribed or unsubscribed
+    #   rule groups.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   Indicates whether the rule group is stateless or stateful. If the
     #   rule group is stateless, it contains stateless rules. If it is
@@ -4169,6 +4192,7 @@ module Aws::NetworkFirewall
       :max_results,
       :scope,
       :managed_type,
+      :subscription_status,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -4888,11 +4912,17 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the rule group.
     #   @return [String]
     #
+    # @!attribute [rw] vendor_name
+    #   The name of the Amazon Web Services Marketplace seller that provides
+    #   this rule group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroupMetadata AWS API Documentation
     #
     class RuleGroupMetadata < Struct.new(
       :name,
-      :arn)
+      :arn,
+      :vendor_name)
       SENSITIVE = []
       include Aws::Structure
     end

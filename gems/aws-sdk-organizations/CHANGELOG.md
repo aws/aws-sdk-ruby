@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-11-21)
+------------------
+
+* Feature - Add support for policy operations on the UPGRADE_ROLLOUT_POLICY policy type.
+
+1.128.0 (2025-11-20)
+------------------
+
+* Feature - Added new APIs for Billing Transfer, new policy type INSPECTOR_POLICY, and allow an account to transfer between organizations
+
 1.127.0 (2025-10-28)
 ------------------
 

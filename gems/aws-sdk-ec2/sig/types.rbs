@@ -229,7 +229,7 @@ module Aws::EC2
       attr_accessor customer_owned_ipv_4_pool: ::String
       attr_accessor carrier_ip: ::String
       attr_accessor subnet_id: ::String
-      attr_accessor service_managed: ("alb" | "nlb" | "rnat")
+      attr_accessor service_managed: ("alb" | "nlb" | "rnat" | "rds")
       attr_accessor instance_id: ::String
       attr_accessor public_ip: ::String
       SENSITIVE: []
@@ -609,6 +609,8 @@ module Aws::EC2
       attr_accessor allocation_ids: ::Array[::String]
       attr_accessor private_ip_addresses: ::Array[::String]
       attr_accessor dry_run: bool
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       SENSITIVE: []
     end
 
@@ -957,6 +959,13 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class AvailabilityZoneAddress
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor allocation_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AvailabilityZoneMessage
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1059,8 +1068,9 @@ module Aws::EC2
       attr_accessor description: ::String
       attr_accessor asn_associations: ::Array[Types::AsnAssociation]
       attr_accessor status_message: ::String
-      attr_accessor state: ("advertised" | "deprovisioned" | "failed-deprovision" | "failed-provision" | "pending-deprovision" | "pending-provision" | "provisioned" | "provisioned-not-publicly-advertisable")
+      attr_accessor state: ("advertised" | "deprovisioned" | "failed-deprovision" | "failed-provision" | "pending-advertising" | "pending-deprovision" | "pending-provision" | "pending-withdrawal" | "provisioned" | "provisioned-not-publicly-advertisable")
       attr_accessor network_border_group: ::String
+      attr_accessor advertisement_type: ::String
       SENSITIVE: []
     end
 
@@ -1361,6 +1371,9 @@ module Aws::EC2
       attr_accessor commitment_info: Types::CapacityReservationCommitmentInfo
       attr_accessor delivery_preference: ("fixed" | "incremental")
       attr_accessor capacity_block_id: ::String
+      attr_accessor interruptible: bool
+      attr_accessor interruptible_capacity_allocation: Types::InterruptibleCapacityAllocation
+      attr_accessor interruption_info: Types::InterruptionInfo
       SENSITIVE: []
     end
 
@@ -1686,6 +1699,9 @@ module Aws::EC2
       attr_accessor log_enabled: bool
       attr_accessor log_group_arn: ::String
       attr_accessor log_output_format: ::String
+      attr_accessor bgp_log_enabled: bool
+      attr_accessor bgp_log_group_arn: ::String
+      attr_accessor bgp_log_output_format: ::String
       SENSITIVE: []
     end
 
@@ -1693,6 +1709,9 @@ module Aws::EC2
       attr_accessor log_enabled: bool
       attr_accessor log_group_arn: ::String
       attr_accessor log_output_format: ::String
+      attr_accessor bgp_log_enabled: bool
+      attr_accessor bgp_log_group_arn: ::String
+      attr_accessor bgp_log_output_format: ::String
       SENSITIVE: []
     end
 
@@ -2203,7 +2222,7 @@ module Aws::EC2
       attr_accessor deliver_cross_account_role: ::String
       attr_accessor log_group_name: ::String
       attr_accessor resource_ids: ::Array[::String]
-      attr_accessor resource_type: ("VPC" | "Subnet" | "NetworkInterface" | "TransitGateway" | "TransitGatewayAttachment")
+      attr_accessor resource_type: ("VPC" | "Subnet" | "NetworkInterface" | "TransitGateway" | "TransitGatewayAttachment" | "RegionalNatGateway")
       attr_accessor traffic_type: ("ACCEPT" | "REJECT" | "ALL")
       attr_accessor log_destination_type: ("cloud-watch-logs" | "s3" | "kinesis-data-firehose")
       attr_accessor log_destination: ::String
@@ -2326,6 +2345,23 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateInterruptibleCapacityReservationAllocationRequest
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      SENSITIVE: []
+    end
+
+    class CreateInterruptibleCapacityReservationAllocationResult
+      attr_accessor source_capacity_reservation_id: ::String
+      attr_accessor target_instance_count: ::Integer
+      attr_accessor status: ("pending" | "active" | "updating" | "canceling" | "canceled" | "failed")
+      attr_accessor interruption_type: ("adhoc")
+      SENSITIVE: []
+    end
+
     class CreateIpamExternalResourceVerificationTokenRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_id: ::String
@@ -2336,6 +2372,19 @@ module Aws::EC2
 
     class CreateIpamExternalResourceVerificationTokenResult
       attr_accessor ipam_external_resource_verification_token: Types::IpamExternalResourceVerificationToken
+      SENSITIVE: []
+    end
+
+    class CreateIpamPolicyRequest
+      attr_accessor dry_run: bool
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor client_token: ::String
+      attr_accessor ipam_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIpamPolicyResult
+      attr_accessor ipam_policy: Types::IpamPolicy
       SENSITIVE: []
     end
 
@@ -2354,7 +2403,7 @@ module Aws::EC2
       attr_accessor allocation_resource_tags: ::Array[Types::RequestIpamResourceTag]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor client_token: ::String
-      attr_accessor aws_service: ("ec2")
+      attr_accessor aws_service: ("ec2" | "global-services")
       attr_accessor public_ip_source: ("amazon" | "byoip")
       attr_accessor source_resource: Types::IpamPoolSourceResourceRequest
       SENSITIVE: []
@@ -2607,10 +2656,13 @@ module Aws::EC2
     end
 
     class CreateNatGatewayRequest
+      attr_accessor availability_mode: ("zonal" | "regional")
       attr_accessor allocation_id: ::String
       attr_accessor client_token: ::String
       attr_accessor dry_run: bool
       attr_accessor subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor availability_zone_addresses: ::Array[Types::AvailabilityZoneAddress]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor connectivity_type: ("private" | "public")
       attr_accessor private_ip_address: ::String
@@ -3106,6 +3158,41 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateTransitGatewayMeteringPolicyEntryRequest
+      attr_accessor transit_gateway_metering_policy_id: ::String
+      attr_accessor policy_rule_number: ::Integer
+      attr_accessor source_transit_gateway_attachment_id: ::String
+      attr_accessor source_transit_gateway_attachment_type: ("vpc" | "vpn" | "vpn-concentrator" | "direct-connect-gateway" | "connect" | "peering" | "tgw-peering" | "network-function")
+      attr_accessor source_cidr_block: ::String
+      attr_accessor source_port_range: ::String
+      attr_accessor destination_transit_gateway_attachment_id: ::String
+      attr_accessor destination_transit_gateway_attachment_type: ("vpc" | "vpn" | "vpn-concentrator" | "direct-connect-gateway" | "connect" | "peering" | "tgw-peering" | "network-function")
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destination_port_range: ::String
+      attr_accessor protocol: ::String
+      attr_accessor metered_account: ("source-attachment-owner" | "destination-attachment-owner" | "transit-gateway-owner")
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayMeteringPolicyEntryResult
+      attr_accessor transit_gateway_metering_policy_entry: Types::TransitGatewayMeteringPolicyEntry
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayMeteringPolicyRequest
+      attr_accessor transit_gateway_id: ::String
+      attr_accessor middlebox_attachment_ids: ::Array[::String]
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayMeteringPolicyResult
+      attr_accessor transit_gateway_metering_policy: Types::TransitGatewayMeteringPolicy
+      SENSITIVE: []
+    end
+
     class CreateTransitGatewayMulticastDomainRequest
       attr_accessor transit_gateway_id: ::String
       attr_accessor options: Types::CreateTransitGatewayMulticastDomainRequestOptions
@@ -3443,6 +3530,18 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateVpcEncryptionControlRequest
+      attr_accessor dry_run: bool
+      attr_accessor vpc_id: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      SENSITIVE: []
+    end
+
+    class CreateVpcEncryptionControlResult
+      attr_accessor vpc_encryption_control: Types::VpcEncryptionControl
+      SENSITIVE: []
+    end
+
     class CreateVpcEndpointConnectionNotificationRequest
       attr_accessor dry_run: bool
       attr_accessor service_id: ::String
@@ -3529,6 +3628,7 @@ module Aws::EC2
       attr_accessor ipv_6_ipam_pool_id: ::String
       attr_accessor ipv_6_netmask_length: ::Integer
       attr_accessor ipv_6_cidr_block_network_border_group: ::String
+      attr_accessor vpc_encryption_control: Types::VpcEncryptionControlConfiguration
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor dry_run: bool
       attr_accessor instance_tenancy: ("default" | "dedicated" | "host")
@@ -3852,6 +3952,17 @@ module Aws::EC2
 
     class DeleteIpamExternalResourceVerificationTokenResult
       attr_accessor ipam_external_resource_verification_token: Types::IpamExternalResourceVerificationToken
+      SENSITIVE: []
+    end
+
+    class DeleteIpamPolicyRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIpamPolicyResult
+      attr_accessor ipam_policy: Types::IpamPolicy
       SENSITIVE: []
     end
 
@@ -4347,6 +4458,29 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DeleteTransitGatewayMeteringPolicyEntryRequest
+      attr_accessor transit_gateway_metering_policy_id: ::String
+      attr_accessor policy_rule_number: ::Integer
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTransitGatewayMeteringPolicyEntryResult
+      attr_accessor transit_gateway_metering_policy_entry: Types::TransitGatewayMeteringPolicyEntry
+      SENSITIVE: []
+    end
+
+    class DeleteTransitGatewayMeteringPolicyRequest
+      attr_accessor transit_gateway_metering_policy_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTransitGatewayMeteringPolicyResult
+      attr_accessor transit_gateway_metering_policy: Types::TransitGatewayMeteringPolicy
+      SENSITIVE: []
+    end
+
     class DeleteTransitGatewayMulticastDomainRequest
       attr_accessor transit_gateway_multicast_domain_id: ::String
       attr_accessor dry_run: bool
@@ -4510,6 +4644,17 @@ module Aws::EC2
 
     class DeleteVpcBlockPublicAccessExclusionResult
       attr_accessor vpc_block_public_access_exclusion: Types::VpcBlockPublicAccessExclusion
+      SENSITIVE: []
+    end
+
+    class DeleteVpcEncryptionControlRequest
+      attr_accessor dry_run: bool
+      attr_accessor vpc_encryption_control_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcEncryptionControlResult
+      attr_accessor vpc_encryption_control: Types::VpcEncryptionControl
       SENSITIVE: []
     end
 
@@ -5789,6 +5934,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DescribeIpamPoliciesRequest
+      attr_accessor dry_run: bool
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor ipam_policy_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeIpamPoliciesResult
+      attr_accessor next_token: ::String
+      attr_accessor ipam_policies: ::Array[Types::IpamPolicy]
+      SENSITIVE: []
+    end
+
     class DescribeIpamPoolsRequest
       attr_accessor dry_run: bool
       attr_accessor filters: ::Array[Types::Filter]
@@ -6897,6 +7057,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DescribeTransitGatewayMeteringPoliciesRequest
+      attr_accessor transit_gateway_metering_policy_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeTransitGatewayMeteringPoliciesResult
+      attr_accessor transit_gateway_metering_policies: ::Array[Types::TransitGatewayMeteringPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeTransitGatewayMulticastDomainsRequest
       attr_accessor transit_gateway_multicast_domain_ids: ::Array[::String]
       attr_accessor filters: ::Array[Types::Filter]
@@ -7216,6 +7391,22 @@ module Aws::EC2
 
     class DescribeVpcClassicLinkResult
       attr_accessor vpcs: ::Array[Types::VpcClassicLink]
+      SENSITIVE: []
+    end
+
+    class DescribeVpcEncryptionControlsRequest
+      attr_accessor dry_run: bool
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor vpc_encryption_control_ids: ::Array[::String]
+      attr_accessor vpc_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeVpcEncryptionControlsResult
+      attr_accessor vpc_encryption_controls: ::Array[Types::VpcEncryptionControl]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -7689,6 +7880,18 @@ module Aws::EC2
 
     class DisableIpamOrganizationAdminAccountResult
       attr_accessor success: bool
+      SENSITIVE: []
+    end
+
+    class DisableIpamPolicyRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor organization_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableIpamPolicyResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 
@@ -8417,6 +8620,18 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class EnableIpamPolicyRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor organization_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableIpamPolicyResult
+      attr_accessor ipam_policy_id: ::String
+      SENSITIVE: []
+    end
+
     class EnableReachabilityAnalyzerOrganizationSharingRequest
       attr_accessor dry_run: bool
       SENSITIVE: []
@@ -8514,6 +8729,12 @@ module Aws::EC2
 
     class EnclaveOptionsRequest
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class EncryptionSupport
+      attr_accessor encryption_state: ("enabling" | "enabled" | "disabling" | "disabled")
+      attr_accessor state_message: ::String
       SENSITIVE: []
     end
 
@@ -9145,6 +9366,9 @@ module Aws::EC2
       attr_accessor available_instance_count: ::Integer
       attr_accessor state: ("active" | "expired" | "cancelled" | "pending" | "failed" | "scheduled" | "payment-pending" | "payment-failed" | "assessing" | "delayed" | "unsupported" | "unavailable")
       attr_accessor instance_usages: ::Array[Types::InstanceUsage]
+      attr_accessor interruptible: bool
+      attr_accessor interruptible_capacity_allocation: Types::InterruptibleCapacityAllocation
+      attr_accessor interruption_info: Types::InterruptionInfo
       SENSITIVE: []
     end
 
@@ -9240,6 +9464,18 @@ module Aws::EC2
     class GetEbsEncryptionByDefaultResult
       attr_accessor ebs_encryption_by_default: bool
       attr_accessor sse_type: ("sse-ebs" | "sse-kms" | "none")
+      SENSITIVE: []
+    end
+
+    class GetEnabledIpamPolicyRequest
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetEnabledIpamPolicyResult
+      attr_accessor ipam_policy_enabled: bool
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor managed_by: ("account" | "delegated-administrator-for-ipam")
       SENSITIVE: []
     end
 
@@ -9428,6 +9664,38 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetIpamPolicyAllocationRulesRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor locale: ::String
+      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamPolicyAllocationRulesResult
+      attr_accessor ipam_policy_documents: ::Array[Types::IpamPolicyDocument]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpamPolicyOrganizationTargetsRequest
+      attr_accessor dry_run: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class GetIpamPolicyOrganizationTargetsResult
+      attr_accessor organization_targets: ::Array[Types::IpamPolicyOrganizationTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetIpamPoolAllocationsRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_pool_id: ::String
@@ -9513,7 +9781,7 @@ module Aws::EC2
       attr_accessor ipam_scope_id: ::String
       attr_accessor ipam_pool_id: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni")
+      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni" | "anycast-ip-list")
       attr_accessor resource_tag: Types::RequestIpamResourceTag
       attr_accessor resource_owner: ::String
       SENSITIVE: []
@@ -9751,6 +10019,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetTransitGatewayMeteringPolicyEntriesRequest
+      attr_accessor transit_gateway_metering_policy_id: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayMeteringPolicyEntriesResult
+      attr_accessor transit_gateway_metering_policy_entries: ::Array[Types::TransitGatewayMeteringPolicyEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetTransitGatewayMulticastDomainAssociationsRequest
       attr_accessor transit_gateway_multicast_domain_id: ::String
       attr_accessor filters: ::Array[Types::Filter]
@@ -9875,6 +10158,20 @@ module Aws::EC2
     class GetVerifiedAccessGroupPolicyResult
       attr_accessor policy_enabled: bool
       attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcResourcesBlockingEncryptionEnforcementRequest
+      attr_accessor vpc_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetVpcResourcesBlockingEncryptionEnforcementResult
+      attr_accessor non_compliant_resources: ::Array[Types::VpcEncryptionNonCompliantResource]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -10492,7 +10789,7 @@ module Aws::EC2
       attr_accessor ena_support: bool
       attr_accessor hypervisor: ("ovm" | "xen")
       attr_accessor iam_instance_profile: Types::IamInstanceProfile
-      attr_accessor instance_lifecycle: ("spot" | "scheduled" | "capacity-block")
+      attr_accessor instance_lifecycle: ("spot" | "scheduled" | "capacity-block" | "interruptible-capacity-reservation")
       attr_accessor elastic_gpu_associations: ::Array[Types::ElasticGpuAssociation]
       attr_accessor elastic_inference_accelerator_associations: ::Array[Types::ElasticInferenceAcceleratorAssociation]
       attr_accessor network_interfaces: ::Array[Types::InstanceNetworkInterface]
@@ -10744,7 +11041,7 @@ module Aws::EC2
     end
 
     class InstanceMarketOptionsRequest
-      attr_accessor market_type: ("spot" | "capacity-block")
+      attr_accessor market_type: ("spot" | "capacity-block" | "interruptible-capacity-reservation")
       attr_accessor spot_options: Types::SpotMarketOptions
       SENSITIVE: []
     end
@@ -11095,6 +11392,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class InterruptibleCapacityAllocation
+      attr_accessor instance_count: ::Integer
+      attr_accessor target_instance_count: ::Integer
+      attr_accessor status: ("pending" | "active" | "updating" | "canceling" | "canceled" | "failed")
+      attr_accessor interruptible_capacity_reservation_id: ::String
+      attr_accessor interruption_type: ("adhoc")
+      SENSITIVE: []
+    end
+
+    class InterruptionInfo
+      attr_accessor source_capacity_reservation_id: ::String
+      attr_accessor interruption_type: ("adhoc")
+      SENSITIVE: []
+    end
+
     class IpPermission
       attr_accessor ip_protocol: ::String
       attr_accessor from_port: ::Integer
@@ -11172,8 +11484,8 @@ module Aws::EC2
       attr_accessor address_owner_id: ::String
       attr_accessor address_allocation_id: ::String
       attr_accessor association_status: ("associated" | "disassociated")
-      attr_accessor address_type: ("service-managed-ip" | "service-managed-byoip" | "amazon-owned-eip" | "amazon-owned-contig" | "byoip" | "ec2-public-ip")
-      attr_accessor service: ("nat-gateway" | "database-migration-service" | "redshift" | "elastic-container-service" | "relational-database-service" | "site-to-site-vpn" | "load-balancer" | "global-accelerator" | "other")
+      attr_accessor address_type: ("service-managed-ip" | "service-managed-byoip" | "amazon-owned-eip" | "amazon-owned-contig" | "byoip" | "ec2-public-ip" | "anycast-ip-list-ip")
+      attr_accessor service: ("nat-gateway" | "database-migration-service" | "redshift" | "elastic-container-service" | "relational-database-service" | "site-to-site-vpn" | "load-balancer" | "global-accelerator" | "cloudfront" | "other")
       attr_accessor service_resource: ::String
       attr_accessor vpc_id: ::String
       attr_accessor subnet_id: ::String
@@ -11195,7 +11507,7 @@ module Aws::EC2
       attr_accessor resource_owner_id: ::String
       attr_accessor resource_cidr: ::String
       attr_accessor ip_source: ("amazon" | "byoip" | "none")
-      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni")
+      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni" | "anycast-ip-list")
       attr_accessor resource_tags: ::Array[Types::IpamResourceTag]
       attr_accessor ip_usage: ::Float
       attr_accessor vpc_id: ::String
@@ -11237,6 +11549,41 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class IpamPolicy
+      attr_accessor owner_id: ::String
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor ipam_policy_arn: ::String
+      attr_accessor ipam_policy_region: ::String
+      attr_accessor state: ("create-in-progress" | "create-complete" | "create-failed" | "modify-in-progress" | "modify-complete" | "modify-failed" | "delete-in-progress" | "delete-complete" | "delete-failed" | "isolate-in-progress" | "isolate-complete" | "restore-in-progress")
+      attr_accessor state_message: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor ipam_id: ::String
+      SENSITIVE: []
+    end
+
+    class IpamPolicyAllocationRule
+      attr_accessor source_ipam_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class IpamPolicyAllocationRuleRequest
+      attr_accessor source_ipam_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class IpamPolicyDocument
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor locale: ::String
+      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat")
+      attr_accessor allocation_rules: ::Array[Types::IpamPolicyAllocationRule]
+      SENSITIVE: []
+    end
+
+    class IpamPolicyOrganizationTarget
+      attr_accessor organization_target_id: ::String
+      SENSITIVE: []
+    end
+
     class IpamPool
       attr_accessor owner_id: ::String
       attr_accessor ipam_pool_id: ::String
@@ -11259,7 +11606,7 @@ module Aws::EC2
       attr_accessor allocation_default_netmask_length: ::Integer
       attr_accessor allocation_resource_tags: ::Array[Types::IpamResourceTag]
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor aws_service: ("ec2")
+      attr_accessor aws_service: ("ec2" | "global-services")
       attr_accessor public_ip_source: ("amazon" | "byoip")
       attr_accessor source_resource: Types::IpamPoolSourceResource
       SENSITIVE: []
@@ -11270,7 +11617,7 @@ module Aws::EC2
       attr_accessor ipam_pool_allocation_id: ::String
       attr_accessor description: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("ipam-pool" | "vpc" | "ec2-public-ipv4-pool" | "custom" | "subnet" | "eip")
+      attr_accessor resource_type: ("ipam-pool" | "vpc" | "ec2-public-ipv4-pool" | "custom" | "subnet" | "eip" | "anycast-ip-list")
       attr_accessor resource_region: ::String
       attr_accessor resource_owner: ::String
       SENSITIVE: []
@@ -11326,7 +11673,7 @@ module Aws::EC2
       attr_accessor rule_type: ("static-cidr" | "ipam-resource-cidr" | "ipam-pool-cidr")
       attr_accessor static_cidr: ::String
       attr_accessor ipam_scope_id: ::String
-      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni")
+      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni" | "anycast-ip-list")
       attr_accessor conditions: ::Array[Types::IpamPrefixListResolverRuleCondition]
       SENSITIVE: []
     end
@@ -11357,7 +11704,7 @@ module Aws::EC2
       attr_accessor rule_type: ("static-cidr" | "ipam-resource-cidr" | "ipam-pool-cidr")
       attr_accessor static_cidr: ::String
       attr_accessor ipam_scope_id: ::String
-      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni")
+      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni" | "anycast-ip-list")
       attr_accessor conditions: ::Array[Types::IpamPrefixListResolverRuleConditionRequest]
       SENSITIVE: []
     end
@@ -11414,7 +11761,7 @@ module Aws::EC2
       attr_accessor resource_id: ::String
       attr_accessor resource_name: ::String
       attr_accessor resource_cidr: ::String
-      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni")
+      attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni" | "anycast-ip-list")
       attr_accessor resource_tags: ::Array[Types::IpamResourceTag]
       attr_accessor ip_usage: ::Float
       attr_accessor compliance_status: ("compliant" | "noncompliant" | "unmanaged" | "ignored")
@@ -11754,13 +12101,13 @@ module Aws::EC2
     end
 
     class LaunchTemplateInstanceMarketOptions
-      attr_accessor market_type: ("spot" | "capacity-block")
+      attr_accessor market_type: ("spot" | "capacity-block" | "interruptible-capacity-reservation")
       attr_accessor spot_options: Types::LaunchTemplateSpotMarketOptions
       SENSITIVE: []
     end
 
     class LaunchTemplateInstanceMarketOptionsRequest
-      attr_accessor market_type: ("spot" | "capacity-block")
+      attr_accessor market_type: ("spot" | "capacity-block" | "interruptible-capacity-reservation")
       attr_accessor spot_options: Types::LaunchTemplateSpotMarketOptionsRequest
       SENSITIVE: []
     end
@@ -11937,13 +12284,13 @@ module Aws::EC2
     end
 
     class LaunchTemplateTagSpecification
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class LaunchTemplateTagSpecificationRequest
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -12005,6 +12352,20 @@ module Aws::EC2
 
     class ListSnapshotsInRecycleBinResult
       attr_accessor snapshots: ::Array[Types::SnapshotRecycleBinInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVolumesInRecycleBinRequest
+      attr_accessor volume_ids: ::Array[::String]
+      attr_accessor dry_run: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVolumesInRecycleBinResult
+      attr_accessor volumes: ::Array[Types::VolumeRecycleBinInfo]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -12653,6 +13014,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyIpamPolicyAllocationRulesRequest
+      attr_accessor dry_run: bool
+      attr_accessor ipam_policy_id: ::String
+      attr_accessor locale: ::String
+      attr_accessor resource_type: ("alb" | "eip" | "rds" | "rnat")
+      attr_accessor allocation_rules: ::Array[Types::IpamPolicyAllocationRuleRequest]
+      SENSITIVE: []
+    end
+
+    class ModifyIpamPolicyAllocationRulesResult
+      attr_accessor ipam_policy_document: Types::IpamPolicyDocument
+      SENSITIVE: []
+    end
+
     class ModifyIpamPoolRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_pool_id: ::String
@@ -12993,6 +13368,19 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyTransitGatewayMeteringPolicyRequest
+      attr_accessor transit_gateway_metering_policy_id: ::String
+      attr_accessor add_middlebox_attachment_ids: ::Array[::String]
+      attr_accessor remove_middlebox_attachment_ids: ::Array[::String]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayMeteringPolicyResult
+      attr_accessor transit_gateway_metering_policy: Types::TransitGatewayMeteringPolicy
+      SENSITIVE: []
+    end
+
     class ModifyTransitGatewayOptions
       attr_accessor add_transit_gateway_cidr_blocks: ::Array[::String]
       attr_accessor remove_transit_gateway_cidr_blocks: ::Array[::String]
@@ -13005,6 +13393,7 @@ module Aws::EC2
       attr_accessor default_route_table_propagation: ("enable" | "disable")
       attr_accessor propagation_default_route_table_id: ::String
       attr_accessor amazon_side_asn: ::Integer
+      attr_accessor encryption_support: ("enable" | "disable")
       SENSITIVE: []
     end
 
@@ -13282,6 +13671,26 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyVpcEncryptionControlRequest
+      attr_accessor dry_run: bool
+      attr_accessor vpc_encryption_control_id: ::String
+      attr_accessor mode: ("monitor" | "enforce")
+      attr_accessor internet_gateway_exclusion: ("enable" | "disable")
+      attr_accessor egress_only_internet_gateway_exclusion: ("enable" | "disable")
+      attr_accessor nat_gateway_exclusion: ("enable" | "disable")
+      attr_accessor virtual_private_gateway_exclusion: ("enable" | "disable")
+      attr_accessor vpc_peering_exclusion: ("enable" | "disable")
+      attr_accessor lambda_exclusion: ("enable" | "disable")
+      attr_accessor vpc_lattice_exclusion: ("enable" | "disable")
+      attr_accessor elastic_file_system_exclusion: ("enable" | "disable")
+      SENSITIVE: []
+    end
+
+    class ModifyVpcEncryptionControlResult
+      attr_accessor vpc_encryption_control: Types::VpcEncryptionControl
+      SENSITIVE: []
+    end
+
     class ModifyVpcEndpointConnectionNotificationRequest
       attr_accessor dry_run: bool
       attr_accessor connection_notification_id: ::String
@@ -13548,6 +13957,10 @@ module Aws::EC2
       attr_accessor vpc_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor connectivity_type: ("private" | "public")
+      attr_accessor availability_mode: ("zonal" | "regional")
+      attr_accessor auto_scaling_ips: ("enabled" | "disabled")
+      attr_accessor auto_provision_zones: ("enabled" | "disabled")
+      attr_accessor route_table_id: ::String
       SENSITIVE: []
     end
 
@@ -13560,6 +13973,8 @@ module Aws::EC2
       attr_accessor is_primary: bool
       attr_accessor failure_message: ::String
       attr_accessor status: ("assigning" | "unassigning" | "associating" | "disassociating" | "succeeded" | "failed")
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       SENSITIVE: []
     end
 
@@ -15250,6 +15665,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class RestoreVolumeFromRecycleBinRequest
+      attr_accessor volume_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class RestoreVolumeFromRecycleBinResult
+      attr_accessor return: bool
+      SENSITIVE: []
+    end
+
     class RevokeClientVpnIngressRequest
       attr_accessor client_vpn_endpoint_id: ::String
       attr_accessor target_network_cidr: ::String
@@ -16108,7 +16534,7 @@ module Aws::EC2
     end
 
     class SpotFleetTagSpecification
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -16446,13 +16872,13 @@ module Aws::EC2
     class TagDescription
       attr_accessor key: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
       attr_accessor value: ::String
       SENSITIVE: []
     end
 
     class TagSpecification
-      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
+      attr_accessor resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "capacity-manager-data-export" | "vpn-concentrator")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -16730,6 +17156,39 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class TransitGatewayMeteringPolicy
+      attr_accessor transit_gateway_metering_policy_id: ::String
+      attr_accessor transit_gateway_id: ::String
+      attr_accessor middlebox_attachment_ids: ::Array[::String]
+      attr_accessor state: ("available" | "deleted" | "pending" | "modifying" | "deleting")
+      attr_accessor update_effective_at: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TransitGatewayMeteringPolicyEntry
+      attr_accessor policy_rule_number: ::String
+      attr_accessor metered_account: ("source-attachment-owner" | "destination-attachment-owner" | "transit-gateway-owner")
+      attr_accessor state: ("available" | "deleted")
+      attr_accessor updated_at: ::Time
+      attr_accessor update_effective_at: ::Time
+      attr_accessor metering_policy_rule: Types::TransitGatewayMeteringPolicyRule
+      SENSITIVE: []
+    end
+
+    class TransitGatewayMeteringPolicyRule
+      attr_accessor source_transit_gateway_attachment_id: ::String
+      attr_accessor source_transit_gateway_attachment_type: ("vpc" | "vpn" | "vpn-concentrator" | "direct-connect-gateway" | "connect" | "peering" | "tgw-peering" | "network-function")
+      attr_accessor source_cidr_block: ::String
+      attr_accessor source_port_range: ::String
+      attr_accessor destination_transit_gateway_attachment_id: ::String
+      attr_accessor destination_transit_gateway_attachment_type: ("vpc" | "vpn" | "vpn-concentrator" | "direct-connect-gateway" | "connect" | "peering" | "tgw-peering" | "network-function")
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destination_port_range: ::String
+      attr_accessor protocol: ::String
+      SENSITIVE: []
+    end
+
     class TransitGatewayMulticastDeregisteredGroupMembers
       attr_accessor transit_gateway_multicast_domain_id: ::String
       attr_accessor deregistered_network_interface_ids: ::Array[::String]
@@ -16823,6 +17282,7 @@ module Aws::EC2
       attr_accessor dns_support: ("enable" | "disable")
       attr_accessor security_group_referencing_support: ("enable" | "disable")
       attr_accessor multicast_support: ("enable" | "disable")
+      attr_accessor encryption_support: Types::EncryptionSupport
       SENSITIVE: []
     end
 
@@ -17144,6 +17604,23 @@ module Aws::EC2
     class UpdateCapacityManagerOrganizationsAccessResult
       attr_accessor capacity_manager_status: ("enabled" | "disabled")
       attr_accessor organizations_access: bool
+      SENSITIVE: []
+    end
+
+    class UpdateInterruptibleCapacityReservationAllocationRequest
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor target_instance_count: ::Integer
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class UpdateInterruptibleCapacityReservationAllocationResult
+      attr_accessor interruptible_capacity_reservation_id: ::String
+      attr_accessor source_capacity_reservation_id: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor target_instance_count: ::Integer
+      attr_accessor status: ("pending" | "active" | "updating" | "canceling" | "canceled" | "failed")
+      attr_accessor interruption_type: ("adhoc")
       SENSITIVE: []
     end
 
@@ -17555,6 +18032,25 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class VolumeRecycleBinInfo
+      attr_accessor volume_id: ::String
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+      attr_accessor state: ("creating" | "available" | "in-use" | "deleting" | "deleted" | "error")
+      attr_accessor size: ::Integer
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor outpost_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor source_volume_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor operator: Types::OperatorResponse
+      attr_accessor create_time: ::Time
+      attr_accessor recycle_bin_enter_time: ::Time
+      attr_accessor recycle_bin_exit_time: ::Time
+      SENSITIVE: []
+    end
+
     class VolumeStatusAction
       attr_accessor code: ::String
       attr_accessor description: ::String
@@ -17682,6 +18178,19 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class VpcEncryptionControlConfiguration
+      attr_accessor mode: ("monitor" | "enforce")
+      attr_accessor internet_gateway_exclusion: ("enable" | "disable")
+      attr_accessor egress_only_internet_gateway_exclusion: ("enable" | "disable")
+      attr_accessor nat_gateway_exclusion: ("enable" | "disable")
+      attr_accessor virtual_private_gateway_exclusion: ("enable" | "disable")
+      attr_accessor vpc_peering_exclusion: ("enable" | "disable")
+      attr_accessor lambda_exclusion: ("enable" | "disable")
+      attr_accessor vpc_lattice_exclusion: ("enable" | "disable")
+      attr_accessor elastic_file_system_exclusion: ("enable" | "disable")
+      SENSITIVE: []
+    end
+
     class VpcEncryptionControlExclusion
       attr_accessor state: ("enabling" | "enabled" | "disabling" | "disabled")
       attr_accessor state_message: ::String
@@ -17697,6 +18206,14 @@ module Aws::EC2
       attr_accessor lambda: Types::VpcEncryptionControlExclusion
       attr_accessor vpc_lattice: Types::VpcEncryptionControlExclusion
       attr_accessor elastic_file_system: Types::VpcEncryptionControlExclusion
+      SENSITIVE: []
+    end
+
+    class VpcEncryptionNonCompliantResource
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor is_excludable: bool
       SENSITIVE: []
     end
 

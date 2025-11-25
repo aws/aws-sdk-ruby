@@ -551,7 +551,7 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region, AWS::EKS::Cluster
     #         identifier: "String", # required
     #       },
     #     ],
@@ -574,7 +574,7 @@ module Aws::NetworkFlowMonitor
     #   resp.monitor_name #=> String
     #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
     #   resp.local_resources #=> Array
-    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"
+    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"
     #   resp.local_resources[0].identifier #=> String
     #   resp.remote_resources #=> Array
     #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"
@@ -754,7 +754,7 @@ module Aws::NetworkFlowMonitor
     #   resp.monitor_name #=> String
     #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
     #   resp.local_resources #=> Array
-    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"
+    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"
     #   resp.local_resources[0].identifier #=> String
     #   resp.remote_resources #=> Array
     #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"
@@ -1822,13 +1822,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources_to_add: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region, AWS::EKS::Cluster
     #         identifier: "String", # required
     #       },
     #     ],
     #     local_resources_to_remove: [
     #       {
-    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC, AWS::AvailabilityZone, AWS::EC2::Subnet, AWS::Region, AWS::EKS::Cluster
     #         identifier: "String", # required
     #       },
     #     ],
@@ -1853,7 +1853,7 @@ module Aws::NetworkFlowMonitor
     #   resp.monitor_name #=> String
     #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
     #   resp.local_resources #=> Array
-    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"
+    #   resp.local_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"
     #   resp.local_resources[0].identifier #=> String
     #   resp.remote_resources #=> Array
     #   resp.remote_resources[0].type #=> String, one of "AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"
@@ -1958,7 +1958,7 @@ module Aws::NetworkFlowMonitor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkflowmonitor'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -40,6 +40,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#launch_template-instance_method
       def launch_template: () -> Types::LaunchTemplateSpecification
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#image_id-instance_method
+      def image_id: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#protected_from_scale_in-instance_method
       def protected_from_scale_in: () -> bool
 

@@ -2835,6 +2835,161 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role that
+    #   grants the Amazon ECS container agent permission to make Amazon Web
+    #   Services API calls on your behalf. This role is required for Amazon
+    #   ECS to pull container images from Amazon ECR, send container logs to
+    #   Amazon CloudWatch Logs, and retrieve sensitive data from Amazon Web
+    #   Services Systems Manager Parameter Store or Amazon Web Services
+    #   Secrets Manager.
+    #
+    #   The execution role must include the
+    #   `AmazonECSTaskExecutionRolePolicy` managed policy or equivalent
+    #   permissions. For Express services, this role is used during task
+    #   startup and runtime for container management operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the infrastructure role that
+    #   grants Amazon ECS permission to create and manage Amazon Web
+    #   Services resources on your behalf for the Express service. This role
+    #   is used to provision and manage Application Load Balancers, target
+    #   groups, security groups, auto-scaling policies, and other Amazon Web
+    #   Services infrastructure components.
+    #
+    #   The infrastructure role must include permissions for Elastic Load
+    #   Balancing, Application Auto Scaling, Amazon EC2 (for security
+    #   groups), and other services required for managed infrastructure.
+    #   This role is only used during Express service creation, updates, and
+    #   deletion operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the Express service. This name must be unique within the
+    #   specified cluster and can contain up to 255 letters (uppercase and
+    #   lowercase), numbers, underscores, and hyphens. The name is used to
+    #   identify the service in the Amazon ECS console and API operations.
+    #
+    #   If you don't specify a service name, Amazon ECS generates a unique
+    #   name for the service. The service name becomes part of the service
+    #   ARN and cannot be changed after the service is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster on
+    #   which to create the Express service. If you do not specify a
+    #   cluster, the `default` cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_path
+    #   The path on the container that the Application Load Balancer uses
+    #   for health checks. This should be a valid HTTP endpoint that returns
+    #   a successful response (HTTP 200) when the application is healthy.
+    #
+    #   If not specified, the default health check path is `/ping`. The
+    #   health check path must start with a forward slash and can include
+    #   query parameters. Examples: `/health`, `/api/status`,
+    #   `/ping?format=json`.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_container
+    #   The primary container configuration for the Express service. This
+    #   defines the main application container that will receive traffic
+    #   from the Application Load Balancer.
+    #
+    #   The primary container must specify at minimum a container image. You
+    #   can also configure the container port (defaults to 80), logging
+    #   configuration, environment variables, secrets, and startup commands.
+    #   The container image can be from Amazon ECR, Docker Hub, or any other
+    #   container registry accessible to your execution role.
+    #   @return [Types::ExpressGatewayContainer]
+    #
+    # @!attribute [rw] task_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that containers in
+    #   this task can assume. This role allows your application code to
+    #   access other Amazon Web Services services securely.
+    #
+    #   The task role is different from the execution role. While the
+    #   execution role is used by the Amazon ECS agent to set up the task,
+    #   the task role is used by your application code running inside the
+    #   container to make Amazon Web Services API calls. If your application
+    #   doesn't need to access Amazon Web Services services, you can omit
+    #   this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the Express service tasks. This
+    #   specifies the VPC subnets and security groups for the tasks.
+    #
+    #   For Express services, you can specify custom security groups and
+    #   subnets. If not provided, Amazon ECS will use the default VPC
+    #   configuration and create appropriate security groups automatically.
+    #   The network configuration determines how your service integrates
+    #   with your VPC and what network access it has.
+    #   @return [Types::ExpressGatewayServiceNetworkConfiguration]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units used by the task. This parameter determines
+    #   the CPU allocation for each task in the Express service. The default
+    #   value for an Express service is 256 (.25 vCPU).
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The amount of memory (in MiB) used by the task. This parameter
+    #   determines the memory allocation for each task in the Express
+    #   service. The default value for an express service is 512 MiB.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_target
+    #   The auto-scaling configuration for the Express service. This defines
+    #   how the service automatically adjusts the number of running tasks
+    #   based on demand.
+    #
+    #   You can specify the minimum and maximum number of tasks, the scaling
+    #   metric (CPU utilization, memory utilization, or request count per
+    #   target), and the target value for the metric. If not specified, the
+    #   default target value for an Express service is 60.
+    #   @return [Types::ExpressGatewayScalingTarget]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the Express service to help
+    #   categorize and organize it. Each tag consists of a key and an
+    #   optional value. You can apply up to 50 tags to a service.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateExpressGatewayServiceRequest AWS API Documentation
+    #
+    class CreateExpressGatewayServiceRequest < Struct.new(
+      :execution_role_arn,
+      :infrastructure_role_arn,
+      :service_name,
+      :cluster,
+      :health_check_path,
+      :primary_container,
+      :task_role_arn,
+      :network_configuration,
+      :cpu,
+      :memory,
+      :scaling_target,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service
+    #   The full description of your Express service following the create
+    #   operation.
+    #   @return [Types::ECSExpressGatewayService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateExpressGatewayServiceResponse AWS API Documentation
+    #
+    class CreateExpressGatewayServiceResponse < Struct.new(
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for creating a Amazon ECS Managed Instances
     # provider. This specifies how Amazon ECS should manage Amazon EC2
     # instances, including the infrastructure role, instance launch
@@ -2877,12 +3032,20 @@ module Aws::ECS
     #   launched by this provider.
     #   @return [String]
     #
+    # @!attribute [rw] infrastructure_optimization
+    #   Defines how Amazon ECS Managed Instances optimizes the
+    #   infrastastructure in your capacity provider. Provides control over
+    #   the delay between when EC2 instances become idle or underutilized
+    #   and when Amazon ECS optimizes them.
+    #   @return [Types::InfrastructureOptimization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateManagedInstancesProviderConfiguration AWS API Documentation
     #
     class CreateManagedInstancesProviderConfiguration < Struct.new(
       :infrastructure_role_arn,
       :instance_launch_template,
-      :propagate_tags)
+      :propagate_tags,
+      :infrastructure_optimization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3701,6 +3864,32 @@ module Aws::ECS
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the Express service to delete. The
+    #   ARN uniquely identifies the service within your Amazon Web Services
+    #   account and region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteExpressGatewayServiceRequest AWS API Documentation
+    #
+    class DeleteExpressGatewayServiceRequest < Struct.new(
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service
+    #   The full description of the deleted express service.
+    #   @return [Types::ECSExpressGatewayService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteExpressGatewayServiceResponse AWS API Documentation
+    #
+    class DeleteExpressGatewayServiceResponse < Struct.new(
+      :service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4841,6 +5030,39 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the Express service to describe.
+    #   The ARN uniquely identifies the service within your Amazon Web
+    #   Services account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] include
+    #   Specifies additional information to include in the response. Valid
+    #   values are `TAGS` to include resource tags associated with the
+    #   Express service.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeExpressGatewayServiceRequest AWS API Documentation
+    #
+    class DescribeExpressGatewayServiceRequest < Struct.new(
+      :service_arn,
+      :include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service
+    #   The full description of the described express service.
+    #   @return [Types::ECSExpressGatewayService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeExpressGatewayServiceResponse AWS API Documentation
+    #
+    class DescribeExpressGatewayServiceResponse < Struct.new(
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_deployment_arns
     #   The ARN of the service deployment.
     #
@@ -5280,6 +5502,113 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # Represents an Express service, which provides a simplified way to
+    # deploy containerized web applications on Amazon ECS with managed
+    # Amazon Web Services infrastructure. An Express service automatically
+    # provisions and manages Application Load Balancers, target groups,
+    # security groups, and auto-scaling policies.
+    #
+    # Express services use a service revision architecture where each
+    # service can have multiple active configurations, enabling blue-green
+    # deployments and gradual rollouts. The service maintains a list of
+    # active configurations and manages the lifecycle of the underlying
+    # Amazon Web Services resources.
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full ARN of the cluster that hosts the Express
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN that identifies the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The ARN of the infrastructure role that manages Amazon Web Services
+    #   resources for the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Express service.
+    #   @return [Types::ExpressGatewayServiceStatus]
+    #
+    # @!attribute [rw] current_deployment
+    #   The current deployment configuration for the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_configurations
+    #   The list of active service configurations for the Express service.
+    #   @return [Array<Types::ExpressGatewayServiceConfiguration>]
+    #
+    # @!attribute [rw] tags
+    #   The metadata applied to the Express service.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for when the Express service was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the Express service was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ECSExpressGatewayService AWS API Documentation
+    #
+    class ECSExpressGatewayService < Struct.new(
+      :cluster,
+      :service_name,
+      :service_arn,
+      :infrastructure_role_arn,
+      :status,
+      :current_deployment,
+      :active_configurations,
+      :tags,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the Amazon Web Services resources managed by Amazon ECS for
+    # an Express service, including ingress paths, auto-scaling policies,
+    # metric alarms, and security groups.
+    #
+    # @!attribute [rw] ingress_paths
+    #   The ingress paths and endpoints for the Express service.
+    #   @return [Array<Types::ManagedIngressPath>]
+    #
+    # @!attribute [rw] auto_scaling
+    #   The auto-scaling configuration and policies for the Express service.
+    #   @return [Types::ManagedAutoScaling]
+    #
+    # @!attribute [rw] metric_alarms
+    #   The CloudWatch metric alarms associated with the Express service.
+    #   @return [Array<Types::ManagedMetricAlarm>]
+    #
+    # @!attribute [rw] service_security_groups
+    #   The security groups managed by the Express service.
+    #   @return [Array<Types::ManagedSecurityGroup>]
+    #
+    # @!attribute [rw] log_groups
+    #   The log groups managed by the Express service.
+    #   @return [Array<Types::ManagedLogGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ECSManagedResources AWS API Documentation
+    #
+    class ECSManagedResources < Struct.new(
+      :ingress_paths,
+      :auto_scaling,
+      :metric_alarms,
+      :service_security_groups,
+      :log_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The authorization configuration details for the Amazon EFS file
     # system.
     #
@@ -5633,6 +5962,249 @@ module Aws::ECS
       :interactive,
       :session,
       :task_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for the primary container in an Express
+    # service. This container receives traffic from the Application Load
+    # Balancer and runs your application code.
+    #
+    # The container configuration includes the container image, port
+    # mapping, logging settings, environment variables, and secrets. The
+    # container image is the only required parameter, with sensible defaults
+    # provided for other settings.
+    #
+    # @!attribute [rw] image
+    #   The image used to start a container. This string is passed directly
+    #   to the Docker daemon. Images in the Docker Hub registry are
+    #   available by default. Other repositories are specified with either
+    #   `repository-url/image:tag` or `repository-url/image@digest`.
+    #
+    #   For Express services, the image typically contains a web application
+    #   that listens on the specified container port. The image can be
+    #   stored in Amazon ECR, Docker Hub, or any other container registry
+    #   accessible to your execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port number on the container that receives traffic from the load
+    #   balancer. Default is 80.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_logs_configuration
+    #   The log configuration for the container.
+    #   @return [Types::ExpressGatewayServiceAwsLogsConfiguration]
+    #
+    # @!attribute [rw] repository_credentials
+    #   The configuration for repository credentials for private registry
+    #   authentication.
+    #   @return [Types::ExpressGatewayRepositoryCredentials]
+    #
+    # @!attribute [rw] command
+    #   The command that is passed to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to pass to the container.
+    #   @return [Array<Types::KeyValuePair>]
+    #
+    # @!attribute [rw] secrets
+    #   The secrets to pass to the container.
+    #   @return [Array<Types::Secret>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayContainer AWS API Documentation
+    #
+    class ExpressGatewayContainer < Struct.new(
+      :image,
+      :container_port,
+      :aws_logs_configuration,
+      :repository_credentials,
+      :command,
+      :environment,
+      :secrets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The repository credentials for private registry authentication to pass
+    # to the container.
+    #
+    # @!attribute [rw] credentials_parameter
+    #   The Amazon Resource Name (ARN) of the secret containing the private
+    #   repository credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayRepositoryCredentials AWS API Documentation
+    #
+    class ExpressGatewayRepositoryCredentials < Struct.new(
+      :credentials_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the auto-scaling configuration for an Express service. This
+    # determines how the service automatically adjusts the number of running
+    # tasks based on demand metrics such as CPU utilization, memory
+    # utilization, or request count per target.
+    #
+    # Auto-scaling helps ensure your application can handle varying levels
+    # of traffic while optimizing costs by scaling down during low-demand
+    # periods. You can specify the minimum and maximum number of tasks, the
+    # scaling metric, and the target value for that metric.
+    #
+    # @!attribute [rw] min_task_count
+    #   The minimum number of tasks to run in the Express service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_task_count
+    #   The maximum number of tasks to run in the Express service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_scaling_metric
+    #   The metric used for auto-scaling decisions. The default metric used
+    #   for an Express service is `CPUUtilization`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_target_value
+    #   The target value for the auto-scaling metric. The default value for
+    #   an Express service is 60.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayScalingTarget AWS API Documentation
+    #
+    class ExpressGatewayScalingTarget < Struct.new(
+      :min_task_count,
+      :max_task_count,
+      :auto_scaling_metric,
+      :auto_scaling_target_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Amazon CloudWatch Logs configuration for the Express
+    # service container.
+    #
+    # @!attribute [rw] log_group
+    #   The name of the CloudWatch Logs log group to send container logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_prefix
+    #   The prefix for the CloudWatch Logs log stream names. The default for
+    #   an Express service is `ecs`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayServiceAwsLogsConfiguration AWS API Documentation
+    #
+    class ExpressGatewayServiceAwsLogsConfiguration < Struct.new(
+      :log_group,
+      :log_stream_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a specific configuration revision of an Express service,
+    # containing all the settings and parameters for that revision.
+    #
+    # @!attribute [rw] service_revision_arn
+    #   The ARN of the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the task execution role for the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_role_arn
+    #   The ARN of the task role for the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] cpu
+    #   The CPU allocation for tasks in this service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The memory allocation for tasks in this service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for tasks in this service revision.
+    #   @return [Types::ExpressGatewayServiceNetworkConfiguration]
+    #
+    # @!attribute [rw] health_check_path
+    #   The health check path for this service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_container
+    #   The primary container configuration for this service revision.
+    #   @return [Types::ExpressGatewayContainer]
+    #
+    # @!attribute [rw] scaling_target
+    #   The auto-scaling configuration for this service revision.
+    #   @return [Types::ExpressGatewayScalingTarget]
+    #
+    # @!attribute [rw] ingress_paths
+    #   The entry point into this service revision.
+    #   @return [Array<Types::IngressPathSummary>]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for when this service revision was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayServiceConfiguration AWS API Documentation
+    #
+    class ExpressGatewayServiceConfiguration < Struct.new(
+      :service_revision_arn,
+      :execution_role_arn,
+      :task_role_arn,
+      :cpu,
+      :memory,
+      :network_configuration,
+      :health_check_path,
+      :primary_container,
+      :scaling_target,
+      :ingress_paths,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The network configuration for an Express service. By default, an
+    # Express service utilizes subnets and security groups associated with
+    # the default VPC.
+    #
+    # @!attribute [rw] security_groups
+    #   The IDs of the security groups associated with the Express service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The IDs of the subnets associated with the Express service.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayServiceNetworkConfiguration AWS API Documentation
+    #
+    class ExpressGatewayServiceNetworkConfiguration < Struct.new(
+      :security_groups,
+      :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines the status of Express service creation and
+    # information about the status of the service.
+    #
+    # @!attribute [rw] status_code
+    #   The status of the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the Express service is in the current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ExpressGatewayServiceStatus AWS API Documentation
+    #
+    class ExpressGatewayServiceStatus < Struct.new(
+      :status_code,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6167,6 +6739,55 @@ module Aws::ECS
     class InferenceAcceleratorOverride < Struct.new(
       :device_name,
       :device_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that controls how Amazon ECS optimizes your
+    # infrastructure.
+    #
+    # @!attribute [rw] scale_in_after
+    #   This parameter defines the number of seconds Amazon ECS Managed
+    #   Instances waits before optimizing EC2 instances that have become
+    #   idle or underutilized. A longer delay increases the likelihood of
+    #   placing new tasks on idle or underutilized instances instances,
+    #   reducing startup time. A shorter delay helps reduce infrastructure
+    #   costs by optimizing idle or underutilized instances,instances more
+    #   quickly.
+    #
+    #   Valid values are:
+    #
+    #   * `null` - Uses the default optimization behavior.
+    #
+    #   * `-1` - Disables automatic infrastructure optimization.
+    #
+    #   * A value between `0` and `3600` (inclusive) - Specifies the number
+    #     of seconds to wait before optimizing instances.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InfrastructureOptimization AWS API Documentation
+    #
+    class InfrastructureOptimization < Struct.new(
+      :scale_in_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entry point into an Express service.
+    #
+    # @!attribute [rw] access_type
+    #   The type of access to the endpoint for the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint for access to the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/IngressPathSummary AWS API Documentation
+    #
+    class IngressPathSummary < Struct.new(
+      :access_type,
+      :endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7314,6 +7935,11 @@ module Aws::ECS
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] resource_management_type
+    #   The resourceManagementType type to use when filtering the
+    #   `ListServices` results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
     #
     class ListServicesRequest < Struct.new(
@@ -7321,7 +7947,8 @@ module Aws::ECS
       :next_token,
       :max_results,
       :launch_type,
-      :scheduling_strategy)
+      :scheduling_strategy,
+      :resource_management_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8119,6 +8746,164 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The Application Auto Scaling policy created by Amazon ECS when you
+    # create an Express service.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application Auto Scaling
+    #   policy associated with the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of Application Auto Scaling policy creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the Application Auto Scaling policy is in the
+    #   current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the Application Auto Scaling policy was
+    #   last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of Application Auto Scaling policy associated with the
+    #   Express service. Valid values are `TargetTrackingScaling`,
+    #   `StepScaling`, and `PredictiveScaling`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_value
+    #   The target value for the auto scaling metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] metric
+    #   The metric used for auto scaling decisions. The available metrics
+    #   are `ECSServiceAverageCPUUtilization`,
+    #   `ECSServiceAverageMemoryUtilization`, and
+    #   `ALBRequestCOuntPerTarget`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedApplicationAutoScalingPolicy AWS API Documentation
+    #
+    class ManagedApplicationAutoScalingPolicy < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at,
+      :policy_type,
+      :target_value,
+      :metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The auto scaling configuration created by Amazon ECS for an Express
+    # service.
+    #
+    # @!attribute [rw] scalable_target
+    #   Represents a scalable target.
+    #   @return [Types::ManagedScalableTarget]
+    #
+    # @!attribute [rw] application_auto_scaling_policies
+    #   The policy used for auto scaling.
+    #   @return [Array<Types::ManagedApplicationAutoScalingPolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedAutoScaling AWS API Documentation
+    #
+    class ManagedAutoScaling < Struct.new(
+      :scalable_target,
+      :application_auto_scaling_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ACM certificate associated with the HTTPS domain created for the
+    # Express service.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ACM; certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the ACM certificate is in the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the ACM certificate was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name (FQDN) that is secured with this ACM
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedCertificate AWS API Documentation
+    #
+    class ManagedCertificate < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entry point into the Express service.
+    #
+    # @!attribute [rw] access_type
+    #   The type of access to the endpoint for the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint for access to the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer
+    #   The Application Load Balancer associated with the Express service.
+    #   @return [Types::ManagedLoadBalancer]
+    #
+    # @!attribute [rw] load_balancer_security_groups
+    #   The security groups associated with the Application Load Balancer.
+    #   @return [Array<Types::ManagedSecurityGroup>]
+    #
+    # @!attribute [rw] certificate
+    #   The ACM certificate for the Express service's domain.
+    #   @return [Types::ManagedCertificate]
+    #
+    # @!attribute [rw] listener
+    #   The listeners associated with the Application Load Balancer.
+    #   @return [Types::ManagedListener]
+    #
+    # @!attribute [rw] rule
+    #   The listener rules for the Application Load Balancer.
+    #   @return [Types::ManagedListenerRule]
+    #
+    # @!attribute [rw] target_groups
+    #   The target groups associated with the Application Load Balancer.
+    #   @return [Array<Types::ManagedTargetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedIngressPath AWS API Documentation
+    #
+    class ManagedIngressPath < Struct.new(
+      :access_type,
+      :endpoint,
+      :load_balancer,
+      :load_balancer_security_groups,
+      :certificate,
+      :listener,
+      :rule,
+      :target_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The network configuration for Amazon ECS Managed Instances. This
     # specifies the VPC subnets and security groups that instances use for
     # network connectivity. Amazon ECS Managed Instances support multiple
@@ -8191,12 +8976,21 @@ module Aws::ECS
     #   across your infrastructure.
     #   @return [String]
     #
+    # @!attribute [rw] infrastructure_optimization
+    #   Defines how Amazon ECS Managed Instances optimizes the
+    #   infrastastructure in your capacity provider. Configure it to turn on
+    #   or off the infrastructure optimization in your capacity provider,
+    #   and to control the idle or underutilized EC2 instances optimization
+    #   delay.
+    #   @return [Types::InfrastructureOptimization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedInstancesProvider AWS API Documentation
     #
     class ManagedInstancesProvider < Struct.new(
       :infrastructure_role_arn,
       :instance_launch_template,
-      :propagate_tags)
+      :propagate_tags,
+      :infrastructure_optimization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8212,6 +9006,223 @@ module Aws::ECS
     #
     class ManagedInstancesStorageConfiguration < Struct.new(
       :storage_size_gi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The listeners associated with the Express service's Application Load
+    # Balancer.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the load balancer listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the load balancer listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Informaion about why the load balancer listener is in the current
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when this listener was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedListener AWS API Documentation
+    #
+    class ManagedListener < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The listener rule associated with the Express service's Application
+    # Load Balancer.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the load balancer listener rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the load balancer listener rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the load balancer listener rule is in the
+    #   current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when this listener rule was most recently
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedListenerRule AWS API Documentation
+    #
+    class ManagedListenerRule < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Application Load Balancer associated with the Express service.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the load balancer is in the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when this load balancer was most recently
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scheme
+    #   The scheme of the load balancer. By default, the scheme of the load
+    #   balancer is `internet-facing`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets associated with the load balancer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups associated with the load balancer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedLoadBalancer AWS API Documentation
+    #
+    class ManagedLoadBalancer < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at,
+      :scheme,
+      :subnet_ids,
+      :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Cloudwatch Log Group created by Amazon ECS for an Express service.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Cloudwatch Log Group
+    #   associated with the Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Cloudwatch LogGroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the Cloudwatch LogGroup is in the current
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the Cloudwatch LogGroup was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the Cloudwatch Log Group associated with the Express
+    #   service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedLogGroup AWS API Documentation
+    #
+    class ManagedLogGroup < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at,
+      :log_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CloudWatch metric alarm associated with the Express service's
+    # scaling policy.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch metric alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the CloudWatch metric alarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the CloudWatch metric alarm is in the current
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the CloudWatch metric alarm was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedMetricAlarm AWS API Documentation
+    #
+    class ManagedMetricAlarm < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a scalable target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the scalable target.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the scalable target.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the scalable target is in the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the target was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum value to scale to in response to a scale-in activity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum value to scale to in response to a scale-out activity.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedScalableTarget AWS API Documentation
+    #
+    class ManagedScalableTarget < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at,
+      :min_capacity,
+      :max_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8283,6 +9294,35 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # A security group associated with the Express service.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the security group is in the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the security group was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedSecurityGroup AWS API Documentation
+    #
+    class ManagedSecurityGroup < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The managed storage configuration for the cluster.
     #
     # @!attribute [rw] kms_key_id
@@ -8327,6 +9367,58 @@ module Aws::ECS
     class ManagedStorageConfiguration < Struct.new(
       :kms_key_id,
       :fargate_ephemeral_storage_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target group associated with the Express service's Application
+    # Load Balancer. For more information about load balancer target groups,
+    # see [CreateTargetGroup][1] in the *Elastic Load Balancing API
+    # Reference*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the target group is in the current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the target group was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] health_check_path
+    #   The destination for health checks on the targets.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_port
+    #   The port the load balancer uses when performing health checks on
+    #   targets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port
+    #   The port on which the targets receive traffic.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedTargetGroup AWS API Documentation
+    #
+    class ManagedTargetGroup < Struct.new(
+      :arn,
+      :status,
+      :status_reason,
+      :updated_at,
+      :health_check_path,
+      :health_check_port,
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10743,6 +11835,14 @@ module Aws::ECS
     #   The Unix timestamp for the time when the service was created.
     #   @return [Time]
     #
+    # @!attribute [rw] current_service_deployment
+    #   The ARN of the current service deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_service_revisions
+    #   The list of the service revisions.
+    #   @return [Array<Types::ServiceCurrentRevisionSummary>]
+    #
     # @!attribute [rw] placement_constraints
     #   The placement constraints for the tasks in the service.
     #   @return [Array<Types::PlacementConstraint>]
@@ -10883,6 +11983,12 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
     #   @return [String]
     #
+    # @!attribute [rw] resource_management_type
+    #   Identifies whether an ECS Service is an Express Service managed by
+    #   ECS, or managed by the customer. The valid values are `ECS` and
+    #   `CUSTOMER`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -10906,6 +12012,8 @@ module Aws::ECS
       :role_arn,
       :events,
       :created_at,
+      :current_service_deployment,
+      :current_service_revisions,
       :placement_constraints,
       :placement_strategy,
       :network_configuration,
@@ -10917,7 +12025,8 @@ module Aws::ECS
       :enable_ecs_managed_tags,
       :propagate_tags,
       :enable_execute_command,
-      :availability_zone_rebalancing)
+      :availability_zone_rebalancing,
+      :resource_management_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11391,6 +12500,35 @@ module Aws::ECS
       :issuer_certificate_authority,
       :kms_key,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the current service revision configuration
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the current service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_task_count
+    #   The number of requested tasks in the current service revision
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running_task_count
+    #   The number of running tasks of the current service revision
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_task_count
+    #   The number of pending tasks in the current service revision
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceCurrentRevisionSummary AWS API Documentation
+    #
+    class ServiceCurrentRevisionSummary < Struct.new(
+      :arn,
+      :requested_task_count,
+      :running_task_count,
+      :pending_task_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12168,6 +13306,11 @@ module Aws::ECS
     #   target groups serve traffic.
     #   @return [Types::ResolvedConfiguration]
     #
+    # @!attribute [rw] ecs_managed_resources
+    #   The resources created and managed by Amazon ECS when you create an
+    #   Express service for Amazon ECS.
+    #   @return [Types::ECSManagedResources]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevision AWS API Documentation
     #
     class ServiceRevision < Struct.new(
@@ -12189,7 +13332,8 @@ module Aws::ECS
       :fargate_ephemeral_storage,
       :created_at,
       :vpc_lattice_configurations,
-      :resolved_configuration)
+      :resolved_configuration,
+      :ecs_managed_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14757,6 +15901,76 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the Express service to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role for the
+    #   Express service.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_path
+    #   The path on the container for Application Load Balancer health
+    #   checks.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_container
+    #   The primary container configuration for the Express service.
+    #   @return [Types::ExpressGatewayContainer]
+    #
+    # @!attribute [rw] task_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for containers in
+    #   this task.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the Express service tasks. By default,
+    #   the network configuration for an Express service uses the default
+    #   VPC.
+    #   @return [Types::ExpressGatewayServiceNetworkConfiguration]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units used by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The amount of memory (in MiB) used by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_target
+    #   The auto-scaling configuration for the Express service.
+    #   @return [Types::ExpressGatewayScalingTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateExpressGatewayServiceRequest AWS API Documentation
+    #
+    class UpdateExpressGatewayServiceRequest < Struct.new(
+      :service_arn,
+      :execution_role_arn,
+      :health_check_path,
+      :primary_container,
+      :task_role_arn,
+      :network_configuration,
+      :cpu,
+      :memory,
+      :scaling_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service
+    #   The full description of your express gateway service following the
+    #   update call.
+    #   @return [Types::UpdatedExpressGatewayService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateExpressGatewayServiceResponse AWS API Documentation
+    #
+    class UpdateExpressGatewayServiceResponse < Struct.new(
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There's already a current Amazon ECS container agent update in
     # progress on the container instance that's specified. If the container
     # agent becomes disconnected while it's in a transitional stage, such
@@ -14797,12 +16011,19 @@ module Aws::ECS
     #   new instances launched after the update.
     #   @return [String]
     #
+    # @!attribute [rw] infrastructure_optimization
+    #   The updated infrastructure optimization configuration. Changes to
+    #   this setting affect how Amazon ECS optimizes instances going
+    #   forward.
+    #   @return [Types::InfrastructureOptimization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateManagedInstancesProviderConfiguration AWS API Documentation
     #
     class UpdateManagedInstancesProviderConfiguration < Struct.new(
       :infrastructure_role_arn,
       :instance_launch_template,
-      :propagate_tags)
+      :propagate_tags,
+      :infrastructure_optimization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15336,6 +16557,54 @@ module Aws::ECS
     #
     class UpdateTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes an Express service to be updated.
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the Express service that is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The cluster associated with the Express service that is being
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the Express service that is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Express service that is being updated.
+    #   @return [Types::ExpressGatewayServiceStatus]
+    #
+    # @!attribute [rw] target_configuration
+    #   The configuration to which the current Express service is being
+    #   updated to.
+    #   @return [Types::ExpressGatewayServiceConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for when the Express service that is being
+    #   updated was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for when the Express service that is being
+    #   updated was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdatedExpressGatewayService AWS API Documentation
+    #
+    class UpdatedExpressGatewayService < Struct.new(
+      :service_arn,
+      :cluster,
+      :service_name,
+      :status,
+      :target_configuration,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end

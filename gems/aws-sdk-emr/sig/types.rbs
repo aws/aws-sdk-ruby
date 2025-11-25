@@ -148,6 +148,15 @@ module Aws::EMR
       SENSITIVE: []
     end
 
+    class CloudWatchLogConfiguration
+      attr_accessor enabled: bool
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor log_types: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
     class Cluster
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -184,6 +193,7 @@ module Aws::EMR
       attr_accessor ebs_root_volume_iops: ::Integer
       attr_accessor ebs_root_volume_throughput: ::Integer
       attr_accessor extended_support: bool
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       SENSITIVE: []
     end
 
@@ -1109,6 +1119,11 @@ module Aws::EMR
       SENSITIVE: []
     end
 
+    class MonitoringConfiguration
+      attr_accessor cloud_watch_log_configuration: Types::CloudWatchLogConfiguration
+      SENSITIVE: []
+    end
+
     class NotebookExecution
       attr_accessor notebook_execution_id: ::String
       attr_accessor editor_id: ::String
@@ -1335,12 +1350,19 @@ module Aws::EMR
       attr_accessor ebs_root_volume_iops: ::Integer
       attr_accessor ebs_root_volume_throughput: ::Integer
       attr_accessor extended_support: bool
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       SENSITIVE: []
     end
 
     class RunJobFlowOutput
       attr_accessor job_flow_id: ::String
       attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3MonitoringConfiguration
+      attr_accessor log_uri: ::String
+      attr_accessor encryption_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -1487,6 +1509,8 @@ module Aws::EMR
       attr_accessor action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")
       attr_accessor status: Types::StepStatus
       attr_accessor execution_role_arn: ::String
+      attr_accessor log_uri: ::String
+      attr_accessor encryption_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -1494,6 +1518,7 @@ module Aws::EMR
       attr_accessor name: ::String
       attr_accessor action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")
       attr_accessor hadoop_jar_step: Types::HadoopJarStepConfig
+      attr_accessor step_monitoring_configuration: Types::StepMonitoringConfiguration
       SENSITIVE: []
     end
 
@@ -1509,6 +1534,11 @@ module Aws::EMR
       attr_accessor start_date_time: ::Time
       attr_accessor end_date_time: ::Time
       attr_accessor last_state_change_reason: ::String
+      SENSITIVE: []
+    end
+
+    class StepMonitoringConfiguration
+      attr_accessor s3_monitoring_configuration: Types::S3MonitoringConfiguration
       SENSITIVE: []
     end
 
@@ -1532,6 +1562,8 @@ module Aws::EMR
       attr_accessor config: Types::HadoopStepConfig
       attr_accessor action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")
       attr_accessor status: Types::StepStatus
+      attr_accessor log_uri: ::String
+      attr_accessor encryption_key_arn: ::String
       SENSITIVE: []
     end
 

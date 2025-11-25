@@ -628,6 +628,7 @@ module Aws::Glue
     FindMatchesParameters = Shapes::StructureShape.new(name: 'FindMatchesParameters')
     FindMatchesTaskRunProperties = Shapes::StructureShape.new(name: 'FindMatchesTaskRunProperties')
     FormatString = Shapes::StringShape.new(name: 'FormatString')
+    FunctionType = Shapes::StringShape.new(name: 'FunctionType')
     Generic512CharString = Shapes::StringShape.new(name: 'Generic512CharString')
     GenericBoundedDouble = Shapes::FloatShape.new(name: 'GenericBoundedDouble')
     GenericLimitedString = Shapes::StringShape.new(name: 'GenericLimitedString')
@@ -4732,6 +4733,7 @@ module Aws::Glue
     GetUserDefinedFunctionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetUserDefinedFunctionsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     GetUserDefinedFunctionsRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Pattern"))
+    GetUserDefinedFunctionsRequest.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, location_name: "FunctionType"))
     GetUserDefinedFunctionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetUserDefinedFunctionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetUserDefinedFunctionsRequest.struct_class = Types::GetUserDefinedFunctionsRequest
@@ -7583,6 +7585,7 @@ module Aws::Glue
     UserDefinedFunction.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     UserDefinedFunction.add_member(:class_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ClassName"))
     UserDefinedFunction.add_member(:owner_name, Shapes::ShapeRef.new(shape: NameString, location_name: "OwnerName"))
+    UserDefinedFunction.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, location_name: "FunctionType"))
     UserDefinedFunction.add_member(:owner_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "OwnerType"))
     UserDefinedFunction.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
     UserDefinedFunction.add_member(:resource_uris, Shapes::ShapeRef.new(shape: ResourceUriList, location_name: "ResourceUris"))
@@ -7592,6 +7595,7 @@ module Aws::Glue
     UserDefinedFunctionInput.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, location_name: "FunctionName"))
     UserDefinedFunctionInput.add_member(:class_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ClassName"))
     UserDefinedFunctionInput.add_member(:owner_name, Shapes::ShapeRef.new(shape: NameString, location_name: "OwnerName"))
+    UserDefinedFunctionInput.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, location_name: "FunctionType"))
     UserDefinedFunctionInput.add_member(:owner_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "OwnerType"))
     UserDefinedFunctionInput.add_member(:resource_uris, Shapes::ShapeRef.new(shape: ResourceUriList, location_name: "ResourceUris"))
     UserDefinedFunctionInput.struct_class = Types::UserDefinedFunctionInput

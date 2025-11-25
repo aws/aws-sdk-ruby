@@ -1880,6 +1880,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -1903,6 +1904,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -1917,6 +1919,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -1978,6 +1981,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -2034,6 +2038,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2049,6 +2054,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2061,6 +2067,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].url #=> String
     #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2099,6 +2106,7 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
     #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.mss_manifests[0].filter_configuration.start #=> Time
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2974,6 +2982,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2989,6 +2998,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -3001,6 +3011,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].url #=> String
     #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -3039,6 +3050,7 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
     #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.mss_manifests[0].filter_configuration.start #=> Time
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -4922,6 +4934,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -4945,6 +4958,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -4959,6 +4973,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -5020,6 +5035,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -5074,6 +5090,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5089,6 +5106,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5100,6 +5118,7 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
     #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.mss_manifests[0].filter_configuration.start #=> Time
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5116,6 +5135,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].url #=> String
     #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5178,7 +5198,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

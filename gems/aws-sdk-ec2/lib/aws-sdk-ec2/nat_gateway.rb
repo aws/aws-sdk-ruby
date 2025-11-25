@@ -148,6 +148,71 @@ module Aws::EC2
       data[:connectivity_type]
     end
 
+    # Indicates whether this is a zonal (single-AZ) or regional (multi-AZ)
+    # NAT gateway.
+    #
+    # A zonal NAT gateway is a NAT Gateway that provides redundancy and
+    # scalability within a single availability zone. A regional NAT gateway
+    # is a single NAT Gateway that works across multiple availability zones
+    # (AZs) in your VPC, providing redundancy, scalability and availability
+    # across all the AZs in a Region.
+    #
+    # For more information, see [Regional NAT gateways for automatic
+    # multi-AZ expansion][1] in the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+    # @return [String]
+    def availability_mode
+      data[:availability_mode]
+    end
+
+    # For regional NAT gateways only: Indicates whether Amazon Web Services
+    # automatically allocates additional Elastic IP addresses (EIPs) in an
+    # AZ when the NAT gateway needs more ports due to increased concurrent
+    # connections to a single destination from that AZ.
+    #
+    # For more information, see [Regional NAT gateways for automatic
+    # multi-AZ expansion][1] in the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+    # @return [String]
+    def auto_scaling_ips
+      data[:auto_scaling_ips]
+    end
+
+    # For regional NAT gateways only: Indicates whether Amazon Web Services
+    # automatically manages AZ coverage. When enabled, the NAT gateway
+    # associates EIPs in all AZs where your VPC has subnets to handle
+    # outbound NAT traffic, expands to new AZs when you create subnets
+    # there, and retracts from AZs where you've removed all subnets. When
+    # disabled, you must manually manage which AZs the NAT gateway supports
+    # and their corresponding EIPs.
+    #
+    # A regional NAT gateway is a single NAT Gateway that works across
+    # multiple availability zones (AZs) in your VPC, providing redundancy,
+    # scalability and availability across all the AZs in a Region.
+    #
+    # For more information, see [Regional NAT gateways for automatic
+    # multi-AZ expansion][1] in the *Amazon VPC User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+    # @return [String]
+    def auto_provision_zones
+      data[:auto_provision_zones]
+    end
+
+    # For regional NAT gateways only, this is the ID of the NAT gateway.
+    # @return [String]
+    def route_table_id
+      data[:route_table_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

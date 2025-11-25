@@ -21,6 +21,7 @@ module Aws::RedshiftServerless
     AssociationList = Shapes::ListShape.new(name: 'AssociationList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Capacity = Shapes::IntegerShape.new(name: 'Capacity')
+    CatalogNameString = Shapes::StringShape.new(name: 'CatalogNameString')
     Charge = Shapes::FloatShape.new(name: 'Charge')
     ConfigParameter = Shapes::StructureShape.new(name: 'ConfigParameter')
     ConfigParameterList = Shapes::ListShape.new(name: 'ConfigParameterList')
@@ -72,6 +73,7 @@ module Aws::RedshiftServerless
     DeleteWorkgroupRequest = Shapes::StructureShape.new(name: 'DeleteWorkgroupRequest')
     DeleteWorkgroupResponse = Shapes::StructureShape.new(name: 'DeleteWorkgroupResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DryRunException = Shapes::StructureShape.new(name: 'DryRunException')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointAccess = Shapes::StructureShape.new(name: 'EndpointAccess')
@@ -115,6 +117,8 @@ module Aws::RedshiftServerless
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     Ipv6CidrBlockNotFoundException = Shapes::StructureShape.new(name: 'Ipv6CidrBlockNotFoundException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LakehouseIdcRegistration = Shapes::StringShape.new(name: 'LakehouseIdcRegistration')
+    LakehouseRegistration = Shapes::StringShape.new(name: 'LakehouseRegistration')
     ListCustomDomainAssociationsRequest = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsRequest')
     ListCustomDomainAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCustomDomainAssociationsRequestMaxResultsInteger')
     ListCustomDomainAssociationsResponse = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsResponse')
@@ -246,6 +250,8 @@ module Aws::RedshiftServerless
     UpdateCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'UpdateCustomDomainAssociationResponse')
     UpdateEndpointAccessRequest = Shapes::StructureShape.new(name: 'UpdateEndpointAccessRequest')
     UpdateEndpointAccessResponse = Shapes::StructureShape.new(name: 'UpdateEndpointAccessResponse')
+    UpdateLakehouseConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLakehouseConfigurationRequest')
+    UpdateLakehouseConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateLakehouseConfigurationResponse')
     UpdateNamespaceRequest = Shapes::StructureShape.new(name: 'UpdateNamespaceRequest')
     UpdateNamespaceResponse = Shapes::StructureShape.new(name: 'UpdateNamespaceResponse')
     UpdateScheduledActionRequest = Shapes::StructureShape.new(name: 'UpdateScheduledActionRequest')
@@ -477,6 +483,9 @@ module Aws::RedshiftServerless
 
     DeleteWorkgroupResponse.add_member(:workgroup, Shapes::ShapeRef.new(shape: Workgroup, required: true, location_name: "workgroup"))
     DeleteWorkgroupResponse.struct_class = Types::DeleteWorkgroupResponse
+
+    DryRunException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    DryRunException.struct_class = Types::DryRunException
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
@@ -761,11 +770,13 @@ module Aws::RedshiftServerless
     Namespace.add_member(:admin_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "adminPasswordSecretArn"))
     Namespace.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
     Namespace.add_member(:admin_username, Shapes::ShapeRef.new(shape: DbUser, location_name: "adminUsername"))
+    Namespace.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: String, location_name: "catalogArn"))
     Namespace.add_member(:creation_date, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationDate"))
     Namespace.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "dbName"))
     Namespace.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "defaultIamRoleArn"))
     Namespace.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "iamRoles"))
     Namespace.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    Namespace.add_member(:lakehouse_registration_status, Shapes::ShapeRef.new(shape: String, location_name: "lakehouseRegistrationStatus"))
     Namespace.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogExportList, location_name: "logExports"))
     Namespace.add_member(:namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "namespaceArn"))
     Namespace.add_member(:namespace_id, Shapes::ShapeRef.new(shape: String, location_name: "namespaceId"))
@@ -1038,6 +1049,20 @@ module Aws::RedshiftServerless
     UpdateEndpointAccessResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: EndpointAccess, location_name: "endpoint"))
     UpdateEndpointAccessResponse.struct_class = Types::UpdateEndpointAccessResponse
 
+    UpdateLakehouseConfigurationRequest.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "catalogName"))
+    UpdateLakehouseConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    UpdateLakehouseConfigurationRequest.add_member(:lakehouse_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "lakehouseIdcApplicationArn"))
+    UpdateLakehouseConfigurationRequest.add_member(:lakehouse_idc_registration, Shapes::ShapeRef.new(shape: LakehouseIdcRegistration, location_name: "lakehouseIdcRegistration"))
+    UpdateLakehouseConfigurationRequest.add_member(:lakehouse_registration, Shapes::ShapeRef.new(shape: LakehouseRegistration, location_name: "lakehouseRegistration"))
+    UpdateLakehouseConfigurationRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    UpdateLakehouseConfigurationRequest.struct_class = Types::UpdateLakehouseConfigurationRequest
+
+    UpdateLakehouseConfigurationResponse.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: String, location_name: "catalogArn"))
+    UpdateLakehouseConfigurationResponse.add_member(:lakehouse_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "lakehouseIdcApplicationArn"))
+    UpdateLakehouseConfigurationResponse.add_member(:lakehouse_registration_status, Shapes::ShapeRef.new(shape: String, location_name: "lakehouseRegistrationStatus"))
+    UpdateLakehouseConfigurationResponse.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    UpdateLakehouseConfigurationResponse.struct_class = Types::UpdateLakehouseConfigurationResponse
+
     UpdateNamespaceRequest.add_member(:admin_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "adminPasswordSecretKmsKeyId"))
     UpdateNamespaceRequest.add_member(:admin_user_password, Shapes::ShapeRef.new(shape: DbPassword, location_name: "adminUserPassword"))
     UpdateNamespaceRequest.add_member(:admin_username, Shapes::ShapeRef.new(shape: DbUser, location_name: "adminUsername"))
@@ -1199,8 +1224,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: ConvertRecoveryPointToSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
@@ -1213,8 +1238,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: CreateCustomDomainAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -1240,8 +1265,8 @@ module Aws::RedshiftServerless
         o.input = Shapes::ShapeRef.new(shape: CreateNamespaceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateNamespaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
@@ -1253,8 +1278,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: CreateReservationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1268,8 +1293,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: CreateScheduledActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -1280,8 +1305,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: CreateSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
@@ -1308,8 +1333,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: CreateUsageLimitResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -1322,8 +1347,8 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundException)
       end)
@@ -1336,8 +1361,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: DeleteCustomDomainAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -1362,8 +1387,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: DeleteNamespaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1396,8 +1421,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: DeleteSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_snapshot_copy_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1421,8 +1446,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: DeleteUsageLimitResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_workgroup, Seahorse::Model::Operation.new.tap do |o|
@@ -1433,8 +1458,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: DeleteWorkgroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_credentials, Seahorse::Model::Operation.new.tap do |o|
@@ -1456,8 +1481,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: GetCustomDomainAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -1493,8 +1518,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: GetRecoveryPointResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_reservation, Seahorse::Model::Operation.new.tap do |o|
@@ -1572,8 +1597,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: GetTrackResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -1586,8 +1611,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: GetUsageLimitResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_workgroup, Seahorse::Model::Operation.new.tap do |o|
@@ -1727,8 +1752,8 @@ module Aws::RedshiftServerless
         o.input = Shapes::ShapeRef.new(shape: ListScheduledActionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListScheduledActionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1745,10 +1770,10 @@ module Aws::RedshiftServerless
         o.input = Shapes::ShapeRef.new(shape: ListSnapshotCopyConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSnapshotCopyConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1780,8 +1805,8 @@ module Aws::RedshiftServerless
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTableRestoreStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTableRestoreStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1829,10 +1854,10 @@ module Aws::RedshiftServerless
         o.input = Shapes::ShapeRef.new(shape: ListUsageLimitsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListUsageLimitsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1865,8 +1890,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -1878,8 +1903,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: RestoreFromRecoveryPointResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:restore_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -1890,8 +1915,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: RestoreFromSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -1903,8 +1928,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: RestoreTableFromRecoveryPointResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:restore_table_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -1915,8 +1940,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: RestoreTableFromSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1952,8 +1977,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: UpdateCustomDomainAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -1971,6 +1996,19 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:update_lakehouse_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLakehouseConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLakehouseConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLakehouseConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunException)
+      end)
+
       api.add_operation(:update_namespace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateNamespace"
         o.http_method = "POST"
@@ -1979,8 +2017,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: UpdateNamespaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
@@ -1991,8 +2029,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: UpdateScheduledActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -2003,8 +2041,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: UpdateSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_snapshot_copy_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2028,8 +2066,8 @@ module Aws::RedshiftServerless
         o.output = Shapes::ShapeRef.new(shape: UpdateUsageLimitResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_workgroup, Seahorse::Model::Operation.new.tap do |o|
@@ -2041,8 +2079,8 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundException)
       end)
     end

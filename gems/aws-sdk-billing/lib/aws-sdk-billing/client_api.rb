@@ -73,8 +73,12 @@ module Aws::Billing
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
     ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    SearchOption = Shapes::StringShape.new(name: 'SearchOption')
+    SearchValue = Shapes::StringShape.new(name: 'SearchValue')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StringSearch = Shapes::StructureShape.new(name: 'StringSearch')
+    StringSearches = Shapes::ListShape.new(name: 'StringSearches')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
@@ -207,6 +211,7 @@ module Aws::Billing
     ListBillingViewsRequest.add_member(:active_time_range, Shapes::ShapeRef.new(shape: ActiveTimeRange, location_name: "activeTimeRange"))
     ListBillingViewsRequest.add_member(:arns, Shapes::ShapeRef.new(shape: BillingViewArnList, location_name: "arns"))
     ListBillingViewsRequest.add_member(:billing_view_types, Shapes::ShapeRef.new(shape: BillingViewTypeList, location_name: "billingViewTypes"))
+    ListBillingViewsRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringSearches, location_name: "names"))
     ListBillingViewsRequest.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "ownerAccountId"))
     ListBillingViewsRequest.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "sourceAccountId"))
     ListBillingViewsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BillingViewsMaxResults, location_name: "maxResults"))
@@ -251,6 +256,12 @@ module Aws::Billing
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StringSearch.add_member(:search_option, Shapes::ShapeRef.new(shape: SearchOption, required: true, location_name: "searchOption"))
+    StringSearch.add_member(:search_value, Shapes::ShapeRef.new(shape: SearchValue, required: true, location_name: "searchValue"))
+    StringSearch.struct_class = Types::StringSearch
+
+    StringSearches.member = Shapes::ShapeRef.new(shape: StringSearch)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     TagResourceRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, required: true, location_name: "resourceTags"))

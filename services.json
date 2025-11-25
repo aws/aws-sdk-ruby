@@ -317,6 +317,9 @@
   "ComputeOptimizer": {
     "models": "compute-optimizer/2019-11-01"
   },
+  "ComputeOptimizerAutomation": {
+    "models": "compute-optimizer-automation/2025-09-22"
+  },
   "ConfigService": {
     "models": "config/2014-11-12"
   },
@@ -923,6 +926,9 @@
   "Panorama": {
     "models": "panorama/2019-07-24"
   },
+  "PartnerCentralChannel": {
+    "models": "partnercentral-channel/2024-03-18"
+  },
   "PartnerCentralSelling": {
     "models": "partnercentral-selling/2022-07-26"
   },
@@ -1174,6 +1180,9 @@
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
   },
+  "SageMakerRuntimeHTTP2": {
+    "models": "sagemaker-runtime-http2/2025-10-01"
+  },
   "SagemakerEdgeManager": {
     "models": "sagemaker-edge/2020-09-23"
   },
@@ -1215,6 +1224,10 @@
   },
   "Signer": {
     "models": "signer/2017-08-25"
+  },
+  "Signin": {
+    "models": "signin/2023-01-01",
+    "gemName": "aws-sdk-core"
   },
   "SimSpaceWeaver": {
     "models": "simspaceweaver/2022-10-28"

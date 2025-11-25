@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2025-11-20)
+------------------
+
+* Feature - Add support for environment variables and an IAM execution role.
+
 1.97.0 (2025-11-17)
 ------------------
 

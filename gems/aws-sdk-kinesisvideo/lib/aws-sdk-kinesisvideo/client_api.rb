@@ -35,6 +35,7 @@ module Aws::KinesisVideo
     DataEndpoint = Shapes::StringShape.new(name: 'DataEndpoint')
     DataRetentionChangeInHours = Shapes::IntegerShape.new(name: 'DataRetentionChangeInHours')
     DataRetentionInHours = Shapes::IntegerShape.new(name: 'DataRetentionInHours')
+    DefaultStorageTier = Shapes::StringShape.new(name: 'DefaultStorageTier')
     DeleteAfterUpload = Shapes::BooleanShape.new(name: 'DeleteAfterUpload')
     DeleteEdgeConfigurationInput = Shapes::StructureShape.new(name: 'DeleteEdgeConfigurationInput')
     DeleteEdgeConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteEdgeConfigurationOutput')
@@ -57,6 +58,8 @@ module Aws::KinesisVideo
     DescribeSignalingChannelOutput = Shapes::StructureShape.new(name: 'DescribeSignalingChannelOutput')
     DescribeStreamInput = Shapes::StructureShape.new(name: 'DescribeStreamInput')
     DescribeStreamOutput = Shapes::StructureShape.new(name: 'DescribeStreamOutput')
+    DescribeStreamStorageConfigurationInput = Shapes::StructureShape.new(name: 'DescribeStreamStorageConfigurationInput')
+    DescribeStreamStorageConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeStreamStorageConfigurationOutput')
     DestinationRegion = Shapes::StringShape.new(name: 'DestinationRegion')
     DestinationUri = Shapes::StringShape.new(name: 'DestinationUri')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
@@ -142,6 +145,7 @@ module Aws::KinesisVideo
     StreamInfoList = Shapes::ListShape.new(name: 'StreamInfoList')
     StreamName = Shapes::StringShape.new(name: 'StreamName')
     StreamNameCondition = Shapes::StructureShape.new(name: 'StreamNameCondition')
+    StreamStorageConfiguration = Shapes::StructureShape.new(name: 'StreamStorageConfiguration')
     SyncStatus = Shapes::StringShape.new(name: 'SyncStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -173,6 +177,8 @@ module Aws::KinesisVideo
     UpdateSignalingChannelOutput = Shapes::StructureShape.new(name: 'UpdateSignalingChannelOutput')
     UpdateStreamInput = Shapes::StructureShape.new(name: 'UpdateStreamInput')
     UpdateStreamOutput = Shapes::StructureShape.new(name: 'UpdateStreamOutput')
+    UpdateStreamStorageConfigurationInput = Shapes::StructureShape.new(name: 'UpdateStreamStorageConfigurationInput')
+    UpdateStreamStorageConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateStreamStorageConfigurationOutput')
     UploaderConfig = Shapes::StructureShape.new(name: 'UploaderConfig')
     UploaderStatus = Shapes::StringShape.new(name: 'UploaderStatus')
     Version = Shapes::StringShape.new(name: 'Version')
@@ -221,6 +227,7 @@ module Aws::KinesisVideo
     CreateStreamInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateStreamInput.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, location_name: "DataRetentionInHours"))
     CreateStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "Tags"))
+    CreateStreamInput.add_member(:stream_storage_configuration, Shapes::ShapeRef.new(shape: StreamStorageConfiguration, location_name: "StreamStorageConfiguration"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
 
     CreateStreamOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
@@ -307,6 +314,15 @@ module Aws::KinesisVideo
 
     DescribeStreamOutput.add_member(:stream_info, Shapes::ShapeRef.new(shape: StreamInfo, location_name: "StreamInfo"))
     DescribeStreamOutput.struct_class = Types::DescribeStreamOutput
+
+    DescribeStreamStorageConfigurationInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    DescribeStreamStorageConfigurationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    DescribeStreamStorageConfigurationInput.struct_class = Types::DescribeStreamStorageConfigurationInput
+
+    DescribeStreamStorageConfigurationOutput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    DescribeStreamStorageConfigurationOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    DescribeStreamStorageConfigurationOutput.add_member(:stream_storage_configuration, Shapes::ShapeRef.new(shape: StreamStorageConfiguration, location_name: "StreamStorageConfiguration"))
+    DescribeStreamStorageConfigurationOutput.struct_class = Types::DescribeStreamStorageConfigurationOutput
 
     DeviceStreamLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeviceStreamLimitExceededException.struct_class = Types::DeviceStreamLimitExceededException
@@ -526,6 +542,9 @@ module Aws::KinesisVideo
     StreamNameCondition.add_member(:comparison_value, Shapes::ShapeRef.new(shape: StreamName, location_name: "ComparisonValue"))
     StreamNameCondition.struct_class = Types::StreamNameCondition
 
+    StreamStorageConfiguration.add_member(:default_storage_tier, Shapes::ShapeRef.new(shape: DefaultStorageTier, required: true, location_name: "DefaultStorageTier"))
+    StreamStorageConfiguration.struct_class = Types::StreamStorageConfiguration
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -609,6 +628,14 @@ module Aws::KinesisVideo
     UpdateStreamInput.struct_class = Types::UpdateStreamInput
 
     UpdateStreamOutput.struct_class = Types::UpdateStreamOutput
+
+    UpdateStreamStorageConfigurationInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    UpdateStreamStorageConfigurationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
+    UpdateStreamStorageConfigurationInput.add_member(:current_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "CurrentVersion"))
+    UpdateStreamStorageConfigurationInput.add_member(:stream_storage_configuration, Shapes::ShapeRef.new(shape: StreamStorageConfiguration, required: true, location_name: "StreamStorageConfiguration"))
+    UpdateStreamStorageConfigurationInput.struct_class = Types::UpdateStreamStorageConfigurationInput
+
+    UpdateStreamStorageConfigurationOutput.struct_class = Types::UpdateStreamStorageConfigurationOutput
 
     UploaderConfig.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfig, required: true, location_name: "ScheduleConfig"))
     UploaderConfig.struct_class = Types::UploaderConfig
@@ -794,6 +821,18 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+      end)
+
+      api.add_operation(:describe_stream_storage_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStreamStorageConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeStreamStorageConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStreamStorageConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStreamStorageConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_data_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -1043,6 +1082,20 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
+      end)
+
+      api.add_operation(:update_stream_storage_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStreamStorageConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/updateStreamStorageConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStreamStorageConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStreamStorageConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
       end)
     end

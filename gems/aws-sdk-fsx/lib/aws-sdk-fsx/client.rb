@@ -824,6 +824,8 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.backup.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.backup.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1085,6 +1087,8 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1347,6 +1351,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1831,6 +1837,8 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.backup.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.backup.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2092,6 +2100,8 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3103,6 +3113,10 @@ module Aws::FSx
     #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #         iops: 1,
     #       },
+    #       fsrm_configuration: {
+    #         fsrm_service_enabled: false, # required
+    #         event_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -3251,6 +3265,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3702,6 +3718,10 @@ module Aws::FSx
     #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #         iops: 1,
     #       },
+    #       fsrm_configuration: {
+    #         fsrm_service_enabled: false, # required
+    #         event_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -3835,6 +3855,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4138,6 +4160,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4648,6 +4672,8 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4955,6 +4981,8 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -5740,6 +5768,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.backups[0].file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.backups[0].file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6001,6 +6031,8 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6640,6 +6672,8 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_systems[0].windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_systems[0].windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.file_systems[0].windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.file_systems[0].windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7053,6 +7087,8 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7442,6 +7478,8 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7838,6 +7876,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -8112,6 +8152,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -8355,6 +8397,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -9054,6 +9098,10 @@ module Aws::FSx
     #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #         iops: 1,
     #       },
+    #       fsrm_configuration: {
+    #         fsrm_service_enabled: false, # required
+    #         event_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -9169,6 +9217,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.file_system.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.file_system.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -9491,6 +9541,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -9941,6 +9993,8 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.fsrm_service_enabled #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.fsrm_configuration.event_log_destination #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -10084,7 +10138,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.226.0 (2025-11-21)
+------------------
+
+* Feature - New APIs to support aliases and versions for ContactFlowModule. Updated ContactFlowModule APIs to support custom blocks.
+
+1.225.0 (2025-11-20)
+------------------
+
+* Feature - Add optional ability to exclude users from send notification actions for Contact Lens Rules.
+
 1.224.0 (2025-11-18)
 ------------------
 

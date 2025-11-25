@@ -51,7 +51,6 @@ module AwsSdkCodeGenerator
 
     # @return [Enumerable<String<path>, String<code>>]
     def source_files(options = {})
-
       prefix = options.fetch(:prefix, @service.gem_name)
       codegenerated_plugins = codegen_plugins(prefix)
 
@@ -73,13 +72,13 @@ module AwsSdkCodeGenerator
 
         codegenerated_plugins.each { |p| y.yield(p.path, p.source) }
 
-        y.yield("#{prefix}/client.rb", client_class(codegenerated_plugins))
-        if @service.protocol_settings['h2']
-          y.yield("#{prefix}/async_client.rb", async_client_class(codegenerated_plugins))
+        unless @service.h2_required_setting?
+          y.yield("#{prefix}/client.rb", client_class(codegenerated_plugins))
+          y.yield("#{prefix}/resource.rb", root_resource_class)
         end
+        y.yield("#{prefix}/async_client.rb", async_client_class(codegenerated_plugins)) if @service.h2_setting?
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
-        y.yield("#{prefix}/resource.rb", root_resource_class)
 
         unless @service.legacy_endpoints?
           y.yield("#{prefix}/endpoint_parameters.rb", endpoint_parameters)
@@ -114,24 +113,19 @@ module AwsSdkCodeGenerator
       Enumerator.new do |y|
         prefix = options.fetch(:prefix, '')
         codegenerated_plugins = codegen_plugins(prefix)
-        client_class = client_class_rbs(codegenerated_plugins)
-        y.yield("#{prefix}/client.rbs", client_class.render)
-        if @service.protocol_settings['h2']
-          y.yield(
-            "#{prefix}/async_client.rbs",
-            async_client_class_rbs(codegenerated_plugins).render
-          )
+        unless @service.h2_required_setting?
+          client_class = client_class_rbs(codegenerated_plugins)
+          y.yield("#{prefix}/client.rbs", client_class.render)
+          y.yield("#{prefix}/resource.rbs", Views::RBS::RootResourceClass.new(
+            service_name: @service.name,
+            client_class: client_class,
+            api: @service.api,
+            resources: @service.resources,
+            paginators: @service.paginators
+          ).render)
         end
-        y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(
-          service: @service
-        ).render)
-        y.yield("#{prefix}/resource.rbs", Views::RBS::RootResourceClass.new(
-          service_name: @service.name,
-          client_class: client_class,
-          api: @service.api,
-          resources: @service.resources,
-          paginators: @service.paginators
-        ).render)
+        y.yield("#{prefix}/async_client.rbs", async_client_class_rbs(codegenerated_plugins).render) if @service.h2_setting?
+        y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(service: @service).render)
         y.yield("#{prefix}/waiters.rbs", Views::RBS::WaitersModule.new(
           service_name: @service.name,
           api: @service.api,

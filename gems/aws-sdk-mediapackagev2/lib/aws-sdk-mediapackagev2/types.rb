@@ -1715,6 +1715,13 @@ module Aws::MediaPackageV2
     #   this manifest's endpoint URL.
     #   @return [String]
     #
+    # @!attribute [rw] drm_settings
+    #   Optionally specify one or more DRM settings for all of your manifest
+    #   egress requests. When you include a DRM setting, note that you
+    #   cannot use an identical DRM setting query parameter for this
+    #   manifest's endpoint URL.
+    #   @return [String]
+    #
     # @!attribute [rw] start
     #   Optionally specify the start time for all of your manifest egress
     #   requests. When you include start time, note that you cannot use
@@ -1745,6 +1752,7 @@ module Aws::MediaPackageV2
     #
     class FilterConfiguration < Struct.new(
       :manifest_filter,
+      :drm_settings,
       :start,
       :end,
       :time_delay_seconds,

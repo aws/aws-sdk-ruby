@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2025-11-19)
+------------------
+
+* Feature - Added the EnableOutboundWebIdentityFederation, DisableOutboundWebIdentityFederation and GetOutboundWebIdentityFederationInfo APIs for the IAM outbound federation feature.
+
 1.134.0 (2025-11-18)
 ------------------
 

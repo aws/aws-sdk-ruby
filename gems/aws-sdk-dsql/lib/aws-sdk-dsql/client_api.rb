@@ -25,6 +25,7 @@ module Aws::DSQL
     ClusterList = Shapes::ListShape.new(name: 'ClusterList')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     ClusterSummary = Shapes::StructureShape.new(name: 'ClusterSummary')
+    ClusterVpcEndpoint = Shapes::StringShape.new(name: 'ClusterVpcEndpoint')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateClusterInput = Shapes::StructureShape.new(name: 'CreateClusterInput')
     CreateClusterOutput = Shapes::StructureShape.new(name: 'CreateClusterOutput')
@@ -160,6 +161,7 @@ module Aws::DSQL
     GetVpcEndpointServiceNameInput.struct_class = Types::GetVpcEndpointServiceNameInput
 
     GetVpcEndpointServiceNameOutput.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    GetVpcEndpointServiceNameOutput.add_member(:cluster_vpc_endpoint, Shapes::ShapeRef.new(shape: ClusterVpcEndpoint, location_name: "clusterVpcEndpoint"))
     GetVpcEndpointServiceNameOutput.struct_class = Types::GetVpcEndpointServiceNameOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

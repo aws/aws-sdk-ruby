@@ -930,13 +930,21 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Use this parameter to enable deletion protection for the new log
+    #   group. When enabled on a log group, deletion protection blocks all
+    #   deletion operations until it is explicitly disabled. By default log
+    #   groups are created without deletion protection enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroupRequest AWS API Documentation
     #
     class CreateLogGroupRequest < Struct.new(
       :log_group_name,
       :kms_key_id,
       :tags,
-      :log_group_class)
+      :log_group_class,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4855,6 +4863,12 @@ module Aws::CloudWatchLogs
     #   [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is enabled for this log group.
+    #   When enabled, deletion protection blocks all deletion operations
+    #   until it is explicitly disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
@@ -4868,7 +4882,8 @@ module Aws::CloudWatchLogs
       :data_protection_status,
       :inherited_properties,
       :log_group_class,
-      :log_group_arn)
+      :log_group_arn,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5927,8 +5942,8 @@ module Aws::CloudWatchLogs
     # This processor converts logs into [Open Cybersecurity Schema Framework
     # (OCSF)][1] events.
     #
-    # For more information about this processor including examples, see [
-    # parseToOSCF][2] in the *CloudWatch Logs User Guide*.
+    # For more information about this processor including examples, see
+    # [parseToOCSF][2] in the *CloudWatch Logs User Guide*.
     #
     #
     #
@@ -5950,12 +5965,20 @@ module Aws::CloudWatchLogs
     #   log events.
     #   @return [String]
     #
+    # @!attribute [rw] mapping_version
+    #   Identifies the specific release of the Open Cybersecurity Schema
+    #   Framework (OCSF) transformer being used to parse OCSF data. Defaults
+    #   to the latest version if not specified. Does not automatically
+    #   update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ParseToOCSF AWS API Documentation
     #
     class ParseToOCSF < Struct.new(
       :source,
       :event_source,
-      :ocsf_version)
+      :ocsf_version,
+      :mapping_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6748,8 +6771,13 @@ module Aws::CloudWatchLogs
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
+    #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
+    #
+    #   * For Amazon Web Services RTB Fabric, the valid values is
+    #     `APPLICATION_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and
     #     `SYNC_JOB_LOGS`.
@@ -7046,6 +7074,35 @@ module Aws::CloudWatchLogs
       :next_sequence_token,
       :rejected_log_events_info,
       :rejected_entity_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_group_identifier
+    #   The name or ARN of the log group.
+    #
+    #   Type: String
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
+    #
+    #   Pattern: `[\.\-_/#A-Za-z0-9]+`
+    #
+    #   Required: Yes
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Whether to enable deletion protection.
+    #
+    #   Type: Boolean
+    #
+    #   Required: Yes
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogGroupDeletionProtectionRequest AWS API Documentation
+    #
+    class PutLogGroupDeletionProtectionRequest < Struct.new(
+      :log_group_identifier,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7932,11 +7989,11 @@ module Aws::CloudWatchLogs
     # processed and delivered.
     #
     # @!attribute [rw] destination_type
-    #   The type of destination (S3 or EVENTBRIDGE).
+    #   The type of destination (S3).
     #   @return [String]
     #
     # @!attribute [rw] destination_identifier
-    #   The destination identifier (S3 URI or EventBridge ARN).
+    #   The destination identifier (S3 URI).
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -7945,8 +8002,7 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] processed_identifier
-    #   The processed identifier returned for the destination (S3 key or
-    #   event ID).
+    #   The processed identifier returned for the destination (S3 key).
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -8680,8 +8736,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] execution_status
-    #   The status of the query execution (SUCCEEDED, FAILED, TIMEOUT, or
-    #   INVALID\_QUERY).
+    #   The status of the query execution (Running, Complete, Failed,
+    #   Timeout, or InvalidQuery).
     #   @return [String]
     #
     # @!attribute [rw] triggered_timestamp
@@ -8696,8 +8752,8 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] destinations
     #   The list of destinations where the scheduled query results were
-    #   delivered for this execution. This includes S3 buckets and
-    #   EventBridge targets configured for the scheduled query.
+    #   delivered for this execution. This includes S3 buckets configured
+    #   for the scheduled query.
     #   @return [Array<Types::ScheduledQueryDestination>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TriggerHistoryRecord AWS API Documentation

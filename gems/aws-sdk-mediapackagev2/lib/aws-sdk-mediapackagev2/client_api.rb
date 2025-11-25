@@ -113,6 +113,7 @@ module Aws::MediaPackageV2
     EndpointErrorConditions = Shapes::ListShape.new(name: 'EndpointErrorConditions')
     EntityTag = Shapes::StringShape.new(name: 'EntityTag')
     FilterConfiguration = Shapes::StructureShape.new(name: 'FilterConfiguration')
+    FilterConfigurationDrmSettingsString = Shapes::StringShape.new(name: 'FilterConfigurationDrmSettingsString')
     FilterConfigurationManifestFilterString = Shapes::StringShape.new(name: 'FilterConfigurationManifestFilterString')
     FilterConfigurationTimeDelaySecondsInteger = Shapes::IntegerShape.new(name: 'FilterConfigurationTimeDelaySecondsInteger')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -535,6 +536,7 @@ module Aws::MediaPackageV2
     EndpointErrorConditions.member = Shapes::ShapeRef.new(shape: EndpointErrorCondition)
 
     FilterConfiguration.add_member(:manifest_filter, Shapes::ShapeRef.new(shape: FilterConfigurationManifestFilterString, location_name: "ManifestFilter"))
+    FilterConfiguration.add_member(:drm_settings, Shapes::ShapeRef.new(shape: FilterConfigurationDrmSettingsString, location_name: "DrmSettings"))
     FilterConfiguration.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Start"))
     FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))

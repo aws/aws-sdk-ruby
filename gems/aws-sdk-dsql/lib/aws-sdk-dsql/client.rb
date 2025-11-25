@@ -838,6 +838,7 @@ module Aws::DSQL
     # @return [Types::GetVpcEndpointServiceNameOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetVpcEndpointServiceNameOutput#service_name #service_name} => String
+    #   * {Types::GetVpcEndpointServiceNameOutput#cluster_vpc_endpoint #cluster_vpc_endpoint} => String
     #
     #
     # @example Example: Get VPC Endpoint Service Name
@@ -855,6 +856,7 @@ module Aws::DSQL
     # @example Response structure
     #
     #   resp.service_name #=> String
+    #   resp.cluster_vpc_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetVpcEndpointServiceName AWS API Documentation
     #
@@ -1245,7 +1247,7 @@ module Aws::DSQL
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dsql'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.341.0 (2025-11-21)
+------------------
+
+* Feature - Enhanced SageMaker HyperPod instance groups with support for MinInstanceCount, CapacityRequirements (Spot/On-Demand), and KubernetesConfig (labels and taints). Also Added speculative decoding and MaxInstanceCount for model optimization jobs.
+
+1.340.0 (2025-11-20)
+------------------
+
+* Feature - Added training plan support for inference endpoints. Added HyperPod task governance with accelerator partition-based quota allocation. Added BatchRebootClusterNodes and BatchReplaceClusterNodes APIs. Updated ListClusterNodes to include privateDnsHostName.
+
+1.339.0 (2025-11-19)
+------------------
+
+* Feature - Added support for enhanced metrics for SageMaker AI Endpoints. This features provides Utilization Metrics at instance and container granularity and also provides easy configuration of metric publish frequency from 10 sec -> 5 mins
+
 1.338.0 (2025-11-13)
 ------------------
 

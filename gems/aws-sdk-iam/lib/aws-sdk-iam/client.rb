@@ -4290,6 +4290,23 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Disables the outbound identity federation feature for your Amazon Web
+    # Services account. When disabled, IAM principals in the account cannot
+    # use the `GetWebIdentityToken` API to obtain JSON Web Tokens (JWTs) for
+    # authentication with external services. This operation does not affect
+    # tokens that were issued before the feature was disabled.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOutboundWebIdentityFederation AWS API Documentation
+    #
+    # @overload disable_outbound_web_identity_federation(params = {})
+    # @param [Hash] params ({})
+    def disable_outbound_web_identity_federation(params = {}, options = {})
+      req = build_request(:disable_outbound_web_identity_federation, params)
+      req.send_request(options)
+    end
+
     # Enables the specified MFA device and associates it with the specified
     # IAM user. When enabled, the MFA device is required for every
     # subsequent login by the IAM user associated with the device.
@@ -4486,6 +4503,29 @@ module Aws::IAM
     # @param [Hash] params ({})
     def enable_organizations_root_sessions(params = {}, options = {})
       req = build_request(:enable_organizations_root_sessions, params)
+      req.send_request(options)
+    end
+
+    # Enables the outbound identity federation feature for your Amazon Web
+    # Services account. When enabled, IAM principals in your account can use
+    # the `GetWebIdentityToken` API to obtain JSON Web Tokens (JWTs) for
+    # secure authentication with external services. This operation also
+    # generates a unique issuer URL for your Amazon Web Services account.
+    #
+    # @return [Types::EnableOutboundWebIdentityFederationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableOutboundWebIdentityFederationResponse#issuer_identifier #issuer_identifier} => String
+    #
+    # @example Response structure
+    #
+    #   resp.issuer_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOutboundWebIdentityFederation AWS API Documentation
+    #
+    # @overload enable_outbound_web_identity_federation(params = {})
+    # @param [Hash] params ({})
+    def enable_outbound_web_identity_federation(params = {}, options = {})
+      req = build_request(:enable_outbound_web_identity_federation, params)
       req.send_request(options)
     end
 
@@ -6078,6 +6118,32 @@ module Aws::IAM
     # @param [Hash] params ({})
     def get_organizations_access_report(params = {}, options = {})
       req = build_request(:get_organizations_access_report, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configuration information for the outbound identity
+    # federation feature in your Amazon Web Services account. The response
+    # includes the unique issuer URL for your Amazon Web Services account
+    # and the current enabled/disabled status of the feature. Use this
+    # operation to obtain the issuer URL that you need to configure trust
+    # relationships with external services.
+    #
+    # @return [Types::GetOutboundWebIdentityFederationInfoResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOutboundWebIdentityFederationInfoResponse#issuer_identifier #issuer_identifier} => String
+    #   * {Types::GetOutboundWebIdentityFederationInfoResponse#jwt_vending_enabled #jwt_vending_enabled} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.issuer_identifier #=> String
+    #   resp.jwt_vending_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOutboundWebIdentityFederationInfo AWS API Documentation
+    #
+    # @overload get_outbound_web_identity_federation_info(params = {})
+    # @param [Hash] params ({})
+    def get_outbound_web_identity_federation_info(params = {}, options = {})
+      req = build_request(:get_outbound_web_identity_federation_info, params)
       req.send_request(options)
     end
 
@@ -14623,7 +14689,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

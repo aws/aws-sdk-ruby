@@ -364,6 +364,7 @@ module Aws::ElasticLoadBalancingV2
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetAdministrativeOverrideReasonEnum = Shapes::StringShape.new(name: 'TargetAdministrativeOverrideReasonEnum')
     TargetAdministrativeOverrideStateEnum = Shapes::StringShape.new(name: 'TargetAdministrativeOverrideStateEnum')
+    TargetControlPort = Shapes::IntegerShape.new(name: 'TargetControlPort')
     TargetDescription = Shapes::StructureShape.new(name: 'TargetDescription')
     TargetDescriptions = Shapes::ListShape.new(name: 'TargetDescriptions')
     TargetGroup = Shapes::StructureShape.new(name: 'TargetGroup')
@@ -603,6 +604,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     CreateTargetGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTargetGroupInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: TargetGroupIpAddressTypeEnum, location_name: "IpAddressType"))
+    CreateTargetGroupInput.add_member(:target_control_port, Shapes::ShapeRef.new(shape: TargetControlPort, location_name: "TargetControlPort"))
     CreateTargetGroupInput.struct_class = Types::CreateTargetGroupInput
 
     CreateTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
@@ -1300,6 +1302,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     TargetGroup.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
     TargetGroup.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: TargetGroupIpAddressTypeEnum, location_name: "IpAddressType"))
+    TargetGroup.add_member(:target_control_port, Shapes::ShapeRef.new(shape: TargetControlPort, location_name: "TargetControlPort"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)

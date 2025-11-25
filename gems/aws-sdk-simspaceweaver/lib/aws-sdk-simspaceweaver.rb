@@ -54,7 +54,7 @@ module Aws::SimSpaceWeaver
   autoload :EndpointProvider, 'aws-sdk-simspaceweaver/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-simspaceweaver/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

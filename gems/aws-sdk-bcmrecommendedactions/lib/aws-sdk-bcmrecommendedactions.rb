@@ -55,7 +55,7 @@ module Aws::BCMRecommendedActions
   autoload :EndpointProvider, 'aws-sdk-bcmrecommendedactions/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bcmrecommendedactions/endpoints'
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end
 

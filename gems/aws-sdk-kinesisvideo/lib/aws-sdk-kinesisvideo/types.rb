@@ -147,7 +147,8 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] single_master_configuration
     #   A structure containing the configuration for the `SINGLE_MASTER`
-    #   channel type.
+    #   channel type. The default configuration for the channel message's
+    #   time to live is 60 seconds (1 minute).
     #   @return [Types::SingleMasterConfiguration]
     #
     # @!attribute [rw] tags
@@ -181,7 +182,7 @@ module Aws::KinesisVideo
     # @!attribute [rw] device_name
     #   The name of the device that is writing to the stream.
     #
-    #   <note markdown="1"> In the current implementation, Kinesis Video Streams does not use
+    #   <note markdown="1"> In the current implementation, Kinesis Video Streams doesn't use
     #   this name.
     #
     #    </note>
@@ -217,7 +218,7 @@ module Aws::KinesisVideo
     #   Video Streams to use to encrypt stream data.
     #
     #   If no key ID is specified, the default, Kinesis Video-managed key
-    #   (`Amazon Web Services/kinesisvideo`) is used.
+    #   (`aws/kinesisvideo`) is used.
     #
     #   For more information, see [DescribeKey][1].
     #
@@ -232,7 +233,7 @@ module Aws::KinesisVideo
     #   associated with the stream.
     #
     #   The default value is 0, indicating that the stream does not persist
-    #   data.
+    #   data. The minimum is 1 hour.
     #
     #   When the `DataRetentionInHours` value is 0, consumers can still
     #   consume the fragments that remain in the service host buffer, which
@@ -246,6 +247,16 @@ module Aws::KinesisVideo
     #   key-value pair (the value is optional).
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] stream_storage_configuration
+    #   The configuration for the stream's storage, including the default
+    #   storage tier for stream data. This configuration determines how
+    #   stream data is stored and accessed, with different tiers offering
+    #   varying levels of performance and cost optimization.
+    #
+    #   If not specified, the stream will use the default storage
+    #   configuration with HOT tier for optimal performance.
+    #   @return [Types::StreamStorageConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
@@ -254,7 +265,8 @@ module Aws::KinesisVideo
       :media_type,
       :kms_key_id,
       :data_retention_in_hours,
-      :tags)
+      :tags,
+      :stream_storage_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -660,6 +672,48 @@ module Aws::KinesisVideo
     #
     class DescribeStreamOutput < Struct.new(
       :stream_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_name
+    #   The name of the stream for which you want to retrieve the storage
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which you want to
+    #   retrieve the storage configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStreamStorageConfigurationInput AWS API Documentation
+    #
+    class DescribeStreamStorageConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_name
+    #   The name of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_storage_configuration
+    #   The current storage configuration for the stream, including the
+    #   default storage tier and other storage-related settings.
+    #   @return [Types::StreamStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStreamStorageConfigurationOutput AWS API Documentation
+    #
+    class DescribeStreamStorageConfigurationOutput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :stream_storage_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1400,9 +1454,16 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # The structure that contains the notification information for the KVS
-    # images delivery. If this parameter is null, the configuration will be
-    # deleted from the stream.
+    # Use this API to configure Amazon Simple Notification Service (Amazon
+    # SNS) notifications for when fragments become available in a stream. If
+    # this parameter is null, the configuration will be deleted from the
+    # stream.
+    #
+    # See [Notifications in Kinesis Video Streams][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/notifications.html
     #
     # @!attribute [rw] status
     #   Indicates if a notification configuration is enabled or disabled.
@@ -1439,7 +1500,7 @@ module Aws::KinesisVideo
     end
 
     # The recorder configuration consists of the local `MediaSourceConfig`
-    # details that are used as credentials to accesss the local media files
+    # details that are used as credentials to access the local media files
     # streamed on the camera.
     #
     # @!attribute [rw] media_source_config
@@ -1550,7 +1611,7 @@ module Aws::KinesisVideo
     #
     #
     #
-    #   [1]: http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html
+    #   [1]: https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html
     #   @return [String]
     #
     # @!attribute [rw] duration_in_seconds
@@ -1601,8 +1662,9 @@ module Aws::KinesisVideo
     # channel type.
     #
     # @!attribute [rw] message_ttl_seconds
-    #   The period of time a signaling channel retains undelivered messages
-    #   before they are discarded.
+    #   The period of time (in seconds) a signaling channel retains
+    #   undelivered messages before they are discarded. Use to update this
+    #   value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/SingleMasterConfiguration AWS API Documentation
@@ -1778,6 +1840,35 @@ module Aws::KinesisVideo
     class StreamNameCondition < Struct.new(
       :comparison_operator,
       :comparison_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for stream storage, including the default storage
+    # tier for stream data. This configuration determines how stream data is
+    # stored and accessed, with different tiers offering varying levels of
+    # performance and cost optimization.
+    #
+    # @!attribute [rw] default_storage_tier
+    #   The default storage tier for the stream data. This setting
+    #   determines the storage class used for stream data, affecting both
+    #   performance characteristics and storage costs.
+    #
+    #   Available storage tiers:
+    #
+    #   * `HOT` - Optimized for frequent access with the lowest latency and
+    #     highest performance. Ideal for real-time applications and
+    #     frequently accessed data.
+    #
+    #   * `WARM` - Balanced performance and cost for moderately accessed
+    #     data. Suitable for data that is accessed regularly but not
+    #     continuously.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/StreamStorageConfiguration AWS API Documentation
+    #
+    class StreamStorageConfiguration < Struct.new(
+      :default_storage_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2061,7 +2152,9 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] single_master_configuration
     #   The structure containing the configuration for the `SINGLE_MASTER`
-    #   type of the signaling channel that you want to update.
+    #   type of the signaling channel that you want to update. This
+    #   parameter and the channel message's time-to-live are required for
+    #   channels with the `SINGLE_MASTER` channel type.
     #   @return [Types::SingleMasterConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateSignalingChannelInput AWS API Documentation
@@ -2133,6 +2226,46 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamOutput AWS API Documentation
     #
     class UpdateStreamOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] stream_name
+    #   The name of the stream for which you want to update the storage
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which you want to
+    #   update the storage configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The version of the stream whose storage configuration you want to
+    #   change. To get the version, call either the `DescribeStream` or the
+    #   `ListStreams` API.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_storage_configuration
+    #   The new storage configuration for the stream. This includes the
+    #   default storage tier that determines how stream data is stored and
+    #   accessed.
+    #
+    #   Different storage tiers offer varying levels of performance and cost
+    #   optimization to match your specific use case requirements.
+    #   @return [Types::StreamStorageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamStorageConfigurationInput AWS API Documentation
+    #
+    class UpdateStreamStorageConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :current_version,
+      :stream_storage_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamStorageConfigurationOutput AWS API Documentation
+    #
+    class UpdateStreamStorageConfigurationOutput < Aws::EmptyStructure; end
 
     # The configuration that consists of the `ScheduleExpression` and the
     # `DurationInMinutes` details that specify the scheduling to record from

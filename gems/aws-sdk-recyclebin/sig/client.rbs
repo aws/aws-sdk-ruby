@@ -84,7 +84,7 @@ module Aws
         def retention_period: () -> Types::RetentionPeriod
         def description: () -> ::String
         def tags: () -> ::Array[Types::Tag]
-        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE")
+        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
         def resource_tags: () -> ::Array[Types::ResourceTag]
         def status: () -> ("pending" | "available")
         def lock_configuration: () -> Types::LockConfiguration
@@ -105,7 +105,7 @@ module Aws
                              value: ::String
                            },
                          ],
-                         resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE"),
+                         resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME"),
                          ?resource_tags: Array[
                            {
                              resource_tag_key: ::String,
@@ -140,7 +140,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleResponse]
         def identifier: () -> ::String
         def description: () -> ::String
-        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE")
+        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
         def retention_period: () -> Types::RetentionPeriod
         def resource_tags: () -> ::Array[Types::ResourceTag]
         def status: () -> ("pending" | "available")
@@ -165,7 +165,7 @@ module Aws
       def list_rules: (
                         ?max_results: ::Integer,
                         ?next_token: ::String,
-                        resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE"),
+                        resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME"),
                         ?resource_tags: Array[
                           {
                             resource_tag_key: ::String,
@@ -196,7 +196,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::LockRuleResponse]
         def identifier: () -> ::String
         def description: () -> ::String
-        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE")
+        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
         def retention_period: () -> Types::RetentionPeriod
         def resource_tags: () -> ::Array[Types::ResourceTag]
         def status: () -> ("pending" | "available")
@@ -236,7 +236,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UnlockRuleResponse]
         def identifier: () -> ::String
         def description: () -> ::String
-        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE")
+        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
         def retention_period: () -> Types::RetentionPeriod
         def resource_tags: () -> ::Array[Types::ResourceTag]
         def status: () -> ("pending" | "available")
@@ -267,7 +267,7 @@ module Aws
         def identifier: () -> ::String
         def retention_period: () -> Types::RetentionPeriod
         def description: () -> ::String
-        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE")
+        def resource_type: () -> ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
         def resource_tags: () -> ::Array[Types::ResourceTag]
         def status: () -> ("pending" | "available")
         def lock_state: () -> ("locked" | "pending_unlock" | "unlocked")
@@ -283,7 +283,7 @@ module Aws
                            retention_period_unit: ("DAYS")
                          },
                          ?description: ::String,
-                         ?resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE"),
+                         ?resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME"),
                          ?resource_tags: Array[
                            {
                              resource_tag_key: ::String,

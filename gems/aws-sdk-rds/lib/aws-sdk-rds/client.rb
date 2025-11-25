@@ -3261,40 +3261,31 @@ module Aws::RDS
     # @option params [Boolean] :publicly_accessible
     #   Specifies whether the DB cluster is publicly accessible.
     #
+    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #
     #   When the DB cluster is publicly accessible and you connect from
-    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB cluster's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB cluster, the endpoint
     #   resolves to the private IP address. Access to the DB cluster is
-    #   ultimately controlled by the security group it uses. That public
-    #   access isn't permitted if the security group assigned to the DB
-    #   cluster doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
     #
-    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
+    #   `true`.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB cluster is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB cluster is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Specifies whether minor engine upgrades are applied automatically to
@@ -3892,6 +3883,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -5197,37 +5189,28 @@ module Aws::RDS
     #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible and you connect from
-    #   outside of the DB instance's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB instance's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB instance, the endpoint
     #   resolves to the private IP address. Access to the DB instance is
-    #   ultimately controlled by the security group it uses. That public
-    #   access is not permitted if the security group assigned to the DB
-    #   instance doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
+    #   `false` for Aurora instances and `true` for non-Aurora instances.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB instance is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB instance is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the DB instance.
@@ -6022,6 +6005,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -7034,6 +7018,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -9478,6 +9463,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -10071,6 +10057,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -12937,6 +12924,7 @@ module Aws::RDS
     #   resp.db_clusters[0].db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_clusters[0].preferred_backup_window #=> String
     #   resp.db_clusters[0].preferred_maintenance_window #=> String
+    #   resp.db_clusters[0].upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_clusters[0].replication_source_identifier #=> String
     #   resp.db_clusters[0].read_replica_identifiers #=> Array
     #   resp.db_clusters[0].read_replica_identifiers[0] #=> String
@@ -13671,6 +13659,7 @@ module Aws::RDS
     #   resp.db_instances[0].db_subnet_group.supported_network_types #=> Array
     #   resp.db_instances[0].db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instances[0].preferred_maintenance_window #=> String
+    #   resp.db_instances[0].upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instances[0].pending_modified_values.db_instance_class #=> String
     #   resp.db_instances[0].pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instances[0].pending_modified_values.master_user_password #=> String
@@ -18380,6 +18369,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -20126,6 +20116,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -21177,7 +21168,7 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Can't be longer than 64 characters.
+    #   ^
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
@@ -21931,6 +21922,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -23880,6 +23872,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -24069,6 +24062,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -24374,6 +24368,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -24610,6 +24605,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -25978,6 +25974,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -26804,6 +26801,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -27613,6 +27611,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -28546,6 +28545,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -29364,6 +29364,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -30375,6 +30376,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -30792,6 +30794,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -31000,6 +31003,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -31628,6 +31632,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -31844,6 +31849,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -32451,6 +32457,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -32605,7 +32612,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.298.0'
+      context[:gem_version] = '1.300.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

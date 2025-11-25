@@ -88,6 +88,8 @@ Valid region and credentials options are:
   * [`Aws::AssumeRoleWebIdentityCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleWebIdentityCredentials.html)
   * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AssumeRoleCredentials.html)
   * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SharedCredentials.html)
+  * [`Aws::SSOCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOCredentials.html)
+  * [`Aws::LoginCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LoginCredentials.html)
   * [`Aws::ProcessCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ProcessCredentials.html)
   * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InstanceProfileCredentials.html)
   * [`Aws::ECSCredentials`](https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECSCredentials.html)
@@ -449,6 +451,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Service Catalog                                   | Aws::ServiceCatalog                      | aws-sdk-servicecatalog                      | 2015-12-10  |
 | AWS Service Catalog App Registry                      | Aws::AppRegistry                         | aws-sdk-appregistry                         | 2020-06-24  |
 | AWS Shield                                            | Aws::Shield                              | aws-sdk-shield                              | 2016-06-02  |
+| AWS Sign-In Service                                   | Aws::Signin                              | aws-sdk-core                                | 2023-01-01  |
 | AWS Signer                                            | Aws::Signer                              | aws-sdk-signer                              | 2017-08-25  |
 | AWS SimSpace Weaver                                   | Aws::SimSpaceWeaver                      | aws-sdk-simspaceweaver                      | 2022-10-28  |
 | AWS Single Sign-On                                    | Aws::SSO                                 | aws-sdk-core                                | 2019-06-10  |
@@ -627,6 +630,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime        | aws-sdk-sagemakerfeaturestoreruntime        | 2020-07-01  |
 | Amazon SageMaker Metrics Service                      | Aws::SageMakerMetrics                    | aws-sdk-sagemakermetrics                    | 2022-09-30  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |
+| Amazon SageMaker Runtime HTTP2                        | Aws::SageMakerRuntimeHTTP2               | aws-sdk-sagemakerruntimehttp2               | 2025-10-01  |
 | Amazon SageMaker Service                              | Aws::SageMaker                           | aws-sdk-sagemaker                           | 2017-07-24  |
 | Amazon SageMaker geospatial capabilities              | Aws::SageMakerGeospatial                 | aws-sdk-sagemakergeospatial                 | 2020-05-27  |
 | Amazon Sagemaker Edge Manager                         | Aws::SagemakerEdgeManager                | aws-sdk-sagemakeredgemanager                | 2020-09-23  |
@@ -672,6 +676,7 @@ RubyGems.org page under "LINKS" section.
 | CloudWatch Observability Admin Service                | Aws::ObservabilityAdmin                  | aws-sdk-observabilityadmin                  | 2018-05-10  |
 | CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
+| Compute Optimizer Automation                          | Aws::ComputeOptimizerAutomation          | aws-sdk-computeoptimizerautomation          | 2025-09-22  |
 | Cost Optimization Hub                                 | Aws::CostOptimizationHub                 | aws-sdk-costoptimizationhub                 | 2022-07-26  |
 | Data Automation for Amazon Bedrock                    | Aws::BedrockDataAutomation               | aws-sdk-bedrockdataautomation               | 2023-07-26  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                        | aws-sdk-imagebuilder                        | 2019-12-02  |
@@ -692,6 +697,7 @@ RubyGems.org page under "LINKS" section.
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |
 | Network Flow Monitor                                  | Aws::NetworkFlowMonitor                  | aws-sdk-networkflowmonitor                  | 2023-04-19  |
 | OpenSearch Service Serverless                         | Aws::OpenSearchServerless                | aws-sdk-opensearchserverless                | 2021-11-01  |
+| Partner Central Channel API                           | Aws::PartnerCentralChannel               | aws-sdk-partnercentralchannel               | 2024-03-18  |
 | Partner Central Selling API                           | Aws::PartnerCentralSelling               | aws-sdk-partnercentralselling               | 2022-07-26  |
 | Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |
 | Payment Cryptography Data Plane                       | Aws::PaymentCryptographyData             | aws-sdk-paymentcryptographydata             | 2022-02-03  |

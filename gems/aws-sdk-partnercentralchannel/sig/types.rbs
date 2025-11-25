@@ -1,0 +1,601 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PartnerCentralChannel
+  module Types
+
+    class AcceptChannelHandshakeDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class AcceptChannelHandshakeRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptChannelHandshakeResponse
+      attr_accessor channel_handshake_detail: Types::AcceptChannelHandshakeDetail
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChannelHandshakeDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class CancelChannelHandshakeRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChannelHandshakeResponse
+      attr_accessor channel_handshake_detail: Types::CancelChannelHandshakeDetail
+      SENSITIVE: []
+    end
+
+    class ChannelHandshakePayload
+      attr_accessor start_service_period_payload: Types::StartServicePeriodPayload
+      attr_accessor revoke_service_period_payload: Types::RevokeServicePeriodPayload
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StartServicePeriodPayload < ChannelHandshakePayload
+      end
+      class RevokeServicePeriodPayload < ChannelHandshakePayload
+      end
+      class Unknown < ChannelHandshakePayload
+      end
+    end
+
+    class ChannelHandshakeSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ::String
+      attr_accessor handshake_type: ("START_SERVICE_PERIOD" | "REVOKE_SERVICE_PERIOD" | "PROGRAM_MANAGEMENT_ACCOUNT")
+      attr_accessor owner_account_id: ::String
+      attr_accessor sender_account_id: ::String
+      attr_accessor sender_display_name: ::String
+      attr_accessor receiver_account_id: ::String
+      attr_accessor associated_resource_id: ::String
+      attr_accessor detail: Types::HandshakeDetail
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelHandshakeDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelHandshakeRequest
+      attr_accessor handshake_type: ("START_SERVICE_PERIOD" | "REVOKE_SERVICE_PERIOD" | "PROGRAM_MANAGEMENT_ACCOUNT")
+      attr_accessor catalog: ::String
+      attr_accessor associated_resource_identifier: ::String
+      attr_accessor payload: Types::ChannelHandshakePayload
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateChannelHandshakeResponse
+      attr_accessor channel_handshake_detail: Types::CreateChannelHandshakeDetail
+      SENSITIVE: []
+    end
+
+    class CreateProgramManagementAccountDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProgramManagementAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")
+      attr_accessor display_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProgramManagementAccountResponse
+      attr_accessor program_management_account_detail: Types::CreateProgramManagementAccountDetail
+      SENSITIVE: []
+    end
+
+    class CreateRelationshipDetail
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRelationshipRequest
+      attr_accessor catalog: ::String
+      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor associated_account_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor resale_account_model: ("DISTRIBUTOR" | "END_CUSTOMER" | "SOLUTION_PROVIDER")
+      attr_accessor sector: ("COMMERCIAL" | "GOVERNMENT" | "GOVERNMENT_EXCEPTION")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor requested_support_plan: Types::SupportPlan
+      SENSITIVE: []
+    end
+
+    class CreateRelationshipResponse
+      attr_accessor relationship_detail: Types::CreateRelationshipDetail
+      SENSITIVE: []
+    end
+
+    class DeleteProgramManagementAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProgramManagementAccountResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRelationshipRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRelationshipResponse < Aws::EmptyStructure
+    end
+
+    class GetRelationshipRequest
+      attr_accessor catalog: ::String
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationshipResponse
+      attr_accessor relationship_detail: Types::RelationshipDetail
+      SENSITIVE: []
+    end
+
+    class HandshakeDetail
+      attr_accessor start_service_period_handshake_detail: Types::StartServicePeriodHandshakeDetail
+      attr_accessor revoke_service_period_handshake_detail: Types::RevokeServicePeriodHandshakeDetail
+      attr_accessor program_management_account_handshake_detail: Types::ProgramManagementAccountHandshakeDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StartServicePeriodHandshakeDetail < HandshakeDetail
+      end
+      class RevokeServicePeriodHandshakeDetail < HandshakeDetail
+      end
+      class ProgramManagementAccountHandshakeDetail < HandshakeDetail
+      end
+      class Unknown < HandshakeDetail
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelHandshakesRequest
+      attr_accessor handshake_type: ("START_SERVICE_PERIOD" | "REVOKE_SERVICE_PERIOD" | "PROGRAM_MANAGEMENT_ACCOUNT")
+      attr_accessor catalog: ::String
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor max_results: ::Integer
+      attr_accessor statuses: ::Array[("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")]
+      attr_accessor associated_resource_identifiers: ::Array[::String]
+      attr_accessor handshake_type_filters: Types::ListChannelHandshakesTypeFilters
+      attr_accessor handshake_type_sort: Types::ListChannelHandshakesTypeSort
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelHandshakesResponse
+      attr_accessor items: ::Array[Types::ChannelHandshakeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelHandshakesTypeFilters
+      attr_accessor start_service_period_type_filters: Types::StartServicePeriodTypeFilters
+      attr_accessor revoke_service_period_type_filters: Types::RevokeServicePeriodTypeFilters
+      attr_accessor program_management_account_type_filters: Types::ProgramManagementAccountTypeFilters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StartServicePeriodTypeFilters < ListChannelHandshakesTypeFilters
+      end
+      class RevokeServicePeriodTypeFilters < ListChannelHandshakesTypeFilters
+      end
+      class ProgramManagementAccountTypeFilters < ListChannelHandshakesTypeFilters
+      end
+      class Unknown < ListChannelHandshakesTypeFilters
+      end
+    end
+
+    class ListChannelHandshakesTypeSort
+      attr_accessor start_service_period_type_sort: Types::StartServicePeriodTypeSort
+      attr_accessor revoke_service_period_type_sort: Types::RevokeServicePeriodTypeSort
+      attr_accessor program_management_account_type_sort: Types::ProgramManagementAccountTypeSort
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StartServicePeriodTypeSort < ListChannelHandshakesTypeSort
+      end
+      class RevokeServicePeriodTypeSort < ListChannelHandshakesTypeSort
+      end
+      class ProgramManagementAccountTypeSort < ListChannelHandshakesTypeSort
+      end
+      class Unknown < ListChannelHandshakesTypeSort
+      end
+    end
+
+    class ListProgramManagementAccountsRequest
+      attr_accessor catalog: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor display_names: ::Array[::String]
+      attr_accessor programs: ::Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")]
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor statuses: ::Array[("PENDING" | "ACTIVE" | "INACTIVE")]
+      attr_accessor sort: Types::ListProgramManagementAccountsSortBase
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProgramManagementAccountsResponse
+      attr_accessor items: ::Array[Types::ProgramManagementAccountSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProgramManagementAccountsSortBase
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor sort_by: ("UpdatedAt")
+      SENSITIVE: []
+    end
+
+    class ListRelationshipsRequest
+      attr_accessor catalog: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor associated_account_ids: ::Array[::String]
+      attr_accessor association_types: ::Array[("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")]
+      attr_accessor display_names: ::Array[::String]
+      attr_accessor program_management_account_identifiers: ::Array[::String]
+      attr_accessor sort: Types::ListRelationshipsSortBase
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRelationshipsResponse
+      attr_accessor items: ::Array[Types::RelationshipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRelationshipsSortBase
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor sort_by: ("UpdatedAt")
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PartnerLedSupport
+      attr_accessor coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
+      attr_accessor provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")
+      attr_accessor tam_location: ::String
+      SENSITIVE: []
+    end
+
+    class ProgramManagementAccountHandshakeDetail
+      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")
+      SENSITIVE: []
+    end
+
+    class ProgramManagementAccountSummary
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      attr_accessor catalog: ::String
+      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")
+      attr_accessor display_name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor start_date: ::Time
+      attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class ProgramManagementAccountTypeFilters
+      attr_accessor programs: ::Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")]
+      SENSITIVE: []
+    end
+
+    class ProgramManagementAccountTypeSort
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor sort_by: ("UpdatedAt")
+      SENSITIVE: []
+    end
+
+    class RejectChannelHandshakeDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class RejectChannelHandshakeRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RejectChannelHandshakeResponse
+      attr_accessor channel_handshake_detail: Types::RejectChannelHandshakeDetail
+      SENSITIVE: []
+    end
+
+    class RelationshipDetail
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      attr_accessor catalog: ::String
+      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")
+      attr_accessor program_management_account_id: ::String
+      attr_accessor associated_account_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor resale_account_model: ("DISTRIBUTOR" | "END_CUSTOMER" | "SOLUTION_PROVIDER")
+      attr_accessor sector: ("COMMERCIAL" | "GOVERNMENT" | "GOVERNMENT_EXCEPTION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class RelationshipSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      attr_accessor catalog: ::String
+      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")
+      attr_accessor program_management_account_id: ::String
+      attr_accessor associated_account_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor sector: ("COMMERCIAL" | "GOVERNMENT" | "GOVERNMENT_EXCEPTION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ResoldBusiness
+      attr_accessor coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
+      SENSITIVE: []
+    end
+
+    class ResoldEnterprise
+      attr_accessor coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
+      attr_accessor tam_location: ::String
+      attr_accessor charge_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeServicePeriodHandshakeDetail
+      attr_accessor note: ::String
+      attr_accessor service_period_type: ("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")
+      attr_accessor minimum_notice_days: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class RevokeServicePeriodPayload
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor note: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeServicePeriodTypeFilters
+      attr_accessor service_period_types: ::Array[("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")]
+      SENSITIVE: []
+    end
+
+    class RevokeServicePeriodTypeSort
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor sort_by: ("UpdatedAt")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class StartServicePeriodHandshakeDetail
+      attr_accessor note: ::String
+      attr_accessor service_period_type: ("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")
+      attr_accessor minimum_notice_days: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StartServicePeriodPayload
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor note: ::String
+      attr_accessor service_period_type: ("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")
+      attr_accessor minimum_notice_days: ::String
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StartServicePeriodTypeFilters
+      attr_accessor service_period_types: ::Array[("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")]
+      SENSITIVE: []
+    end
+
+    class StartServicePeriodTypeSort
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor sort_by: ("UpdatedAt")
+      SENSITIVE: []
+    end
+
+    class SupportPlan
+      attr_accessor resold_business: Types::ResoldBusiness
+      attr_accessor resold_enterprise: Types::ResoldEnterprise
+      attr_accessor partner_led_support: Types::PartnerLedSupport
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ResoldBusiness < SupportPlan
+      end
+      class ResoldEnterprise < SupportPlan
+      end
+      class PartnerLedSupport < SupportPlan
+      end
+      class Unknown < SupportPlan
+      end
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProgramManagementAccountDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProgramManagementAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProgramManagementAccountResponse
+      attr_accessor program_management_account_detail: Types::UpdateProgramManagementAccountDetail
+      SENSITIVE: []
+    end
+
+    class UpdateRelationshipDetail
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRelationshipRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor revision: ::String
+      attr_accessor display_name: ::String
+      attr_accessor requested_support_plan: Types::SupportPlan
+      SENSITIVE: []
+    end
+
+    class UpdateRelationshipResponse
+      attr_accessor relationship_detail: Types::UpdateRelationshipDetail
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("REQUEST_VALIDATION_FAILED" | "BUSINESS_VALIDATION_FAILED")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

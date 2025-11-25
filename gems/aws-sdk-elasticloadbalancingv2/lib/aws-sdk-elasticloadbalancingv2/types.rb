@@ -533,9 +533,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, and TCP\_UDP. You can’t specify the UDP or TCP\_UDP
-    #   protocol if dual-stack mode is enabled. You can't specify a
-    #   protocol for a Gateway Load Balancer.
+    #   TLS, UDP, TCP\_UDP, QUIC, and TCP\_QUIC. You can’t specify the UDP,
+    #   TCP\_UDP, QUIC, or TCP\_QUIC protocol if dual-stack mode is enabled.
+    #   You can't specify a protocol for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -836,10 +836,11 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, or TCP\_UDP. For Gateway Load Balancers, the supported
-    #   protocol is GENEVE. A TCP\_UDP listener must be associated with a
-    #   TCP\_UDP target group. If the target is a Lambda function, this
-    #   parameter does not apply.
+    #   TLS, UDP, TCP\_UDP, QUIC, or TCP\_QUIC. For Gateway Load Balancers,
+    #   the supported protocol is GENEVE. A TCP\_UDP listener must be
+    #   associated with a TCP\_UDP target group. A TCP\_QUIC listener must
+    #   be associated with a TCP\_QUIC target group. If the target is a
+    #   Lambda function, this parameter does not apply.
     #   @return [String]
     #
     # @!attribute [rw] protocol_version
@@ -868,15 +869,16 @@ module Aws::ElasticLoadBalancingV2
     #   Network Load Balancers and Gateway Load Balancers, the default is
     #   TCP. The TCP protocol is not supported for health checks if the
     #   protocol of the target group is HTTP or HTTPS. The GENEVE, TLS, UDP,
-    #   and TCP\_UDP protocols are not supported for health checks.
+    #   TCP\_UDP, QUIC, and TCP\_QUIC protocols are not supported for health
+    #   checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
     #   The port the load balancer uses when performing health checks on
-    #   targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, or TCP\_UDP,
-    #   the default is `traffic-port`, which is the port on which each
-    #   target receives traffic from the load balancer. If the protocol is
-    #   GENEVE, the default is port 80.
+    #   targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, TCP\_UDP,
+    #   QUIC, or TCP\_QUIC the default is `traffic-port`, which is the port
+    #   on which each target receives traffic from the load balancer. If the
+    #   protocol is GENEVE, the default is port 80.
     #   @return [String]
     #
     # @!attribute [rw] health_check_enabled
@@ -900,10 +902,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. The range is 5-300. If the target group
-    #   protocol is TCP, TLS, UDP, TCP\_UDP, HTTP or HTTPS, the default is
-    #   30 seconds. If the target group protocol is GENEVE, the default is
-    #   10 seconds. If the target type is `lambda`, the default is 35
-    #   seconds.
+    #   protocol is TCP, TLS, UDP, TCP\_UDP, QUIC, TCP\_QUIC, HTTP or HTTPS,
+    #   the default is 30 seconds. If the target group protocol is GENEVE,
+    #   the default is 10 seconds. If the target type is `lambda`, the
+    #   default is 35 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
@@ -927,18 +929,19 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
     #   considering a target unhealthy. The range is 2-10. If the target
-    #   group protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the
-    #   default is 2. For target groups with a protocol of GENEVE, the
-    #   default is 2. If the target type is `lambda`, the default is 5.
+    #   group protocol is TCP, TCP\_UDP, UDP, TLS, QUIC, TCP\_QUIC, HTTP or
+    #   HTTPS, the default is 2. For target groups with a protocol of
+    #   GENEVE, the default is 2. If the target type is `lambda`, the
+    #   default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
     #   checking for a successful response from a target. For target groups
-    #   with a protocol of TCP, TCP\_UDP, UDP or TLS the range is 200-599.
-    #   For target groups with a protocol of HTTP or HTTPS, the range is
-    #   200-499. For target groups with a protocol of GENEVE, the range is
-    #   200-399.
+    #   with a protocol of TCP, TCP\_UDP, UDP, QUIC, TCP\_QUIC, or TLS the
+    #   range is 200-599. For target groups with a protocol of HTTP or
+    #   HTTPS, the range is 200-499. For target groups with a protocol of
+    #   GENEVE, the range is 200-399.
     #   @return [Types::Matcher]
     #
     # @!attribute [rw] target_type
@@ -968,6 +971,12 @@ module Aws::ElasticLoadBalancingV2
     #   The IP address type. The default value is `ipv4`.
     #   @return [String]
     #
+    # @!attribute [rw] target_control_port
+    #   The port on which the target control agent and application load
+    #   balancer exchange management traffic for the target optimizer
+    #   feature.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
     #
     class CreateTargetGroupInput < Struct.new(
@@ -987,7 +996,8 @@ module Aws::ElasticLoadBalancingV2
       :matcher,
       :target_type,
       :tags,
-      :ip_address_type)
+      :ip_address_type,
+      :target_control_port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2661,6 +2671,19 @@ module Aws::ElasticLoadBalancingV2
     #   * `connection_logs.s3.prefix` - The prefix for the location in the
     #     S3 bucket for the connection logs.
     #
+    #   * `health_check_logs.s3.enabled` - Indicates whether health check
+    #     logs are enabled. The value is `true` or `false`. The default is
+    #     `false`.
+    #
+    #   * `health_check_logs.s3.bucket` - The name of the S3 bucket for the
+    #     health check logs. This attribute is required if health check logs
+    #     are enabled. The bucket must exist in the same region as the load
+    #     balancer and have a bucket policy that grants Elastic Load
+    #     Balancing permissions to write to the bucket.
+    #
+    #   * `health_check_logs.s3.prefix` - The prefix for the location in the
+    #     S3 bucket for the health check logs.
+    #
     #   * `routing.http.desync_mitigation_mode` - Determines how the load
     #     balancer handles requests that might pose a security risk to your
     #     application. The possible values are `monitor`, `defensive`, and
@@ -2956,10 +2979,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer.
     #   Application Load Balancers support the HTTP and HTTPS protocols.
-    #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
-    #   protocols. You can’t change the protocol to UDP or TCP\_UDP if
-    #   dual-stack mode is enabled. You can't specify a protocol for a
-    #   Gateway Load Balancer.
+    #   Network Load Balancers support the TCP, TLS, UDP, TCP\_UDP, QUIC,
+    #   and TCP\_QUIC protocols. You can’t change the protocol to UDP,
+    #   TCP\_UDP, QUIC, or TCP\_QUIC if dual-stack mode is enabled. You
+    #   can't specify a protocol for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
@@ -3157,8 +3180,8 @@ module Aws::ElasticLoadBalancingV2
     #   TCP. The TCP protocol is not supported for health checks if the
     #   protocol of the target group is HTTP or HTTPS. It is supported for
     #   health checks only if the protocol of the target group is TCP, TLS,
-    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are
-    #   not supported for health checks.
+    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, TCP\_UDP, QUIC, and
+    #   TCP\_QUIC protocols are not supported for health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -4395,6 +4418,12 @@ module Aws::ElasticLoadBalancingV2
     #   The IP address type. The default value is `ipv4`.
     #   @return [String]
     #
+    # @!attribute [rw] target_control_port
+    #   The port on which the target control agent and application load
+    #   balancer exchange management traffic for the target optimizer
+    #   feature.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup AWS API Documentation
     #
     class TargetGroup < Struct.new(
@@ -4415,7 +4444,8 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arns,
       :target_type,
       :protocol_version,
-      :ip_address_type)
+      :ip_address_type,
+      :target_control_port)
       SENSITIVE = []
       include Aws::Structure
     end

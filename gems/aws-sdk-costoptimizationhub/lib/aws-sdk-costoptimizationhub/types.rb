@@ -454,7 +454,7 @@ module Aws::CostOptimizationHub
     #   @return [String]
     #
     # @!attribute [rw] instance_family
-    #   The instance family of the recommended Savings Plan.
+    #   The instance family of the recommended Savings Plans.
     #   @return [String]
     #
     # @!attribute [rw] savings_plans_region
@@ -619,6 +619,43 @@ module Aws::CostOptimizationHub
     #
     class EcsServiceConfiguration < Struct.new(
       :compute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains cost efficiency metrics for a specific group over time. The
+    # group is defined by the grouping dimension specified in the request,
+    # such as account ID, Amazon Web Services Region.
+    #
+    # @!attribute [rw] metrics_by_time
+    #   A list of time-series data points containing efficiency metrics for
+    #   this group. Each data point includes an efficiency score, estimated
+    #   savings, spending, and a timestamp corresponding to the specified
+    #   granularity. This field is null when efficiency metrics cannot be
+    #   calculated for the group, in which case the message field provides
+    #   an explanation.
+    #   @return [Array<Types::MetricsByTime>]
+    #
+    # @!attribute [rw] group
+    #   The value of the grouping dimension for this set of metrics. For
+    #   example, if grouped by account ID, this field contains the account
+    #   ID. If no grouping is specified, this field is empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An explanation of why efficiency metrics could not be calculated for
+    #   this group when the metricsByTime field is null. Common reasons
+    #   include insufficient or inconclusive cost and usage data during the
+    #   specified time period. This field is null or empty when metrics are
+    #   successfully calculated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/EfficiencyMetricsByGroup AWS API Documentation
+    #
+    class EfficiencyMetricsByGroup < Struct.new(
+      :metrics_by_time,
+      :group,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1047,6 +1084,80 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_by
+    #   The dimension by which to group the cost efficiency metrics. Valid
+    #   values include account ID, Amazon Web Services Region. When no
+    #   grouping is specified, metrics are aggregated across all resources
+    #   in the specified time period.
+    #   @return [String]
+    #
+    # @!attribute [rw] granularity
+    #   The time granularity for the cost efficiency metrics. Specify
+    #   `Daily` for metrics aggregated by day, or `Monthly` for metrics
+    #   aggregated by month.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_period
+    #   The time period for which to retrieve the cost efficiency metrics.
+    #   The start date is inclusive and the end date is exclusive. Dates can
+    #   be specified in either YYYY-MM-DD format or YYYY-MM format depending
+    #   on the desired granularity.
+    #   @return [Types::TimePeriod]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of groups to return in the response. Valid values
+    #   range from 0 to 1000. Use in conjunction with `nextToken` to
+    #   paginate through results when the total number of groups exceeds
+    #   this limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] order_by
+    #   The ordering specification for the results. Defines which dimension
+    #   to sort by and whether to sort in ascending or descending order.
+    #   @return [Types::OrderBy]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results. This value is
+    #   returned in the response when the number of groups exceeds the
+    #   specified `maxResults` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/ListEfficiencyMetricsRequest AWS API Documentation
+    #
+    class ListEfficiencyMetricsRequest < Struct.new(
+      :group_by,
+      :granularity,
+      :time_period,
+      :max_results,
+      :order_by,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] efficiency_metrics_by_group
+    #   A list of cost efficiency metrics grouped by the specified
+    #   dimension. Each group contains time-series data points with cost
+    #   efficiency, potential savings, and optimzable spend for the
+    #   specified time period.
+    #   @return [Array<Types::EfficiencyMetricsByGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results. When this value is
+    #   present in the response, additional groups are available. Pass this
+    #   token in the `nextToken` parameter of a subsequent request to
+    #   retrieve the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/ListEfficiencyMetricsResponse AWS API Documentation
+    #
+    class ListEfficiencyMetricsResponse < Struct.new(
+      :efficiency_metrics_by_group,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] include_organization_info
     #   Indicates whether to return the enrollment status for the
     #   organization.
@@ -1330,6 +1441,42 @@ module Aws::CostOptimizationHub
       :instance_family,
       :size_flex_eligible,
       :current_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains efficiency metrics for a specific point in time, including an
+    # efficiency score, potential savings, optimizable spend, and timestamp.
+    #
+    # @!attribute [rw] score
+    #   The efficiency score for this time period. The score represents a
+    #   measure of how effectively the cloud resources are being optimized,
+    #   with higher scores indicating better optimization performance.
+    #   @return [Float]
+    #
+    # @!attribute [rw] savings
+    #   The estimated savings amount for this time period, representing the
+    #   potential cost reduction achieved through optimization
+    #   recommendations.
+    #   @return [Float]
+    #
+    # @!attribute [rw] spend
+    #   The total spending amount for this time period.
+    #   @return [Float]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp for this data point. The format depends on the
+    #   granularity: YYYY-MM-DD for daily metrics, or YYYY-MM for monthly
+    #   metrics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/MetricsByTime AWS API Documentation
+    #
+    class MetricsByTime < Struct.new(
+      :score,
+      :savings,
+      :spend,
+      :timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2232,23 +2379,24 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
-    # Pricing information about a Savings Plan.
+    # Pricing information about a Savings Plans.
     #
     # @!attribute [rw] monthly_savings_plans_eligible_cost
-    #   The cost of paying for the recommended Savings Plan monthly.
+    #   The cost of paying for the recommended Savings Plans monthly.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_monthly_commitment
-    #   Estimated monthly commitment for the Savings Plan.
+    #   Estimated monthly commitment for the Savings Plans.
     #   @return [Float]
     #
     # @!attribute [rw] savings_percentage
     #   Estimated savings as a percentage of your overall costs after buying
-    #   the Savings Plan.
+    #   the Savings Plans.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_on_demand_cost
-    #   Estimated On-Demand cost you will pay after buying the Savings Plan.
+    #   Estimated On-Demand cost you will pay after buying the Savings
+    #   Plans.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/SavingsPlansPricing AWS API Documentation
@@ -2330,6 +2478,28 @@ module Aws::CostOptimizationHub
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a date range for retrieving efficiency metrics. The start
+    # date is inclusive and the end date is exclusive.
+    #
+    # @!attribute [rw] start
+    #   The beginning of the time period (inclusive). Specify the date in
+    #   ISO 8601 format, such as 2024-01-01.
+    #   @return [String]
+    #
+    # @!attribute [rw] end
+    #   The end of the time period (exclusive). Specify the date in ISO 8601
+    #   format, such as 2024-12-31.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/TimePeriod AWS API Documentation
+    #
+    class TimePeriod < Struct.new(
+      :start,
+      :end)
       SENSITIVE = []
       include Aws::Structure
     end

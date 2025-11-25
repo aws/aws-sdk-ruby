@@ -172,6 +172,8 @@ module Aws::MediaConnect
       attr_accessor ndi_speed_hq_quality: ::Integer
       attr_accessor ndi_program_name: ::String
       attr_accessor output_tags: ::Hash[::String, ::String]
+      attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
+      attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
       SENSITIVE: []
     end
 
@@ -180,8 +182,65 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class AutomaticEncryptionKeyConfiguration < Aws::EmptyStructure
+    end
+
     class BadRequestException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterInputError
+      attr_accessor arn: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterInputRequest
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterInputResponse
+      attr_accessor router_inputs: ::Array[Types::RouterInput]
+      attr_accessor errors: ::Array[Types::BatchGetRouterInputError]
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterNetworkInterfaceError
+      attr_accessor arn: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterNetworkInterfaceRequest
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterNetworkInterfaceResponse
+      attr_accessor router_network_interfaces: ::Array[Types::RouterNetworkInterface]
+      attr_accessor errors: ::Array[Types::BatchGetRouterNetworkInterfaceError]
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterOutputError
+      attr_accessor arn: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterOutputRequest
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRouterOutputResponse
+      attr_accessor router_outputs: ::Array[Types::RouterOutput]
+      attr_accessor errors: ::Array[Types::BatchGetRouterOutputError]
       SENSITIVE: []
     end
 
@@ -323,6 +382,62 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class CreateRouterInputRequest
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::RouterInputConfiguration
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20")
+      attr_accessor region_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor transit_encryption: Types::RouterInputTransitEncryption
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouterInputResponse
+      attr_accessor router_input: Types::RouterInput
+      SENSITIVE: []
+    end
+
+    class CreateRouterNetworkInterfaceRequest
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::RouterNetworkInterfaceConfiguration
+      attr_accessor region_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouterNetworkInterfaceResponse
+      attr_accessor router_network_interface: Types::RouterNetworkInterface
+      SENSITIVE: []
+    end
+
+    class CreateRouterOutputRequest
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::RouterOutputConfiguration
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
+      attr_accessor region_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouterOutputResponse
+      attr_accessor router_output: Types::RouterOutput
+      SENSITIVE: []
+    end
+
+    class DefaultMaintenanceConfiguration < Aws::EmptyStructure
+    end
+
     class DeleteBridgeRequest
       attr_accessor bridge_arn: ::String
       SENSITIVE: []
@@ -351,6 +466,42 @@ module Aws::MediaConnect
 
     class DeleteGatewayResponse
       attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouterInputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouterInputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      SENSITIVE: []
+    end
+
+    class DeleteRouterNetworkInterfaceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouterNetworkInterfaceResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "ERROR" | "RECOVERING")
+      SENSITIVE: []
+    end
+
+    class DeleteRouterOutputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouterOutputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
       SENSITIVE: []
     end
 
@@ -515,6 +666,46 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class FailoverRouterInputConfiguration
+      attr_accessor network_interface_arn: ::String
+      attr_accessor protocol_configurations: ::Array[Types::FailoverRouterInputProtocolConfiguration]
+      attr_accessor source_priority_mode: ("NO_PRIORITY" | "PRIMARY_SECONDARY")
+      attr_accessor primary_source_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class FailoverRouterInputIndexedStreamDetails
+      attr_accessor source_index: ::Integer
+      attr_accessor source_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverRouterInputProtocolConfiguration
+      attr_accessor rtp: Types::RtpRouterInputConfiguration
+      attr_accessor rist: Types::RistRouterInputConfiguration
+      attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
+      attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Rtp < FailoverRouterInputProtocolConfiguration
+      end
+      class Rist < FailoverRouterInputProtocolConfiguration
+      end
+      class SrtListener < FailoverRouterInputProtocolConfiguration
+      end
+      class SrtCaller < FailoverRouterInputProtocolConfiguration
+      end
+      class Unknown < FailoverRouterInputProtocolConfiguration
+      end
+    end
+
+    class FailoverRouterInputStreamDetails
+      attr_accessor source_index_zero_stream_details: Types::FailoverRouterInputIndexedStreamDetails
+      attr_accessor source_index_one_stream_details: Types::FailoverRouterInputIndexedStreamDetails
+      SENSITIVE: []
+    end
+
     class Flow
       attr_accessor availability_zone: ::String
       attr_accessor description: ::String
@@ -534,6 +725,26 @@ module Aws::MediaConnect
       attr_accessor flow_size: ("MEDIUM" | "LARGE")
       attr_accessor ndi_config: Types::NdiConfig
       SENSITIVE: []
+    end
+
+    class FlowTransitEncryption
+      attr_accessor encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")
+      attr_accessor encryption_key_configuration: Types::FlowTransitEncryptionKeyConfiguration
+      SENSITIVE: []
+    end
+
+    class FlowTransitEncryptionKeyConfiguration
+      attr_accessor secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration
+      attr_accessor automatic: Types::AutomaticEncryptionKeyConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SecretsManager < FlowTransitEncryptionKeyConfiguration
+      end
+      class Automatic < FlowTransitEncryptionKeyConfiguration
+      end
+      class Unknown < FlowTransitEncryptionKeyConfiguration
+      end
     end
 
     class Fmtp
@@ -606,6 +817,60 @@ module Aws::MediaConnect
     class GatewayNetwork
       attr_accessor cidr_block: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouterInputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouterInputResponse
+      attr_accessor router_input: Types::RouterInput
+      SENSITIVE: []
+    end
+
+    class GetRouterInputSourceMetadataRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouterInputSourceMetadataResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor source_metadata_details: Types::RouterInputSourceMetadataDetails
+      SENSITIVE: []
+    end
+
+    class GetRouterInputThumbnailRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouterInputThumbnailResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor thumbnail_details: Types::RouterInputThumbnailDetails
+      SENSITIVE: []
+    end
+
+    class GetRouterNetworkInterfaceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouterNetworkInterfaceResponse
+      attr_accessor router_network_interface: Types::RouterNetworkInterface
+      SENSITIVE: []
+    end
+
+    class GetRouterOutputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouterOutputResponse
+      attr_accessor router_output: Types::RouterOutput
       SENSITIVE: []
     end
 
@@ -758,6 +1023,55 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class ListRouterInputsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RouterInputFilter]
+      SENSITIVE: []
+    end
+
+    class ListRouterInputsResponse
+      attr_accessor router_inputs: ::Array[Types::ListedRouterInput]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRouterNetworkInterfacesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RouterNetworkInterfaceFilter]
+      SENSITIVE: []
+    end
+
+    class ListRouterNetworkInterfacesResponse
+      attr_accessor router_network_interfaces: ::Array[Types::ListedRouterNetworkInterface]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRouterOutputsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RouterOutputFilter]
+      SENSITIVE: []
+    end
+
+    class ListRouterOutputsResponse
+      attr_accessor router_outputs: ::Array[Types::ListedRouterOutput]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForGlobalResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForGlobalResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -810,12 +1124,142 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class ListedRouterInput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor input_type: ("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      attr_accessor routed_outputs: ::Integer
+      attr_accessor region_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor message_count: ::Integer
+      attr_accessor network_interface_arn: ::String
+      attr_accessor maintenance_schedule_type: ("WINDOW")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
+    class ListedRouterNetworkInterface
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor network_interface_type: ("PUBLIC" | "VPC")
+      attr_accessor associated_output_count: ::Integer
+      attr_accessor associated_input_count: ::Integer
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "ERROR" | "RECOVERING")
+      attr_accessor region_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListedRouterOutput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor output_type: ("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      attr_accessor routed_state: ("ROUTED" | "ROUTING" | "UNROUTED")
+      attr_accessor region_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor message_count: ::Integer
+      attr_accessor routed_input_arn: ::String
+      attr_accessor network_interface_arn: ::String
+      attr_accessor maintenance_schedule_type: ("WINDOW")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
     class Maintenance
       attr_accessor maintenance_day: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday")
       attr_accessor maintenance_deadline: ::String
       attr_accessor maintenance_scheduled_date: ::String
       attr_accessor maintenance_start_hour: ::String
       SENSITIVE: []
+    end
+
+    class MaintenanceConfiguration
+      attr_accessor preferred_day_time: Types::PreferredDayTimeMaintenanceConfiguration
+      attr_accessor default: Types::DefaultMaintenanceConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PreferredDayTime < MaintenanceConfiguration
+      end
+      class Default < MaintenanceConfiguration
+      end
+      class Unknown < MaintenanceConfiguration
+      end
+    end
+
+    class MaintenanceSchedule
+      attr_accessor window: Types::WindowMaintenanceSchedule
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Window < MaintenanceSchedule
+      end
+      class Unknown < MaintenanceSchedule
+      end
+    end
+
+    class MediaConnectFlowRouterInputConfiguration
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_output_arn: ::String
+      attr_accessor source_transit_decryption: Types::FlowTransitEncryption
+      SENSITIVE: []
+    end
+
+    class MediaConnectFlowRouterInputStreamDetails < Aws::EmptyStructure
+    end
+
+    class MediaConnectFlowRouterOutputConfiguration
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_source_arn: ::String
+      attr_accessor destination_transit_encryption: Types::FlowTransitEncryption
+      SENSITIVE: []
+    end
+
+    class MediaConnectFlowRouterOutputStreamDetails < Aws::EmptyStructure
+    end
+
+    class MediaLiveInputRouterOutputConfiguration
+      attr_accessor media_live_input_arn: ::String
+      attr_accessor media_live_pipeline_id: ("PIPELINE_0" | "PIPELINE_1")
+      attr_accessor destination_transit_encryption: Types::MediaLiveTransitEncryption
+      SENSITIVE: []
+    end
+
+    class MediaLiveInputRouterOutputStreamDetails < Aws::EmptyStructure
+    end
+
+    class MediaLiveTransitEncryption
+      attr_accessor encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")
+      attr_accessor encryption_key_configuration: Types::MediaLiveTransitEncryptionKeyConfiguration
+      SENSITIVE: []
+    end
+
+    class MediaLiveTransitEncryptionKeyConfiguration
+      attr_accessor secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration
+      attr_accessor automatic: Types::AutomaticEncryptionKeyConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SecretsManager < MediaLiveTransitEncryptionKeyConfiguration
+      end
+      class Automatic < MediaLiveTransitEncryptionKeyConfiguration
+      end
+      class Unknown < MediaLiveTransitEncryptionKeyConfiguration
+      end
     end
 
     class MediaStream
@@ -869,6 +1313,39 @@ module Aws::MediaConnect
       attr_accessor encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm")
       attr_accessor input_configurations: ::Array[Types::InputConfigurationRequest]
       attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class MergeRouterInputConfiguration
+      attr_accessor network_interface_arn: ::String
+      attr_accessor protocol_configurations: ::Array[Types::MergeRouterInputProtocolConfiguration]
+      attr_accessor merge_recovery_window_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class MergeRouterInputIndexedStreamDetails
+      attr_accessor source_index: ::Integer
+      attr_accessor source_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class MergeRouterInputProtocolConfiguration
+      attr_accessor rtp: Types::RtpRouterInputConfiguration
+      attr_accessor rist: Types::RistRouterInputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Rtp < MergeRouterInputProtocolConfiguration
+      end
+      class Rist < MergeRouterInputProtocolConfiguration
+      end
+      class Unknown < MergeRouterInputProtocolConfiguration
+      end
+    end
+
+    class MergeRouterInputStreamDetails
+      attr_accessor source_index_zero_stream_details: Types::MergeRouterInputIndexedStreamDetails
+      attr_accessor source_index_one_stream_details: Types::MergeRouterInputIndexedStreamDetails
       SENSITIVE: []
     end
 
@@ -946,6 +1423,25 @@ module Aws::MediaConnect
       attr_accessor bridge_ports: ::Array[::Integer]
       attr_accessor output_status: ("ENABLED" | "DISABLED")
       attr_accessor peer_ip_address: ::String
+      attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
+      attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
+      attr_accessor connected_router_input_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PreferredDayTimeMaintenanceConfiguration
+      attr_accessor day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class PublicRouterNetworkInterfaceConfiguration
+      attr_accessor allow_rules: ::Array[Types::PublicRouterNetworkInterfaceRule]
+      SENSITIVE: []
+    end
+
+    class PublicRouterNetworkInterfaceRule
+      attr_accessor cidr: ::String
       SENSITIVE: []
     end
 
@@ -1057,6 +1553,30 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class RestartRouterInputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RestartRouterInputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      SENSITIVE: []
+    end
+
+    class RestartRouterOutputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RestartRouterOutputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      SENSITIVE: []
+    end
+
     class RevokeFlowEntitlementRequest
       attr_accessor entitlement_arn: ::String
       attr_accessor flow_arn: ::String
@@ -1066,6 +1586,375 @@ module Aws::MediaConnect
     class RevokeFlowEntitlementResponse
       attr_accessor entitlement_arn: ::String
       attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RistRouterInputConfiguration
+      attr_accessor port: ::Integer
+      attr_accessor recovery_latency_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class RistRouterOutputConfiguration
+      attr_accessor destination_address: ::String
+      attr_accessor destination_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouterInput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      attr_accessor input_type: ("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")
+      attr_accessor configuration: Types::RouterInputConfiguration
+      attr_accessor routed_outputs: ::Integer
+      attr_accessor maximum_routed_outputs: ::Integer
+      attr_accessor region_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20")
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor messages: ::Array[Types::RouterInputMessage]
+      attr_accessor transit_encryption: Types::RouterInputTransitEncryption
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor stream_details: Types::RouterInputStreamDetails
+      attr_accessor ip_address: ::String
+      attr_accessor maintenance_type: ("PREFERRED_DAY_TIME" | "DEFAULT")
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      attr_accessor maintenance_schedule_type: ("WINDOW")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
+    class RouterInputConfiguration
+      attr_accessor standard: Types::StandardRouterInputConfiguration
+      attr_accessor failover: Types::FailoverRouterInputConfiguration
+      attr_accessor merge: Types::MergeRouterInputConfiguration
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterInputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Standard < RouterInputConfiguration
+      end
+      class Failover < RouterInputConfiguration
+      end
+      class Merge < RouterInputConfiguration
+      end
+      class MediaConnectFlow < RouterInputConfiguration
+      end
+      class Unknown < RouterInputConfiguration
+      end
+    end
+
+    class RouterInputFilter
+      attr_accessor region_names: ::Array[::String]
+      attr_accessor input_types: ::Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")]
+      attr_accessor name_contains: ::Array[::String]
+      attr_accessor network_interface_arns: ::Array[::String]
+      attr_accessor routing_scopes: ::Array[("REGIONAL" | "GLOBAL")]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RegionNames < RouterInputFilter
+      end
+      class InputTypes < RouterInputFilter
+      end
+      class NameContains < RouterInputFilter
+      end
+      class NetworkInterfaceArns < RouterInputFilter
+      end
+      class RoutingScopes < RouterInputFilter
+      end
+      class Unknown < RouterInputFilter
+      end
+    end
+
+    class RouterInputMessage
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouterInputMetadata
+      attr_accessor transport_stream_media_info: Types::TransportMediaInfo
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TransportStreamMediaInfo < RouterInputMetadata
+      end
+      class Unknown < RouterInputMetadata
+      end
+    end
+
+    class RouterInputProtocolConfiguration
+      attr_accessor rtp: Types::RtpRouterInputConfiguration
+      attr_accessor rist: Types::RistRouterInputConfiguration
+      attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
+      attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Rtp < RouterInputProtocolConfiguration
+      end
+      class Rist < RouterInputProtocolConfiguration
+      end
+      class SrtListener < RouterInputProtocolConfiguration
+      end
+      class SrtCaller < RouterInputProtocolConfiguration
+      end
+      class Unknown < RouterInputProtocolConfiguration
+      end
+    end
+
+    class RouterInputServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouterInputSourceMetadataDetails
+      attr_accessor source_metadata_messages: ::Array[Types::RouterInputMessage]
+      attr_accessor timestamp: ::Time
+      attr_accessor router_input_metadata: Types::RouterInputMetadata
+      SENSITIVE: []
+    end
+
+    class RouterInputStreamDetails
+      attr_accessor standard: Types::StandardRouterInputStreamDetails
+      attr_accessor failover: Types::FailoverRouterInputStreamDetails
+      attr_accessor merge: Types::MergeRouterInputStreamDetails
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterInputStreamDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Standard < RouterInputStreamDetails
+      end
+      class Failover < RouterInputStreamDetails
+      end
+      class Merge < RouterInputStreamDetails
+      end
+      class MediaConnectFlow < RouterInputStreamDetails
+      end
+      class Unknown < RouterInputStreamDetails
+      end
+    end
+
+    class RouterInputThumbnailDetails
+      attr_accessor thumbnail_messages: ::Array[Types::RouterInputMessage]
+      attr_accessor thumbnail: ::String
+      attr_accessor timecode: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RouterInputTransitEncryption
+      attr_accessor encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")
+      attr_accessor encryption_key_configuration: Types::RouterInputTransitEncryptionKeyConfiguration
+      SENSITIVE: []
+    end
+
+    class RouterInputTransitEncryptionKeyConfiguration
+      attr_accessor secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration
+      attr_accessor automatic: Types::AutomaticEncryptionKeyConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SecretsManager < RouterInputTransitEncryptionKeyConfiguration
+      end
+      class Automatic < RouterInputTransitEncryptionKeyConfiguration
+      end
+      class Unknown < RouterInputTransitEncryptionKeyConfiguration
+      end
+    end
+
+    class RouterNetworkInterface
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "ERROR" | "RECOVERING")
+      attr_accessor network_interface_type: ("PUBLIC" | "VPC")
+      attr_accessor configuration: Types::RouterNetworkInterfaceConfiguration
+      attr_accessor associated_output_count: ::Integer
+      attr_accessor associated_input_count: ::Integer
+      attr_accessor region_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RouterNetworkInterfaceConfiguration
+      attr_accessor public: Types::PublicRouterNetworkInterfaceConfiguration
+      attr_accessor vpc: Types::VpcRouterNetworkInterfaceConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Public < RouterNetworkInterfaceConfiguration
+      end
+      class Vpc < RouterNetworkInterfaceConfiguration
+      end
+      class Unknown < RouterNetworkInterfaceConfiguration
+      end
+    end
+
+    class RouterNetworkInterfaceFilter
+      attr_accessor region_names: ::Array[::String]
+      attr_accessor network_interface_types: ::Array[("PUBLIC" | "VPC")]
+      attr_accessor name_contains: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RegionNames < RouterNetworkInterfaceFilter
+      end
+      class NetworkInterfaceTypes < RouterNetworkInterfaceFilter
+      end
+      class NameContains < RouterNetworkInterfaceFilter
+      end
+      class Unknown < RouterNetworkInterfaceFilter
+      end
+    end
+
+    class RouterNetworkInterfaceServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouterOutput
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      attr_accessor output_type: ("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")
+      attr_accessor configuration: Types::RouterOutputConfiguration
+      attr_accessor routed_state: ("ROUTED" | "ROUTING" | "UNROUTED")
+      attr_accessor region_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor messages: ::Array[Types::RouterOutputMessage]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor stream_details: Types::RouterOutputStreamDetails
+      attr_accessor ip_address: ::String
+      attr_accessor routed_input_arn: ::String
+      attr_accessor maintenance_type: ("PREFERRED_DAY_TIME" | "DEFAULT")
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      attr_accessor maintenance_schedule_type: ("WINDOW")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
+    class RouterOutputConfiguration
+      attr_accessor standard: Types::StandardRouterOutputConfiguration
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterOutputConfiguration
+      attr_accessor media_live_input: Types::MediaLiveInputRouterOutputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Standard < RouterOutputConfiguration
+      end
+      class MediaConnectFlow < RouterOutputConfiguration
+      end
+      class MediaLiveInput < RouterOutputConfiguration
+      end
+      class Unknown < RouterOutputConfiguration
+      end
+    end
+
+    class RouterOutputFilter
+      attr_accessor region_names: ::Array[::String]
+      attr_accessor output_types: ::Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")]
+      attr_accessor name_contains: ::Array[::String]
+      attr_accessor network_interface_arns: ::Array[::String]
+      attr_accessor routed_input_arns: ::Array[::String]
+      attr_accessor routing_scopes: ::Array[("REGIONAL" | "GLOBAL")]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RegionNames < RouterOutputFilter
+      end
+      class OutputTypes < RouterOutputFilter
+      end
+      class NameContains < RouterOutputFilter
+      end
+      class NetworkInterfaceArns < RouterOutputFilter
+      end
+      class RoutedInputArns < RouterOutputFilter
+      end
+      class RoutingScopes < RouterOutputFilter
+      end
+      class Unknown < RouterOutputFilter
+      end
+    end
+
+    class RouterOutputMessage
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouterOutputProtocolConfiguration
+      attr_accessor rtp: Types::RtpRouterOutputConfiguration
+      attr_accessor rist: Types::RistRouterOutputConfiguration
+      attr_accessor srt_listener: Types::SrtListenerRouterOutputConfiguration
+      attr_accessor srt_caller: Types::SrtCallerRouterOutputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Rtp < RouterOutputProtocolConfiguration
+      end
+      class Rist < RouterOutputProtocolConfiguration
+      end
+      class SrtListener < RouterOutputProtocolConfiguration
+      end
+      class SrtCaller < RouterOutputProtocolConfiguration
+      end
+      class Unknown < RouterOutputProtocolConfiguration
+      end
+    end
+
+    class RouterOutputServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouterOutputStreamDetails
+      attr_accessor standard: Types::StandardRouterOutputStreamDetails
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterOutputStreamDetails
+      attr_accessor media_live_input: Types::MediaLiveInputRouterOutputStreamDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Standard < RouterOutputStreamDetails
+      end
+      class MediaConnectFlow < RouterOutputStreamDetails
+      end
+      class MediaLiveInput < RouterOutputStreamDetails
+      end
+      class Unknown < RouterOutputStreamDetails
+      end
+    end
+
+    class RtpRouterInputConfiguration
+      attr_accessor port: ::Integer
+      attr_accessor forward_error_correction: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class RtpRouterOutputConfiguration
+      attr_accessor destination_address: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor forward_error_correction: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class SecretsManagerEncryptionKeyConfiguration
+      attr_accessor secret_arn: ::String
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1101,6 +1990,8 @@ module Aws::MediaConnect
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::SetGatewayBridgeSourceRequest
       attr_accessor source_tags: ::Hash[::String, ::String]
+      attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
+      attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
       SENSITIVE: []
     end
 
@@ -1127,11 +2018,80 @@ module Aws::MediaConnect
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::GatewayBridgeSource
       attr_accessor peer_ip_address: ::String
+      attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
+      attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
+      attr_accessor connected_router_output_arn: ::String
       SENSITIVE: []
     end
 
     class SourcePriority
       attr_accessor primary_source: ::String
+      SENSITIVE: []
+    end
+
+    class SrtCallerRouterInputConfiguration
+      attr_accessor source_address: ::String
+      attr_accessor source_port: ::Integer
+      attr_accessor minimum_latency_milliseconds: ::Integer
+      attr_accessor stream_id: ::String
+      attr_accessor decryption_configuration: Types::SrtDecryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class SrtCallerRouterOutputConfiguration
+      attr_accessor destination_address: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor minimum_latency_milliseconds: ::Integer
+      attr_accessor stream_id: ::String
+      attr_accessor encryption_configuration: Types::SrtEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class SrtDecryptionConfiguration
+      attr_accessor encryption_key: Types::SecretsManagerEncryptionKeyConfiguration
+      SENSITIVE: []
+    end
+
+    class SrtEncryptionConfiguration
+      attr_accessor encryption_key: Types::SecretsManagerEncryptionKeyConfiguration
+      SENSITIVE: []
+    end
+
+    class SrtListenerRouterInputConfiguration
+      attr_accessor port: ::Integer
+      attr_accessor minimum_latency_milliseconds: ::Integer
+      attr_accessor decryption_configuration: Types::SrtDecryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class SrtListenerRouterOutputConfiguration
+      attr_accessor port: ::Integer
+      attr_accessor minimum_latency_milliseconds: ::Integer
+      attr_accessor encryption_configuration: Types::SrtEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class StandardRouterInputConfiguration
+      attr_accessor network_interface_arn: ::String
+      attr_accessor protocol_configuration: Types::RouterInputProtocolConfiguration
+      attr_accessor protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")
+      SENSITIVE: []
+    end
+
+    class StandardRouterInputStreamDetails
+      attr_accessor source_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class StandardRouterOutputConfiguration
+      attr_accessor network_interface_arn: ::String
+      attr_accessor protocol_configuration: Types::RouterOutputProtocolConfiguration
+      attr_accessor protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")
+      SENSITIVE: []
+    end
+
+    class StandardRouterOutputStreamDetails
+      attr_accessor destination_ip_address: ::String
       SENSITIVE: []
     end
 
@@ -1146,6 +2106,34 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class StartRouterInputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartRouterInputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      attr_accessor maintenance_schedule_type: ("WINDOW")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
+    class StartRouterOutputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartRouterOutputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      attr_accessor maintenance_schedule_type: ("WINDOW")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      SENSITIVE: []
+    end
+
     class StopFlowRequest
       attr_accessor flow_arn: ::String
       SENSITIVE: []
@@ -1157,9 +2145,54 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class StopRouterInputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopRouterInputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      SENSITIVE: []
+    end
+
+    class StopRouterOutputRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopRouterOutputResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
+      SENSITIVE: []
+    end
+
+    class TagGlobalResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TakeRouterInputRequest
+      attr_accessor router_output_arn: ::String
+      attr_accessor router_input_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TakeRouterInputResponse
+      attr_accessor routed_state: ("ROUTED" | "ROUTING" | "UNROUTED")
+      attr_accessor router_output_arn: ::String
+      attr_accessor router_output_name: ::String
+      attr_accessor router_input_arn: ::String
+      attr_accessor router_input_name: ::String
       SENSITIVE: []
     end
 
@@ -1219,6 +2252,12 @@ module Aws::MediaConnect
       attr_accessor program_number: ::Integer
       attr_accessor program_pid: ::Integer
       attr_accessor streams: ::Array[Types::TransportStream]
+      SENSITIVE: []
+    end
+
+    class UntagGlobalResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1384,6 +2423,8 @@ module Aws::MediaConnect
       attr_accessor output_status: ("ENABLED" | "DISABLED")
       attr_accessor ndi_program_name: ::String
       attr_accessor ndi_speed_hq_quality: ::Integer
+      attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
+      attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
       SENSITIVE: []
     end
 
@@ -1429,6 +2470,8 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: ::String
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest
+      attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
+      attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
       SENSITIVE: []
     end
 
@@ -1469,6 +2512,51 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class UpdateRouterInputRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::RouterInputConfiguration
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20")
+      attr_accessor transit_encryption: Types::RouterInputTransitEncryption
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRouterInputResponse
+      attr_accessor router_input: Types::RouterInput
+      SENSITIVE: []
+    end
+
+    class UpdateRouterNetworkInterfaceRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::RouterNetworkInterfaceConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRouterNetworkInterfaceResponse
+      attr_accessor router_network_interface: Types::RouterNetworkInterface
+      SENSITIVE: []
+    end
+
+    class UpdateRouterOutputRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::RouterOutputConfiguration
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
+      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRouterOutputResponse
+      attr_accessor router_output: Types::RouterOutput
+      SENSITIVE: []
+    end
+
     class VideoMonitoringSetting
       attr_accessor black_frames: Types::BlackFrames
       attr_accessor frozen_frames: Types::FrozenFrames
@@ -1497,6 +2585,19 @@ module Aws::MediaConnect
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_id: ::String
       attr_accessor vpc_interface_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class VpcRouterNetworkInterfaceConfiguration
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+
+    class WindowMaintenanceSchedule
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      attr_accessor scheduled_time: ::Time
       SENSITIVE: []
     end
   end

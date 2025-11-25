@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-paymentcryptographydata/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.234.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.239.1')
   spec.add_dependency('aws-sigv4', '~> 1.5')
 
   spec.required_ruby_version = '>= 2.7'

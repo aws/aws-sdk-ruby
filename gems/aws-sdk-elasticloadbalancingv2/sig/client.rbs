@@ -431,7 +431,8 @@ module Aws
                                      value: ::String?
                                    },
                                  ],
-                                 ?ip_address_type: ("ipv4" | "ipv6")
+                                 ?ip_address_type: ("ipv4" | "ipv6"),
+                                 ?target_control_port: ::Integer
                                ) -> _CreateTargetGroupResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTargetGroupResponseSuccess
 

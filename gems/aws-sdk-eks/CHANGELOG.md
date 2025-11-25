@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2025-11-21)
+------------------
+
+* Feature - Adds support for controlPlaneScalingConfig on EKS Clusters.
+
 1.150.0 (2025-10-24)
 ------------------
 

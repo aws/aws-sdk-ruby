@@ -52,6 +52,12 @@ module Aws::SecurityIR
       SENSITIVE: []
     end
 
+    class CaseMetadataEntry
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class CloseCaseRequest
       attr_accessor case_id: ::String
       SENSITIVE: []
@@ -167,6 +173,7 @@ module Aws::SecurityIR
       attr_accessor impacted_services: ::Array[::String]
       attr_accessor case_attachments: ::Array[Types::CaseAttachmentAttributes]
       attr_accessor closed_date: ::Time
+      attr_accessor case_metadata: ::Array[Types::CaseMetadataEntry]
       SENSITIVE: [:title, :description]
     end
 
@@ -227,6 +234,24 @@ module Aws::SecurityIR
 
     class InvalidTokenException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvestigationAction
+      attr_accessor investigation_id: ::String
+      attr_accessor action_type: ("Evidence" | "Investigation" | "Summarization")
+      attr_accessor title: ::String
+      attr_accessor content: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Waiting" | "Completed" | "Failed" | "Cancelled")
+      attr_accessor last_updated: ::Time
+      attr_accessor feedback: Types::InvestigationFeedback
+      SENSITIVE: []
+    end
+
+    class InvestigationFeedback
+      attr_accessor usefulness: ("USEFUL" | "NOT_USEFUL")
+      attr_accessor comment: ::String
+      attr_accessor submitted_at: ::Time
       SENSITIVE: []
     end
 
@@ -295,6 +320,19 @@ module Aws::SecurityIR
       SENSITIVE: []
     end
 
+    class ListInvestigationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvestigationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor investigation_actions: ::Array[Types::InvestigationAction]
+      SENSITIVE: []
+    end
+
     class ListMembershipItem
       attr_accessor membership_id: ::String
       attr_accessor account_id: ::String
@@ -353,6 +391,17 @@ module Aws::SecurityIR
     class SecurityIncidentResponseNotActiveException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class SendFeedbackRequest
+      attr_accessor case_id: ::String
+      attr_accessor result_id: ::String
+      attr_accessor usefulness: ("USEFUL" | "NOT_USEFUL")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class SendFeedbackResponse < Aws::EmptyStructure
     end
 
     class ServiceQuotaExceededException
@@ -426,6 +475,7 @@ module Aws::SecurityIR
       attr_accessor impacted_aws_regions_to_delete: ::Array[Types::ImpactedAwsRegion]
       attr_accessor impacted_accounts_to_add: ::Array[::String]
       attr_accessor impacted_accounts_to_delete: ::Array[::String]
+      attr_accessor case_metadata: ::Array[Types::CaseMetadataEntry]
       SENSITIVE: [:title, :description]
     end
 

@@ -299,6 +299,7 @@ module Aws::DatabaseMigrationService
     KerberosAuthenticationSettings = Shapes::StructureShape.new(name: 'KerberosAuthenticationSettings')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KinesisSettings = Shapes::StructureShape.new(name: 'KinesisSettings')
+    LakehouseSettings = Shapes::StructureShape.new(name: 'LakehouseSettings')
     Limitation = Shapes::StructureShape.new(name: 'Limitation')
     LimitationList = Shapes::ListShape.new(name: 'LimitationList')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
@@ -598,6 +599,7 @@ module Aws::DatabaseMigrationService
     Certificate.add_member(:valid_to_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidToDate"))
     Certificate.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "SigningAlgorithm"))
     Certificate.add_member(:key_length, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "KeyLength"))
+    Certificate.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Certificate.struct_class = Types::Certificate
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate)
@@ -1540,6 +1542,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     Endpoint.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
     Endpoint.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalId"))
+    Endpoint.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     Endpoint.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
     Endpoint.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
     Endpoint.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
@@ -1559,6 +1562,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
     Endpoint.add_member(:gcp_my_sql_settings, Shapes::ShapeRef.new(shape: GcpMySQLSettings, location_name: "GcpMySQLSettings"))
     Endpoint.add_member(:timestream_settings, Shapes::ShapeRef.new(shape: TimestreamSettings, location_name: "TimestreamSettings"))
+    Endpoint.add_member(:lakehouse_settings, Shapes::ShapeRef.new(shape: LakehouseSettings, location_name: "LakehouseSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -1735,6 +1739,7 @@ module Aws::DatabaseMigrationService
     ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: SecretString, location_name: "CertificatePem"))
     ImportCertificateMessage.add_member(:certificate_wallet, Shapes::ShapeRef.new(shape: CertificateWallet, location_name: "CertificateWallet"))
     ImportCertificateMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportCertificateMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ImportCertificateMessage.struct_class = Types::ImportCertificateMessage
 
     ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
@@ -1842,6 +1847,9 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
     KinesisSettings.add_member(:use_large_integer_value, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseLargeIntegerValue"))
     KinesisSettings.struct_class = Types::KinesisSettings
+
+    LakehouseSettings.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    LakehouseSettings.struct_class = Types::LakehouseSettings
 
     Limitation.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
     Limitation.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
@@ -2471,6 +2479,7 @@ module Aws::DatabaseMigrationService
     Replication.add_member(:replication_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationUpdateTime"))
     Replication.add_member(:replication_last_stop_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationLastStopTime"))
     Replication.add_member(:replication_deprovision_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationDeprovisionTime"))
+    Replication.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     Replication.struct_class = Types::Replication
 
     ReplicationConfig.add_member(:replication_config_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationConfigIdentifier"))
@@ -2484,6 +2493,7 @@ module Aws::DatabaseMigrationService
     ReplicationConfig.add_member(:table_mappings, Shapes::ShapeRef.new(shape: String, location_name: "TableMappings"))
     ReplicationConfig.add_member(:replication_config_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationConfigCreateTime"))
     ReplicationConfig.add_member(:replication_config_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationConfigUpdateTime"))
+    ReplicationConfig.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     ReplicationConfig.struct_class = Types::ReplicationConfig
 
     ReplicationConfigList.member = Shapes::ShapeRef.new(shape: ReplicationConfig)
@@ -2559,6 +2569,7 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.add_member(:subnet_group_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupStatus"))
     ReplicationSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     ReplicationSubnetGroup.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
+    ReplicationSubnetGroup.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     ReplicationSubnetGroup.struct_class = Types::ReplicationSubnetGroup
 
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -4165,6 +4176,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

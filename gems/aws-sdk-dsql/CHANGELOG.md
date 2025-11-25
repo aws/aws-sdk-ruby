@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2025-11-20)
+------------------
+
+* Feature - Added clusterVpcEndpoint field to GetVpcEndpointServiceName API response, returning the VPC connection endpoint for the cluster
+
 1.20.0 (2025-11-10)
 ------------------
 

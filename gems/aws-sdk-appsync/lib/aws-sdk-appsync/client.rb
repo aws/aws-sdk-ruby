@@ -5115,7 +5115,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

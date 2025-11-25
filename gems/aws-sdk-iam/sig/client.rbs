@@ -569,6 +569,10 @@ module Aws
                                                ) -> _DisableOrganizationsRootSessionsResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableOrganizationsRootSessionsResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#disable_outbound_web_identity_federation-instance_method
+      def disable_outbound_web_identity_federation: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#enable_mfa_device-instance_method
       def enable_mfa_device: (
                                user_name: ::String,
@@ -597,6 +601,14 @@ module Aws
       def enable_organizations_root_sessions: (
                                               ) -> _EnableOrganizationsRootSessionsResponseSuccess
                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOrganizationsRootSessionsResponseSuccess
+
+      interface _EnableOutboundWebIdentityFederationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableOutboundWebIdentityFederationResponse]
+        def issuer_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#enable_outbound_web_identity_federation-instance_method
+      def enable_outbound_web_identity_federation: () -> _EnableOutboundWebIdentityFederationResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOutboundWebIdentityFederationResponseSuccess
 
       interface _GenerateCredentialReportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GenerateCredentialReportResponse]
@@ -826,6 +838,15 @@ module Aws
                                              ?sort_key: ("SERVICE_NAMESPACE_ASCENDING" | "SERVICE_NAMESPACE_DESCENDING" | "LAST_AUTHENTICATED_TIME_ASCENDING" | "LAST_AUTHENTICATED_TIME_DESCENDING")
                                            ) -> _GetOrganizationsAccessReportResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationsAccessReportResponseSuccess
+
+      interface _GetOutboundWebIdentityFederationInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutboundWebIdentityFederationInfoResponse]
+        def issuer_identifier: () -> ::String
+        def jwt_vending_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_outbound_web_identity_federation_info-instance_method
+      def get_outbound_web_identity_federation_info: () -> _GetOutboundWebIdentityFederationInfoResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutboundWebIdentityFederationInfoResponseSuccess
 
       interface _GetPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]

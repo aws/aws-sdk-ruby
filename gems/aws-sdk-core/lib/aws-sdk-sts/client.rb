@@ -2097,9 +2097,15 @@ module Aws::STS
       req.send_request(options)
     end
 
-    # This API is currently unavailable for general use.
+    # Exchanges a trade-in token for temporary Amazon Web Services
+    # credentials with the permissions associated with the assumed
+    # principal. This operation allows you to obtain credentials for a
+    # specific principal based on a trade-in token, enabling delegation of
+    # access to Amazon Web Services resources.
     #
     # @option params [required, String] :trade_in_token
+    #   The token to exchange for temporary Amazon Web Services credentials.
+    #   This token must be valid and unexpired at the time of the request.
     #
     # @return [Types::GetDelegatedAccessTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2636,6 +2642,71 @@ module Aws::STS
       req.send_request(options)
     end
 
+    # Returns a signed JSON Web Token (JWT) that represents the calling
+    # Amazon Web Services identity. The returned JWT can be used to
+    # authenticate with external services that support OIDC discovery. The
+    # token is signed by Amazon Web Services STS and can be publicly
+    # verified using the verification keys published at the issuer's JWKS
+    # endpoint.
+    #
+    # @option params [required, Array<String>] :audience
+    #   The intended recipient of the web identity token. This value populates
+    #   the `aud` claim in the JWT and should identify the service or
+    #   application that will validate and use the token. The external service
+    #   should verify this claim to ensure the token was intended for their
+    #   use.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The duration, in seconds, for which the JSON Web Token (JWT) will
+    #   remain valid. The value can range from 60 seconds (1 minute) to 3600
+    #   seconds (1 hour). If not specified, the default duration is 300
+    #   seconds (5 minutes). The token is designed to be short-lived and
+    #   should be used for proof of identity, then exchanged for credentials
+    #   or short-lived tokens in the external service.
+    #
+    # @option params [required, String] :signing_algorithm
+    #   The cryptographic algorithm to use for signing the JSON Web Token
+    #   (JWT). Valid values are RS256 (RSA with SHA-256) and ES384 (ECDSA
+    #   using P-384 curve with SHA-384).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An optional list of tags to include in the JSON Web Token (JWT). These
+    #   tags are added as custom claims to the JWT and can be used by the
+    #   downstream service for authorization decisions.
+    #
+    # @return [Types::GetWebIdentityTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWebIdentityTokenResponse#web_identity_token #web_identity_token} => String
+    #   * {Types::GetWebIdentityTokenResponse#expiration #expiration} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_web_identity_token({
+    #     audience: ["webIdentityTokenAudienceStringType"], # required
+    #     duration_seconds: 1,
+    #     signing_algorithm: "jwtAlgorithmType", # required
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.web_identity_token #=> String
+    #   resp.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetWebIdentityToken AWS API Documentation
+    #
+    # @overload get_web_identity_token(params = {})
+    # @param [Hash] params ({})
+    def get_web_identity_token(params = {}, options = {})
+      req = build_request(:get_web_identity_token, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2654,7 +2725,7 @@ module Aws::STS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.237.0'
+      context[:gem_version] = '3.239.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,6 +8,11 @@
 module Aws::S3
   module Types
 
+    class AbacStatus
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
     class AbortIncompleteMultipartUpload
       attr_accessor days_after_initiation: ::Integer
       SENSITIVE: []
@@ -74,6 +79,11 @@ module Aws::S3
       attr_accessor bucket_account_id: ::String
       attr_accessor bucket: ::String
       attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class BlockedEncryptionTypes
+      attr_accessor encryption_type: ::Array[("NONE" | "SSE-C")]
       SENSITIVE: []
     end
 
@@ -693,6 +703,17 @@ module Aws::S3
     class FilterRule
       attr_accessor name: ("prefix" | "suffix")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketAbacOutput
+      attr_accessor abac_status: Types::AbacStatus
+      SENSITIVE: []
+    end
+
+    class GetBucketAbacRequest
+      attr_accessor bucket: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -1993,6 +2014,15 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class PutBucketAbacRequest
+      attr_accessor bucket: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor abac_status: Types::AbacStatus
+      SENSITIVE: []
+    end
+
     class PutBucketAccelerateConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor accelerate_configuration: Types::AccelerateConfiguration
@@ -2607,6 +2637,7 @@ module Aws::S3
     class ServerSideEncryptionRule
       attr_accessor apply_server_side_encryption_by_default: Types::ServerSideEncryptionByDefault
       attr_accessor bucket_key_enabled: bool
+      attr_accessor blocked_encryption_types: Types::BlockedEncryptionTypes
       SENSITIVE: []
     end
 

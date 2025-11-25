@@ -276,6 +276,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -299,6 +300,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -313,6 +315,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -374,6 +377,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -825,6 +829,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -848,6 +853,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -862,6 +868,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -923,6 +930,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,

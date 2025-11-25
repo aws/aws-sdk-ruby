@@ -3841,6 +3841,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor pattern: ::String
+      attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -7299,6 +7300,7 @@ module Aws::Glue
       attr_accessor database_name: ::String
       attr_accessor class_name: ::String
       attr_accessor owner_name: ::String
+      attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
       attr_accessor create_time: ::Time
       attr_accessor resource_uris: ::Array[Types::ResourceUri]
@@ -7310,6 +7312,7 @@ module Aws::Glue
       attr_accessor function_name: ::String
       attr_accessor class_name: ::String
       attr_accessor owner_name: ::String
+      attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
       attr_accessor resource_uris: ::Array[Types::ResourceUri]
       SENSITIVE: []

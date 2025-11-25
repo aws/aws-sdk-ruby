@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2025-11-21)
+------------------
+
+* Feature - This release adds support for Tiered Storage
+
 1.87.0 (2025-10-28)
 ------------------
 

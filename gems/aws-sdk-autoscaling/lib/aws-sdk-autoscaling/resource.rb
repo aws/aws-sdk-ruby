@@ -123,6 +123,7 @@ module Aws::AutoScaling
     #                 },
     #               },
     #             },
+    #             image_id: "ImageId",
     #           },
     #         ],
     #       },
@@ -198,6 +199,11 @@ module Aws::AutoScaling
     #       capacity_reservation_target: {
     #         capacity_reservation_ids: ["AsciiStringMaxLen255"],
     #         capacity_reservation_resource_group_arns: ["ResourceName"],
+    #       },
+    #     },
+    #     instance_lifecycle_policy: {
+    #       retention_triggers: {
+    #         terminate_hook_abandon: "retain", # accepts retain, terminate
     #       },
     #     },
     #   })
@@ -508,6 +514,17 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
     # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
     #   The capacity reservation specification for the Auto Scaling group.
+    # @option options [Types::InstanceLifecyclePolicy] :instance_lifecycle_policy
+    #   The instance lifecycle policy for the Auto Scaling group. This policy
+    #   controls instance behavior when an instance transitions through its
+    #   lifecycle states. Configure retention triggers to specify when
+    #   instances should move to a `Retained` state for manual intervention
+    #   instead of automatic termination.
+    #
+    #   <note markdown="1"> Instances in a Retained state will continue to incur standard EC2
+    #   charges until terminated.
+    #
+    #    </note>
     # @return [AutoScalingGroup]
     def create_group(options = {})
       Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

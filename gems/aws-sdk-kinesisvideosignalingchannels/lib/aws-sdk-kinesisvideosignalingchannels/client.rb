@@ -605,7 +605,7 @@ module Aws::KinesisVideoSignalingChannels
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisvideosignalingchannels'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

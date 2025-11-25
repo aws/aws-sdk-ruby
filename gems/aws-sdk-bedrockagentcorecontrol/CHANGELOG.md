@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2025-11-21)
+------------------
+
+* Feature - Support for agentcore gateway interceptor configurations and NONE authorizer type
+
 1.14.0 (2025-11-03)
 ------------------
 

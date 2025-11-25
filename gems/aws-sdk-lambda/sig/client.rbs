@@ -284,7 +284,8 @@ module Aws
                                          },
                                          ?provisioned_poller_config: {
                                            minimum_pollers: ::Integer?,
-                                           maximum_pollers: ::Integer?
+                                           maximum_pollers: ::Integer?,
+                                           poller_group_name: ::String?
                                          }
                                        ) -> _CreateEventSourceMappingResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSourceMappingResponseSuccess
@@ -293,7 +294,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -327,11 +328,12 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_function-instance_method
       def create_function: (
                              function_name: ::String,
-                             ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14"),
+                             ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25"),
                              role: ::String,
                              ?handler: ::String,
                              code: {
@@ -388,6 +390,9 @@ module Aws
                                application_log_level: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")?,
                                system_log_level: ("DEBUG" | "INFO" | "WARN")?,
                                log_group: ::String?
+                             },
+                             ?tenancy_config: {
+                               tenant_isolation_mode: ("PER_TENANT")
                              }
                            ) -> _CreateFunctionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionResponseSuccess
@@ -639,7 +644,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -673,6 +678,7 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_configuration-instance_method
       def get_function_configuration: (
@@ -731,7 +737,7 @@ module Aws
         def description: () -> ::String
         def created_date: () -> ::Time
         def version: () -> ::Integer
-        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
         def license_info: () -> ::String
         def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
       end
@@ -750,7 +756,7 @@ module Aws
         def description: () -> ::String
         def created_date: () -> ::Time
         def version: () -> ::Integer
-        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
         def license_info: () -> ::String
         def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
       end
@@ -828,7 +834,8 @@ module Aws
                     ?log_type: ("None" | "Tail"),
                     ?client_context: ::String,
                     ?payload: ::String,
-                    ?qualifier: ::String
+                    ?qualifier: ::String,
+                    ?tenant_id: ::String
                   ) -> _InvokeResponseSuccess
                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeResponseSuccess
 
@@ -857,7 +864,8 @@ module Aws
                                          ?log_type: ("None" | "Tail"),
                                          ?client_context: ::String,
                                          ?qualifier: ::String,
-                                         ?payload: ::String
+                                         ?payload: ::String,
+                                         ?tenant_id: ::String
                                        ) ?{ (*untyped) -> void } -> _InvokeWithResponseStreamResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeWithResponseStreamResponseSuccess
 
@@ -961,7 +969,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_layer_versions-instance_method
       def list_layer_versions: (
-                                 ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14"),
+                                 ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25"),
                                  layer_name: ::String,
                                  ?marker: ::String,
                                  ?max_items: ::Integer,
@@ -976,7 +984,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_layers-instance_method
       def list_layers: (
-                         ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14"),
+                         ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25"),
                          ?marker: ::String,
                          ?max_items: ::Integer,
                          ?compatible_architecture: ("x86_64" | "arm64")
@@ -1027,7 +1035,7 @@ module Aws
         def description: () -> ::String
         def created_date: () -> ::Time
         def version: () -> ::Integer
-        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
         def license_info: () -> ::String
         def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
       end
@@ -1041,7 +1049,7 @@ module Aws
                                      s3_object_version: ::String?,
                                      zip_file: ::String?
                                    },
-                                   ?compatible_runtimes: Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")],
+                                   ?compatible_runtimes: Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")],
                                    ?license_info: ::String,
                                    ?compatible_architectures: Array[("x86_64" | "arm64")]
                                  ) -> _PublishLayerVersionResponseSuccess
@@ -1051,7 +1059,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -1085,6 +1093,7 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#publish_version-instance_method
       def publish_version: (
@@ -1376,7 +1385,8 @@ module Aws
                                          },
                                          ?provisioned_poller_config: {
                                            minimum_pollers: ::Integer?,
-                                           maximum_pollers: ::Integer?
+                                           maximum_pollers: ::Integer?,
+                                           poller_group_name: ::String?
                                          }
                                        ) -> _UpdateEventSourceMappingResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventSourceMappingResponseSuccess
@@ -1385,7 +1395,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -1419,6 +1429,7 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_code-instance_method
       def update_function_code: (
@@ -1440,7 +1451,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
         def function_name: () -> ::String
         def function_arn: () -> ::String
-        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
         def role: () -> ::String
         def handler: () -> ::String
         def code_size: () -> ::Integer
@@ -1474,6 +1485,7 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_configuration-instance_method
       def update_function_configuration: (
@@ -1491,7 +1503,7 @@ module Aws
                                            ?environment: {
                                              variables: Hash[::String, ::String]?
                                            },
-                                           ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14"),
+                                           ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25"),
                                            ?dead_letter_config: {
                                              target_arn: ::String?
                                            },

@@ -373,6 +373,60 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Braket ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_arn
+    #   The Amazon Resource Name (ARN) of the quantum device to apply the
+    #   spending limit to.
+    #   @return [String]
+    #
+    # @!attribute [rw] spending_limit
+    #   The maximum amount that can be spent on the specified device, in
+    #   USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_period
+    #   The time period during which the spending limit is active, including
+    #   start and end dates.
+    #   @return [Types::TimePeriod]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the spending limit. Each tag consists of a key
+    #   and an optional value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CreateSpendingLimitRequest AWS API Documentation
+    #
+    class CreateSpendingLimitRequest < Struct.new(
+      :client_token,
+      :device_arn,
+      :spending_limit,
+      :time_period,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] spending_limit_arn
+    #   The Amazon Resource Name (ARN) of the created spending limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CreateSpendingLimitResponse AWS API Documentation
+    #
+    class CreateSpendingLimitResponse < Struct.new(
+      :spending_limit_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the source of the input data used by the Amazon
     # Braket hybrid job.
     #
@@ -387,6 +441,22 @@ module Aws::Braket
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] spending_limit_arn
+    #   The Amazon Resource Name (ARN) of the spending limit to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/DeleteSpendingLimitRequest AWS API Documentation
+    #
+    class DeleteSpendingLimitRequest < Struct.new(
+      :spending_limit_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/DeleteSpendingLimitResponse AWS API Documentation
+    #
+    class DeleteSpendingLimitResponse < Aws::EmptyStructure; end
 
     # Configures the primary device used to create and run an Amazon Braket
     # hybrid job.
@@ -1472,6 +1542,77 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # Specifies filter criteria for searching spending limits. Use filters
+    # to narrow down results based on specific attributes.
+    #
+    # @!attribute [rw] name
+    #   The name of the field to filter on. Currently only supports
+    #   `deviceArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to match against the specified field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator to use when filtering.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchSpendingLimitsFilter AWS API Documentation
+    #
+    class SearchSpendingLimitsFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results. This value is
+    #   returned from a previous call to SearchSpendingLimits when there are
+    #   more results available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Minimum
+    #   value of 1, maximum value of 100. Default is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply when searching for spending limits. Use filters
+    #   to narrow down the results based on specific criteria.
+    #   @return [Array<Types::SearchSpendingLimitsFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchSpendingLimitsRequest AWS API Documentation
+    #
+    class SearchSpendingLimitsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] spending_limits
+    #   An array of spending limit summaries that match the specified
+    #   filters.
+    #   @return [Array<Types::SpendingLimitSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchSpendingLimitsResponse AWS API Documentation
+    #
+    class SearchSpendingLimitsResponse < Struct.new(
+      :spending_limits,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because a service quota is exceeded.
     #
     # @!attribute [rw] message
@@ -1481,6 +1622,68 @@ module Aws::Braket
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a spending limit, including current
+    # spending status and configuration details.
+    #
+    # @!attribute [rw] spending_limit_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the spending
+    #   limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_arn
+    #   The Amazon Resource Name (ARN) of the quantum device associated with
+    #   this spending limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_period
+    #   The time period during which the spending limit is active.
+    #   @return [Types::TimePeriod]
+    #
+    # @!attribute [rw] spending_limit
+    #   The maximum spending amount allowed for the device during the
+    #   specified time period, in USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] queued_spend
+    #   The amount currently queued for spending on the device, in USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_spend
+    #   The total amount spent on the device so far during the current time
+    #   period, in USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the spending limit was created, in epoch
+    #   seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the spending limit was last modified, in
+    #   epoch seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the spending limit. Each tag consists of a
+    #   key and an optional value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SpendingLimitSummary AWS API Documentation
+    #
+    class SpendingLimitSummary < Struct.new(
+      :spending_limit_arn,
+      :device_arn,
+      :time_period,
+      :spending_limit,
+      :queued_spend,
+      :total_spend,
+      :created_at,
+      :updated_at,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1521,6 +1724,28 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # Defines a time range for spending limits, specifying when the limit is
+    # active.
+    #
+    # @!attribute [rw] start_at
+    #   The start date and time for the spending limit period, in epoch
+    #   seconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_at
+    #   The end date and time for the spending limit period, in epoch
+    #   seconds.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/TimePeriod AWS API Documentation
+    #
+    class TimePeriod < Struct.new(
+      :start_at,
+      :end_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   Specify the `resourceArn` for the resource from which to remove the
     #   tags.
@@ -1542,6 +1767,45 @@ module Aws::Braket
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] spending_limit_arn
+    #   The Amazon Resource Name (ARN) of the spending limit to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Braket ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] spending_limit
+    #   The new maximum amount that can be spent on the specified device, in
+    #   USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_period
+    #   The new time period during which the spending limit is active,
+    #   including start and end dates.
+    #   @return [Types::TimePeriod]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UpdateSpendingLimitRequest AWS API Documentation
+    #
+    class UpdateSpendingLimitRequest < Struct.new(
+      :spending_limit_arn,
+      :client_token,
+      :spending_limit,
+      :time_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UpdateSpendingLimitResponse AWS API Documentation
+    #
+    class UpdateSpendingLimitResponse < Aws::EmptyStructure; end
 
     # The input request failed to satisfy constraints expected by Amazon
     # Braket.

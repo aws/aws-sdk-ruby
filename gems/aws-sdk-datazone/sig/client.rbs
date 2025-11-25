@@ -270,6 +270,48 @@ module Aws
                                     ) -> _AssociateGovernedTermsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateGovernedTermsResponseSuccess
 
+      interface _BatchGetAttributesMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAttributesMetadataOutput]
+        def attributes: () -> ::Array[Types::BatchGetAttributeOutput]
+        def errors: () -> ::Array[Types::AttributeError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#batch_get_attributes_metadata-instance_method
+      def batch_get_attributes_metadata: (
+                                           attribute_identifiers: Array[::String],
+                                           domain_identifier: ::String,
+                                           entity_identifier: ::String,
+                                           ?entity_revision: ::String,
+                                           entity_type: ("ASSET" | "LISTING")
+                                         ) -> _BatchGetAttributesMetadataResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetAttributesMetadataResponseSuccess
+
+      interface _BatchPutAttributesMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutAttributesMetadataOutput]
+        def attributes: () -> ::Array[Types::BatchPutAttributeOutput]
+        def errors: () -> ::Array[Types::AttributeError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#batch_put_attributes_metadata-instance_method
+      def batch_put_attributes_metadata: (
+                                           attributes: Array[
+                                             {
+                                               attribute_identifier: ::String,
+                                               forms: Array[
+                                                 {
+                                                   content: ::String?,
+                                                   form_name: ::String,
+                                                   type_identifier: ::String?,
+                                                   type_revision: ::String?
+                                                 },
+                                               ]
+                                             },
+                                           ],
+                                           ?client_token: ::String,
+                                           domain_identifier: ::String,
+                                           entity_identifier: ::String,
+                                           entity_type: ("ASSET" | "LISTING")
+                                         ) -> _BatchPutAttributesMetadataResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutAttributesMetadataResponseSuccess
+
       interface _CancelMetadataGenerationRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelMetadataGenerationRunOutput]
       end
@@ -1333,7 +1375,7 @@ module Aws
         def detail: () -> Types::RuleDetail
         def identifier: () -> ::String
         def name: () -> ::String
-        def rule_type: () -> ("METADATA_FORM_ENFORCEMENT")
+        def rule_type: () -> ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
         def scope: () -> Types::RuleScope
         def target: () -> Types::RuleTarget
         def target_type: () -> ("DOMAIN_UNIT")
@@ -1344,6 +1386,9 @@ module Aws
                          ?client_token: ::String,
                          ?description: ::String,
                          detail: {
+                           glossary_term_enforcement_detail: {
+                             required_glossary_term_ids: Array[::String]?
+                           }?,
                            metadata_form_enforcement_detail: {
                              required_metadata_forms: Array[
                                {
@@ -2469,7 +2514,7 @@ module Aws
         def last_updated_by: () -> ::String
         def name: () -> ::String
         def revision: () -> ::String
-        def rule_type: () -> ("METADATA_FORM_ENFORCEMENT")
+        def rule_type: () -> ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
         def scope: () -> Types::RuleScope
         def target: () -> Types::RuleTarget
         def target_type: () -> ("DOMAIN_UNIT")
@@ -3038,7 +3083,7 @@ module Aws
                         ?max_results: ::Integer,
                         ?next_token: ::String,
                         ?project_ids: Array[::String],
-                        ?rule_type: ("METADATA_FORM_ENFORCEMENT"),
+                        ?rule_type: ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT"),
                         target_identifier: ::String,
                         target_type: ("DOMAIN_UNIT")
                       ) -> _ListRulesResponseSuccess
@@ -4274,6 +4319,18 @@ module Aws
                                   ) -> _UpdateProjectProfileResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectProfileResponseSuccess
 
+      interface _UpdateRootDomainUnitOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRootDomainUnitOwnerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_root_domain_unit_owner-instance_method
+      def update_root_domain_unit_owner: (
+                                           ?client_token: ::String,
+                                           current_owner: ::String,
+                                           domain_identifier: ::String,
+                                           new_owner: ::String
+                                         ) -> _UpdateRootDomainUnitOwnerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRootDomainUnitOwnerResponseSuccess
+
       interface _UpdateRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleOutput]
         def action: () -> ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
@@ -4285,7 +4342,7 @@ module Aws
         def last_updated_by: () -> ::String
         def name: () -> ::String
         def revision: () -> ::String
-        def rule_type: () -> ("METADATA_FORM_ENFORCEMENT")
+        def rule_type: () -> ("METADATA_FORM_ENFORCEMENT" | "GLOSSARY_TERM_ENFORCEMENT")
         def scope: () -> Types::RuleScope
         def target: () -> Types::RuleTarget
         def updated_at: () -> ::Time
@@ -4294,6 +4351,9 @@ module Aws
       def update_rule: (
                          ?description: ::String,
                          ?detail: {
+                           glossary_term_enforcement_detail: {
+                             required_glossary_term_ids: Array[::String]?
+                           }?,
                            metadata_form_enforcement_detail: {
                              required_metadata_forms: Array[
                                {

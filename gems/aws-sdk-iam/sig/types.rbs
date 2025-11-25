@@ -569,6 +569,11 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class EnableOutboundWebIdentityFederationResponse
+      attr_accessor issuer_identifier: ::String
+      SENSITIVE: []
+    end
+
     class EntityAlreadyExistsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -610,6 +615,16 @@ module Aws::IAM
       attr_accessor permissions_boundary_decision_detail: Types::PermissionsBoundaryDecisionDetail
       attr_accessor eval_decision_details: ::Hash[::String, ("allowed" | "explicitDeny" | "implicitDeny")]
       attr_accessor resource_specific_results: ::Array[Types::ResourceSpecificResult]
+      SENSITIVE: []
+    end
+
+    class FeatureDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FeatureEnabledException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -822,6 +837,12 @@ module Aws::IAM
       attr_accessor is_truncated: bool
       attr_accessor marker: ::String
       attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class GetOutboundWebIdentityFederationInfoResponse
+      attr_accessor issuer_identifier: ::String
+      attr_accessor jwt_vending_enabled: bool
       SENSITIVE: []
     end
 

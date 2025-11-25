@@ -261,7 +261,10 @@ module Aws
                                 enabled: bool?
                               }?
                             },
-                            ?deletion_protection: bool
+                            ?deletion_protection: bool,
+                            ?control_plane_scaling_config: {
+                              tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")?
+                            }
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -993,7 +996,10 @@ module Aws
                                        },
                                      ]?
                                    },
-                                   ?deletion_protection: bool
+                                   ?deletion_protection: bool,
+                                   ?control_plane_scaling_config: {
+                                     tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")?
+                                   }
                                  ) -> _UpdateClusterConfigResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigResponseSuccess
 

@@ -54,7 +54,7 @@ module Aws::ComprehendMedical
   autoload :EndpointProvider, 'aws-sdk-comprehendmedical/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-comprehendmedical/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

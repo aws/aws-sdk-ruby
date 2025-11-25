@@ -54,7 +54,7 @@ module Aws::Neptunedata
   autoload :EndpointProvider, 'aws-sdk-neptunedata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-neptunedata/endpoints'
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end
 

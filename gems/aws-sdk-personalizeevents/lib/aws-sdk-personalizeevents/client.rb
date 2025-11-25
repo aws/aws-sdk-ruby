@@ -728,7 +728,7 @@ module Aws::PersonalizeEvents
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-personalizeevents'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

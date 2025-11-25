@@ -63,6 +63,33 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Contains aggregated scan results across multiple scan operations,
+    # providing a summary of scan status and findings.
+    #
+    # @!attribute [rw] failed_scan
+    #   A Boolean value indicating whether any of the aggregated scans
+    #   failed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] findings
+    #   An array of findings discovered across all aggregated scans.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_computed
+    #   The timestamp when the aggregated scan result was last computed, in
+    #   Unix format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/AggregatedScanResult AWS API Documentation
+    #
+    class AggregatedScanResult < Struct.new(
+      :failed_scan,
+      :findings,
+      :last_computed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The required resource already exists.
     #
     # @!attribute [rw] code
@@ -498,12 +525,19 @@ module Aws::Backup
     #   Contains a list of `BackupOptions` for each resource type.
     #   @return [Array<Types::AdvancedBackupSetting>]
     #
+    # @!attribute [rw] scan_settings
+    #   Contains your scanning configuration for the backup plan and
+    #   includes the Malware scanner, your selected resources, and scanner
+    #   role.
+    #   @return [Array<Types::ScanSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlan AWS API Documentation
     #
     class BackupPlan < Struct.new(
       :backup_plan_name,
       :rules,
-      :advanced_backup_settings)
+      :advanced_backup_settings,
+      :scan_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -528,12 +562,19 @@ module Aws::Backup
     #   (VSS) backup jobs.
     #   @return [Array<Types::AdvancedBackupSetting>]
     #
+    # @!attribute [rw] scan_settings
+    #   Contains your scanning configuration for the backup rule and
+    #   includes the malware scanner, and scan mode of either full or
+    #   incremental.
+    #   @return [Array<Types::ScanSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlanInput AWS API Documentation
     #
     class BackupPlanInput < Struct.new(
       :backup_plan_name,
       :rules,
-      :advanced_backup_settings)
+      :advanced_backup_settings,
+      :scan_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -754,6 +795,12 @@ module Aws::Backup
     #   BackupRule.
     #   @return [Array<Types::IndexAction>]
     #
+    # @!attribute [rw] scan_actions
+    #   Contains your scanning configuration for the backup rule and
+    #   includes the malware scanner, and scan mode of either full or
+    #   incremental.
+    #   @return [Array<Types::ScanAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRule AWS API Documentation
     #
     class BackupRule < Struct.new(
@@ -769,7 +816,8 @@ module Aws::Backup
       :copy_actions,
       :enable_continuous_backup,
       :schedule_expression_timezone,
-      :index_actions)
+      :index_actions,
+      :scan_actions)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -884,6 +932,12 @@ module Aws::Backup
     #   * `S3` for Amazon Simple Storage Service (Amazon S3)
     #   @return [Array<Types::IndexAction>]
     #
+    # @!attribute [rw] scan_actions
+    #   Contains your scanning configuration for the backup rule and
+    #   includes the malware scanner, and scan mode of either full or
+    #   incremental.
+    #   @return [Array<Types::ScanAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRuleInput AWS API Documentation
     #
     class BackupRuleInput < Struct.new(
@@ -898,7 +952,8 @@ module Aws::Backup
       :copy_actions,
       :enable_continuous_backup,
       :schedule_expression_timezone,
-      :index_actions)
+      :index_actions,
+      :scan_actions)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -2219,7 +2274,8 @@ module Aws::Backup
     #   using a report template. The report templates are:
     #
     #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
-    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT |
+    #   SCAN_JOB_REPORT `
     #
     #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
     #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
@@ -3736,6 +3792,12 @@ module Aws::Backup
     #   Web Services\_OWNED\_KMS\_KEY for Amazon Web Services-owned keys.
     #   @return [String]
     #
+    # @!attribute [rw] scan_results
+    #   Contains the latest scanning results against the recovery point and
+    #   currently include `MalwareScanner`, `ScanJobState`, `Findings`, and
+    #   `LastScanTimestamp`
+    #   @return [Array<Types::ScanResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointOutput AWS API Documentation
     #
     class DescribeRecoveryPointOutput < Struct.new(
@@ -3766,7 +3828,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
-      :encryption_key_type)
+      :encryption_key_type,
+      :scan_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4021,6 +4084,155 @@ module Aws::Backup
       :deletion_status_message,
       :is_parent,
       :parent_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_job_id
+    #   Uniquely identifies a request to Backup to scan a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeScanJobInput AWS API Documentation
+    #
+    class DescribeScanJobInput < Struct.new(
+      :scan_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Returns the account ID that owns the scan job.
+    #
+    #   Pattern: `^[0-9]{12}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   vault; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the account used
+    #   to create them and the Amazon Web Services Region where they are
+    #   created.
+    #
+    #   Pattern: `^[a-zA-Z0-9\-\_\.]{2,50}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_date
+    #   The date and time that a backup index finished creation, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CompletionDate` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Contains identifying information about the creation of a scan job,
+    #   including the backup plan and rule that initiated the scan.
+    #   @return [Types::ScanJobCreator]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time that a backup index finished creation, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationDate` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   vault; for example, `arn:aws:iam::123456789012:role/S3Access`.
+    #   @return [String]
+    #
+    # @!attribute [rw] malware_scanner
+    #   The scanning engine used for the corresponding scan job. Currently
+    #   only `GUARDUTY` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   An ARN that uniquely identifies the target recovery point for
+    #   scanning.; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   An ARN that uniquely identifies the source resource of the
+    #   corresponding recovery point ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The non-unique name of the resource that belongs to the specified
+    #   backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services Resource to be backed up; for
+    #   example, an Amazon Elastic Block Store (Amazon EBS) volume.
+    #
+    #   Pattern: `^[a-zA-Z0-9\-\_\.]{1,50}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_base_recovery_point_arn
+    #   An ARN that uniquely identifies the base recovery point for
+    #   scanning. This field will only be populated when an incremental scan
+    #   job has taken place.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_id
+    #   The scan ID generated by Amazon GuardDuty for the corresponding Scan
+    #   Job ID request from Backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_job_id
+    #   The scan job ID that uniquely identified the request to Backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode
+    #   Specifies the scan type used for the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_result
+    #   Contains the `ScanResultsStatus` for the scanning job and returns
+    #   `THREATS_FOUND` or `NO_THREATS_FOUND` for completed jobs.
+    #   @return [Types::ScanResultInfo]
+    #
+    # @!attribute [rw] scanner_role_arn
+    #   Specifies the scanner IAM role ARN used to for the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of a scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A detailed message explaining the status of the job to back up a
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeScanJobOutput AWS API Documentation
+    #
+    class DescribeScanJobOutput < Struct.new(
+      :account_id,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :completion_date,
+      :created_by,
+      :creation_date,
+      :iam_role_arn,
+      :malware_scanner,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_name,
+      :resource_type,
+      :scan_base_recovery_point_arn,
+      :scan_id,
+      :scan_job_id,
+      :scan_mode,
+      :scan_result,
+      :scanner_role_arn,
+      :state,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6672,7 +6884,11 @@ module Aws::Backup
     #   Returns only report jobs that are in the specified status. The
     #   statuses are:
     #
-    #   `CREATED | RUNNING | COMPLETED | FAILED`
+    #   `CREATED | RUNNING | COMPLETED | FAILED | COMPLETED_WITH_ISSUES`
+    #
+    #   Please note that only scanning jobs finish with state completed with
+    #   issues. For backup jobs this is a console interpretation of a job
+    #   that finishes in completed state and has a status message.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7186,6 +7402,238 @@ module Aws::Backup
     class ListRestoreTestingSelectionsOutput < Struct.new(
       :next_token,
       :restore_testing_selections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Returns the job count for the specified account.
+    #
+    #   If the request is sent from a member account or an account not part
+    #   of Amazon Web Services Organizations, jobs within requestor's
+    #   account will be returned.
+    #
+    #   Root, admin, and delegated administrator accounts can use the value
+    #   `ANY` to return job counts from every account in the organization.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts from all accounts within the
+    #   authenticated organization, then returns the sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Returns the job count for the specified resource type. Use request
+    #   `GetSupportedResourceTypes` to obtain strings for supported resource
+    #   types.
+    #
+    #   The the value `ANY` returns count of all resource types.
+    #
+    #   `AGGREGATE_ALL` aggregates job counts for all resource types and
+    #   returns the sum.
+    #   @return [String]
+    #
+    # @!attribute [rw] malware_scanner
+    #   Returns only the scan jobs for the specified malware scanner.
+    #   Currently the only MalwareScanner is `GUARDDUTY`. But the field also
+    #   supports `ANY`, and `AGGREGATE_ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_result_status
+    #   Returns only the scan jobs for the specified scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Returns only the scan jobs for the specified scanning job state.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_period
+    #   The period for the returned results.
+    #
+    #   * `ONE_DAY`The daily job count for the prior 1 day.
+    #
+    #   * `SEVEN_DAYS`The daily job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS`The daily job count for the prior 14 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #
+    #   The value is an integer. Range of accepted values is from 1 to 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListScanJobSummariesInput AWS API Documentation
+    #
+    class ListScanJobSummariesInput < Struct.new(
+      :account_id,
+      :resource_type,
+      :malware_scanner,
+      :scan_result_status,
+      :state,
+      :aggregation_period,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_job_summaries
+    #   The summary information.
+    #   @return [Array<Types::ScanJobSummary>]
+    #
+    # @!attribute [rw] aggregation_period
+    #   The period for the returned results.
+    #
+    #   * `ONE_DAY`The daily job count for the prior 1 day.
+    #
+    #   * `SEVEN_DAYS`The daily job count for the prior 7 days.
+    #
+    #   * `FOURTEEN_DAYS`The daily job count for the prior 14 days.
+    #
+    #   Valid Values: `'ONE_DAY'` \| `'SEVEN_DAYS'` \| `'FOURTEEN_DAYS'`
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListScanJobSummariesOutput AWS API Documentation
+    #
+    class ListScanJobSummariesOutput < Struct.new(
+      :scan_job_summaries,
+      :aggregation_period,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] by_account_id
+    #   The account ID to list the jobs from. Returns only backup jobs
+    #   associated with the specified account ID.
+    #
+    #   If used from an Amazon Web Services Organizations management
+    #   account, passing `*` returns all jobs across the organization.
+    #
+    #   Pattern: `^[0-9]{12}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] by_backup_vault_name
+    #   Returns only scan jobs that will be stored in the specified backup
+    #   vault. Backup vaults are identified by names that are unique to the
+    #   account used to create them and the Amazon Web Services Region where
+    #   they are created.
+    #
+    #   Pattern: `^[a-zA-Z0-9\-\_\.]{2,50}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] by_complete_after
+    #   Returns only scan jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_complete_before
+    #   Returns only backup jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_malware_scanner
+    #   Returns only the scan jobs for the specified malware scanner.
+    #   Currently only supports `GUARDDUTY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] by_recovery_point_arn
+    #   Returns only the scan jobs that are ran against the specified
+    #   recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] by_resource_arn
+    #   Returns only scan jobs that match the specified resource Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] by_resource_type
+    #   Returns restore testing selections by the specified restore testing
+    #   plan name.
+    #
+    #   * `EBS`for Amazon Elastic Block Store
+    #
+    #   * `EC2`for Amazon Elastic Compute Cloud
+    #
+    #   * `S3`for Amazon Simple Storage Service (Amazon S3)
+    #
+    #   Pattern: `^[a-zA-Z0-9\-\_\.]{1,50}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] by_scan_result_status
+    #   Returns only the scan jobs for the specified scan results:
+    #
+    #   * `THREATS_FOUND`
+    #
+    #   * `NO_THREATS_FOUND`
+    #   @return [String]
+    #
+    # @!attribute [rw] by_state
+    #   Returns only the scan jobs for the specified scanning job state.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListScanJobsInput AWS API Documentation
+    #
+    class ListScanJobsInput < Struct.new(
+      :by_account_id,
+      :by_backup_vault_name,
+      :by_complete_after,
+      :by_complete_before,
+      :by_malware_scanner,
+      :by_recovery_point_arn,
+      :by_resource_arn,
+      :by_resource_type,
+      :by_scan_result_status,
+      :by_state,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_jobs
+    #   An array of structures containing metadata about your scan jobs
+    #   returned in JSON format.
+    #   @return [Array<Types::ScanJob>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListScanJobsOutput AWS API Documentation
+    #
+    class ListScanJobsOutput < Struct.new(
+      :next_token,
+      :scan_jobs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7714,6 +8162,11 @@ module Aws::Backup
     #   Web Services\_OWNED\_KMS\_KEY for Amazon Web Services-owned keys.
     #   @return [String]
     #
+    # @!attribute [rw] aggregated_scan_result
+    #   Contains the latest scanning results against the recovery point and
+    #   currently include `FailedScan`, `Findings`, `LastComputed`.
+    #   @return [Types::AggregatedScanResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByBackupVault AWS API Documentation
     #
     class RecoveryPointByBackupVault < Struct.new(
@@ -7743,7 +8196,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
-      :encryption_key_type)
+      :encryption_key_type,
+      :aggregated_scan_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7828,6 +8282,11 @@ module Aws::Backup
     #   Web Services\_OWNED\_KMS\_KEY for Amazon Web Services-owned keys.
     #   @return [String]
     #
+    # @!attribute [rw] aggregated_scan_result
+    #   Contains the latest scanning results against the recovery point and
+    #   currently include `FailedScan`, `Findings`, `LastComputed`.
+    #   @return [Types::AggregatedScanResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByResource AWS API Documentation
     #
     class RecoveryPointByResource < Struct.new(
@@ -7844,7 +8303,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
-      :encryption_key_type)
+      :encryption_key_type,
+      :aggregated_scan_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8192,7 +8652,8 @@ module Aws::Backup
     #   using a report template. The report templates are:
     #
     #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
-    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT |
+    #   SCAN_JOB_REPORT`
     #   @return [String]
     #
     # @!attribute [rw] framework_arns
@@ -9225,6 +9686,354 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Defines a scanning action that specifies the malware scanner and scan
+    # mode to use.
+    #
+    # @!attribute [rw] malware_scanner
+    #   The malware scanner to use for the scan action. Currently only
+    #   `GUARDDUTY` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode
+    #   The scanning mode to use for the scan action.
+    #
+    #   Valid values: `FULL_SCAN` \| `INCREMENTAL_SCAN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanAction AWS API Documentation
+    #
+    class ScanAction < Struct.new(
+      :malware_scanner,
+      :scan_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a scan job, including information about the
+    # scanning process, results, and associated resources.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   vault; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the account used
+    #   to create them and the Amazon Web Services Region where they are
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_date
+    #   The date and time that a scan job is completed, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of `CompletionDate` is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Contains identifying information about the creation of a scan job.
+    #   @return [Types::ScanJobCreator]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time that a scan job is created, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   Specifies the IAM role ARN used to create the scan job; for example,
+    #   `arn:aws:iam::123456789012:role/S3Access`.
+    #   @return [String]
+    #
+    # @!attribute [rw] malware_scanner
+    #   The scanning engine used for the scan job. Currently only
+    #   `GUARDDUTY` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   An ARN that uniquely identifies the recovery point being scanned;
+    #   for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   An ARN that uniquely identifies the source resource of the recovery
+    #   point being scanned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The non-unique name of the resource that belongs to the specified
+    #   backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource being scanned; for example,
+    #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+    #   Relational Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_base_recovery_point_arn
+    #   An ARN that uniquely identifies the base recovery point for
+    #   scanning. This field is populated when an incremental scan job has
+    #   taken place.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_id
+    #   The scan ID generated by the malware scanner for the corresponding
+    #   scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_job_id
+    #   The unique identifier that identifies the scan job request to
+    #   Backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode
+    #   Specifies the scan type use for the scan job.
+    #
+    #   Includes:
+    #
+    #   `FULL_SCAN` will scan the entire data lineage within the backup.
+    #
+    #   `INCREMENTAL_SCAN` will scan the data difference between the target
+    #   recovery point and base recovery point ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_result
+    #   Contains the scan results information, including the status of
+    #   threats found during scanning.
+    #   @return [Types::ScanResultInfo]
+    #
+    # @!attribute [rw] scanner_role_arn
+    #   Specifies the scanner IAM role ARN used for the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the scan job.
+    #
+    #   Valid values: `CREATED` \| `RUNNING` \| `COMPLETED` \|
+    #   `COMPLETED_WITH_ISSUES` \| `FAILED` \| `CANCELED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A detailed message explaining the status of the scan job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanJob AWS API Documentation
+    #
+    class ScanJob < Struct.new(
+      :account_id,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :completion_date,
+      :created_by,
+      :creation_date,
+      :iam_role_arn,
+      :malware_scanner,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_name,
+      :resource_type,
+      :scan_base_recovery_point_arn,
+      :scan_id,
+      :scan_job_id,
+      :scan_mode,
+      :scan_result,
+      :scanner_role_arn,
+      :state,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains identifying information about the creation of a scan job,
+    # including the backup plan and rule that initiated the scan.
+    #
+    # @!attribute [rw] backup_plan_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a backup
+    #   plan; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50`.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_plan_id
+    #   The ID of the backup plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_plan_version
+    #   Unique, randomly generated, Unicode, UTF-8 encoded strings that are
+    #   at most 1,024 bytes long. Version IDs cannot be edited.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_rule_id
+    #   Uniquely identifies the backup rule that initiated the scan job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanJobCreator AWS API Documentation
+    #
+    class ScanJobCreator < Struct.new(
+      :backup_plan_arn,
+      :backup_plan_id,
+      :backup_plan_version,
+      :backup_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about scan jobs, including counts and
+    # metadata for a specific time period and criteria.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where the scan jobs were executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that owns the scan jobs included in this summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the scan jobs included in this summary.
+    #
+    #   Valid values: `CREATED` \| `RUNNING` \| `COMPLETED` \|
+    #   `COMPLETED_WITH_ISSUES` \| `FAILED` \| `CANCELED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource for the scan jobs included
+    #   in this summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of scan jobs that match the specified criteria.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The value of time in number format of a job start time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The value of time in number format of a job end time.
+    #
+    #   This value is the time in Unix format, Coordinated Universal Time
+    #   (UTC), and accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] malware_scanner
+    #   Specifies the malware scanner used during the scan job. Currently
+    #   only supports `GUARDDUTY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_result_status
+    #   The scan result status for the scan jobs included in this summary.
+    #
+    #   Valid values: `THREATS_FOUND` \| `NO_THREATS_FOUND`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanJobSummary AWS API Documentation
+    #
+    class ScanJobSummary < Struct.new(
+      :region,
+      :account_id,
+      :state,
+      :resource_type,
+      :count,
+      :start_time,
+      :end_time,
+      :malware_scanner,
+      :scan_result_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results of a security scan, including scanner
+    # information, scan state, and any findings discovered.
+    #
+    # @!attribute [rw] malware_scanner
+    #   The malware scanner used to perform the scan. Currently only
+    #   `GUARDDUTY` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_job_state
+    #   The final state of the scan job.
+    #
+    #   Valid values: `COMPLETED` \| `FAILED` \| `CANCELED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_scan_timestamp
+    #   The timestamp of when the last scan was performed, in Unix format
+    #   and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] findings
+    #   An array of findings discovered during the scan.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanResult AWS API Documentation
+    #
+    class ScanResult < Struct.new(
+      :malware_scanner,
+      :scan_job_state,
+      :last_scan_timestamp,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the results of a scan job.
+    #
+    # @!attribute [rw] scan_result_status
+    #   The status of the scan results.
+    #
+    #   Valid values: `THREATS_FOUND` \| `NO_THREATS_FOUND`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanResultInfo AWS API Documentation
+    #
+    class ScanResultInfo < Struct.new(
+      :scan_result_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration settings for malware scanning, including the
+    # scanner type, target resource types, and scanner role.
+    #
+    # @!attribute [rw] malware_scanner
+    #   The malware scanner to use for scanning. Currently only `GUARDDUTY`
+    #   is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types
+    #   An array of resource types to be scanned for malware.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scanner_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the scanner uses
+    #   to access resources; for example,
+    #   `arn:aws:iam::123456789012:role/ScannerRole`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScanSetting AWS API Documentation
+    #
+    class ScanSetting < Struct.new(
+      :malware_scanner,
+      :resource_types,
+      :scanner_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a scheduled backup plan execution,
     # including the execution time, rule type, and associated rule
     # identifier.
@@ -9738,6 +10547,94 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of a logical container where backups are stored. Backup
+    #   vaults are identified by names that are unique to the account used
+    #   to create them and the Amazon Web Services Region where they are
+    #   created.
+    #
+    #   Pattern: `^[a-zA-Z0-9\-\_]{2,50}$`
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   Specifies the IAM role ARN used to create the target recovery point;
+    #   for example, `arn:aws:iam::123456789012:role/S3Access`.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `StartScanJob`. Retrying a successful
+    #   request with the same idempotency token results in a success message
+    #   with no action taken.
+    #   @return [String]
+    #
+    # @!attribute [rw] malware_scanner
+    #   Specifies the malware scanner used during the scan job. Currently
+    #   only supports `GUARDDUTY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
+    #   point. This is your target recovery point for a full scan. If you
+    #   are running an incremental scan, this will be your a recovery point
+    #   which has been created after your base recovery point selection.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_base_recovery_point_arn
+    #   An ARN that uniquely identifies the base recovery point to be used
+    #   for incremental scanning.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode
+    #   Specifies the scan type use for the scan job.
+    #
+    #   Includes:
+    #
+    #   * `FULL_SCAN` will scan the entire data lineage within the backup.
+    #
+    #   * `INCREMENTAL_SCAN` will scan the data difference between the
+    #     target recovery point and base recovery point ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] scanner_role_arn
+    #   Specified the IAM scanner role ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartScanJobInput AWS API Documentation
+    #
+    class StartScanJobInput < Struct.new(
+      :backup_vault_name,
+      :iam_role_arn,
+      :idempotency_token,
+      :malware_scanner,
+      :recovery_point_arn,
+      :scan_base_recovery_point_arn,
+      :scan_mode,
+      :scanner_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_date
+    #   The date and time that a backup job is created, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of `CreationDate` is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_job_id
+    #   Uniquely identifies a request to Backup to back up a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartScanJobOutput AWS API Documentation
+    #
+    class StartScanJobOutput < Struct.new(
+      :creation_date,
+      :scan_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] backup_job_id
     #   Uniquely identifies a request to Backup to back up a resource.
     #   @return [String]
@@ -9994,6 +10891,12 @@ module Aws::Backup
     #   Contains a list of `BackupOptions` for each resource type.
     #   @return [Array<Types::AdvancedBackupSetting>]
     #
+    # @!attribute [rw] scan_settings
+    #   Contains your scanning configuration for the backup plan and
+    #   includes the Malware scanner, your selected resources, and scanner
+    #   role.
+    #   @return [Array<Types::ScanSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateBackupPlanOutput AWS API Documentation
     #
     class UpdateBackupPlanOutput < Struct.new(
@@ -10001,7 +10904,8 @@ module Aws::Backup
       :backup_plan_arn,
       :creation_date,
       :version_id,
-      :advanced_backup_settings)
+      :advanced_backup_settings,
+      :scan_settings)
       SENSITIVE = []
       include Aws::Structure
     end

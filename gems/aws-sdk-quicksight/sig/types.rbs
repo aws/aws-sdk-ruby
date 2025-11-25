@@ -1008,7 +1008,9 @@ module Aws::QuickSight
     end
 
     class BorderStyle
+      attr_accessor color: ::String
       attr_accessor show: bool
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -4866,6 +4868,8 @@ module Aws::QuickSight
       attr_accessor selected_border_style: Types::FreeFormLayoutElementBorderStyle
       attr_accessor background_style: Types::FreeFormLayoutElementBackgroundStyle
       attr_accessor loading_animation: Types::LoadingAnimation
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
       SENSITIVE: []
     end
 
@@ -4878,6 +4882,7 @@ module Aws::QuickSight
     class FreeFormLayoutElementBorderStyle
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor color: ::String
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -5444,6 +5449,25 @@ module Aws::QuickSight
       attr_accessor column_span: ::Integer
       attr_accessor row_index: ::Integer
       attr_accessor row_span: ::Integer
+      attr_accessor border_style: Types::GridLayoutElementBorderStyle
+      attr_accessor selected_border_style: Types::GridLayoutElementBorderStyle
+      attr_accessor background_style: Types::GridLayoutElementBackgroundStyle
+      attr_accessor loading_animation: Types::LoadingAnimation
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
+      SENSITIVE: []
+    end
+
+    class GridLayoutElementBackgroundStyle
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor color: ::String
+      SENSITIVE: []
+    end
+
+    class GridLayoutElementBorderStyle
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor color: ::String
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -8017,6 +8041,7 @@ module Aws::QuickSight
       attr_accessor q_search_bar: Types::RegisteredUserQSearchBarEmbeddingConfiguration
       attr_accessor dashboard_visual: Types::RegisteredUserDashboardVisualEmbeddingConfiguration
       attr_accessor generative_qn_a: Types::RegisteredUserGenerativeQnAEmbeddingConfiguration
+      attr_accessor quick_chat: Types::RegisteredUserQuickChatEmbeddingConfiguration
       SENSITIVE: []
     end
 
@@ -8028,6 +8053,9 @@ module Aws::QuickSight
     class RegisteredUserQSearchBarEmbeddingConfiguration
       attr_accessor initial_topic_id: ::String
       SENSITIVE: []
+    end
+
+    class RegisteredUserQuickChatEmbeddingConfiguration < Aws::EmptyStructure
     end
 
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration
@@ -8601,6 +8629,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SheetBackgroundStyle
+      attr_accessor color: ::String
+      attr_accessor gradient: ::String
+      SENSITIVE: []
+    end
+
     class SheetControlInfoIconLabelOptions
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor info_icon_text: ::String
@@ -8695,6 +8729,7 @@ module Aws::QuickSight
     class SheetStyle
       attr_accessor tile: Types::TileStyle
       attr_accessor tile_layout: Types::TileLayoutStyle
+      attr_accessor background: Types::SheetBackgroundStyle
       SENSITIVE: []
     end
 
@@ -9509,7 +9544,10 @@ module Aws::QuickSight
     end
 
     class TileStyle
+      attr_accessor background_color: ::String
       attr_accessor border: Types::BorderStyle
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
       SENSITIVE: []
     end
 
@@ -10031,6 +10069,13 @@ module Aws::QuickSight
 
     class Typography
       attr_accessor font_families: ::Array[Types::Font]
+      attr_accessor axis_title_font_configuration: Types::FontConfiguration
+      attr_accessor axis_label_font_configuration: Types::FontConfiguration
+      attr_accessor legend_title_font_configuration: Types::FontConfiguration
+      attr_accessor legend_value_font_configuration: Types::FontConfiguration
+      attr_accessor data_label_font_configuration: Types::FontConfiguration
+      attr_accessor visual_title_font_configuration: Types::VisualTitleFontConfiguration
+      attr_accessor visual_subtitle_font_configuration: Types::VisualSubtitleFontConfiguration
       SENSITIVE: []
     end
 
@@ -11051,9 +11096,23 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class VisualSubtitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      attr_accessor text_transform: ("CAPITALIZE")
+      SENSITIVE: []
+    end
+
     class VisualSubtitleLabelOptions
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor format_text: Types::LongFormatText
+      SENSITIVE: []
+    end
+
+    class VisualTitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      attr_accessor text_transform: ("CAPITALIZE")
       SENSITIVE: []
     end
 

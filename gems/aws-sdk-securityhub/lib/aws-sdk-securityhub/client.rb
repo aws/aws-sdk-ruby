@@ -2299,7 +2299,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to complete the authorization based on input
-    # parameters. This API is in preview release and subject to change.
+    # parameters. This API is in public preview and subject to change.
     #
     # @option params [required, String] :auth_code
     #   The authCode retrieved from authUrl to complete the OAuth 2.0
@@ -3222,7 +3222,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to create a connectorV2 based on input parameters.
-    # This API is in preview release and subject to change.
+    # This API is in public preview and subject to change.
     #
     # @option params [required, String] :name
     #   The unique name of the connectorV2.
@@ -4280,7 +4280,7 @@ module Aws::SecurityHub
 
     # Grants permission to create a ticket in the chosen ITSM based on
     # finding information for the provided finding metadata UID. This API is
-    # in preview release and subject to change.
+    # in public preview and subject to change.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -4519,8 +4519,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Grants permission to delete a connectorV2. This API is in preview
-    # release and subject to change.
+    # Grants permission to delete a connectorV2. This API is in public
+    # preview and subject to change.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -6080,7 +6080,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to retrieve details for a connectorV2 based on
-    # connector id. This API is in preview release and subject to change.
+    # connector id. This API is in public preview and subject to change.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -7422,6 +7422,90 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns findings trend data based on the specified criteria. This
+    # operation helps you analyze patterns and changes in findings over
+    # time. This API is in public preview and subject to change.
+    #
+    # @option params [Types::FindingsTrendsFilters] :filters
+    #   The filters to apply to the findings trend data.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The starting timestamp for the time period to analyze findings trends,
+    #   in ISO 8601 format.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The ending timestamp for the time period to analyze findings trends,
+    #   in ISO 8601 format.
+    #
+    # @option params [String] :next_token
+    #   The token to use for paginating results. This value is returned in the
+    #   response if more results are available.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of trend data points to return in a single
+    #   response.
+    #
+    # @return [Types::GetFindingsTrendsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingsTrendsV2Response#granularity #granularity} => String
+    #   * {Types::GetFindingsTrendsV2Response#trends_metrics #trends_metrics} => Array&lt;Types::TrendsMetricsResult&gt;
+    #   * {Types::GetFindingsTrendsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_findings_trends_v2({
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "account_id", # accepts account_id, region, finding_types, finding_status, finding_cve_ids, finding_compliance_status, finding_control_id, finding_class_name, finding_provider, finding_activity_name
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive FindingsTrendsCompositeFilterList
+    #           },
+    #           operator: "AND", # accepts AND, OR
+    #         },
+    #       ],
+    #       composite_operator: "AND", # accepts AND, OR
+    #     },
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.granularity #=> String, one of "Daily", "Weekly", "Monthly"
+    #   resp.trends_metrics #=> Array
+    #   resp.trends_metrics[0].timestamp #=> Time
+    #   resp.trends_metrics[0].trends_values.severity_trends.unknown #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.informational #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.low #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.medium #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.high #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.critical #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.fatal #=> Integer
+    #   resp.trends_metrics[0].trends_values.severity_trends.other #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsTrendsV2 AWS API Documentation
+    #
+    # @overload get_findings_trends_v2(params = {})
+    # @param [Hash] params ({})
+    def get_findings_trends_v2(params = {}, options = {})
+      req = build_request(:get_findings_trends_v2, params)
+      req.send_request(options)
+    end
+
     # Return a list of findings that match the specified criteria.
     # `GetFindings` and `GetFindingsV2` both use `securityhub:GetFindings`
     # in the `Action` element of an IAM policy statement. You must have
@@ -8326,6 +8410,84 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns resource trend data based on the specified criteria. This
+    # operation helps you analyze patterns and changes in resource
+    # compliance over time. This API is in public preview and subject to
+    # change.
+    #
+    # @option params [Types::ResourcesTrendsFilters] :filters
+    #   The filters to apply to the resources trend data.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The starting timestamp for the time period to analyze resources
+    #   trends, in ISO 8601 format.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The ending timestamp for the time period to analyze resources trends,
+    #   in ISO 8601 format.
+    #
+    # @option params [String] :next_token
+    #   The token to use for paginating results. This value is returned in the
+    #   response if more results are available.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of trend data points to return in a single
+    #   response.
+    #
+    # @return [Types::GetResourcesTrendsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcesTrendsV2Response#granularity #granularity} => String
+    #   * {Types::GetResourcesTrendsV2Response#trends_metrics #trends_metrics} => Array&lt;Types::ResourcesTrendsMetricsResult&gt;
+    #   * {Types::GetResourcesTrendsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resources_trends_v2({
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "account_id", # accepts account_id, region, resource_type, resource_category
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive ResourcesTrendsCompositeFilterList
+    #           },
+    #           operator: "AND", # accepts AND, OR
+    #         },
+    #       ],
+    #       composite_operator: "AND", # accepts AND, OR
+    #     },
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.granularity #=> String, one of "Daily", "Weekly", "Monthly"
+    #   resp.trends_metrics #=> Array
+    #   resp.trends_metrics[0].timestamp #=> Time
+    #   resp.trends_metrics[0].trends_values.resources_count.all_resources #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesTrendsV2 AWS API Documentation
+    #
+    # @overload get_resources_trends_v2(params = {})
+    # @param [Hash] params ({})
+    def get_resources_trends_v2(params = {}, options = {})
+      req = build_request(:get_resources_trends_v2, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resources. This API is in public preview and subject
     # to change.
     #
@@ -8987,7 +9149,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to retrieve a list of connectorsV2 and their
-    # metadata for the calling account. This API is in preview release and
+    # metadata for the calling account. This API is in public preview and
     # subject to change.
     #
     # @option params [String] :next_token
@@ -10327,7 +10489,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to update a connectorV2 based on its id and input
-    # parameters. This API is in preview release and subject to change.
+    # parameters. This API is in public preview and subject to change.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -12249,7 +12411,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

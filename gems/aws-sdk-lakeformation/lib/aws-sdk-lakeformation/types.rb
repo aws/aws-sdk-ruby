@@ -558,13 +558,19 @@ module Aws::LakeFormation
     #   resource share is created.
     #   @return [Array<Types::DataLakePrincipal>]
     #
+    # @!attribute [rw] service_integrations
+    #   A list of service integrations for enabling trusted identity
+    #   propagation with external services such as Redshift.
+    #   @return [Array<Types::ServiceIntegrationUnion>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationIdentityCenterConfigurationRequest AWS API Documentation
     #
     class CreateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       :catalog_id,
       :instance_arn,
       :external_filtering,
-      :share_recipients)
+      :share_recipients,
+      :service_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1139,6 +1145,11 @@ module Aws::LakeFormation
     #   resource share is created.
     #   @return [Array<Types::DataLakePrincipal>]
     #
+    # @!attribute [rw] service_integrations
+    #   A list of service integrations for enabling trusted identity
+    #   propagation with external services such as Redshift.
+    #   @return [Array<Types::ServiceIntegrationUnion>]
+    #
     # @!attribute [rw] resource_share
     #   The Amazon Resource Name (ARN) of the RAM share.
     #   @return [String]
@@ -1151,6 +1162,7 @@ module Aws::LakeFormation
       :application_arn,
       :external_filtering,
       :share_recipients,
+      :service_integrations,
       :resource_share)
       SENSITIVE = []
       include Aws::Structure
@@ -2571,8 +2583,12 @@ module Aws::LakeFormation
     #   @return [Integer]
     #
     # @!attribute [rw] include_related
-    #   Indicates that related permissions should be included in the
-    #   results.
+    #   Indicates that related permissions should be included in the results
+    #   when listing permissions on a table resource.
+    #
+    #   Set the field to `TRUE` to show the cell filters on a table
+    #   resource. Default is `FALSE`. The Principal parameter must not be
+    #   specified when requesting cell filter information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListPermissionsRequest AWS API Documentation
@@ -3028,6 +3044,45 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # Configuration for enabling trusted identity propagation with Redshift
+    # Connect.
+    #
+    # @!attribute [rw] authorization
+    #   The authorization status for Redshift Connect. Valid values are
+    #   ENABLED or DISABLED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RedshiftConnect AWS API Documentation
+    #
+    class RedshiftConnect < Struct.new(
+      :authorization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A union structure representing different Redshift integration scopes.
+    #
+    # @note RedshiftScopeUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RedshiftScopeUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RedshiftScopeUnion corresponding to the set member.
+    #
+    # @!attribute [rw] redshift_connect
+    #   Configuration for Redshift Connect integration.
+    #   @return [Types::RedshiftConnect]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RedshiftScopeUnion AWS API Documentation
+    #
+    class RedshiftScopeUnion < Struct.new(
+      :redshift_connect,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RedshiftConnect < RedshiftScopeUnion; end
+      class Unknown < RedshiftScopeUnion; end
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   register.
@@ -3159,7 +3214,7 @@ module Aws::LakeFormation
     #   @return [Types::DataCellsFilterResource]
     #
     # @!attribute [rw] lf_tag
-    #   The LF-tag key and values attached to a resource.
+    #   The LF-Tag key and values attached to a resource.
     #   @return [Types::LFTagKeyResource]
     #
     # @!attribute [rw] lf_tag_policy
@@ -3429,6 +3484,29 @@ module Aws::LakeFormation
       :table_list)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A union structure representing different service integration types.
+    #
+    # @note ServiceIntegrationUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ServiceIntegrationUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ServiceIntegrationUnion corresponding to the set member.
+    #
+    # @!attribute [rw] redshift
+    #   Redshift service integration configuration.
+    #   @return [Array<Types::RedshiftScopeUnion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ServiceIntegrationUnion AWS API Documentation
+    #
+    class ServiceIntegrationUnion < Struct.new(
+      :redshift,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Redshift < ServiceIntegrationUnion; end
+      class Unknown < ServiceIntegrationUnion; end
     end
 
     # @!attribute [rw] query_planning_context
@@ -3911,6 +3989,11 @@ module Aws::LakeFormation
     #   be deleted.
     #   @return [Array<Types::DataLakePrincipal>]
     #
+    # @!attribute [rw] service_integrations
+    #   A list of service integrations for enabling trusted identity
+    #   propagation with external services such as Redshift.
+    #   @return [Array<Types::ServiceIntegrationUnion>]
+    #
     # @!attribute [rw] application_status
     #   Allows to enable or disable the IAM Identity Center connection.
     #   @return [String]
@@ -3926,6 +4009,7 @@ module Aws::LakeFormation
     class UpdateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       :catalog_id,
       :share_recipients,
+      :service_integrations,
       :application_status,
       :external_filtering)
       SENSITIVE = []

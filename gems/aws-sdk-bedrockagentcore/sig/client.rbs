@@ -490,6 +490,25 @@ module Aws
                        ) -> _ListEventsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsResponseSuccess
 
+      interface _ListMemoryExtractionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMemoryExtractionJobsOutput]
+        def jobs: () -> ::Array[Types::ExtractionJobMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_memory_extraction_jobs-instance_method
+      def list_memory_extraction_jobs: (
+                                         memory_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?filter: {
+                                           strategy_id: ::String?,
+                                           session_id: ::String?,
+                                           actor_id: ::String?,
+                                           status: ("FAILED")?
+                                         },
+                                         ?next_token: ::String
+                                       ) -> _ListMemoryExtractionJobsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemoryExtractionJobsResponseSuccess
+
       interface _ListMemoryRecordsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMemoryRecordsOutput]
         def memory_record_summaries: () -> ::Array[Types::MemoryRecordSummary]
@@ -576,6 +595,20 @@ module Aws
                                             ?client_token: ::String
                                           ) -> _StartCodeInterpreterSessionResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeInterpreterSessionResponseSuccess
+
+      interface _StartMemoryExtractionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMemoryExtractionJobOutput]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_memory_extraction_job-instance_method
+      def start_memory_extraction_job: (
+                                         memory_id: ::String,
+                                         extraction_job: {
+                                           job_id: ::String
+                                         },
+                                         ?client_token: ::String
+                                       ) -> _StartMemoryExtractionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMemoryExtractionJobResponseSuccess
 
       interface _StopBrowserSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopBrowserSessionResponse]

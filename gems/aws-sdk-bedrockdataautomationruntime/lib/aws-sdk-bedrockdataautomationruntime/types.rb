@@ -146,13 +146,28 @@ module Aws::BedrockDataAutomationRuntime
     #   Output configuration.
     #   @return [Types::OutputConfiguration]
     #
+    # @!attribute [rw] job_submission_time
+    #   Job Submission time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_completion_time
+    #   Job completion time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_duration_in_seconds
+    #   Job duration in seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/GetDataAutomationStatusResponse AWS API Documentation
     #
     class GetDataAutomationStatusResponse < Struct.new(
       :status,
       :error_type,
       :error_message,
-      :output_configuration)
+      :output_configuration,
+      :job_submission_time,
+      :job_completion_time,
+      :job_duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -260,6 +275,59 @@ module Aws::BedrockDataAutomationRuntime
       include Aws::Structure
     end
 
+    # Invoke Data Automation Request
+    #
+    # @!attribute [rw] input_configuration
+    #   Input configuration.
+    #   @return [Types::SyncInputConfiguration]
+    #
+    # @!attribute [rw] data_automation_configuration
+    #   Data automation configuration.
+    #   @return [Types::DataAutomationConfiguration]
+    #
+    # @!attribute [rw] blueprints
+    #   Blueprint list.
+    #   @return [Array<Types::Blueprint>]
+    #
+    # @!attribute [rw] data_automation_profile_arn
+    #   Data automation profile ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Encryption configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/InvokeDataAutomationRequest AWS API Documentation
+    #
+    class InvokeDataAutomationRequest < Struct.new(
+      :input_configuration,
+      :data_automation_configuration,
+      :blueprints,
+      :data_automation_profile_arn,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Invoke Data Automation Response
+    #
+    # @!attribute [rw] semantic_modality
+    #   Detected semantic modality
+    #   @return [String]
+    #
+    # @!attribute [rw] output_segments
+    #   List of outputs for each logical sub-doc
+    #   @return [Array<Types::OutputSegment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/InvokeDataAutomationResponse AWS API Documentation
+    #
+    class InvokeDataAutomationResponse < Struct.new(
+      :semantic_modality,
+      :output_segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   ARN of a taggable resource
     #   @return [String]
@@ -312,6 +380,30 @@ module Aws::BedrockDataAutomationRuntime
       include Aws::Structure
     end
 
+    # Results for an output segment
+    #
+    # @!attribute [rw] custom_output_status
+    #   Status of blueprint match
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_output
+    #   Custom output response
+    #   @return [String]
+    #
+    # @!attribute [rw] standard_output
+    #   Standard output response
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/OutputSegment AWS API Documentation
+    #
+    class OutputSegment < Struct.new(
+      :custom_output_status,
+      :custom_output,
+      :standard_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception will be thrown when resource provided from customer not
     # found.
     #
@@ -335,6 +427,38 @@ module Aws::BedrockDataAutomationRuntime
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception will be thrown when service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input configuration for synchronous API
+    #
+    # @!attribute [rw] bytes
+    #   Input data as bytes
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   S3 URI of the input data
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/SyncInputConfiguration AWS API Documentation
+    #
+    class SyncInputConfiguration < Struct.new(
+      :bytes,
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end

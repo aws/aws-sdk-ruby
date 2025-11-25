@@ -90,6 +90,8 @@ module Aws::Organizations
     DescribePolicyRequest = Shapes::StructureShape.new(name: 'DescribePolicyRequest')
     DescribePolicyResponse = Shapes::StructureShape.new(name: 'DescribePolicyResponse')
     DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
+    DescribeResponsibilityTransferRequest = Shapes::StructureShape.new(name: 'DescribeResponsibilityTransferRequest')
+    DescribeResponsibilityTransferResponse = Shapes::StructureShape.new(name: 'DescribeResponsibilityTransferResponse')
     DestinationParentNotFoundException = Shapes::StructureShape.new(name: 'DestinationParentNotFoundException')
     DetachPolicyRequest = Shapes::StructureShape.new(name: 'DetachPolicyRequest')
     DisableAWSServiceAccessRequest = Shapes::StructureShape.new(name: 'DisableAWSServiceAccessRequest')
@@ -142,8 +144,11 @@ module Aws::Organizations
     InvalidHandshakeTransitionException = Shapes::StructureShape.new(name: 'InvalidHandshakeTransitionException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidInputExceptionReason = Shapes::StringShape.new(name: 'InvalidInputExceptionReason')
+    InvalidResponsibilityTransferTransitionException = Shapes::StructureShape.new(name: 'InvalidResponsibilityTransferTransitionException')
     InviteAccountToOrganizationRequest = Shapes::StructureShape.new(name: 'InviteAccountToOrganizationRequest')
     InviteAccountToOrganizationResponse = Shapes::StructureShape.new(name: 'InviteAccountToOrganizationResponse')
+    InviteOrganizationToTransferResponsibilityRequest = Shapes::StructureShape.new(name: 'InviteOrganizationToTransferResponsibilityRequest')
+    InviteOrganizationToTransferResponsibilityResponse = Shapes::StructureShape.new(name: 'InviteOrganizationToTransferResponsibilityResponse')
     ListAWSServiceAccessForOrganizationRequest = Shapes::StructureShape.new(name: 'ListAWSServiceAccessForOrganizationRequest')
     ListAWSServiceAccessForOrganizationResponse = Shapes::StructureShape.new(name: 'ListAWSServiceAccessForOrganizationResponse')
     ListAccountsForParentRequest = Shapes::StructureShape.new(name: 'ListAccountsForParentRequest')
@@ -166,8 +171,12 @@ module Aws::Organizations
     ListHandshakesForAccountResponse = Shapes::StructureShape.new(name: 'ListHandshakesForAccountResponse')
     ListHandshakesForOrganizationRequest = Shapes::StructureShape.new(name: 'ListHandshakesForOrganizationRequest')
     ListHandshakesForOrganizationResponse = Shapes::StructureShape.new(name: 'ListHandshakesForOrganizationResponse')
+    ListInboundResponsibilityTransfersRequest = Shapes::StructureShape.new(name: 'ListInboundResponsibilityTransfersRequest')
+    ListInboundResponsibilityTransfersResponse = Shapes::StructureShape.new(name: 'ListInboundResponsibilityTransfersResponse')
     ListOrganizationalUnitsForParentRequest = Shapes::StructureShape.new(name: 'ListOrganizationalUnitsForParentRequest')
     ListOrganizationalUnitsForParentResponse = Shapes::StructureShape.new(name: 'ListOrganizationalUnitsForParentResponse')
+    ListOutboundResponsibilityTransfersRequest = Shapes::StructureShape.new(name: 'ListOutboundResponsibilityTransfersRequest')
+    ListOutboundResponsibilityTransfersResponse = Shapes::StructureShape.new(name: 'ListOutboundResponsibilityTransfersResponse')
     ListParentsRequest = Shapes::StructureShape.new(name: 'ListParentsRequest')
     ListParentsResponse = Shapes::StructureShape.new(name: 'ListParentsResponse')
     ListPoliciesForTargetRequest = Shapes::StructureShape.new(name: 'ListPoliciesForTargetRequest')
@@ -237,6 +246,15 @@ module Aws::Organizations
     ResourcePolicyId = Shapes::StringShape.new(name: 'ResourcePolicyId')
     ResourcePolicyNotFoundException = Shapes::StructureShape.new(name: 'ResourcePolicyNotFoundException')
     ResourcePolicySummary = Shapes::StructureShape.new(name: 'ResourcePolicySummary')
+    ResponsibilityTransfer = Shapes::StructureShape.new(name: 'ResponsibilityTransfer')
+    ResponsibilityTransferAlreadyInStatusException = Shapes::StructureShape.new(name: 'ResponsibilityTransferAlreadyInStatusException')
+    ResponsibilityTransferArn = Shapes::StringShape.new(name: 'ResponsibilityTransferArn')
+    ResponsibilityTransferId = Shapes::StringShape.new(name: 'ResponsibilityTransferId')
+    ResponsibilityTransferName = Shapes::StringShape.new(name: 'ResponsibilityTransferName')
+    ResponsibilityTransferNotFoundException = Shapes::StructureShape.new(name: 'ResponsibilityTransferNotFoundException')
+    ResponsibilityTransferStatus = Shapes::StringShape.new(name: 'ResponsibilityTransferStatus')
+    ResponsibilityTransferType = Shapes::StringShape.new(name: 'ResponsibilityTransferType')
+    ResponsibilityTransfers = Shapes::ListShape.new(name: 'ResponsibilityTransfers')
     RoleName = Shapes::StringShape.new(name: 'RoleName')
     Root = Shapes::StructureShape.new(name: 'Root')
     RootArn = Shapes::StringShape.new(name: 'RootArn')
@@ -257,14 +275,19 @@ module Aws::Organizations
     TargetName = Shapes::StringShape.new(name: 'TargetName')
     TargetNotFoundException = Shapes::StructureShape.new(name: 'TargetNotFoundException')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
+    TerminateResponsibilityTransferRequest = Shapes::StructureShape.new(name: 'TerminateResponsibilityTransferRequest')
+    TerminateResponsibilityTransferResponse = Shapes::StructureShape.new(name: 'TerminateResponsibilityTransferResponse')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TransferParticipant = Shapes::StructureShape.new(name: 'TransferParticipant')
     UnsupportedAPIEndpointException = Shapes::StructureShape.new(name: 'UnsupportedAPIEndpointException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationalUnitRequest')
     UpdateOrganizationalUnitResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationalUnitResponse')
     UpdatePolicyRequest = Shapes::StructureShape.new(name: 'UpdatePolicyRequest')
     UpdatePolicyResponse = Shapes::StructureShape.new(name: 'UpdatePolicyResponse')
+    UpdateResponsibilityTransferRequest = Shapes::StructureShape.new(name: 'UpdateResponsibilityTransferRequest')
+    UpdateResponsibilityTransferResponse = Shapes::StructureShape.new(name: 'UpdateResponsibilityTransferResponse')
 
     AWSOrganizationsNotInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AWSOrganizationsNotInUseException.struct_class = Types::AWSOrganizationsNotInUseException
@@ -483,6 +506,12 @@ module Aws::Organizations
     DescribeResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
     DescribeResourcePolicyResponse.struct_class = Types::DescribeResourcePolicyResponse
 
+    DescribeResponsibilityTransferRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResponsibilityTransferId, required: true, location_name: "Id"))
+    DescribeResponsibilityTransferRequest.struct_class = Types::DescribeResponsibilityTransferRequest
+
+    DescribeResponsibilityTransferResponse.add_member(:responsibility_transfer, Shapes::ShapeRef.new(shape: ResponsibilityTransfer, location_name: "ResponsibilityTransfer"))
+    DescribeResponsibilityTransferResponse.struct_class = Types::DescribeResponsibilityTransferResponse
+
     DestinationParentNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     DestinationParentNotFoundException.struct_class = Types::DestinationParentNotFoundException
 
@@ -602,6 +631,9 @@ module Aws::Organizations
     InvalidInputException.add_member(:reason, Shapes::ShapeRef.new(shape: InvalidInputExceptionReason, location_name: "Reason"))
     InvalidInputException.struct_class = Types::InvalidInputException
 
+    InvalidResponsibilityTransferTransitionException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidResponsibilityTransferTransitionException.struct_class = Types::InvalidResponsibilityTransferTransitionException
+
     InviteAccountToOrganizationRequest.add_member(:target, Shapes::ShapeRef.new(shape: HandshakeParty, required: true, location_name: "Target"))
     InviteAccountToOrganizationRequest.add_member(:notes, Shapes::ShapeRef.new(shape: HandshakeNotes, location_name: "Notes"))
     InviteAccountToOrganizationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -609,6 +641,17 @@ module Aws::Organizations
 
     InviteAccountToOrganizationResponse.add_member(:handshake, Shapes::ShapeRef.new(shape: Handshake, location_name: "Handshake"))
     InviteAccountToOrganizationResponse.struct_class = Types::InviteAccountToOrganizationResponse
+
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:type, Shapes::ShapeRef.new(shape: ResponsibilityTransferType, required: true, location_name: "Type"))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:target, Shapes::ShapeRef.new(shape: HandshakeParty, required: true, location_name: "Target"))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:notes, Shapes::ShapeRef.new(shape: HandshakeNotes, location_name: "Notes"))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTimestamp"))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:source_name, Shapes::ShapeRef.new(shape: ResponsibilityTransferName, required: true, location_name: "SourceName"))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    InviteOrganizationToTransferResponsibilityRequest.struct_class = Types::InviteOrganizationToTransferResponsibilityRequest
+
+    InviteOrganizationToTransferResponsibilityResponse.add_member(:handshake, Shapes::ShapeRef.new(shape: Handshake, location_name: "Handshake"))
+    InviteOrganizationToTransferResponsibilityResponse.struct_class = Types::InviteOrganizationToTransferResponsibilityResponse
 
     ListAWSServiceAccessForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAWSServiceAccessForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -714,6 +757,16 @@ module Aws::Organizations
     ListHandshakesForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListHandshakesForOrganizationResponse.struct_class = Types::ListHandshakesForOrganizationResponse
 
+    ListInboundResponsibilityTransfersRequest.add_member(:type, Shapes::ShapeRef.new(shape: ResponsibilityTransferType, required: true, location_name: "Type"))
+    ListInboundResponsibilityTransfersRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResponsibilityTransferId, location_name: "Id"))
+    ListInboundResponsibilityTransfersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInboundResponsibilityTransfersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInboundResponsibilityTransfersRequest.struct_class = Types::ListInboundResponsibilityTransfersRequest
+
+    ListInboundResponsibilityTransfersResponse.add_member(:responsibility_transfers, Shapes::ShapeRef.new(shape: ResponsibilityTransfers, location_name: "ResponsibilityTransfers"))
+    ListInboundResponsibilityTransfersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInboundResponsibilityTransfersResponse.struct_class = Types::ListInboundResponsibilityTransfersResponse
+
     ListOrganizationalUnitsForParentRequest.add_member(:parent_id, Shapes::ShapeRef.new(shape: ParentId, required: true, location_name: "ParentId"))
     ListOrganizationalUnitsForParentRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOrganizationalUnitsForParentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -722,6 +775,15 @@ module Aws::Organizations
     ListOrganizationalUnitsForParentResponse.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnits, location_name: "OrganizationalUnits"))
     ListOrganizationalUnitsForParentResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOrganizationalUnitsForParentResponse.struct_class = Types::ListOrganizationalUnitsForParentResponse
+
+    ListOutboundResponsibilityTransfersRequest.add_member(:type, Shapes::ShapeRef.new(shape: ResponsibilityTransferType, required: true, location_name: "Type"))
+    ListOutboundResponsibilityTransfersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOutboundResponsibilityTransfersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListOutboundResponsibilityTransfersRequest.struct_class = Types::ListOutboundResponsibilityTransfersRequest
+
+    ListOutboundResponsibilityTransfersResponse.add_member(:responsibility_transfers, Shapes::ShapeRef.new(shape: ResponsibilityTransfers, location_name: "ResponsibilityTransfers"))
+    ListOutboundResponsibilityTransfersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOutboundResponsibilityTransfersResponse.struct_class = Types::ListOutboundResponsibilityTransfersResponse
 
     ListParentsRequest.add_member(:child_id, Shapes::ShapeRef.new(shape: ChildId, required: true, location_name: "ChildId"))
     ListParentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -897,6 +959,26 @@ module Aws::Organizations
     ResourcePolicySummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourcePolicyArn, location_name: "Arn"))
     ResourcePolicySummary.struct_class = Types::ResourcePolicySummary
 
+    ResponsibilityTransfer.add_member(:arn, Shapes::ShapeRef.new(shape: ResponsibilityTransferArn, location_name: "Arn"))
+    ResponsibilityTransfer.add_member(:name, Shapes::ShapeRef.new(shape: ResponsibilityTransferName, location_name: "Name"))
+    ResponsibilityTransfer.add_member(:id, Shapes::ShapeRef.new(shape: ResponsibilityTransferId, location_name: "Id"))
+    ResponsibilityTransfer.add_member(:type, Shapes::ShapeRef.new(shape: ResponsibilityTransferType, location_name: "Type"))
+    ResponsibilityTransfer.add_member(:status, Shapes::ShapeRef.new(shape: ResponsibilityTransferStatus, location_name: "Status"))
+    ResponsibilityTransfer.add_member(:source, Shapes::ShapeRef.new(shape: TransferParticipant, location_name: "Source"))
+    ResponsibilityTransfer.add_member(:target, Shapes::ShapeRef.new(shape: TransferParticipant, location_name: "Target"))
+    ResponsibilityTransfer.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
+    ResponsibilityTransfer.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    ResponsibilityTransfer.add_member(:active_handshake_id, Shapes::ShapeRef.new(shape: HandshakeId, location_name: "ActiveHandshakeId"))
+    ResponsibilityTransfer.struct_class = Types::ResponsibilityTransfer
+
+    ResponsibilityTransferAlreadyInStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResponsibilityTransferAlreadyInStatusException.struct_class = Types::ResponsibilityTransferAlreadyInStatusException
+
+    ResponsibilityTransferNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResponsibilityTransferNotFoundException.struct_class = Types::ResponsibilityTransferNotFoundException
+
+    ResponsibilityTransfers.member = Shapes::ShapeRef.new(shape: ResponsibilityTransfer)
+
     Root.add_member(:id, Shapes::ShapeRef.new(shape: RootId, location_name: "Id"))
     Root.add_member(:arn, Shapes::ShapeRef.new(shape: RootArn, location_name: "Arn"))
     Root.add_member(:name, Shapes::ShapeRef.new(shape: RootName, location_name: "Name"))
@@ -929,9 +1011,20 @@ module Aws::Organizations
     TargetNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     TargetNotFoundException.struct_class = Types::TargetNotFoundException
 
+    TerminateResponsibilityTransferRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResponsibilityTransferId, required: true, location_name: "Id"))
+    TerminateResponsibilityTransferRequest.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    TerminateResponsibilityTransferRequest.struct_class = Types::TerminateResponsibilityTransferRequest
+
+    TerminateResponsibilityTransferResponse.add_member(:responsibility_transfer, Shapes::ShapeRef.new(shape: ResponsibilityTransfer, location_name: "ResponsibilityTransfer"))
+    TerminateResponsibilityTransferResponse.struct_class = Types::TerminateResponsibilityTransferResponse
+
     TooManyRequestsException.add_member(:type, Shapes::ShapeRef.new(shape: ExceptionType, location_name: "Type"))
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TransferParticipant.add_member(:management_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "ManagementAccountId"))
+    TransferParticipant.add_member(:management_account_email, Shapes::ShapeRef.new(shape: Email, location_name: "ManagementAccountEmail"))
+    TransferParticipant.struct_class = Types::TransferParticipant
 
     UnsupportedAPIEndpointException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     UnsupportedAPIEndpointException.struct_class = Types::UnsupportedAPIEndpointException
@@ -955,6 +1048,13 @@ module Aws::Organizations
 
     UpdatePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     UpdatePolicyResponse.struct_class = Types::UpdatePolicyResponse
+
+    UpdateResponsibilityTransferRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResponsibilityTransferId, required: true, location_name: "Id"))
+    UpdateResponsibilityTransferRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResponsibilityTransferName, required: true, location_name: "Name"))
+    UpdateResponsibilityTransferRequest.struct_class = Types::UpdateResponsibilityTransferRequest
+
+    UpdateResponsibilityTransferResponse.add_member(:responsibility_transfer, Shapes::ShapeRef.new(shape: ResponsibilityTransfer, location_name: "ResponsibilityTransfer"))
+    UpdateResponsibilityTransferResponse.struct_class = Types::UpdateResponsibilityTransferResponse
 
 
     # @api private
@@ -994,6 +1094,8 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedForDependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: MasterCannotLeaveOrganizationException)
       end)
 
       api.add_operation(:attach_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1163,6 +1265,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotEmptyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
@@ -1353,6 +1456,21 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
       end)
 
+      api.add_operation(:describe_responsibility_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResponsibilityTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResponsibilityTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResponsibilityTransferResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResponsibilityTransferNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+      end)
+
       api.add_operation(:detach_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetachPolicy"
         o.http_method = "POST"
@@ -1477,6 +1595,24 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: FinalizingOrganizationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:invite_organization_to_transfer_responsibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InviteOrganizationToTransferResponsibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: InviteOrganizationToTransferResponsibilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: InviteOrganizationToTransferResponsibilityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateHandshakeException)
+        o.errors << Shapes::ShapeRef.new(shape: HandshakeConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:leave_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -1724,6 +1860,22 @@ module Aws::Organizations
         )
       end)
 
+      api.add_operation(:list_inbound_responsibility_transfers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInboundResponsibilityTransfers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInboundResponsibilityTransfersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInboundResponsibilityTransfersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResponsibilityTransferNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+      end)
+
       api.add_operation(:list_organizational_units_for_parent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListOrganizationalUnitsForParent"
         o.http_method = "POST"
@@ -1742,6 +1894,21 @@ module Aws::Organizations
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_outbound_responsibility_transfers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOutboundResponsibilityTransfers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListOutboundResponsibilityTransfersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOutboundResponsibilityTransfersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:list_parents, Seahorse::Model::Operation.new.tap do |o|
@@ -1949,6 +2116,25 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:terminate_responsibility_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TerminateResponsibilityTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TerminateResponsibilityTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: TerminateResponsibilityTransferResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResponsibilityTransferNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o.errors << Shapes::ShapeRef.new(shape: ResponsibilityTransferAlreadyInStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResponsibilityTransferTransitionException)
+      end)
+
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "POST"
@@ -1999,6 +2185,22 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyChangesInProgressException)
+      end)
+
+      api.add_operation(:update_responsibility_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResponsibilityTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResponsibilityTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResponsibilityTransferResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResponsibilityTransferNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
     end
 

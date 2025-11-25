@@ -14,6 +14,7 @@ module Aws::S3
 
     include Seahorse::Model
 
+    AbacStatus = Shapes::StructureShape.new(name: 'AbacStatus')
     AbortDate = Shapes::TimestampShape.new(name: 'AbortDate')
     AbortIncompleteMultipartUpload = Shapes::StructureShape.new(name: 'AbortIncompleteMultipartUpload')
     AbortMultipartUploadOutput = Shapes::StructureShape.new(name: 'AbortMultipartUploadOutput')
@@ -43,8 +44,10 @@ module Aws::S3
     AnalyticsS3BucketDestination = Shapes::StructureShape.new(name: 'AnalyticsS3BucketDestination')
     AnalyticsS3ExportFileFormat = Shapes::StringShape.new(name: 'AnalyticsS3ExportFileFormat')
     ArchiveStatus = Shapes::StringShape.new(name: 'ArchiveStatus')
+    BlockedEncryptionTypes = Shapes::StructureShape.new(name: 'BlockedEncryptionTypes')
     Body = Shapes::BlobShape.new(name: 'Body')
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
+    BucketAbacStatus = Shapes::StringShape.new(name: 'BucketAbacStatus')
     BucketAccelerateStatus = Shapes::StringShape.new(name: 'BucketAccelerateStatus')
     BucketAlreadyExists = Shapes::StructureShape.new(name: 'BucketAlreadyExists')
     BucketAlreadyOwnedByYou = Shapes::StructureShape.new(name: 'BucketAlreadyOwnedByYou')
@@ -177,6 +180,8 @@ module Aws::S3
     EncodingType = Shapes::StringShape.new(name: 'EncodingType')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EncryptionTypeList = Shapes::ListShape.new(name: 'EncryptionTypeList', flattened: true)
     EncryptionTypeMismatch = Shapes::StructureShape.new(name: 'EncryptionTypeMismatch')
     End = Shapes::IntegerShape.new(name: 'End')
     EndEvent = Shapes::StructureShape.new(name: 'EndEvent')
@@ -208,6 +213,8 @@ module Aws::S3
     FilterRuleList = Shapes::ListShape.new(name: 'FilterRuleList', flattened: true)
     FilterRuleName = Shapes::StringShape.new(name: 'FilterRuleName')
     FilterRuleValue = Shapes::StringShape.new(name: 'FilterRuleValue')
+    GetBucketAbacOutput = Shapes::StructureShape.new(name: 'GetBucketAbacOutput')
+    GetBucketAbacRequest = Shapes::StructureShape.new(name: 'GetBucketAbacRequest')
     GetBucketAccelerateConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketAccelerateConfigurationOutput')
     GetBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketAccelerateConfigurationRequest')
     GetBucketAclOutput = Shapes::StructureShape.new(name: 'GetBucketAclOutput')
@@ -497,6 +504,7 @@ module Aws::S3
     ProgressEvent = Shapes::StructureShape.new(name: 'ProgressEvent')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
+    PutBucketAbacRequest = Shapes::StructureShape.new(name: 'PutBucketAbacRequest')
     PutBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAccelerateConfigurationRequest')
     PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
     PutBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAnalyticsConfigurationRequest')
@@ -686,6 +694,9 @@ module Aws::S3
     WriteOffsetBytes = Shapes::IntegerShape.new(name: 'WriteOffsetBytes')
     Years = Shapes::IntegerShape.new(name: 'Years')
 
+    AbacStatus.add_member(:status, Shapes::ShapeRef.new(shape: BucketAbacStatus, location_name: "Status"))
+    AbacStatus.struct_class = Types::AbacStatus
+
     AbortIncompleteMultipartUpload.add_member(:days_after_initiation, Shapes::ShapeRef.new(shape: DaysAfterInitiation, location_name: "DaysAfterInitiation"))
     AbortIncompleteMultipartUpload.struct_class = Types::AbortIncompleteMultipartUpload
 
@@ -740,6 +751,9 @@ module Aws::S3
     AnalyticsS3BucketDestination.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
     AnalyticsS3BucketDestination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     AnalyticsS3BucketDestination.struct_class = Types::AnalyticsS3BucketDestination
+
+    BlockedEncryptionTypes.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionTypeList, location_name: "EncryptionType"))
+    BlockedEncryptionTypes.struct_class = Types::BlockedEncryptionTypes
 
     Bucket.add_member(:name, Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
     Bucket.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
@@ -1220,6 +1234,8 @@ module Aws::S3
     EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
+    EncryptionTypeList.member = Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType")
+
     EncryptionTypeMismatch.struct_class = Types::EncryptionTypeMismatch
 
     EndEvent.struct_class = Types::EndEvent
@@ -1253,6 +1269,15 @@ module Aws::S3
     FilterRule.struct_class = Types::FilterRule
 
     FilterRuleList.member = Shapes::ShapeRef.new(shape: FilterRule)
+
+    GetBucketAbacOutput.add_member(:abac_status, Shapes::ShapeRef.new(shape: AbacStatus, location_name: "AbacStatus"))
+    GetBucketAbacOutput.struct_class = Types::GetBucketAbacOutput
+    GetBucketAbacOutput[:payload] = :abac_status
+    GetBucketAbacOutput[:payload_member] = GetBucketAbacOutput.member(:abac_status)
+
+    GetBucketAbacRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    GetBucketAbacRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    GetBucketAbacRequest.struct_class = Types::GetBucketAbacRequest
 
     GetBucketAccelerateConfigurationOutput.add_member(:status, Shapes::ShapeRef.new(shape: BucketAccelerateStatus, location_name: "Status"))
     GetBucketAccelerateConfigurationOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
@@ -2294,6 +2319,15 @@ module Aws::S3
     PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets"))
     PublicAccessBlockConfiguration.struct_class = Types::PublicAccessBlockConfiguration
 
+    PutBucketAbacRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    PutBucketAbacRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    PutBucketAbacRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
+    PutBucketAbacRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    PutBucketAbacRequest.add_member(:abac_status, Shapes::ShapeRef.new(shape: AbacStatus, required: true, location_name: "AbacStatus", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketAbacRequest.struct_class = Types::PutBucketAbacRequest
+    PutBucketAbacRequest[:payload] = :abac_status
+    PutBucketAbacRequest[:payload_member] = PutBucketAbacRequest.member(:abac_status)
+
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, Shapes::ShapeRef.new(shape: AccelerateConfiguration, required: true, location_name: "AccelerateConfiguration", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketAccelerateConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
@@ -2843,6 +2877,7 @@ module Aws::S3
 
     ServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, Shapes::ShapeRef.new(shape: ServerSideEncryptionByDefault, location_name: "ApplyServerSideEncryptionByDefault"))
     ServerSideEncryptionRule.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled"))
+    ServerSideEncryptionRule.add_member(:blocked_encryption_types, Shapes::ShapeRef.new(shape: BlockedEncryptionTypes, location_name: "BlockedEncryptionTypes"))
     ServerSideEncryptionRule.struct_class = Types::ServerSideEncryptionRule
 
     ServerSideEncryptionRules.member = Shapes::ShapeRef.new(shape: ServerSideEncryptionRule)
@@ -3334,6 +3369,14 @@ module Aws::S3
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:get_bucket_abac, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketAbac"
+        o.http_method = "GET"
+        o.http_request_uri = "/?abac"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketAbacRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketAbacOutput)
+      end)
+
       api.add_operation(:get_bucket_accelerate_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBucketAccelerateConfiguration"
         o.http_method = "GET"
@@ -3766,6 +3809,22 @@ module Aws::S3
             "next_part_number_marker" => "part_number_marker"
           }
         )
+      end)
+
+      api.add_operation(:put_bucket_abac, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBucketAbac"
+        o.http_method = "PUT"
+        o.http_request_uri = "/?abac"
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => false,
+        }
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => false,
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutBucketAbacRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:put_bucket_accelerate_configuration, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.300.0 (2025-11-21)
+------------------
+
+* Feature - Add support for Upgrade Rollout Order
+
+1.299.0 (2025-11-20)
+------------------
+
+* Feature - Add support for VPC Encryption Controls.
+
 1.298.0 (2025-11-13)
 ------------------
 

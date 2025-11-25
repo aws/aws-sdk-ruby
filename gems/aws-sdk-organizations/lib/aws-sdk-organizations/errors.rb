@@ -54,6 +54,7 @@ module Aws::Organizations
   # * {HandshakeNotFoundException}
   # * {InvalidHandshakeTransitionException}
   # * {InvalidInputException}
+  # * {InvalidResponsibilityTransferTransitionException}
   # * {MalformedPolicyDocumentException}
   # * {MasterCannotLeaveOrganizationException}
   # * {OrganizationNotEmptyException}
@@ -68,6 +69,8 @@ module Aws::Organizations
   # * {PolicyTypeNotAvailableForOrganizationException}
   # * {PolicyTypeNotEnabledException}
   # * {ResourcePolicyNotFoundException}
+  # * {ResponsibilityTransferAlreadyInStatusException}
+  # * {ResponsibilityTransferNotFoundException}
   # * {RootNotFoundException}
   # * {ServiceException}
   # * {SourceParentNotFoundException}
@@ -506,6 +509,21 @@ module Aws::Organizations
       end
     end
 
+    class InvalidResponsibilityTransferTransitionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::InvalidResponsibilityTransferTransitionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class MalformedPolicyDocumentException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -706,6 +724,36 @@ module Aws::Organizations
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Organizations::Types::ResourcePolicyNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResponsibilityTransferAlreadyInStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::ResponsibilityTransferAlreadyInStatusException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResponsibilityTransferNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::ResponsibilityTransferNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

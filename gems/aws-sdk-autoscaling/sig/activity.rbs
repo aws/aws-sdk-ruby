@@ -34,7 +34,7 @@ module Aws
       def end_time: () -> ::Time
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Activity.html#status_code-instance_method
-      def status_code: () -> ("PendingSpotBidPlacement" | "WaitingForSpotInstanceRequestId" | "WaitingForSpotInstanceId" | "WaitingForInstanceId" | "PreInService" | "InProgress" | "WaitingForELBConnectionDraining" | "MidLifecycleAction" | "WaitingForInstanceWarmup" | "Successful" | "Failed" | "Cancelled" | "WaitingForConnectionDraining")
+      def status_code: () -> ("PendingSpotBidPlacement" | "WaitingForSpotInstanceRequestId" | "WaitingForSpotInstanceId" | "WaitingForInstanceId" | "PreInService" | "InProgress" | "WaitingForELBConnectionDraining" | "MidLifecycleAction" | "WaitingForInstanceWarmup" | "Successful" | "Failed" | "Cancelled" | "WaitingForConnectionDraining" | "WaitingForInPlaceUpdateToStart" | "WaitingForInPlaceUpdateToFinalize" | "InPlaceUpdateInProgress")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Activity.html#status_message-instance_method
       def status_message: () -> ::String

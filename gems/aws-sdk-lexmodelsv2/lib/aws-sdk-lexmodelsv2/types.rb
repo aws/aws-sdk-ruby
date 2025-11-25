@@ -2337,6 +2337,13 @@ module Aws::LexModelsV2
     #   * `generative`
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] speech_detection_sensitivity
+    #   The sensitivity level for voice activity detection (VAD) in the bot
+    #   locale. This setting helps optimize speech recognition accuracy by
+    #   adjusting how the system responds to background noise during voice
+    #   interactions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
     #
     class BotLocaleImportSpecification < Struct.new(
@@ -2344,7 +2351,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :nlu_intent_confidence_threshold,
-      :voice_settings)
+      :voice_settings,
+      :speech_detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3507,6 +3515,13 @@ module Aws::LexModelsV2
     #   Amazon Bedrock that you can turn on for your bot.
     #   @return [Types::GenerativeAISettings]
     #
+    # @!attribute [rw] speech_detection_sensitivity
+    #   The sensitivity level for voice activity detection (VAD) in the bot
+    #   locale. This setting helps optimize speech recognition accuracy by
+    #   adjusting how the system responds to background noise during voice
+    #   interactions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleRequest AWS API Documentation
     #
     class CreateBotLocaleRequest < Struct.new(
@@ -3516,7 +3531,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
-      :generative_ai_settings)
+      :generative_ai_settings,
+      :speech_detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3577,6 +3593,11 @@ module Aws::LexModelsV2
     #   Amazon Bedrock that you can turn on for your bot.
     #   @return [Types::GenerativeAISettings]
     #
+    # @!attribute [rw] speech_detection_sensitivity
+    #   The sensitivity level for voice activity detection (VAD) that was
+    #   specified for the bot locale.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleResponse AWS API Documentation
     #
     class CreateBotLocaleResponse < Struct.new(
@@ -3589,7 +3610,8 @@ module Aws::LexModelsV2
       :voice_settings,
       :bot_locale_status,
       :creation_date_time,
-      :generative_ai_settings)
+      :generative_ai_settings,
+      :speech_detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3932,6 +3954,14 @@ module Aws::LexModelsV2
     #   intent.
     #   @return [String]
     #
+    # @!attribute [rw] intent_display_name
+    #   A display name for the intent. If configured, This name will be
+    #   shown to users during Intent Disambiguation instead of the intent
+    #   name. Display names should be user-friendly, descriptive and match
+    #   the intent's purpose to improve user experience during
+    #   disambiguation.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the intent. Use the description to help identify
     #   the intent in lists.
@@ -4067,6 +4097,7 @@ module Aws::LexModelsV2
     #
     class CreateIntentRequest < Struct.new(
       :intent_name,
+      :intent_display_name,
       :description,
       :parent_intent_signature,
       :sample_utterances,
@@ -4093,6 +4124,10 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] intent_name
     #   The name specified for the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_display_name
+    #   The display name specified for the intent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4172,6 +4207,7 @@ module Aws::LexModelsV2
     class CreateIntentResponse < Struct.new(
       :intent_id,
       :intent_name,
+      :intent_display_name,
       :description,
       :parent_intent_signature,
       :sample_utterances,
@@ -5825,6 +5861,11 @@ module Aws::LexModelsV2
     #   your bot locale.
     #   @return [Types::GenerativeAISettings]
     #
+    # @!attribute [rw] speech_detection_sensitivity
+    #   The sensitivity level for voice activity detection (VAD) configured
+    #   for the bot locale.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleResponse AWS API Documentation
     #
     class DescribeBotLocaleResponse < Struct.new(
@@ -5844,7 +5885,8 @@ module Aws::LexModelsV2
       :last_build_submitted_date_time,
       :bot_locale_history_events,
       :recommended_actions,
-      :generative_ai_settings)
+      :generative_ai_settings,
+      :speech_detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6525,6 +6567,10 @@ module Aws::LexModelsV2
     #   The name specified for the intent.
     #   @return [String]
     #
+    # @!attribute [rw] intent_display_name
+    #   The display name specified for the intent.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the intent.
     #   @return [String]
@@ -6615,6 +6661,7 @@ module Aws::LexModelsV2
     class DescribeIntentResponse < Struct.new(
       :intent_id,
       :intent_name,
+      :intent_display_name,
       :description,
       :parent_intent_signature,
       :sample_utterances,
@@ -8389,6 +8436,42 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Configures the Intent Disambiguation feature that helps resolve
+    # ambiguous user inputs when multiple intents could match. When enabled,
+    # the system presents clarifying questions to users, helping them
+    # specify their exact intent for improved conversation accuracy.
+    #
+    # @!attribute [rw] enabled
+    #   Determines whether the Intent Disambiguation feature is enabled.
+    #   When set to `true`, Amazon Lex will present disambiguation options
+    #   to users when multiple intents could match their input, with the
+    #   default being `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_disambiguation_intents
+    #   Specifies the maximum number of intent options (2-5) to present to
+    #   users when disambiguation is needed. This setting determines how
+    #   many intent options will be shown to users when the system detects
+    #   ambiguous input. The default value is 3.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_disambiguation_message
+    #   Provides a custom message that will be displayed before presenting
+    #   the disambiguation options to users. This message helps set the
+    #   context for users and can be customized to match your bot's tone
+    #   and brand. If not specified, a default message will be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentDisambiguationSettings AWS API Documentation
+    #
+    class IntentDisambiguationSettings < Struct.new(
+      :enabled,
+      :max_disambiguation_intents,
+      :custom_disambiguation_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters the response from the `ListIntents` operation.
     #
     # @!attribute [rw] name
@@ -8524,6 +8607,10 @@ module Aws::LexModelsV2
     #   The name of the intent.
     #   @return [String]
     #
+    # @!attribute [rw] intent_display_name
+    #   The display name of the intent.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the intent.
     #   @return [String]
@@ -8552,6 +8639,7 @@ module Aws::LexModelsV2
     class IntentSummary < Struct.new(
       :intent_id,
       :intent_name,
+      :intent_display_name,
       :description,
       :parent_intent_signature,
       :input_contexts,
@@ -11218,11 +11306,19 @@ module Aws::LexModelsV2
     #   use it only when standard NLU confidence is low.
     #   @return [String]
     #
+    # @!attribute [rw] intent_disambiguation_settings
+    #   An object containing specifications for the Intent Disambiguation
+    #   feature within the Assisted NLU settings. These settings determine
+    #   how the bot handles ambiguous user inputs that could match multiple
+    #   intents.
+    #   @return [Types::IntentDisambiguationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/NluImprovementSpecification AWS API Documentation
     #
     class NluImprovementSpecification < Struct.new(
       :enabled,
-      :assisted_nlu_mode)
+      :assisted_nlu_mode,
+      :intent_disambiguation_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14456,6 +14552,13 @@ module Aws::LexModelsV2
     #   For more information, see LINK.
     #   @return [Types::GenerativeAISettings]
     #
+    # @!attribute [rw] speech_detection_sensitivity
+    #   The new sensitivity level for voice activity detection (VAD) in the
+    #   bot locale. This setting helps optimize speech recognition accuracy
+    #   by adjusting how the system responds to background noise during
+    #   voice interactions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleRequest AWS API Documentation
     #
     class UpdateBotLocaleRequest < Struct.new(
@@ -14465,7 +14568,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
-      :generative_ai_settings)
+      :generative_ai_settings,
+      :speech_detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14529,6 +14633,11 @@ module Aws::LexModelsV2
     #   Bedrock for your bot locale.
     #   @return [Types::GenerativeAISettings]
     #
+    # @!attribute [rw] speech_detection_sensitivity
+    #   The updated sensitivity level for voice activity detection (VAD) in
+    #   the bot locale.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleResponse AWS API Documentation
     #
     class UpdateBotLocaleResponse < Struct.new(
@@ -14544,7 +14653,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :recommended_actions,
-      :generative_ai_settings)
+      :generative_ai_settings,
+      :speech_detection_sensitivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14867,6 +14977,10 @@ module Aws::LexModelsV2
     #   The new name for the intent.
     #   @return [String]
     #
+    # @!attribute [rw] intent_display_name
+    #   The new display name for the intent.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The new description of the intent.
     #   @return [String]
@@ -14959,6 +15073,7 @@ module Aws::LexModelsV2
     class UpdateIntentRequest < Struct.new(
       :intent_id,
       :intent_name,
+      :intent_display_name,
       :description,
       :parent_intent_signature,
       :sample_utterances,
@@ -14986,6 +15101,10 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] intent_name
     #   The updated name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_display_name
+    #   The updated display name of the intent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -15080,6 +15199,7 @@ module Aws::LexModelsV2
     class UpdateIntentResponse < Struct.new(
       :intent_id,
       :intent_name,
+      :intent_display_name,
       :description,
       :parent_intent_signature,
       :sample_utterances,

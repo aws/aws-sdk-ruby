@@ -218,6 +218,41 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ExtractionJob
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExtractionJobFilterInput
+      attr_accessor strategy_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor status: ("FAILED")
+      SENSITIVE: []
+    end
+
+    class ExtractionJobMessages
+      attr_accessor messages_list: ::Array[Types::MessageMetadata]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MessagesList < ExtractionJobMessages
+      end
+      class Unknown < ExtractionJobMessages
+      end
+    end
+
+    class ExtractionJobMetadata
+      attr_accessor job_id: ::String
+      attr_accessor messages: Types::ExtractionJobMessages
+      attr_accessor status: ("FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor strategy_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
+      SENSITIVE: []
+    end
+
     class FilterInput
       attr_accessor branch: Types::BranchFilter
       attr_accessor event_metadata: ::Array[Types::EventMetadataFilterExpression]
@@ -497,6 +532,20 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ListMemoryExtractionJobsInput
+      attr_accessor memory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ExtractionJobFilterInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoryExtractionJobsOutput
+      attr_accessor jobs: ::Array[Types::ExtractionJobMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor namespace: ::String
@@ -593,6 +642,12 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class MessageMetadata
+      attr_accessor event_id: ::String
+      attr_accessor message_index: ::Integer
+      SENSITIVE: []
+    end
+
     class MetadataValue
       attr_accessor string_value: ::String
       attr_accessor unknown: untyped
@@ -608,7 +663,7 @@ module Aws::BedrockAgentCore
       attr_accessor conversational: Types::Conversational
       attr_accessor blob: untyped
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:blob]
 
       class Conversational < PayloadType
       end
@@ -722,6 +777,18 @@ module Aws::BedrockAgentCore
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartMemoryExtractionJobInput
+      attr_accessor memory_id: ::String
+      attr_accessor extraction_job: Types::ExtractionJob
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartMemoryExtractionJobOutput
+      attr_accessor job_id: ::String
       SENSITIVE: []
     end
 

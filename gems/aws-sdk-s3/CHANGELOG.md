@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.205.0 (2025-11-20)
+------------------
+
+* Feature - Enable / Disable ABAC on a general purpose bucket.
+
+1.204.0 (2025-11-19)
+------------------
+
+* Feature - Adds support for blocking SSE-C writes to general purpose buckets.
+
 1.203.1 (2025-11-10)
 ------------------
 

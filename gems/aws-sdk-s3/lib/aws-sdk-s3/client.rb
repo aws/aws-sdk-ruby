@@ -5405,7 +5405,14 @@ module Aws::S3
     #
     #  </note>
     #
-    # Deletes the tags from the bucket.
+    # Deletes tags from the general purpose bucket if attribute based access
+    # control (ABAC) is not enabled for the bucket. When you [enable ABAC
+    # for a general purpose bucket][1], you can no longer use this operation
+    # for that bucket and must use [UntagResource][2] instead.
+    #
+    # if ABAC is not enabled for the bucket. When you [enable ABAC for a
+    # general purpose bucket][1], you can no longer use this operation for
+    # that bucket and must use [UntagResource][2] instead.
     #
     # To use this operation, you must have permission to perform the
     # `s3:PutBucketTagging` action. By default, the bucket owner has this
@@ -5413,9 +5420,9 @@ module Aws::S3
     #
     # The following operations are related to `DeleteBucketTagging`:
     #
-    # * [GetBucketTagging][1]
+    # * [GetBucketTagging][3]
     #
-    # * [PutBucketTagging][2]
+    # * [PutBucketTagging][4]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -5423,8 +5430,10 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket that has the tag set to be removed.
@@ -5613,6 +5622,12 @@ module Aws::S3
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
     #       specific version of an object from a versioning-enabled bucket,
     #       you must have the `s3:DeleteObjectVersion` permission.
+    #
+    #       <note markdown="1"> If the `s3:DeleteObject` or `s3:DeleteObjectVersion` permissions
+    #       are explicitly denied in your bucket policy, attempts to delete
+    #       any unversioned objects result in a `403 Access Denied` error.
+    #
+    #        </note>
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][8] API operation for session-based
@@ -6052,6 +6067,12 @@ module Aws::S3
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
     #       specific version of an object from a versioning-enabled bucket,
     #       you must specify the `s3:DeleteObjectVersion` permission.
+    #
+    #       <note markdown="1"> If the `s3:DeleteObject` or `s3:DeleteObjectVersion` permissions
+    #       are explicitly denied in your bucket policy, attempts to delete
+    #       any unversioned objects result in a `403 Access Denied` error.
+    #
+    #        </note>
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][4] API operation for session-based
@@ -6433,6 +6454,49 @@ module Aws::S3
     # @param [Hash] params ({})
     def delete_public_access_block(params = {}, options = {})
       req = build_request(:delete_public_access_block, params)
+      req.send_request(options)
+    end
+
+    # Returns the attribute-based access control (ABAC) property of the
+    # general purpose bucket. If the bucket ABAC is enabled, you can use
+    # tags for bucket access control. For more information, see [Enabling
+    # ABAC in general purpose buckets][1]. Whether ABAC is enabled or
+    # disabled, you can use tags for cost tracking. For more information,
+    # see [Using tags with S3 general purpose buckets][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the general purpose bucket.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID of the general purpose bucket's
+    #   owner.
+    #
+    # @return [Types::GetBucketAbacOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketAbacOutput#abac_status #abac_status} => Types::AbacStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_abac({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.abac_status.status #=> String, one of "Enabled", "Disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAbac AWS API Documentation
+    #
+    # @overload get_bucket_abac(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_abac(params = {}, options = {})
+      req = build_request(:get_bucket_abac, params)
       req.send_request(options)
     end
 
@@ -6865,17 +6929,19 @@ module Aws::S3
 
     # Returns the default encryption configuration for an Amazon S3 bucket.
     # By default, all buckets have a default encryption configuration that
-    # uses server-side encryption with Amazon S3 managed keys (SSE-S3).
+    # uses server-side encryption with Amazon S3 managed keys (SSE-S3). This
+    # operation also returns the [BucketKeyEnabled][1] and
+    # [BlockedEncryptionTypes][2] statuses.
     #
     # <note markdown="1"> * **General purpose buckets** - For information about the bucket
     #   default encryption feature, see [Amazon S3 Bucket Default
-    #   Encryption][1] in the *Amazon S3 User Guide*.
+    #   Encryption][3] in the *Amazon S3 User Guide*.
     #
     # * **Directory buckets** - For directory buckets, there are only two
     #   supported options for server-side encryption: SSE-S3 and SSE-KMS.
     #   For information about the default encryption configuration in
     #   directory buckets, see [Setting default server-side encryption
-    #   behavior for directory buckets][2].
+    #   behavior for directory buckets][4].
     #
     #  </note>
     #
@@ -6885,8 +6951,8 @@ module Aws::S3
     #     policy. The bucket owner has this permission by default. The
     #     bucket owner can grant this permission to others. For more
     #     information about permissions, see [Permissions Related to Bucket
-    #     Operations][3] and [Managing Access Permissions to Your Amazon S3
-    #     Resources][4].
+    #     Operations][5] and [Managing Access Permissions to Your Amazon S3
+    #     Resources][6].
     #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation, you must have the
@@ -6896,7 +6962,7 @@ module Aws::S3
     #     only be performed by the Amazon Web Services account that owns the
     #     resource. For more information about directory bucket policies and
     #     permissions, see [Amazon Web Services Identity and Access
-    #     Management (IAM) for S3 Express One Zone][5] in the *Amazon S3
+    #     Management (IAM) for S3 Express One Zone][7] in the *Amazon S3
     #     User Guide*.
     #
     # HTTP Host header syntax
@@ -6906,9 +6972,9 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketEncryption`:
     #
-    # * [PutBucketEncryption][6]
+    # * [PutBucketEncryption][8]
     #
-    # * [DeleteBucketEncryption][7]
+    # * [DeleteBucketEncryption][9]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -6916,13 +6982,15 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-bucket-encryption.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BucketKeyEnabled.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BlockedEncryptionTypes.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-bucket-encryption.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket from which the server-side encryption
@@ -6971,6 +7039,8 @@ module Aws::S3
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:fsx", "aws:kms", "aws:kms:dsse"
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
     #   resp.server_side_encryption_configuration.rules[0].bucket_key_enabled #=> Boolean
+    #   resp.server_side_encryption_configuration.rules[0].blocked_encryption_types.encryption_type #=> Array
+    #   resp.server_side_encryption_configuration.rules[0].blocked_encryption_types.encryption_type[0] #=> String, one of "NONE", "SSE-C"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryption AWS API Documentation
     #
@@ -8411,7 +8481,7 @@ module Aws::S3
     #
     #   resp.to_h outputs the following:
     #   {
-    #     policy: "{\"Version\":\"2008-10-17\",\"Id\":\"LogPolicy\",\"Statement\":[{\"Sid\":\"Enables the log delivery group to publish logs to your bucket \",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"111122223333\"},\"Action\":[\"s3:GetBucketAcl\",\"s3:GetObjectAcl\",\"s3:PutObject\"],\"Resource\":[\"arn:aws:s3:::policytest1/*\",\"arn:aws:s3:::policytest1\"]}]}", 
+    #     policy: "{\"Version\":\"2008-10-17\",&TCX5-2025-waiver;\"Id\":\"LogPolicy\",\"Statement\":[{\"Sid\":\"Enables the log delivery group to publish logs to your bucket \",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"111122223333\"},\"Action\":[\"s3:GetBucketAcl\",\"s3:GetObjectAcl\",\"s3:PutObject\"],\"Resource\":[\"arn:aws:s3:::policytest1/*\",\"arn:aws:s3:::policytest1\"]}]}", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -8704,7 +8774,11 @@ module Aws::S3
     #
     #  </note>
     #
-    # Returns the tag set associated with the bucket.
+    # Returns the tag set associated with the general purpose bucket.
+    #
+    # if ABAC is not enabled for the bucket. When you [enable ABAC for a
+    # general purpose bucket][1], you can no longer use this operation for
+    # that bucket and must use [ListTagsForResource][2] instead.
     #
     # To use this operation, you must have permission to perform the
     # `s3:GetBucketTagging` action. By default, the bucket owner has this
@@ -8720,9 +8794,9 @@ module Aws::S3
     #
     # The following operations are related to `GetBucketTagging`:
     #
-    # * [PutBucketTagging][1]
+    # * [PutBucketTagging][3]
     #
-    # * [DeleteBucketTagging][2]
+    # * [DeleteBucketTagging][4]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -8730,8 +8804,10 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListTagsForResource.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to get the tagging information.
@@ -13970,6 +14046,83 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Sets the attribute-based access control (ABAC) property of the general
+    # purpose bucket. When you enable ABAC, you can use tags for bucket
+    # access control. Additionally, when ABAC is enabled, you must use the
+    # [TagResource][1], [UntagResource][2], and [ListTagsForResource][3]
+    # actions to manage bucket tags, and you can nolonger use the
+    # [PutBucketTagging][4] and [DeleteBucketTagging][5] actions to tag the
+    # bucket. You must also have the correct permissions for these actions.
+    # For more information, see [Enabling ABAC in general purpose
+    # buckets][6].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_TagResource.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListTagsForResource.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the general purpose bucket.
+    #
+    # @option params [String] :content_md5
+    #   The MD5 hash of the `PutBucketAbac` request body.
+    #
+    #   For requests made using the Amazon Web Services Command Line Interface
+    #   (CLI) or Amazon Web Services SDKs, this field is calculated
+    #   automatically.
+    #
+    # @option params [String] :checksum_algorithm
+    #   Indicates the algorithm that you want Amazon S3 to use to create the
+    #   checksum. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The Amazon Web Services account ID of the general purpose bucket's
+    #   owner.
+    #
+    # @option params [required, Types::AbacStatus] :abac_status
+    #   The ABAC status of the general purpose bucket. When ABAC is enabled
+    #   for the general purpose bucket, you can use tags to manage access to
+    #   the general purpose buckets as well as for cost tracking purposes.
+    #   When ABAC is disabled for the general purpose buckets, you can only
+    #   use tags for cost tracking purposes. For more information, see [Using
+    #   tags with S3 general purpose buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_abac({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     expected_bucket_owner: "AccountId",
+    #     abac_status: { # required
+    #       status: "Enabled", # accepts Enabled, Disabled
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAbac AWS API Documentation
+    #
+    # @overload put_bucket_abac(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_abac(params = {}, options = {})
+      req = build_request(:put_bucket_abac, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -14712,7 +14865,8 @@ module Aws::S3
     end
 
     # This operation configures default encryption and Amazon S3 Bucket Keys
-    # for an existing bucket.
+    # for an existing bucket. You can also [block encryption types][1] using
+    # this operation.
     #
     # <note markdown="1"> <b>Directory buckets </b> - For directory buckets, you must make
     # requests for this API operation to the Regional endpoint. These
@@ -14720,9 +14874,9 @@ module Aws::S3
     # `https://s3express-control.region-code.amazonaws.com/bucket-name `.
     # Virtual-hosted-style requests aren't supported. For more information
     # about endpoints in Availability Zones, see [Regional and Zonal
-    # endpoints for directory buckets in Availability Zones][1] in the
+    # endpoints for directory buckets in Availability Zones][2] in the
     # *Amazon S3 User Guide*. For more information about endpoints in Local
-    # Zones, see [Concepts for directory buckets in Local Zones][2] in the
+    # Zones, see [Concepts for directory buckets in Local Zones][3] in the
     # *Amazon S3 User Guide*.
     #
     #  </note>
@@ -14737,12 +14891,12 @@ module Aws::S3
     #     keys (SSE-KMS) or dual-layer server-side encryption with Amazon
     #     Web Services KMS keys (DSSE-KMS). If you specify default
     #     encryption by using SSE-KMS, you can also configure [Amazon S3
-    #     Bucket Keys][3]. For information about the bucket default
-    #     encryption feature, see [Amazon S3 Bucket Default Encryption][4]
+    #     Bucket Keys][4]. For information about the bucket default
+    #     encryption feature, see [Amazon S3 Bucket Default Encryption][5]
     #     in the *Amazon S3 User Guide*.
     #
     #   * If you use PutBucketEncryption to set your [default bucket
-    #     encryption][4] to SSE-KMS, you should verify that your KMS key ID
+    #     encryption][5] to SSE-KMS, you should verify that your KMS key ID
     #     is correct. Amazon S3 doesn't validate the KMS key ID provided in
     #     PutBucketEncryption requests.
     # * <b>Directory buckets </b> - You can optionally configure default
@@ -14756,28 +14910,28 @@ module Aws::S3
     #     encrypted with the desired encryption settings. For more
     #     information about the encryption overriding behaviors in directory
     #     buckets, see [Specifying server-side encryption with KMS for new
-    #     object uploads][5].
+    #     object uploads][6].
     #
     #   * Your SSE-KMS configuration can only support 1 [customer managed
-    #     key][6] per directory bucket's lifetime. The [Amazon Web Services
-    #     managed key][7] (`aws/s3`) isn't supported.
+    #     key][7] per directory bucket's lifetime. The [Amazon Web Services
+    #     managed key][8] (`aws/s3`) isn't supported.
     #
     #   * S3 Bucket Keys are always enabled for `GET` and `PUT` operations
     #     in a directory bucket and can’t be disabled. S3 Bucket Keys
     #     aren't supported, when you copy SSE-KMS encrypted objects from
     #     general purpose buckets to directory buckets, from directory
     #     buckets to general purpose buckets, or between directory buckets,
-    #     through [CopyObject][8], [UploadPartCopy][9], [the Copy operation
-    #     in Batch Operations][10], or [the import jobs][11]. In this case,
+    #     through [CopyObject][9], [UploadPartCopy][10], [the Copy operation
+    #     in Batch Operations][11], or [the import jobs][12]. In this case,
     #     Amazon S3 makes a call to KMS every time a copy request is made
     #     for a KMS-encrypted object.
     #
-    #   * When you specify an [KMS customer managed key][6] for encryption
+    #   * When you specify an [KMS customer managed key][7] for encryption
     #     in your directory bucket, only use the key ID or key ARN. The key
     #     alias format of the KMS key isn't supported.
     #
     #   * For directory buckets, if you use PutBucketEncryption to set your
-    #     [default bucket encryption][4] to SSE-KMS, Amazon S3 validates the
+    #     [default bucket encryption][5] to SSE-KMS, Amazon S3 validates the
     #     KMS key ID provided in PutBucketEncryption requests.
     #
     #  </note>
@@ -14790,7 +14944,7 @@ module Aws::S3
     #
     #  Also, this action requires Amazon Web Services Signature Version 4.
     # For more information, see [ Authenticating Requests (Amazon Web
-    # Services Signature Version 4)][12].
+    # Services Signature Version 4)][13].
     #
     # Permissions
     # : * **General purpose bucket permissions** - The
@@ -14798,8 +14952,8 @@ module Aws::S3
     #     policy. The bucket owner has this permission by default. The
     #     bucket owner can grant this permission to others. For more
     #     information about permissions, see [Permissions Related to Bucket
-    #     Operations][13] and [Managing Access Permissions to Your Amazon S3
-    #     Resources][14] in the *Amazon S3 User Guide*.
+    #     Operations][14] and [Managing Access Permissions to Your Amazon S3
+    #     Resources][15] in the *Amazon S3 User Guide*.
     #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation, you must have the
@@ -14809,7 +14963,7 @@ module Aws::S3
     #     only be performed by the Amazon Web Services account that owns the
     #     resource. For more information about directory bucket policies and
     #     permissions, see [Amazon Web Services Identity and Access
-    #     Management (IAM) for S3 Express One Zone][15] in the *Amazon S3
+    #     Management (IAM) for S3 Express One Zone][16] in the *Amazon S3
     #     User Guide*.
     #
     #     To set a directory bucket default encryption with SSE-KMS, you
@@ -14824,9 +14978,9 @@ module Aws::S3
     #
     # The following operations are related to `PutBucketEncryption`:
     #
-    # * [GetBucketEncryption][16]
+    # * [GetBucketEncryption][17]
     #
-    # * [DeleteBucketEncryption][17]
+    # * [DeleteBucketEncryption][18]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -14834,23 +14988,24 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
-    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
-    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BlockedEncryptionTypes.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
+    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
+    # [18]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   Specifies default encryption for a bucket using server-side encryption
@@ -14934,6 +15089,9 @@ module Aws::S3
     #             kms_master_key_id: "SSEKMSKeyId",
     #           },
     #           bucket_key_enabled: false,
+    #           blocked_encryption_types: {
+    #             encryption_type: ["NONE"], # accepts NONE, SSE-C
+    #           },
     #         },
     #       ],
     #     },
@@ -16930,7 +17088,15 @@ module Aws::S3
     #
     #  </note>
     #
-    # Sets the tags for a bucket.
+    # Sets the tags for a general purpose bucket if attribute based access
+    # control (ABAC) is not enabled for the bucket. When you [enable ABAC
+    # for a general purpose bucket][1], you can no longer use this operation
+    # for that bucket and must use the [TagResource][2] or
+    # [UntagResource][3] operations instead.
+    #
+    # if ABAC is not enabled for the bucket. When you [enable ABAC for a
+    # general purpose bucket][1], you can no longer use this operation for
+    # that bucket and must use [TagResource][2] instead.
     #
     # Use tags to organize your Amazon Web Services bill to reflect your own
     # cost structure. To do this, sign up to get your Amazon Web Services
@@ -16940,8 +17106,8 @@ module Aws::S3
     # several resources with a specific application name, and then organize
     # your billing information to see the total cost of that application
     # across several services. For more information, see [Cost Allocation
-    # and Tagging][1] and [Using Cost Allocation in Amazon S3 Bucket
-    # Tags][2].
+    # and Tagging][4] and [Using Cost Allocation in Amazon S3 Bucket
+    # Tags][5].
     #
     # <note markdown="1"> When this operation sets the tags for a bucket, it will overwrite any
     # current tags the bucket already has. You cannot use this operation to
@@ -16953,16 +17119,16 @@ module Aws::S3
     # `s3:PutBucketTagging` action. The bucket owner has this permission by
     # default and can grant this permission to others. For more information
     # about permissions, see [Permissions Related to Bucket Subresource
-    # Operations][3] and [Managing Access Permissions to Your Amazon S3
-    # Resources][4].
+    # Operations][6] and [Managing Access Permissions to Your Amazon S3
+    # Resources][7].
     #
     # `PutBucketTagging` has the following special errors. For more Amazon
-    # S3 errors see, [Error Responses][5].
+    # S3 errors see, [Error Responses][8].
     #
     # * `InvalidTag` - The tag provided was not a valid tag. This error can
     #   occur if the tag did not pass input validation. For more
     #   information, see [Using Cost Allocation in Amazon S3 Bucket
-    #   Tags][2].
+    #   Tags][5].
     #
     # * `MalformedXML` - The XML provided does not match the schema.
     #
@@ -16974,9 +17140,9 @@ module Aws::S3
     #
     # The following operations are related to `PutBucketTagging`:
     #
-    # * [GetBucketTagging][6]
+    # * [GetBucketTagging][9]
     #
-    # * [DeleteBucketTagging][7]
+    # * [DeleteBucketTagging][10]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -16984,13 +17150,16 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_TagResource.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html
+    # [4]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -20850,6 +21019,15 @@ module Aws::S3
     #     Multipart request. For more information, see
     #     [CreateMultipartUpload][2].
     #
+    #     <note markdown="1"> If you have server-side encryption with customer-provided keys
+    #     (SSE-C) blocked for your general purpose bucket, you will get an
+    #     HTTP 403 Access Denied error when you specify the SSE-C request
+    #     headers while writing new data to your bucket. For more
+    #     information, see [Blocking or unblocking SSE-C for a general
+    #     purpose bucket][12].
+    #
+    #      </note>
+    #
     #     If you request server-side encryption using a customer-provided
     #     encryption key (SSE-C) in your initiate multipart upload request,
     #     you must provide identical encryption information in each part
@@ -20860,7 +21038,7 @@ module Aws::S3
     #     * x-amz-server-side-encryption-customer-key
     #
     #     * x-amz-server-side-encryption-customer-key-MD5
-    #     For more information, see [Using Server-Side Encryption][12] in
+    #     For more information, see [Using Server-Side Encryption][13] in
     #     the *Amazon S3 User Guide*.
     #
     #   * <b>Directory buckets </b> - For directory buckets, there are only
@@ -20888,13 +21066,13 @@ module Aws::S3
     #
     # * [CreateMultipartUpload][2]
     #
-    # * [CompleteMultipartUpload][13]
+    # * [CompleteMultipartUpload][14]
     #
-    # * [AbortMultipartUpload][14]
+    # * [AbortMultipartUpload][15]
     #
-    # * [ListParts][15]
+    # * [ListParts][16]
     #
-    # * [ListMultipartUploads][16]
+    # * [ListMultipartUploads][17]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -20913,11 +21091,12 @@ module Aws::S3
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
-    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [String, StringIO, File] :body
     #   Object data.
@@ -21316,12 +21495,21 @@ module Aws::S3
     #     the `UploadPartCopy` operation, see [CopyObject][13] and
     #     [UploadPart][2].
     #
+    #     <note markdown="1"> If you have server-side encryption with customer-provided keys
+    #     (SSE-C) blocked for your general purpose bucket, you will get an
+    #     HTTP 403 Access Denied error when you specify the SSE-C request
+    #     headers while writing new data to your bucket. For more
+    #     information, see [Blocking or unblocking SSE-C for a general
+    #     purpose bucket][14].
+    #
+    #      </note>
+    #
     #   * <b>Directory buckets </b> - For directory buckets, there are only
     #     two supported options for server-side encryption: server-side
     #     encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
     #     server-side encryption with KMS keys (SSE-KMS) (`aws:kms`). For
     #     more information, see [Protecting data with server-side
-    #     encryption][14] in the *Amazon S3 User Guide*.
+    #     encryption][15] in the *Amazon S3 User Guide*.
     #
     #     <note markdown="1"> For directory buckets, when you perform a `CreateMultipartUpload`
     #     operation and an `UploadPartCopy` operation, the request headers
@@ -21333,7 +21521,7 @@ module Aws::S3
     #     S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted
     #     objects from general purpose buckets to directory buckets, from
     #     directory buckets to general purpose buckets, or between directory
-    #     buckets, through [UploadPartCopy][15]. In this case, Amazon S3
+    #     buckets, through [UploadPartCopy][16]. In this case, Amazon S3
     #     makes a call to KMS every time a copy request is made for a
     #     KMS-encrypted object.
     #
@@ -21359,17 +21547,17 @@ module Aws::S3
     #
     # The following operations are related to `UploadPartCopy`:
     #
-    # * [CreateMultipartUpload][16]
+    # * [CreateMultipartUpload][17]
     #
     # * [UploadPart][2]
     #
-    # * [CompleteMultipartUpload][17]
+    # * [CompleteMultipartUpload][18]
     #
-    # * [AbortMultipartUpload][18]
+    # * [AbortMultipartUpload][19]
     #
-    # * [ListParts][19]
+    # * [ListParts][20]
     #
-    # * [ListMultipartUploads][20]
+    # * [ListMultipartUploads][21]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -21390,13 +21578,14 @@ module Aws::S3
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
     # [12]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
     # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
-    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
-    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
-    # [18]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
-    # [19]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
-    # [20]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
+    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
+    # [18]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [19]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [20]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [21]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -22224,7 +22413,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.203.1'
+      context[:gem_version] = '1.205.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

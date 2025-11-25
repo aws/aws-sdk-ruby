@@ -54,7 +54,7 @@ module Aws::CloudDirectory
   autoload :EndpointProvider, 'aws-sdk-clouddirectory/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-clouddirectory/endpoints'
 
-  GEM_VERSION = '1.82.0'
+  GEM_VERSION = '1.83.0'
 
 end
 

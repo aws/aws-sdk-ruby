@@ -8,6 +8,12 @@
 module Aws::SageMaker
   module Types
 
+    class AcceleratorPartitionConfig
+      attr_accessor type: ("mig-1g.5gb" | "mig-1g.10gb" | "mig-1g.18gb" | "mig-1g.20gb" | "mig-1g.23gb" | "mig-1g.35gb" | "mig-1g.45gb" | "mig-1g.47gb" | "mig-2g.10gb" | "mig-2g.20gb" | "mig-2g.35gb" | "mig-2g.45gb" | "mig-2g.47gb" | "mig-3g.20gb" | "mig-3g.40gb" | "mig-3g.71gb" | "mig-3g.90gb" | "mig-3g.93gb" | "mig-4g.20gb" | "mig-4g.40gb" | "mig-4g.71gb" | "mig-4g.90gb" | "mig-4g.93gb" | "mig-7g.40gb" | "mig-7g.80gb" | "mig-7g.141gb" | "mig-7g.180gb" | "mig-7g.186gb")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
     class ActionSource
       attr_accessor source_uri: ::String
       attr_accessor source_type: ::String
@@ -598,6 +604,64 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class BatchRebootClusterNodeLogicalIdsError
+      attr_accessor node_logical_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodesError
+      attr_accessor node_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_ids: ::Array[::String]
+      attr_accessor node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodesResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor failed: ::Array[Types::BatchRebootClusterNodesError]
+      attr_accessor failed_node_logical_ids: ::Array[Types::BatchRebootClusterNodeLogicalIdsError]
+      attr_accessor successful_node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodeLogicalIdsError
+      attr_accessor node_logical_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodesError
+      attr_accessor node_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_ids: ::Array[::String]
+      attr_accessor node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodesResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor failed: ::Array[Types::BatchReplaceClusterNodesError]
+      attr_accessor failed_node_logical_ids: ::Array[Types::BatchReplaceClusterNodeLogicalIdsError]
+      attr_accessor successful_node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BatchTransformInput
       attr_accessor data_captured_destination_s3_uri: ::String
       attr_accessor dataset_format: Types::MonitoringDatasetFormat
@@ -867,6 +931,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterCapacityRequirements
+      attr_accessor spot: Types::ClusterSpotOptions
+      attr_accessor on_demand: Types::ClusterOnDemandOptions
+      SENSITIVE: []
+    end
+
     class ClusterEbsVolumeConfig
       attr_accessor volume_size_in_gb: ::Integer
       attr_accessor volume_kms_key_id: ::String
@@ -902,6 +972,7 @@ module Aws::SageMaker
     class ClusterInstanceGroupDetails
       attr_accessor current_count: ::Integer
       attr_accessor target_count: ::Integer
+      attr_accessor min_count: ::Integer
       attr_accessor instance_group_name: ::String
       attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
@@ -916,6 +987,9 @@ module Aws::SageMaker
       attr_accessor scheduled_update_config: Types::ScheduledUpdateConfig
       attr_accessor current_image_id: ::String
       attr_accessor desired_image_id: ::String
+      attr_accessor active_operations: ::Hash[("Scaling"), ::Integer]
+      attr_accessor kubernetes_config: Types::ClusterKubernetesConfigDetails
+      attr_accessor capacity_requirements: Types::ClusterCapacityRequirements
       attr_accessor target_state_count: ::Integer
       attr_accessor software_update_status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "RollbackInProgress" | "RollbackComplete")
       attr_accessor active_software_update_config: Types::DeploymentConfiguration
@@ -924,6 +998,7 @@ module Aws::SageMaker
 
     class ClusterInstanceGroupSpecification
       attr_accessor instance_count: ::Integer
+      attr_accessor min_instance_count: ::Integer
       attr_accessor instance_group_name: ::String
       attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
@@ -935,6 +1010,8 @@ module Aws::SageMaker
       attr_accessor override_vpc_config: Types::VpcConfig
       attr_accessor scheduled_update_config: Types::ScheduledUpdateConfig
       attr_accessor image_id: ::String
+      attr_accessor kubernetes_config: Types::ClusterKubernetesConfig
+      attr_accessor capacity_requirements: Types::ClusterCapacityRequirements
       SENSITIVE: []
     end
 
@@ -959,6 +1036,35 @@ module Aws::SageMaker
       end
       class Unknown < ClusterInstanceStorageConfig
       end
+    end
+
+    class ClusterKubernetesConfig
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor taints: ::Array[Types::ClusterKubernetesTaint]
+      SENSITIVE: []
+    end
+
+    class ClusterKubernetesConfigDetails
+      attr_accessor current_labels: ::Hash[::String, ::String]
+      attr_accessor desired_labels: ::Hash[::String, ::String]
+      attr_accessor current_taints: ::Array[Types::ClusterKubernetesTaint]
+      attr_accessor desired_taints: ::Array[Types::ClusterKubernetesTaint]
+      SENSITIVE: []
+    end
+
+    class ClusterKubernetesConfigNodeDetails
+      attr_accessor current_labels: ::Hash[::String, ::String]
+      attr_accessor desired_labels: ::Hash[::String, ::String]
+      attr_accessor current_taints: ::Array[Types::ClusterKubernetesTaint]
+      attr_accessor desired_taints: ::Array[Types::ClusterKubernetesTaint]
+      SENSITIVE: []
+    end
+
+    class ClusterKubernetesTaint
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor effect: ("NoSchedule" | "PreferNoSchedule" | "NoExecute")
+      SENSITIVE: []
     end
 
     class ClusterLifeCycleConfig
@@ -993,6 +1099,8 @@ module Aws::SageMaker
       attr_accessor current_image_id: ::String
       attr_accessor desired_image_id: ::String
       attr_accessor ultra_server_info: Types::UltraServerInfo
+      attr_accessor kubernetes_config: Types::ClusterKubernetesConfigNodeDetails
+      attr_accessor capacity_type: ("Spot" | "OnDemand")
       SENSITIVE: []
     end
 
@@ -1005,7 +1113,11 @@ module Aws::SageMaker
       attr_accessor last_software_update_time: ::Time
       attr_accessor instance_status: Types::ClusterInstanceStatusDetails
       attr_accessor ultra_server_info: Types::UltraServerInfo
+      attr_accessor private_dns_hostname: ::String
       SENSITIVE: []
+    end
+
+    class ClusterOnDemandOptions < Aws::EmptyStructure
     end
 
     class ClusterOrchestrator
@@ -1061,6 +1173,9 @@ module Aws::SageMaker
       attr_accessor status: ("Creating" | "CreateFailed" | "CreateRollbackFailed" | "Created" | "Updating" | "UpdateFailed" | "UpdateRollbackFailed" | "Updated" | "Deleting" | "DeleteFailed" | "DeleteRollbackFailed" | "Deleted")
       attr_accessor cluster_arn: ::String
       SENSITIVE: []
+    end
+
+    class ClusterSpotOptions < Aws::EmptyStructure
     end
 
     class ClusterSummary
@@ -1165,6 +1280,7 @@ module Aws::SageMaker
       attr_accessor accelerators: ::Integer
       attr_accessor v_cpu: ::Float
       attr_accessor memory_in_gi_b: ::Float
+      attr_accessor accelerator_partition: Types::AcceleratorPartitionConfig
       SENSITIVE: []
     end
 
@@ -1568,6 +1684,7 @@ module Aws::SageMaker
       attr_accessor execution_role_arn: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_network_isolation: bool
+      attr_accessor metrics_config: Types::MetricsConfig
       SENSITIVE: []
     end
 
@@ -2034,7 +2151,8 @@ module Aws::SageMaker
       attr_accessor optimization_job_name: ::String
       attr_accessor role_arn: ::String
       attr_accessor model_source: Types::OptimizationJobModelSource
-      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor max_instance_count: ::Integer
       attr_accessor optimization_environment: ::Hash[::String, ::String]
       attr_accessor optimization_configs: ::Array[Types::OptimizationConfig]
       attr_accessor output_config: Types::OptimizationJobOutputConfig
@@ -3453,6 +3571,7 @@ module Aws::SageMaker
       attr_accessor execution_role_arn: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_network_isolation: bool
+      attr_accessor metrics_config: Types::MetricsConfig
       SENSITIVE: []
     end
 
@@ -3476,6 +3595,7 @@ module Aws::SageMaker
       attr_accessor pending_deployment_summary: Types::PendingDeploymentSummary
       attr_accessor explainer_config: Types::ExplainerConfig
       attr_accessor shadow_production_variants: ::Array[Types::ProductionVariantSummary]
+      attr_accessor metrics_config: Types::MetricsConfig
       SENSITIVE: []
     end
 
@@ -4092,7 +4212,8 @@ module Aws::SageMaker
       attr_accessor optimization_job_name: ::String
       attr_accessor model_source: Types::OptimizationJobModelSource
       attr_accessor optimization_environment: ::Hash[::String, ::String]
-      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor max_instance_count: ::Integer
       attr_accessor optimization_configs: ::Array[Types::OptimizationConfig]
       attr_accessor output_config: Types::OptimizationJobOutputConfig
       attr_accessor optimization_output: Types::OptimizationOutput
@@ -4385,7 +4506,7 @@ module Aws::SageMaker
       attr_accessor unhealthy_instance_count: ::Integer
       attr_accessor available_spare_instance_count: ::Integer
       attr_accessor total_ultra_server_count: ::Integer
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       attr_accessor reserved_capacity_summaries: ::Array[Types::ReservedCapacitySummary]
       SENSITIVE: []
     end
@@ -5836,6 +5957,7 @@ module Aws::SageMaker
     class InstanceGroupScalingMetadata
       attr_accessor instance_count: ::Integer
       attr_accessor target_count: ::Integer
+      attr_accessor min_count: ::Integer
       attr_accessor failure_message: ::String
       SENSITIVE: []
     end
@@ -7597,6 +7719,12 @@ module Aws::SageMaker
       end
     end
 
+    class MetricsConfig
+      attr_accessor enable_enhanced_metrics: bool
+      attr_accessor metric_publish_frequency_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class MetricsSource
       attr_accessor content_type: ::String
       attr_accessor content_digest: ::String
@@ -8053,6 +8181,18 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ModelSpeculativeDecodingConfig
+      attr_accessor technique: ("EAGLE")
+      attr_accessor training_data_source: Types::ModelSpeculativeDecodingTrainingDataSource
+      SENSITIVE: []
+    end
+
+    class ModelSpeculativeDecodingTrainingDataSource
+      attr_accessor s3_uri: ::String
+      attr_accessor s3_data_type: ("S3Prefix" | "ManifestFile")
+      SENSITIVE: []
+    end
+
     class ModelStepMetadata
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -8412,6 +8552,7 @@ module Aws::SageMaker
       attr_accessor model_quantization_config: Types::ModelQuantizationConfig
       attr_accessor model_compilation_config: Types::ModelCompilationConfig
       attr_accessor model_sharding_config: Types::ModelShardingConfig
+      attr_accessor model_speculative_decoding_config: Types::ModelSpeculativeDecodingConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -8421,12 +8562,15 @@ module Aws::SageMaker
       end
       class ModelShardingConfig < OptimizationConfig
       end
+      class ModelSpeculativeDecodingConfig < OptimizationConfig
+      end
       class Unknown < OptimizationConfig
       end
     end
 
     class OptimizationJobModelSource
       attr_accessor s3: Types::OptimizationJobModelSourceS3
+      attr_accessor sage_maker_model: Types::OptimizationSageMakerModel
       SENSITIVE: []
     end
 
@@ -8439,6 +8583,7 @@ module Aws::SageMaker
     class OptimizationJobOutputConfig
       attr_accessor kms_key_id: ::String
       attr_accessor s3_output_location: ::String
+      attr_accessor sage_maker_model: Types::OptimizationSageMakerModel
       SENSITIVE: []
     end
 
@@ -8450,7 +8595,8 @@ module Aws::SageMaker
       attr_accessor optimization_start_time: ::Time
       attr_accessor optimization_end_time: ::Time
       attr_accessor last_modified_time: ::Time
-      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor max_instance_count: ::Integer
       attr_accessor optimization_types: ::Array[::String]
       SENSITIVE: []
     end
@@ -8462,6 +8608,11 @@ module Aws::SageMaker
 
     class OptimizationOutput
       attr_accessor recommended_inference_image: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizationSageMakerModel
+      attr_accessor model_name: ::String
       SENSITIVE: []
     end
 
@@ -9558,7 +9709,7 @@ module Aws::SageMaker
       attr_accessor start_time_after: ::Time
       attr_accessor end_time_before: ::Time
       attr_accessor duration_hours: ::Integer
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       SENSITIVE: []
     end
 
@@ -10215,7 +10366,7 @@ module Aws::SageMaker
 
     class TrainingPlanOffering
       attr_accessor training_plan_offering_id: ::String
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       attr_accessor requested_start_time_after: ::Time
       attr_accessor requested_end_time_before: ::Time
       attr_accessor duration_hours: ::Integer
@@ -10241,7 +10392,7 @@ module Aws::SageMaker
       attr_accessor available_instance_count: ::Integer
       attr_accessor in_use_instance_count: ::Integer
       attr_accessor total_ultra_server_count: ::Integer
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       attr_accessor reserved_capacity_summaries: ::Array[Types::ReservedCapacitySummary]
       SENSITIVE: []
     end

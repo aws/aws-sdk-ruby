@@ -504,6 +504,7 @@ module Aws::FSx
     WindowsAuditLogCreateConfiguration = Shapes::StructureShape.new(name: 'WindowsAuditLogCreateConfiguration')
     WindowsDeploymentType = Shapes::StringShape.new(name: 'WindowsDeploymentType')
     WindowsFileSystemConfiguration = Shapes::StructureShape.new(name: 'WindowsFileSystemConfiguration')
+    WindowsFsrmConfiguration = Shapes::StructureShape.new(name: 'WindowsFsrmConfiguration')
 
     AccessPointAlreadyOwnedByYou.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     AccessPointAlreadyOwnedByYou.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -833,6 +834,7 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
     CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     CreateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
     CreateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -1933,6 +1935,7 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
 
     UpdateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -2057,7 +2060,12 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
     WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv_6, Shapes::ShapeRef.new(shape: IpAddress, location_name: "PreferredFileServerIpv6"))
+    WindowsFileSystemConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     WindowsFileSystemConfiguration.struct_class = Types::WindowsFileSystemConfiguration
+
+    WindowsFsrmConfiguration.add_member(:fsrm_service_enabled, Shapes::ShapeRef.new(shape: Flag, required: true, location_name: "FsrmServiceEnabled"))
+    WindowsFsrmConfiguration.add_member(:event_log_destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "EventLogDestination"))
+    WindowsFsrmConfiguration.struct_class = Types::WindowsFsrmConfiguration
 
 
     # @api private

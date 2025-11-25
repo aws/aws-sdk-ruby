@@ -670,6 +670,9 @@ module Aws
         def capacity: () -> ::Integer
         def stateful_rule_options: () -> Types::StatefulRuleOptions
         def last_modified_time: () -> ::Time
+        def vendor_name: () -> ::String
+        def product_id: () -> ::String
+        def listing_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_rule_group_metadata-instance_method
       def describe_rule_group_metadata: (
@@ -864,7 +867,8 @@ module Aws
                               ?next_token: ::String,
                               ?max_results: ::Integer,
                               ?scope: ("MANAGED" | "ACCOUNT"),
-                              ?managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE"),
+                              ?managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE" | "PARTNER_MANAGED"),
+                              ?subscription_status: ("NOT_SUBSCRIBED" | "SUBSCRIBED"),
                               ?type: ("STATELESS" | "STATEFUL")
                             ) -> _ListRuleGroupsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleGroupsResponseSuccess

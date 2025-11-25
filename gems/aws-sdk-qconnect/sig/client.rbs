@@ -619,8 +619,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_message_template-instance_method
       def create_message_template: (
                                      knowledge_base_id: ::String,
-                                     name: ::String,
-                                     content: {
+                                     ?name: ::String,
+                                     ?content: {
                                        email: {
                                          subject: ::String?,
                                          body: {
@@ -644,11 +644,81 @@ module Aws
                                              content: ::String?
                                            }?
                                          }?
+                                       }?,
+                                       whats_app: {
+                                         data: ::String?
+                                       }?,
+                                       push: {
+                                         adm: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           image_url: ::String?,
+                                           image_icon_url: ::String?,
+                                           small_image_icon_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         apns: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           media_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         fcm: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           image_url: ::String?,
+                                           image_icon_url: ::String?,
+                                           small_image_icon_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         baidu: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           image_url: ::String?,
+                                           image_icon_url: ::String?,
+                                           small_image_icon_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?
                                        }?
                                      },
                                      ?description: ::String,
-                                     channel_subtype: ("EMAIL" | "SMS"),
+                                     channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH"),
                                      ?language: ::String,
+                                     ?source_configuration: {
+                                       whats_app: {
+                                         business_account_id: ::String,
+                                         template_id: ::String,
+                                         components: Array[::String]?
+                                       }?
+                                     },
                                      ?default_attributes: {
                                        system_attributes: {
                                          name: ::String?,
@@ -1490,6 +1560,7 @@ module Aws
       interface _RenderMessageTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RenderMessageTemplateResponse]
         def content: () -> Types::MessageTemplateContentProvider
+        def source_configuration_summary: () -> Types::MessageTemplateSourceConfigurationSummary
         def attributes_not_interpolated: () -> ::Array[::String]
         def attachments: () -> ::Array[Types::MessageTemplateAttachment]
       end
@@ -2186,9 +2257,79 @@ module Aws
                                              content: ::String?
                                            }?
                                          }?
+                                       }?,
+                                       whats_app: {
+                                         data: ::String?
+                                       }?,
+                                       push: {
+                                         adm: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           image_url: ::String?,
+                                           image_icon_url: ::String?,
+                                           small_image_icon_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         apns: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           media_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         fcm: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           image_url: ::String?,
+                                           image_icon_url: ::String?,
+                                           small_image_icon_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         baidu: {
+                                           title: ::String?,
+                                           body: {
+                                             content: ::String?
+                                           }?,
+                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+                                           sound: ::String?,
+                                           url: ::String?,
+                                           image_url: ::String?,
+                                           image_icon_url: ::String?,
+                                           small_image_icon_url: ::String?,
+                                           raw_content: {
+                                             content: ::String?
+                                           }?
+                                         }?
                                        }?
                                      },
                                      ?language: ::String,
+                                     ?source_configuration: {
+                                       whats_app: {
+                                         business_account_id: ::String,
+                                         template_id: ::String,
+                                         components: Array[::String]?
+                                       }?
+                                     },
                                      ?default_attributes: {
                                        system_attributes: {
                                          name: ::String?,

@@ -322,6 +322,25 @@ module Aws
         expect(metric_values(client.config.credentials.metrics)).to include('n', 'e')
       end
 
+      it 'prefers login credentials from profile over env' do
+        mock_login_cached_token
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_login', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AK_LOGIN')
+        expect(metric_values(client.config.credentials.metrics)).to include('AD', 'AC', 'e')
+      end
+
+      it 'prefers login credentials over process' do
+        mock_login_cached_token
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'process_plus_login', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AK_LOGIN')
+        expect(metric_values(client.config.credentials.metrics)).to include('AD', 'AC', 'e')
+      end
+
       it 'prefers process credentials over metadata credentials' do
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'creds_from_process', region: 'us-east-1'
@@ -390,7 +409,7 @@ module Aws
               "Token" : "session-token-md",
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
-          JSON
+         JSON
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
         )
@@ -1211,6 +1230,25 @@ module Aws
     def legacy_sso_stub
       mock_sso_cached_token
       sso_stub
+    end
+
+    def mock_login_cached_token
+      cached_token = {
+        'accessToken' => {
+          'accessKeyId' => 'AK_LOGIN',
+          'secretAccessKey' => 'SECRET_AK_LOGIN',
+          'sessionToken' => 'TOKEN_LOGIN',
+          'accountId' => '0123456789012',
+          'expiresAt' => (Time.now.utc + 900).to_datetime.rfc3339
+        },
+        'tokenType' => 'aws_sigv4',
+        'refreshToken' => 'refresh_token',
+        'idToken' => 'identity_token',
+        'clientId' => 'arn:aws:signin:::devtools/same-device',
+        'dpopKey' => OpenSSL::PKey::EC.generate('prime256v1').to_pem
+      }
+      allow(Dir).to receive(:home).and_return('HOME')
+      expect(JSON).to receive(:load_file).and_return(cached_token)
     end
 
     def stub_token_file(token)

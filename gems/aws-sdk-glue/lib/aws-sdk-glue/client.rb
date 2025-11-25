@@ -4748,6 +4748,7 @@ module Aws::Glue
     #       function_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION", # accepts REGULAR_FUNCTION, AGGREGATE_FUNCTION, STORED_PROCEDURE
     #       owner_type: "USER", # accepts USER, ROLE, GROUP
     #       resource_uris: [
     #         {
@@ -11730,6 +11731,7 @@ module Aws::Glue
     #   resp.user_defined_function.database_name #=> String
     #   resp.user_defined_function.class_name #=> String
     #   resp.user_defined_function.owner_name #=> String
+    #   resp.user_defined_function.function_type #=> String, one of "REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"
     #   resp.user_defined_function.owner_type #=> String, one of "USER", "ROLE", "GROUP"
     #   resp.user_defined_function.create_time #=> Time
     #   resp.user_defined_function.resource_uris #=> Array
@@ -11762,6 +11764,15 @@ module Aws::Glue
     #   An optional function-name pattern string that filters the function
     #   definitions returned.
     #
+    # @option params [String] :function_type
+    #   An optional function-type pattern string that filters the function
+    #   definitions returned from Amazon Redshift Federated Permissions
+    #   Catalog.
+    #
+    #   Specify a value of `REGULAR_FUNCTION` or `STORED_PROCEDURE`. The
+    #   `STORED_PROCEDURE` function type is only compatible with Amazon
+    #   Redshift Federated Permissions Catalog.
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
     #
@@ -11781,6 +11792,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString",
     #     pattern: "NameString", # required
+    #     function_type: "REGULAR_FUNCTION", # accepts REGULAR_FUNCTION, AGGREGATE_FUNCTION, STORED_PROCEDURE
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -11792,6 +11804,7 @@ module Aws::Glue
     #   resp.user_defined_functions[0].database_name #=> String
     #   resp.user_defined_functions[0].class_name #=> String
     #   resp.user_defined_functions[0].owner_name #=> String
+    #   resp.user_defined_functions[0].function_type #=> String, one of "REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"
     #   resp.user_defined_functions[0].owner_type #=> String, one of "USER", "ROLE", "GROUP"
     #   resp.user_defined_functions[0].create_time #=> Time
     #   resp.user_defined_functions[0].resource_uris #=> Array
@@ -17963,6 +17976,7 @@ module Aws::Glue
     #       function_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION", # accepts REGULAR_FUNCTION, AGGREGATE_FUNCTION, STORED_PROCEDURE
     #       owner_type: "USER", # accepts USER, ROLE, GROUP
     #       resource_uris: [
     #         {
@@ -18052,7 +18066,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.241.0'
+      context[:gem_version] = '1.243.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

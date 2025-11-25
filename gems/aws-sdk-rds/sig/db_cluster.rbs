@@ -84,6 +84,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#preferred_maintenance_window-instance_method
       def preferred_maintenance_window: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#upgrade_rollout_order-instance_method
+      def upgrade_rollout_order: () -> ("first" | "second" | "last")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#replication_source_identifier-instance_method
       def replication_source_identifier: () -> ::String
 

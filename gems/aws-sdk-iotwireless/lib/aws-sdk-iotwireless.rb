@@ -54,7 +54,7 @@ module Aws::IoTWireless
   autoload :EndpointProvider, 'aws-sdk-iotwireless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotwireless/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

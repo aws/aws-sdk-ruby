@@ -175,6 +175,13 @@ module Aws::CostOptimizationHub
       SENSITIVE: []
     end
 
+    class EfficiencyMetricsByGroup
+      attr_accessor metrics_by_time: ::Array[Types::MetricsByTime]
+      attr_accessor group: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ElastiCacheReservedInstances
       attr_accessor configuration: Types::ElastiCacheReservedInstancesConfiguration
       attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation
@@ -283,6 +290,22 @@ module Aws::CostOptimizationHub
       SENSITIVE: []
     end
 
+    class ListEfficiencyMetricsRequest
+      attr_accessor group_by: ::String
+      attr_accessor granularity: ("Daily" | "Monthly")
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor max_results: ::Integer
+      attr_accessor order_by: Types::OrderBy
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEfficiencyMetricsResponse
+      attr_accessor efficiency_metrics_by_group: ::Array[Types::EfficiencyMetricsByGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEnrollmentStatusesRequest
       attr_accessor include_organization_info: bool
       attr_accessor account_id: ::String
@@ -352,6 +375,14 @@ module Aws::CostOptimizationHub
       attr_accessor instance_family: ::String
       attr_accessor size_flex_eligible: bool
       attr_accessor current_generation: ::String
+      SENSITIVE: []
+    end
+
+    class MetricsByTime
+      attr_accessor score: ::Float
+      attr_accessor savings: ::Float
+      attr_accessor spend: ::Float
+      attr_accessor timestamp: ::String
       SENSITIVE: []
     end
 
@@ -642,6 +673,12 @@ module Aws::CostOptimizationHub
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimePeriod
+      attr_accessor start: ::String
+      attr_accessor end: ::String
       SENSITIVE: []
     end
 

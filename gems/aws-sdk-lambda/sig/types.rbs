@@ -190,7 +190,7 @@ module Aws::Lambda
 
     class CreateFunctionRequest
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
       attr_accessor role: ::String
       attr_accessor handler: ::String
       attr_accessor code: Types::FunctionCode
@@ -213,6 +213,7 @@ module Aws::Lambda
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor snap_start: Types::SnapStart
       attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor tenancy_config: Types::TenancyConfig
       SENSITIVE: []
     end
 
@@ -468,7 +469,7 @@ module Aws::Lambda
     class FunctionConfiguration
       attr_accessor function_name: ::String
       attr_accessor function_arn: ::String
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
       attr_accessor role: ::String
       attr_accessor handler: ::String
       attr_accessor code_size: ::Integer
@@ -502,6 +503,7 @@ module Aws::Lambda
       attr_accessor snap_start: Types::SnapStartResponse
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig
       attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor tenancy_config: Types::TenancyConfig
       SENSITIVE: []
     end
 
@@ -660,7 +662,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
       attr_accessor version: ::Integer
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -775,6 +777,7 @@ module Aws::Lambda
       attr_accessor client_context: ::String
       attr_accessor payload: ::String
       attr_accessor qualifier: ::String
+      attr_accessor tenant_id: ::String
       SENSITIVE: [:payload]
     end
 
@@ -819,6 +822,7 @@ module Aws::Lambda
       attr_accessor client_context: ::String
       attr_accessor qualifier: ::String
       attr_accessor payload: ::String
+      attr_accessor tenant_id: ::String
       SENSITIVE: [:payload]
     end
 
@@ -903,7 +907,7 @@ module Aws::Lambda
       attr_accessor version: ::Integer
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -1010,7 +1014,7 @@ module Aws::Lambda
     end
 
     class ListLayerVersionsRequest
-      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
       attr_accessor layer_name: ::String
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
@@ -1025,7 +1029,7 @@ module Aws::Lambda
     end
 
     class ListLayersRequest
-      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
       attr_accessor compatible_architecture: ("x86_64" | "arm64")
@@ -1124,6 +1128,7 @@ module Aws::Lambda
     class ProvisionedPollerConfig
       attr_accessor minimum_pollers: ::Integer
       attr_accessor maximum_pollers: ::Integer
+      attr_accessor poller_group_name: ::String
       SENSITIVE: []
     end
 
@@ -1131,7 +1136,7 @@ module Aws::Lambda
       attr_accessor layer_name: ::String
       attr_accessor description: ::String
       attr_accessor content: Types::LayerVersionContentInput
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -1144,7 +1149,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
       attr_accessor version: ::Integer
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -1373,6 +1378,11 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class TenancyConfig
+      attr_accessor tenant_isolation_mode: ("PER_TENANT")
+      SENSITIVE: []
+    end
+
     class TooManyRequestsException
       attr_accessor retry_after_seconds: ::String
       attr_accessor type: ::String
@@ -1475,7 +1485,7 @@ module Aws::Lambda
       attr_accessor memory_size: ::Integer
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor environment: Types::Environment
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "java25" | "nodejs24.x" | "python3.14")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25")
       attr_accessor dead_letter_config: Types::DeadLetterConfig
       attr_accessor kms_key_arn: ::String
       attr_accessor tracing_config: Types::TracingConfig

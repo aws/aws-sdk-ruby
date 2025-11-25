@@ -110,6 +110,7 @@ module Aws::BCMPricingCalculator
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CostAmount = Shapes::StructureShape.new(name: 'CostAmount')
+    CostCategoryArn = Shapes::StringShape.new(name: 'CostCategoryArn')
     CostDifference = Shapes::StructureShape.new(name: 'CostDifference')
     CreateBillEstimateRequest = Shapes::StructureShape.new(name: 'CreateBillEstimateRequest')
     CreateBillEstimateResponse = Shapes::StructureShape.new(name: 'CreateBillEstimateResponse')
@@ -138,6 +139,7 @@ module Aws::BCMPricingCalculator
     GetPreferencesResponse = Shapes::StructureShape.new(name: 'GetPreferencesResponse')
     GetWorkloadEstimateRequest = Shapes::StructureShape.new(name: 'GetWorkloadEstimateRequest')
     GetWorkloadEstimateResponse = Shapes::StructureShape.new(name: 'GetWorkloadEstimateResponse')
+    GroupSharingPreferenceEnum = Shapes::StringShape.new(name: 'GroupSharingPreferenceEnum')
     HistoricalUsageEntity = Shapes::StructureShape.new(name: 'HistoricalUsageEntity')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -592,6 +594,8 @@ module Aws::BCMPricingCalculator
     BillScenarioSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     BillScenarioSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
     BillScenarioSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    BillScenarioSummary.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    BillScenarioSummary.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
     BillScenarioSummary.struct_class = Types::BillScenarioSummary
 
     BillScenarioUsageModificationItem.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
@@ -635,11 +639,16 @@ module Aws::BCMPricingCalculator
     CreateBillEstimateResponse.add_member(:cost_summary, Shapes::ShapeRef.new(shape: BillEstimateCostSummary, location_name: "costSummary"))
     CreateBillEstimateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CreateBillEstimateResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    CreateBillEstimateResponse.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    CreateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
+    CreateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_effective_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "costCategoryGroupSharingPreferenceEffectiveDate"))
     CreateBillEstimateResponse.struct_class = Types::CreateBillEstimateResponse
 
     CreateBillScenarioRequest.add_member(:name, Shapes::ShapeRef.new(shape: BillScenarioName, required: true, location_name: "name"))
     CreateBillScenarioRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBillScenarioRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateBillScenarioRequest.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    CreateBillScenarioRequest.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
     CreateBillScenarioRequest.struct_class = Types::CreateBillScenarioRequest
 
     CreateBillScenarioResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
@@ -649,6 +658,8 @@ module Aws::BCMPricingCalculator
     CreateBillScenarioResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CreateBillScenarioResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
     CreateBillScenarioResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    CreateBillScenarioResponse.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    CreateBillScenarioResponse.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
     CreateBillScenarioResponse.struct_class = Types::CreateBillScenarioResponse
 
     CreateWorkloadEstimateRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkloadEstimateName, required: true, location_name: "name"))
@@ -717,6 +728,9 @@ module Aws::BCMPricingCalculator
     GetBillEstimateResponse.add_member(:cost_summary, Shapes::ShapeRef.new(shape: BillEstimateCostSummary, location_name: "costSummary"))
     GetBillEstimateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetBillEstimateResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    GetBillEstimateResponse.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    GetBillEstimateResponse.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
+    GetBillEstimateResponse.add_member(:cost_category_group_sharing_preference_effective_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "costCategoryGroupSharingPreferenceEffectiveDate"))
     GetBillEstimateResponse.struct_class = Types::GetBillEstimateResponse
 
     GetBillScenarioRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "identifier"))
@@ -729,6 +743,8 @@ module Aws::BCMPricingCalculator
     GetBillScenarioResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetBillScenarioResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
     GetBillScenarioResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    GetBillScenarioResponse.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    GetBillScenarioResponse.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
     GetBillScenarioResponse.struct_class = Types::GetBillScenarioResponse
 
     GetPreferencesRequest.struct_class = Types::GetPreferencesRequest
@@ -980,11 +996,16 @@ module Aws::BCMPricingCalculator
     UpdateBillEstimateResponse.add_member(:cost_summary, Shapes::ShapeRef.new(shape: BillEstimateCostSummary, location_name: "costSummary"))
     UpdateBillEstimateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     UpdateBillEstimateResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    UpdateBillEstimateResponse.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    UpdateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
+    UpdateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_effective_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "costCategoryGroupSharingPreferenceEffectiveDate"))
     UpdateBillEstimateResponse.struct_class = Types::UpdateBillEstimateResponse
 
     UpdateBillScenarioRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "identifier"))
     UpdateBillScenarioRequest.add_member(:name, Shapes::ShapeRef.new(shape: BillScenarioName, location_name: "name"))
     UpdateBillScenarioRequest.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    UpdateBillScenarioRequest.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    UpdateBillScenarioRequest.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
     UpdateBillScenarioRequest.struct_class = Types::UpdateBillScenarioRequest
 
     UpdateBillScenarioResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
@@ -994,6 +1015,8 @@ module Aws::BCMPricingCalculator
     UpdateBillScenarioResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     UpdateBillScenarioResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
     UpdateBillScenarioResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    UpdateBillScenarioResponse.add_member(:group_sharing_preference, Shapes::ShapeRef.new(shape: GroupSharingPreferenceEnum, location_name: "groupSharingPreference"))
+    UpdateBillScenarioResponse.add_member(:cost_category_group_sharing_preference_arn, Shapes::ShapeRef.new(shape: CostCategoryArn, location_name: "costCategoryGroupSharingPreferenceArn"))
     UpdateBillScenarioResponse.struct_class = Types::UpdateBillScenarioResponse
 
     UpdatePreferencesRequest.add_member(:management_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))

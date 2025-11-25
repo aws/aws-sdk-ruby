@@ -3993,6 +3993,13 @@ module Aws::KMS
     #   the parameter defaults to `NEW_KEY_MATERIAL`. After the first key
     #   material is imported, if this parameter is omitted then the
     #   parameter defaults to `EXISTING_KEY_MATERIAL`.
+    #
+    #   For multi-Region keys, you must first import new key material into
+    #   the primary Region key. You should use the `NEW_KEY_MATERIAL` import
+    #   type when importing key material into the primary Region key. Then,
+    #   you can import the same key material into the replica Region key.
+    #   The import type for the replica Region key should be
+    #   `EXISTING_KEY_MATERIAL`.
     #   @return [String]
     #
     # @!attribute [rw] key_material_description
@@ -4576,12 +4583,11 @@ module Aws::KMS
     #
     # @!attribute [rw] current_key_material_id
     #   Identifies the current key material. This value is present for
-    #   symmetric encryption keys with `AWS_KMS` origin and single-Region,
-    #   symmetric encryption keys with `EXTERNAL` origin. These KMS keys
-    #   support automatic or on-demand key rotation and can have multiple
-    #   key materials associated with them. KMS uses the current key
-    #   material for both encryption and decryption, and the non-current key
-    #   material for decryption operations only.
+    #   symmetric encryption keys with `AWS_KMS` or `EXTERNAL` origin. These
+    #   KMS keys support automatic or on-demand key rotation and can have
+    #   multiple key materials associated with them. KMS uses the current
+    #   key material for both encryption and decryption, and the non-current
+    #   key material for decryption operations only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
@@ -6001,15 +6007,24 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_material_state
-    #   There are three possible values for this field: `CURRENT`,
-    #   `NON_CURRENT` and `PENDING_ROTATION`. KMS uses `CURRENT` key
-    #   material for both encryption and decryption and `NON_CURRENT` key
-    #   material only for decryption. `PENDING_ROTATION` identifies key
-    #   material that has been imported for on-demand key rotation but the
-    #   rotation hasn't completed. Key material in `PENDING_ROTATION` is
-    #   not permanently associated with the KMS key. You can delete this key
-    #   material and import different key material in its place. The
-    #   `PENDING_ROTATION` value is only used in symmetric encryption keys
+    #   There are four possible values for this field: `CURRENT`,
+    #   `NON_CURRENT`, `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` and
+    #   `PENDING_ROTATION`. KMS uses `CURRENT` key material for both
+    #   encryption and decryption and `NON_CURRENT` key material only for
+    #   decryption. `PENDING_ROTATION` identifies key material that has been
+    #   imported for on-demand key rotation but the rotation hasn't
+    #   completed. The key material state
+    #   `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` is unique to
+    #   multi-region, symmetric encryption keys with imported key material.
+    #   It indicates key material that has been imported into the primary
+    #   Region key but not all of the replica Region keys. When this key
+    #   material is imported in to all of the replica Region keys, the key
+    #   material state will change to `PENDING_ROTATION`. Key material in
+    #   `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` or `PENDING_ROTATION`
+    #   state is not permanently associated with the KMS key. You can delete
+    #   this key material and import different key material in its place.
+    #   The `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` and
+    #   `PENDING_ROTATION` values are only used in symmetric encryption keys
     #   with imported key material. The other values, `CURRENT` and
     #   `NON_CURRENT`, are used for all KMS keys that support automatic or
     #   on-demand key rotation.
