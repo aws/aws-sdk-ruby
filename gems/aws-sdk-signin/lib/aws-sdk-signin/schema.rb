@@ -9,7 +9,7 @@ module Aws::Signin
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client"})
     AccessToken = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#AccessToken", name: "AccessToken", traits: {"smithy.api#sensitive" => {}})
     AuthorizationCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#AuthorizationCode", name: "AuthorizationCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
-    ClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#ClientId", name: "ClientId", traits: {"smithy.api#pattern" => "^aws:signin:::cli/(same-device|cross-device|in-band|out-of-band)$"})
+    ClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#ClientId", name: "ClientId", traits: {"smithy.api#pattern" => "^arn:aws:signin:::devtools/(cross-device|same-device)$"})
     CodeVerifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#CodeVerifier", name: "CodeVerifier", traits: {"smithy.api#length" => {"min" => 43, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9\\-._~]+$"})
     CreateOAuth2TokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#CreateOAuth2TokenRequest", name: "CreateOAuth2TokenRequest")
     CreateOAuth2TokenRequestBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#CreateOAuth2TokenRequestBody", name: "CreateOAuth2TokenRequestBody")
@@ -74,7 +74,7 @@ module Aws::Signin
       service.id = "com.amazonaws.signin#Signin"
       service.name = "Signin"
       service.version = "2023-01-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Signin", "arnNamespace" => "signin", "endpointPrefix" => "signin"}, "aws.auth#sigv4" => {"name" => "signin"}, "aws.endpoints#standardRegionalEndpoints" => {"partitionSpecialCases" => {"aws" => [{"endpoint" => "https://{region}.signin.aws.amazon.com"}], "aws-cn" => [{"endpoint" => "https://{region}.signin.amazonaws.cn"}], "aws-us-gov" => [{"endpoint" => "https://{region}.signin.amazonaws-us-gov.com"}]}}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Sign-In Data Plane"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Signin", "arnNamespace" => "signin", "endpointPrefix" => "signin"}, "aws.auth#sigv4" => {"name" => "signin"}, "aws.endpoints#standardRegionalEndpoints" => {"partitionSpecialCases" => {"aws" => [{"endpoint" => "https://{region}.signin.aws.amazon.com"}], "aws-cn" => [{"endpoint" => "https://{region}.signin.amazonaws.cn"}], "aws-us-gov" => [{"endpoint" => "https://{region}.signin.amazonaws-us-gov.com"}]}}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Sign-In Service"}
       service.add_operation(:create_o_auth2_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.signin#CreateOAuth2Token"
         operation.name = "CreateOAuth2Token"
@@ -84,7 +84,7 @@ module Aws::Signin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsError)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/v1/token"}, "smithy.test#smokeTests" => [{"id" => "TokenOperationSmokeTest", "params" => {"tokenInput" => {"clientId" => "aws:signin:::cli/same-device", "grantType" => "authorization_code", "code" => "test-code", "redirectUri" => "https://example.com", "codeVerifier" => "test-code-verifier-1234567890abcdefghijklmnop"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {}, "expect" => {"failure" => {}}}]}
+        operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/v1/token"}, "smithy.test#smokeTests" => [{"id" => "TokenOperationSmokeTest", "params" => {"tokenInput" => {"clientId" => "arn:aws:signin:::devtools/same-device", "grantType" => "authorization_code", "code" => "test-code", "redirectUri" => "https://example.com", "codeVerifier" => "test-code-verifier-1234567890abcdefghijklmnop"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {}, "expect" => {"failure" => {}}}]}
       end)
     end
 

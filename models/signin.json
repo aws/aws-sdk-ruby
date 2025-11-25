@@ -70,8 +70,8 @@
         "com.amazonaws.signin#ClientId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Client identifier pattern for AWS Sign-In CLI clients\n\nThe ARN used by client as part of Sign-In onboarding. Expected values:\n- aws:signin:::cli/same-device (for CLI login on same device)\n- aws:signin:::cli/cross-device (for cross-device CLI login)\n- aws:signin:::cli/in-band (for in-band CLI login)\n- aws:signin:::cli/out-of-band (for out-of-band CLI login)\n\nThis will be finalized after consulting with UX as this is visible to end customer.",
-                "smithy.api#pattern": "^aws:signin:::cli/(same-device|cross-device|in-band|out-of-band)$"
+                "smithy.api#documentation": "Client identifier pattern for AWS Sign-In devtools clients\n\nThe ARN used by client as part of Sign-In onboarding. Expected values:\n- arn:aws:signin:::devtools/cross-device (for cross-device devtools login)\n- arn:aws:signin:::devtools/same-device (for same-device devtools login)\n\nThis will be finalized after consulting with UX as this is visible to end customer.",
+                "smithy.api#pattern": "^arn:aws:signin:::devtools/(cross-device|same-device)$"
             }
         },
         "com.amazonaws.signin#CodeVerifier": {
@@ -119,7 +119,7 @@
                         "id": "TokenOperationSmokeTest",
                         "params": {
                             "tokenInput": {
-                                "clientId": "aws:signin:::cli/same-device",
+                                "clientId": "arn:aws:signin:::devtools/same-device",
                                 "grantType": "authorization_code",
                                 "code": "test-code",
                                 "redirectUri": "https://example.com",
@@ -429,8 +429,8 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "AWS Sign-In Data Plane Service\n\nThis service implements OAuth 2.0 flows for AWS CLI authentication,\nproviding secure token exchange and refresh capabilities.",
-                "smithy.api#title": "AWS Sign-In Data Plane",
+                "smithy.api#documentation": "AWS Sign-In manages authentication for AWS services. This service provides\nsecure authentication flows for accessing AWS resources from the console and developer tools.",
+                "smithy.api#title": "AWS Sign-In Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
