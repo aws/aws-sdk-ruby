@@ -52,26 +52,13 @@ module Aws
       private
 
       def refresh
-        # First reload the token from disk to ensure it hasn't been refreshed externally
         token_json = read_cached_token
         update_creds(token_json['accessToken'])
-        return if @identity && @expiration && !near_expiration?(sync_expiration_length)
+        return if credentials_valid?
 
-        # Using OpenSSL 3.6.0 may result in errors like "certificate verify failed (unable to get certificate CRL)."
-        # A recommended workaround is to use OpenSSL version < 3.6.0 or requiring the openssl gem with a version of at
-        # least 3.2.2. GitHub issue: https://github.com/openssl/openssl/issues/28752.
-        if OpenSSL::OPENSSL_LIBRARY_VERSION.include?('3.6.') &&
-           (!Gem.loaded_specs['openssl'] || Gem.loaded_specs['openssl'].version < Gem::Version.new('3.2.2'))
-          warn 'WARNING: OpenSSL 3.6.x may cause certificate verify errors, use OpenSSL < 3.6.0 or openssl gem >= 3.2.2'
-        end
-
-        # Attempt to refresh the token
+        warn_openssl_version_issues
         attempt_refresh(token_json)
-
-        # Raise if token is hard expired
-        return unless !@expiration || @expiration < Time.now
-
-        raise InvalidLoginToken, 'Login token is invalid and failed to refresh. Please reauthenticate.'
+        raise_if_expired
       end
 
       def read_cached_token
@@ -116,6 +103,17 @@ module Aws
         )
       end
 
+      def credentials_valid?
+        @identity && @expiration && !near_expiration?(sync_expiration_length)
+      end
+
+      def warn_openssl_version_issues
+        return unless OpenSSL::OPENSSL_LIBRARY_VERSION.include?('3.6.') &&
+                      (!Gem.loaded_specs['openssl'] || Gem.loaded_specs['openssl'].version < Gem::Version.new('3.2.2'))
+
+        warn 'WARNING: OpenSSL 3.6.x may cause certificate verify errors, use OpenSSL < 3.6.0 or openssl gem >= 3.2.2'
+      end
+
       def attempt_refresh(token_json)
         resp = make_request(token_json)
         parse_resp(resp.token_output, token_json)
@@ -137,6 +135,13 @@ module Aws
       end
 
       def make_request(token_json)
+        req = build_oauth_request(token_json)
+        endpoint = resolve_endpoint(req)
+        req.context.http_request.headers['DPoP'] = dpop_proof(token_json['dpopKey'], endpoint)
+        req.send_request
+      end
+
+      def build_oauth_request(token_json)
         options = {
           token_input: {
             client_id: token_json['clientId'],
@@ -144,13 +149,14 @@ module Aws
             refresh_token: token_json['refreshToken']
           }
         }
-        req = @client.build_request(:create_o_auth2_token, options)
+        @client.build_request(:create_o_auth2_token, options)
+      end
+
+      def resolve_endpoint(req)
         endpoint_params = Aws::Signin::EndpointParameters.create(req.context)
         endpoint = req.context.config.endpoint_provider.resolve(endpoint_params)
         uri = @client.config.service.operation(:create_o_auth2_token).traits['smithy.api#http']['uri']
-        endpoint = URI.join(endpoint.url, uri).to_s
-        req.context.http_request.headers['DPoP'] = dpop_proof(token_json['dpopKey'], endpoint)
-        req.send_request
+        URI.join(endpoint.url, uri).to_s
       end
 
       def dpop_proof(dpop_key, endpoint)
@@ -231,6 +237,12 @@ module Aws
         ensure
           temp_file.unlink if File.exist?(temp_file.path) # Ensure temp file is cleaned up
         end
+      end
+
+      def raise_if_expired
+        return if @expiration && @expiration >= Time.now
+
+        raise InvalidLoginToken, 'Login token is invalid and failed to refresh. Please reauthenticate.'
       end
     end
   end

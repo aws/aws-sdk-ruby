@@ -11,7 +11,8 @@ module LoginCredentialsProviderHelper
     allow(Dir).to receive(:home).and_return('HOME')
     directory = ENV['AWS_LOGIN_CACHE_DIRECTORY'] || File.join(Dir.home, '.aws', 'login', 'cache')
     expected_path = File.join(directory, "#{login_session_sha}.json")
-    expect_any_instance_of(Aws::Core::LoginCredentialsProvider).to receive(:login_cache_file).at_least(:once).and_wrap_original do |m, *args|
+    expect_any_instance_of(Aws::Core::LoginCredentialsProvider).to receive(:login_cache_file)
+      .at_least(:once).and_wrap_original do |m, *args|
       path = m.call(*args)
       expect(path).to eq(expected_path)
       token_file.path
@@ -85,12 +86,12 @@ module LoginCredentialsProviderHelper
     group = OpenSSL::PKey::EC::Group.new('prime256v1')
     ec_params_der = group.to_der
     asn1_sequence = OpenSSL::ASN1::Sequence([
-      OpenSSL::ASN1::Sequence([
-        OpenSSL::ASN1::ObjectId('id-ecPublicKey'),
-        OpenSSL::ASN1.decode(ec_params_der)
-      ]),
-      OpenSSL::ASN1::BitString(point)
-    ])
+                                              OpenSSL::ASN1::Sequence([
+                                                                        OpenSSL::ASN1::ObjectId('id-ecPublicKey'),
+                                                                        OpenSSL::ASN1.decode(ec_params_der)
+                                                                      ]),
+                                              OpenSSL::ASN1::BitString(point)
+                                            ])
 
     # Use read to create public key from DER encoding to avoid immutable PKey error
     OpenSSL::PKey.read(asn1_sequence.to_der)
