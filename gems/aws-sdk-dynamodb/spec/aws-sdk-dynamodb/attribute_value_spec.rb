@@ -331,7 +331,7 @@ module Aws
 
         it 'handles extreme numeric values' do
           very_large = '9' * 100
-          very_small = '0.' + ('0' * 100) + '1'
+          very_small = "0.#{'0' * 100}1"
 
           expect(value.unmarshal(n: very_large)).to eq(BigDecimal(very_large))
           expect(value.unmarshal(n: very_small)).to eq(BigDecimal(very_small))
