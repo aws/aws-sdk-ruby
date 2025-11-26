@@ -173,13 +173,21 @@ module Aws::Forecastquery
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
-    # @option options [lambda] :retry_backoff (Smithy::Client::Retry::EXPONENTIAL_BACKOFF)
+    # @option options [#call(attempts)] :retry_backoff (Smithy::Client::Retry::ExponentialBackoff.new)
     #  A callable object that calculates a backoff delay for a retry attempt. The callable
     #  should accept a single argument, `attempts`, that represents the number of attempts
     #  that have been made. Used in the `standard` and `adaptive` retry strategies.
+    # @option options :retry_base_delay (2)
+    #  The base delay, in seconds, used to calculate the exponential backoff for
+    #  retry attempts. This option is ignored if a custom `retry_backoff` is provided.
+    #  Used in the `standard` and `adaptive` retry strategies.
     # @option options [Integer] :retry_max_attempts (3)
     #  The maximum number attempts that will be made for a single request, including
     #  the initial attempt. Used in the `standard` and `adaptive` retry strategies.
+    # @option options :retry_max_delay (20)
+    #  The maximum delay, in seconds, between retry attempts. This option is ignored
+    #  if a custom `retry_backoff` is provided. Used in the `standard` and `adaptive`
+    #  retry strategies.
     # @option options [String, Class] :retry_strategy ('standard')
     #  The retry strategy to use when retrying errors. This can be one of the following:
     #  * `standard` - A standardized retry strategy used by the AWS SDKs. This includes support
