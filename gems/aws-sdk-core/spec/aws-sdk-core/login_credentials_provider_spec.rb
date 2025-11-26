@@ -34,6 +34,13 @@ module Aws
         allow_any_instance_of(LoginCredentialsProvider).to receive(:warn).with(/WARNING: OpenSSL 3.6.x/)
       end
 
+      it 'raises if aws-sdk-signin is not required' do
+        hide_const('Aws::Signin')
+        expect do
+          LoginCredentialsProvider.new(login_session: login_session)
+        end.to raise_error(/aws-sdk-signin gem must be required/)
+      end
+
       describe '#initialize' do
         it 'constructs an client with passed arguments when not given' do
           expect(Aws::Signin::Client).to receive(:new).with({ credentials_provider: nil }).and_return(client)

@@ -107,6 +107,9 @@ module Aws
         @identity && @expiration && !near_expiration?(sync_expiration_length)
       end
 
+      # Using OpenSSL 3.6.0 may result in errors like "certificate verify failed (unable to get certificate CRL)."
+      # A recommended workaround is to use OpenSSL version < 3.6.0 or requiring the openssl gem with a version of at
+      # least 3.2.2. GitHub issue: https://github.com/openssl/openssl/issues/28752.
       def warn_openssl_version_issues
         return unless OpenSSL::OPENSSL_LIBRARY_VERSION.include?('3.6.') &&
                       (!Gem.loaded_specs['openssl'] || Gem.loaded_specs['openssl'].version < Gem::Version.new('3.2.2'))

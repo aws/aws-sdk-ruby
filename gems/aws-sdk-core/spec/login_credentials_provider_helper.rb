@@ -85,13 +85,17 @@ module LoginCredentialsProviderHelper
     # Create EC public key using P-256 curve
     group = OpenSSL::PKey::EC::Group.new('prime256v1')
     ec_params_der = group.to_der
-    asn1_sequence = OpenSSL::ASN1::Sequence([
-                                              OpenSSL::ASN1::Sequence([
-                                                                        OpenSSL::ASN1::ObjectId('id-ecPublicKey'),
-                                                                        OpenSSL::ASN1.decode(ec_params_der)
-                                                                      ]),
-                                              OpenSSL::ASN1::BitString(point)
-                                            ])
+    asn1_sequence = OpenSSL::ASN1::Sequence(
+      [
+        OpenSSL::ASN1::Sequence(
+          [
+            OpenSSL::ASN1::ObjectId('id-ecPublicKey'),
+            OpenSSL::ASN1.decode(ec_params_der)
+          ]
+        ),
+        OpenSSL::ASN1::BitString(point)
+      ]
+    )
 
     # Use read to create public key from DER encoding to avoid immutable PKey error
     OpenSSL::PKey.read(asn1_sequence.to_der)

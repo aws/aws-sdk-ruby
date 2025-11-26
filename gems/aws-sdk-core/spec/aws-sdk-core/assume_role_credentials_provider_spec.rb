@@ -19,6 +19,13 @@ module Aws
         }
       end
 
+      it 'raises if aws-sdk-sts is not required' do
+        hide_const('Aws::STS')
+        expect do
+          AssumeRoleCredentialsProvider.new(provider_options)
+        end.to raise_error(/aws-sdk-sts gem must be required/)
+      end
+
       describe '#initialize' do
         it 'constructs a client if not provided' do
           options = provider_options

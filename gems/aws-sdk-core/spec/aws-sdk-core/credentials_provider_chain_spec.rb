@@ -1972,8 +1972,7 @@ module Aws
                   identity: credentials(values),
                   set?: true
                 )
-                allow(AssumeRoleCredentialsProvider)
-                  .to receive(:new).and_return(assume_role_provider)
+                allow(AssumeRoleCredentialsProvider).to receive(:new).and_return(assume_role_provider)
                 allow(assume_role_provider).to receive(:features=)
                 allow(AssumeRoleWebIdentityCredentialsProvider)
                   .to receive(:new).and_return(assume_role_web_identity_provider)
@@ -1984,8 +1983,7 @@ module Aws
                   identity: credentials(values),
                   set?: true
                 )
-                allow(SSOCredentialsProvider)
-                  .to receive(:new).and_return(sso_provider)
+                allow(SSOCredentialsProvider).to receive(:new).and_return(sso_provider)
                 allow(sso_provider).to receive(:features=)
               when 'loginToken'
                 login_provider = double(
@@ -1993,8 +1991,7 @@ module Aws
                   identity: credentials(values),
                   set?: true
                 )
-                allow(LoginCredentialsProvider)
-                  .to receive(:new).and_return(login_provider)
+                allow(LoginCredentialsProvider).to receive(:new).and_return(login_provider)
                 allow(login_provider).to receive(:features=)
               when 'processResponse'
                 process_provider = double(
@@ -2002,8 +1999,7 @@ module Aws
                   identity: credentials(values),
                   set?: true
                 )
-                allow(ProcessCredentialsProvider)
-                  .to receive(:new).and_return(process_provider)
+                allow(ProcessCredentialsProvider).to receive(:new).and_return(process_provider)
                 allow(process_provider).to receive(:features=)
               when 'httpResponse'
                 container_provider = double(
@@ -2011,8 +2007,7 @@ module Aws
                   identity: credentials(values),
                   set?: true
                 )
-                allow(ContainerCredentialsProvider)
-                  .to receive(:new).and_return(container_provider)
+                allow(ContainerCredentialsProvider).to receive(:new).and_return(container_provider)
               when 'imdsResponse'
                 # Error case is handled transparently since instance profile credentials
                 # will rescue from StandardError and return empty credentials.
@@ -2021,8 +2016,7 @@ module Aws
                   identity: credentials(values),
                   set?: true
                 )
-                allow(InstanceProfileCredentialsProvider)
-                  .to receive(:new).and_return(instance_provider)
+                allow(InstanceProfileCredentialsProvider).to receive(:new).and_return(instance_provider)
                 allow(instance_provider).to receive(:features).and_return(['CREDENTIALS_IMDS'])
               else
                 raise 'Unknown input type'
