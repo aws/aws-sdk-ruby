@@ -3,6 +3,7 @@
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sso/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sts/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-ssooidc/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-signin/lib', __dir__))
 
 require 'byebug'
 require 'rspec'
@@ -12,8 +13,10 @@ require 'aws-sdk-core'
 require 'aws-sdk-sts'
 require 'aws-sdk-sso'
 require 'aws-sdk-ssooidc'
+require 'aws-sdk-signin'
 
 require_relative 'client_helper'
+require_relative 'login_credentials_provider_helper'
 
 def mock_shared_config(config_contents = '', credentials_contents = '')
   parsed_config = Aws::Core::ConfigFileParser.new(config_contents).parse
@@ -31,6 +34,8 @@ def mock_shared_config(config_contents = '', credentials_contents = '')
 end
 
 RSpec.configure do |config|
+  config.include LoginCredentialsProviderHelper
+
   config.before(:each) do
     stub_const('ENV', {})
 

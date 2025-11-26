@@ -1,0 +1,27 @@
+module Aws::Signin
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccessToken: StructureShape
+    AuthorizationCode: StringShape
+    ClientId: StringShape
+    CodeVerifier: StringShape
+    CreateOAuth2TokenRequest: StructureShape
+    CreateOAuth2TokenRequestBody: StructureShape
+    CreateOAuth2TokenResponse: StructureShape
+    CreateOAuth2TokenResponseBody: StructureShape
+    ExpiresIn: IntegerShape
+    GrantType: StringShape
+    IdToken: StringShape
+    InternalServerException: StructureShape
+    OAuth2ErrorCode: EnumShape
+    RedirectUri: StringShape
+    RefreshToken: StringShape
+    TokenType: StringShape
+    TooManyRequestsError: StructureShape
+    ValidationException: StructureShape
+
+    Signin: ServiceShape
+  end
+end

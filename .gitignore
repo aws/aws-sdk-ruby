@@ -5,3 +5,4 @@
 api-docs/
 build/
 Gemfile.lock
+.idea

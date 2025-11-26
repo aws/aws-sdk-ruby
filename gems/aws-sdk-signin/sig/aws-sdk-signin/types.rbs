@@ -1,0 +1,142 @@
+module Aws::Signin
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
+    class AccessToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+    end
+
+    class CreateOAuth2TokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_input: Types::CreateOAuth2TokenRequestBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_input: Types::CreateOAuth2TokenRequestBody?
+    end
+
+    class CreateOAuth2TokenRequestBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?grant_type: String,
+        ?code: String,
+        ?redirect_uri: String,
+        ?code_verifier: String,
+        ?refresh_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor grant_type: String?
+      attr_accessor code: String?
+      attr_accessor redirect_uri: String?
+      attr_accessor code_verifier: String?
+      attr_accessor refresh_token: String?
+    end
+
+    class CreateOAuth2TokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_output: Types::CreateOAuth2TokenResponseBody,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_output: Types::CreateOAuth2TokenResponseBody?
+    end
+
+    class CreateOAuth2TokenResponseBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: Types::AccessToken,
+        ?token_type: String,
+        ?expires_in: Integer,
+        ?refresh_token: String,
+        ?id_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: Types::AccessToken?
+      attr_accessor token_type: String?
+      attr_accessor expires_in: Integer?
+      attr_accessor refresh_token: String?
+      attr_accessor id_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
+    module OAuth2ErrorCode
+      TOKEN_EXPIRED: String
+      USER_CREDENTIALS_CHANGED: String
+      INSUFFICIENT_PERMISSIONS: String
+      AUTHCODE_EXPIRED: String
+      SERVER_ERROR: String
+      INVALID_REQUEST: String
+    end
+
+    class TooManyRequestsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+  end
+end

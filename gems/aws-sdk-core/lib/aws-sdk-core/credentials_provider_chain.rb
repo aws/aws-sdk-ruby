@@ -28,6 +28,7 @@ module Aws
           profile_assume_role_credentials
           profile_assume_role_web_identity_credentials
           profile_sso_credentials
+          profile_login_credentials
           profile_process_credentials
           container_credentials
           instance_profile_credentials
@@ -40,6 +41,7 @@ module Aws
           profile_assume_role_credentials
           profile_assume_role_web_identity_credentials
           profile_sso_credentials
+          profile_login_credentials
           profile_process_credentials
         ]
       end
@@ -188,8 +190,10 @@ module Aws
 
       def resolve_source_profile(options, profile, profile_config, source_profile)
         options = visit_source_profile(options, profile, profile_config, source_profile)
-        # check all profile-based credentials providers for credentials
-        profile_based_providers.each do |method_name|
+        # check all profile-based credentials providers for credentials except for LoginCredentialsProvider
+        providers = profile_based_providers
+        providers.delete(:profile_login_credentials)
+        providers.each do |method_name|
           Smithy::Client::Features.track('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             provider = send(method_name, options)
             next unless provider&.set?
@@ -331,8 +335,19 @@ module Aws
               "(#{sso_session['sso_start_url']}). Please remove the SSO start URL from the profile #{profile}."
       end
 
-      # 9. Resolve process credentials from profile when shared config for resolved profile
-      #    is configured with credential process.
+      # 9. Resolve login credentials from profile when shared config for resolved profile
+      #    is configured with login session.
+      def profile_login_credentials
+        profile_config = resolve_profile_config
+        return unless profile_config['login_session']
+
+        provider = LoginCredentialsProvider.new(login_session: profile_config['login_session'], region: @config.region)
+        provider.features = %w[CREDENTIALS_PROFILE_LOGIN CREDENTIALS_LOGIN]
+        provider
+      end
+
+      # 10. Resolve process credentials from profile when shared config for resolved profile
+      #     is configured with credential process.
       def profile_process_credentials(options = {})
         profile_config = options[:profile_config] || resolve_profile_config
         return unless profile_config['credential_process']
@@ -342,14 +357,14 @@ module Aws
         provider
       end
 
-      # 10. Resolve container credentials when relative or full URI is set in the environment.
+      # 11. Resolve container credentials when relative or full URI is set in the environment.
       def container_credentials
         return unless ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] || ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
 
         ContainerCredentialsProvider.new
       end
 
-      # 11. Resolve instance profile credentials last to prevent unnecessary waiting for
+      # 12. Resolve instance profile credentials last to prevent unnecessary waiting for
       #     EC2 metadata service timeout.
       def instance_profile_credentials(options = {})
         return if ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
