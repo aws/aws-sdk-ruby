@@ -80,12 +80,8 @@ module Aws
         nil
       end
 
-      def resolve_profile
-        @config.profile || ENV['AWS_PROFILE'] || 'default'
-      end
-
       def resolve_profile_config
-        Aws::Core.shared_config.profiles[resolve_profile] || {}
+        Aws::Core.shared_config.profiles[@config.profile] || {}
       end
 
       # 3. Resolve static credentials from environment when environment variables for
@@ -145,6 +141,7 @@ module Aws
       # 6. Resolve assume role credentials from profile when shared config for resolved
       #    profile is configured with role arn and source profile or credential source.
       def profile_assume_role_credentials(options = {})
+        # Explicitly resolve default profile name when @config.profile is nil for circular profile reference check
         profile = options[:profile] || resolve_profile
         profile_config = Aws::Core.shared_config.profiles[profile] || {}
         return unless valid_assume_role_inputs?(profile_config)
@@ -159,6 +156,10 @@ module Aws
           provider.features = source_provider.features
           provider
         end
+      end
+
+      def resolve_profile
+        @config.profile || ENV['AWS_PROFILE'] || 'default'
       end
 
       def valid_assume_role_inputs?(profile_config)
@@ -272,7 +273,7 @@ module Aws
       # 7. Resolve assume role with web identity credentials from profile when shared config
       #    for resolved profile is configured with web identity token file and role arn.
       def profile_assume_role_web_identity_credentials(options = {})
-        profile = options[:profile] || resolve_profile
+        profile = options[:profile] || @config.profile
         profile_config = options[:profile_config] || resolve_profile_config
         return unless defined?(Aws::STS) && profile_config['web_identity_token_file'] && profile_config['role_arn']
 
@@ -291,7 +292,7 @@ module Aws
       # 8. Resolve sso credentials from profile when shared config for resolved profile is
       #    configured with sso session, account id, and role name.
       def profile_sso_credentials(options = {})
-        profile = options[:profile] || resolve_profile
+        profile = options[:profile] || @config.profile
         profile_config = options[:profile_config] || resolve_profile_config
         return unless valid_sso_inputs?(profile_config)
 

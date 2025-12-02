@@ -12,15 +12,15 @@ module Aws
         expect(client.config.s3_use_arn_region).to be(true)
       end
 
-      # it 's3_use_arn_region can be configured using shared config' do
-      #   shared_config = <<~CONFIG
-      #     [profile default]
-      #     s3_use_arn_region = false
-      #   CONFIG
-      #   mock_shared_config(shared_config)
-      #   client = Client.new(stub_responses: true)
-      #   expect(client.config.s3_use_arn_region).to be(false)
-      # end
+      it 's3_use_arn_region can be configured using shared config' do
+        shared_config = <<~CONFIG
+          [profile default]
+          s3_use_arn_region = false
+        CONFIG
+        mock_shared_config(shared_config)
+        client = Client.new(stub_responses: true)
+        expect(client.config.s3_use_arn_region).to be(false)
+      end
 
       it 's3_use_arn_region can be configured using ENV with precedence over shared config' do
         shared_config = <<~CONFIG
@@ -49,15 +49,15 @@ module Aws
           .to raise_error(ArgumentError, /Expected :s3_use_arn_region to be true or false/)
       end
 
-      # it 'validates s3_use_arn_region from shared config' do
-      #   shared_config = <<~CONFIG
-      #     [profile default]
-      #     s3_use_arn_region = peccy
-      #   CONFIG
-      #   mock_shared_config(shared_config)
-      #   expect { Client.new(stub_responses: true) }
-      #     .to raise_error(ArgumentError, /`s3_use_arn_region` profile config/)
-      # end
+      it 'validates s3_use_arn_region from shared config' do
+        shared_config = <<~CONFIG
+          [profile default]
+          s3_use_arn_region = peccy
+        CONFIG
+        mock_shared_config(shared_config)
+        expect { Client.new(stub_responses: true) }
+          .to raise_error(ArgumentError, /`s3_use_arn_region` profile config/)
+      end
 
       it 'validates s3_use_arn_region from ENV' do
         ENV['AWS_S3_USE_ARN_REGION'] = 'peccy'

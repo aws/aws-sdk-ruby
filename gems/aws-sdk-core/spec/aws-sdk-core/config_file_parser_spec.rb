@@ -31,6 +31,13 @@ module Aws
         )
       end
 
+      def expect_profiles_eq(actual, expected)
+        expect(actual.keys).to match_array(expected.keys)
+        actual.each_key do |key|
+          expect(actual[key]).to eq(expected[key])
+        end
+      end
+
       context '#parse' do
         file = File.join(File.dirname(__FILE__), 'config_file_parser_tests.json')
         test_cases = JSON.load_file(file)['tests']
@@ -45,7 +52,7 @@ module Aws
                 .to raise_error(InvalidSharedConfigError, include(error))
             else
               parsed = parse(test_case['input'])
-              expect(parsed.profiles).to eq(expected['profiles']) if expected.key?('profiles')
+              expect_profiles_eq(parsed.profiles, expected['profiles']) if expected.key?('profiles')
               expect(parsed.sso_sessions).to eq(expected['ssoSessions']) if expected.key?('ssoSessions')
             end
           end

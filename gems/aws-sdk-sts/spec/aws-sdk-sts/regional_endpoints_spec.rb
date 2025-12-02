@@ -12,15 +12,15 @@ module Aws
         expect(client.config.sts_regional_endpoints).to eq('regional')
       end
 
-      # it 'sts_regional_endpoints can be configured using shared config' do
-      #   shared_config = <<~CONFIG
-      #     [profile default]
-      #     sts_regional_endpoints = legacy
-      #   CONFIG
-      #   mock_shared_config(shared_config)
-      #   client = Client.new(stub_responses: true)
-      #   expect(client.config.sts_regional_endpoints).to be('legacy')
-      # end
+      it 'sts_regional_endpoints can be configured using shared config' do
+        shared_config = <<~CONFIG
+          [profile default]
+          sts_regional_endpoints = legacy
+        CONFIG
+        mock_shared_config(shared_config)
+        client = Client.new(stub_responses: true)
+        expect(client.config.sts_regional_endpoints).to eq('legacy')
+      end
 
       it 'sts_regional_endpoints can be configured using ENV with precedence over shared config' do
         shared_config = <<~CONFIG
@@ -49,15 +49,15 @@ module Aws
           .to raise_error(ArgumentError, /Expected :sts_regional_endpoints to be 'legacy' or 'regional'/)
       end
 
-      # it 'validates sts_regional_endpoints from shared config' do
-      #   shared_config = <<~CONFIG
-      #     [profile default]
-      #     sts_regional_endpoints = peccy
-      #   CONFIG
-      #   mock_shared_config(shared_config)
-      #   expect { Client.new(stub_responses: true) }
-      #     .to raise_error(ArgumentError, /`sts_regional_endpoints` profile config/)
-      # end
+      it 'validates sts_regional_endpoints from shared config' do
+        shared_config = <<~CONFIG
+          [profile default]
+          sts_regional_endpoints = peccy
+        CONFIG
+        mock_shared_config(shared_config)
+        expect { Client.new(stub_responses: true) }
+          .to raise_error(ArgumentError, /`sts_regional_endpoints` profile config/)
+      end
 
       it 'validates sts_regional_endpoints from ENV' do
         ENV['AWS_STS_REGIONAL_ENDPOINTS'] = 'peccy'
