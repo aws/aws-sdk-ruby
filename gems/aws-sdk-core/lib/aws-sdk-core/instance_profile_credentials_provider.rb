@@ -20,8 +20,11 @@ module Aws
 
       # @option (see EC2Metadata#initialize)
       # @option options [String] :ec2_instance_profile_name (nil) The specified IAM instance profile name to use.
+      # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. `before_refresh` is
+      #   called when AWS credentials are required and need to be refreshed.
       def initialize(options = {})
         @ec2_instance_profile_name = options.delete(:ec2_instance_profile_name)
+
         @ec2_metadata = EC2Metadata.new(options)
         @no_refresh_until = nil
 

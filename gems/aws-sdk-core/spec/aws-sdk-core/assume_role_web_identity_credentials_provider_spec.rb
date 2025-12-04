@@ -63,6 +63,17 @@ module Aws
         expect(provider.client).to be(client)
       end
 
+      it 'excludes before_refresh from client construction' do
+        expect(STS::Client).to receive(:new).with({ credentials_provider: nil }).and_return(client)
+        provider = AssumeRoleWebIdentityCredentialsProvider.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path,
+          role_session_name: 'session-name',
+          before_refresh: proc {}
+        )
+        expect(provider.client).to be(client)
+      end
+
       it 'auto populates :session_name when not provided' do
         expect(client).to receive(:assume_role_with_web_identity).with(
           {
@@ -138,6 +149,20 @@ module Aws
         expect(creds.secret_access_key).to eq('secret')
         expect(creds.session_token).to eq('session')
         expect(provider.expiration.to_s).to eq(expiration.to_s)
+      end
+
+      it 'calls before_refresh with self' do
+        before_refresh_called = false
+        before_refresh = proc do |provider|
+          before_refresh_called = true
+          expect(provider).to be_instance_of(AssumeRoleWebIdentityCredentialsProvider)
+        end
+        AssumeRoleWebIdentityCredentialsProvider.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path,
+          before_refresh: before_refresh
+        )
+        expect(before_refresh_called).to be(true)
       end
 
       context 'retries' do

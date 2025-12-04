@@ -30,12 +30,10 @@ module Aws
       # @option options [Integer] :retries (3) Number of times to retry when retrieving credentials.
       # @option options [Integer,Proc] :backoff A backoff used for retryable requests. When given an Integer,
       #   it sleeps that amount. When given a Proc, it is called with the current number of failed retries.
-      # @option options [Aws::STS::Client] :client
-      #
-      # Creates a new AssumeRoleWebIdentityCredentialProvider. Takes additional parameters for
-      # {Aws::STS::Client#assume_role_with_web_identity}.
-      #
-      # @see Aws::STS::Client#assume_role_with_web_identity
+      # @option options [Aws::STS::Client] :client Optional `STS::Client`.
+      #   If not provided, a client will be constructed.
+      # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. `before_refresh` is
+      #   called when AWS credentials are required and need to be refreshed.
       def initialize(options = {})
         unless defined?(Aws::STS)
           raise 'The aws-sdk-sts gem must be required in order to use AssumeRoleWebIdentityCredentialsProvider.'
@@ -77,8 +75,7 @@ module Aws
         options.each_pair do |key, value|
           if assume_role_with_web_identity_options.include?(key)
             @assume_role_with_web_identity_params[key] = value
-          else
-            # TODO: filter out non client options
+          elsif !CLIENT_EXCLUDE_OPTIONS.include?(key)
             client_params[key] = value
           end
         end

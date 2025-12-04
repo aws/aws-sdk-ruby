@@ -24,20 +24,26 @@ module Aws
       include Smithy::Client::IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
-      # @param [String] :sso_session The SSO Session used for fetching the SSO token.
-      # @param [String] :sso_account_id The AWS account ID that temporary AWS credentials will be resolved for.
-      # @param [String] :sso_role_name The corresponding IAM role in the AWS account that temporary AWS credentials
-      #   will be resolved for.
-      # @param [String] :sso_region The AWS region where the SSO directory for the given sso_session is hosted.
-      # @param [SSO::Client] :client (Client.new)
-      def initialize(sso_session:, sso_account_id:, sso_role_name:, sso_region:, client: nil)
+      # @option options [String] :sso_session The SSO Session used for fetching the SSO token.
+      # @option options [String] :sso_account_id The AWS account ID that temporary AWS credentials will be resolved for.
+      # @option options [String] :sso_role_name The corresponding IAM role in the AWS account that temporary AWS
+      #   credentials will be resolved for.
+      # @option options [String] :sso_region The AWS region where the SSO directory for the given sso_session is hosted.
+      # @option options [AWS::SSO::Client] :client Optional `SSO::Client`.
+      #   If not provided, a client will be constructed.
+      # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. `before_refresh` is
+      #   called when AWS credentials are required and need to be refreshed.
+      def initialize(options = {})
         raise 'The aws-sdk-sso gem must be required in order to use SSOCredentialsProvider.' unless defined?(Aws::SSO)
 
-        @sso_session = sso_session
-        @sso_account_id = sso_account_id
-        @sso_region = sso_region
-        @sso_role_name = sso_role_name
-        @client = client || SSO::Client.new(region: sso_region, credentials_provider: nil)
+        validate_options(options)
+
+        @sso_session = options.delete(:sso_session)
+        @sso_account_id = options.delete(:sso_account_id)
+        @sso_region = options.delete(:sso_region)
+        @sso_role_name = options.delete(:sso_role_name)
+
+        @client = options.delete(:client) || SSO::Client.new(region: @sso_region, credentials_provider: nil)
         @token_provider = SSOOIDCTokenProvider.new(sso_session: sso_session, sso_region: sso_region)
         @features = ['CREDENTIALS_SSO']
         super
@@ -63,6 +69,12 @@ module Aws
       attr_accessor :features
 
       private
+
+      def validate_options(options)
+        required = %i[sso_session sso_account_id sso_region sso_role_name]
+        missing = required.reject { |k| options[k] }
+        raise ArgumentError, "Missing required parameter(s): #{missing.join(', ')}" if missing.any?
+      end
 
       def refresh
         creds = @client.get_role_credentials(

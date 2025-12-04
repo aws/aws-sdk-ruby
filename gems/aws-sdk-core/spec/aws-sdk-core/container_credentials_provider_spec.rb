@@ -78,6 +78,16 @@ module Aws
         expect(provider.expiration).to eq(expiration)
       end
 
+      it 'calls before_refresh with self' do
+        before_refresh_called = false
+        before_refresh = proc do |provider|
+          before_refresh_called = true
+          expect(provider).to be_instance_of(ContainerCredentialsProvider)
+        end
+        ContainerCredentialsProvider.new(options.merge(before_refresh: before_refresh))
+        expect(before_refresh_called).to be(true)
+      end
+
       context 'failure cases' do
         let(:resp) { '{}' }
 

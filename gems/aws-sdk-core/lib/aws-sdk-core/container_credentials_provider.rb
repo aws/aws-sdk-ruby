@@ -6,8 +6,8 @@ module Aws
   module Core
     # Auto-refreshing credentials that loads credentials from instances running in containers.
     #
-    #     credentials = Aws::Core::ContainerCredentialsProvider.new(retries: 3)
-    #     ec2 = Aws::EC2::Client.new(credentials_provider: credentials)
+    #     provider = Aws::Core::ContainerCredentialsProvider.new(retries: 3)
+    #     ec2 = Aws::EC2::Client.new(credentials_provider: provider)
     #
     # This credentials provider can be configured by setting one of the following environment variables:
     # * `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` - The relative URI path to the credentials in the container.
@@ -50,6 +50,8 @@ module Aws
       #   By default, failures are retried with exponential backoff, i.e. `sleep(1.2 ** num_failures)`.
       #   You can pass a number of seconds to sleep between failed attempts,
       #   or a Proc that accepts the number of failures.
+      # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. `before_refresh` is
+      #   called when AWS credentials are required and need to be refreshed.
       def initialize(options = {})
         initialize_uri
         @retries = options[:retries] || 3

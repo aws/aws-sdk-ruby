@@ -19,22 +19,22 @@ module Aws
       include Smithy::Client::IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
-      # Initializes an instance of AssumeRoleCredentialsProvider.
       # @option options [String] :role_arn
-      # @option options [String|Callable] :token_code If a proc is provided, it will be called and the result used
-      #   when credentials are required and need to be refreshed.
       # @option options [String] :role_session_name (Base64 UUID)
-      # @option options [Aws::STS::Client] :client (Client.new)
-      #
-      # Takes additional parameters for {Aws::STS::Client#assume_role}.
-      #
-      # @see Aws::STS::Client#assume_role
+      # @option options [Aws::STS::Client] :client Optional `STS::Client`.
+      #   If not provided, a client will be constructed.
+      # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. Useful for updating
+      #   tokens. `before_refresh` is called when AWS credentials are required and need to be refreshed. See the
+      #   example in this doc.
+      # @example Tokens can be refreshed using a Proc.
+      #   before_refresh = Proc.new do |assume_role_credentials_provider|
+      #     assume_role_credentials_provider.assume_role_params[:token_code] = update_token
+      #   end
       def initialize(options = {})
         unless defined?(Aws::STS)
           raise 'The aws-sdk-sts gem must be required in order to use AssumeRoleCredentialsProvider.'
         end
 
-        @token_code = options.delete(:token_code)
         @assume_role_params = {}
         client_params = {}
         build_parameters(options, client_params)
@@ -47,6 +47,9 @@ module Aws
       # @return [Client]
       attr_reader :client
 
+      # @return [Hash]
+      attr_reader :assume_role_params
+
       # Feature IDs for the User-Agent
       # @api private
       attr_accessor :features
@@ -58,16 +61,14 @@ module Aws
         options.each_pair do |key, value|
           if assume_role_options.include?(key)
             @assume_role_params[key] = value
-          else
-            # TODO: filter out non client options
+          elsif !CLIENT_EXCLUDE_OPTIONS.include?(key)
             client_params[key] = value
           end
         end
       end
 
       def refresh
-        token_code = @token_code.respond_to?(:call) ? @token_code.call : @token_code
-        creds = @client.assume_role(@assume_role_params.merge(token_code: token_code)).credentials
+        creds = @client.assume_role(@assume_role_params).credentials
         @expiration = creds.expiration
         @identity = Credentials.new(
           access_key_id: creds.access_key_id,

@@ -133,6 +133,16 @@ module Aws
         assert_requested(stub_request(:get, ipv4_endpoint_creds_path), times: 0)
       end
 
+      it 'calls before_refresh with self' do
+        before_refresh_called = false
+        before_refresh = proc do |provider|
+          before_refresh_called = true
+          expect(provider).to be_instance_of(InstanceProfileCredentialsProvider)
+        end
+        InstanceProfileCredentialsProvider.new(options.merge(before_refresh: before_refresh))
+        expect(before_refresh_called).to be(true)
+      end
+
       context 'failure cases' do
         it 'returns empty credentials when given an empty response' do
           # This handles the case when the service response but returns

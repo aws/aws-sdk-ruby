@@ -44,19 +44,28 @@ module Aws
       it 'raises if aws-sdk-sso is not required' do
         hide_const('Aws::SSO')
         expect do
-          SSOCredentialsProvider.new(**provider_options)
+          SSOCredentialsProvider.new(provider_options)
         end.to raise_error(/aws-sdk-sso gem must be required/)
       end
 
       it 'constructs a client if not provided' do
         expect(SSO::Client).to receive(:new).with(region: sso_region, credentials_provider: nil).and_return(client)
-        provider = SSOCredentialsProvider.new(**provider_options)
+        provider = SSOCredentialsProvider.new(provider_options)
         expect(provider.client).to be(client)
       end
 
       it 'uses a provided client' do
         expect(SSO::Client).not_to receive(:new)
-        provider = SSOCredentialsProvider.new(**provider_options, client: client)
+        provider = SSOCredentialsProvider.new(provider_options.merge(client: client))
+        expect(provider.client).to be(client)
+      end
+
+      it 'excludes before_refresh from client construction' do
+        options = provider_options.merge(before_refresh: proc {})
+        expect(SSO::Client).to receive(:new).with(
+          { credentials_provider: nil, region: provider_options[:sso_region] }
+        ).and_return(client)
+        provider = SSOCredentialsProvider.new(options)
         expect(provider.client).to be(client)
       end
 
@@ -68,7 +77,7 @@ module Aws
           role_name: sso_role_name,
           access_token: 'token'
         ).and_call_original
-        provider = SSOCredentialsProvider.new(**provider_options)
+        provider = SSOCredentialsProvider.new(provider_options)
         creds = provider.identity
         expect(creds.access_key_id).to eq('akid')
         expect(creds.secret_access_key).to eq('secret')
@@ -81,7 +90,7 @@ module Aws
         expect(SSO::Client).to receive(:new).with(region: sso_region, credentials_provider: nil).and_return(client)
         new_token = double('Token', token: 'new_token')
         expect(token_provider).to receive(:identity).and_return(token, new_token)
-        provider = SSOCredentialsProvider.new(**provider_options)
+        provider = SSOCredentialsProvider.new(provider_options)
         provider.identity
 
         allow(Time).to receive(:now).and_return(expiration + 60)
@@ -97,9 +106,19 @@ module Aws
       it 'parses expiration as Time' do
         expect(Aws::SSO::Client).to receive(:new).with(region: sso_region, credentials_provider: nil).and_return(client)
         expect(token_provider).to receive(:identity).and_return(token)
-        provider = SSOCredentialsProvider.new(**provider_options)
+        provider = SSOCredentialsProvider.new(provider_options)
         expect(provider.expiration).to be_a(Time)
         expect(provider.expiration).to eq(expiration)
+      end
+
+      it 'calls before_refresh with self' do
+        before_refresh_called = false
+        before_refresh = proc do |provider|
+          before_refresh_called = true
+          expect(provider).to be_instance_of(SSOCredentialsProvider)
+        end
+        SSOCredentialsProvider.new(provider_options.merge(client: client, before_refresh: before_refresh))
+        expect(before_refresh_called).to be(true)
       end
     end
   end
