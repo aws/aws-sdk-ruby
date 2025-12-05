@@ -212,6 +212,26 @@ module Aws
                                 ) -> _DeleteMemoryRecordResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
 
+      interface _EvaluateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateResponse]
+        def evaluation_results: () -> ::Array[Types::EvaluationResultContent]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#evaluate-instance_method
+      def evaluate: (
+                      evaluator_id: ::String,
+                      evaluation_input: {
+                        session_spans: Array[
+                          {
+                          },
+                        ]?
+                      },
+                      ?evaluation_target: {
+                        span_ids: Array[::String]?,
+                        trace_ids: Array[::String]?
+                      }
+                    ) -> _EvaluateResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateResponseSuccess
+
       interface _GetAgentCardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentCardResponse]
         def runtime_session_id: () -> ::String
@@ -550,7 +570,20 @@ module Aws
                                      search_criteria: {
                                        search_query: ::String,
                                        memory_strategy_id: ::String?,
-                                       top_k: ::Integer?
+                                       top_k: ::Integer?,
+                                       metadata_filters: Array[
+                                         {
+                                           left: {
+                                             metadata_key: ::String?
+                                           },
+                                           operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS"),
+                                           right: {
+                                             metadata_value: {
+                                               string_value: ::String?
+                                             }?
+                                           }?
+                                         },
+                                       ]?
                                      },
                                      ?next_token: ::String,
                                      ?max_results: ::Integer

@@ -557,7 +557,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the rates for the specified Savings Plan.
+    # Describes the rates for a specific, existing Savings Plan.
     #
     # @option params [required, String] :savings_plan_id
     #   The ID of the Savings Plan.
@@ -598,10 +598,10 @@ module Aws::SavingsPlans
     #   resp.savings_plan_id #=> String
     #   resp.search_results #=> Array
     #   resp.search_results[0].rate #=> String
-    #   resp.search_results[0].currency #=> String, one of "CNY", "USD"
-    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
-    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker"
+    #   resp.search_results[0].currency #=> String, one of "CNY", "USD", "EUR"
+    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr"
+    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -655,7 +655,7 @@ module Aws::SavingsPlans
     #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted, pending-return, returned
     #     filters: [
     #       {
-    #         name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end
+    #         name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end, instance-family
     #         values: ["String"],
     #       },
     #     ],
@@ -673,11 +673,11 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted", "pending-return", "returned"
     #   resp.savings_plans[0].region #=> String
     #   resp.savings_plans[0].ec2_instance_family #=> String
-    #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker"
+    #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker", "Database"
     #   resp.savings_plans[0].payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
     #   resp.savings_plans[0].product_types #=> Array
-    #   resp.savings_plans[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker"
-    #   resp.savings_plans[0].currency #=> String, one of "CNY", "USD"
+    #   resp.savings_plans[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
+    #   resp.savings_plans[0].currency #=> String, one of "CNY", "USD", "EUR"
     #   resp.savings_plans[0].commitment #=> String
     #   resp.savings_plans[0].upfront_payment_amount #=> String
     #   resp.savings_plans[0].recurring_payment_amount #=> String
@@ -696,7 +696,8 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the offering rates for the specified Savings Plans.
+    # Describes the offering rates for Savings Plans you might want to
+    # purchase.
     #
     # @option params [Array<String>] :savings_plan_offering_ids
     #   The IDs of the offerings.
@@ -741,9 +742,9 @@ module Aws::SavingsPlans
     #   resp = client.describe_savings_plans_offering_rates({
     #     savings_plan_offering_ids: ["UUID"],
     #     savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #     savings_plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker
-    #     products: ["EC2"], # accepts EC2, Fargate, Lambda, SageMaker
-    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda, AmazonSageMaker
+    #     savings_plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker, Database
+    #     products: ["EC2"], # accepts EC2, Fargate, Lambda, SageMaker, RDS, DSQL, DynamoDB, ElastiCache, DocDB, Neptune, Timestream, Keyspaces, DMS
+    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda, AmazonSageMaker, AmazonRDS, AuroraDSQL, AmazonDynamoDB, AmazonElastiCache, AmazonDocDB, AmazonNeptune, AmazonTimestream, AmazonMCS, AWSDatabaseMigrationSvc
     #     usage_types: ["SavingsPlanRateUsageType"],
     #     operations: ["SavingsPlanRateOperation"],
     #     filters: [
@@ -761,14 +762,14 @@ module Aws::SavingsPlans
     #   resp.search_results #=> Array
     #   resp.search_results[0].savings_plan_offering.offering_id #=> String
     #   resp.search_results[0].savings_plan_offering.payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
-    #   resp.search_results[0].savings_plan_offering.plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker"
+    #   resp.search_results[0].savings_plan_offering.plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker", "Database"
     #   resp.search_results[0].savings_plan_offering.duration_seconds #=> Integer
-    #   resp.search_results[0].savings_plan_offering.currency #=> String, one of "CNY", "USD"
+    #   resp.search_results[0].savings_plan_offering.currency #=> String, one of "CNY", "USD", "EUR"
     #   resp.search_results[0].savings_plan_offering.plan_description #=> String
     #   resp.search_results[0].rate #=> String
-    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
-    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker"
+    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr"
+    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -839,10 +840,10 @@ module Aws::SavingsPlans
     #   resp = client.describe_savings_plans_offerings({
     #     offering_ids: ["UUID"],
     #     payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #     product_type: "EC2", # accepts EC2, Fargate, Lambda, SageMaker
-    #     plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker
+    #     product_type: "EC2", # accepts EC2, Fargate, Lambda, SageMaker, RDS, DSQL, DynamoDB, ElastiCache, DocDB, Neptune, Timestream, Keyspaces, DMS
+    #     plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker, Database
     #     durations: [1],
-    #     currencies: ["CNY"], # accepts CNY, USD
+    #     currencies: ["CNY"], # accepts CNY, USD, EUR
     #     descriptions: ["SavingsPlanDescription"],
     #     service_codes: ["SavingsPlanServiceCode"],
     #     usage_types: ["SavingsPlanUsageType"],
@@ -862,12 +863,12 @@ module Aws::SavingsPlans
     #   resp.search_results #=> Array
     #   resp.search_results[0].offering_id #=> String
     #   resp.search_results[0].product_types #=> Array
-    #   resp.search_results[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker"
-    #   resp.search_results[0].plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker"
+    #   resp.search_results[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
+    #   resp.search_results[0].plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker", "Database"
     #   resp.search_results[0].description #=> String
     #   resp.search_results[0].payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
     #   resp.search_results[0].duration_seconds #=> Integer
-    #   resp.search_results[0].currency #=> String, one of "CNY", "USD"
+    #   resp.search_results[0].currency #=> String, one of "CNY", "USD", "EUR"
     #   resp.search_results[0].service_code #=> String
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
@@ -1023,7 +1024,7 @@ module Aws::SavingsPlans
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

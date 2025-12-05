@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2025-12-01)
+------------------
+
+* Feature - This release introduces offer set entity in AWS Marketplace Catalog API to enable multi-product transaction. Offer set enables sellers to group multiple private offers into a single-click purchase experience, simplifying procurement for customers purchasing multi-product solutions.
+
 1.70.0 (2025-11-21)
 ------------------
 

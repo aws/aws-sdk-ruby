@@ -1308,7 +1308,7 @@ module Aws::S3
     # (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe
     # (Ireland), and South America (São Paulo).
     #
-    # <note markdown="1"> You can store individual objects of up to 5 TB in Amazon S3. You
+    # <note markdown="1"> You can store individual objects of up to 50 TB in Amazon S3. You
     # create a copy of your object up to 5 GB in size in a single atomic
     # action using this API. However, to copy an object greater than 5 GB,
     # you must use the multipart upload Upload Part - Copy (UploadPartCopy)
@@ -2370,7 +2370,7 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2420,18 +2420,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: As of October 1, 2025, Amazon S3 has
-    # discontinued support for Email Grantee Access Control Lists (ACLs). If
-    # you attempt to use an Email Grantee ACL in a request after October 1,
-    # 2025, the request will receive an `HTTP 405` (Method Not Allowed)
-    # error.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia), US West (N. California), US West (Oregon), Asia Pacific
-    # (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Europe
-    # (Ireland), and South America (São Paulo).
-    #
     # <note markdown="1"> This action creates an Amazon S3 bucket. To create an Amazon S3 on
     # Outposts bucket, see [ `CreateBucket` ][1].
     #
@@ -3943,7 +3931,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -6401,7 +6389,10 @@ module Aws::S3
     #  </note>
     #
     # Removes the `PublicAccessBlock` configuration for an Amazon S3 bucket.
-    # To use this operation, you must have the
+    # This operation removes the bucket-level configuration only. The
+    # effective public access behavior will still be governed by
+    # account-level settings (which may inherit from organization-level
+    # policies). To use this operation, you must have the
     # `s3:PutBucketPublicAccessBlock` permission. For more information about
     # permissions, see [Permissions Related to Bucket Subresource
     # Operations][1] and [Managing Access Permissions to Your Amazon S3
@@ -6458,16 +6449,13 @@ module Aws::S3
     end
 
     # Returns the attribute-based access control (ABAC) property of the
-    # general purpose bucket. If the bucket ABAC is enabled, you can use
-    # tags for bucket access control. For more information, see [Enabling
-    # ABAC in general purpose buckets][1]. Whether ABAC is enabled or
-    # disabled, you can use tags for cost tracking. For more information,
-    # see [Using tags with S3 general purpose buckets][2].
+    # general purpose bucket. If ABAC is enabled on your bucket, you can use
+    # tags on the bucket for access control. For more information, see
+    # [Enabling ABAC in general purpose buckets][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
     #
     # @option params [required, String] :bucket
     #   The name of the general purpose bucket.
@@ -6600,19 +6588,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -6982,8 +6957,8 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BucketKeyEnabled.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_BlockedEncryptionTypes.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ServerSideEncryptionRule.html#AmazonS3-Type-ServerSideEncryptionRule-BucketKeyEnabled
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ServerSideEncryptionRule.html#AmazonS3-Type-ServerSideEncryptionRule-BlockedEncryptionTypes
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-bucket-encryption.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
@@ -7655,19 +7630,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -8682,7 +8644,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].existing_object_replication.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
-    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
@@ -9697,7 +9659,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"
     #   resp.parts_count #=> Integer
@@ -9715,19 +9677,6 @@ module Aws::S3
       req.send_request(options, &block)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -10297,7 +10246,7 @@ module Aws::S3
     #   resp.object_parts.parts[0].checksum_crc64nvme #=> String
     #   resp.object_parts.parts[0].checksum_sha1 #=> String
     #   resp.object_parts.parts[0].checksum_sha256 #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.object_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAttributes AWS API Documentation
@@ -10875,17 +10824,21 @@ module Aws::S3
     #  </note>
     #
     # Retrieves the `PublicAccessBlock` configuration for an Amazon S3
-    # bucket. To use this operation, you must have the
+    # bucket. This operation returns the bucket-level configuration only. To
+    # understand the effective public access behavior, you must also
+    # consider account-level settings (which may inherit from
+    # organization-level policies). To use this operation, you must have the
     # `s3:GetBucketPublicAccessBlock` permission. For more information about
     # Amazon S3 permissions, see [Specifying Permissions in a Policy][1].
     #
     # When Amazon S3 evaluates the `PublicAccessBlock` configuration for a
     # bucket or an object, it checks the `PublicAccessBlock` configuration
     # for both the bucket (or the bucket that contains the object) and the
-    # bucket owner's account. If the `PublicAccessBlock` settings are
-    # different between the bucket and the account, Amazon S3 uses the most
-    # restrictive combination of the bucket-level and account-level
-    # settings.
+    # bucket owner's account. Account-level settings automatically inherit
+    # from organization-level policies when present. If the
+    # `PublicAccessBlock` settings are different between the bucket and the
+    # account, Amazon S3 uses the most restrictive combination of the
+    # bucket-level and account-level settings.
     #
     # For more information about when Amazon S3 considers a bucket or an
     # object public, see [The Meaning of "Public"][2].
@@ -11659,7 +11612,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"
     #   resp.parts_count #=> Integer
@@ -12102,19 +12055,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -12351,19 +12291,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # This operation lists in-progress multipart uploads in a bucket. An
     # in-progress multipart upload is a multipart upload that has been
     # initiated by the `CreateMultipartUpload` request, but has not yet been
@@ -12796,7 +12723,7 @@ module Aws::S3
     #   resp.uploads[0].upload_id #=> String
     #   resp.uploads[0].key #=> String
     #   resp.uploads[0].initiated #=> Time
-    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.uploads[0].owner.display_name #=> String
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
@@ -12817,19 +12744,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -13077,19 +12991,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # <note markdown="1"> This operation is not supported for directory buckets.
     #
     #  </note>
@@ -13310,7 +13211,7 @@ module Aws::S3
     #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
     #   resp.contents[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.contents[0].restore_status.is_restore_in_progress #=> Boolean
@@ -13333,19 +13234,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # Returns some or all (up to 1,000) of the objects in a bucket with each
     # request. You can use the request parameters as selection criteria to
     # return a subset of the objects in a bucket. A `200 OK` response can
@@ -13673,7 +13561,7 @@ module Aws::S3
     #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
     #   resp.contents[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.contents[0].restore_status.is_restore_in_progress #=> Boolean
@@ -13700,19 +13588,6 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # Lists the parts that have been uploaded for a specific multipart
     # upload.
     #
@@ -14032,7 +13907,7 @@ module Aws::S3
     #   resp.initiator.display_name #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
     #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
@@ -14047,23 +13922,21 @@ module Aws::S3
     end
 
     # Sets the attribute-based access control (ABAC) property of the general
-    # purpose bucket. When you enable ABAC, you can use tags for bucket
-    # access control. Additionally, when ABAC is enabled, you must use the
-    # [TagResource][1], [UntagResource][2], and [ListTagsForResource][3]
-    # actions to manage bucket tags, and you can nolonger use the
-    # [PutBucketTagging][4] and [DeleteBucketTagging][5] actions to tag the
-    # bucket. You must also have the correct permissions for these actions.
-    # For more information, see [Enabling ABAC in general purpose
-    # buckets][6].
+    # purpose bucket. You must have `s3:PutBucketABAC` permission to perform
+    # this action. When you enable ABAC, you can use tags for access control
+    # on your buckets. Additionally, when ABAC is enabled, you must use the
+    # [TagResource][1] and [UntagResource][2] actions to manage tags on your
+    # buckets. You can nolonger use the [PutBucketTagging][3] and
+    # [DeleteBucketTagging][4] actions to tag your bucket. For more
+    # information, see [Enabling ABAC in general purpose buckets][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_TagResource.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListTagsForResource.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
     #
     # @option params [required, String] :bucket
     #   The name of the general purpose bucket.
@@ -16944,7 +16817,7 @@ module Aws::S3
     #           destination: { # required
     #             bucket: "BucketName", # required
     #             account: "AccountId",
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #             access_control_translation: {
     #               owner: "Destination", # required, accepts Destination
     #             },
@@ -17093,10 +16966,6 @@ module Aws::S3
     # for a general purpose bucket][1], you can no longer use this operation
     # for that bucket and must use the [TagResource][2] or
     # [UntagResource][3] operations instead.
-    #
-    # if ABAC is not enabled for the bucket. When you [enable ABAC for a
-    # general purpose bucket][1], you can no longer use this operation for
-    # that bucket and must use [TagResource][2] instead.
     #
     # Use tags to organize your Amazon Web Services bill to reflect your own
     # cost structure. To do this, sign up to get your Amazon Web Services
@@ -18594,7 +18463,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -19618,10 +19487,11 @@ module Aws::S3
     # When Amazon S3 evaluates the `PublicAccessBlock` configuration for a
     # bucket or an object, it checks the `PublicAccessBlock` configuration
     # for both the bucket (or the bucket that contains the object) and the
-    # bucket owner's account. If the `PublicAccessBlock` configurations are
-    # different between the bucket and the account, Amazon S3 uses the most
-    # restrictive combination of the bucket-level and account-level
-    # settings.
+    # bucket owner's account. Account-level settings automatically inherit
+    # from organization-level policies when present. If the
+    # `PublicAccessBlock` configurations are different between the bucket
+    # and the account, Amazon S3 uses the most restrictive combination of
+    # the bucket-level and account-level settings.
     #
     # For more information about when Amazon S3 considers a bucket or an
     # object public, see [The Meaning of "Public"][2].
@@ -20260,7 +20130,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #         },
     #       },
     #     },
@@ -22380,7 +22250,7 @@ module Aws::S3
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     tag_count: 1,
     #     version_id: "ObjectVersionId",
     #     bucket_key_enabled: false,
@@ -22413,7 +22283,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.205.0'
+      context[:gem_version] = '1.206.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

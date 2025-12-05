@@ -621,6 +621,46 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Associates a data source with an S3 Table Integration for query access
+    # in the 'logs' namespace. This enables querying log data using
+    # analytics engines that support Iceberg such as Amazon Athena, Amazon
+    # Redshift, and Apache Spark.
+    #
+    # @option params [required, String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the S3 Table Integration to
+    #   associate the data source with.
+    #
+    # @option params [required, Types::DataSource] :data_source
+    #   The data source to associate with the S3 Table Integration. Contains
+    #   the name and type of the data source.
+    #
+    # @return [Types::AssociateSourceToS3TableIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSourceToS3TableIntegrationResponse#identifier #identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_source_to_s3_table_integration({
+    #     integration_arn: "Arn", # required
+    #     data_source: { # required
+    #       name: "DataSourceName", # required
+    #       type: "DataSourceType",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateSourceToS3TableIntegration AWS API Documentation
+    #
+    # @overload associate_source_to_s3_table_integration(params = {})
+    # @param [Hash] params ({})
+    def associate_source_to_s3_table_integration(params = {}, options = {})
+      req = build_request(:associate_source_to_s3_table_integration, params)
+      req.send_request(options)
+    end
+
     # Cancels the specified export task.
     #
     # The task must be in the `PENDING` or `RUNNING` state.
@@ -1162,82 +1202,73 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates a new Scheduled Query that runs CloudWatch Logs Insights
-    # queries on a schedule and delivers results to specified destinations.
+    # Creates a scheduled query that runs CloudWatch Logs Insights queries
+    # at regular intervals. Scheduled queries enable proactive monitoring by
+    # automatically executing queries to detect patterns and anomalies in
+    # your log data. Query results can be delivered to Amazon S3 for
+    # analysis or further processing.
     #
     # @option params [required, String] :name
-    #   A unique name for the scheduled query within the region for an AWS
-    #   account. The name can contain letters, numbers, underscores, hyphens,
-    #   forward slashes, periods, and hash symbols.
+    #   The name of the scheduled query. The name must be unique within your
+    #   account and region. Valid characters are alphanumeric characters,
+    #   hyphens, underscores, and periods. Length must be between 1 and 255
+    #   characters.
     #
     # @option params [String] :description
     #   An optional description for the scheduled query to help identify its
-    #   purpose.
+    #   purpose and functionality.
     #
     # @option params [required, String] :query_language
     #   The query language to use for the scheduled query. Valid values are
-    #   LogsQL (CloudWatch Logs Insights query language), PPL (OpenSearch
-    #   Service Piped Processing Language), and SQL (OpenSearch Service
-    #   Structured Query Language).
+    #   `LogsQL`, `PPL`, and `SQL`.
     #
     # @option params [required, String] :query_string
-    #   The CloudWatch Logs Insights query string to execute. This is the
-    #   actual query that will be run against your log data on the specified
-    #   schedule.
+    #   The query string to execute. This is the same query syntax used in
+    #   CloudWatch Logs Insights. Maximum length is 10,000 characters.
     #
     # @option params [Array<String>] :log_group_identifiers
-    #   The log group identifiers to query. You can specify log group names or
-    #   log group ARNs. If querying log groups in a source account from a
-    #   monitoring account, you must specify the ARN of the log group.
+    #   An array of log group names or ARNs to query. You can specify between
+    #   1 and 50 log groups. Log groups can be identified by name or full ARN.
     #
     # @option params [required, String] :schedule_expression
     #   A cron expression that defines when the scheduled query runs. The
-    #   format is cron(fields) where fields consist of six space-separated
-    #   values: minutes, hours, day\_of\_month, month, day\_of\_week, year.
+    #   expression uses standard cron syntax and supports minute-level
+    #   precision. Maximum length is 256 characters.
     #
     # @option params [String] :timezone
-    #   The timezone in which the schedule expression is evaluated. If not
-    #   provided, defaults to UTC.
+    #   The timezone for evaluating the schedule expression. This determines
+    #   when the scheduled query executes relative to the specified timezone.
     #
     # @option params [Integer] :start_time_offset
-    #   Time offset in seconds from the execution time for the start of the
-    #   query time range. This defines the lookback period for the query (for
-    #   example, 3600 for the last hour).
+    #   The time offset in seconds that defines the lookback period for the
+    #   query. This determines how far back in time the query searches from
+    #   the execution time.
     #
     # @option params [Types::DestinationConfiguration] :destination_configuration
-    #   Configuration for destinations where the query results will be
-    #   delivered after successful execution. You can configure delivery to S3
-    #   buckets or EventBridge event buses.
+    #   Configuration for where to deliver query results. Currently supports
+    #   Amazon S3 destinations for storing query output.
     #
     # @option params [Integer] :schedule_start_time
-    #   The start time for the query schedule in Unix epoch time (seconds
-    #   since January 1, 1970, 00:00:00 UTC). If not specified, the schedule
-    #   starts immediately.
+    #   The start time for the scheduled query in Unix epoch format. The query
+    #   will not execute before this time.
     #
     # @option params [Integer] :schedule_end_time
-    #   The end time for the query schedule in Unix epoch time (seconds since
-    #   January 1, 1970, 00:00:00 UTC). If not specified, the schedule runs
-    #   indefinitely.
+    #   The end time for the scheduled query in Unix epoch format. The query
+    #   will stop executing after this time.
     #
     # @option params [required, String] :execution_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that CloudWatch Logs
-    #   will assume to execute the scheduled query and deliver results to the
-    #   specified destinations.
+    #   The ARN of the IAM role that grants permissions to execute the query
+    #   and deliver results to the specified destination. The role must have
+    #   permissions to read from the specified log groups and write to the
+    #   destination.
     #
     # @option params [String] :state
-    #   The initial state of the scheduled query. Valid values are ENABLED
-    #   (the query will run according to its schedule) and DISABLED (the query
-    #   is paused and will not run). If not provided, defaults to ENABLED.
+    #   The initial state of the scheduled query. Valid values are `ENABLED`
+    #   and `DISABLED`. Default is `ENABLED`.
     #
     # @option params [Hash<String,String>] :tags
-    #   An optional list of key-value pairs to associate with the resource.
-    #
-    #   For more information about tagging, see [Tagging Amazon Web Services
-    #   resources][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   Key-value pairs to associate with the scheduled query for resource
+    #   management and cost allocation.
     #
     # @return [Types::CreateScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1285,9 +1316,12 @@ module Aws::CloudWatchLogs
     end
 
     # Deletes a CloudWatch Logs account policy. This stops the account-wide
-    # policy from applying to log groups in the account. If you delete a
-    # data protection policy or subscription filter policy, any log-group
-    # level policies of those types remain in effect.
+    # policy from applying to log groups or data sources in the account. If
+    # you delete a data protection policy or subscription filter policy, any
+    # log-group level policies of those types remain in effect. This
+    # operation supports deletion of data source-based field index policies,
+    # including facet configurations, in addition to log group-based
+    # policies.
     #
     # To use this operation, you must be signed on with the correct
     # permissions depending on the type of policy that you are deleting.
@@ -1305,6 +1339,11 @@ module Aws::CloudWatchLogs
     #
     # * To delete a field index policy, you must have the
     #   `logs:DeleteIndexPolicy` and `logs:DeleteAccountPolicy` permissions.
+    #
+    #   If you delete a field index policy that included facet
+    #   configurations, those facets will no longer be available for
+    #   interactive exploration in the CloudWatch Logs Insights console.
+    #   However, facet data is retained for up to 30 days.
     #
     # If you delete a field index policy, the indexing of the log events
     # that happened before you deleted the policy will still be used for up
@@ -1522,13 +1561,20 @@ module Aws::CloudWatchLogs
     # you delete the policy will still be used for as many as 30 days to
     # improve CloudWatch Logs Insights queries.
     #
+    # If the deleted policy included facet configurations, those facets will
+    # no longer be available for interactive exploration in the CloudWatch
+    # Logs Insights console for this log group. However, facet data is
+    # retained for up to 30 days.
+    #
     # You can't use this operation to delete an account-level index policy.
     # Instead, use [DeletAccountPolicy][1].
     #
     # If you delete a log-group level field index policy and there is an
     # account-level field index policy, in a few minutes the log group
     # begins using that account-wide policy to index new incoming log
-    # events.
+    # events. This operation only affects log group-level policies,
+    # including any facet configurations, and preserves any data
+    # source-based account policies that may apply to the log group.
     #
     #
     #
@@ -1798,12 +1844,12 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Deletes an existing scheduled query and all its associated
-    # configurations. This operation permanently removes the scheduled query
-    # and cannot be undone.
+    # Deletes a scheduled query and stops all future executions. This
+    # operation also removes any configured actions and associated
+    # resources.
     #
     # @option params [required, String] :identifier
-    #   The name or ARN of the scheduled query to delete.
+    #   The ARN or name of the scheduled query to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2351,6 +2397,7 @@ module Aws::CloudWatchLogs
     #   resp.field_indexes[0].last_scan_time #=> Integer
     #   resp.field_indexes[0].first_event_time #=> Integer
     #   resp.field_indexes[0].last_event_time #=> Integer
+    #   resp.field_indexes[0].type #=> String, one of "FACET", "FIELD_INDEX"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeFieldIndexes AWS API Documentation
@@ -2419,9 +2466,10 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns information about log groups. You can return all your log
-    # groups or filter the results by prefix. The results are ASCII-sorted
-    # by log group name.
+    # Returns information about log groups, including data sources that
+    # ingest into each log group. You can return all your log groups or
+    # filter the results by prefix. The results are ASCII-sorted by log
+    # group name.
     #
     # CloudWatch Logs doesn't support IAM policies that control access to
     # the `DescribeLogGroups` action by using the `aws:ResourceTag/key-name
@@ -2767,6 +2815,12 @@ module Aws::CloudWatchLogs
     # all queries or limit it to queries of a specific log group or queries
     # with a certain status.
     #
+    # This operation includes both interactive queries started directly by
+    # users and automated queries executed by scheduled query
+    # configurations. Scheduled query executions appear in the results
+    # alongside manually initiated queries, providing visibility into all
+    # query activity in your account.
+    #
     # @option params [String] :log_group_name
     #   Limits the returned queries to only those for the specified log group.
     #
@@ -3076,6 +3130,36 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def disassociate_kms_key(params = {}, options = {})
       req = build_request(:disassociate_kms_key, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a data source from an S3 Table Integration, removing
+    # query access and deleting all associated data from the integration.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the association to remove between the data
+    #   source and S3 Table Integration.
+    #
+    # @return [Types::DisassociateSourceFromS3TableIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateSourceFromS3TableIntegrationResponse#identifier #identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_source_from_s3_table_integration({
+    #     identifier: "S3TableIntegrationSourceIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateSourceFromS3TableIntegration AWS API Documentation
+    #
+    # @overload disassociate_source_from_s3_table_integration(params = {})
+    # @param [Hash] params ({})
+    def disassociate_source_from_s3_table_integration(params = {}, options = {})
+      req = build_request(:disassociate_source_from_s3_table_integration, params)
       req.send_request(options)
     end
 
@@ -3720,10 +3804,52 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Discovers available fields for a specific data source and type. The
+    # response includes any field modifications introduced through
+    # pipelines, such as new fields or changed field types.
+    #
+    # @option params [required, String] :data_source_name
+    #   The name of the data source to retrieve log fields for.
+    #
+    # @option params [required, String] :data_source_type
+    #   The type of the data source to retrieve log fields for.
+    #
+    # @return [Types::GetLogFieldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogFieldsResponse#log_fields #log_fields} => Array&lt;Types::LogFieldsListItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_fields({
+    #     data_source_name: "DataSourceName", # required
+    #     data_source_type: "DataSourceType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_fields #=> Array
+    #   resp.log_fields[0].log_field_name #=> String
+    #   resp.log_fields[0].log_field_type.type #=> String
+    #   resp.log_fields[0].log_field_type.element #=> Types::LogFieldType
+    #   resp.log_fields[0].log_field_type.fields #=> Types::LogFieldsList
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogFields AWS API Documentation
+    #
+    # @overload get_log_fields(params = {})
+    # @param [Hash] params ({})
+    def get_log_fields(params = {}, options = {})
+      req = build_request(:get_log_fields, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the fields that are included in log events in the
     # specified log group. Includes the percentage of log events that
     # contain each field. The search is limited to a time period that you
     # specify.
+    #
+    # This operation is used for discovering fields within log group events.
+    # For discovering fields across data sources, use the GetLogFields
+    # operation.
     #
     # You can specify the log group to search by using either
     # `logGroupIdentifier` or `logGroupName`. You must specify one of these
@@ -4037,6 +4163,11 @@ module Aws::CloudWatchLogs
     # `Scheduled` or `Running` for the status, you can retry the operation
     # later to see the final results.
     #
+    # This operation is used both for retrieving results from interactive
+    # queries and from automated scheduled query executions. Scheduled
+    # queries use `GetQueryResults` internally to retrieve query results for
+    # processing and delivery to configured destinations.
+    #
     # If you are using CloudWatch cross-account observability, you can use
     # this operation in a monitoring account to start queries in linked
     # source accounts. For more information, see [CloudWatch cross-account
@@ -4091,11 +4222,11 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns detailed information about a specified scheduled query,
-    # including its configuration, current state, and execution history.
+    # Retrieves details about a specific scheduled query, including its
+    # configuration, execution status, and metadata.
     #
     # @option params [required, String] :identifier
-    #   The name or ARN of the scheduled query to retrieve.
+    #   The ARN or name of the scheduled query to retrieve.
     #
     # @return [Types::GetScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4157,24 +4288,25 @@ module Aws::CloudWatchLogs
     end
 
     # Retrieves the execution history of a scheduled query within a
-    # specified time range, including execution status and destination
-    # processing metadata.
+    # specified time range, including query results and destination
+    # processing status.
     #
     # @option params [required, String] :identifier
-    #   The name or ARN of the scheduled query to retrieve history for.
+    #   The ARN or name of the scheduled query to retrieve history for.
     #
     # @option params [required, Integer] :start_time
-    #   The start time for the history retrieval window in Unix epoch time.
+    #   The start time for the history query in Unix epoch format.
     #
     # @option params [required, Integer] :end_time
-    #   The end time for the history retrieval window in Unix epoch time.
+    #   The end time for the history query in Unix epoch format.
     #
     # @option params [Array<String>] :execution_statuses
-    #   Filter results by execution status (Running, Complete, Failed,
-    #   Timeout, or InvalidQuery).
+    #   An array of execution statuses to filter the history results. Only
+    #   executions with the specified statuses are returned.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of history records to return in a single call.
+    #   The maximum number of history records to return. Valid range is 1 to
+    #   1000.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. The token expires after
@@ -4341,6 +4473,122 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def get_transformer(params = {}, options = {})
       req = build_request(:get_transformer, params)
+      req.send_request(options)
+    end
+
+    # Returns an aggregate summary of all log groups in the Region grouped
+    # by specified data source characteristics. Supports optional filtering
+    # by log group class, name patterns, and data sources. If you perform
+    # this action in a monitoring account, you can also return aggregated
+    # summaries of log groups from source accounts that are linked to the
+    # monitoring account. For more information about using cross-account
+    # observability to set up monitoring accounts and source accounts, see
+    # [CloudWatch cross-account observability][1].
+    #
+    # The operation aggregates log groups by data source name and type and
+    # optionally format, providing counts of log groups that share these
+    # characteristics. The operation paginates results. By default, it
+    # returns up to 50 results and includes a token to retrieve more
+    # results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+    #
+    # @option params [Array<String>] :account_identifiers
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as 20
+    #   account IDs in the array.
+    #
+    # @option params [Boolean] :include_linked_accounts
+    #   If you are using a monitoring account, set this to `true` to have the
+    #   operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains a
+    #   null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
+    #
+    # @option params [String] :log_group_class
+    #   Filters the results by log group class to include only log groups of
+    #   the specified class.
+    #
+    # @option params [String] :log_group_name_pattern
+    #   Use this parameter to limit the returned log groups to only those with
+    #   names that match the pattern that you specify. This parameter is a
+    #   regular expression that can match prefixes and substrings, and
+    #   supports wildcard matching and matching multiple patterns, as in the
+    #   following examples.
+    #
+    #   * Use `^` to match log group names by prefix.
+    #
+    #   * For a substring match, specify the string to match. All matches are
+    #     case sensitive
+    #
+    #   * To match multiple patterns, separate them with a `|` as in the
+    #     example `^/aws/lambda|discovery`
+    #
+    #   You can specify as many as five different regular expression patterns
+    #   in this field, each of which must be between 3 and 24 characters. You
+    #   can include the `^` symbol as many as five times, and include the `|`
+    #   symbol as many as four times.
+    #
+    # @option params [Array<Types::DataSourceFilter>] :data_sources
+    #   Filters the results by data source characteristics to include only log
+    #   groups associated with the specified data sources.
+    #
+    # @option params [required, String] :group_by
+    #   Specifies how to group the log groups in the summary.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of aggregated summaries to return. If you omit this
+    #   parameter, the default is up to 50 aggregated summaries.
+    #
+    # @return [Types::ListAggregateLogGroupSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAggregateLogGroupSummariesResponse#aggregate_log_group_summaries #aggregate_log_group_summaries} => Array&lt;Types::AggregateLogGroupSummary&gt;
+    #   * {Types::ListAggregateLogGroupSummariesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_aggregate_log_group_summaries({
+    #     account_identifiers: ["AccountId"],
+    #     include_linked_accounts: false,
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_name_pattern: "LogGroupNameRegexPattern",
+    #     data_sources: [
+    #       {
+    #         name: "DataSourceName", # required
+    #         type: "DataSourceType",
+    #       },
+    #     ],
+    #     group_by: "DATA_SOURCE_NAME_TYPE_AND_FORMAT", # required, accepts DATA_SOURCE_NAME_TYPE_AND_FORMAT, DATA_SOURCE_NAME_AND_TYPE
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregate_log_group_summaries #=> Array
+    #   resp.aggregate_log_group_summaries[0].log_group_count #=> Integer
+    #   resp.aggregate_log_group_summaries[0].grouping_identifiers #=> Array
+    #   resp.aggregate_log_group_summaries[0].grouping_identifiers[0].key #=> String
+    #   resp.aggregate_log_group_summaries[0].grouping_identifiers[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListAggregateLogGroupSummaries AWS API Documentation
+    #
+    # @overload list_aggregate_log_group_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_aggregate_log_group_summaries(params = {}, options = {})
+      req = build_request(:list_aggregate_log_group_summaries, params)
       req.send_request(options)
     end
 
@@ -4529,9 +4777,12 @@ module Aws::CloudWatchLogs
     # observability to set up monitoring accounts and source accounts, see [
     # CloudWatch cross-account observability][1].
     #
-    # You can optionally filter the list by log group class and by using
+    # You can optionally filter the list by log group class, by using
     # regular expressions in your request to match strings in the log group
-    # names.
+    # names, by using the fieldIndexes parameter to filter log groups based
+    # on which field indexes are configured, by using the dataSources
+    # parameter to filter log groups by data source types, and by using the
+    # fieldIndexNames parameter to filter by specific field index names.
     #
     # This operation is paginated. By default, your first use of this
     # operation returns 50 results, and includes a token to use in a
@@ -4591,6 +4842,19 @@ module Aws::CloudWatchLogs
     #   The maximum number of log groups to return. If you omit this
     #   parameter, the default is up to 50 log groups.
     #
+    # @option params [Array<Types::DataSourceFilter>] :data_sources
+    #   An array of data source filters to filter log groups by their
+    #   associated data sources. You can filter by data source name, type, or
+    #   both. Multiple filters within the same dimension are combined with OR
+    #   logic, while filters across different dimensions are combined with AND
+    #   logic.
+    #
+    # @option params [Array<String>] :field_index_names
+    #   An array of field index names to filter log groups that have specific
+    #   field indexes. Only log groups containing all specified field indexes
+    #   are returned. You can specify 1 to 20 field index names, each with 1
+    #   to 512 characters.
+    #
     # @return [Types::ListLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLogGroupsResponse#log_groups #log_groups} => Array&lt;Types::LogGroupSummary&gt;
@@ -4605,6 +4869,13 @@ module Aws::CloudWatchLogs
     #     account_identifiers: ["AccountId"],
     #     next_token: "NextToken",
     #     limit: 1,
+    #     data_sources: [
+    #       {
+    #         name: "DataSourceName", # required
+    #         type: "DataSourceType",
+    #       },
+    #     ],
+    #     field_index_names: ["FieldIndexName"],
     #   })
     #
     # @example Response structure
@@ -4681,19 +4952,20 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Lists all scheduled queries in the current AWS account and region with
-    # optional filtering by state.
+    # Lists all scheduled queries in your account and region. You can filter
+    # results by state to show only enabled or disabled queries.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of scheduled queries to return in a single call.
+    #   The maximum number of scheduled queries to return. Valid range is 1 to
+    #   1000.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. The token expires after
     #   24 hours.
     #
     # @option params [String] :state
-    #   Filter results by the state of scheduled queries (ENABLED or
-    #   DISABLED).
+    #   Filter scheduled queries by state. Valid values are `ENABLED` and
+    #   `DISABLED`. If not specified, all scheduled queries are returned.
     #
     # @return [Types::ListScheduledQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4732,6 +5004,57 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def list_scheduled_queries(params = {}, options = {})
       req = build_request(:list_scheduled_queries, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of data source associations for a specified S3 Table
+    # Integration, showing which data sources are currently associated for
+    # query access.
+    #
+    # @option params [required, String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the S3 Table Integration to list
+    #   associations for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of associations to return in a single call. Valid
+    #   range is 1 to 100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::ListSourcesForS3TableIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSourcesForS3TableIntegrationResponse#sources #sources} => Array&lt;Types::S3TableIntegrationSource&gt;
+    #   * {Types::ListSourcesForS3TableIntegrationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sources_for_s3_table_integration({
+    #     integration_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].data_source.name #=> String
+    #   resp.sources[0].data_source.type #=> String
+    #   resp.sources[0].status #=> String, one of "ACTIVE", "UNHEALTHY", "FAILED", "DATA_SOURCE_DELETE_IN_PROGRESS"
+    #   resp.sources[0].status_reason #=> String
+    #   resp.sources[0].created_time_stamp #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListSourcesForS3TableIntegration AWS API Documentation
+    #
+    # @overload list_sources_for_s3_table_integration(params = {})
+    # @param [Hash] params ({})
+    def list_sources_for_s3_table_integration(params = {}, options = {})
+      req = build_request(:list_sources_for_s3_table_integration, params)
       req.send_request(options)
     end
 
@@ -4819,6 +5142,12 @@ module Aws::CloudWatchLogs
     # policy that applies to all log groups or a subset of log groups in the
     # account.
     #
+    # For field index policies, you can configure indexed fields as *facets*
+    # to enable interactive exploration of your logs. Facets provide value
+    # distributions and counts for indexed fields in the CloudWatch Logs
+    # Insights console without requiring query execution. For more
+    # information, see [Use facets to group and explore logs][1].
+    #
     # To use this operation, you must be signed on with the correct
     # permissions depending on the type of policy that you are creating.
     #
@@ -4834,6 +5163,9 @@ module Aws::CloudWatchLogs
     #   `logs:PutTransformer` and `logs:PutAccountPolicy` permissions.
     #
     # * To create a field index policy, you must have the
+    #   `logs:PutIndexPolicy` and `logs:PutAccountPolicy` permissions.
+    #
+    # * To configure facets for field index policies, you must have the
     #   `logs:PutIndexPolicy` and `logs:PutAccountPolicy` permissions.
     #
     # * To create a metric extraction policy, you must have the
@@ -4860,21 +5192,21 @@ module Aws::CloudWatchLogs
     #
     # By default, when a user views a log event that includes masked data,
     # the sensitive data is replaced by asterisks. A user who has the
-    # `logs:Unmask` permission can use a [GetLogEvents][1] or
-    # [FilterLogEvents][2] operation with the `unmask` parameter set to
+    # `logs:Unmask` permission can use a [GetLogEvents][2] or
+    # [FilterLogEvents][3] operation with the `unmask` parameter set to
     # `true` to view the unmasked log events. Users with the `logs:Unmask`
     # can also view unmasked data in the CloudWatch Logs console by running
     # a CloudWatch Logs Insights query with the `unmask` query command.
     #
     # For more information, including a list of types of data that can be
-    # audited and masked, see [Protect sensitive log data with masking][3].
+    # audited and masked, see [Protect sensitive log data with masking][4].
     #
     # To use the `PutAccountPolicy` operation for a data protection policy,
     # you must be signed on with the `logs:PutDataProtectionPolicy` and
     # `logs:PutAccountPolicy` permissions.
     #
     # The `PutAccountPolicy` operation applies to all log groups in the
-    # account. You can use [PutDataProtectionPolicy][4] to create a data
+    # account. You can use [PutDataProtectionPolicy][5] to create a data
     # protection policy that applies to just one log group. If a log group
     # has its own data protection policy and the account also has an
     # account-level data protection policy, then the two policies are
@@ -4902,7 +5234,7 @@ module Aws::CloudWatchLogs
     #   for same-account delivery.
     #
     # * A logical destination in a different account created with
-    #   [PutDestination][5], for cross-account delivery. Kinesis Data
+    #   [PutDestination][6], for cross-account delivery. Kinesis Data
     #   Streams and Firehose are supported as logical destinations.
     #
     # Each account can have one account-level subscription filter policy per
@@ -4931,7 +5263,7 @@ module Aws::CloudWatchLogs
     # processor applies one type of transformation to the log events
     # ingested into this log group. For more information about the available
     # processors to use in a transformer, see [ Processors that you can
-    # use][6].
+    # use][7].
     #
     # Having log events in standardized format enables visibility across
     # your applications for your log analysis, reporting, and alarming
@@ -4973,7 +5305,7 @@ module Aws::CloudWatchLogs
     # towards your field index quota.
     #
     # You can also set up a transformer at the log-group level. For more
-    # information, see [PutTransformer][7]. If there is both a log-group
+    # information, see [PutTransformer][8]. If there is both a log-group
     # level transformer created with `PutTransformer` and an account-level
     # transformer that could apply to the same log group, the log group uses
     # only the log-group level transformer. It ignores the account-level
@@ -4990,10 +5322,10 @@ module Aws::CloudWatchLogs
     # that match only a small fraction of the total log events. Common
     # examples of indexes include request ID, session ID, user IDs, or
     # instance IDs. For more information, see [Create field indexes to
-    # improve query performance and reduce costs][8]
+    # improve query performance and reduce costs][9]
     #
     # To find the fields that are in your log group events, use the
-    # [GetLogGroupFields][9] operation.
+    # [GetLogGroupFields][10] operation.
     #
     # For example, suppose you have created a field index for `requestId`.
     # Then, any CloudWatch Logs Insights query on that log group that
@@ -5006,24 +5338,27 @@ module Aws::CloudWatchLogs
     # match a log event containing `requestId`.
     #
     # You can have one account-level field index policy that applies to all
-    # log groups in the account. Or you can create as many as 20
-    # account-level field index policies that are each scoped to a subset of
-    # log groups with the `selectionCriteria` parameter. If you have
-    # multiple account-level index policies with selection criteria, no two
-    # of them can use the same or overlapping log group name prefixes. For
-    # example, if you have one policy filtered to log groups that start with
-    # `my-log`, you can't have another field index policy filtered to
-    # `my-logpprod` or `my-logging`.
+    # log groups in the account. Or you can create as many as 40
+    # account-level field index policies (20 for log group prefix selection,
+    # 20 for data source selection) that are each scoped to a subset of log
+    # groups or data sources with the `selectionCriteria` parameter. Field
+    # index policies can now be created for specific data source name and
+    # type combinations using DataSourceName and DataSourceType selection
+    # criteria. If you have multiple account-level index policies with
+    # selection criteria, no two of them can use the same or overlapping log
+    # group name prefixes. For example, if you have one policy filtered to
+    # log groups that start with `my-log`, you can't have another field
+    # index policy filtered to `my-logpprod` or `my-logging`.
     #
     # If you create an account-level field index policy in a monitoring
     # account in cross-account observability, the policy is applied only to
     # the monitoring account and not to any source accounts.
     #
     # If you want to create a field index policy for a single log group, you
-    # can use [PutIndexPolicy][10] instead of `PutAccountPolicy`. If you do
+    # can use [PutIndexPolicy][11] instead of `PutAccountPolicy`. If you do
     # so, that log group will use only that log-group level policy, and will
     # ignore the account-level policy that you create with
-    # [PutAccountPolicy][11].
+    # [PutAccountPolicy][12].
     #
     # **Metric extraction policy**
     #
@@ -5089,17 +5424,18 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html
-    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
-    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
-    # [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors
-    # [7]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
-    # [8]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
-    # [9]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
-    # [10]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
-    # [11]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
+    # [6]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
+    # [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors
+    # [8]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
+    # [9]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
+    # [10]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
+    # [11]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
+    # [12]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
     #
     # @option params [required, String] :policy_name
     #   A name for the policy. This must be unique within the account.
@@ -5886,8 +6222,16 @@ module Aws::CloudWatchLogs
     # userID, and instance IDs. For more information, see [Create field
     # indexes to improve query performance and reduce costs][2].
     #
+    # You can configure indexed fields as *facets* to enable interactive
+    # exploration and filtering of your logs in the CloudWatch Logs Insights
+    # console. Facets allow you to view value distributions and counts for
+    # indexed fields without running queries. When you create a field index,
+    # you can optionally set it as a facet to enable this interactive
+    # analysis capability. For more information, see [Use facets to group
+    # and explore logs][3].
+    #
     # To find the fields that are in your log group events, use the
-    # [GetLogGroupFields][3] operation.
+    # [GetLogGroupFields][4] operation.
     #
     # For example, suppose you have created a field index for `requestId`.
     # Then, any CloudWatch Logs Insights query on that log group that
@@ -5925,17 +6269,20 @@ module Aws::CloudWatchLogs
     #
     # Log group-level field index policies created with `PutIndexPolicy`
     # override account-level field index policies created with
-    # [PutAccountPolicy][4]. If you use `PutIndexPolicy` to create a field
-    # index policy for a log group, that log group uses only that policy.
-    # The log group ignores any account-wide field index policy that you
-    # might have created.
+    # [PutAccountPolicy][5] that apply to log groups. If you use
+    # `PutIndexPolicy` to create a field index policy for a log group, that
+    # log group uses only that policy for log group-level indexing,
+    # including any facet configurations. The log group ignores any
+    # account-wide field index policy that applies to log groups, but data
+    # source-based account policies may still apply.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
-    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
     #
     # @option params [required, String] :log_group_identifier
     #   Specify either the log group name or log group ARN to apply this field
@@ -7247,15 +7594,22 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Starts a query of one or more log groups using CloudWatch Logs
-    # Insights. You specify the log groups and time range to query and the
-    # query string to use.
+    # Starts a query of one or more log groups or data sources using
+    # CloudWatch Logs Insights. You specify the log groups or data sources
+    # and time range to query and the query string to use. You can query up
+    # to 10 data sources in a single query.
     #
     # For more information, see [CloudWatch Logs Insights Query Syntax][1].
     #
     # After you run a query using `StartQuery`, the query results are stored
     # by CloudWatch Logs. You can use [GetQueryResults][2] to retrieve the
     # results of a query, using the `queryId` that `StartQuery` returns.
+    #
+    # Interactive queries started with `StartQuery` share concurrency limits
+    # with automated scheduled query executions. Both types of queries count
+    # toward the same regional concurrent query quota, so high scheduled
+    # query activity may affect the availability of concurrent slots for
+    # interactive queries.
     #
     # <note markdown="1"> To specify the log groups to query, a `StartQuery` operation must
     # include one of the following:
@@ -7265,7 +7619,8 @@ module Aws::CloudWatchLogs
     #
     # * Or the `queryString` must include a `SOURCE` command to select log
     #   groups for the query. The `SOURCE` command can select log groups
-    #   based on log group name prefix, account ID, and log class.
+    #   based on log group name prefix, account ID, and log class, or select
+    #   data sources using dataSource syntax in LogsQL, PPL, and SQL.
     #
     #   For more information about the `SOURCE` command, see [SOURCE][3].
     #
@@ -7405,6 +7760,11 @@ module Aws::CloudWatchLogs
     # Stops a CloudWatch Logs Insights query that is in progress. If the
     # query has already ended, the operation returns an error indicating
     # that the specified query is not running.
+    #
+    # This operation can be used to cancel both interactive queries and
+    # individual scheduled query executions. When used with scheduled
+    # queries, `StopQuery` cancels only the specific execution identified by
+    # the query ID, not the scheduled query configuration itself.
     #
     # @option params [required, String] :query_id
     #   The ID number of the query to stop. To find this ID number, use
@@ -8022,51 +8382,51 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Updates the configuration of an existing scheduled query. This
-    # operation follows PUT semantics, replacing the existing configuration
-    # with the provided values.
+    # Updates an existing scheduled query with new configuration. This
+    # operation uses PUT semantics, allowing modification of query
+    # parameters, schedule, and destinations.
     #
     # @option params [required, String] :identifier
-    #   The name or ARN of the scheduled query to update.
+    #   The ARN or name of the scheduled query to update.
     #
     # @option params [String] :description
-    #   Updated description for the scheduled query.
+    #   An updated description for the scheduled query.
     #
     # @option params [required, String] :query_language
-    #   Updated query language to use (LogsQL, PPL, or SQL).
+    #   The updated query language for the scheduled query.
     #
     # @option params [required, String] :query_string
-    #   Updated CloudWatch Logs Insights query string to execute.
+    #   The updated query string to execute.
     #
     # @option params [Array<String>] :log_group_identifiers
-    #   Updated log group identifiers to query.
+    #   The updated array of log group names or ARNs to query.
     #
     # @option params [required, String] :schedule_expression
-    #   Updated cron expression that defines when the scheduled query runs.
+    #   The updated cron expression that defines when the scheduled query
+    #   runs.
     #
     # @option params [String] :timezone
-    #   Updated timezone in which the schedule expression is evaluated.
+    #   The updated timezone for evaluating the schedule expression.
     #
     # @option params [Integer] :start_time_offset
-    #   Updated time offset in seconds from the execution time for the start
-    #   of the query time range.
+    #   The updated time offset in seconds that defines the lookback period
+    #   for the query.
     #
     # @option params [Types::DestinationConfiguration] :destination_configuration
-    #   Updated configuration for destinations where the query results will be
-    #   delivered.
+    #   The updated configuration for where to deliver query results.
     #
     # @option params [Integer] :schedule_start_time
-    #   Updated start time for the query schedule in Unix epoch time.
+    #   The updated start time for the scheduled query in Unix epoch format.
     #
     # @option params [Integer] :schedule_end_time
-    #   Updated end time for the query schedule in Unix epoch time.
+    #   The updated end time for the scheduled query in Unix epoch format.
     #
     # @option params [required, String] :execution_role_arn
-    #   Updated ARN of the IAM role that CloudWatch Logs will assume to
-    #   execute the scheduled query.
+    #   The updated ARN of the IAM role that grants permissions to execute the
+    #   query and deliver results.
     #
     # @option params [String] :state
-    #   Updated state of the scheduled query (ENABLED or DISABLED).
+    #   The updated state of the scheduled query.
     #
     # @return [Types::UpdateScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8162,7 +8522,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.244.0 (2025-12-01)
+------------------
+
+* Feature - Add support for Iceberg materialized view in Glue Data Catalog, including updated CreateTable API to support materialized views and new APIs for managing data refresh for materialized views. Add support for Iceberg table encryption keys and struct field defaults.
+
 1.243.0 (2025-11-21)
 ------------------
 

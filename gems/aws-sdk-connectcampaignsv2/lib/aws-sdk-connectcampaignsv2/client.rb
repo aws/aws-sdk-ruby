@@ -485,8 +485,11 @@ module Aws::ConnectCampaignsV2
     # @option params [required, String] :connect_instance_id
     #   Amazon Connect Instance Id
     #
-    # @option params [required, Types::ChannelSubtypeConfig] :channel_subtype_config
+    # @option params [Types::ChannelSubtypeConfig] :channel_subtype_config
     #   Campaign Channel Subtype config
+    #
+    # @option params [String] :type
+    #   The type of campaign externally exposed in APIs.
     #
     # @option params [Types::Source] :source
     #   Source of the campaign
@@ -517,7 +520,7 @@ module Aws::ConnectCampaignsV2
     #   resp = client.create_campaign({
     #     name: "CampaignName", # required
     #     connect_instance_id: "InstanceId", # required
-    #     channel_subtype_config: { # required
+    #     channel_subtype_config: {
     #       telephony: {
     #         capacity: 1.0,
     #         connect_queue_id: "QueueId",
@@ -571,7 +574,19 @@ module Aws::ConnectCampaignsV2
     #           wisdom_template_arn: "Arn", # required
     #         },
     #       },
+    #       whats_app: {
+    #         capacity: 1.0,
+    #         outbound_mode: { # required
+    #           agentless: {
+    #           },
+    #         },
+    #         default_outbound_config: { # required
+    #           connect_source_phone_number_arn: "Arn", # required
+    #           wisdom_template_arn: "Arn", # required
+    #         },
+    #       },
     #     },
+    #     type: "MANAGED", # accepts MANAGED, JOURNEY
     #     source: {
     #       customer_profiles_segment_arn: "Arn",
     #       event_trigger: {
@@ -632,6 +647,27 @@ module Aws::ConnectCampaignsV2
     #         },
     #       },
     #       email: {
+    #         open_hours: { # required
+    #           daily_hours: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "Iso8601Time", # required
+    #                 end_time: "Iso8601Time", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         restricted_periods: {
+    #           restricted_period_list: [
+    #             {
+    #               name: "RestrictedPeriodName",
+    #               start_date: "Iso8601Date", # required
+    #               end_date: "Iso8601Date", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       whats_app: {
     #         open_hours: { # required
     #           daily_hours: {
     #             "MONDAY" => [
@@ -723,7 +759,7 @@ module Aws::ConnectCampaignsV2
     #
     #   resp = client.delete_campaign_channel_subtype_config({
     #     id: "CampaignId", # required
-    #     channel_subtype: "TELEPHONY", # required, accepts TELEPHONY, SMS, EMAIL
+    #     channel_subtype: "TELEPHONY", # required, accepts TELEPHONY, SMS, EMAIL, WHATSAPP
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/DeleteCampaignChannelSubtypeConfig AWS API Documentation
@@ -777,7 +813,7 @@ module Aws::ConnectCampaignsV2
     #
     #   resp = client.delete_campaign_communication_time({
     #     id: "CampaignId", # required
-    #     config: "TELEPHONY", # required, accepts TELEPHONY, SMS, EMAIL
+    #     config: "TELEPHONY", # required, accepts TELEPHONY, SMS, EMAIL, WHATSAPP
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/DeleteCampaignCommunicationTime AWS API Documentation
@@ -836,6 +872,9 @@ module Aws::ConnectCampaignsV2
     #       },
     #       q_connect: {
     #         knowledge_base_arn: "Arn", # required
+    #       },
+    #       lambda: {
+    #         function_arn: "LambdaArn", # required
     #       },
     #     },
     #   })
@@ -913,6 +952,10 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.channel_subtype_config.email.default_outbound_config.connect_source_email_address #=> String
     #   resp.campaign.channel_subtype_config.email.default_outbound_config.source_email_address_display_name #=> String
     #   resp.campaign.channel_subtype_config.email.default_outbound_config.wisdom_template_arn #=> String
+    #   resp.campaign.channel_subtype_config.whats_app.capacity #=> Float
+    #   resp.campaign.channel_subtype_config.whats_app.default_outbound_config.connect_source_phone_number_arn #=> String
+    #   resp.campaign.channel_subtype_config.whats_app.default_outbound_config.wisdom_template_arn #=> String
+    #   resp.campaign.type #=> String, one of "MANAGED", "JOURNEY"
     #   resp.campaign.source.customer_profiles_segment_arn #=> String
     #   resp.campaign.source.event_trigger.customer_profiles_domain_arn #=> String
     #   resp.campaign.connect_campaign_flow_arn #=> String
@@ -946,6 +989,14 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.communication_time_config.email.restricted_periods.restricted_period_list[0].name #=> String
     #   resp.campaign.communication_time_config.email.restricted_periods.restricted_period_list[0].start_date #=> String
     #   resp.campaign.communication_time_config.email.restricted_periods.restricted_period_list[0].end_date #=> String
+    #   resp.campaign.communication_time_config.whats_app.open_hours.daily_hours #=> Hash
+    #   resp.campaign.communication_time_config.whats_app.open_hours.daily_hours["DayOfWeek"] #=> Array
+    #   resp.campaign.communication_time_config.whats_app.open_hours.daily_hours["DayOfWeek"][0].start_time #=> String
+    #   resp.campaign.communication_time_config.whats_app.open_hours.daily_hours["DayOfWeek"][0].end_time #=> String
+    #   resp.campaign.communication_time_config.whats_app.restricted_periods.restricted_period_list #=> Array
+    #   resp.campaign.communication_time_config.whats_app.restricted_periods.restricted_period_list[0].name #=> String
+    #   resp.campaign.communication_time_config.whats_app.restricted_periods.restricted_period_list[0].start_date #=> String
+    #   resp.campaign.communication_time_config.whats_app.restricted_periods.restricted_period_list[0].end_date #=> String
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list #=> Array
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].max_count_per_recipient #=> Integer
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].frequency #=> Integer
@@ -1159,7 +1210,8 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign_summary_list[0].name #=> String
     #   resp.campaign_summary_list[0].connect_instance_id #=> String
     #   resp.campaign_summary_list[0].channel_subtypes #=> Array
-    #   resp.campaign_summary_list[0].channel_subtypes[0] #=> String, one of "TELEPHONY", "SMS", "EMAIL"
+    #   resp.campaign_summary_list[0].channel_subtypes[0] #=> String, one of "TELEPHONY", "SMS", "EMAIL", "WHATSAPP"
+    #   resp.campaign_summary_list[0].type #=> String, one of "MANAGED", "JOURNEY"
     #   resp.campaign_summary_list[0].schedule.start_time #=> Time
     #   resp.campaign_summary_list[0].schedule.end_time #=> Time
     #   resp.campaign_summary_list[0].schedule.refresh_frequency #=> String
@@ -1209,6 +1261,7 @@ module Aws::ConnectCampaignsV2
     #   resp.integration_summary_list[0].customer_profiles.object_type_names #=> Hash
     #   resp.integration_summary_list[0].customer_profiles.object_type_names["EventType"] #=> String
     #   resp.integration_summary_list[0].q_connect.knowledge_base_arn #=> String
+    #   resp.integration_summary_list[0].lambda.function_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/ListConnectInstanceIntegrations AWS API Documentation
     #
@@ -1294,6 +1347,9 @@ module Aws::ConnectCampaignsV2
     #       },
     #       q_connect: {
     #         knowledge_base_arn: "Arn", # required
+    #       },
+    #       lambda: {
+    #         function_arn: "LambdaArn", # required
     #       },
     #     },
     #   })
@@ -1389,6 +1445,14 @@ module Aws::ConnectCampaignsV2
     #           email: {
     #             destination_email_address: "EmailAddress", # required
     #             connect_source_email_address: "EmailAddress",
+    #             template_arn: "Arn",
+    #             template_parameters: { # required
+    #               "AttributeName" => "AttributeValue",
+    #             },
+    #           },
+    #           whats_app: {
+    #             destination_phone_number: "DestinationPhoneNumber", # required
+    #             connect_source_phone_number_arn: "Arn",
     #             template_arn: "Arn",
     #             template_parameters: { # required
     #               "AttributeName" => "AttributeValue",
@@ -1694,6 +1758,17 @@ module Aws::ConnectCampaignsV2
     #           wisdom_template_arn: "Arn", # required
     #         },
     #       },
+    #       whats_app: {
+    #         capacity: 1.0,
+    #         outbound_mode: { # required
+    #           agentless: {
+    #           },
+    #         },
+    #         default_outbound_config: { # required
+    #           connect_source_phone_number_arn: "Arn", # required
+    #           wisdom_template_arn: "Arn", # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1807,6 +1882,27 @@ module Aws::ConnectCampaignsV2
     #         },
     #       },
     #       email: {
+    #         open_hours: { # required
+    #           daily_hours: {
+    #             "MONDAY" => [
+    #               {
+    #                 start_time: "Iso8601Time", # required
+    #                 end_time: "Iso8601Time", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         restricted_periods: {
+    #           restricted_period_list: [
+    #             {
+    #               name: "RestrictedPeriodName",
+    #               start_date: "Iso8601Date", # required
+    #               end_date: "Iso8601Date", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       whats_app: {
     #         open_hours: { # required
     #           daily_hours: {
     #             "MONDAY" => [
@@ -1971,7 +2067,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

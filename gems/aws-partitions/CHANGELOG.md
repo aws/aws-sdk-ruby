@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+1.1190.0 (2025-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::NovaAct`.
+
+1.1189.0 (2025-12-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Route53GlobalResolver`.
+
+* Feature - Added support for enumerating regions for  `Aws::PartnerCentralBenefits`.
+
+* Feature - Added support for enumerating regions for  `Aws::PartnerCentralAccount`.
+
+1.1188.0 (2025-11-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.1187.0 (2025-11-21)
 ------------------
 

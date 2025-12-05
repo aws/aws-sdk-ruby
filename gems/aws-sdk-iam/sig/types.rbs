@@ -351,6 +351,7 @@ module Aws::IAM
       attr_accessor owner_id: ::String
       attr_accessor approver_id: ::String
       attr_accessor state: ("UNASSIGNED" | "ASSIGNED" | "PENDING_APPROVAL" | "FINALIZED" | "ACCEPTED" | "REJECTED" | "EXPIRED")
+      attr_accessor expiration_time: ::Time
       attr_accessor requestor_id: ::String
       attr_accessor requestor_name: ::String
       attr_accessor create_date: ::Time

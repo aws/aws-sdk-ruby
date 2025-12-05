@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-12-02)
+------------------
+
+* Feature - Add support for S3 Storage Lens Advanced Performance Metrics, Expanded Prefixes metrics report, and export to S3 Tables.
+
 1.121.0 (2025-11-21)
 ------------------
 

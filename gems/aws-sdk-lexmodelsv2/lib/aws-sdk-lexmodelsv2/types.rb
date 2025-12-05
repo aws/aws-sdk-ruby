@@ -2337,12 +2337,22 @@ module Aws::LexModelsV2
     #   * `generative`
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] speech_recognition_settings
+    #   Speech-to-text settings to apply when importing the bot locale
+    #   configuration.
+    #   @return [Types::SpeechRecognitionSettings]
+    #
     # @!attribute [rw] speech_detection_sensitivity
     #   The sensitivity level for voice activity detection (VAD) in the bot
     #   locale. This setting helps optimize speech recognition accuracy by
     #   adjusting how the system responds to background noise during voice
     #   interactions.
     #   @return [String]
+    #
+    # @!attribute [rw] unified_speech_settings
+    #   Unified speech settings to apply when importing the bot locale
+    #   configuration.
+    #   @return [Types::UnifiedSpeechSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
     #
@@ -2352,7 +2362,9 @@ module Aws::LexModelsV2
       :locale_id,
       :nlu_intent_confidence_threshold,
       :voice_settings,
-      :speech_detection_sensitivity)
+      :speech_recognition_settings,
+      :speech_detection_sensitivity,
+      :unified_speech_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3510,6 +3522,14 @@ module Aws::LexModelsV2
     #   with the user.
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] unified_speech_settings
+    #   Unified speech settings to configure for the new bot locale.
+    #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] speech_recognition_settings
+    #   Speech-to-text settings to configure for the new bot locale.
+    #   @return [Types::SpeechRecognitionSettings]
+    #
     # @!attribute [rw] generative_ai_settings
     #   Contains specifications about the generative AI capabilities from
     #   Amazon Bedrock that you can turn on for your bot.
@@ -3531,6 +3551,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
+      :unified_speech_settings,
+      :speech_recognition_settings,
       :generative_ai_settings,
       :speech_detection_sensitivity)
       SENSITIVE = []
@@ -3566,6 +3588,14 @@ module Aws::LexModelsV2
     #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
     #   with the user.
     #   @return [Types::VoiceSettings]
+    #
+    # @!attribute [rw] unified_speech_settings
+    #   The unified speech settings configured for the created bot locale.
+    #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] speech_recognition_settings
+    #   The speech-to-text settings configured for the created bot locale.
+    #   @return [Types::SpeechRecognitionSettings]
     #
     # @!attribute [rw] bot_locale_status
     #   The status of the bot.
@@ -3608,6 +3638,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
+      :unified_speech_settings,
+      :speech_recognition_settings,
       :bot_locale_status,
       :creation_date_time,
       :generative_ai_settings,
@@ -5023,6 +5055,28 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Configuration settings for integrating Deepgram speech-to-text models
+    # with Amazon Lex.
+    #
+    # @!attribute [rw] api_token_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
+    #   contains the Deepgram API token.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The identifier of the Deepgram speech-to-text model to use for
+    #   processing speech input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeepgramSpeechModelConfig AWS API Documentation
+    #
+    class DeepgramSpeechModelConfig < Struct.new(
+      :api_token_secret_arn,
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A set of actions that Amazon Lex should run if none of the other
     # conditions are met.
     #
@@ -5816,6 +5870,14 @@ module Aws::LexModelsV2
     #   the user.
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] unified_speech_settings
+    #   The unified speech settings configured for the bot locale.
+    #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] speech_recognition_settings
+    #   The speech-to-text settings configured for the bot locale.
+    #   @return [Types::SpeechRecognitionSettings]
+    #
     # @!attribute [rw] intents_count
     #   The number of intents defined for the locale.
     #   @return [Integer]
@@ -5876,6 +5938,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
+      :unified_speech_settings,
+      :speech_recognition_settings,
       :intents_count,
       :slot_types_count,
       :bot_locale_status,
@@ -13079,6 +13143,64 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Configuration for a foundation model used for speech synthesis and
+    # recognition capabilities.
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the foundation model used for
+    #   speech processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   The identifier of the voice to use for speech synthesis with the
+    #   foundation model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SpeechFoundationModel AWS API Documentation
+    #
+    class SpeechFoundationModel < Struct.new(
+      :model_arn,
+      :voice_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings that define which speech-to-text model to use
+    # for processing speech input.
+    #
+    # @!attribute [rw] deepgram_config
+    #   Configuration settings for using Deepgram as the speech-to-text
+    #   provider.
+    #   @return [Types::DeepgramSpeechModelConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SpeechModelConfig AWS API Documentation
+    #
+    class SpeechModelConfig < Struct.new(
+      :deepgram_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that control how Amazon Lex processes and recognizes speech
+    # input from users.
+    #
+    # @!attribute [rw] speech_model_preference
+    #   The speech-to-text model to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_model_config
+    #   Configuration settings for the selected speech-to-text model.
+    #   @return [Types::SpeechModelConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SpeechRecognitionSettings AWS API Documentation
+    #
+    class SpeechRecognitionSettings < Struct.new(
+      :speech_model_preference,
+      :speech_model_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] bot_id
     #   The unique identifier of the bot containing the bot recommendation.
     #   @return [String]
@@ -14373,6 +14495,22 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Unified configuration settings that combine speech recognition and
+    # synthesis capabilities.
+    #
+    # @!attribute [rw] speech_foundation_model
+    #   The foundation model configuration to use for unified speech
+    #   processing capabilities.
+    #   @return [Types::SpeechFoundationModel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UnifiedSpeechSettings AWS API Documentation
+    #
+    class UnifiedSpeechSettings < Struct.new(
+      :speech_foundation_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove the tags
     #   from.
@@ -14545,6 +14683,14 @@ module Aws::LexModelsV2
     #   interaction with the user.
     #   @return [Types::VoiceSettings]
     #
+    # @!attribute [rw] unified_speech_settings
+    #   Updated unified speech settings to apply to the bot locale.
+    #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] speech_recognition_settings
+    #   Updated speech-to-text settings to apply to the bot locale.
+    #   @return [Types::SpeechRecognitionSettings]
+    #
     # @!attribute [rw] generative_ai_settings
     #   Contains settings for generative AI features powered by Amazon
     #   Bedrock for your bot locale. Use this object to turn generative AI
@@ -14568,6 +14714,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
+      :unified_speech_settings,
+      :speech_recognition_settings,
       :generative_ai_settings,
       :speech_detection_sensitivity)
       SENSITIVE = []
@@ -14604,6 +14752,14 @@ module Aws::LexModelsV2
     #   The updated Amazon Polly voice to use for voice interaction with the
     #   user.
     #   @return [Types::VoiceSettings]
+    #
+    # @!attribute [rw] unified_speech_settings
+    #   The updated unified speech settings for the bot locale.
+    #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] speech_recognition_settings
+    #   The updated speech-to-text settings for the bot locale.
+    #   @return [Types::SpeechRecognitionSettings]
     #
     # @!attribute [rw] bot_locale_status
     #   The current status of the locale. When the bot status is `Built` the
@@ -14648,6 +14804,8 @@ module Aws::LexModelsV2
       :description,
       :nlu_intent_confidence_threshold,
       :voice_settings,
+      :unified_speech_settings,
+      :speech_recognition_settings,
       :bot_locale_status,
       :failure_reasons,
       :creation_date_time,
@@ -16210,10 +16368,6 @@ module Aws::LexModelsV2
     #
     # * `generative`
     #
-    # @!attribute [rw] voice_id
-    #   The identifier of the Amazon Polly voice to use.
-    #   @return [String]
-    #
     # @!attribute [rw] engine
     #   Indicates the type of Amazon Polly voice that Amazon Lex should use
     #   for voice interaction with the user. For more information, see the [
@@ -16227,11 +16381,15 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine
     #   @return [String]
     #
+    # @!attribute [rw] voice_id
+    #   The identifier of the Amazon Polly voice to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/VoiceSettings AWS API Documentation
     #
     class VoiceSettings < Struct.new(
-      :voice_id,
-      :engine)
+      :engine,
+      :voice_id)
       SENSITIVE = []
       include Aws::Structure
     end

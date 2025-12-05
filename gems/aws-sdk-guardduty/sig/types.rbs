@@ -179,6 +179,11 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AutoscalingAutoScalingGroup
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AwsApiCallAction
       attr_accessor api: ::String
       attr_accessor caller_type: ::String
@@ -229,6 +234,11 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class CloudformationStack
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Condition
       attr_accessor eq: ::Array[::String]
       attr_accessor neq: ::Array[::String]
@@ -242,6 +252,8 @@ module Aws::GuardDuty
       attr_accessor greater_than_or_equal: ::Integer
       attr_accessor less_than: ::Integer
       attr_accessor less_than_or_equal: ::Integer
+      attr_accessor matches: ::Array[::String]
+      attr_accessor not_matches: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -839,6 +851,11 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Ec2Image
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Ec2ImageDetails
       attr_accessor image_arn: ::String
       SENSITIVE: []
@@ -857,6 +874,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Ec2LaunchTemplate
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
     class Ec2NetworkInterface
       attr_accessor ipv_6_addresses: ::Array[::String]
       attr_accessor private_ip_addresses: ::Array[Types::PrivateIpAddressDetails]
@@ -864,6 +887,17 @@ module Aws::GuardDuty
       attr_accessor security_groups: ::Array[Types::SecurityGroup]
       attr_accessor sub_net_id: ::String
       attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2Vpc
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EcsCluster
+      attr_accessor status: ("ACTIVE" | "PROVISIONING" | "DEPROVISIONING" | "FAILED" | "INACTIVE")
+      attr_accessor ec2_instance_uids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -876,6 +910,14 @@ module Aws::GuardDuty
       attr_accessor running_tasks_count: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor task_details: Types::EcsTaskDetails
+      SENSITIVE: []
+    end
+
+    class EcsTask
+      attr_accessor created_at: ::Time
+      attr_accessor task_definition_arn: ::String
+      attr_accessor launch_type: ("FARGATE" | "EC2")
+      attr_accessor container_uids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1318,6 +1360,11 @@ module Aws::GuardDuty
     class IamInstanceProfile
       attr_accessor arn: ::String
       attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class IamInstanceProfileV2
+      attr_accessor ec2_instance_uids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2223,6 +2270,14 @@ module Aws::GuardDuty
       attr_accessor eks_cluster: Types::EksCluster
       attr_accessor kubernetes_workload: Types::KubernetesWorkload
       attr_accessor container: Types::ContainerFindingResource
+      attr_accessor ecs_cluster: Types::EcsCluster
+      attr_accessor ecs_task: Types::EcsTask
+      attr_accessor iam_instance_profile: Types::IamInstanceProfileV2
+      attr_accessor autoscaling_auto_scaling_group: Types::AutoscalingAutoScalingGroup
+      attr_accessor ec2_launch_template: Types::Ec2LaunchTemplate
+      attr_accessor ec2_vpc: Types::Ec2Vpc
+      attr_accessor ec2_image: Types::Ec2Image
+      attr_accessor cloudformation_stack: Types::CloudformationStack
       SENSITIVE: []
     end
 
@@ -2250,7 +2305,7 @@ module Aws::GuardDuty
       attr_accessor uid: ::String
       attr_accessor name: ::String
       attr_accessor account_id: ::String
-      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER")
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER" | "ECS_CLUSTER" | "ECS_TASK" | "AUTOSCALING_AUTO_SCALING_GROUP" | "IAM_INSTANCE_PROFILE" | "CLOUDFORMATION_STACK" | "EC2_LAUNCH_TEMPLATE" | "EC2_VPC" | "EC2_IMAGE")
       attr_accessor region: ::String
       attr_accessor service: ::String
       attr_accessor cloud_partition: ::String

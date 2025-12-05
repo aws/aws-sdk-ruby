@@ -77,6 +77,7 @@ module Aws::CostOptimizationHub
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommendationsRequestMaxResultsInteger')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAccountDiscountVisibility = Shapes::StringShape.new(name: 'MemberAccountDiscountVisibility')
     MemoryDbReservedInstances = Shapes::StructureShape.new(name: 'MemoryDbReservedInstances')
@@ -85,6 +86,8 @@ module Aws::CostOptimizationHub
     MetricsByTimeList = Shapes::ListShape.new(name: 'MetricsByTimeList')
     MixedInstanceConfiguration = Shapes::StructureShape.new(name: 'MixedInstanceConfiguration')
     MixedInstanceConfigurationList = Shapes::ListShape.new(name: 'MixedInstanceConfigurationList')
+    NatGateway = Shapes::StructureShape.new(name: 'NatGateway')
+    NatGatewayConfiguration = Shapes::StructureShape.new(name: 'NatGatewayConfiguration')
     OpenSearchReservedInstances = Shapes::StructureShape.new(name: 'OpenSearchReservedInstances')
     OpenSearchReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'OpenSearchReservedInstancesConfiguration')
     Order = Shapes::StringShape.new(name: 'Order')
@@ -446,6 +449,15 @@ module Aws::CostOptimizationHub
 
     MixedInstanceConfigurationList.member = Shapes::ShapeRef.new(shape: MixedInstanceConfiguration)
 
+    NatGateway.add_member(:configuration, Shapes::ShapeRef.new(shape: NatGatewayConfiguration, location_name: "configuration"))
+    NatGateway.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
+    NatGateway.struct_class = Types::NatGateway
+
+    NatGatewayConfiguration.add_member(:active_connection_count, Shapes::ShapeRef.new(shape: Long, location_name: "activeConnectionCount"))
+    NatGatewayConfiguration.add_member(:packets_in_from_source, Shapes::ShapeRef.new(shape: Long, location_name: "packetsInFromSource"))
+    NatGatewayConfiguration.add_member(:packets_in_from_destination, Shapes::ShapeRef.new(shape: Long, location_name: "packetsInFromDestination"))
+    NatGatewayConfiguration.struct_class = Types::NatGatewayConfiguration
+
     OpenSearchReservedInstances.add_member(:configuration, Shapes::ShapeRef.new(shape: OpenSearchReservedInstancesConfiguration, location_name: "configuration"))
     OpenSearchReservedInstances.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ReservedInstancesCostCalculation, location_name: "costCalculation"))
     OpenSearchReservedInstances.struct_class = Types::OpenSearchReservedInstances
@@ -600,6 +612,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member(:aurora_db_cluster_storage, Shapes::ShapeRef.new(shape: AuroraDbClusterStorage, location_name: "auroraDbClusterStorage"))
     ResourceDetails.add_member(:dynamo_db_reserved_capacity, Shapes::ShapeRef.new(shape: DynamoDbReservedCapacity, location_name: "dynamoDbReservedCapacity"))
     ResourceDetails.add_member(:memory_db_reserved_instances, Shapes::ShapeRef.new(shape: MemoryDbReservedInstances, location_name: "memoryDbReservedInstances"))
+    ResourceDetails.add_member(:nat_gateway, Shapes::ShapeRef.new(shape: NatGateway, location_name: "natGateway"))
     ResourceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ResourceDetails.add_member_subclass(:lambda_function, Types::ResourceDetails::LambdaFunction)
     ResourceDetails.add_member_subclass(:ecs_service, Types::ResourceDetails::EcsService)
@@ -619,6 +632,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member_subclass(:aurora_db_cluster_storage, Types::ResourceDetails::AuroraDbClusterStorage)
     ResourceDetails.add_member_subclass(:dynamo_db_reserved_capacity, Types::ResourceDetails::DynamoDbReservedCapacity)
     ResourceDetails.add_member_subclass(:memory_db_reserved_instances, Types::ResourceDetails::MemoryDbReservedInstances)
+    ResourceDetails.add_member_subclass(:nat_gateway, Types::ResourceDetails::NatGateway)
     ResourceDetails.add_member_subclass(:unknown, Types::ResourceDetails::Unknown)
     ResourceDetails.struct_class = Types::ResourceDetails
 

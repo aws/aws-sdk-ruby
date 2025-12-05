@@ -32,6 +32,7 @@ module Aws::S3Tables
   # * {ConflictException}
   # * {ForbiddenException}
   # * {InternalServerErrorException}
+  # * {MethodNotAllowedException}
   # * {NotFoundException}
   # * {TooManyRequestsException}
   #
@@ -106,6 +107,21 @@ module Aws::S3Tables
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::S3Tables::Types::InternalServerErrorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MethodNotAllowedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Tables::Types::MethodNotAllowedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

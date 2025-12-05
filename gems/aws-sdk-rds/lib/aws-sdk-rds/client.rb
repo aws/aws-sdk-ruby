@@ -1976,6 +1976,13 @@ module Aws::RDS
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2418,8 +2425,9 @@ module Aws::RDS
     # Creates a custom DB engine version (CEV).
     #
     # @option params [required, String] :engine
-    #   The database engine. RDS Custom for Oracle supports the following
-    #   values:
+    #   The database engine.
+    #
+    #   RDS Custom for Oracle supports the following values:
     #
     #   * `custom-oracle-ee`
     #
@@ -2429,12 +2437,30 @@ module Aws::RDS
     #
     #   * `custom-oracle-se2-cdb`
     #
+    #   RDS Custom for SQL Server supports the following values:
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `ccustom-sqlserver-web`
+    #
+    #   * `custom-sqlserver-dev`
+    #
+    #   RDS for SQL Server supports only `sqlserver-dev-ee`.
+    #
     # @option params [required, String] :engine_version
-    #   The name of your CEV. The name format is 19.*customized\_string*. For
-    #   example, a valid CEV name is `19.my_cev1`. This setting is required
-    #   for RDS Custom for Oracle, but optional for Amazon RDS. The
-    #   combination of `Engine` and `EngineVersion` is unique per customer per
-    #   Region.
+    #   The name of your custom engine version (CEV).
+    #
+    #   For RDS Custom for Oracle, the name format is
+    #   `19.*customized_string*`. For example, a valid CEV name is
+    #   `19.my_cev1`.
+    #
+    #   For RDS for SQL Server and RDS Custom for SQL Server, the name format
+    #   is `major engine_version*.*minor_engine_version*.*customized_string*`.
+    #   For example, a valid CEV name is `16.00.4215.2.my_cev1`.
+    #
+    #   The CEV name is unique per customer per Amazon Web Services Regions.
     #
     # @option params [String] :database_installation_files_s3_bucket_name
     #   The name of an Amazon S3 bucket that contains database installation
@@ -2540,6 +2566,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
+    # @option params [Array<String>] :database_installation_files
+    #   The database installation files (ISO and EXE) uploaded to Amazon S3
+    #   for your database engine version to import to Amazon RDS.
+    #
     # @return [Types::DBEngineVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersion#engine #engine} => String
@@ -2577,6 +2607,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2597,6 +2629,7 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     database_installation_files: ["String"],
     #   })
     #
     # @example Response structure
@@ -2663,6 +2696,9 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -4777,6 +4813,8 @@ module Aws::RDS
     #
     #   * `postgres`
     #
+    #   * `sqlserver-dev-ee`
+    #
     #   * `sqlserver-ee`
     #
     #   * `sqlserver-se`
@@ -5773,6 +5811,13 @@ module Aws::RDS
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5965,6 +6010,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6033,6 +6088,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6132,6 +6194,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6887,6 +6958,13 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -6977,6 +7055,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     #
@@ -7046,6 +7134,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -7145,6 +7240,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7960,6 +8064,13 @@ module Aws::RDS
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -9188,8 +9299,9 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete
     #
     # @option params [required, String] :engine
-    #   The database engine. RDS Custom for Oracle supports the following
-    #   values:
+    #   The database engine.
+    #
+    #   RDS Custom for Oracle supports the following values:
     #
     #   * `custom-oracle-ee`
     #
@@ -9198,6 +9310,18 @@ module Aws::RDS
     #   * `custom-oracle-se2`
     #
     #   * `custom-oracle-se2-cdb`
+    #
+    #   RDS Custom for SQL Server supports the following values:
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `ccustom-sqlserver-web`
+    #
+    #   * `custom-sqlserver-dev`
+    #
+    #   RDS for SQL Server supports only `sqlserver-dev-ee`.
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) for your DB instance. This option is
@@ -9242,6 +9366,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -9314,6 +9440,9 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -10085,6 +10214,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10184,6 +10320,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -10292,6 +10437,13 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -10659,6 +10811,13 @@ module Aws::RDS
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -13329,6 +13488,9 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].serverless_v2_features_support.min_capacity #=> Float
     #   resp.db_engine_versions[0].serverless_v2_features_support.max_capacity #=> Float
+    #   resp.db_engine_versions[0].database_installation_files #=> Array
+    #   resp.db_engine_versions[0].database_installation_files[0] #=> String
+    #   resp.db_engine_versions[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -13501,6 +13663,13 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].multi_tenant #=> Boolean
     #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -13687,6 +13856,13 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].pending_modified_values.engine #=> String
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -13786,6 +13962,15 @@ module Aws::RDS
     #   resp.db_instances[0].dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instances[0].engine_lifecycle_support #=> String
+    #   resp.db_instances[0].additional_storage_volumes #=> Array
+    #   resp.db_instances[0].additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instances[0].additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instances[0].storage_volume_status #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15407,6 +15592,13 @@ module Aws::RDS
     #   resp.db_snapshots[0].multi_tenant #=> Boolean
     #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
     #   resp.db_snapshots[0].snapshot_availability_zone #=> String
+    #   resp.db_snapshots[0].additional_storage_volumes #=> Array
+    #   resp.db_snapshots[0].additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshots[0].additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].storage_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -17220,6 +17412,20 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_dedicated_log_volume #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_http_endpoint #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_additional_storage_volumes #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options #=> Array
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_storage_autoscaling #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_storage_throughput #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_iops #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].storage_type #=> String
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_storage_size #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_storage_size #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_iops #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_iops #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_storage_throughput #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_storage_throughput #=> Integer
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -18049,6 +18255,30 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
     #   resp.valid_db_instance_modifications_message.supports_dedicated_log_volume #=> Boolean
+    #   resp.valid_db_instance_modifications_message.additional_storage.supports_additional_storage_volumes #=> Boolean
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].volume_name #=> String
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_type #=> String
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].iops_to_storage_ratio #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].iops_to_storage_ratio[0].from #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].iops_to_storage_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_throughput_to_iops_ratio #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_throughput_to_iops_ratio[0].from #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_throughput_to_iops_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].supports_storage_autoscaling #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -19024,8 +19254,9 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify
     #
     # @option params [required, String] :engine
-    #   The database engine. RDS Custom for Oracle supports the following
-    #   values:
+    #   The database engine.
+    #
+    #   RDS Custom for Oracle supports the following values:
     #
     #   * `custom-oracle-ee`
     #
@@ -19034,6 +19265,18 @@ module Aws::RDS
     #   * `custom-oracle-se2`
     #
     #   * `custom-oracle-se2-cdb`
+    #
+    #   RDS Custom for SQL Server supports the following values:
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `ccustom-sqlserver-web`
+    #
+    #   * `custom-sqlserver-dev`
+    #
+    #   RDS for SQL Server supports only `sqlserver-dev-ee`.
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) that you want to modify. This option
@@ -19103,6 +19346,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -19177,6 +19422,9 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -21754,6 +22002,12 @@ module Aws::RDS
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
     #
+    # @option params [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can create up to 3 additional storage volumes.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -21882,6 +22136,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     engine: "String",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #         set_for_delete: false,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -21950,6 +22215,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -22049,6 +22321,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -22778,6 +23059,13 @@ module Aws::RDS
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -23900,6 +24188,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -23999,6 +24294,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -24633,6 +24937,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -24732,6 +25043,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -28406,6 +28726,13 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -28505,6 +28832,16 @@ module Aws::RDS
     #     engine_lifecycle_support: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -28573,6 +28910,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28672,6 +29016,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -29255,6 +29608,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can modify or delete up to three additional storage
+    #   volumes using the names `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -29324,6 +29684,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -29392,6 +29762,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -29491,6 +29868,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -30174,6 +30560,13 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to restore to the DB instance.
+    #   You can restore up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -30336,6 +30729,16 @@ module Aws::RDS
     #     engine_lifecycle_support: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -30404,6 +30807,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -30503,6 +30913,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -31031,6 +31450,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -31130,6 +31556,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -31288,6 +31723,13 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -31877,6 +32319,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -31976,6 +32425,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -32086,6 +32544,13 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -32485,6 +32950,13 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -32584,6 +33056,15 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -32612,7 +33093,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.300.0'
+      context[:gem_version] = '1.301.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

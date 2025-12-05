@@ -195,7 +195,7 @@ module Aws::Organizations
       attr_accessor content: ::String
       attr_accessor description: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -271,7 +271,7 @@ module Aws::Organizations
     end
 
     class DescribeEffectivePolicyRequest
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor target_id: ::String
       SENSITIVE: []
     end
@@ -349,7 +349,7 @@ module Aws::Organizations
 
     class DisablePolicyTypeRequest
       attr_accessor root_id: ::String
-      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       SENSITIVE: []
     end
 
@@ -387,7 +387,7 @@ module Aws::Organizations
       attr_accessor policy_content: ::String
       attr_accessor last_updated_timestamp: ::Time
       attr_accessor target_id: ::String
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       SENSITIVE: []
     end
 
@@ -419,7 +419,7 @@ module Aws::Organizations
 
     class EnablePolicyTypeRequest
       attr_accessor root_id: ::String
-      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       SENSITIVE: []
     end
 
@@ -567,7 +567,7 @@ module Aws::Organizations
     end
 
     class ListAccountsWithInvalidEffectivePolicyRequest
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -575,7 +575,7 @@ module Aws::Organizations
 
     class ListAccountsWithInvalidEffectivePolicyResponse
       attr_accessor accounts: ::Array[Types::Account]
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -635,7 +635,7 @@ module Aws::Organizations
 
     class ListEffectivePolicyValidationErrorsRequest
       attr_accessor account_id: ::String
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -643,7 +643,7 @@ module Aws::Organizations
 
     class ListEffectivePolicyValidationErrorsResponse
       attr_accessor account_id: ::String
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor path: ::String
       attr_accessor evaluation_timestamp: ::Time
       attr_accessor next_token: ::String
@@ -732,7 +732,7 @@ module Aws::Organizations
 
     class ListPoliciesForTargetRequest
       attr_accessor target_id: ::String
-      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -745,7 +745,7 @@ module Aws::Organizations
     end
 
     class ListPoliciesRequest
-      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -886,7 +886,7 @@ module Aws::Organizations
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor aws_managed: bool
       SENSITIVE: []
     end
@@ -915,7 +915,7 @@ module Aws::Organizations
     end
 
     class PolicyTypeSummary
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
       attr_accessor status: ("ENABLED" | "PENDING_ENABLE" | "PENDING_DISABLE")
       SENSITIVE: []
     end

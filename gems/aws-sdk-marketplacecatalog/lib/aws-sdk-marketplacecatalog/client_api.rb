@@ -162,6 +162,33 @@ module Aws::MarketplaceCatalog
     OfferResaleAuthorizationIdFilter = Shapes::StructureShape.new(name: 'OfferResaleAuthorizationIdFilter')
     OfferResaleAuthorizationIdFilterValueList = Shapes::ListShape.new(name: 'OfferResaleAuthorizationIdFilterValueList')
     OfferResaleAuthorizationIdString = Shapes::StringShape.new(name: 'OfferResaleAuthorizationIdString')
+    OfferSetAssociatedOfferIdsFilter = Shapes::StructureShape.new(name: 'OfferSetAssociatedOfferIdsFilter')
+    OfferSetAssociatedOfferIdsFilterValueList = Shapes::ListShape.new(name: 'OfferSetAssociatedOfferIdsFilterValueList')
+    OfferSetAssociatedOfferIdsList = Shapes::ListShape.new(name: 'OfferSetAssociatedOfferIdsList')
+    OfferSetAssociatedOfferIdsString = Shapes::StringShape.new(name: 'OfferSetAssociatedOfferIdsString')
+    OfferSetEntityIdFilter = Shapes::StructureShape.new(name: 'OfferSetEntityIdFilter')
+    OfferSetEntityIdFilterValueList = Shapes::ListShape.new(name: 'OfferSetEntityIdFilterValueList')
+    OfferSetEntityIdString = Shapes::StringShape.new(name: 'OfferSetEntityIdString')
+    OfferSetFilters = Shapes::StructureShape.new(name: 'OfferSetFilters')
+    OfferSetIdFilter = Shapes::StructureShape.new(name: 'OfferSetIdFilter')
+    OfferSetIdFilterValueList = Shapes::ListShape.new(name: 'OfferSetIdFilterValueList')
+    OfferSetIdString = Shapes::StringShape.new(name: 'OfferSetIdString')
+    OfferSetLastModifiedDateFilter = Shapes::StructureShape.new(name: 'OfferSetLastModifiedDateFilter')
+    OfferSetLastModifiedDateFilterDateRange = Shapes::StructureShape.new(name: 'OfferSetLastModifiedDateFilterDateRange')
+    OfferSetNameFilter = Shapes::StructureShape.new(name: 'OfferSetNameFilter')
+    OfferSetNameFilterValueList = Shapes::ListShape.new(name: 'OfferSetNameFilterValueList')
+    OfferSetNameString = Shapes::StringShape.new(name: 'OfferSetNameString')
+    OfferSetReleaseDateFilter = Shapes::StructureShape.new(name: 'OfferSetReleaseDateFilter')
+    OfferSetReleaseDateFilterDateRange = Shapes::StructureShape.new(name: 'OfferSetReleaseDateFilterDateRange')
+    OfferSetSolutionIdFilter = Shapes::StructureShape.new(name: 'OfferSetSolutionIdFilter')
+    OfferSetSolutionIdFilterValueList = Shapes::ListShape.new(name: 'OfferSetSolutionIdFilterValueList')
+    OfferSetSolutionIdString = Shapes::StringShape.new(name: 'OfferSetSolutionIdString')
+    OfferSetSort = Shapes::StructureShape.new(name: 'OfferSetSort')
+    OfferSetSortBy = Shapes::StringShape.new(name: 'OfferSetSortBy')
+    OfferSetStateFilter = Shapes::StructureShape.new(name: 'OfferSetStateFilter')
+    OfferSetStateFilterValueList = Shapes::ListShape.new(name: 'OfferSetStateFilterValueList')
+    OfferSetStateString = Shapes::StringShape.new(name: 'OfferSetStateString')
+    OfferSetSummary = Shapes::StructureShape.new(name: 'OfferSetSummary')
     OfferSort = Shapes::StructureShape.new(name: 'OfferSort')
     OfferSortBy = Shapes::StringShape.new(name: 'OfferSortBy')
     OfferStateFilter = Shapes::StructureShape.new(name: 'OfferStateFilter')
@@ -496,6 +523,7 @@ module Aws::MarketplaceCatalog
     EntitySummary.add_member(:offer_summary, Shapes::ShapeRef.new(shape: OfferSummary, location_name: "OfferSummary"))
     EntitySummary.add_member(:resale_authorization_summary, Shapes::ShapeRef.new(shape: ResaleAuthorizationSummary, location_name: "ResaleAuthorizationSummary"))
     EntitySummary.add_member(:machine_learning_product_summary, Shapes::ShapeRef.new(shape: MachineLearningProductSummary, location_name: "MachineLearningProductSummary"))
+    EntitySummary.add_member(:offer_set_summary, Shapes::ShapeRef.new(shape: OfferSetSummary, location_name: "OfferSetSummary"))
     EntitySummary.struct_class = Types::EntitySummary
 
     EntitySummaryList.member = Shapes::ShapeRef.new(shape: EntitySummary)
@@ -507,6 +535,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member(:container_product_filters, Shapes::ShapeRef.new(shape: ContainerProductFilters, location_name: "ContainerProductFilters"))
     EntityTypeFilters.add_member(:resale_authorization_filters, Shapes::ShapeRef.new(shape: ResaleAuthorizationFilters, location_name: "ResaleAuthorizationFilters"))
     EntityTypeFilters.add_member(:machine_learning_product_filters, Shapes::ShapeRef.new(shape: MachineLearningProductFilters, location_name: "MachineLearningProductFilters"))
+    EntityTypeFilters.add_member(:offer_set_filters, Shapes::ShapeRef.new(shape: OfferSetFilters, location_name: "OfferSetFilters"))
     EntityTypeFilters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeFilters.add_member_subclass(:data_product_filters, Types::EntityTypeFilters::DataProductFilters)
     EntityTypeFilters.add_member_subclass(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters)
@@ -515,6 +544,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member_subclass(:container_product_filters, Types::EntityTypeFilters::ContainerProductFilters)
     EntityTypeFilters.add_member_subclass(:resale_authorization_filters, Types::EntityTypeFilters::ResaleAuthorizationFilters)
     EntityTypeFilters.add_member_subclass(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters)
+    EntityTypeFilters.add_member_subclass(:offer_set_filters, Types::EntityTypeFilters::OfferSetFilters)
     EntityTypeFilters.add_member_subclass(:unknown, Types::EntityTypeFilters::Unknown)
     EntityTypeFilters.struct_class = Types::EntityTypeFilters
 
@@ -525,6 +555,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member(:container_product_sort, Shapes::ShapeRef.new(shape: ContainerProductSort, location_name: "ContainerProductSort"))
     EntityTypeSort.add_member(:resale_authorization_sort, Shapes::ShapeRef.new(shape: ResaleAuthorizationSort, location_name: "ResaleAuthorizationSort"))
     EntityTypeSort.add_member(:machine_learning_product_sort, Shapes::ShapeRef.new(shape: MachineLearningProductSort, location_name: "MachineLearningProductSort"))
+    EntityTypeSort.add_member(:offer_set_sort, Shapes::ShapeRef.new(shape: OfferSetSort, location_name: "OfferSetSort"))
     EntityTypeSort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeSort.add_member_subclass(:data_product_sort, Types::EntityTypeSort::DataProductSort)
     EntityTypeSort.add_member_subclass(:saa_s_product_sort, Types::EntityTypeSort::SaaSProductSort)
@@ -533,6 +564,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member_subclass(:container_product_sort, Types::EntityTypeSort::ContainerProductSort)
     EntityTypeSort.add_member_subclass(:resale_authorization_sort, Types::EntityTypeSort::ResaleAuthorizationSort)
     EntityTypeSort.add_member_subclass(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort)
+    EntityTypeSort.add_member_subclass(:offer_set_sort, Types::EntityTypeSort::OfferSetSort)
     EntityTypeSort.add_member_subclass(:unknown, Types::EntityTypeSort::Unknown)
     EntityTypeSort.struct_class = Types::EntityTypeSort
 
@@ -657,6 +689,7 @@ module Aws::MarketplaceCatalog
     OfferFilters.add_member(:state, Shapes::ShapeRef.new(shape: OfferStateFilter, location_name: "State"))
     OfferFilters.add_member(:targeting, Shapes::ShapeRef.new(shape: OfferTargetingFilter, location_name: "Targeting"))
     OfferFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    OfferFilters.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetIdFilter, location_name: "OfferSetId"))
     OfferFilters.struct_class = Types::OfferFilters
 
     OfferLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: OfferLastModifiedDateFilterDateRange, location_name: "DateRange"))
@@ -689,6 +722,72 @@ module Aws::MarketplaceCatalog
 
     OfferResaleAuthorizationIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdString)
 
+    OfferSetAssociatedOfferIdsFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSetAssociatedOfferIdsFilterValueList, location_name: "ValueList"))
+    OfferSetAssociatedOfferIdsFilter.struct_class = Types::OfferSetAssociatedOfferIdsFilter
+
+    OfferSetAssociatedOfferIdsFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSetAssociatedOfferIdsString)
+
+    OfferSetAssociatedOfferIdsList.member = Shapes::ShapeRef.new(shape: OfferSetAssociatedOfferIdsString)
+
+    OfferSetEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSetEntityIdFilterValueList, location_name: "ValueList"))
+    OfferSetEntityIdFilter.struct_class = Types::OfferSetEntityIdFilter
+
+    OfferSetEntityIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSetEntityIdString)
+
+    OfferSetFilters.add_member(:entity_id, Shapes::ShapeRef.new(shape: OfferSetEntityIdFilter, location_name: "EntityId"))
+    OfferSetFilters.add_member(:name, Shapes::ShapeRef.new(shape: OfferSetNameFilter, location_name: "Name"))
+    OfferSetFilters.add_member(:state, Shapes::ShapeRef.new(shape: OfferSetStateFilter, location_name: "State"))
+    OfferSetFilters.add_member(:release_date, Shapes::ShapeRef.new(shape: OfferSetReleaseDateFilter, location_name: "ReleaseDate"))
+    OfferSetFilters.add_member(:associated_offer_ids, Shapes::ShapeRef.new(shape: OfferSetAssociatedOfferIdsFilter, location_name: "AssociatedOfferIds"))
+    OfferSetFilters.add_member(:solution_id, Shapes::ShapeRef.new(shape: OfferSetSolutionIdFilter, location_name: "SolutionId"))
+    OfferSetFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: OfferSetLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    OfferSetFilters.struct_class = Types::OfferSetFilters
+
+    OfferSetIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSetIdFilterValueList, location_name: "ValueList"))
+    OfferSetIdFilter.struct_class = Types::OfferSetIdFilter
+
+    OfferSetIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSetIdString)
+
+    OfferSetLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: OfferSetLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    OfferSetLastModifiedDateFilter.struct_class = Types::OfferSetLastModifiedDateFilter
+
+    OfferSetLastModifiedDateFilterDateRange.add_member(:after_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
+    OfferSetLastModifiedDateFilterDateRange.add_member(:before_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    OfferSetLastModifiedDateFilterDateRange.struct_class = Types::OfferSetLastModifiedDateFilterDateRange
+
+    OfferSetNameFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSetNameFilterValueList, location_name: "ValueList"))
+    OfferSetNameFilter.struct_class = Types::OfferSetNameFilter
+
+    OfferSetNameFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSetNameString)
+
+    OfferSetReleaseDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: OfferSetReleaseDateFilterDateRange, location_name: "DateRange"))
+    OfferSetReleaseDateFilter.struct_class = Types::OfferSetReleaseDateFilter
+
+    OfferSetReleaseDateFilterDateRange.add_member(:after_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
+    OfferSetReleaseDateFilterDateRange.add_member(:before_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    OfferSetReleaseDateFilterDateRange.struct_class = Types::OfferSetReleaseDateFilterDateRange
+
+    OfferSetSolutionIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSetSolutionIdFilterValueList, location_name: "ValueList"))
+    OfferSetSolutionIdFilter.struct_class = Types::OfferSetSolutionIdFilter
+
+    OfferSetSolutionIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSetSolutionIdString)
+
+    OfferSetSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OfferSetSortBy, location_name: "SortBy"))
+    OfferSetSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    OfferSetSort.struct_class = Types::OfferSetSort
+
+    OfferSetStateFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSetStateFilterValueList, location_name: "ValueList"))
+    OfferSetStateFilter.struct_class = Types::OfferSetStateFilter
+
+    OfferSetStateFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSetStateString)
+
+    OfferSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: OfferSetNameString, location_name: "Name"))
+    OfferSetSummary.add_member(:state, Shapes::ShapeRef.new(shape: OfferSetStateString, location_name: "State"))
+    OfferSetSummary.add_member(:release_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "ReleaseDate"))
+    OfferSetSummary.add_member(:associated_offer_ids, Shapes::ShapeRef.new(shape: OfferSetAssociatedOfferIdsList, location_name: "AssociatedOfferIds"))
+    OfferSetSummary.add_member(:solution_id, Shapes::ShapeRef.new(shape: OfferSetSolutionIdString, location_name: "SolutionId"))
+    OfferSetSummary.struct_class = Types::OfferSetSummary
+
     OfferSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OfferSortBy, location_name: "SortBy"))
     OfferSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     OfferSort.struct_class = Types::OfferSort
@@ -706,6 +805,7 @@ module Aws::MarketplaceCatalog
     OfferSummary.add_member(:buyer_accounts, Shapes::ShapeRef.new(shape: OfferBuyerAccountsList, location_name: "BuyerAccounts"))
     OfferSummary.add_member(:state, Shapes::ShapeRef.new(shape: OfferStateString, location_name: "State"))
     OfferSummary.add_member(:targeting, Shapes::ShapeRef.new(shape: OfferTargetingList, location_name: "Targeting"))
+    OfferSummary.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetIdString, location_name: "OfferSetId"))
     OfferSummary.struct_class = Types::OfferSummary
 
     OfferTargetingFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferTargetingFilterValueList, location_name: "ValueList"))

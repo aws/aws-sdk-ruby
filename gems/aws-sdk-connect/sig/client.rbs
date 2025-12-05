@@ -287,6 +287,19 @@ module Aws
                                   ) -> _AssociateSecurityKeyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSecurityKeyResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_security_profiles-instance_method
+      def associate_security_profiles: (
+                                         instance_id: ::String,
+                                         security_profiles: Array[
+                                           {
+                                             id: ::String?
+                                           },
+                                         ],
+                                         entity_type: ("USER" | "AI_AGENT"),
+                                         entity_arn: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _AssociateTrafficDistributionGroupUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTrafficDistributionGroupUserResponse]
       end
@@ -312,6 +325,19 @@ module Aws
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _AssociateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWorkspaceResponse]
+        def successful_list: () -> ::Array[Types::SuccessfulBatchAssociationSummary]
+        def failed_list: () -> ::Array[Types::FailedBatchAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_workspace-instance_method
+      def associate_workspace: (
+                                 instance_id: ::String,
+                                 workspace_id: ::String,
+                                 resource_arns: Array[::String]
+                               ) -> _AssociateWorkspaceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWorkspaceResponseSuccess
+
       interface _BatchAssociateAnalyticsDataSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateAnalyticsDataSetResponse]
         def created: () -> ::Array[Types::AnalyticsDataAssociationResult]
@@ -324,6 +350,90 @@ module Aws
                                                 ?target_account_id: ::String
                                               ) -> _BatchAssociateAnalyticsDataSetResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateAnalyticsDataSetResponseSuccess
+
+      interface _BatchCreateDataTableValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateDataTableValueResponse]
+        def successful: () -> ::Array[Types::BatchCreateDataTableValueSuccessResult]
+        def failed: () -> ::Array[Types::BatchCreateDataTableValueFailureResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#batch_create_data_table_value-instance_method
+      def batch_create_data_table_value: (
+                                           instance_id: ::String,
+                                           data_table_id: ::String,
+                                           values: Array[
+                                             {
+                                               primary_values: Array[
+                                                 {
+                                                   attribute_name: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]?,
+                                               attribute_name: ::String,
+                                               value: ::String,
+                                               lock_version: {
+                                                 data_table: ::String?,
+                                                 attribute: ::String?,
+                                                 primary_values: ::String?,
+                                                 value: ::String?
+                                               }?,
+                                               last_modified_time: ::Time?,
+                                               last_modified_region: ::String?
+                                             },
+                                           ]
+                                         ) -> _BatchCreateDataTableValueResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateDataTableValueResponseSuccess
+
+      interface _BatchDeleteDataTableValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDataTableValueResponse]
+        def successful: () -> ::Array[Types::BatchDeleteDataTableValueSuccessResult]
+        def failed: () -> ::Array[Types::BatchDeleteDataTableValueFailureResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#batch_delete_data_table_value-instance_method
+      def batch_delete_data_table_value: (
+                                           instance_id: ::String,
+                                           data_table_id: ::String,
+                                           values: Array[
+                                             {
+                                               primary_values: Array[
+                                                 {
+                                                   attribute_name: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]?,
+                                               attribute_name: ::String,
+                                               lock_version: {
+                                                 data_table: ::String?,
+                                                 attribute: ::String?,
+                                                 primary_values: ::String?,
+                                                 value: ::String?
+                                               }
+                                             },
+                                           ]
+                                         ) -> _BatchDeleteDataTableValueResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDataTableValueResponseSuccess
+
+      interface _BatchDescribeDataTableValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDescribeDataTableValueResponse]
+        def successful: () -> ::Array[Types::BatchDescribeDataTableValueSuccessResult]
+        def failed: () -> ::Array[Types::BatchDescribeDataTableValueFailureResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#batch_describe_data_table_value-instance_method
+      def batch_describe_data_table_value: (
+                                             instance_id: ::String,
+                                             data_table_id: ::String,
+                                             values: Array[
+                                               {
+                                                 primary_values: Array[
+                                                   {
+                                                     attribute_name: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ]?,
+                                                 attribute_name: ::String
+                                               },
+                                             ]
+                                           ) -> _BatchDescribeDataTableValueResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeDataTableValueResponseSuccess
 
       interface _BatchDisassociateAnalyticsDataSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateAnalyticsDataSetResponse]
@@ -406,6 +516,38 @@ module Aws
                              ) -> _BatchPutContactResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutContactResponseSuccess
 
+      interface _BatchUpdateDataTableValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateDataTableValueResponse]
+        def successful: () -> ::Array[Types::BatchUpdateDataTableValueSuccessResult]
+        def failed: () -> ::Array[Types::BatchUpdateDataTableValueFailureResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#batch_update_data_table_value-instance_method
+      def batch_update_data_table_value: (
+                                           instance_id: ::String,
+                                           data_table_id: ::String,
+                                           values: Array[
+                                             {
+                                               primary_values: Array[
+                                                 {
+                                                   attribute_name: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]?,
+                                               attribute_name: ::String,
+                                               value: ::String,
+                                               lock_version: {
+                                                 data_table: ::String?,
+                                                 attribute: ::String?,
+                                                 primary_values: ::String?,
+                                                 value: ::String?
+                                               }?,
+                                               last_modified_time: ::Time?,
+                                               last_modified_region: ::String?
+                                             },
+                                           ]
+                                         ) -> _BatchUpdateDataTableValueResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateDataTableValueResponseSuccess
+
       interface _ClaimPhoneNumberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ClaimPhoneNumberResponse]
         def phone_number_id: () -> ::String
@@ -462,7 +604,7 @@ module Aws
                             ?attributes: Hash[::String, ::String],
                             ?references: Hash[::String, {
                                 value: ::String?,
-                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                 status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                 arn: ::String?,
                                 status_reason: ::String?
@@ -573,6 +715,57 @@ module Aws
                                        ) -> _CreateContactFlowVersionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowVersionResponseSuccess
 
+      interface _CreateDataTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataTableResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def lock_version: () -> Types::DataTableLockVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_data_table-instance_method
+      def create_data_table: (
+                               instance_id: ::String,
+                               name: ::String,
+                               ?description: ::String,
+                               time_zone: ::String,
+                               value_lock_level: ("NONE" | "DATA_TABLE" | "PRIMARY_VALUE" | "ATTRIBUTE" | "VALUE"),
+                               status: ("PUBLISHED"),
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateDataTableResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataTableResponseSuccess
+
+      interface _CreateDataTableAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataTableAttributeResponse]
+        def name: () -> ::String
+        def attribute_id: () -> ::String
+        def lock_version: () -> Types::DataTableLockVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_data_table_attribute-instance_method
+      def create_data_table_attribute: (
+                                         instance_id: ::String,
+                                         data_table_id: ::String,
+                                         name: ::String,
+                                         value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST"),
+                                         ?description: ::String,
+                                         ?primary: bool,
+                                         ?validation: {
+                                           min_length: ::Integer?,
+                                           max_length: ::Integer?,
+                                           min_values: ::Integer?,
+                                           max_values: ::Integer?,
+                                           ignore_case: bool?,
+                                           minimum: ::Float?,
+                                           maximum: ::Float?,
+                                           exclusive_minimum: ::Float?,
+                                           exclusive_maximum: ::Float?,
+                                           multiple_of: ::Float?,
+                                           enum: {
+                                             strict: bool?,
+                                             values: Array[::String]?
+                                           }?
+                                         }
+                                       ) -> _CreateDataTableAttributeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataTableAttributeResponseSuccess
+
       interface _CreateEmailAddressResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEmailAddressResponse]
         def email_address_id: () -> ::String
@@ -613,7 +806,7 @@ module Aws
                                           instructions: ::String?,
                                           ref_id: ::String,
                                           not_applicable_enabled: bool?,
-                                          question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC"),
+                                          question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC" | "MULTISELECT" | "DATETIME"),
                                           question_type_properties: {
                                             numeric: {
                                               min_value: ::Integer,
@@ -631,7 +824,7 @@ module Aws
                                               ]?,
                                               automation: {
                                                 property_value: {
-                                                  label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
+                                                  label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
                                                 }?,
                                                 answer_source: {
                                                   source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
@@ -673,6 +866,30 @@ module Aws
                                                   source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
                                                 }?
                                               }?
+                                            }?,
+                                            multi_select: {
+                                              options: Array[
+                                                {
+                                                  ref_id: ::String,
+                                                  text: ::String
+                                                },
+                                              ],
+                                              display_as: ("DROPDOWN" | "CHECKBOX")?,
+                                              automation: {
+                                                options: Array[
+                                                  {
+                                                    rule_category: {
+                                                      category: ::String,
+                                                      condition: ("PRESENT" | "NOT_PRESENT"),
+                                                      option_ref_ids: Array[::String]
+                                                    }?
+                                                  },
+                                                ]?,
+                                                default_option_ref_ids: Array[::String]?,
+                                                answer_source: {
+                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+                                                }?
+                                              }?
                                             }?
                                           }?,
                                           enablement: {
@@ -690,7 +907,7 @@ module Aws
                                                         ref_id: ::String?
                                                       },
                                                     ],
-                                                    comparator: ("IN" | "NOT_IN")
+                                                    comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
                                                   }?,
                                                   condition: untyped?
                                                 },
@@ -712,7 +929,14 @@ module Aws
                                       enabled: bool
                                     },
                                     ?client_token: ::String,
-                                    ?tags: Hash[::String, ::String]
+                                    ?as_draft: bool,
+                                    ?tags: Hash[::String, ::String],
+                                    ?target_configuration: {
+                                      contact_interaction_type: ("AGENT" | "AUTOMATED")
+                                    },
+                                    ?language_configuration: {
+                                      form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")?
+                                    }
                                   ) -> _CreateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationFormResponseSuccess
 
@@ -797,7 +1021,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_integration_association-instance_method
       def create_integration_association: (
                                             instance_id: ::String,
-                                            integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL"),
+                                            integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL" | "MESSAGE_PROCESSOR"),
                                             integration_arn: ::String,
                                             ?source_application_url: ::String,
                                             ?source_application_name: ::String,
@@ -925,7 +1149,7 @@ module Aws
                                   name: ::String,
                                   ?description: ::String,
                                   quick_connect_config: {
-                                    quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER"),
+                                    quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW"),
                                     user_config: {
                                       user_id: ::String,
                                       contact_flow_id: ::String
@@ -936,6 +1160,9 @@ module Aws
                                     }?,
                                     phone_config: {
                                       phone_number: ::String
+                                    }?,
+                                    flow_config: {
+                                      contact_flow_id: ::String
                                     }?
                                   },
                                   ?tags: Hash[::String, ::String]
@@ -1008,7 +1235,7 @@ module Aws
                                contact_flow_id: ::String,
                                references: Hash[::String, {
                                    value: ::String?,
-                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                    arn: ::String?,
                                    status_reason: ::String?
@@ -1109,11 +1336,31 @@ module Aws
                                      ?applications: Array[
                                        {
                                          namespace: ::String?,
-                                         application_permissions: Array[::String]?
+                                         application_permissions: Array[::String]?,
+                                         type: ("MCP" | "THIRD_PARTY_APPLICATION")?
                                        },
                                      ],
                                      ?hierarchy_restricted_resources: Array[::String],
-                                     ?allowed_access_control_hierarchy_group_id: ::String
+                                     ?allowed_access_control_hierarchy_group_id: ::String,
+                                     ?allowed_flow_modules: Array[
+                                       {
+                                         type: ("MCP")?,
+                                         flow_module_id: ::String?
+                                       },
+                                     ],
+                                     ?granular_access_control_configuration: {
+                                       data_table_access_control_configuration: {
+                                         primary_attribute_access_control_configuration: {
+                                           primary_attribute_values: Array[
+                                             {
+                                               access_type: ("ALLOW")?,
+                                               attribute_name: ::String?,
+                                               values: Array[::String]?
+                                             },
+                                           ]?
+                                         }?
+                                       }?
+                                     }
                                    ) -> _CreateSecurityProfileResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityProfileResponseSuccess
 
@@ -1301,6 +1548,117 @@ module Aws
                              ) -> _CreateVocabularyResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVocabularyResponseSuccess
 
+      interface _CreateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceResponse]
+        def workspace_id: () -> ::String
+        def workspace_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_workspace-instance_method
+      def create_workspace: (
+                              instance_id: ::String,
+                              name: ::String,
+                              ?description: ::String,
+                              ?theme: {
+                                light: {
+                                  palette: {
+                                    header: {
+                                      background: ::String?,
+                                      text: ::String?,
+                                      text_hover: ::String?,
+                                      invert_actions_colors: bool?
+                                    }?,
+                                    navigation: {
+                                      background: ::String?,
+                                      text_background_hover: ::String?,
+                                      text_background_active: ::String?,
+                                      text: ::String?,
+                                      text_hover: ::String?,
+                                      text_active: ::String?,
+                                      invert_actions_colors: bool?
+                                    }?,
+                                    canvas: {
+                                      container_background: ::String?,
+                                      page_background: ::String?,
+                                      active_background: ::String?
+                                    }?,
+                                    primary: {
+                                      default: ::String?,
+                                      active: ::String?,
+                                      contrast_text: ::String?
+                                    }?
+                                  }?,
+                                  images: {
+                                    logo: {
+                                      default: ::String?,
+                                      favicon: ::String?
+                                    }?
+                                  }?,
+                                  typography: {
+                                    font_family: {
+                                      default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
+                                    }?
+                                  }?
+                                }?,
+                                dark: {
+                                  palette: {
+                                    header: {
+                                      background: ::String?,
+                                      text: ::String?,
+                                      text_hover: ::String?,
+                                      invert_actions_colors: bool?
+                                    }?,
+                                    navigation: {
+                                      background: ::String?,
+                                      text_background_hover: ::String?,
+                                      text_background_active: ::String?,
+                                      text: ::String?,
+                                      text_hover: ::String?,
+                                      text_active: ::String?,
+                                      invert_actions_colors: bool?
+                                    }?,
+                                    canvas: {
+                                      container_background: ::String?,
+                                      page_background: ::String?,
+                                      active_background: ::String?
+                                    }?,
+                                    primary: {
+                                      default: ::String?,
+                                      active: ::String?,
+                                      contrast_text: ::String?
+                                    }?
+                                  }?,
+                                  images: {
+                                    logo: {
+                                      default: ::String?,
+                                      favicon: ::String?
+                                    }?
+                                  }?,
+                                  typography: {
+                                    font_family: {
+                                      default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
+                                    }?
+                                  }?
+                                }?
+                              },
+                              ?title: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceResponseSuccess
+
+      interface _CreateWorkspacePageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspacePageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_workspace_page-instance_method
+      def create_workspace_page: (
+                                   instance_id: ::String,
+                                   workspace_id: ::String,
+                                   resource_arn: ::String,
+                                   page: ::String,
+                                   ?slug: ::String,
+                                   ?input_data: ::String
+                                 ) -> _CreateWorkspacePageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacePageResponseSuccess
+
       interface _DeactivateEvaluationFormResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateEvaluationFormResponse]
         def evaluation_form_id: () -> ::String
@@ -1385,6 +1743,28 @@ module Aws
                                          contact_flow_version: ::Integer
                                        ) -> _DeleteContactFlowVersionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowVersionResponseSuccess
+
+      interface _DeleteDataTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataTableResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_data_table-instance_method
+      def delete_data_table: (
+                               instance_id: ::String,
+                               data_table_id: ::String
+                             ) -> _DeleteDataTableResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataTableResponseSuccess
+
+      interface _DeleteDataTableAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataTableAttributeResponse]
+        def lock_version: () -> Types::DataTableLockVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_data_table_attribute-instance_method
+      def delete_data_table_attribute: (
+                                         instance_id: ::String,
+                                         data_table_id: ::String,
+                                         attribute_name: ::String
+                                       ) -> _DeleteDataTableAttributeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataTableAttributeResponseSuccess
 
       interface _DeleteEmailAddressResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailAddressResponse]
@@ -1568,6 +1948,38 @@ module Aws
                              ) -> _DeleteVocabularyResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVocabularyResponseSuccess
 
+      interface _DeleteWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_workspace-instance_method
+      def delete_workspace: (
+                              instance_id: ::String,
+                              workspace_id: ::String
+                            ) -> _DeleteWorkspaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceResponseSuccess
+
+      interface _DeleteWorkspaceMediaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceMediaResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_workspace_media-instance_method
+      def delete_workspace_media: (
+                                    instance_id: ::String,
+                                    workspace_id: ::String,
+                                    media_type: ("IMAGE_LOGO_LIGHT_FAVICON" | "IMAGE_LOGO_DARK_FAVICON" | "IMAGE_LOGO_LIGHT_HORIZONTAL" | "IMAGE_LOGO_DARK_HORIZONTAL")
+                                  ) -> _DeleteWorkspaceMediaResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceMediaResponseSuccess
+
+      interface _DeleteWorkspacePageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspacePageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_workspace_page-instance_method
+      def delete_workspace_page: (
+                                   instance_id: ::String,
+                                   workspace_id: ::String,
+                                   page: ::String
+                                 ) -> _DeleteWorkspacePageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspacePageResponseSuccess
+
       interface _DescribeAgentStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAgentStatusResponse]
         def agent_status: () -> Types::AgentStatus
@@ -1647,6 +2059,29 @@ module Aws
                                               ) -> _DescribeContactFlowModuleAliasResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContactFlowModuleAliasResponseSuccess
 
+      interface _DescribeDataTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataTableResponse]
+        def data_table: () -> Types::DataTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_data_table-instance_method
+      def describe_data_table: (
+                                 instance_id: ::String,
+                                 data_table_id: ::String
+                               ) -> _DescribeDataTableResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataTableResponseSuccess
+
+      interface _DescribeDataTableAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataTableAttributeResponse]
+        def attribute: () -> Types::DataTableAttribute
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_data_table_attribute-instance_method
+      def describe_data_table_attribute: (
+                                           instance_id: ::String,
+                                           data_table_id: ::String,
+                                           attribute_name: ::String
+                                         ) -> _DescribeDataTableAttributeResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataTableAttributeResponseSuccess
+
       interface _DescribeEmailAddressResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEmailAddressResponse]
         def email_address_id: () -> ::String
@@ -1719,7 +2154,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_instance_attribute-instance_method
       def describe_instance_attribute: (
                                          instance_id: ::String,
-                                         attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE")
+                                         attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
                                        ) -> _DescribeInstanceAttributeResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceAttributeResponseSuccess
 
@@ -1886,6 +2321,17 @@ module Aws
                                ) -> _DescribeVocabularyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVocabularyResponseSuccess
 
+      interface _DescribeWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceResponse]
+        def workspace: () -> Types::Workspace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_workspace-instance_method
+      def describe_workspace: (
+                                instance_id: ::String,
+                                workspace_id: ::String
+                              ) -> _DescribeWorkspaceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_analytics_data_set-instance_method
       def disassociate_analytics_data_set: (
                                              instance_id: ::String,
@@ -2009,6 +2455,19 @@ module Aws
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_security_profiles-instance_method
+      def disassociate_security_profiles: (
+                                            instance_id: ::String,
+                                            security_profiles: Array[
+                                              {
+                                                id: ::String?
+                                              },
+                                            ],
+                                            entity_type: ("USER" | "AI_AGENT"),
+                                            entity_arn: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DisassociateTrafficDistributionGroupUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTrafficDistributionGroupUserResponse]
       end
@@ -2033,6 +2492,19 @@ module Aws
                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DisassociateWorkspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWorkspaceResponse]
+        def successful_list: () -> ::Array[Types::SuccessfulBatchAssociationSummary]
+        def failed_list: () -> ::Array[Types::FailedBatchAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_workspace-instance_method
+      def disassociate_workspace: (
+                                    instance_id: ::String,
+                                    workspace_id: ::String,
+                                    resource_arns: Array[::String]
+                                  ) -> _DisassociateWorkspaceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWorkspaceResponseSuccess
+
       interface _DismissUserContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DismissUserContactResponse]
       end
@@ -2043,6 +2515,32 @@ module Aws
                                   contact_id: ::String
                                 ) -> _DismissUserContactResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DismissUserContactResponseSuccess
+
+      interface _EvaluateDataTableValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateDataTableValuesResponse]
+        def values: () -> ::Array[Types::DataTableEvaluatedValue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#evaluate_data_table_values-instance_method
+      def evaluate_data_table_values: (
+                                        instance_id: ::String,
+                                        data_table_id: ::String,
+                                        values: Array[
+                                          {
+                                            primary_values: Array[
+                                              {
+                                                attribute_name: ::String,
+                                                value: ::String
+                                              },
+                                            ]?,
+                                            attribute_names: Array[::String]
+                                          },
+                                        ],
+                                        ?time_zone: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _EvaluateDataTableValuesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateDataTableValuesResponseSuccess
 
       interface _GetAttachedFileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAttachedFileResponse]
@@ -2246,7 +2744,10 @@ module Aws
                                 filters: Array[
                                   {
                                     filter_key: ::String?,
-                                    filter_values: Array[::String]?
+                                    filter_values: Array[::String]?,
+                                    string_condition: {
+                                      comparison: ("NOT_EXISTS")?
+                                    }?
                                   },
                                 ],
                                 ?groupings: Array[::String],
@@ -2259,6 +2760,7 @@ module Aws
                                         threshold_value: ::Float?
                                       },
                                     ]?,
+                                    metric_id: ::String?,
                                     metric_filters: Array[
                                       {
                                         metric_filter_key: ::String?,
@@ -2339,6 +2841,18 @@ module Aws
                                  ?client_token: ::String
                                ) -> _ImportPhoneNumberResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportPhoneNumberResponseSuccess
+
+      interface _ImportWorkspaceMediaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportWorkspaceMediaResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#import_workspace_media-instance_method
+      def import_workspace_media: (
+                                    instance_id: ::String,
+                                    workspace_id: ::String,
+                                    media_type: ("IMAGE_LOGO_LIGHT_FAVICON" | "IMAGE_LOGO_DARK_FAVICON" | "IMAGE_LOGO_LIGHT_HORIZONTAL" | "IMAGE_LOGO_DARK_HORIZONTAL"),
+                                    media_source: ::String
+                                  ) -> _ImportWorkspaceMediaResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportWorkspaceMediaResponseSuccess
 
       interface _ListAgentStatusesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentStatusResponse]
@@ -2527,10 +3041,80 @@ module Aws
       def list_contact_references: (
                                      instance_id: ::String,
                                      contact_id: ::String,
-                                     reference_types: Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE")],
+                                     reference_types: Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT")],
                                      ?next_token: ::String
                                    ) -> _ListContactReferencesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactReferencesResponseSuccess
+
+      interface _ListDataTableAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTableAttributesResponse]
+        def next_token: () -> ::String
+        def attributes: () -> ::Array[Types::DataTableAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_data_table_attributes-instance_method
+      def list_data_table_attributes: (
+                                        instance_id: ::String,
+                                        data_table_id: ::String,
+                                        ?attribute_ids: Array[::String],
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListDataTableAttributesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTableAttributesResponseSuccess
+
+      interface _ListDataTablePrimaryValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTablePrimaryValuesResponse]
+        def next_token: () -> ::String
+        def primary_values_list: () -> ::Array[Types::RecordPrimaryValue]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_data_table_primary_values-instance_method
+      def list_data_table_primary_values: (
+                                            instance_id: ::String,
+                                            data_table_id: ::String,
+                                            ?record_ids: Array[::String],
+                                            ?primary_attribute_values: Array[
+                                              {
+                                                attribute_name: ::String,
+                                                values: Array[::String]
+                                              },
+                                            ],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListDataTablePrimaryValuesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTablePrimaryValuesResponseSuccess
+
+      interface _ListDataTableValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTableValuesResponse]
+        def next_token: () -> ::String
+        def values: () -> ::Array[Types::DataTableValueSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_data_table_values-instance_method
+      def list_data_table_values: (
+                                    instance_id: ::String,
+                                    data_table_id: ::String,
+                                    ?record_ids: Array[::String],
+                                    ?primary_attribute_values: Array[
+                                      {
+                                        attribute_name: ::String,
+                                        values: Array[::String]
+                                      },
+                                    ],
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListDataTableValuesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTableValuesResponseSuccess
+
+      interface _ListDataTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataTablesResponse]
+        def next_token: () -> ::String
+        def data_table_summary_list: () -> ::Array[Types::DataTableSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_data_tables-instance_method
+      def list_data_tables: (
+                              instance_id: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListDataTablesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataTablesResponseSuccess
 
       interface _ListDefaultVocabulariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDefaultVocabulariesResponse]
@@ -2545,6 +3129,21 @@ module Aws
                                        ?next_token: ::String
                                      ) -> _ListDefaultVocabulariesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDefaultVocabulariesResponseSuccess
+
+      interface _ListEntitySecurityProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitySecurityProfilesResponse]
+        def security_profiles: () -> ::Array[Types::SecurityProfileItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_entity_security_profiles-instance_method
+      def list_entity_security_profiles: (
+                                           instance_id: ::String,
+                                           entity_type: ("USER" | "AI_AGENT"),
+                                           entity_arn: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListEntitySecurityProfilesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitySecurityProfilesResponseSuccess
 
       interface _ListEvaluationFormVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationFormVersionsResponse]
@@ -2663,7 +3262,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_integration_associations-instance_method
       def list_integration_associations: (
                                            instance_id: ::String,
-                                           ?integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL"),
+                                           ?integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL" | "MESSAGE_PROCESSOR"),
                                            ?next_token: ::String,
                                            ?max_results: ::Integer,
                                            ?integration_arn: ::String
@@ -2794,7 +3393,7 @@ module Aws
                                  instance_id: ::String,
                                  ?next_token: ::String,
                                  ?max_results: ::Integer,
-                                 ?quick_connect_types: Array[("USER" | "QUEUE" | "PHONE_NUMBER")]
+                                 ?quick_connect_types: Array[("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW")]
                                ) -> _ListQuickConnectsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQuickConnectsResponseSuccess
 
@@ -2904,6 +3503,22 @@ module Aws
                                                 ?max_results: ::Integer
                                               ) -> _ListSecurityProfileApplicationsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityProfileApplicationsResponseSuccess
+
+      interface _ListSecurityProfileFlowModulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityProfileFlowModulesResponse]
+        def allowed_flow_modules: () -> ::Array[Types::FlowModule]
+        def next_token: () -> ::String
+        def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_security_profile_flow_modules-instance_method
+      def list_security_profile_flow_modules: (
+                                                security_profile_id: ::String,
+                                                instance_id: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListSecurityProfileFlowModulesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityProfileFlowModulesResponseSuccess
 
       interface _ListSecurityProfilePermissionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityProfilePermissionsResponse]
@@ -3068,6 +3683,44 @@ module Aws
                         ?max_results: ::Integer
                       ) -> _ListViewsResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListViewsResponseSuccess
+
+      interface _ListWorkspaceMediaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspaceMediaResponse]
+        def media: () -> ::Array[Types::MediaItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_workspace_media-instance_method
+      def list_workspace_media: (
+                                  instance_id: ::String,
+                                  workspace_id: ::String
+                                ) -> _ListWorkspaceMediaResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspaceMediaResponseSuccess
+
+      interface _ListWorkspacePagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacePagesResponse]
+        def next_token: () -> ::String
+        def workspace_page_list: () -> ::Array[Types::WorkspacePage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_workspace_pages-instance_method
+      def list_workspace_pages: (
+                                  instance_id: ::String,
+                                  workspace_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListWorkspacePagesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspacePagesResponseSuccess
+
+      interface _ListWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacesResponse]
+        def next_token: () -> ::String
+        def workspace_summary_list: () -> ::Array[Types::WorkspaceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_workspaces-instance_method
+      def list_workspaces: (
+                             instance_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListWorkspacesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspacesResponseSuccess
 
       interface _MonitorContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::MonitorContactResponse]
@@ -3377,6 +4030,39 @@ module Aws
                                         tag_key: ::String?,
                                         tag_value: ::String?
                                       }?
+                                    }?,
+                                    flow_attribute_filter: {
+                                      or_conditions: Array[
+                                        {
+                                          tag_conditions: Array[
+                                            {
+                                              tag_key: ::String?,
+                                              tag_value: ::String?
+                                            },
+                                          ]?,
+                                          contact_flow_type_condition: {
+                                            contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?
+                                          }?
+                                        },
+                                      ]?,
+                                      and_condition: {
+                                        tag_conditions: Array[
+                                          {
+                                            tag_key: ::String?,
+                                            tag_value: ::String?
+                                          },
+                                        ]?,
+                                        contact_flow_type_condition: {
+                                          contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?
+                                        }?
+                                      }?,
+                                      tag_condition: {
+                                        tag_key: ::String?,
+                                        tag_value: ::String?
+                                      }?,
+                                      contact_flow_type_condition: {
+                                        contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?
+                                      }?
                                     }?
                                   },
                                   ?search_criteria: {
@@ -3493,6 +4179,59 @@ module Aws
                              }
                            ) -> _SearchContactsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactsResponseSuccess
+
+      interface _SearchDataTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchDataTablesResponse]
+        def data_tables: () -> ::Array[Types::DataTable]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_data_tables-instance_method
+      def search_data_tables: (
+                                instance_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?search_filter: {
+                                  attribute_filter: {
+                                    or_conditions: Array[
+                                      {
+                                        tag_conditions: Array[
+                                          {
+                                            tag_key: ::String?,
+                                            tag_value: ::String?
+                                          },
+                                        ]?
+                                      },
+                                    ]?,
+                                    and_condition: {
+                                      tag_conditions: Array[
+                                        {
+                                          tag_key: ::String?,
+                                          tag_value: ::String?
+                                        },
+                                      ]?
+                                    }?,
+                                    tag_condition: {
+                                      tag_key: ::String?,
+                                      tag_value: ::String?
+                                    }?
+                                  }?
+                                },
+                                ?search_criteria: {
+                                  or_conditions: Array[
+                                    untyped,
+                                  ]?,
+                                  and_conditions: Array[
+                                    untyped,
+                                  ]?,
+                                  string_condition: {
+                                    field_name: ::String?,
+                                    value: ::String?,
+                                    comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                  }?
+                                }
+                              ) -> _SearchDataTablesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDataTablesResponseSuccess
 
       interface _SearchEmailAddressesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchEmailAddressesResponse]
@@ -4170,6 +4909,61 @@ module Aws
                         ) -> _SearchUsersResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUsersResponseSuccess
 
+      interface _SearchViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchViewsResponse]
+        def views: () -> ::Array[Types::View]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_views-instance_method
+      def search_views: (
+                          instance_id: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?search_filter: {
+                            attribute_filter: {
+                              or_conditions: Array[
+                                {
+                                  tag_conditions: Array[
+                                    {
+                                      tag_key: ::String?,
+                                      tag_value: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?,
+                              and_condition: {
+                                tag_conditions: Array[
+                                  {
+                                    tag_key: ::String?,
+                                    tag_value: ::String?
+                                  },
+                                ]?
+                              }?,
+                              tag_condition: {
+                                tag_key: ::String?,
+                                tag_value: ::String?
+                              }?
+                            }?
+                          },
+                          ?search_criteria: {
+                            or_conditions: Array[
+                              untyped,
+                            ]?,
+                            and_conditions: Array[
+                              untyped,
+                            ]?,
+                            string_condition: {
+                              field_name: ::String?,
+                              value: ::String?,
+                              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                            }?,
+                            view_type_condition: ("CUSTOMER_MANAGED" | "AWS_MANAGED")?,
+                            view_status_condition: ("PUBLISHED" | "SAVED")?
+                          }
+                        ) -> _SearchViewsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchViewsResponseSuccess
+
       interface _SearchVocabulariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchVocabulariesResponse]
         def vocabulary_summary_list: () -> ::Array[Types::VocabularySummary]
@@ -4185,6 +4979,112 @@ module Aws
                                  ?language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
                                ) -> _SearchVocabulariesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchVocabulariesResponseSuccess
+
+      interface _SearchWorkspaceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchWorkspaceAssociationsResponse]
+        def next_token: () -> ::String
+        def workspace_associations: () -> ::Array[Types::WorkspaceAssociationSearchSummary]
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_workspace_associations-instance_method
+      def search_workspace_associations: (
+                                           instance_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer,
+                                           ?search_filter: {
+                                             attribute_filter: {
+                                               or_conditions: Array[
+                                                 {
+                                                   tag_conditions: Array[
+                                                     {
+                                                       tag_key: ::String?,
+                                                       tag_value: ::String?
+                                                     },
+                                                   ]?
+                                                 },
+                                               ]?,
+                                               and_condition: {
+                                                 tag_conditions: Array[
+                                                   {
+                                                     tag_key: ::String?,
+                                                     tag_value: ::String?
+                                                   },
+                                                 ]?
+                                               }?,
+                                               tag_condition: {
+                                                 tag_key: ::String?,
+                                                 tag_value: ::String?
+                                               }?
+                                             }?
+                                           },
+                                           ?search_criteria: {
+                                             or_conditions: Array[
+                                               untyped,
+                                             ]?,
+                                             and_conditions: Array[
+                                               untyped,
+                                             ]?,
+                                             string_condition: {
+                                               field_name: ::String?,
+                                               value: ::String?,
+                                               comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                             }?
+                                           }
+                                         ) -> _SearchWorkspaceAssociationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchWorkspaceAssociationsResponseSuccess
+
+      interface _SearchWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchWorkspacesResponse]
+        def next_token: () -> ::String
+        def workspaces: () -> ::Array[Types::WorkspaceSearchSummary]
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_workspaces-instance_method
+      def search_workspaces: (
+                               instance_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?search_filter: {
+                                 attribute_filter: {
+                                   or_conditions: Array[
+                                     {
+                                       tag_conditions: Array[
+                                         {
+                                           tag_key: ::String?,
+                                           tag_value: ::String?
+                                         },
+                                       ]?
+                                     },
+                                   ]?,
+                                   and_condition: {
+                                     tag_conditions: Array[
+                                       {
+                                         tag_key: ::String?,
+                                         tag_value: ::String?
+                                       },
+                                     ]?
+                                   }?,
+                                   tag_condition: {
+                                     tag_key: ::String?,
+                                     tag_value: ::String?
+                                   }?
+                                 }?
+                               },
+                               ?search_criteria: {
+                                 or_conditions: Array[
+                                   untyped,
+                                 ]?,
+                                 and_conditions: Array[
+                                   untyped,
+                                 ]?,
+                                 string_condition: {
+                                   field_name: ::String?,
+                                   value: ::String?,
+                                   comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                 }?
+                               }
+                             ) -> _SearchWorkspacesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchWorkspacesResponseSuccess
 
       interface _SendChatIntegrationEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendChatIntegrationEventResponse]
@@ -4302,6 +5202,9 @@ module Aws
                                 participant_details: {
                                   display_name: ::String
                                 },
+                                ?participant_configuration: {
+                                  response_mode: ("INCREMENTAL" | "COMPLETE")?
+                                },
                                 ?initial_message: {
                                   content_type: ::String,
                                   content: ::String
@@ -4344,6 +5247,18 @@ module Aws
                                       ?tags: Hash[::String, ::String]
                                     ) -> _StartContactEvaluationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContactEvaluationResponseSuccess
+
+      interface _StartContactMediaProcessingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartContactMediaProcessingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_contact_media_processing-instance_method
+      def start_contact_media_processing: (
+                                            ?instance_id: ::String,
+                                            ?contact_id: ::String,
+                                            ?processor_arn: ::String,
+                                            ?failure_mode: ("DELIVER_UNPROCESSED_MESSAGE" | "DO_NOT_DELIVER_UNPROCESSED_MESSAGE")
+                                          ) -> _StartContactMediaProcessingResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContactMediaProcessingResponseSuccess
 
       interface _StartContactRecordingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartContactRecordingResponse]
@@ -4390,7 +5305,7 @@ module Aws
                                  ?description: ::String,
                                  ?references: Hash[::String, {
                                      value: ::String?,
-                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                      status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                      arn: ::String?,
                                      status_reason: ::String?
@@ -4535,7 +5450,7 @@ module Aws
                                           ?description: ::String,
                                           ?references: Hash[::String, {
                                               value: ::String?,
-                                              type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                              type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                               status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                               arn: ::String?,
                                               status_reason: ::String?
@@ -4595,7 +5510,7 @@ module Aws
                                 name: ::String,
                                 ?references: Hash[::String, {
                                     value: ::String?,
-                                    type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                    type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                     arn: ::String?,
                                     status_reason: ::String?
@@ -4647,7 +5562,7 @@ module Aws
                                    ?related_contact_id: ::String,
                                    ?references: Hash[::String, {
                                        value: ::String?,
-                                       type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                       type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                        status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                        arn: ::String?,
                                        status_reason: ::String?
@@ -4668,6 +5583,16 @@ module Aws
                           }
                         ) -> _StopContactResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopContactResponseSuccess
+
+      interface _StopContactMediaProcessingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopContactMediaProcessingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#stop_contact_media_processing-instance_method
+      def stop_contact_media_processing: (
+                                           ?instance_id: ::String,
+                                           ?contact_id: ::String
+                                         ) -> _StopContactMediaProcessingResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopContactMediaProcessingResponseSuccess
 
       interface _StopContactRecordingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopContactRecordingResponse]
@@ -4705,6 +5630,8 @@ module Aws
                                            value: {
                                              string_value: ::String?,
                                              numeric_value: ::Float?,
+                                             string_values: Array[::String]?,
+                                             date_time_value: ::String?,
                                              not_applicable: bool?
                                            }?
                                          }],
@@ -4818,7 +5745,7 @@ module Aws
                             ?description: ::String,
                             ?references: Hash[::String, {
                                 value: ::String?,
-                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                 status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                 arn: ::String?,
                                 status_reason: ::String?
@@ -4873,6 +5800,8 @@ module Aws
                                            value: {
                                              string_value: ::String?,
                                              numeric_value: ::Float?,
+                                             string_values: Array[::String]?,
+                                             date_time_value: ::String?,
                                              not_applicable: bool?
                                            }?
                                          }],
@@ -5030,6 +5959,83 @@ module Aws
                                    ) -> _UpdateContactScheduleResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactScheduleResponseSuccess
 
+      interface _UpdateDataTableAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataTableAttributeResponse]
+        def name: () -> ::String
+        def lock_version: () -> Types::DataTableLockVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_data_table_attribute-instance_method
+      def update_data_table_attribute: (
+                                         instance_id: ::String,
+                                         data_table_id: ::String,
+                                         attribute_name: ::String,
+                                         name: ::String,
+                                         value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST"),
+                                         ?description: ::String,
+                                         ?primary: bool,
+                                         ?validation: {
+                                           min_length: ::Integer?,
+                                           max_length: ::Integer?,
+                                           min_values: ::Integer?,
+                                           max_values: ::Integer?,
+                                           ignore_case: bool?,
+                                           minimum: ::Float?,
+                                           maximum: ::Float?,
+                                           exclusive_minimum: ::Float?,
+                                           exclusive_maximum: ::Float?,
+                                           multiple_of: ::Float?,
+                                           enum: {
+                                             strict: bool?,
+                                             values: Array[::String]?
+                                           }?
+                                         }
+                                       ) -> _UpdateDataTableAttributeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataTableAttributeResponseSuccess
+
+      interface _UpdateDataTableMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataTableMetadataResponse]
+        def lock_version: () -> Types::DataTableLockVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_data_table_metadata-instance_method
+      def update_data_table_metadata: (
+                                        instance_id: ::String,
+                                        data_table_id: ::String,
+                                        name: ::String,
+                                        ?description: ::String,
+                                        value_lock_level: ("NONE" | "DATA_TABLE" | "PRIMARY_VALUE" | "ATTRIBUTE" | "VALUE"),
+                                        time_zone: ::String
+                                      ) -> _UpdateDataTableMetadataResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataTableMetadataResponseSuccess
+
+      interface _UpdateDataTablePrimaryValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataTablePrimaryValuesResponse]
+        def lock_version: () -> Types::DataTableLockVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_data_table_primary_values-instance_method
+      def update_data_table_primary_values: (
+                                              instance_id: ::String,
+                                              data_table_id: ::String,
+                                              primary_values: Array[
+                                                {
+                                                  attribute_name: ::String,
+                                                  value: ::String
+                                                },
+                                              ],
+                                              new_primary_values: Array[
+                                                {
+                                                  attribute_name: ::String,
+                                                  value: ::String
+                                                },
+                                              ],
+                                              lock_version: {
+                                                data_table: ::String?,
+                                                attribute: ::String?,
+                                                primary_values: ::String?,
+                                                value: ::String?
+                                              }
+                                            ) -> _UpdateDataTablePrimaryValuesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataTablePrimaryValuesResponseSuccess
+
       interface _UpdateEmailAddressMetadataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEmailAddressMetadataResponse]
         def email_address_id: () -> ::String
@@ -5073,7 +6079,7 @@ module Aws
                                           instructions: ::String?,
                                           ref_id: ::String,
                                           not_applicable_enabled: bool?,
-                                          question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC"),
+                                          question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC" | "MULTISELECT" | "DATETIME"),
                                           question_type_properties: {
                                             numeric: {
                                               min_value: ::Integer,
@@ -5091,7 +6097,7 @@ module Aws
                                               ]?,
                                               automation: {
                                                 property_value: {
-                                                  label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
+                                                  label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
                                                 }?,
                                                 answer_source: {
                                                   source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
@@ -5133,6 +6139,30 @@ module Aws
                                                   source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
                                                 }?
                                               }?
+                                            }?,
+                                            multi_select: {
+                                              options: Array[
+                                                {
+                                                  ref_id: ::String,
+                                                  text: ::String
+                                                },
+                                              ],
+                                              display_as: ("DROPDOWN" | "CHECKBOX")?,
+                                              automation: {
+                                                options: Array[
+                                                  {
+                                                    rule_category: {
+                                                      category: ::String,
+                                                      condition: ("PRESENT" | "NOT_PRESENT"),
+                                                      option_ref_ids: Array[::String]
+                                                    }?
+                                                  },
+                                                ]?,
+                                                default_option_ref_ids: Array[::String]?,
+                                                answer_source: {
+                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+                                                }?
+                                              }?
                                             }?
                                           }?,
                                           enablement: {
@@ -5150,7 +6180,7 @@ module Aws
                                                         ref_id: ::String?
                                                       },
                                                     ],
-                                                    comparator: ("IN" | "NOT_IN")
+                                                    comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
                                                   }?,
                                                   condition: untyped?
                                                 },
@@ -5171,7 +6201,14 @@ module Aws
                                     ?auto_evaluation_configuration: {
                                       enabled: bool
                                     },
-                                    ?client_token: ::String
+                                    ?as_draft: bool,
+                                    ?client_token: ::String,
+                                    ?target_configuration: {
+                                      contact_interaction_type: ("AGENT" | "AUTOMATED")
+                                    },
+                                    ?language_configuration: {
+                                      form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")?
+                                    }
                                   ) -> _UpdateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEvaluationFormResponseSuccess
 
@@ -5226,7 +6263,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_instance_attribute-instance_method
       def update_instance_attribute: (
                                        instance_id: ::String,
-                                       attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE"),
+                                       attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING"),
                                        value: ::String,
                                        ?client_token: ::String
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -5415,7 +6452,7 @@ module Aws
                                          instance_id: ::String,
                                          quick_connect_id: ::String,
                                          quick_connect_config: {
-                                           quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER"),
+                                           quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW"),
                                            user_config: {
                                              user_id: ::String,
                                              contact_flow_id: ::String
@@ -5426,6 +6463,9 @@ module Aws
                                            }?,
                                            phone_config: {
                                              phone_number: ::String
+                                           }?,
+                                           flow_config: {
+                                             contact_flow_id: ::String
                                            }?
                                          }
                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -5513,7 +6553,7 @@ module Aws
                                contact_flow_id: ::String,
                                references: Hash[::String, {
                                    value: ::String?,
-                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE"),
+                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                    arn: ::String?,
                                    status_reason: ::String?
@@ -5607,11 +6647,31 @@ module Aws
                                      ?applications: Array[
                                        {
                                          namespace: ::String?,
-                                         application_permissions: Array[::String]?
+                                         application_permissions: Array[::String]?,
+                                         type: ("MCP" | "THIRD_PARTY_APPLICATION")?
                                        },
                                      ],
                                      ?hierarchy_restricted_resources: Array[::String],
-                                     ?allowed_access_control_hierarchy_group_id: ::String
+                                     ?allowed_access_control_hierarchy_group_id: ::String,
+                                     ?allowed_flow_modules: Array[
+                                       {
+                                         type: ("MCP")?,
+                                         flow_module_id: ::String?
+                                       },
+                                     ],
+                                     ?granular_access_control_configuration: {
+                                       data_table_access_control_configuration: {
+                                         primary_attribute_access_control_configuration: {
+                                           primary_attribute_values: Array[
+                                             {
+                                               access_type: ("ALLOW")?,
+                                               attribute_name: ::String?,
+                                               values: Array[::String]?
+                                             },
+                                           ]?
+                                         }?
+                                       }?
+                                     }
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -5843,6 +6903,137 @@ module Aws
                                   ?description: ::String
                                 ) -> _UpdateViewMetadataResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateViewMetadataResponseSuccess
+
+      interface _UpdateWorkspaceMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceMetadataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_workspace_metadata-instance_method
+      def update_workspace_metadata: (
+                                       instance_id: ::String,
+                                       workspace_id: ::String,
+                                       ?name: ::String,
+                                       ?description: ::String,
+                                       ?title: ::String
+                                     ) -> _UpdateWorkspaceMetadataResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceMetadataResponseSuccess
+
+      interface _UpdateWorkspacePageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspacePageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_workspace_page-instance_method
+      def update_workspace_page: (
+                                   instance_id: ::String,
+                                   workspace_id: ::String,
+                                   page: ::String,
+                                   ?new_page: ::String,
+                                   ?resource_arn: ::String,
+                                   ?slug: ::String,
+                                   ?input_data: ::String
+                                 ) -> _UpdateWorkspacePageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspacePageResponseSuccess
+
+      interface _UpdateWorkspaceThemeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceThemeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_workspace_theme-instance_method
+      def update_workspace_theme: (
+                                    instance_id: ::String,
+                                    workspace_id: ::String,
+                                    ?theme: {
+                                      light: {
+                                        palette: {
+                                          header: {
+                                            background: ::String?,
+                                            text: ::String?,
+                                            text_hover: ::String?,
+                                            invert_actions_colors: bool?
+                                          }?,
+                                          navigation: {
+                                            background: ::String?,
+                                            text_background_hover: ::String?,
+                                            text_background_active: ::String?,
+                                            text: ::String?,
+                                            text_hover: ::String?,
+                                            text_active: ::String?,
+                                            invert_actions_colors: bool?
+                                          }?,
+                                          canvas: {
+                                            container_background: ::String?,
+                                            page_background: ::String?,
+                                            active_background: ::String?
+                                          }?,
+                                          primary: {
+                                            default: ::String?,
+                                            active: ::String?,
+                                            contrast_text: ::String?
+                                          }?
+                                        }?,
+                                        images: {
+                                          logo: {
+                                            default: ::String?,
+                                            favicon: ::String?
+                                          }?
+                                        }?,
+                                        typography: {
+                                          font_family: {
+                                            default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
+                                          }?
+                                        }?
+                                      }?,
+                                      dark: {
+                                        palette: {
+                                          header: {
+                                            background: ::String?,
+                                            text: ::String?,
+                                            text_hover: ::String?,
+                                            invert_actions_colors: bool?
+                                          }?,
+                                          navigation: {
+                                            background: ::String?,
+                                            text_background_hover: ::String?,
+                                            text_background_active: ::String?,
+                                            text: ::String?,
+                                            text_hover: ::String?,
+                                            text_active: ::String?,
+                                            invert_actions_colors: bool?
+                                          }?,
+                                          canvas: {
+                                            container_background: ::String?,
+                                            page_background: ::String?,
+                                            active_background: ::String?
+                                          }?,
+                                          primary: {
+                                            default: ::String?,
+                                            active: ::String?,
+                                            contrast_text: ::String?
+                                          }?
+                                        }?,
+                                        images: {
+                                          logo: {
+                                            default: ::String?,
+                                            favicon: ::String?
+                                          }?
+                                        }?,
+                                        typography: {
+                                          font_family: {
+                                            default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
+                                          }?
+                                        }?
+                                      }?
+                                    }
+                                  ) -> _UpdateWorkspaceThemeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceThemeResponseSuccess
+
+      interface _UpdateWorkspaceVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspaceVisibilityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_workspace_visibility-instance_method
+      def update_workspace_visibility: (
+                                         instance_id: ::String,
+                                         workspace_id: ::String,
+                                         visibility: ("ALL" | "ASSIGNED" | "NONE")
+                                       ) -> _UpdateWorkspaceVisibilityResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceVisibilityResponseSuccess
     end
   end
 end

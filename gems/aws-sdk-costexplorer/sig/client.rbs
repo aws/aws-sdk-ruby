@@ -989,7 +989,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plans_purchase_recommendation-instance_method
       def get_savings_plans_purchase_recommendation: (
-                                                       savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP"),
+                                                       savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP"),
                                                        term_in_years: ("ONE_YEAR" | "THREE_YEARS"),
                                                        payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION"),
                                                        ?account_scope: ("PAYER" | "LINKED"),
@@ -1311,7 +1311,7 @@ module Aws
                                                     savings_plans_to_add: Array[
                                                       {
                                                         payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")?,
-                                                        savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")?,
+                                                        savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")?,
                                                         region: ::String?,
                                                         instance_family: ::String?,
                                                         term_in_years: ("ONE_YEAR" | "THREE_YEARS")?,

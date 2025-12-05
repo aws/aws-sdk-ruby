@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-12-02)
+------------------
+
+* Feature - Adding support for extended threat detection for Amazon EC2 and Amazon ECS. Adding support for wild card suppression rules.
+
 1.135.0 (2025-11-21)
 ------------------
 

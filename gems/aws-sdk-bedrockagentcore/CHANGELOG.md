@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2025-12-02)
+------------------
+
+* Feature - Support for AgentCore Evaluations and Episodic memory strategy for AgentCore Memory.
+
 1.12.0 (2025-11-21)
 ------------------
 

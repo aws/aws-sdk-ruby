@@ -869,7 +869,7 @@ module Aws
                                             role_arn: ::String,
                                             ?client_request_token: ::String,
                                             base_model_identifier: ::String,
-                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED"),
+                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED"),
                                             ?custom_model_kms_key_id: ::String,
                                             ?job_tags: Array[
                                               {
@@ -929,6 +929,23 @@ module Aws
                                                   teacher_model_identifier: ::String,
                                                   max_response_length_for_inference: ::Integer?
                                                 }
+                                              }?,
+                                              rft_config: {
+                                                grader_config: {
+                                                  lambda_grader: {
+                                                    lambda_arn: ::String
+                                                  }?
+                                                }?,
+                                                hyper_parameters: {
+                                                  epoch_count: ::Integer?,
+                                                  batch_size: ::Integer?,
+                                                  learning_rate: ::Float?,
+                                                  max_prompt_length: ::Integer?,
+                                                  training_sample_per_prompt: ::Integer?,
+                                                  inference_max_tokens: ::Integer?,
+                                                  reasoning_effort: ("low" | "medium" | "high")?,
+                                                  eval_interval: ::Integer?
+                                                }?
                                               }?
                                             }
                                           ) -> _CreateModelCustomizationJobResponseSuccess
@@ -1316,7 +1333,7 @@ module Aws
         def job_name: () -> ::String
         def job_arn: () -> ::String
         def base_model_arn: () -> ::String
-        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
         def model_kms_key_arn: () -> ::String
         def hyper_parameters: () -> ::Hash[::String, ::String]
         def training_data_config: () -> Types::TrainingDataConfig
@@ -1343,6 +1360,7 @@ module Aws
         def created_at: () -> ::Time
         def status: () -> ("Creating" | "Active" | "Failed")
         def description: () -> ::String
+        def update_details: () -> Types::CustomModelDeploymentUpdateDetails
         def failure_message: () -> ::String
         def last_updated_at: () -> ::Time
       end
@@ -1515,7 +1533,7 @@ module Aws
         def training_data_config: () -> Types::TrainingDataConfig
         def validation_data_config: () -> Types::ValidationDataConfig
         def output_data_config: () -> Types::OutputDataConfig
-        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
         def output_model_kms_key_arn: () -> ::String
         def training_metrics: () -> Types::TrainingMetrics
         def validation_metrics: () -> ::Array[Types::ValidatorMetric]
@@ -1991,7 +2009,8 @@ module Aws
                                                           text_data_delivery_enabled: bool?,
                                                           image_data_delivery_enabled: bool?,
                                                           embedding_data_delivery_enabled: bool?,
-                                                          video_data_delivery_enabled: bool?
+                                                          video_data_delivery_enabled: bool?,
+                                                          audio_data_delivery_enabled: bool?
                                                         }
                                                       ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
@@ -2365,6 +2384,17 @@ module Aws
                                                          ?client_request_token: ::String
                                                        ) -> _UpdateAutomatedReasoningPolicyTestCaseResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutomatedReasoningPolicyTestCaseResponseSuccess
+
+      interface _UpdateCustomModelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomModelDeploymentResponse]
+        def custom_model_deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#update_custom_model_deployment-instance_method
+      def update_custom_model_deployment: (
+                                            model_arn: ::String,
+                                            custom_model_deployment_identifier: ::String
+                                          ) -> _UpdateCustomModelDeploymentResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomModelDeploymentResponseSuccess
 
       interface _UpdateGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGuardrailResponse]

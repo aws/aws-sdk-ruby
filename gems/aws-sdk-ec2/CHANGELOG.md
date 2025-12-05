@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.583.0 (2025-11-25)
+------------------
+
+* Feature - This release adds support to view Network firewall proxy appliances attached to an existing NAT Gateway via DescribeNatGateways API NatGatewayAttachedAppliance structure.
+
 1.582.0 (2025-11-21)
 ------------------
 

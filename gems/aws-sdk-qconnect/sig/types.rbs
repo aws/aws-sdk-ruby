@@ -15,6 +15,9 @@ module Aws::QConnect
       attr_accessor email_response_ai_agent_configuration: Types::EmailResponseAIAgentConfiguration
       attr_accessor email_overview_ai_agent_configuration: Types::EmailOverviewAIAgentConfiguration
       attr_accessor email_generative_answer_ai_agent_configuration: Types::EmailGenerativeAnswerAIAgentConfiguration
+      attr_accessor orchestration_ai_agent_configuration: Types::OrchestrationAIAgentConfiguration
+      attr_accessor note_taking_ai_agent_configuration: Types::NoteTakingAIAgentConfiguration
+      attr_accessor case_summarization_ai_agent_configuration: Types::CaseSummarizationAIAgentConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -29,6 +32,12 @@ module Aws::QConnect
       class EmailOverviewAiAgentConfiguration < AIAgentConfiguration
       end
       class EmailGenerativeAnswerAiAgentConfiguration < AIAgentConfiguration
+      end
+      class OrchestrationAiAgentConfiguration < AIAgentConfiguration
+      end
+      class NoteTakingAiAgentConfiguration < AIAgentConfiguration
+      end
+      class CaseSummarizationAiAgentConfiguration < AIAgentConfiguration
       end
       class Unknown < AIAgentConfiguration
       end
@@ -45,7 +54,7 @@ module Aws::QConnect
       attr_accessor ai_agent_id: ::String
       attr_accessor ai_agent_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
+      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor configuration: Types::AIAgentConfiguration
       attr_accessor modified_time: ::Time
       attr_accessor description: ::String
@@ -61,7 +70,7 @@ module Aws::QConnect
       attr_accessor assistant_id: ::String
       attr_accessor assistant_arn: ::String
       attr_accessor ai_agent_id: ::String
-      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
+      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor ai_agent_arn: ::String
       attr_accessor modified_time: ::Time
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
@@ -76,6 +85,11 @@ module Aws::QConnect
     class AIAgentVersionSummary
       attr_accessor ai_agent_summary: Types::AIAgentSummary
       attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class AIGuardrailAssessment
+      attr_accessor blocked: bool
       SENSITIVE: []
     end
 
@@ -153,11 +167,12 @@ module Aws::QConnect
       attr_accessor ai_prompt_id: ::String
       attr_accessor ai_prompt_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION")
+      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor template_type: ("TEXT")
       attr_accessor model_id: ::String
       attr_accessor api_format: ("ANTHROPIC_CLAUDE_MESSAGES" | "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS" | "MESSAGES" | "TEXT_COMPLETIONS")
       attr_accessor template_configuration: Types::AIPromptTemplateConfiguration
+      attr_accessor inference_configuration: Types::AIPromptInferenceConfiguration
       attr_accessor modified_time: ::Time
       attr_accessor description: ::String
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
@@ -167,12 +182,23 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class AIPromptInferenceConfiguration
+      attr_accessor text_ai_prompt_inference_configuration: Types::TextAIPromptInferenceConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TextAiPromptInferenceConfiguration < AIPromptInferenceConfiguration
+      end
+      class Unknown < AIPromptInferenceConfiguration
+      end
+    end
+
     class AIPromptSummary
       attr_accessor name: ::String
       attr_accessor assistant_id: ::String
       attr_accessor assistant_arn: ::String
       attr_accessor ai_prompt_id: ::String
-      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION")
+      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor ai_prompt_arn: ::String
       attr_accessor modified_time: ::Time
       attr_accessor template_type: ("TEXT")
@@ -233,6 +259,12 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class Annotation
+      attr_accessor title: ::String
+      attr_accessor destructive_hint: bool
+      SENSITIVE: []
+    end
+
     class AnswerRecommendationAIAgentConfiguration
       attr_accessor intent_labeling_generation_ai_prompt_id: ::String
       attr_accessor query_reformulation_ai_prompt_id: ::String
@@ -240,6 +272,7 @@ module Aws::QConnect
       attr_accessor answer_generation_ai_guardrail_id: ::String
       attr_accessor association_configurations: ::Array[Types::AssociationConfiguration]
       attr_accessor locale: ::String
+      attr_accessor suggested_messages: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -254,7 +287,7 @@ module Aws::QConnect
       attr_accessor assistant_association_arn: ::String
       attr_accessor assistant_id: ::String
       attr_accessor assistant_arn: ::String
-      attr_accessor association_type: ("KNOWLEDGE_BASE")
+      attr_accessor association_type: ("KNOWLEDGE_BASE" | "EXTERNAL_BEDROCK_KNOWLEDGE_BASE")
       attr_accessor association_data: Types::AssistantAssociationOutputData
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -262,10 +295,13 @@ module Aws::QConnect
 
     class AssistantAssociationInputData
       attr_accessor knowledge_base_id: ::String
+      attr_accessor external_bedrock_knowledge_base_config: Types::ExternalBedrockKnowledgeBaseConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class KnowledgeBaseId < AssistantAssociationInputData
+      end
+      class ExternalBedrockKnowledgeBaseConfig < AssistantAssociationInputData
       end
       class Unknown < AssistantAssociationInputData
       end
@@ -273,10 +309,13 @@ module Aws::QConnect
 
     class AssistantAssociationOutputData
       attr_accessor knowledge_base_association: Types::KnowledgeBaseAssociationData
+      attr_accessor external_bedrock_knowledge_base_config: Types::ExternalBedrockKnowledgeBaseConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class KnowledgeBaseAssociation < AssistantAssociationOutputData
+      end
+      class ExternalBedrockKnowledgeBaseConfig < AssistantAssociationOutputData
       end
       class Unknown < AssistantAssociationOutputData
       end
@@ -287,7 +326,7 @@ module Aws::QConnect
       attr_accessor assistant_association_arn: ::String
       attr_accessor assistant_id: ::String
       attr_accessor assistant_arn: ::String
-      attr_accessor association_type: ("KNOWLEDGE_BASE")
+      attr_accessor association_type: ("KNOWLEDGE_BASE" | "EXTERNAL_BEDROCK_KNOWLEDGE_BASE")
       attr_accessor association_data: Types::AssistantAssociationOutputData
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -309,7 +348,8 @@ module Aws::QConnect
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration
       attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
+      attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
       SENSITIVE: []
     end
 
@@ -329,7 +369,8 @@ module Aws::QConnect
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration
       attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
+      attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
       SENSITIVE: []
     end
 
@@ -357,12 +398,40 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class CaseSummarizationAIAgentConfiguration
+      attr_accessor case_summarization_ai_prompt_id: ::String
+      attr_accessor case_summarization_ai_guardrail_id: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class CaseSummarizationChunkDataDetails
+      attr_accessor completion: ::String
+      attr_accessor next_chunk_token: ::String
+      SENSITIVE: []
+    end
+
+    class CaseSummarizationInputData
+      attr_accessor case_arn: ::String
+      SENSITIVE: []
+    end
+
     class ChunkingConfiguration
       attr_accessor chunking_strategy: ("FIXED_SIZE" | "NONE" | "HIERARCHICAL" | "SEMANTIC")
       attr_accessor fixed_size_chunking_configuration: Types::FixedSizeChunkingConfiguration
       attr_accessor hierarchical_chunking_configuration: Types::HierarchicalChunkingConfiguration
       attr_accessor semantic_chunking_configuration: Types::SemanticChunkingConfiguration
       SENSITIVE: []
+    end
+
+    class Citation
+      attr_accessor content_id: ::String
+      attr_accessor title: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor citation_span: Types::CitationSpan
+      attr_accessor source_url: ::String
+      attr_accessor reference_type: ("WEB_CRAWLER" | "KNOWLEDGE_BASE" | "BEDROCK_KB_S3" | "BEDROCK_KB_WEB" | "BEDROCK_KB_CONFLUENCE" | "BEDROCK_KB_SALESFORCE" | "BEDROCK_KB_SHAREPOINT" | "BEDROCK_KB_KENDRA" | "BEDROCK_KB_CUSTOM_DOCUMENT" | "BEDROCK_KB_SQL")
+      SENSITIVE: [:title, :source_url]
     end
 
     class CitationSpan
@@ -470,7 +539,7 @@ module Aws::QConnect
       attr_accessor content_arn: ::String
       attr_accessor content_id: ::String
       attr_accessor source_url: ::String
-      attr_accessor reference_type: ("WEB_CRAWLER" | "KNOWLEDGE_BASE")
+      attr_accessor reference_type: ("WEB_CRAWLER" | "KNOWLEDGE_BASE" | "BEDROCK_KB_S3" | "BEDROCK_KB_WEB" | "BEDROCK_KB_CONFLUENCE" | "BEDROCK_KB_SALESFORCE" | "BEDROCK_KB_SHAREPOINT" | "BEDROCK_KB_KENDRA" | "BEDROCK_KB_CUSTOM_DOCUMENT" | "BEDROCK_KB_SQL")
       SENSITIVE: []
     end
 
@@ -504,7 +573,7 @@ module Aws::QConnect
       attr_accessor client_token: ::String
       attr_accessor assistant_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
+      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor configuration: Types::AIAgentConfiguration
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor tags: ::Hash[::String, ::String]
@@ -571,7 +640,7 @@ module Aws::QConnect
       attr_accessor client_token: ::String
       attr_accessor assistant_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION")
+      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor template_configuration: Types::AIPromptTemplateConfiguration
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor template_type: ("TEXT")
@@ -579,6 +648,7 @@ module Aws::QConnect
       attr_accessor api_format: ("ANTHROPIC_CLAUDE_MESSAGES" | "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS" | "MESSAGES" | "TEXT_COMPLETIONS")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor description: ::String
+      attr_accessor inference_configuration: Types::AIPromptInferenceConfiguration
       SENSITIVE: []
     end
 
@@ -603,7 +673,7 @@ module Aws::QConnect
 
     class CreateAssistantAssociationRequest
       attr_accessor assistant_id: ::String
-      attr_accessor association_type: ("KNOWLEDGE_BASE")
+      attr_accessor association_type: ("KNOWLEDGE_BASE" | "EXTERNAL_BEDROCK_KNOWLEDGE_BASE")
       attr_accessor association: Types::AssistantAssociationInputData
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -755,8 +825,10 @@ module Aws::QConnect
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor tag_filter: Types::TagFilter
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
       attr_accessor contact_arn: ::String
+      attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
+      attr_accessor remove_orchestrator_configuration_list: bool
       SENSITIVE: []
     end
 
@@ -836,6 +908,10 @@ module Aws::QConnect
       attr_accessor email_response_chunk_data: Types::EmailResponseChunkDataDetails
       attr_accessor email_overview_chunk_data: Types::EmailOverviewChunkDataDetails
       attr_accessor email_generative_answer_chunk_data: Types::EmailGenerativeAnswerChunkDataDetails
+      attr_accessor case_summarization_chunk_data: Types::CaseSummarizationChunkDataDetails
+      attr_accessor suggested_message_data: Types::SuggestedMessageDataDetails
+      attr_accessor notes_data: Types::NotesDataDetails
+      attr_accessor notes_chunk_data: Types::NotesChunkDataDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -855,6 +931,14 @@ module Aws::QConnect
       end
       class EmailGenerativeAnswerChunkData < DataDetails
       end
+      class CaseSummarizationChunkData < DataDetails
+      end
+      class SuggestedMessageData < DataDetails
+      end
+      class NotesData < DataDetails
+      end
+      class NotesChunkData < DataDetails
+      end
       class Unknown < DataDetails
       end
     end
@@ -862,12 +946,15 @@ module Aws::QConnect
     class DataReference
       attr_accessor content_reference: Types::ContentReference
       attr_accessor generative_reference: Types::GenerativeReference
+      attr_accessor suggested_message_reference: Types::SuggestedMessageReference
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class ContentReference < DataReference
       end
       class GenerativeReference < DataReference
+      end
+      class SuggestedMessageReference < DataReference
       end
       class Unknown < DataReference
       end
@@ -1135,6 +1222,12 @@ module Aws::QConnect
       SENSITIVE: [:channel]
     end
 
+    class ExternalBedrockKnowledgeBaseConfig
+      attr_accessor bedrock_knowledge_base_arn: ::String
+      attr_accessor access_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class ExternalSourceConfiguration
       attr_accessor source: ("AMAZON_CONNECT")
       attr_accessor configuration: Types::Configuration
@@ -1145,6 +1238,12 @@ module Aws::QConnect
       attr_accessor field: ("NAME")
       attr_accessor operator: ("EQUALS")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FilterAttribute
+      attr_accessor key: ::String
+      attr_accessor value: untyped
       SENSITIVE: []
     end
 
@@ -1316,6 +1415,7 @@ module Aws::QConnect
       attr_accessor conversation_state: Types::ConversationState
       attr_accessor next_message_token: ::String
       attr_accessor conversation_session_data: ::Array[Types::RuntimeSessionData]
+      attr_accessor chunked_response_terminated: bool
       SENSITIVE: []
     end
 
@@ -1336,6 +1436,7 @@ module Aws::QConnect
       attr_accessor max_results: ::Integer
       attr_accessor wait_time_seconds: ::Integer
       attr_accessor next_chunk_token: ::String
+      attr_accessor recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
       SENSITIVE: []
     end
 
@@ -1458,6 +1559,7 @@ module Aws::QConnect
     class IntentDetectedDataDetails
       attr_accessor intent: ::String
       attr_accessor intent_id: ::String
+      attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
       SENSITIVE: [:intent]
     end
 
@@ -1510,6 +1612,17 @@ module Aws::QConnect
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class KnowledgeSource
+      attr_accessor assistant_association_ids: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AssistantAssociationIds < KnowledgeSource
+      end
+      class Unknown < KnowledgeSource
+      end
     end
 
     class ListAIAgentVersionsRequest
@@ -1706,6 +1819,7 @@ module Aws::QConnect
       attr_accessor session_id: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor filter: ("ALL" | "TEXT_ONLY")
       SENSITIVE: []
     end
 
@@ -1724,6 +1838,20 @@ module Aws::QConnect
 
     class ListQuickResponsesResponse
       attr_accessor quick_response_summaries: ::Array[Types::QuickResponseSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpansRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSpansResponse
+      attr_accessor spans: ::Array[Types::Span]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1759,15 +1887,19 @@ module Aws::QConnect
 
     class MessageConfiguration
       attr_accessor generate_filler_message: bool
+      attr_accessor generate_chunked_message: bool
       SENSITIVE: []
     end
 
     class MessageData
       attr_accessor text: Types::TextMessage
+      attr_accessor tool_use_result: Types::ToolUseResultData
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Text < MessageData
+      end
+      class ToolUseResult < MessageData
       end
       class Unknown < MessageData
       end
@@ -1962,6 +2094,24 @@ module Aws::QConnect
       SENSITIVE: [:channel]
     end
 
+    class NoteTakingAIAgentConfiguration
+      attr_accessor note_taking_ai_prompt_id: ::String
+      attr_accessor note_taking_ai_guardrail_id: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class NotesChunkDataDetails
+      attr_accessor completion: ::String
+      attr_accessor next_chunk_token: ::String
+      SENSITIVE: [:completion]
+    end
+
+    class NotesDataDetails
+      attr_accessor completion: ::String
+      SENSITIVE: [:completion]
+    end
+
     class NotifyRecommendationsReceivedError
       attr_accessor recommendation_id: ::String
       attr_accessor message: ::String
@@ -1993,6 +2143,21 @@ module Aws::QConnect
       end
       class Unknown < OrCondition
       end
+    end
+
+    class OrchestrationAIAgentConfiguration
+      attr_accessor orchestration_ai_prompt_id: ::String
+      attr_accessor orchestration_ai_guardrail_id: ::String
+      attr_accessor tool_configurations: ::Array[Types::ToolConfiguration]
+      attr_accessor connect_instance_arn: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class OrchestratorConfigurationEntry
+      attr_accessor ai_agent_id: ::String
+      attr_accessor orchestrator_use_case: ::String
+      SENSITIVE: []
     end
 
     class ParsingConfiguration
@@ -2125,12 +2290,15 @@ module Aws::QConnect
     class QueryInputData
       attr_accessor query_text_input_data: Types::QueryTextInputData
       attr_accessor intent_input_data: Types::IntentInputData
+      attr_accessor case_summarization_input_data: Types::CaseSummarizationInputData
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class QueryTextInputData < QueryInputData
       end
       class IntentInputData < QueryInputData
+      end
+      class CaseSummarizationInputData < QueryInputData
       end
       class Unknown < QueryInputData
       end
@@ -2279,7 +2447,7 @@ module Aws::QConnect
       attr_accessor document: Types::Document
       attr_accessor relevance_score: ::Float
       attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
-      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK")
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
       attr_accessor data: Types::DataSummary
       SENSITIVE: []
     end
@@ -2306,7 +2474,8 @@ module Aws::QConnect
 
     class RemoveAssistantAIAgentRequest
       attr_accessor assistant_id: ::String
-      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
+      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
+      attr_accessor orchestrator_use_case: ::String
       SENSITIVE: []
     end
 
@@ -2357,8 +2526,83 @@ module Aws::QConnect
       attr_accessor document: Types::Document
       attr_accessor relevance_score: ::Float
       attr_accessor data: Types::DataSummary
-      attr_accessor type: ("KNOWLEDGE_CONTENT" | "INTENT_ANSWER" | "GENERATIVE_ANSWER" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK")
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "INTENT_ANSWER" | "GENERATIVE_ANSWER" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "NOTES" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
       SENSITIVE: []
+    end
+
+    class RetrievalConfiguration
+      attr_accessor knowledge_source: Types::KnowledgeSource
+      attr_accessor filter: Types::RetrievalFilterConfiguration
+      attr_accessor number_of_results: ::Integer
+      attr_accessor override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")
+      SENSITIVE: []
+    end
+
+    class RetrievalFilterConfiguration
+      attr_accessor and_all: ::Array[Types::RetrievalFilterConfiguration]
+      attr_accessor equals: Types::FilterAttribute
+      attr_accessor greater_than: Types::FilterAttribute
+      attr_accessor greater_than_or_equals: Types::FilterAttribute
+      attr_accessor in: Types::FilterAttribute
+      attr_accessor less_than: Types::FilterAttribute
+      attr_accessor less_than_or_equals: Types::FilterAttribute
+      attr_accessor list_contains: Types::FilterAttribute
+      attr_accessor not_equals: Types::FilterAttribute
+      attr_accessor not_in: Types::FilterAttribute
+      attr_accessor or_all: ::Array[Types::RetrievalFilterConfiguration]
+      attr_accessor starts_with: Types::FilterAttribute
+      attr_accessor string_contains: Types::FilterAttribute
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndAll < RetrievalFilterConfiguration
+      end
+      class Equals < RetrievalFilterConfiguration
+      end
+      class GreaterThan < RetrievalFilterConfiguration
+      end
+      class GreaterThanOrEquals < RetrievalFilterConfiguration
+      end
+      class In < RetrievalFilterConfiguration
+      end
+      class LessThan < RetrievalFilterConfiguration
+      end
+      class LessThanOrEquals < RetrievalFilterConfiguration
+      end
+      class ListContains < RetrievalFilterConfiguration
+      end
+      class NotEquals < RetrievalFilterConfiguration
+      end
+      class NotIn < RetrievalFilterConfiguration
+      end
+      class OrAll < RetrievalFilterConfiguration
+      end
+      class StartsWith < RetrievalFilterConfiguration
+      end
+      class StringContains < RetrievalFilterConfiguration
+      end
+      class Unknown < RetrievalFilterConfiguration
+      end
+    end
+
+    class RetrieveRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor retrieval_configuration: Types::RetrievalConfiguration
+      attr_accessor retrieval_query: ::String
+      SENSITIVE: [:retrieval_query]
+    end
+
+    class RetrieveResponse
+      attr_accessor results: ::Array[Types::RetrieveResult]
+      SENSITIVE: []
+    end
+
+    class RetrieveResult
+      attr_accessor association_id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor reference_type: ("WEB_CRAWLER" | "KNOWLEDGE_BASE" | "BEDROCK_KB_S3" | "BEDROCK_KB_WEB" | "BEDROCK_KB_CONFLUENCE" | "BEDROCK_KB_SALESFORCE" | "BEDROCK_KB_SHAREPOINT" | "BEDROCK_KB_KENDRA" | "BEDROCK_KB_CUSTOM_DOCUMENT" | "BEDROCK_KB_SQL")
+      attr_accessor content_text: ::String
+      SENSITIVE: [:source_id, :content_text]
     end
 
     class RuntimeSessionData
@@ -2467,6 +2711,7 @@ module Aws::QConnect
       attr_accessor turn_number: ::Integer
       attr_accessor input_transcript: ::String
       attr_accessor bot_response: ::String
+      attr_accessor timestamp: ::Time
       SENSITIVE: [:input_transcript, :bot_response]
     end
 
@@ -2482,9 +2727,12 @@ module Aws::QConnect
       attr_accessor session_id: ::String
       attr_accessor type: ("TEXT")
       attr_accessor message: Types::MessageInput
+      attr_accessor ai_agent_id: ::String
       attr_accessor conversation_context: Types::ConversationContext
       attr_accessor configuration: Types::MessageConfiguration
       attr_accessor client_token: ::String
+      attr_accessor orchestrator_use_case: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -2513,8 +2761,9 @@ module Aws::QConnect
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor integration_configuration: Types::SessionIntegrationConfiguration
       attr_accessor tag_filter: Types::TagFilter
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
       attr_accessor origin: ("SYSTEM" | "CUSTOMER")
+      attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
       SENSITIVE: []
     end
 
@@ -2554,6 +2803,113 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class Span
+      attr_accessor span_id: ::String
+      attr_accessor assistant_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor parent_span_id: ::String
+      attr_accessor span_name: ::String
+      attr_accessor span_type: ("CLIENT" | "SERVER" | "INTERNAL")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor status: ("OK" | "ERROR" | "TIMEOUT")
+      attr_accessor request_id: ::String
+      attr_accessor attributes: Types::SpanAttributes
+      SENSITIVE: []
+    end
+
+    class SpanAttributes
+      attr_accessor operation_name: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor error_type: ::String
+      attr_accessor agent_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor initial_contact_id: ::String
+      attr_accessor session_name: ::String
+      attr_accessor ai_agent_arn: ::String
+      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
+      attr_accessor ai_agent_name: ::String
+      attr_accessor ai_agent_id: ::String
+      attr_accessor ai_agent_version: ::Integer
+      attr_accessor ai_agent_invoker: ::String
+      attr_accessor ai_agent_orchestrator_use_case: ::String
+      attr_accessor request_model: ::String
+      attr_accessor request_max_tokens: ::Integer
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor response_model: ::String
+      attr_accessor response_finish_reasons: ::Array[::String]
+      attr_accessor usage_input_tokens: ::Integer
+      attr_accessor usage_output_tokens: ::Integer
+      attr_accessor usage_total_tokens: ::Integer
+      attr_accessor cache_read_input_tokens: ::Integer
+      attr_accessor cache_write_input_tokens: ::Integer
+      attr_accessor input_messages: ::Array[Types::SpanMessage]
+      attr_accessor output_messages: ::Array[Types::SpanMessage]
+      attr_accessor system_instructions: ::Array[Types::SpanMessageValue]
+      attr_accessor prompt_arn: ::String
+      attr_accessor prompt_id: ::String
+      attr_accessor prompt_type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
+      attr_accessor prompt_name: ::String
+      attr_accessor prompt_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SpanCitation
+      attr_accessor content_id: ::String
+      attr_accessor title: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor knowledge_base_arn: ::String
+      SENSITIVE: [:title]
+    end
+
+    class SpanMessage
+      attr_accessor message_id: ::String
+      attr_accessor participant: ("CUSTOMER" | "AGENT" | "BOT")
+      attr_accessor timestamp: ::Time
+      attr_accessor values: ::Array[Types::SpanMessageValue]
+      SENSITIVE: []
+    end
+
+    class SpanMessageValue
+      attr_accessor text: Types::SpanTextValue
+      attr_accessor tool_use: Types::SpanToolUseValue
+      attr_accessor tool_result: Types::SpanToolResultValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < SpanMessageValue
+      end
+      class ToolUse < SpanMessageValue
+      end
+      class ToolResult < SpanMessageValue
+      end
+      class Unknown < SpanMessageValue
+      end
+    end
+
+    class SpanTextValue
+      attr_accessor value: ::String
+      attr_accessor citations: ::Array[Types::SpanCitation]
+      attr_accessor ai_guardrail_assessment: Types::AIGuardrailAssessment
+      SENSITIVE: [:value]
+    end
+
+    class SpanToolResultValue
+      attr_accessor tool_use_id: ::String
+      attr_accessor values: ::Array[Types::SpanMessageValue]
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class SpanToolUseValue
+      attr_accessor tool_use_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arguments: untyped
+      SENSITIVE: []
+    end
+
     class StartContentUploadRequest
       attr_accessor knowledge_base_id: ::String
       attr_accessor content_type: ::String
@@ -2581,6 +2937,17 @@ module Aws::QConnect
 
     class StartImportJobResponse
       attr_accessor import_job: Types::ImportJobData
+      SENSITIVE: []
+    end
+
+    class SuggestedMessageDataDetails
+      attr_accessor message_text: ::String
+      SENSITIVE: [:message_text]
+    end
+
+    class SuggestedMessageReference
+      attr_accessor ai_agent_id: ::String
+      attr_accessor ai_agent_arn: ::String
       SENSITIVE: []
     end
 
@@ -2628,6 +2995,14 @@ module Aws::QConnect
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TextAIPromptInferenceConfiguration
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor top_k: ::Integer
+      attr_accessor max_tokens_to_sample: ::Integer
+      SENSITIVE: [:temperature, :top_p, :top_k, :max_tokens_to_sample]
+    end
+
     class TextData
       attr_accessor title: Types::DocumentText
       attr_accessor excerpt: Types::DocumentText
@@ -2641,6 +3016,8 @@ module Aws::QConnect
 
     class TextMessage
       attr_accessor value: ::String
+      attr_accessor citations: ::Array[Types::Citation]
+      attr_accessor ai_guardrail_assessment: Types::AIGuardrailAssessment
       SENSITIVE: [:value]
     end
 
@@ -2655,7 +3032,77 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class ToolConfiguration
+      attr_accessor tool_name: ::String
+      attr_accessor tool_type: ("MODEL_CONTEXT_PROTOCOL" | "RETURN_TO_CONTROL" | "CONSTANT")
+      attr_accessor title: ::String
+      attr_accessor tool_id: ::String
+      attr_accessor description: ::String
+      attr_accessor instruction: Types::ToolInstruction
+      attr_accessor override_input_values: ::Array[Types::ToolOverrideInputValue]
+      attr_accessor output_filters: ::Array[Types::ToolOutputFilter]
+      attr_accessor input_schema: untyped
+      attr_accessor output_schema: untyped
+      attr_accessor annotations: Types::Annotation
+      attr_accessor user_interaction_configuration: Types::UserInteractionConfiguration
+      SENSITIVE: []
+    end
+
+    class ToolInstruction
+      attr_accessor instruction: ::String
+      attr_accessor examples: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ToolOutputConfiguration
+      attr_accessor output_variable_name_override: ::String
+      attr_accessor session_data_namespace: ::String
+      SENSITIVE: []
+    end
+
+    class ToolOutputFilter
+      attr_accessor json_path: ::String
+      attr_accessor output_configuration: Types::ToolOutputConfiguration
+      SENSITIVE: []
+    end
+
+    class ToolOverrideConstantInputValue
+      attr_accessor type: ("STRING" | "NUMBER" | "JSON_STRING")
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class ToolOverrideInputValue
+      attr_accessor json_path: ::String
+      attr_accessor value: Types::ToolOverrideInputValueConfiguration
+      SENSITIVE: []
+    end
+
+    class ToolOverrideInputValueConfiguration
+      attr_accessor constant: Types::ToolOverrideConstantInputValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Constant < ToolOverrideInputValueConfiguration
+      end
+      class Unknown < ToolOverrideInputValueConfiguration
+      end
+    end
+
+    class ToolUseResultData
+      attr_accessor tool_use_id: ::String
+      attr_accessor tool_name: ::String
+      attr_accessor tool_result: untyped
+      attr_accessor input_schema: untyped
+      SENSITIVE: []
+    end
+
     class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableContentException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -2713,6 +3160,7 @@ module Aws::QConnect
       attr_accessor template_configuration: Types::AIPromptTemplateConfiguration
       attr_accessor description: ::String
       attr_accessor model_id: ::String
+      attr_accessor inference_configuration: Types::AIPromptInferenceConfiguration
       SENSITIVE: []
     end
 
@@ -2723,8 +3171,9 @@ module Aws::QConnect
 
     class UpdateAssistantAIAgentRequest
       attr_accessor assistant_id: ::String
-      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
+      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor configuration: Types::AIAgentConfigurationData
+      attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
       SENSITIVE: []
     end
 
@@ -2834,7 +3283,9 @@ module Aws::QConnect
       attr_accessor session_id: ::String
       attr_accessor description: ::String
       attr_accessor tag_filter: Types::TagFilter
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
+      attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
+      attr_accessor remove_orchestrator_configuration_list: bool
       SENSITIVE: []
     end
 
@@ -2845,6 +3296,11 @@ module Aws::QConnect
 
     class UrlConfiguration
       attr_accessor seed_urls: ::Array[Types::SeedUrl]
+      SENSITIVE: []
+    end
+
+    class UserInteractionConfiguration
+      attr_accessor is_user_confirmation_required: bool
       SENSITIVE: []
     end
 

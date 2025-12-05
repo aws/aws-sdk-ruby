@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2025-12-05)
+------------------
+
+* Feature - Updating the desired url for `PutEmailIdentityDkimSigningAttributes` from v1 to v2
+
 1.88.0 (2025-11-21)
 ------------------
 

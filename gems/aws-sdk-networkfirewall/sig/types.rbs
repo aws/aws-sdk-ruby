@@ -107,6 +107,20 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class AttachRuleGroupsToProxyConfigurationRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor rule_groups: ::Array[Types::ProxyRuleGroupAttachment]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class AttachRuleGroupsToProxyConfigurationResponse
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
     class Attachment
       attr_accessor subnet_id: ::String
       attr_accessor endpoint_id: ::String
@@ -180,6 +194,82 @@ module Aws::NetworkFirewall
     class CreateFirewallResponse
       attr_accessor firewall: Types::Firewall
       attr_accessor firewall_status: Types::FirewallStatus
+      SENSITIVE: []
+    end
+
+    class CreateProxyConfigurationRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_group_names: ::Array[::String]
+      attr_accessor rule_group_arns: ::Array[::String]
+      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProxyConfigurationResponse
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProxyRequest
+      attr_accessor proxy_name: ::String
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor listener_properties: ::Array[Types::ListenerPropertyRequest]
+      attr_accessor tls_intercept_properties: Types::TlsInterceptPropertiesRequest
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProxyResponse
+      attr_accessor proxy: Types::Proxy
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProxyRule
+      attr_accessor proxy_rule_name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ("ALLOW" | "DENY" | "ALERT")
+      attr_accessor conditions: ::Array[Types::ProxyRuleCondition]
+      attr_accessor insert_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateProxyRuleGroupRequest
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor rules: Types::ProxyRulesByRequestPhase
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProxyRuleGroupResponse
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProxyRulesByRequestPhase
+      attr_accessor pre_dns: ::Array[Types::CreateProxyRule]
+      attr_accessor pre_request: ::Array[Types::CreateProxyRule]
+      attr_accessor post_response: ::Array[Types::CreateProxyRule]
+      SENSITIVE: []
+    end
+
+    class CreateProxyRulesRequest
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor rules: Types::CreateProxyRulesByRequestPhase
+      SENSITIVE: []
+    end
+
+    class CreateProxyRulesResponse
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
+      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 
@@ -272,6 +362,56 @@ module Aws::NetworkFirewall
     class DeleteNetworkFirewallTransitGatewayAttachmentResponse
       attr_accessor transit_gateway_attachment_id: ::String
       attr_accessor transit_gateway_attachment_status: ("CREATING" | "DELETING" | "DELETED" | "FAILED" | "ERROR" | "READY" | "PENDING_ACCEPTANCE" | "REJECTING" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class DeleteProxyConfigurationRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyConfigurationResponse
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyRequest
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor proxy_name: ::String
+      attr_accessor proxy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyResponse
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor proxy_name: ::String
+      attr_accessor proxy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyRuleGroupRequest
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyRuleGroupResponse
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyRulesRequest
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor rules: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteProxyRulesResponse
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
       SENSITIVE: []
     end
 
@@ -394,6 +534,76 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DescribeProxyConfigurationRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyConfigurationResponse
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyRequest
+      attr_accessor proxy_name: ::String
+      attr_accessor proxy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyResource
+      attr_accessor proxy_name: ::String
+      attr_accessor proxy_arn: ::String
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor proxy_state: ("ATTACHING" | "ATTACHED" | "DETACHING" | "DETACHED" | "ATTACH_FAILED" | "DETACH_FAILED")
+      attr_accessor proxy_modify_state: ("MODIFYING" | "COMPLETED" | "FAILED")
+      attr_accessor listener_properties: ::Array[Types::ListenerProperty]
+      attr_accessor tls_intercept_properties: Types::TlsInterceptProperties
+      attr_accessor vpc_endpoint_service_name: ::String
+      attr_accessor private_dns_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor delete_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribeProxyResponse
+      attr_accessor proxy: Types::DescribeProxyResource
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyRuleGroupRequest
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyRuleGroupResponse
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyRuleRequest
+      attr_accessor proxy_rule_name: ::String
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProxyRuleResponse
+      attr_accessor proxy_rule: Types::ProxyRule
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeResourcePolicyRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -475,6 +685,21 @@ module Aws::NetworkFirewall
     class DescribeVpcEndpointAssociationResponse
       attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation
       attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus
+      SENSITIVE: []
+    end
+
+    class DetachRuleGroupsFromProxyConfigurationRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor rule_group_names: ::Array[::String]
+      attr_accessor rule_group_arns: ::Array[::String]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class DetachRuleGroupsFromProxyConfigurationResponse
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 
@@ -800,6 +1025,42 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ListProxiesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProxiesResponse
+      attr_accessor proxies: ::Array[Types::ProxyMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxyConfigurationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProxyConfigurationsResponse
+      attr_accessor proxy_configurations: ::Array[Types::ProxyConfigurationMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxyRuleGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProxyRuleGroupsResponse
+      attr_accessor proxy_rule_groups: ::Array[Types::ProxyRuleGroupMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRuleGroupsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -854,6 +1115,18 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ListenerProperty
+      attr_accessor port: ::Integer
+      attr_accessor type: ("HTTP" | "HTTPS")
+      SENSITIVE: []
+    end
+
+    class ListenerPropertyRequest
+      attr_accessor port: ::Integer
+      attr_accessor type: ("HTTP" | "HTTPS")
+      SENSITIVE: []
+    end
+
     class LogDestinationConfig
       attr_accessor log_type: ("ALERT" | "FLOW" | "TLS")
       attr_accessor log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose")
@@ -900,6 +1173,127 @@ module Aws::NetworkFirewall
 
     class PortSet
       attr_accessor definition: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Proxy
+      attr_accessor create_time: ::Time
+      attr_accessor delete_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor proxy_state: ("ATTACHING" | "ATTACHED" | "DETACHING" | "DETACHED" | "ATTACH_FAILED" | "DETACH_FAILED")
+      attr_accessor proxy_modify_state: ("MODIFYING" | "COMPLETED" | "FAILED")
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor proxy_name: ::String
+      attr_accessor proxy_arn: ::String
+      attr_accessor listener_properties: ::Array[Types::ListenerProperty]
+      attr_accessor tls_intercept_properties: Types::TlsInterceptProperties
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ProxyConfigDefaultRulePhaseActionsRequest
+      attr_accessor pre_dns: ("ALLOW" | "DENY" | "ALERT")
+      attr_accessor pre_request: ("ALLOW" | "DENY" | "ALERT")
+      attr_accessor post_response: ("ALLOW" | "DENY" | "ALERT")
+      SENSITIVE: []
+    end
+
+    class ProxyConfigRuleGroup
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor type: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProxyConfiguration
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor delete_time: ::Time
+      attr_accessor rule_groups: ::Array[Types::ProxyConfigRuleGroup]
+      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ProxyConfigurationMetadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProxyMetadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProxyRule
+      attr_accessor proxy_rule_name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ("ALLOW" | "DENY" | "ALERT")
+      attr_accessor conditions: ::Array[Types::ProxyRuleCondition]
+      SENSITIVE: []
+    end
+
+    class ProxyRuleCondition
+      attr_accessor condition_operator: ::String
+      attr_accessor condition_key: ::String
+      attr_accessor condition_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProxyRuleGroup
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor delete_time: ::Time
+      attr_accessor rules: Types::ProxyRulesByRequestPhase
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ProxyRuleGroupAttachment
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor insert_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProxyRuleGroupMetadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProxyRuleGroupPriority
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor new_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProxyRuleGroupPriorityResult
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProxyRulePriority
+      attr_accessor proxy_rule_name: ::String
+      attr_accessor new_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProxyRulesByRequestPhase
+      attr_accessor pre_dns: ::Array[Types::ProxyRule]
+      attr_accessor pre_request: ::Array[Types::ProxyRule]
+      attr_accessor post_response: ::Array[Types::ProxyRule]
       SENSITIVE: []
     end
 
@@ -1224,6 +1618,18 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class TlsInterceptProperties
+      attr_accessor pca_arn: ::String
+      attr_accessor tls_intercept_mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class TlsInterceptPropertiesRequest
+      attr_accessor pca_arn: ::String
+      attr_accessor tls_intercept_mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class TransitGatewayAttachmentSyncState
       attr_accessor attachment_id: ::String
       attr_accessor transit_gateway_attachment_status: ("CREATING" | "DELETING" | "DELETED" | "FAILED" | "ERROR" | "READY" | "PENDING_ACCEPTANCE" | "REJECTING" | "REJECTED")
@@ -1376,6 +1782,88 @@ module Aws::NetworkFirewall
       attr_accessor firewall_name: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor enable_monitoring_dashboard: bool
+      SENSITIVE: []
+    end
+
+    class UpdateProxyConfigurationRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyConfigurationResponse
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRequest
+      attr_accessor nat_gateway_id: ::String
+      attr_accessor proxy_name: ::String
+      attr_accessor proxy_arn: ::String
+      attr_accessor listener_properties_to_add: ::Array[Types::ListenerPropertyRequest]
+      attr_accessor listener_properties_to_remove: ::Array[Types::ListenerPropertyRequest]
+      attr_accessor tls_intercept_properties: Types::TlsInterceptPropertiesRequest
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyResponse
+      attr_accessor proxy: Types::Proxy
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRuleGroupPrioritiesRequest
+      attr_accessor proxy_configuration_name: ::String
+      attr_accessor proxy_configuration_arn: ::String
+      attr_accessor rule_groups: ::Array[Types::ProxyRuleGroupPriority]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRuleGroupPrioritiesResponse
+      attr_accessor proxy_rule_groups: ::Array[Types::ProxyRuleGroupPriorityResult]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRulePrioritiesRequest
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor rule_group_request_phase: ("PRE_DNS" | "PRE_REQ" | "POST_RES")
+      attr_accessor rules: ::Array[Types::ProxyRulePriority]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRulePrioritiesResponse
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor rule_group_request_phase: ("PRE_DNS" | "PRE_REQ" | "POST_RES")
+      attr_accessor rules: ::Array[Types::ProxyRulePriority]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRuleRequest
+      attr_accessor proxy_rule_group_name: ::String
+      attr_accessor proxy_rule_group_arn: ::String
+      attr_accessor proxy_rule_name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ("ALLOW" | "DENY" | "ALERT")
+      attr_accessor add_conditions: ::Array[Types::ProxyRuleCondition]
+      attr_accessor remove_conditions: ::Array[Types::ProxyRuleCondition]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyRuleResponse
+      attr_accessor proxy_rule: Types::ProxyRule
+      attr_accessor removed_conditions: ::Array[Types::ProxyRuleCondition]
+      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 

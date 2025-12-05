@@ -4854,18 +4854,6 @@ module Aws
                                                        ) -> _BatchUpdateStandardsControlAssociationsResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateStandardsControlAssociationsResponseSuccess
 
-      interface _ConnectorRegistrationsV2ResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::ConnectorRegistrationsV2Response]
-        def connector_arn: () -> ::String
-        def connector_id: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#connector_registrations_v2-instance_method
-      def connector_registrations_v2: (
-                                        auth_code: ::String,
-                                        auth_state: ::String
-                                      ) -> _ConnectorRegistrationsV2ResponseSuccess
-                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConnectorRegistrationsV2ResponseSuccess
-
       interface _CreateActionTargetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateActionTargetResponse]
         def action_target_arn: () -> ::String
@@ -5215,7 +5203,7 @@ module Aws
                                              {
                                                string_filters: Array[
                                                  {
-                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
+                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")?,
                                                    filter: {
                                                      value: ::String?,
                                                      comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -5245,7 +5233,7 @@ module Aws
                                                ]?,
                                                number_filters: Array[
                                                  {
-                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
+                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count" | "vulnerabilities.cve.cvss.base_score" | "vendor_attributes.severity_id")?,
                                                    filter: {
                                                      gte: ::Float?,
                                                      lte: ::Float?,
@@ -5349,6 +5337,7 @@ module Aws
         def connector_arn: () -> ::String
         def connector_id: () -> ::String
         def auth_url: () -> ::String
+        def connector_status: () -> ("CONNECTED" | "FAILED_TO_CONNECT" | "PENDING_CONFIGURATION" | "PENDING_AUTHORIZATION")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#create_connector_v2-instance_method
       def create_connector_v2: (
@@ -5360,8 +5349,7 @@ module Aws
                                    }?,
                                    service_now: {
                                      instance_name: ::String,
-                                     client_id: ::String,
-                                     client_secret: ::String
+                                     secret_arn: ::String
                                    }?
                                  },
                                  ?kms_key_arn: ::String,
@@ -6115,7 +6103,8 @@ module Aws
       def create_ticket_v2: (
                               connector_id: ::String,
                               finding_metadata_uid: ::String,
-                              ?client_token: ::String
+                              ?client_token: ::String,
+                              ?mode: ("DRYRUN")
                             ) -> _CreateTicketV2ResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTicketV2ResponseSuccess
 
@@ -6567,7 +6556,7 @@ module Aws
                                                {
                                                  string_filters: Array[
                                                    {
-                                                     field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
+                                                     field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")?,
                                                      filter: {
                                                        value: ::String?,
                                                        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -6597,7 +6586,7 @@ module Aws
                                                  ]?,
                                                  number_filters: Array[
                                                    {
-                                                     field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
+                                                     field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count" | "vulnerabilities.cve.cvss.base_score" | "vendor_attributes.severity_id")?,
                                                      filter: {
                                                        gte: ::Float?,
                                                        lte: ::Float?,
@@ -6631,7 +6620,7 @@ module Aws
                                              ]?,
                                              composite_operator: ("AND" | "OR")?
                                            }?,
-                                           group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name")
+                                           group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.related_events.traits.category" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name" | "vendor_attributes.severity")
                                          },
                                        ],
                                        ?sort_order: ("asc" | "desc"),
@@ -7398,7 +7387,7 @@ module Aws
                                  {
                                    string_filters: Array[
                                      {
-                                       field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
+                                       field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")?,
                                        filter: {
                                          value: ::String?,
                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -7428,7 +7417,7 @@ module Aws
                                    ]?,
                                    number_filters: Array[
                                      {
-                                       field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
+                                       field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count" | "vulnerabilities.cve.cvss.base_score" | "vendor_attributes.severity_id")?,
                                        filter: {
                                          gte: ::Float?,
                                          lte: ::Float?,
@@ -7896,6 +7885,18 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _RegisterConnectorV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterConnectorV2Response]
+        def connector_arn: () -> ::String
+        def connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#register_connector_v2-instance_method
+      def register_connector_v2: (
+                                   auth_code: ::String,
+                                   auth_state: ::String
+                                 ) -> _RegisterConnectorV2ResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterConnectorV2ResponseSuccess
+
       interface _StartConfigurationPolicyAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartConfigurationPolicyAssociationResponse]
         def configuration_policy_id: () -> ::String
@@ -7993,7 +7994,7 @@ module Aws
                                              {
                                                string_filters: Array[
                                                  {
-                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
+                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")?,
                                                    filter: {
                                                      value: ::String?,
                                                      comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -8023,7 +8024,7 @@ module Aws
                                                ]?,
                                                number_filters: Array[
                                                  {
-                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
+                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count" | "vulnerabilities.cve.cvss.base_score" | "vendor_attributes.severity_id")?,
                                                    filter: {
                                                      gte: ::Float?,
                                                      lte: ::Float?,
@@ -8127,11 +8128,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#update_connector_v2-instance_method
       def update_connector_v2: (
                                  connector_id: ::String,
-                                 ?client_secret: ::String,
                                  ?description: ::String,
                                  ?provider: {
                                    jira_cloud: {
-                                     project_key: ::String
+                                     project_key: ::String?
+                                   }?,
+                                   service_now: {
+                                     secret_arn: ::String?
                                    }?
                                  }
                                ) -> _UpdateConnectorV2ResponseSuccess

@@ -207,6 +207,13 @@ module Aws::EC2
       data[:auto_provision_zones]
     end
 
+    # The proxy appliances attached to the NAT Gateway for filtering and
+    # inspecting traffic to prevent data exfiltration.
+    # @return [Array<Types::NatGatewayAttachedAppliance>]
+    def attached_appliances
+      data[:attached_appliances]
+    end
+
     # For regional NAT gateways only, this is the ID of the NAT gateway.
     # @return [String]
     def route_table_id

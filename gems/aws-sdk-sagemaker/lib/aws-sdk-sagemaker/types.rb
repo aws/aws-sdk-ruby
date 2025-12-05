@@ -1674,6 +1674,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The data type used to describe the relationship between different
+    # sources.
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the `AssociationInfo` source.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The Amazon Resource Name (ARN) of the `AssociationInfo` destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationInfo AWS API Documentation
+    #
+    class AssociationInfo < Struct.new(
+      :source_arn,
+      :destination_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Lists a summary of the properties of an association. An association is
     # an entity that links other lineage or experiment entities. An example
     # would be an association between a training job and a model.
@@ -3129,6 +3149,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Identifies the foundation model that was used as the starting point
+    # for model customization.
+    #
+    # @!attribute [rw] hub_content_name
+    #   The hub content name of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The hub content version of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe_name
+    #   The recipe name of the base model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BaseModel AWS API Documentation
+    #
+    class BaseModel < Struct.new(
+      :hub_content_name,
+      :hub_content_version,
+      :recipe_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an error that occurred during the node addition
     # operation.
     #
@@ -3464,6 +3509,10 @@ module Aws::SageMaker
     #   The approval status of the model.
     #   @return [String]
     #
+    # @!attribute [rw] model_package_registration_type
+    #   The package registration type of the model package summary.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDescribeModelPackageSummary AWS API Documentation
     #
     class BatchDescribeModelPackageSummary < Struct.new(
@@ -3474,7 +3523,8 @@ module Aws::SageMaker
       :creation_time,
       :inference_specification,
       :model_package_status,
-      :model_approval_status)
+      :model_approval_status,
+      :model_package_registration_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3906,6 +3956,66 @@ module Aws::SageMaker
       :start_time_offset,
       :end_time_offset,
       :exclude_features_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the Amazon Bedrock custom model deployment.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the metadata for the Amazon
+    #   Bedrock custom model deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockCustomModelDeploymentMetadata AWS API Documentation
+    #
+    class BedrockCustomModelDeploymentMetadata < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the Amazon Bedrock custom model.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock custom model
+    #   metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockCustomModelMetadata AWS API Documentation
+    #
+    class BedrockCustomModelMetadata < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the Amazon Bedrock model import.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock model import
+    #   metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockModelImportMetadata AWS API Documentation
+    #
+    class BedrockModelImportMetadata < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the Amazon Bedrock provisioned model throughput.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock provisioned
+    #   model throughput metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockProvisionedModelThroughputMetadata AWS API Documentation
+    #
+    class BedrockProvisionedModelThroughputMetadata < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5467,12 +5577,35 @@ module Aws::SageMaker
     #   @return [Types::ClusterCapacityRequirements]
     #
     # @!attribute [rw] target_state_count
-    #   The number of nodes running a specific image ID since the last
-    #   software update request.
+    #   Represents the number of running nodes using the desired Image ID.
+    #
+    #   1.  **During software update operations:** This count shows the
+    #       number of nodes running on the desired Image ID. If a rollback
+    #       occurs, the current image ID and desired image ID (both included
+    #       in the describe cluster response) swap values. The
+    #       TargetStateCount then shows the number of nodes running on the
+    #       newly designated desired image ID (which was previously the
+    #       current image ID).
+    #
+    #   2.  **During simultaneous scaling and software update operations:**
+    #       This count shows the number of instances running on the desired
+    #       image ID, including any new instances created as part of the
+    #       scaling request. New nodes are always created using the desired
+    #       image ID, so TargetStateCount reflects the total count of nodes
+    #       running on the desired image ID, even during rollback scenarios.
     #   @return [Integer]
     #
     # @!attribute [rw] software_update_status
     #   Status of the last software udpate request.
+    #
+    #   Status transitions follow these possible sequences:
+    #
+    #   * Pending -&gt; InProgress -&gt; Succeeded
+    #
+    #   * Pending -&gt; InProgress -&gt; RollbackInProgress -&gt;
+    #     RollbackComplete
+    #
+    #   * Pending -&gt; InProgress -&gt; RollbackInProgress -&gt; Failed
     #   @return [String]
     #
     # @!attribute [rw] active_software_update_config
@@ -10287,6 +10420,80 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   A string identifying the MLflow app name. This string is not part of
+    #   the tracking server ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_store_uri
+    #   The S3 URI for a general purpose bucket to use as the MLflow App
+    #   artifact store.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) for an IAM role in your account that
+    #   the MLflow App uses to access the artifact store in Amazon S3. The
+    #   role should have the `AmazonS3FullAccess` permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_registration_mode
+    #   Whether to enable or disable automatic registration of new MLflow
+    #   models to the SageMaker Model Registry. To enable automatic model
+    #   registration, set this value to `AutoModelRegistrationEnabled`. To
+    #   disable automatic model registration, set this value to
+    #   `AutoModelRegistrationDisabled`. If not specified,
+    #   `AutomaticModelRegistration` defaults to
+    #   `AutoModelRegistrationDisabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time that weekly maintenance updates are scheduled.
+    #   For example: TUE:03:30.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_status
+    #   Indicates whether this MLflow app is the default for the entire
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_domain_id_list
+    #   List of SageMaker domain IDs for which this MLflow App is used as
+    #   the default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Tags consisting of key-value pairs used to manage metadata for the
+    #   MLflow App.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMlflowAppRequest AWS API Documentation
+    #
+    class CreateMlflowAppRequest < Struct.new(
+      :name,
+      :artifact_store_uri,
+      :role_arn,
+      :model_registration_mode,
+      :weekly_maintenance_window_start,
+      :account_default_status,
+      :default_domain_id_list,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the MLflow App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMlflowAppResponse AWS API Documentation
+    #
+    class CreateMlflowAppResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] tracking_server_name
     #   A unique string identifying the tracking server name. This string is
     #   part of the tracking server ARN.
@@ -10793,6 +11000,10 @@ module Aws::SageMaker
     #   A description of the model package.
     #   @return [String]
     #
+    # @!attribute [rw] model_package_registration_type
+    #   The package registration type of the model package input.
+    #   @return [String]
+    #
     # @!attribute [rw] inference_specification
     #   Specifies details about inference jobs that you can run with models
     #   based on this model package, including the following information:
@@ -10961,6 +11172,7 @@ module Aws::SageMaker
       :model_package_name,
       :model_package_group_name,
       :model_package_description,
+      :model_package_registration_type,
       :inference_specification,
       :validation_specification,
       :source_algorithm_specification,
@@ -11766,6 +11978,42 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the MLflow App to connect to your MLflow UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_in_seconds
+    #   The duration in seconds that your presigned URL is valid. The
+    #   presigned URL can be used only once.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_expiration_duration_in_seconds
+    #   The duration in seconds that your presigned URL is valid. The
+    #   presigned URL can be used only once.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedMlflowAppUrlRequest AWS API Documentation
+    #
+    class CreatePresignedMlflowAppUrlRequest < Struct.new(
+      :arn,
+      :expires_in_seconds,
+      :session_expiration_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url
+    #   A presigned URL with an authorization token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedMlflowAppUrlResponse AWS API Documentation
+    #
+    class CreatePresignedMlflowAppUrlResponse < Struct.new(
+      :authorized_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] tracking_server_name
     #   The name of the tracking server to connect to your MLflow UI.
     #   @return [String]
@@ -12402,6 +12650,18 @@ module Aws::SageMaker
     #   the training job.
     #   @return [Types::SessionChainingConfig]
     #
+    # @!attribute [rw] serverless_job_config
+    #   The configuration for serverless training jobs.
+    #   @return [Types::ServerlessJobConfig]
+    #
+    # @!attribute [rw] mlflow_config
+    #   The MLflow configuration using SageMaker managed MLflow.
+    #   @return [Types::MlflowConfig]
+    #
+    # @!attribute [rw] model_package_config
+    #   The configuration for the model package.
+    #   @return [Types::ModelPackageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -12429,7 +12689,10 @@ module Aws::SageMaker
       :retry_strategy,
       :remote_debug_config,
       :infra_check_config,
-      :session_chaining_config)
+      :session_chaining_config,
+      :serverless_job_config,
+      :mlflow_config,
+      :model_package_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13474,11 +13737,16 @@ module Aws::SageMaker
     #   The file system that is associated with a channel.
     #   @return [Types::FileSystemDataSource]
     #
+    # @!attribute [rw] dataset_source
+    #   The dataset resource that's associated with a channel.
+    #   @return [Types::DatasetSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
       :s3_data_source,
-      :file_system_data_source)
+      :file_system_data_source,
+      :dataset_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13524,6 +13792,20 @@ module Aws::SageMaker
       :local_path,
       :data_distribution_type,
       :input_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a dataset source for a channel.
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DatasetSource AWS API Documentation
+    #
+    class DatasetSource < Struct.new(
+      :dataset_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14316,6 +14598,30 @@ module Aws::SageMaker
     #
     class DeleteInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the MLflow App to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteMlflowAppRequest AWS API Documentation
+    #
+    class DeleteMlflowAppRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the deleted MLflow App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteMlflowAppResponse AWS API Documentation
+    #
+    class DeleteMlflowAppResponse < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18698,6 +19004,107 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the MLflow App for which to get information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowAppRequest AWS API Documentation
+    #
+    class DescribeMlflowAppRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_store_uri
+    #   The S3 URI of the general purpose bucket used as the MLflow App
+    #   artifact store.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_version
+    #   The MLflow version used.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) for an IAM role in your account that
+    #   the MLflow App uses to access the artifact store in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current creation status of the described MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_registration_mode
+    #   Whether automatic registration of new MLflow models to the SageMaker
+    #   Model Registry is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_status
+    #   Indicates whether this MLflow app is the default for the entire
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_domain_id_list
+    #   List of SageMaker Domain IDs for which this MLflow App is the
+    #   default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the MLflow App was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the MLflow App was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified a SageMaker
+    #   resource.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The day and time of the week when weekly maintenance occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_status
+    #   Current maintenance status of the MLflow App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowAppResponse AWS API Documentation
+    #
+    class DescribeMlflowAppResponse < Struct.new(
+      :arn,
+      :name,
+      :artifact_store_uri,
+      :mlflow_version,
+      :role_arn,
+      :status,
+      :model_registration_mode,
+      :account_default_status,
+      :default_domain_id_list,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :weekly_maintenance_window_start,
+      :maintenance_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] tracking_server_name
     #   The name of the MLflow Tracking Server to describe.
     #   @return [String]
@@ -19319,6 +19726,10 @@ module Aws::SageMaker
     #   The version of the model package.
     #   @return [Integer]
     #
+    # @!attribute [rw] model_package_registration_type
+    #   The package registration type of the model package output.
+    #   @return [String]
+    #
     # @!attribute [rw] model_package_arn
     #   The Amazon Resource Name (ARN) of the model package.
     #   @return [String]
@@ -19472,6 +19883,7 @@ module Aws::SageMaker
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
+      :model_package_registration_type,
       :model_package_arn,
       :model_package_description,
       :creation_time,
@@ -20305,6 +20717,10 @@ module Aws::SageMaker
     #   The ID of the pipeline version.
     #   @return [Integer]
     #
+    # @!attribute [rw] m_lflow_config
+    #   The MLflow configuration of the pipeline execution.
+    #   @return [Types::MLflowConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
     #
     class DescribePipelineExecutionResponse < Struct.new(
@@ -20321,7 +20737,8 @@ module Aws::SageMaker
       :last_modified_by,
       :parallelism_configuration,
       :selective_execution_config,
-      :pipeline_version_id)
+      :pipeline_version_id,
+      :m_lflow_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20986,6 +21403,9 @@ module Aws::SageMaker
     #   InProgress
     #   : * `Starting` - Starting the training job.
     #
+    #     * `Pending` - The training job is waiting for compute capacity or
+    #       compute resource provision.
+    #
     #     * `Downloading` - An optional stage for algorithms that support
     #       `File` training input mode. It indicates that data is being
     #       downloaded to the ML storage volumes.
@@ -21184,6 +21604,10 @@ module Aws::SageMaker
     #   `TrainingTimeInSeconds` is 500, the savings is 80%.
     #   @return [Integer]
     #
+    # @!attribute [rw] billable_token_count
+    #   The billable token count for eligible serverless training jobs.
+    #   @return [Integer]
+    #
     # @!attribute [rw] debug_hook_config
     #   Configuration information for the Amazon SageMaker Debugger hook
     #   parameters, metric and tensor collections, and storage paths. To
@@ -21279,6 +21703,31 @@ module Aws::SageMaker
     #   configuration for the training job.
     #   @return [Types::InfraCheckConfig]
     #
+    # @!attribute [rw] serverless_job_config
+    #   The configuration for serverless training jobs.
+    #   @return [Types::ServerlessJobConfig]
+    #
+    # @!attribute [rw] mlflow_config
+    #   The MLflow configuration using SageMaker managed MLflow.
+    #   @return [Types::MlflowConfig]
+    #
+    # @!attribute [rw] model_package_config
+    #   The configuration for the model package.
+    #   @return [Types::ModelPackageConfig]
+    #
+    # @!attribute [rw] mlflow_details
+    #   The MLflow details of this job.
+    #   @return [Types::MlflowDetails]
+    #
+    # @!attribute [rw] progress_info
+    #   The Serverless training job progress information.
+    #   @return [Types::TrainingProgressInfo]
+    #
+    # @!attribute [rw] output_model_package_arn
+    #   The Amazon Resource Name (ARN) of the output model package
+    #   containing model weights or checkpoints.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -21312,6 +21761,7 @@ module Aws::SageMaker
       :checkpoint_config,
       :training_time_in_seconds,
       :billable_time_in_seconds,
+      :billable_token_count,
       :debug_hook_config,
       :experiment_config,
       :debug_rule_configurations,
@@ -21324,7 +21774,13 @@ module Aws::SageMaker
       :environment,
       :retry_strategy,
       :remote_debug_config,
-      :infra_check_config)
+      :infra_check_config,
+      :serverless_job_config,
+      :mlflow_config,
+      :model_package_config,
+      :mlflow_details,
+      :progress_info,
+      :output_model_package_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28304,6 +28760,20 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The metadata of the inference component.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the inference component metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentMetadata AWS API Documentation
+    #
+    class InferenceComponentMetadata < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a rolling deployment strategy for updating a SageMaker AI
     # inference component.
     #
@@ -30242,6 +30712,36 @@ module Aws::SageMaker
       :display_name,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata that tracks relationships between ML artifacts, actions,
+    # and contexts.
+    #
+    # @!attribute [rw] action_arns
+    #   The Amazon Resource Name (ARN) of the lineage metadata action.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] artifact_arns
+    #   The Amazon Resource Name (ARN) of the lineage metadata artifact.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] context_arns
+    #   The Amazon Resource Name (ARN) of the lineage metadata context.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] associations
+    #   The lineage metadata associations.
+    #   @return [Array<Types::AssociationInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LineageMetadata AWS API Documentation
+    #
+    class LineageMetadata < Struct.new(
+      :action_arns,
+      :artifact_arns,
+      :context_arns,
+      :associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33455,6 +33955,92 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] created_after
+    #   Use the `CreatedAfter` filter to only list MLflow Apps created after
+    #   a specific date and time. Listed MLflow Apps are shown with a date
+    #   and time such as `"2024-03-16T01:46:56+00:00"`. The `CreatedAfter`
+    #   parameter takes in a Unix timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   Use the `CreatedBefore` filter to only list MLflow Apps created
+    #   before a specific date and time. Listed MLflow Apps are shown with a
+    #   date and time such as `"2024-03-16T01:46:56+00:00"`. The
+    #   `CreatedAfter` parameter takes in a Unix timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   Filter for Mlflow apps with a specific creation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_version
+    #   Filter for Mlflow Apps with the specified version.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_for_domain_id
+    #   Filter for MLflow Apps with the specified default SageMaker Domain
+    #   ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_status
+    #   Filter for MLflow Apps with the specified `AccountDefaultStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Filter for MLflow Apps sorting by name, creation time, or creation
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Change the order of the listed MLflow Apps. By default, MLflow Apps
+    #   are listed in `Descending` order by creation time. To change the
+    #   list order, specify `SortOrder` to be `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, use this token in your next
+    #   request to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of MLflow Apps to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMlflowAppsRequest AWS API Documentation
+    #
+    class ListMlflowAppsRequest < Struct.new(
+      :created_after,
+      :created_before,
+      :status,
+      :mlflow_version,
+      :default_for_domain_id,
+      :account_default_status,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of MLflow Apps according to chosen filters.
+    #   @return [Array<Types::MlflowAppSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMlflowAppsResponse AWS API Documentation
+    #
+    class ListMlflowAppsResponse < Struct.new(
+      :summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_after
     #   Use the `CreatedAfter` filter to only list tracking servers created
     #   after a specific date and time. Listed tracking servers are shown
     #   with a date and time such as `"2024-03-16T01:46:56+00:00"`. The
@@ -36401,6 +36987,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The MLflow configuration.
+    #
+    # @!attribute [rw] mlflow_resource_arn
+    #   The Amazon Resource Name (ARN) of MLflow configuration resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_experiment_name
+    #   The name of the MLflow configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MLflowConfiguration AWS API Documentation
+    #
+    class MLflowConfiguration < Struct.new(
+      :mlflow_resource_arn,
+      :mlflow_experiment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines an Amazon Cognito or your own OIDC IdP user group that is part
     # of a work team.
     #
@@ -36626,6 +37231,88 @@ module Aws::SageMaker
       :content_type,
       :content_digest,
       :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the Mlflow App to list.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of a listed MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of a listed MLflow App.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of a listed MLflow App.
+    #   @return [Time]
+    #
+    # @!attribute [rw] mlflow_version
+    #   The version of a listed MLflow App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MlflowAppSummary AWS API Documentation
+    #
+    class MlflowAppSummary < Struct.new(
+      :arn,
+      :name,
+      :status,
+      :creation_time,
+      :last_modified_time,
+      :mlflow_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow configuration using SageMaker managed MLflow.
+    #
+    # @!attribute [rw] mlflow_resource_arn
+    #   The Amazon Resource Name (ARN) of the MLflow resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_experiment_name
+    #   The MLflow experiment name used for this job.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_run_name
+    #   The MLflow run name used for this job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MlflowConfig AWS API Documentation
+    #
+    class MlflowConfig < Struct.new(
+      :mlflow_resource_arn,
+      :mlflow_experiment_name,
+      :mlflow_run_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow details of this job.
+    #
+    # @!attribute [rw] mlflow_experiment_id
+    #   The MLflow experiment ID used for this job.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_run_id
+    #   The MLflow run ID used for this job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MlflowDetails AWS API Documentation
+    #
+    class MlflowDetails < Struct.new(
+      :mlflow_experiment_id,
+      :mlflow_run_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37831,6 +38518,10 @@ module Aws::SageMaker
     #   The version number of a versioned model.
     #   @return [Integer]
     #
+    # @!attribute [rw] model_package_registration_type
+    #   The package registration type of the model package.
+    #   @return [String]
+    #
     # @!attribute [rw] model_package_arn
     #   The Amazon Resource Name (ARN) of the model package.
     #   @return [String]
@@ -38012,6 +38703,7 @@ module Aws::SageMaker
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
+      :model_package_registration_type,
       :model_package_arn,
       :model_package_description,
       :creation_time,
@@ -38040,6 +38732,27 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :skip_model_validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the Model package.
+    #
+    # @!attribute [rw] model_package_group_arn
+    #   The Amazon Resource Name (ARN) of the model package group of output
+    #   model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_model_package_arn
+    #   The Amazon Resource Name (ARN) of the source model package used for
+    #   continued fine-tuning and custom model evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageConfig AWS API Documentation
+    #
+    class ModelPackageConfig < Struct.new(
+      :model_package_group_arn,
+      :source_model_package_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38125,6 +38838,14 @@ module Aws::SageMaker
     #   The ETag associated with Model Data URL.
     #   @return [String]
     #
+    # @!attribute [rw] is_checkpoint
+    #   The checkpoint of the model package.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] base_model
+    #   The base model of the package.
+    #   @return [Types::BaseModel]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
     #
     class ModelPackageContainerDefinition < Struct.new(
@@ -38140,7 +38861,9 @@ module Aws::SageMaker
       :framework_version,
       :nearest_model_name,
       :additional_s3_data_source,
-      :model_data_etag)
+      :model_data_etag,
+      :is_checkpoint,
+      :base_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38405,6 +39128,10 @@ module Aws::SageMaker
     #   cycle.
     #   @return [Types::ModelLifeCycle]
     #
+    # @!attribute [rw] model_package_registration_type
+    #   The package registration type of the model package summary.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageSummary AWS API Documentation
     #
     class ModelPackageSummary < Struct.new(
@@ -38416,7 +39143,8 @@ module Aws::SageMaker
       :creation_time,
       :model_package_status,
       :model_approval_status,
-      :model_life_cycle)
+      :model_life_cycle,
+      :model_package_registration_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41679,6 +42407,35 @@ module Aws::SageMaker
     #   step execution.
     #   @return [Types::EndpointConfigStepMetadata]
     #
+    # @!attribute [rw] bedrock_custom_model
+    #   The metadata of the Amazon Bedrock custom model used in the pipeline
+    #   execution step.
+    #   @return [Types::BedrockCustomModelMetadata]
+    #
+    # @!attribute [rw] bedrock_custom_model_deployment
+    #   The metadata of the Amazon Bedrock custom model deployment used in
+    #   pipeline execution step.
+    #   @return [Types::BedrockCustomModelDeploymentMetadata]
+    #
+    # @!attribute [rw] bedrock_provisioned_model_throughput
+    #   The metadata of the Amazon Bedrock provisioned model throughput used
+    #   in the pipeline execution step.
+    #   @return [Types::BedrockProvisionedModelThroughputMetadata]
+    #
+    # @!attribute [rw] bedrock_model_import
+    #   The metadata of Amazon Bedrock model import used in pipeline
+    #   execution step.
+    #   @return [Types::BedrockModelImportMetadata]
+    #
+    # @!attribute [rw] inference_component
+    #   The metadata of the inference component used in pipeline execution
+    #   step.
+    #   @return [Types::InferenceComponentMetadata]
+    #
+    # @!attribute [rw] lineage
+    #   The metadata of the lineage used in pipeline execution step.
+    #   @return [Types::LineageMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -41697,7 +42454,13 @@ module Aws::SageMaker
       :fail,
       :auto_ml_job,
       :endpoint,
-      :endpoint_config)
+      :endpoint_config,
+      :bedrock_custom_model,
+      :bedrock_custom_model_deployment,
+      :bedrock_provisioned_model_throughput,
+      :bedrock_model_import,
+      :inference_component,
+      :lineage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45033,6 +45796,9 @@ module Aws::SageMaker
     # @!attribute [rw] volume_size_in_gb
     #   The size of the ML storage volume that you want to provision.
     #
+    #   SageMaker automatically selects the volume size for serverless
+    #   training jobs. You cannot customize this setting.
+    #
     #   ML storage volumes store model artifacts and incremental states.
     #   Training algorithms might also use the ML storage volume for scratch
     #   space. If you want to store the training data in the ML storage
@@ -46665,6 +47431,68 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for the serverless training job.
+    #
+    # @!attribute [rw] base_model_arn
+    #   The base model Amazon Resource Name (ARN) in [SageMaker Public
+    #   Hub][1]. SageMaker always selects the latest version of the provided
+    #   model.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-use.html
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_eula
+    #   Specifies agreement to the model end-user license agreement (EULA).
+    #   The `AcceptEula` value must be explicitly defined as `True` in order
+    #   to accept the EULA that this model requires. You are responsible for
+    #   reviewing and complying with any applicable license terms and making
+    #   sure they are acceptable for your use case before downloading or
+    #   using a model. For more information, see [End-user license
+    #   agreements][1] section for more details on accepting the EULA.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] job_type
+    #   The serverless training job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] customization_technique
+    #   The model customization technique.
+    #   @return [String]
+    #
+    # @!attribute [rw] peft
+    #   The parameter-efficient fine-tuning configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_type
+    #   The evaluation job type. Required when serverless job type is
+    #   `Evaluation`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_arn
+    #   The evaluator Amazon Resource Name (ARN) used as reward function or
+    #   reward prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ServerlessJobConfig AWS API Documentation
+    #
+    class ServerlessJobConfig < Struct.new(
+      :base_model_arn,
+      :accept_eula,
+      :job_type,
+      :customization_technique,
+      :peft,
+      :evaluation_type,
+      :evaluator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of a provisioned service catalog product. For information
     # about service catalog, see [What is Amazon Web Services Service
     # Catalog][1].
@@ -47441,6 +48269,10 @@ module Aws::SageMaker
     #   The ID of the pipeline version to start execution from.
     #   @return [Integer]
     #
+    # @!attribute [rw] mlflow_experiment_name
+    #   The MLflow experiment name of the start execution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
     #
     class StartPipelineExecutionRequest < Struct.new(
@@ -47451,7 +48283,8 @@ module Aws::SageMaker
       :client_request_token,
       :parallelism_configuration,
       :selective_execution_config,
-      :pipeline_version_id)
+      :pipeline_version_id,
+      :mlflow_experiment_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49289,6 +50122,15 @@ module Aws::SageMaker
     #   training job.
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
     #
+    # @!attribute [rw] output_model_package_arn
+    #   The output model package Amazon Resource Name (ARN) that contains
+    #   model weights or checkpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_config
+    #   The model package configuration.
+    #   @return [Types::ModelPackageConfig]
+    #
     # @!attribute [rw] profiler_config
     #   Configuration information for Amazon SageMaker Debugger system
     #   monitoring, framework profiling, and storage paths.
@@ -49351,6 +50193,8 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
+      :output_model_package_arn,
+      :model_package_config,
       :profiler_config,
       :environment,
       :retry_strategy,
@@ -49778,6 +50622,35 @@ module Aws::SageMaker
       :total_ultra_server_count,
       :target_resources,
       :reserved_capacity_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The serverless training job progress information.
+    #
+    # @!attribute [rw] total_step_count_per_epoch
+    #   The total step count per epoch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_step
+    #   The current step number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_epoch
+    #   The current epoch number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_epoch
+    #   The maximum number of epochs for this job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingProgressInfo AWS API Documentation
+    #
+    class TrainingProgressInfo < Struct.new(
+      :total_step_count_per_epoch,
+      :current_step,
+      :current_epoch,
+      :max_epoch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52790,6 +53663,71 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the MLflow App to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the MLflow App to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_store_uri
+    #   The new S3 URI for the general purpose bucket to use as the artifact
+    #   store for the MLflow App.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_registration_mode
+    #   Whether to enable or disable automatic registration of new MLflow
+    #   models to the SageMaker Model Registry. To enable automatic model
+    #   registration, set this value to `AutoModelRegistrationEnabled`. To
+    #   disable automatic model registration, set this value to
+    #   `AutoModelRegistrationDisabled`. If not specified,
+    #   `AutomaticModelRegistration` defaults to
+    #   `AutoModelRegistrationEnabled`
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The new weekly maintenance window start day and time to update. The
+    #   maintenance window day and time should be in Coordinated Universal
+    #   Time (UTC) 24-hour standard time. For example: TUE:03:30.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_domain_id_list
+    #   List of SageMaker Domain IDs for which this MLflow App is the
+    #   default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] account_default_status
+    #   Indicates whether this this MLflow App is the default for the
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMlflowAppRequest AWS API Documentation
+    #
+    class UpdateMlflowAppRequest < Struct.new(
+      :arn,
+      :name,
+      :artifact_store_uri,
+      :model_registration_mode,
+      :weekly_maintenance_window_start,
+      :default_domain_id_list,
+      :account_default_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the updated MLflow App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMlflowAppResponse AWS API Documentation
+    #
+    class UpdateMlflowAppResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] tracking_server_name
     #   The name of the MLflow Tracking Server to update.
     #   @return [String]
@@ -52902,6 +53840,10 @@ module Aws::SageMaker
     #   The approval status of the model.
     #   @return [String]
     #
+    # @!attribute [rw] model_package_registration_type
+    #   The package registration type of the model package input.
+    #   @return [String]
+    #
     # @!attribute [rw] approval_description
     #   A description for the approval status of the model.
     #   @return [String]
@@ -52975,6 +53917,7 @@ module Aws::SageMaker
     class UpdateModelPackageInput < Struct.new(
       :model_package_arn,
       :model_approval_status,
+      :model_package_registration_type,
       :approval_description,
       :customer_metadata_properties,
       :customer_metadata_properties_to_remove,

@@ -162,6 +162,21 @@ module Aws
                                       },
                                       ?error_message_configuration: {
                                         type: ("DETAILED")
+                                      },
+                                      ?synthetic_data_parameters: {
+                                        ml_synthetic_data_parameters: {
+                                          epsilon: ::Float,
+                                          max_membership_inference_attack_score: ::Float,
+                                          column_classification: {
+                                            column_mapping: Array[
+                                              {
+                                                column_name: ::String,
+                                                column_type: ("CATEGORICAL" | "NUMERICAL"),
+                                                is_predictive_value: bool
+                                              },
+                                            ]
+                                          }
+                                        }?
                                       }
                                     ) -> _CreateAnalysisTemplateResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalysisTemplateResponseSuccess
@@ -189,6 +204,9 @@ module Aws
                                             is_responsible: bool
                                           }?,
                                           model_inference: {
+                                            is_responsible: bool
+                                          }?,
+                                          synthetic_data_generation: {
                                             is_responsible: bool
                                           }?
                                         }?,
@@ -223,6 +241,9 @@ module Aws
                                         is_responsible: bool
                                       }?,
                                       model_inference: {
+                                        is_responsible: bool
+                                      }?,
+                                      synthetic_data_generation: {
                                         is_responsible: bool
                                       }?
                                     }?,
@@ -492,6 +513,9 @@ module Aws
                                      is_responsible: bool
                                    }?,
                                    model_inference: {
+                                     is_responsible: bool
+                                   }?,
+                                   synthetic_data_generation: {
                                      is_responsible: bool
                                    }?
                                  }?,
@@ -1182,7 +1206,7 @@ module Aws
                                  type: ("PYSPARK"),
                                  membership_identifier: ::String,
                                  job_parameters: {
-                                   analysis_template_arn: ::String?
+                                   analysis_template_arn: ::String
                                  },
                                  ?result_configuration: {
                                    output_configuration: {

@@ -362,7 +362,7 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -1486,7 +1486,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2087,7 +2087,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2762,7 +2762,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #         },
     #       },
     #     },

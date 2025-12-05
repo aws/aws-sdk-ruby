@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2025-12-02)
+------------------
+
+* Feature - Added support for Amazon Database Savings Plans
+
 1.69.0 (2025-11-21)
 ------------------
 

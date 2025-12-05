@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2025-12-02)
+------------------
+
+* Feature - Amazon DataZone now supports exporting Catalog datasets as Amazon S3 tables, and provides automatic business glossary term suggestions for data assets.
+
 1.61.0 (2025-11-21)
 ------------------
 

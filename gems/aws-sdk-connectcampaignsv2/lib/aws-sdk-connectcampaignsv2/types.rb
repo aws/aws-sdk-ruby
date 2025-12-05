@@ -78,6 +78,10 @@ module Aws::ConnectCampaignsV2
     #   Campaign Channel Subtype config
     #   @return [Types::ChannelSubtypeConfig]
     #
+    # @!attribute [rw] type
+    #   The type of campaign externally exposed in APIs.
+    #   @return [String]
+    #
     # @!attribute [rw] source
     #   Source of the campaign
     #   @return [Types::Source]
@@ -110,6 +114,7 @@ module Aws::ConnectCampaignsV2
       :name,
       :connect_instance_id,
       :channel_subtype_config,
+      :type,
       :source,
       :connect_campaign_flow_arn,
       :schedule,
@@ -156,6 +161,10 @@ module Aws::ConnectCampaignsV2
     #   Channel subtype list
     #   @return [Array<String>]
     #
+    # @!attribute [rw] type
+    #   The type of campaign externally exposed in APIs.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule
     #   Campaign schedule
     #   @return [Types::Schedule]
@@ -172,6 +181,7 @@ module Aws::ConnectCampaignsV2
       :name,
       :connect_instance_id,
       :channel_subtypes,
+      :type,
       :schedule,
       :connect_campaign_flow_arn)
       SENSITIVE = []
@@ -192,12 +202,17 @@ module Aws::ConnectCampaignsV2
     #   Email Channel Subtype config
     #   @return [Types::EmailChannelSubtypeConfig]
     #
+    # @!attribute [rw] whats_app
+    #   WhatsApp Channel Subtype config
+    #   @return [Types::WhatsAppChannelSubtypeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/ChannelSubtypeConfig AWS API Documentation
     #
     class ChannelSubtypeConfig < Struct.new(
       :telephony,
       :sms,
-      :email)
+      :email,
+      :whats_app)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -218,12 +233,17 @@ module Aws::ConnectCampaignsV2
     #   Parameters for the Email Channel Subtype
     #   @return [Types::EmailChannelSubtypeParameters]
     #
+    # @!attribute [rw] whats_app
+    #   Parameters for the WhatsApp Channel Subtype
+    #   @return [Types::WhatsAppChannelSubtypeParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/ChannelSubtypeParameters AWS API Documentation
     #
     class ChannelSubtypeParameters < Struct.new(
       :telephony,
       :sms,
       :email,
+      :whats_app,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -232,6 +252,7 @@ module Aws::ConnectCampaignsV2
       class Telephony < ChannelSubtypeParameters; end
       class Sms < ChannelSubtypeParameters; end
       class Email < ChannelSubtypeParameters; end
+      class WhatsApp < ChannelSubtypeParameters; end
       class Unknown < ChannelSubtypeParameters; end
     end
 
@@ -320,13 +341,18 @@ module Aws::ConnectCampaignsV2
     #   Time window config
     #   @return [Types::TimeWindow]
     #
+    # @!attribute [rw] whats_app
+    #   Time window config
+    #   @return [Types::TimeWindow]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/CommunicationTimeConfig AWS API Documentation
     #
     class CommunicationTimeConfig < Struct.new(
       :local_time_zone_config,
       :telephony,
       :sms,
-      :email)
+      :email,
+      :whats_app)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -365,6 +391,10 @@ module Aws::ConnectCampaignsV2
     #   Campaign Channel Subtype config
     #   @return [Types::ChannelSubtypeConfig]
     #
+    # @!attribute [rw] type
+    #   The type of campaign externally exposed in APIs.
+    #   @return [String]
+    #
     # @!attribute [rw] source
     #   Source of the campaign
     #   @return [Types::Source]
@@ -395,6 +425,7 @@ module Aws::ConnectCampaignsV2
       :name,
       :connect_instance_id,
       :channel_subtype_config,
+      :type,
       :source,
       :connect_campaign_flow_arn,
       :schedule,
@@ -1089,11 +1120,16 @@ module Aws::ConnectCampaignsV2
     #   Q Connect integration config
     #   @return [Types::QConnectIntegrationConfig]
     #
+    # @!attribute [rw] lambda
+    #   Lambda integration config
+    #   @return [Types::LambdaIntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/IntegrationConfig AWS API Documentation
     #
     class IntegrationConfig < Struct.new(
       :customer_profiles,
       :q_connect,
+      :lambda,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1101,6 +1137,7 @@ module Aws::ConnectCampaignsV2
 
       class CustomerProfiles < IntegrationConfig; end
       class QConnect < IntegrationConfig; end
+      class Lambda < IntegrationConfig; end
       class Unknown < IntegrationConfig; end
     end
 
@@ -1116,11 +1153,16 @@ module Aws::ConnectCampaignsV2
     #   Q Connect integration identifier
     #   @return [Types::QConnectIntegrationIdentifier]
     #
+    # @!attribute [rw] lambda
+    #   Lambda integration identifier
+    #   @return [Types::LambdaIntegrationIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/IntegrationIdentifier AWS API Documentation
     #
     class IntegrationIdentifier < Struct.new(
       :customer_profiles,
       :q_connect,
+      :lambda,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1128,6 +1170,7 @@ module Aws::ConnectCampaignsV2
 
       class CustomerProfiles < IntegrationIdentifier; end
       class QConnect < IntegrationIdentifier; end
+      class Lambda < IntegrationIdentifier; end
       class Unknown < IntegrationIdentifier; end
     end
 
@@ -1143,11 +1186,16 @@ module Aws::ConnectCampaignsV2
     #   Q Connect integration summary
     #   @return [Types::QConnectIntegrationSummary]
     #
+    # @!attribute [rw] lambda
+    #   Lambda integration summary
+    #   @return [Types::LambdaIntegrationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/IntegrationSummary AWS API Documentation
     #
     class IntegrationSummary < Struct.new(
       :customer_profiles,
       :q_connect,
+      :lambda,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1155,6 +1203,7 @@ module Aws::ConnectCampaignsV2
 
       class CustomerProfiles < IntegrationSummary; end
       class QConnect < IntegrationSummary; end
+      class Lambda < IntegrationSummary; end
       class Unknown < IntegrationSummary; end
     end
 
@@ -1219,6 +1268,48 @@ module Aws::ConnectCampaignsV2
     class InvalidStateException < Struct.new(
       :message,
       :x_amz_error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lambda integration config
+    #
+    # @!attribute [rw] function_arn
+    #   Lambda ARN for integration with Connect instances
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/LambdaIntegrationConfig AWS API Documentation
+    #
+    class LambdaIntegrationConfig < Struct.new(
+      :function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lambda integration identifier
+    #
+    # @!attribute [rw] function_arn
+    #   Lambda ARN for integration with Connect instances
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/LambdaIntegrationIdentifier AWS API Documentation
+    #
+    class LambdaIntegrationIdentifier < Struct.new(
+      :function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lambda integration summary
+    #
+    # @!attribute [rw] function_arn
+    #   Lambda ARN for integration with Connect instances
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/LambdaIntegrationSummary AWS API Documentation
+    #
+    class LambdaIntegrationSummary < Struct.new(
+      :function_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2428,6 +2519,104 @@ module Aws::ConnectCampaignsV2
       :x_amz_error_type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # WhatsApp Channel Subtype config
+    #
+    # @!attribute [rw] capacity
+    #   Allocates outbound capacity for the specific channel subtype of this
+    #   campaign between multiple active campaigns
+    #   @return [Float]
+    #
+    # @!attribute [rw] outbound_mode
+    #   WhatsApp Outbound Mode
+    #   @return [Types::WhatsAppOutboundMode]
+    #
+    # @!attribute [rw] default_outbound_config
+    #   Default WhatsApp Outbound config
+    #   @return [Types::WhatsAppOutboundConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/WhatsAppChannelSubtypeConfig AWS API Documentation
+    #
+    class WhatsAppChannelSubtypeConfig < Struct.new(
+      :capacity,
+      :outbound_mode,
+      :default_outbound_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters for the WhatsApp Channel Subtype
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The phone number of the customer, in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_source_phone_number_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    #
+    # @!attribute [rw] template_parameters
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/WhatsAppChannelSubtypeParameters AWS API Documentation
+    #
+    class WhatsAppChannelSubtypeParameters < Struct.new(
+      :destination_phone_number,
+      :connect_source_phone_number_arn,
+      :template_arn,
+      :template_parameters)
+      SENSITIVE = [:destination_phone_number, :template_parameters]
+      include Aws::Structure
+    end
+
+    # Default WhatsApp Outbound config
+    #
+    # @!attribute [rw] connect_source_phone_number_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    #
+    # @!attribute [rw] wisdom_template_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/WhatsAppOutboundConfig AWS API Documentation
+    #
+    class WhatsAppOutboundConfig < Struct.new(
+      :connect_source_phone_number_arn,
+      :wisdom_template_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # WhatsApp Outbound Mode
+    #
+    # @note WhatsAppOutboundMode is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note WhatsAppOutboundMode is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WhatsAppOutboundMode corresponding to the set member.
+    #
+    # @!attribute [rw] agentless
+    #   Agentless config
+    #   @return [Types::AgentlessConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/WhatsAppOutboundMode AWS API Documentation
+    #
+    class WhatsAppOutboundMode < Struct.new(
+      :agentless,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Agentless < WhatsAppOutboundMode; end
+      class Unknown < WhatsAppOutboundMode; end
     end
 
   end

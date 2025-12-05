@@ -26,6 +26,10 @@ module Aws::RDS
     AddSourceIdentifierToSubscriptionMessage = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionMessage')
     AddSourceIdentifierToSubscriptionResult = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionResult')
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
+    AdditionalStorageVolume = Shapes::StructureShape.new(name: 'AdditionalStorageVolume')
+    AdditionalStorageVolumeOutput = Shapes::StructureShape.new(name: 'AdditionalStorageVolumeOutput')
+    AdditionalStorageVolumesList = Shapes::ListShape.new(name: 'AdditionalStorageVolumesList')
+    AdditionalStorageVolumesOutputList = Shapes::ListShape.new(name: 'AdditionalStorageVolumesOutputList')
     ApplyMethod = Shapes::StringShape.new(name: 'ApplyMethod')
     ApplyPendingMaintenanceActionMessage = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionMessage')
     ApplyPendingMaintenanceActionResult = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionResult')
@@ -43,6 +47,8 @@ module Aws::RDS
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+    AvailableAdditionalStorageVolumesOption = Shapes::StructureShape.new(name: 'AvailableAdditionalStorageVolumesOption')
+    AvailableAdditionalStorageVolumesOptionList = Shapes::ListShape.new(name: 'AvailableAdditionalStorageVolumesOptionList')
     AvailableProcessorFeature = Shapes::StructureShape.new(name: 'AvailableProcessorFeature')
     AvailableProcessorFeatureList = Shapes::ListShape.new(name: 'AvailableProcessorFeatureList')
     AwsBackupRecoveryPointArn = Shapes::StringShape.new(name: 'AwsBackupRecoveryPointArn')
@@ -527,6 +533,8 @@ module Aws::RDS
     MinimumEngineVersionPerAllowedValueList = Shapes::ListShape.new(name: 'MinimumEngineVersionPerAllowedValueList')
     ModifyActivityStreamRequest = Shapes::StructureShape.new(name: 'ModifyActivityStreamRequest')
     ModifyActivityStreamResponse = Shapes::StructureShape.new(name: 'ModifyActivityStreamResponse')
+    ModifyAdditionalStorageVolume = Shapes::StructureShape.new(name: 'ModifyAdditionalStorageVolume')
+    ModifyAdditionalStorageVolumesList = Shapes::ListShape.new(name: 'ModifyAdditionalStorageVolumesList')
     ModifyCertificatesMessage = Shapes::StructureShape.new(name: 'ModifyCertificatesMessage')
     ModifyCertificatesResult = Shapes::StructureShape.new(name: 'ModifyCertificatesResult')
     ModifyCurrentDBClusterCapacityMessage = Shapes::StructureShape.new(name: 'ModifyCurrentDBClusterCapacityMessage')
@@ -773,10 +781,13 @@ module Aws::RDS
     UserAuthConfigInfo = Shapes::StructureShape.new(name: 'UserAuthConfigInfo')
     UserAuthConfigInfoList = Shapes::ListShape.new(name: 'UserAuthConfigInfoList')
     UserAuthConfigList = Shapes::ListShape.new(name: 'UserAuthConfigList')
+    ValidAdditionalStorageOptions = Shapes::StructureShape.new(name: 'ValidAdditionalStorageOptions')
     ValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'ValidDBInstanceModificationsMessage')
     ValidStorageOptions = Shapes::StructureShape.new(name: 'ValidStorageOptions')
     ValidStorageOptionsList = Shapes::ListShape.new(name: 'ValidStorageOptionsList')
     ValidUpgradeTargetList = Shapes::ListShape.new(name: 'ValidUpgradeTargetList')
+    ValidVolumeOptions = Shapes::StructureShape.new(name: 'ValidVolumeOptions')
+    ValidVolumeOptionsList = Shapes::ListShape.new(name: 'ValidVolumeOptionsList')
     VpcEncryptionControlViolationException = Shapes::StructureShape.new(name: 'VpcEncryptionControlViolationException', error: {"code" => "VpcEncryptionControlViolationException", "httpStatusCode" => 400, "senderFault" => true})
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
@@ -816,6 +827,27 @@ module Aws::RDS
     AddTagsToResourceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     AddTagsToResourceMessage.struct_class = Types::AddTagsToResourceMessage
 
+    AdditionalStorageVolume.add_member(:volume_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeName"))
+    AdditionalStorageVolume.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    AdditionalStorageVolume.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IOPS"))
+    AdditionalStorageVolume.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    AdditionalStorageVolume.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    AdditionalStorageVolume.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    AdditionalStorageVolume.struct_class = Types::AdditionalStorageVolume
+
+    AdditionalStorageVolumeOutput.add_member(:volume_name, Shapes::ShapeRef.new(shape: String, location_name: "VolumeName"))
+    AdditionalStorageVolumeOutput.add_member(:storage_volume_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageVolumeStatus"))
+    AdditionalStorageVolumeOutput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "AllocatedStorage"))
+    AdditionalStorageVolumeOutput.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IOPS"))
+    AdditionalStorageVolumeOutput.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    AdditionalStorageVolumeOutput.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    AdditionalStorageVolumeOutput.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    AdditionalStorageVolumeOutput.struct_class = Types::AdditionalStorageVolumeOutput
+
+    AdditionalStorageVolumesList.member = Shapes::ShapeRef.new(shape: AdditionalStorageVolume)
+
+    AdditionalStorageVolumesOutputList.member = Shapes::ShapeRef.new(shape: AdditionalStorageVolumeOutput)
+
     ApplyPendingMaintenanceActionMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceIdentifier"))
     ApplyPendingMaintenanceActionMessage.add_member(:apply_action, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ApplyAction"))
     ApplyPendingMaintenanceActionMessage.add_member(:opt_in_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptInType"))
@@ -848,6 +880,22 @@ module Aws::RDS
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone")
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone")
+
+    AvailableAdditionalStorageVolumesOption.add_member(:supports_storage_autoscaling, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsStorageAutoscaling"))
+    AvailableAdditionalStorageVolumesOption.add_member(:supports_storage_throughput, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsStorageThroughput"))
+    AvailableAdditionalStorageVolumesOption.add_member(:supports_iops, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsIops"))
+    AvailableAdditionalStorageVolumesOption.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_storage_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinStorageSize"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_storage_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxStorageSize"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinIops"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxIops"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_iops_per_gib, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinIopsPerGib"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_iops_per_gib, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxIopsPerGib"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinStorageThroughput"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxStorageThroughput"))
+    AvailableAdditionalStorageVolumesOption.struct_class = Types::AvailableAdditionalStorageVolumesOption
+
+    AvailableAdditionalStorageVolumesOptionList.member = Shapes::ShapeRef.new(shape: AvailableAdditionalStorageVolumesOption, location_name: "AvailableAdditionalStorageVolumesOption")
 
     AvailableProcessorFeature.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     AvailableProcessorFeature.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "DefaultValue"))
@@ -1044,6 +1092,7 @@ module Aws::RDS
     CreateCustomDBEngineVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateCustomDBEngineVersionMessage.add_member(:manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "Manifest"))
     CreateCustomDBEngineVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseInstallationFiles"))
     CreateCustomDBEngineVersionMessage.struct_class = Types::CreateCustomDBEngineVersionMessage
 
     CreateDBClusterEndpointMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
@@ -1199,6 +1248,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     CreateDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
+    CreateDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1248,6 +1298,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceReadReplicaMessage.add_member(:upgrade_storage_config, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UpgradeStorageConfig"))
     CreateDBInstanceReadReplicaMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
+    CreateDBInstanceReadReplicaMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1724,6 +1775,8 @@ module Aws::RDS
     DBEngineVersion.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
     DBEngineVersion.add_member(:supports_integrations, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsIntegrations"))
     DBEngineVersion.add_member(:serverless_v2_features_support, Shapes::ShapeRef.new(shape: ServerlessV2FeaturesSupport, location_name: "ServerlessV2FeaturesSupport"))
+    DBEngineVersion.add_member(:database_installation_files, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseInstallationFiles"))
+    DBEngineVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -1820,6 +1873,8 @@ module Aws::RDS
     DBInstance.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
     DBInstance.add_member(:is_storage_config_upgrade_available, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsStorageConfigUpgradeAvailable"))
     DBInstance.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    DBInstance.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesOutputList, location_name: "AdditionalStorageVolumes"))
+    DBInstance.add_member(:storage_volume_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageVolumeStatus"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1855,6 +1910,7 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     DBInstanceAutomatedBackup.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBInstanceAutomatedBackup.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
+    DBInstanceAutomatedBackup.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     DBInstanceAutomatedBackup.struct_class = Types::DBInstanceAutomatedBackup
 
     DBInstanceAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup")
@@ -2137,6 +2193,7 @@ module Aws::RDS
     DBSnapshot.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     DBSnapshot.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
     DBSnapshot.add_member(:snapshot_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotAvailabilityZone"))
+    DBSnapshot.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault
@@ -3098,6 +3155,17 @@ module Aws::RDS
     ModifyActivityStreamResponse.add_member(:policy_status, Shapes::ShapeRef.new(shape: ActivityStreamPolicyStatus, location_name: "PolicyStatus"))
     ModifyActivityStreamResponse.struct_class = Types::ModifyActivityStreamResponse
 
+    ModifyAdditionalStorageVolume.add_member(:volume_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeName"))
+    ModifyAdditionalStorageVolume.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+    ModifyAdditionalStorageVolume.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IOPS"))
+    ModifyAdditionalStorageVolume.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    ModifyAdditionalStorageVolume.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    ModifyAdditionalStorageVolume.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    ModifyAdditionalStorageVolume.add_member(:set_for_delete, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SetForDelete"))
+    ModifyAdditionalStorageVolume.struct_class = Types::ModifyAdditionalStorageVolume
+
+    ModifyAdditionalStorageVolumesList.member = Shapes::ShapeRef.new(shape: ModifyAdditionalStorageVolume)
+
     ModifyCertificatesMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     ModifyCertificatesMessage.add_member(:remove_customer_override, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RemoveCustomerOverride"))
     ModifyCertificatesMessage.struct_class = Types::ModifyCertificatesMessage
@@ -3250,6 +3318,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
+    ModifyDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: ModifyAdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3531,6 +3600,8 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supports_clusters, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsClusters"))
     OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
     OrderableDBInstanceOption.add_member(:supports_http_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsHttpEndpoint"))
+    OrderableDBInstanceOption.add_member(:supports_additional_storage_volumes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsAdditionalStorageVolumes"))
+    OrderableDBInstanceOption.add_member(:available_additional_storage_volumes_options, Shapes::ShapeRef.new(shape: AvailableAdditionalStorageVolumesOptionList, location_name: "AvailableAdditionalStorageVolumesOptions"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")
@@ -3599,6 +3670,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IAMDatabaseAuthenticationEnabled"))
     PendingModifiedValues.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     PendingModifiedValues.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    PendingModifiedValues.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PerformanceInsightsMetricDimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: StringList, location_name: "Dimensions"))
@@ -3988,6 +4060,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4045,6 +4118,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromS3Message.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceFromS3Message.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    RestoreDBInstanceFromS3Message.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4098,6 +4172,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4407,9 +4482,14 @@ module Aws::RDS
 
     UserAuthConfigList.member = Shapes::ShapeRef.new(shape: UserAuthConfig)
 
+    ValidAdditionalStorageOptions.add_member(:supports_additional_storage_volumes, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsAdditionalStorageVolumes"))
+    ValidAdditionalStorageOptions.add_member(:volumes, Shapes::ShapeRef.new(shape: ValidVolumeOptionsList, location_name: "Volumes"))
+    ValidAdditionalStorageOptions.struct_class = Types::ValidAdditionalStorageOptions
+
     ValidDBInstanceModificationsMessage.add_member(:storage, Shapes::ShapeRef.new(shape: ValidStorageOptionsList, location_name: "Storage"))
     ValidDBInstanceModificationsMessage.add_member(:valid_processor_features, Shapes::ShapeRef.new(shape: AvailableProcessorFeatureList, location_name: "ValidProcessorFeatures"))
     ValidDBInstanceModificationsMessage.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
+    ValidDBInstanceModificationsMessage.add_member(:additional_storage, Shapes::ShapeRef.new(shape: ValidAdditionalStorageOptions, location_name: "AdditionalStorage"))
     ValidDBInstanceModificationsMessage.struct_class = Types::ValidDBInstanceModificationsMessage
 
     ValidStorageOptions.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
@@ -4424,6 +4504,12 @@ module Aws::RDS
     ValidStorageOptionsList.member = Shapes::ShapeRef.new(shape: ValidStorageOptions, location_name: "ValidStorageOptions")
 
     ValidUpgradeTargetList.member = Shapes::ShapeRef.new(shape: UpgradeTarget, location_name: "UpgradeTarget")
+
+    ValidVolumeOptions.add_member(:volume_name, Shapes::ShapeRef.new(shape: String, location_name: "VolumeName"))
+    ValidVolumeOptions.add_member(:storage, Shapes::ShapeRef.new(shape: ValidStorageOptionsList, location_name: "Storage"))
+    ValidVolumeOptions.struct_class = Types::ValidVolumeOptions
+
+    ValidVolumeOptionsList.member = Shapes::ShapeRef.new(shape: ValidVolumeOptions)
 
     VpcEncryptionControlViolationException.struct_class = Types::VpcEncryptionControlViolationException
 

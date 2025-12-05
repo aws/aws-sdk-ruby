@@ -196,6 +196,23 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class CatalogItem
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor code: ::String
+      attr_accessor type: ::String
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor image_link: ::String
+      attr_accessor link: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor price: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:id, :name, :code, :type, :category, :description, :additional_information, :image_link, :link, :price, :attributes]
+    end
+
     class ConditionOverrides
       attr_accessor range: Types::RangeOverride
       SENSITIVE: []
@@ -300,6 +317,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: ::String
       attr_accessor matching: Types::MatchingRequest
       attr_accessor rule_based_matching: Types::RuleBasedMatchingRequest
+      attr_accessor data_store: Types::DataStoreRequest
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -311,6 +329,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: ::String
       attr_accessor matching: Types::MatchingResponse
       attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse
+      attr_accessor data_store: Types::DataStoreResponse
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
@@ -407,14 +426,31 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class CreateRecommenderRequest
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      attr_accessor recommender_recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now")
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
+    class CreateRecommenderResponse
+      attr_accessor recommender_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class CreateSegmentDefinitionRequest
       attr_accessor domain_name: ::String
       attr_accessor segment_definition_name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
       attr_accessor segment_groups: Types::SegmentGroup
+      attr_accessor segment_sql_query: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:description, :segment_groups]
+      SENSITIVE: [:description, :segment_groups, :segment_sql_query]
     end
 
     class CreateSegmentDefinitionResponse
@@ -430,7 +466,8 @@ module Aws::CustomerProfiles
     class CreateSegmentEstimateRequest
       attr_accessor domain_name: ::String
       attr_accessor segment_query: Types::SegmentGroupStructure
-      SENSITIVE: []
+      attr_accessor segment_sql_query: ::String
+      SENSITIVE: [:segment_sql_query]
     end
 
     class CreateSegmentEstimateResponse
@@ -469,6 +506,17 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class DataStoreRequest
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DataStoreResponse
+      attr_accessor enabled: bool
+      attr_accessor readiness: Types::Readiness
+      SENSITIVE: []
+    end
+
     class DateDimension
       attr_accessor dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON")
       attr_accessor values: ::Array[::String]
@@ -493,6 +541,15 @@ module Aws::CustomerProfiles
     class DeleteDomainLayoutResponse
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class DeleteDomainObjectTypeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainObjectTypeResponse < Aws::EmptyStructure
     end
 
     class DeleteDomainRequest
@@ -584,6 +641,15 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class DeleteRecommenderRequest
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecommenderResponse < Aws::EmptyStructure
+    end
+
     class DeleteSegmentDefinitionRequest
       attr_accessor domain_name: ::String
       attr_accessor segment_definition_name: ::String
@@ -643,6 +709,23 @@ module Aws::CustomerProfiles
       end
     end
 
+    class DomainObjectTypeField
+      attr_accessor source: ::String
+      attr_accessor target: ::String
+      attr_accessor content_type: ("STRING" | "NUMBER")
+      attr_accessor feature_type: ("TEXTUAL" | "CATEGORICAL")
+      SENSITIVE: []
+    end
+
+    class DomainObjectTypesListItem
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
     class DomainStats
       attr_accessor profile_count: ::Integer
       attr_accessor metering_profile_count: ::Integer
@@ -654,6 +737,12 @@ module Aws::CustomerProfiles
     class EngagementPreferences
       attr_accessor phone: ::Array[Types::ContactPreference]
       attr_accessor email: ::Array[Types::ContactPreference]
+      SENSITIVE: []
+    end
+
+    class EventParameters
+      attr_accessor event_type: ::String
+      attr_accessor event_value_threshold: ::Float
       SENSITIVE: []
     end
 
@@ -700,6 +789,11 @@ module Aws::CustomerProfiles
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EventsConfig
+      attr_accessor event_parameters_list: ::Array[Types::EventParameters]
       SENSITIVE: []
     end
 
@@ -860,6 +954,23 @@ module Aws::CustomerProfiles
       SENSITIVE: [:description, :layout]
     end
 
+    class GetDomainObjectTypeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainObjectTypeResponse
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor fields: ::Hash[::String, Types::DomainObjectTypeField]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
     class GetDomainRequest
       attr_accessor domain_name: ::String
       SENSITIVE: []
@@ -873,6 +984,7 @@ module Aws::CustomerProfiles
       attr_accessor stats: Types::DomainStats
       attr_accessor matching: Types::MatchingResponse
       attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse
+      attr_accessor data_store: Types::DataStoreResponse
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
@@ -954,6 +1066,7 @@ module Aws::CustomerProfiles
       attr_accessor is_unstructured: bool
       attr_accessor role_arn: ::String
       attr_accessor event_trigger_names: ::Array[::String]
+      attr_accessor scope: ("PROFILE" | "DOMAIN")
       SENSITIVE: []
     end
 
@@ -969,6 +1082,37 @@ module Aws::CustomerProfiles
       attr_accessor match_generation_date: ::Time
       attr_accessor potential_matches: ::Integer
       attr_accessor matches: ::Array[Types::MatchItem]
+      SENSITIVE: []
+    end
+
+    class GetObjectTypeAttributeStatisticsPercentiles
+      attr_accessor p5: ::Float
+      attr_accessor p25: ::Float
+      attr_accessor p50: ::Float
+      attr_accessor p75: ::Float
+      attr_accessor p95: ::Float
+      SENSITIVE: []
+    end
+
+    class GetObjectTypeAttributeStatisticsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetObjectTypeAttributeStatisticsResponse
+      attr_accessor statistics: Types::GetObjectTypeAttributeStatisticsStats
+      attr_accessor calculated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetObjectTypeAttributeStatisticsStats
+      attr_accessor maximum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor average: ::Float
+      attr_accessor standard_deviation: ::Float
+      attr_accessor percentiles: Types::GetObjectTypeAttributeStatisticsPercentiles
       SENSITIVE: []
     end
 
@@ -1031,6 +1175,42 @@ module Aws::CustomerProfiles
       SENSITIVE: [:fields, :keys]
     end
 
+    class GetProfileRecommendationsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor recommender_name: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor max_results: ::Integer
+      SENSITIVE: [:context]
+    end
+
+    class GetProfileRecommendationsResponse
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: [:recommendations]
+    end
+
+    class GetRecommenderRequest
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      attr_accessor training_metrics_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecommenderResponse
+      attr_accessor recommender_name: ::String
+      attr_accessor recommender_recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now")
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor description: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "FAILED" | "STOPPING" | "INACTIVE" | "STARTING" | "DELETING")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor latest_recommender_update: Types::RecommenderUpdate
+      attr_accessor training_metrics: ::Array[Types::TrainingMetrics]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
     class GetSegmentDefinitionRequest
       attr_accessor domain_name: ::String
       attr_accessor segment_definition_name: ::String
@@ -1045,7 +1225,9 @@ module Aws::CustomerProfiles
       attr_accessor segment_definition_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:description, :segment_groups]
+      attr_accessor segment_sql_query: ::String
+      attr_accessor segment_type: ("CLASSIC" | "ENHANCED")
+      SENSITIVE: [:description, :segment_groups, :segment_sql_query]
     end
 
     class GetSegmentEstimateRequest
@@ -1075,6 +1257,7 @@ module Aws::CustomerProfiles
       attr_accessor segment_definition_name: ::String
       attr_accessor profiles: ::Array[Types::ProfileQueryResult]
       attr_accessor failures: ::Array[Types::ProfileQueryFailures]
+      attr_accessor last_computed_at: ::Time
       SENSITIVE: []
     end
 
@@ -1326,6 +1509,19 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ListDomainObjectTypesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainObjectTypesResponse
+      attr_accessor items: ::Array[Types::DomainObjectTypesListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:items]
+    end
+
     class ListDomainsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -1389,6 +1585,7 @@ module Aws::CustomerProfiles
       attr_accessor is_unstructured: bool
       attr_accessor role_arn: ::String
       attr_accessor event_trigger_names: ::Array[::String]
+      attr_accessor scope: ("PROFILE" | "DOMAIN")
       SENSITIVE: []
     end
 
@@ -1409,6 +1606,27 @@ module Aws::CustomerProfiles
     class ListObjectTypeAttributeItem
       attr_accessor attribute_name: ::String
       attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListObjectTypeAttributeValuesItem
+      attr_accessor value: ::String
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:value]
+    end
+
+    class ListObjectTypeAttributeValuesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectTypeAttributeValuesResponse
+      attr_accessor items: ::Array[Types::ListObjectTypeAttributeValuesItem]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1506,6 +1724,31 @@ module Aws::CustomerProfiles
     class ListProfileObjectsResponse
       attr_accessor items: ::Array[Types::ListProfileObjectsItem]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommenderRecipesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommenderRecipesResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommender_recipes: ::Array[Types::RecommenderRecipe]
+      SENSITIVE: []
+    end
+
+    class ListRecommendersRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendersResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommenders: ::Array[Types::RecommenderSummary]
       SENSITIVE: []
     end
 
@@ -1774,15 +2017,37 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class PutDomainObjectTypeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor fields: ::Hash[::String, Types::DomainObjectTypeField]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
+    class PutDomainObjectTypeResponse
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor fields: ::Hash[::String, Types::DomainObjectTypeField]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
     class PutIntegrationRequest
       attr_accessor domain_name: ::String
       attr_accessor uri: ::String
       attr_accessor object_type_name: ::String
+      attr_accessor object_type_names: ::Hash[::String, ::String]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor flow_definition: Types::FlowDefinition
-      attr_accessor object_type_names: ::Hash[::String, ::String]
       attr_accessor role_arn: ::String
       attr_accessor event_trigger_names: ::Array[::String]
+      attr_accessor scope: ("PROFILE" | "DOMAIN")
       SENSITIVE: [:flow_definition]
     end
 
@@ -1798,6 +2063,7 @@ module Aws::CustomerProfiles
       attr_accessor is_unstructured: bool
       attr_accessor role_arn: ::String
       attr_accessor event_trigger_names: ::Array[::String]
+      attr_accessor scope: ("PROFILE" | "DOMAIN")
       SENSITIVE: []
     end
 
@@ -1866,6 +2132,47 @@ module Aws::CustomerProfiles
     class Readiness
       attr_accessor progress_percentage: ::Integer
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor catalog_item: Types::CatalogItem
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class RecommenderConfig
+      attr_accessor events_config: Types::EventsConfig
+      attr_accessor training_frequency: ::Integer
+      SENSITIVE: []
+    end
+
+    class RecommenderRecipe
+      attr_accessor name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class RecommenderSummary
+      attr_accessor recommender_name: ::String
+      attr_accessor recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now")
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "FAILED" | "STOPPING" | "INACTIVE" | "STARTING" | "DELETING")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor failure_reason: ::String
+      attr_accessor latest_recommender_update: Types::RecommenderUpdate
+      SENSITIVE: [:description]
+    end
+
+    class RecommenderUpdate
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "FAILED" | "STOPPING" | "INACTIVE" | "STARTING" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -1964,6 +2271,7 @@ module Aws::CustomerProfiles
       attr_accessor segment_definition_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor segment_type: ("CLASSIC" | "ENHANCED")
       SENSITIVE: [:description]
     end
 
@@ -2006,6 +2314,15 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class StartRecommenderRequest
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartRecommenderResponse < Aws::EmptyStructure
+    end
+
     class StartUploadJobRequest
       attr_accessor domain_name: ::String
       attr_accessor job_id: ::String
@@ -2013,6 +2330,15 @@ module Aws::CustomerProfiles
     end
 
     class StartUploadJobResponse < Aws::EmptyStructure
+    end
+
+    class StopRecommenderRequest
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopRecommenderResponse < Aws::EmptyStructure
     end
 
     class StopUploadJobRequest
@@ -2050,6 +2376,12 @@ module Aws::CustomerProfiles
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrainingMetrics
+      attr_accessor time: ::Time
+      attr_accessor metrics: ::Hash[("hit" | "coverage" | "recall" | "popularity" | "freshness" | "similarity"), ::Float]
       SENSITIVE: []
     end
 
@@ -2144,6 +2476,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: ::String
       attr_accessor matching: Types::MatchingRequest
       attr_accessor rule_based_matching: Types::RuleBasedMatchingRequest
+      attr_accessor data_store: Types::DataStoreRequest
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -2155,6 +2488,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: ::String
       attr_accessor matching: Types::MatchingResponse
       attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse
+      attr_accessor data_store: Types::DataStoreResponse
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2218,6 +2552,19 @@ module Aws::CustomerProfiles
 
     class UpdateProfileResponse
       attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecommenderRequest
+      attr_accessor domain_name: ::String
+      attr_accessor recommender_name: ::String
+      attr_accessor description: ::String
+      attr_accessor recommender_config: Types::RecommenderConfig
+      SENSITIVE: [:description]
+    end
+
+    class UpdateRecommenderResponse
+      attr_accessor recommender_name: ::String
       SENSITIVE: []
     end
 

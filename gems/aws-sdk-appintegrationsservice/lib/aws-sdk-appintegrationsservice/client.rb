@@ -531,6 +531,9 @@ module Aws::AppIntegrationsService
     # @option params [Types::IframeConfig] :iframe_config
     #   The iframe configuration for the application.
     #
+    # @option params [String] :application_type
+    #   The type of application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#arn #arn} => String
@@ -599,6 +602,7 @@ module Aws::AppIntegrationsService
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"],
     #     },
+    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER
     #   })
     #
     # @example Response structure
@@ -1007,6 +1011,7 @@ module Aws::AppIntegrationsService
     #   * {Types::GetApplicationResponse#initialization_timeout #initialization_timeout} => Integer
     #   * {Types::GetApplicationResponse#application_config #application_config} => Types::ApplicationConfig
     #   * {Types::GetApplicationResponse#iframe_config #iframe_config} => Types::IframeConfig
+    #   * {Types::GetApplicationResponse#application_type #application_type} => String
     #
     #
     # @example Example: To get an application
@@ -1065,6 +1070,7 @@ module Aws::AppIntegrationsService
     #   resp.iframe_config.allow[0] #=> String
     #   resp.iframe_config.sandbox #=> Array
     #   resp.iframe_config.sandbox[0] #=> String
+    #   resp.application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -1258,6 +1264,9 @@ module Aws::AppIntegrationsService
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
+    # @option params [String] :application_type
+    #   The type of application.
+    #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListApplicationsResponse#applications #applications} => Array&lt;Types::ApplicationSummary&gt;
@@ -1292,6 +1301,7 @@ module Aws::AppIntegrationsService
     #   resp = client.list_applications({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER
     #   })
     #
     # @example Response structure
@@ -1304,6 +1314,7 @@ module Aws::AppIntegrationsService
     #   resp.applications[0].created_time #=> Time
     #   resp.applications[0].last_modified_time #=> Time
     #   resp.applications[0].is_service #=> Boolean
+    #   resp.applications[0].application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplications AWS API Documentation
@@ -1650,6 +1661,9 @@ module Aws::AppIntegrationsService
     # @option params [Types::IframeConfig] :iframe_config
     #   The iframe configuration for the application.
     #
+    # @option params [String] :application_type
+    #   The type of application.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1703,6 +1717,7 @@ module Aws::AppIntegrationsService
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"],
     #     },
+    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplication AWS API Documentation
@@ -1845,7 +1860,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

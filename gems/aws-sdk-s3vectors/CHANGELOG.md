@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-12-02)
+------------------
+
+* Feature - Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+
 1.9.0 (2025-11-21)
 ------------------
 

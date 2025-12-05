@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2025-11-26)
+------------------
+
+* Feature - Compute Optimizer now identifies idle NAT Gateway resources for cost optimization based on traffic patterns and backup configuration analysis. Access recommendations via the GetIdleRecommendations API.
+
 1.86.0 (2025-11-21)
 ------------------
 

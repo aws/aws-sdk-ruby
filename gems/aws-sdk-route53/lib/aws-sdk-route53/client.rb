@@ -1303,6 +1303,46 @@ module Aws::Route53
     #     }, 
     #   }
     #
+    # @example Example: TXT record creation
+    #
+    #   # Create a TXT record with a value greater than 255 characters. Break the value string up into multiple lines.
+    #
+    #   resp = client.change_resource_record_sets({
+    #     change_batch: {
+    #       changes: [
+    #         {
+    #           action: "CREATE", 
+    #           resource_record_set: {
+    #             name: "example.com.", 
+    #             resource_records: [
+    #               {
+    #                 value: "\"verification_string = \\\"google-site-verification=abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef\"", 
+    #               }, 
+    #               {
+    #                 value: "\"1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcd\"", 
+    #               }, 
+    #               {
+    #                 value: "\"ef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890\\\"\"", 
+    #               }, 
+    #             ], 
+    #             ttl: 300, 
+    #             type: "TXT", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     hosted_zone_id: "/hostedzone/Z06404571DIQRB3A5ZYSP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     change_info: {
+    #       id: "/change/C08517551SJKVOMY5SXVJ", 
+    #       status: "PENDING", 
+    #       submitted_at: Time.parse("2025-10-15T22:38:22.569000+00:00"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To create geolocation alias resource record sets
     #
     #   # The following example creates four geolocation alias resource record sets that route traffic to ELB load balancers.
@@ -1906,6 +1946,8 @@ module Aws::Route53
     #   resp.hosted_zone.resource_record_set_count #=> Integer
     #   resp.hosted_zone.linked_service.service_principal #=> String
     #   resp.hosted_zone.linked_service.description #=> String
+    #   resp.hosted_zone.features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zone.features.failure_reasons.accelerated_recovery #=> String
     #   resp.change_info.id #=> String
     #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
     #   resp.change_info.submitted_at #=> Time
@@ -3666,6 +3708,8 @@ module Aws::Route53
     #   resp.hosted_zone.resource_record_set_count #=> Integer
     #   resp.hosted_zone.linked_service.service_principal #=> String
     #   resp.hosted_zone.linked_service.description #=> String
+    #   resp.hosted_zone.features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zone.features.failure_reasons.accelerated_recovery #=> String
     #   resp.delegation_set.id #=> String
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
@@ -4378,6 +4422,8 @@ module Aws::Route53
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
     #   resp.hosted_zones[0].linked_service.service_principal #=> String
     #   resp.hosted_zones[0].linked_service.description #=> String
+    #   resp.hosted_zones[0].features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zones[0].features.failure_reasons.accelerated_recovery #=> String
     #   resp.marker #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_marker #=> String
@@ -4510,6 +4556,8 @@ module Aws::Route53
     #   resp.hosted_zones[0].resource_record_set_count #=> Integer
     #   resp.hosted_zones[0].linked_service.service_principal #=> String
     #   resp.hosted_zones[0].linked_service.description #=> String
+    #   resp.hosted_zones[0].features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zones[0].features.failure_reasons.accelerated_recovery #=> String
     #   resp.dns_name #=> String
     #   resp.hosted_zone_id #=> String
     #   resp.is_truncated #=> Boolean
@@ -5861,8 +5909,8 @@ module Aws::Route53
     #   [How Amazon Route 53 Determines Whether an Endpoint Is Healthy][1] in
     #   the *Amazon Route 53 Developer Guide*.
     #
-    #   If you don't specify a value for `FailureThreshold`, the default
-    #   value is three health checks.
+    #   Otherwise, if you don't specify a value for `FailureThreshold`, the
+    #   default value is three health checks.
     #
     #
     #
@@ -6102,6 +6150,8 @@ module Aws::Route53
     #   resp.hosted_zone.resource_record_set_count #=> Integer
     #   resp.hosted_zone.linked_service.service_principal #=> String
     #   resp.hosted_zone.linked_service.description #=> String
+    #   resp.hosted_zone.features.accelerated_recovery_status #=> String, one of "ENABLING", "ENABLE_FAILED", "ENABLING_HOSTED_ZONE_LOCKED", "ENABLED", "DISABLING", "DISABLE_FAILED", "DISABLED", "DISABLING_HOSTED_ZONE_LOCKED"
+    #   resp.hosted_zone.features.failure_reasons.accelerated_recovery #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment AWS API Documentation
     #
@@ -6109,6 +6159,40 @@ module Aws::Route53
     # @param [Hash] params ({})
     def update_hosted_zone_comment(params = {}, options = {})
       req = build_request(:update_hosted_zone_comment, params)
+      req.send_request(options)
+    end
+
+    # Updates the features configuration for a hosted zone. This operation
+    # allows you to enable or disable specific features for your hosted
+    # zone, such as accelerated recovery.
+    #
+    # Accelerated recovery enables you to update DNS records in your public
+    # hosted zone even when the us-east-1 region is unavailable.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone for which you want to update features. This
+    #   is the unique identifier for your hosted zone.
+    #
+    # @option params [Boolean] :enable_accelerated_recovery
+    #   Specifies whether to enable accelerated recovery for the hosted zone.
+    #   Set to `true` to enable accelerated recovery, or `false` to disable
+    #   it.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hosted_zone_features({
+    #     hosted_zone_id: "ResourceId", # required
+    #     enable_accelerated_recovery: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneFeatures AWS API Documentation
+    #
+    # @overload update_hosted_zone_features(params = {})
+    # @param [Hash] params ({})
+    def update_hosted_zone_features(params = {}, options = {})
+      req = build_request(:update_hosted_zone_features, params)
       req.send_request(options)
     end
 
@@ -6254,7 +6338,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

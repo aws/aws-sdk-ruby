@@ -301,6 +301,9 @@ module Aws
                                    after_value: ::String?,
                                    before_value: ::String?
                                  }?
+                               }?,
+                               offer_set_id: {
+                                 value_list: Array[::String]?
                                }?
                              }?,
                              container_product_filters: {
@@ -397,6 +400,35 @@ module Aws
                                visibility: {
                                  value_list: Array[("Limited" | "Public" | "Restricted" | "Draft")]?
                                }?
+                             }?,
+                             offer_set_filters: {
+                               entity_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               name: {
+                                 value_list: Array[::String]?
+                               }?,
+                               state: {
+                                 value_list: Array[("Draft" | "Released")]?
+                               }?,
+                               release_date: {
+                                 date_range: {
+                                   after_value: ::String?,
+                                   before_value: ::String?
+                                 }?
+                               }?,
+                               associated_offer_ids: {
+                                 value_list: Array[::String]?
+                               }?,
+                               solution_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               last_modified_date: {
+                                 date_range: {
+                                   after_value: ::String?,
+                                   before_value: ::String?
+                                 }?
+                               }?
                              }?
                            },
                            ?entity_type_sort: {
@@ -413,7 +445,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              offer_sort: {
-                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate")?,
+                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              container_product_sort: {
@@ -426,6 +458,10 @@ module Aws
                              }?,
                              machine_learning_product_sort: {
                                sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility")?,
+                               sort_order: ("ASCENDING" | "DESCENDING")?
+                             }?,
+                             offer_set_sort: {
+                               sort_by: ("Name" | "State" | "ReleaseDate" | "SolutionId" | "EntityId" | "LastModifiedDate")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?
                            }

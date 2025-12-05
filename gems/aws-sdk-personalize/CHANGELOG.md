@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2025-12-01)
+------------------
+
+* Feature - This release adds support for includedDatasetColumns and performIncrementalUpdate in solution APIs, and rankingInfluence in campaign and batch inference APIs.
+
 1.91.0 (2025-11-21)
 ------------------
 

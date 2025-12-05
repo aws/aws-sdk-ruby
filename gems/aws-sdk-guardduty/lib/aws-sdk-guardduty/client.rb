@@ -1004,6 +1004,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -2668,6 +2670,10 @@ module Aws::GuardDuty
     #   resp.finding_criteria.criterion["String"].greater_than_or_equal #=> Integer
     #   resp.finding_criteria.criterion["String"].less_than #=> Integer
     #   resp.finding_criteria.criterion["String"].less_than_or_equal #=> Integer
+    #   resp.finding_criteria.criterion["String"].matches #=> Array
+    #   resp.finding_criteria.criterion["String"].matches[0] #=> String
+    #   resp.finding_criteria.criterion["String"].not_matches #=> Array
+    #   resp.finding_criteria.criterion["String"].not_matches[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -3217,7 +3223,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].uid #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].name #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].account_id #=> String
-    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER"
+    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER", "ECS_CLUSTER", "ECS_TASK", "AUTOSCALING_AUTO_SCALING_GROUP", "IAM_INSTANCE_PROFILE", "CLOUDFORMATION_STACK", "EC2_LAUNCH_TEMPLATE", "EC2_VPC", "EC2_IMAGE"
     #   resp.findings[0].service.detection.sequence.resources[0].region #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].service #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].cloud_partition #=> String
@@ -3283,6 +3289,27 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].data.kubernetes_workload.kubernetes_resources_types #=> String, one of "PODS", "JOBS", "CRONJOBS", "DEPLOYMENTS", "DAEMONSETS", "STATEFULSETS", "REPLICASETS", "REPLICATIONCONTROLLERS"
     #   resp.findings[0].service.detection.sequence.resources[0].data.container.image #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].data.container.image_uid #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_cluster.status #=> String, one of "ACTIVE", "PROVISIONING", "DEPROVISIONING", "FAILED", "INACTIVE"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_cluster.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_cluster.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.created_at #=> Time
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.task_definition_arn #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.launch_type #=> String, one of "FARGATE", "EC2"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.container_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.container_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.iam_instance_profile.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.iam_instance_profile.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.autoscaling_auto_scaling_group.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.autoscaling_auto_scaling_group.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_launch_template.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_launch_template.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_launch_template.version #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_vpc.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_vpc.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_image.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_image.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.cloudformation_stack.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.cloudformation_stack.ec2_instance_uids[0] #=> String
     #   resp.findings[0].service.detection.sequence.endpoints #=> Array
     #   resp.findings[0].service.detection.sequence.endpoints[0].id #=> String
     #   resp.findings[0].service.detection.sequence.endpoints[0].ip #=> String
@@ -3430,6 +3457,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -4743,6 +4772,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -5807,6 +5838,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -6483,7 +6516,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

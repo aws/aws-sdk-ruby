@@ -524,6 +524,31 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The contextual information associated with an evaluation, including
+    # span context details that identify the specific traces and sessions
+    # being evaluated within the agent's execution flow.
+    #
+    # @note Context is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Context corresponding to the set member.
+    #
+    # @!attribute [rw] span_context
+    #   The span context information that uniquely identifies the trace and
+    #   span being evaluated, including session ID, trace ID, and span ID
+    #   for precise targeting within the agent's execution flow.
+    #   @return [Types::SpanContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Context AWS API Documentation
+    #
+    class Context < Struct.new(
+      :span_context,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SpanContext < Context; end
+      class Unknown < Context; end
+    end
+
     # Contains conversational content for an event payload.
     #
     # @!attribute [rw] content
@@ -684,6 +709,216 @@ module Aws::BedrockAgentCore
       :memory_record_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An exception thrown when attempting to create a resource with an
+    # identifier that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DuplicateIdException AWS API Documentation
+    #
+    class DuplicateIdException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator to use for scoring. Can be a
+    #   built-in evaluator (e.g., `Builtin.Helpfulness`,
+    #   `Builtin.Correctness`) or a custom evaluator ARN created through the
+    #   control plane API.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_input
+    #   The input data containing agent session spans to be evaluated.
+    #   Includes a list of spans in OpenTelemetry format from supported
+    #   frameworks like Strands (AgentCore Runtime) or LangGraph with
+    #   OpenInference instrumentation.
+    #   @return [Types::EvaluationInput]
+    #
+    # @!attribute [rw] evaluation_target
+    #   The specific trace or span IDs to evaluate within the provided
+    #   input. Allows targeting evaluation at different levels: individual
+    #   tool calls, single request-response interactions (traces), or entire
+    #   conversation sessions.
+    #   @return [Types::EvaluationTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluateRequest AWS API Documentation
+    #
+    class EvaluateRequest < Struct.new(
+      :evaluator_id,
+      :evaluation_input,
+      :evaluation_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_results
+    #   The detailed evaluation results containing scores, explanations, and
+    #   metadata. Includes the evaluator information, numerical or
+    #   categorical ratings based on the evaluator's rating scale, and
+    #   token usage statistics for the evaluation process.
+    #   @return [Array<Types::EvaluationResultContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluateResponse AWS API Documentation
+    #
+    class EvaluateResponse < Struct.new(
+      :evaluation_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input data structure containing agent session spans in
+    # OpenTelemetry format. Supports traces from frameworks like Strands
+    # (AgentCore Runtime) and LangGraph with OpenInference instrumentation
+    # for comprehensive evaluation.
+    #
+    # @note EvaluationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] session_spans
+    #   The collection of spans representing agent execution traces within a
+    #   session. Each span contains detailed information about tool calls,
+    #   model interactions, and other agent activities that can be evaluated
+    #   for quality and performance.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationInput AWS API Documentation
+    #
+    class EvaluationInput < Struct.new(
+      :session_spans,
+      :unknown)
+      SENSITIVE = [:session_spans]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SessionSpans < EvaluationInput; end
+      class Unknown < EvaluationInput; end
+    end
+
+    # The comprehensive result of an evaluation containing the score,
+    # explanation, evaluator metadata, and execution details. Provides both
+    # quantitative ratings and qualitative insights about agent performance.
+    #
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the evaluator used to generate
+    #   this result. For custom evaluators, this is the full ARN; for
+    #   built-in evaluators, this follows the pattern
+    #   `Builtin.{EvaluatorName}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator that produced this result.
+    #   This matches the `evaluatorId` provided in the evaluation request
+    #   and can be used to identify which evaluator generated specific
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_name
+    #   The human-readable name of the evaluator used for this evaluation.
+    #   For built-in evaluators, this is the descriptive name (e.g.,
+    #   "Helpfulness", "Correctness"); for custom evaluators, this is
+    #   the user-defined name.
+    #   @return [String]
+    #
+    # @!attribute [rw] explanation
+    #   The detailed explanation provided by the evaluator describing the
+    #   reasoning behind the assigned score. This qualitative feedback helps
+    #   understand why specific ratings were given and provides actionable
+    #   insights for improvement.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The contextual information associated with this evaluation result,
+    #   including span context details that identify the specific traces and
+    #   sessions that were evaluated.
+    #   @return [Types::Context]
+    #
+    # @!attribute [rw] value
+    #   The numerical score assigned by the evaluator according to its
+    #   configured rating scale. For numerical scales, this is a decimal
+    #   value within the defined range. This field is not allowed for
+    #   categorical scales.
+    #   @return [Float]
+    #
+    # @!attribute [rw] label
+    #   The categorical label assigned by the evaluator when using a
+    #   categorical rating scale. This provides a human-readable description
+    #   of the evaluation result (e.g., "Excellent", "Good", "Poor")
+    #   corresponding to the numerical value. For numerical scales, this
+    #   field is optional and provides a natural language explanation of
+    #   what the value means (e.g., value 0.5 = "Somewhat Helpful").
+    #   @return [String]
+    #
+    # @!attribute [rw] token_usage
+    #   The token consumption statistics for this evaluation, including
+    #   input tokens, output tokens, and total tokens used by the underlying
+    #   language model during the evaluation process.
+    #   @return [Types::TokenUsage]
+    #
+    # @!attribute [rw] error_message
+    #   The error message describing what went wrong if the evaluation
+    #   failed. Provides detailed information about evaluation failures to
+    #   help diagnose and resolve issues with evaluator configuration or
+    #   input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code indicating the type of failure that occurred during
+    #   evaluation. Used to programmatically identify and handle different
+    #   categories of evaluation errors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationResultContent AWS API Documentation
+    #
+    class EvaluationResultContent < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :evaluator_name,
+      :explanation,
+      :context,
+      :value,
+      :label,
+      :token_usage,
+      :error_message,
+      :error_code)
+      SENSITIVE = [:explanation]
+      include Aws::Structure
+    end
+
+    # The specification of which trace or span IDs to evaluate within the
+    # provided input data. Allows precise targeting of evaluation at
+    # different levels: tool calls, traces, or sessions.
+    #
+    # @note EvaluationTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] span_ids
+    #   The list of specific span IDs to evaluate within the provided
+    #   traces. Used to target evaluation at individual tool calls or
+    #   specific operations within the agent's execution flow.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] trace_ids
+    #   The list of trace IDs to evaluate, representing complete
+    #   request-response interactions. Used to evaluate entire conversation
+    #   turns or specific agent interactions within a session.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationTarget AWS API Documentation
+    #
+    class EvaluationTarget < Struct.new(
+      :span_ids,
+      :trace_ids,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SpanIds < EvaluationTarget; end
+      class TraceIds < EvaluationTarget; end
+      class Unknown < EvaluationTarget; end
     end
 
     # Contains information about an event in an AgentCore Memory resource.
@@ -2078,6 +2313,33 @@ module Aws::BedrockAgentCore
       class Unknown < MemoryContent; end
     end
 
+    # Filters to apply to metadata associated with a memory. Specify the
+    # metadata key and value in the `left` and `right` fields and use the
+    # `operator` field to define the relationship to match.
+    #
+    # @!attribute [rw] left
+    #   Left expression of the event metadata filter.
+    #   @return [Types::LeftExpression]
+    #
+    # @!attribute [rw] operator
+    #   The relationship between the metadata key and value to match when
+    #   applying the metadata filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] right
+    #   Right expression of the `eventMetadata`filter.
+    #   @return [Types::RightExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryMetadataFilterExpression AWS API Documentation
+    #
+    class MemoryMetadataFilterExpression < Struct.new(
+      :left,
+      :operator,
+      :right)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a memory record in an AgentCore Memory
     # resource.
     #
@@ -2102,6 +2364,10 @@ module Aws::BedrockAgentCore
     #   The timestamp when the memory record was created.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata
+    #   A map of metadata key-value pairs associated with a memory record.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecord AWS API Documentation
     #
     class MemoryRecord < Struct.new(
@@ -2109,7 +2375,8 @@ module Aws::BedrockAgentCore
       :content,
       :memory_strategy_id,
       :namespaces,
-      :created_at)
+      :created_at,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2230,6 +2497,10 @@ module Aws::BedrockAgentCore
     #   search query.
     #   @return [Float]
     #
+    # @!attribute [rw] metadata
+    #   A map of metadata key-value pairs associated with a memory record.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordSummary AWS API Documentation
     #
     class MemoryRecordSummary < Struct.new(
@@ -2238,7 +2509,8 @@ module Aws::BedrockAgentCore
       :memory_strategy_id,
       :namespaces,
       :created_at,
-      :score)
+      :score,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2511,12 +2783,17 @@ module Aws::BedrockAgentCore
     #   value is used for semantic search ranking.
     #   @return [Integer]
     #
+    # @!attribute [rw] metadata_filters
+    #   Filters to apply to metadata associated with a memory.
+    #   @return [Array<Types::MemoryMetadataFilterExpression>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SearchCriteria AWS API Documentation
     #
     class SearchCriteria < Struct.new(
       :search_query,
       :memory_strategy_id,
-      :top_k)
+      :top_k,
+      :metadata_filters)
       SENSITIVE = [:search_query]
       include Aws::Structure
     end
@@ -2572,6 +2849,39 @@ module Aws::BedrockAgentCore
       :session_id,
       :actor_id,
       :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contextual information that uniquely identifies a span within the
+    # distributed tracing system. Contains session, trace, and span
+    # identifiers used to correlate evaluation results with specific agent
+    # execution points.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session containing this span. Sessions
+    #   represent complete conversation flows and are detected using
+    #   configurable `SessionTimeoutMinutes` (default 15 minutes).
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_id
+    #   The unique identifier of the trace containing this span. Traces
+    #   represent individual request-response interactions within a session
+    #   and group related spans together.
+    #   @return [String]
+    #
+    # @!attribute [rw] span_id
+    #   The unique identifier of the specific span being referenced. Spans
+    #   represent individual operations like tool calls, model invocations,
+    #   or other discrete actions within the agent's execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SpanContext AWS API Documentation
+    #
+    class SpanContext < Struct.new(
+      :session_id,
+      :trace_id,
+      :span_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2995,6 +3305,38 @@ module Aws::BedrockAgentCore
     class ThrottlingException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The token consumption statistics for language model operations during
+    # evaluation. Provides detailed breakdown of input, output, and total
+    # tokens used for cost tracking and performance monitoring.
+    #
+    # @!attribute [rw] input_tokens
+    #   The number of tokens consumed for input processing during the
+    #   evaluation. Includes tokens from the evaluation prompt, agent
+    #   traces, and any additional context provided to the evaluator model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_tokens
+    #   The number of tokens generated by the evaluator model in its
+    #   response. Includes tokens for the score, explanation, and any
+    #   additional output produced during the evaluation process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_tokens
+    #   The total number of tokens consumed during the evaluation,
+    #   calculated as the sum of input and output tokens. Used for cost
+    #   calculation and rate limiting within the service limits.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TokenUsage AWS API Documentation
+    #
+    class TokenUsage < Struct.new(
+      :input_tokens,
+      :output_tokens,
+      :total_tokens)
       SENSITIVE = []
       include Aws::Structure
     end

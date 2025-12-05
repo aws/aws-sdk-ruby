@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-12-02)
+------------------
+
+* Feature - S3 Access Points support for FSx for NetApp ONTAP
+
 1.128.0 (2025-11-21)
 ------------------
 

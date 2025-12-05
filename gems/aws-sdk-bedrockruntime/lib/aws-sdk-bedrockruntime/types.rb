@@ -261,6 +261,70 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # An audio content block that contains audio data in various supported
+    # formats.
+    #
+    # @!attribute [rw] format
+    #   The format of the audio data, such as MP3, WAV, FLAC, or other
+    #   supported audio formats.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the audio data, which can be provided as raw bytes or
+    #   an S3 location.
+    #   @return [Types::AudioSource]
+    #
+    # @!attribute [rw] error
+    #   Error information if the audio block could not be processed or
+    #   contains invalid data.
+    #   @return [Types::ErrorBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/AudioBlock AWS API Documentation
+    #
+    class AudioBlock < Struct.new(
+      :format,
+      :source,
+      :error)
+      SENSITIVE = [:source, :error]
+      include Aws::Structure
+    end
+
+    # The source of audio data, which can be provided either as raw bytes or
+    # a reference to an S3 location.
+    #
+    # @note AudioSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AudioSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AudioSource corresponding to the set member.
+    #
+    # @!attribute [rw] bytes
+    #   Audio data encoded in base64.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_location
+    #   A reference to audio data stored in an Amazon S3 bucket. To see
+    #   which models support S3 uploads, see [Supported models and features
+    #   for Converse][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/AudioSource AWS API Documentation
+    #
+    class AudioSource < Struct.new(
+      :bytes,
+      :s3_location,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Bytes < AudioSource; end
+      class S3Location < AudioSource; end
+      class Unknown < AudioSource; end
+    end
+
     # The Model automatically decides if a tool should be called or whether
     # to generate text instead. For example, `{"auto" : {}}`. For more
     # information, see [Call a tool with the Converse API][1] in the Amazon
@@ -605,6 +669,10 @@ module Aws::BedrockRuntime
     #   Video to include in the message.
     #   @return [Types::VideoBlock]
     #
+    # @!attribute [rw] audio
+    #   An audio content block containing audio data in the conversation.
+    #   @return [Types::AudioBlock]
+    #
     # @!attribute [rw] tool_use
     #   Information about a tool use request from a model.
     #   @return [Types::ToolUseBlock]
@@ -649,6 +717,7 @@ module Aws::BedrockRuntime
       :image,
       :document,
       :video,
+      :audio,
       :tool_use,
       :tool_result,
       :guard_content,
@@ -665,6 +734,7 @@ module Aws::BedrockRuntime
       class Image < ContentBlock; end
       class Document < ContentBlock; end
       class Video < ContentBlock; end
+      class Audio < ContentBlock; end
       class ToolUse < ContentBlock; end
       class ToolResult < ContentBlock; end
       class GuardContent < ContentBlock; end
@@ -702,6 +772,10 @@ module Aws::BedrockRuntime
     #   response generation process.
     #   @return [Types::CitationsDelta]
     #
+    # @!attribute [rw] image
+    #   A streaming delta event containing incremental image data.
+    #   @return [Types::ImageBlockDelta]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ContentBlockDelta AWS API Documentation
     #
     class ContentBlockDelta < Struct.new(
@@ -710,6 +784,7 @@ module Aws::BedrockRuntime
       :tool_result,
       :reasoning_content,
       :citation,
+      :image,
       :unknown)
       SENSITIVE = [:reasoning_content]
       include Aws::Structure
@@ -720,6 +795,7 @@ module Aws::BedrockRuntime
       class ToolResult < ContentBlockDelta; end
       class ReasoningContent < ContentBlockDelta; end
       class Citation < ContentBlockDelta; end
+      class Image < ContentBlockDelta; end
       class Unknown < ContentBlockDelta; end
     end
 
@@ -755,11 +831,16 @@ module Aws::BedrockRuntime
     #   The
     #   @return [Types::ToolResultBlockStart]
     #
+    # @!attribute [rw] image
+    #   The initial event indicating the start of a streaming image block.
+    #   @return [Types::ImageBlockStart]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ContentBlockStart AWS API Documentation
     #
     class ContentBlockStart < Struct.new(
       :tool_use,
       :tool_result,
+      :image,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -767,6 +848,7 @@ module Aws::BedrockRuntime
 
       class ToolUse < ContentBlockStart; end
       class ToolResult < ContentBlockStart; end
+      class Image < ContentBlockStart; end
       class Unknown < ContentBlockStart; end
     end
 
@@ -1637,6 +1719,21 @@ module Aws::BedrockRuntime
       class Text < DocumentSource; end
       class Content < DocumentSource; end
       class Unknown < DocumentSource; end
+    end
+
+    # A block containing error information when content processing fails.
+    #
+    # @!attribute [rw] message
+    #   A human-readable error message describing what went wrong during
+    #   content processing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ErrorBlock AWS API Documentation
+    #
+    class ErrorBlock < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] invocation_arn
@@ -2930,11 +3027,53 @@ module Aws::BedrockRuntime
     #   The source for the image.
     #   @return [Types::ImageSource]
     #
+    # @!attribute [rw] error
+    #   Error information if the image block could not be processed or
+    #   contains invalid data.
+    #   @return [Types::ErrorBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageBlock AWS API Documentation
     #
     class ImageBlock < Struct.new(
       :format,
-      :source)
+      :source,
+      :error)
+      SENSITIVE = [:source, :error]
+      include Aws::Structure
+    end
+
+    # A streaming delta event that contains incremental image data during
+    # streaming responses.
+    #
+    # @!attribute [rw] source
+    #   The incremental image source data for this delta event.
+    #   @return [Types::ImageSource]
+    #
+    # @!attribute [rw] error
+    #   Error information if this image delta could not be processed.
+    #   @return [Types::ErrorBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageBlockDelta AWS API Documentation
+    #
+    class ImageBlockDelta < Struct.new(
+      :source,
+      :error)
+      SENSITIVE = [:source, :error]
+      include Aws::Structure
+    end
+
+    # The initial event in a streaming image block that indicates the start
+    # of image content.
+    #
+    # @!attribute [rw] format
+    #   The format of the image data that will be streamed in subsequent
+    #   delta events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageBlockStart AWS API Documentation
+    #
+    class ImageBlockStart < Struct.new(
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4364,16 +4503,27 @@ module Aws::BedrockRuntime
     #   The reasoning the model used to return the output.
     #   @return [String]
     #
+    # @!attribute [rw] json
+    #   The JSON schema for the tool result content block. see [JSON Schema
+    #   Reference][1].
+    #
+    #
+    #
+    #   [1]: https://json-schema.org/understanding-json-schema/reference
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolResultBlockDelta AWS API Documentation
     #
     class ToolResultBlockDelta < Struct.new(
       :text,
+      :json,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Text < ToolResultBlockDelta; end
+      class Json < ToolResultBlockDelta; end
       class Unknown < ToolResultBlockDelta; end
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-12-01)
+------------------
+
+* Feature - Support audio and video content retrieval on Bedrock Knowledge Bases.
+
 1.67.0 (2025-11-21)
 ------------------
 

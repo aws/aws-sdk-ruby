@@ -2740,6 +2740,11 @@ module Aws::EC2
     NatGatewayAddress = Shapes::StructureShape.new(name: 'NatGatewayAddress')
     NatGatewayAddressList = Shapes::ListShape.new(name: 'NatGatewayAddressList')
     NatGatewayAddressStatus = Shapes::StringShape.new(name: 'NatGatewayAddressStatus')
+    NatGatewayApplianceModifyState = Shapes::StringShape.new(name: 'NatGatewayApplianceModifyState')
+    NatGatewayApplianceState = Shapes::StringShape.new(name: 'NatGatewayApplianceState')
+    NatGatewayApplianceType = Shapes::StringShape.new(name: 'NatGatewayApplianceType')
+    NatGatewayAttachedAppliance = Shapes::StructureShape.new(name: 'NatGatewayAttachedAppliance')
+    NatGatewayAttachedApplianceList = Shapes::ListShape.new(name: 'NatGatewayAttachedApplianceList')
     NatGatewayId = Shapes::StringShape.new(name: 'NatGatewayId')
     NatGatewayIdStringList = Shapes::ListShape.new(name: 'NatGatewayIdStringList')
     NatGatewayList = Shapes::ListShape.new(name: 'NatGatewayList')
@@ -14958,6 +14963,7 @@ module Aws::EC2
     NatGateway.add_member(:availability_mode, Shapes::ShapeRef.new(shape: AvailabilityMode, location_name: "availabilityMode"))
     NatGateway.add_member(:auto_scaling_ips, Shapes::ShapeRef.new(shape: AutoScalingIpsState, location_name: "autoScalingIps"))
     NatGateway.add_member(:auto_provision_zones, Shapes::ShapeRef.new(shape: AutoProvisionZonesState, location_name: "autoProvisionZones"))
+    NatGateway.add_member(:attached_appliances, Shapes::ShapeRef.new(shape: NatGatewayAttachedApplianceList, location_name: "attachedApplianceSet"))
     NatGateway.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "routeTableId"))
     NatGateway.struct_class = Types::NatGateway
 
@@ -14974,6 +14980,17 @@ module Aws::EC2
     NatGatewayAddress.struct_class = Types::NatGatewayAddress
 
     NatGatewayAddressList.member = Shapes::ShapeRef.new(shape: NatGatewayAddress, location_name: "item")
+
+    NatGatewayAttachedAppliance.add_member(:type, Shapes::ShapeRef.new(shape: NatGatewayApplianceType, location_name: "type"))
+    NatGatewayAttachedAppliance.add_member(:appliance_arn, Shapes::ShapeRef.new(shape: String, location_name: "applianceArn"))
+    NatGatewayAttachedAppliance.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointId"))
+    NatGatewayAttachedAppliance.add_member(:attachment_state, Shapes::ShapeRef.new(shape: NatGatewayApplianceState, location_name: "attachmentState"))
+    NatGatewayAttachedAppliance.add_member(:modification_state, Shapes::ShapeRef.new(shape: NatGatewayApplianceModifyState, location_name: "modificationState"))
+    NatGatewayAttachedAppliance.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
+    NatGatewayAttachedAppliance.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    NatGatewayAttachedAppliance.struct_class = Types::NatGatewayAttachedAppliance
+
+    NatGatewayAttachedApplianceList.member = Shapes::ShapeRef.new(shape: NatGatewayAttachedAppliance, location_name: "item")
 
     NatGatewayIdStringList.member = Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "item")
 

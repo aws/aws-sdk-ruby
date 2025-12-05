@@ -90,6 +90,20 @@ module Aws
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _AssociateSourceToS3TableIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSourceToS3TableIntegrationResponse]
+        def identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#associate_source_to_s3_table_integration-instance_method
+      def associate_source_to_s3_table_integration: (
+                                                      integration_arn: ::String,
+                                                      data_source: {
+                                                        name: ::String,
+                                                        type: ::String?
+                                                      }
+                                                    ) -> _AssociateSourceToS3TableIntegrationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceToS3TableIntegrationResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#cancel_export_task-instance_method
       def cancel_export_task: (
                                 task_id: ::String
@@ -558,6 +572,16 @@ module Aws
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DisassociateSourceFromS3TableIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSourceFromS3TableIntegrationResponse]
+        def identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#disassociate_source_from_s3_table_integration-instance_method
+      def disassociate_source_from_s3_table_integration: (
+                                                           identifier: ::String
+                                                         ) -> _DisassociateSourceFromS3TableIntegrationResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSourceFromS3TableIntegrationResponseSuccess
+
       interface _FilterLogEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::FilterLogEventsResponse]
         def events: () -> ::Array[Types::FilteredLogEvent]
@@ -683,6 +707,17 @@ module Aws
                           ) -> _GetLogEventsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogEventsResponseSuccess
 
+      interface _GetLogFieldsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogFieldsResponse]
+        def log_fields: () -> ::Array[Types::LogFieldsListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_fields-instance_method
+      def get_log_fields: (
+                            data_source_name: ::String,
+                            data_source_type: ::String
+                          ) -> _GetLogFieldsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogFieldsResponseSuccess
+
       interface _GetLogGroupFieldsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLogGroupFieldsResponse]
         def log_group_fields: () -> ::Array[Types::LogGroupField]
@@ -789,6 +824,29 @@ module Aws
                            ) -> _GetTransformerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransformerResponseSuccess
 
+      interface _ListAggregateLogGroupSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAggregateLogGroupSummariesResponse]
+        def aggregate_log_group_summaries: () -> ::Array[Types::AggregateLogGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_aggregate_log_group_summaries-instance_method
+      def list_aggregate_log_group_summaries: (
+                                                ?account_identifiers: Array[::String],
+                                                ?include_linked_accounts: bool,
+                                                ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                                                ?log_group_name_pattern: ::String,
+                                                ?data_sources: Array[
+                                                  {
+                                                    name: ::String,
+                                                    type: ::String?
+                                                  },
+                                                ],
+                                                group_by: ("DATA_SOURCE_NAME_TYPE_AND_FORMAT" | "DATA_SOURCE_NAME_AND_TYPE"),
+                                                ?next_token: ::String,
+                                                ?limit: ::Integer
+                                              ) -> _ListAggregateLogGroupSummariesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAggregateLogGroupSummariesResponseSuccess
+
       interface _ListAnomaliesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAnomaliesResponse]
         def anomalies: () -> ::Array[Types::Anomaly]
@@ -840,7 +898,14 @@ module Aws
                              ?include_linked_accounts: bool,
                              ?account_identifiers: Array[::String],
                              ?next_token: ::String,
-                             ?limit: ::Integer
+                             ?limit: ::Integer,
+                             ?data_sources: Array[
+                               {
+                                 name: ::String,
+                                 type: ::String?
+                               },
+                             ],
+                             ?field_index_names: Array[::String]
                            ) -> _ListLogGroupsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogGroupsResponseSuccess
 
@@ -869,6 +934,19 @@ module Aws
                                     ?state: ("ENABLED" | "DISABLED")
                                   ) -> _ListScheduledQueriesResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduledQueriesResponseSuccess
+
+      interface _ListSourcesForS3TableIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourcesForS3TableIntegrationResponse]
+        def sources: () -> ::Array[Types::S3TableIntegrationSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_sources_for_s3_table_integration-instance_method
+      def list_sources_for_s3_table_integration: (
+                                                   integration_arn: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListSourcesForS3TableIntegrationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourcesForS3TableIntegrationResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]

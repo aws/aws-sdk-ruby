@@ -39,6 +39,8 @@ module Aws::NetworkFirewall
     AssociateSubnetsRequest = Shapes::StructureShape.new(name: 'AssociateSubnetsRequest')
     AssociateSubnetsResponse = Shapes::StructureShape.new(name: 'AssociateSubnetsResponse')
     AssociationSyncState = Shapes::MapShape.new(name: 'AssociationSyncState')
+    AttachRuleGroupsToProxyConfigurationRequest = Shapes::StructureShape.new(name: 'AttachRuleGroupsToProxyConfigurationRequest')
+    AttachRuleGroupsToProxyConfigurationResponse = Shapes::StructureShape.new(name: 'AttachRuleGroupsToProxyConfigurationResponse')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
     AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
@@ -57,16 +59,30 @@ module Aws::NetworkFirewall
     Certificates = Shapes::ListShape.new(name: 'Certificates')
     CheckCertificateRevocationStatusActions = Shapes::StructureShape.new(name: 'CheckCertificateRevocationStatusActions')
     CollectionMember_String = Shapes::StringShape.new(name: 'CollectionMember_String')
+    ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
+    ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
     ConfigurationSyncState = Shapes::StringShape.new(name: 'ConfigurationSyncState')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateFirewallPolicyRequest = Shapes::StructureShape.new(name: 'CreateFirewallPolicyRequest')
     CreateFirewallPolicyResponse = Shapes::StructureShape.new(name: 'CreateFirewallPolicyResponse')
     CreateFirewallRequest = Shapes::StructureShape.new(name: 'CreateFirewallRequest')
     CreateFirewallResponse = Shapes::StructureShape.new(name: 'CreateFirewallResponse')
+    CreateProxyConfigurationRequest = Shapes::StructureShape.new(name: 'CreateProxyConfigurationRequest')
+    CreateProxyConfigurationResponse = Shapes::StructureShape.new(name: 'CreateProxyConfigurationResponse')
+    CreateProxyRequest = Shapes::StructureShape.new(name: 'CreateProxyRequest')
+    CreateProxyResponse = Shapes::StructureShape.new(name: 'CreateProxyResponse')
+    CreateProxyRule = Shapes::StructureShape.new(name: 'CreateProxyRule')
+    CreateProxyRuleGroupRequest = Shapes::StructureShape.new(name: 'CreateProxyRuleGroupRequest')
+    CreateProxyRuleGroupResponse = Shapes::StructureShape.new(name: 'CreateProxyRuleGroupResponse')
+    CreateProxyRuleList = Shapes::ListShape.new(name: 'CreateProxyRuleList')
+    CreateProxyRulesByRequestPhase = Shapes::StructureShape.new(name: 'CreateProxyRulesByRequestPhase')
+    CreateProxyRulesRequest = Shapes::StructureShape.new(name: 'CreateProxyRulesRequest')
+    CreateProxyRulesResponse = Shapes::StructureShape.new(name: 'CreateProxyRulesResponse')
     CreateRuleGroupRequest = Shapes::StructureShape.new(name: 'CreateRuleGroupRequest')
     CreateRuleGroupResponse = Shapes::StructureShape.new(name: 'CreateRuleGroupResponse')
     CreateTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'CreateTLSInspectionConfigurationRequest')
     CreateTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'CreateTLSInspectionConfigurationResponse')
+    CreateTime = Shapes::TimestampShape.new(name: 'CreateTime')
     CreateVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'CreateVpcEndpointAssociationRequest')
     CreateVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointAssociationResponse')
     CustomAction = Shapes::StructureShape.new(name: 'CustomAction')
@@ -78,12 +94,21 @@ module Aws::NetworkFirewall
     DeleteFirewallResponse = Shapes::StructureShape.new(name: 'DeleteFirewallResponse')
     DeleteNetworkFirewallTransitGatewayAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteNetworkFirewallTransitGatewayAttachmentRequest')
     DeleteNetworkFirewallTransitGatewayAttachmentResponse = Shapes::StructureShape.new(name: 'DeleteNetworkFirewallTransitGatewayAttachmentResponse')
+    DeleteProxyConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteProxyConfigurationRequest')
+    DeleteProxyConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteProxyConfigurationResponse')
+    DeleteProxyRequest = Shapes::StructureShape.new(name: 'DeleteProxyRequest')
+    DeleteProxyResponse = Shapes::StructureShape.new(name: 'DeleteProxyResponse')
+    DeleteProxyRuleGroupRequest = Shapes::StructureShape.new(name: 'DeleteProxyRuleGroupRequest')
+    DeleteProxyRuleGroupResponse = Shapes::StructureShape.new(name: 'DeleteProxyRuleGroupResponse')
+    DeleteProxyRulesRequest = Shapes::StructureShape.new(name: 'DeleteProxyRulesRequest')
+    DeleteProxyRulesResponse = Shapes::StructureShape.new(name: 'DeleteProxyRulesResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteRuleGroupRequest = Shapes::StructureShape.new(name: 'DeleteRuleGroupRequest')
     DeleteRuleGroupResponse = Shapes::StructureShape.new(name: 'DeleteRuleGroupResponse')
     DeleteTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteTLSInspectionConfigurationRequest')
     DeleteTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteTLSInspectionConfigurationResponse')
+    DeleteTime = Shapes::TimestampShape.new(name: 'DeleteTime')
     DeleteVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointAssociationRequest')
     DeleteVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'DeleteVpcEndpointAssociationResponse')
     DescribeFirewallMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFirewallMetadataRequest')
@@ -96,6 +121,15 @@ module Aws::NetworkFirewall
     DescribeFlowOperationResponse = Shapes::StructureShape.new(name: 'DescribeFlowOperationResponse')
     DescribeLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationRequest')
     DescribeLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationResponse')
+    DescribeProxyConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeProxyConfigurationRequest')
+    DescribeProxyConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeProxyConfigurationResponse')
+    DescribeProxyRequest = Shapes::StructureShape.new(name: 'DescribeProxyRequest')
+    DescribeProxyResource = Shapes::StructureShape.new(name: 'DescribeProxyResource')
+    DescribeProxyResponse = Shapes::StructureShape.new(name: 'DescribeProxyResponse')
+    DescribeProxyRuleGroupRequest = Shapes::StructureShape.new(name: 'DescribeProxyRuleGroupRequest')
+    DescribeProxyRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeProxyRuleGroupResponse')
+    DescribeProxyRuleRequest = Shapes::StructureShape.new(name: 'DescribeProxyRuleRequest')
+    DescribeProxyRuleResponse = Shapes::StructureShape.new(name: 'DescribeProxyRuleResponse')
     DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
     DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
     DescribeRuleGroupMetadataRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupMetadataRequest')
@@ -110,6 +144,8 @@ module Aws::NetworkFirewall
     DescribeVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'DescribeVpcEndpointAssociationResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Destination = Shapes::StringShape.new(name: 'Destination')
+    DetachRuleGroupsFromProxyConfigurationRequest = Shapes::StructureShape.new(name: 'DetachRuleGroupsFromProxyConfigurationRequest')
+    DetachRuleGroupsFromProxyConfigurationResponse = Shapes::StructureShape.new(name: 'DetachRuleGroupsFromProxyConfigurationResponse')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
@@ -127,6 +163,8 @@ module Aws::NetworkFirewall
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     EndpointId = Shapes::StringShape.new(name: 'EndpointId')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FailureCode = Shapes::StringShape.new(name: 'FailureCode')
+    FailureMessage = Shapes::StringShape.new(name: 'FailureMessage')
     Firewall = Shapes::StructureShape.new(name: 'Firewall')
     FirewallMetadata = Shapes::StructureShape.new(name: 'FirewallMetadata')
     FirewallPolicies = Shapes::ListShape.new(name: 'FirewallPolicies')
@@ -167,6 +205,7 @@ module Aws::NetworkFirewall
     IPSetReferenceName = Shapes::StringShape.new(name: 'IPSetReferenceName')
     IPSets = Shapes::MapShape.new(name: 'IPSets')
     IdentifiedType = Shapes::StringShape.new(name: 'IdentifiedType')
+    InsertPosition = Shapes::IntegerShape.new(name: 'InsertPosition')
     InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -188,6 +227,12 @@ module Aws::NetworkFirewall
     ListFlowOperationResultsResponse = Shapes::StructureShape.new(name: 'ListFlowOperationResultsResponse')
     ListFlowOperationsRequest = Shapes::StructureShape.new(name: 'ListFlowOperationsRequest')
     ListFlowOperationsResponse = Shapes::StructureShape.new(name: 'ListFlowOperationsResponse')
+    ListProxiesRequest = Shapes::StructureShape.new(name: 'ListProxiesRequest')
+    ListProxiesResponse = Shapes::StructureShape.new(name: 'ListProxiesResponse')
+    ListProxyConfigurationsRequest = Shapes::StructureShape.new(name: 'ListProxyConfigurationsRequest')
+    ListProxyConfigurationsResponse = Shapes::StructureShape.new(name: 'ListProxyConfigurationsResponse')
+    ListProxyRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListProxyRuleGroupsRequest')
+    ListProxyRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListProxyRuleGroupsResponse')
     ListRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListRuleGroupsRequest')
     ListRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListRuleGroupsResponse')
     ListTLSInspectionConfigurationsRequest = Shapes::StructureShape.new(name: 'ListTLSInspectionConfigurationsRequest')
@@ -196,6 +241,11 @@ module Aws::NetworkFirewall
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVpcEndpointAssociationsRequest = Shapes::StructureShape.new(name: 'ListVpcEndpointAssociationsRequest')
     ListVpcEndpointAssociationsResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointAssociationsResponse')
+    ListenerProperties = Shapes::ListShape.new(name: 'ListenerProperties')
+    ListenerPropertiesRequest = Shapes::ListShape.new(name: 'ListenerPropertiesRequest')
+    ListenerProperty = Shapes::StructureShape.new(name: 'ListenerProperty')
+    ListenerPropertyRequest = Shapes::StructureShape.new(name: 'ListenerPropertyRequest')
+    ListenerPropertyType = Shapes::StringShape.new(name: 'ListenerPropertyType')
     ListingName = Shapes::StringShape.new(name: 'ListingName')
     LogDestinationConfig = Shapes::StructureShape.new(name: 'LogDestinationConfig')
     LogDestinationConfigs = Shapes::ListShape.new(name: 'LogDestinationConfigs')
@@ -205,6 +255,8 @@ module Aws::NetworkFirewall
     LogType = Shapes::StringShape.new(name: 'LogType')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MatchAttributes = Shapes::StructureShape.new(name: 'MatchAttributes')
+    NatGatewayId = Shapes::StringShape.new(name: 'NatGatewayId')
+    NatGatewayPort = Shapes::IntegerShape.new(name: 'NatGatewayPort')
     NumberOfAssociations = Shapes::IntegerShape.new(name: 'NumberOfAssociations')
     OverrideAction = Shapes::StringShape.new(name: 'OverrideAction')
     PacketCount = Shapes::IntegerShape.new(name: 'PacketCount')
@@ -221,11 +273,45 @@ module Aws::NetworkFirewall
     PortSet = Shapes::StructureShape.new(name: 'PortSet')
     PortSets = Shapes::MapShape.new(name: 'PortSets')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
+    PrivateDNSName = Shapes::StringShape.new(name: 'PrivateDNSName')
     ProductId = Shapes::StringShape.new(name: 'ProductId')
     ProtocolNumber = Shapes::IntegerShape.new(name: 'ProtocolNumber')
     ProtocolNumbers = Shapes::ListShape.new(name: 'ProtocolNumbers')
     ProtocolString = Shapes::StringShape.new(name: 'ProtocolString')
     ProtocolStrings = Shapes::ListShape.new(name: 'ProtocolStrings')
+    Proxies = Shapes::ListShape.new(name: 'Proxies')
+    Proxy = Shapes::StructureShape.new(name: 'Proxy')
+    ProxyConditionValue = Shapes::StringShape.new(name: 'ProxyConditionValue')
+    ProxyConditionValueList = Shapes::ListShape.new(name: 'ProxyConditionValueList')
+    ProxyConfigDefaultRulePhaseActionsRequest = Shapes::StructureShape.new(name: 'ProxyConfigDefaultRulePhaseActionsRequest')
+    ProxyConfigRuleGroup = Shapes::StructureShape.new(name: 'ProxyConfigRuleGroup')
+    ProxyConfigRuleGroupPriority = Shapes::IntegerShape.new(name: 'ProxyConfigRuleGroupPriority')
+    ProxyConfigRuleGroupSet = Shapes::ListShape.new(name: 'ProxyConfigRuleGroupSet')
+    ProxyConfigRuleGroupType = Shapes::StringShape.new(name: 'ProxyConfigRuleGroupType')
+    ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
+    ProxyConfigurationMetadata = Shapes::StructureShape.new(name: 'ProxyConfigurationMetadata')
+    ProxyConfigurations = Shapes::ListShape.new(name: 'ProxyConfigurations')
+    ProxyMetadata = Shapes::StructureShape.new(name: 'ProxyMetadata')
+    ProxyModifyState = Shapes::StringShape.new(name: 'ProxyModifyState')
+    ProxyRule = Shapes::StructureShape.new(name: 'ProxyRule')
+    ProxyRuleCondition = Shapes::StructureShape.new(name: 'ProxyRuleCondition')
+    ProxyRuleConditionList = Shapes::ListShape.new(name: 'ProxyRuleConditionList')
+    ProxyRuleGroup = Shapes::StructureShape.new(name: 'ProxyRuleGroup')
+    ProxyRuleGroupAttachment = Shapes::StructureShape.new(name: 'ProxyRuleGroupAttachment')
+    ProxyRuleGroupAttachmentList = Shapes::ListShape.new(name: 'ProxyRuleGroupAttachmentList')
+    ProxyRuleGroupMetadata = Shapes::StructureShape.new(name: 'ProxyRuleGroupMetadata')
+    ProxyRuleGroupPriority = Shapes::StructureShape.new(name: 'ProxyRuleGroupPriority')
+    ProxyRuleGroupPriorityList = Shapes::ListShape.new(name: 'ProxyRuleGroupPriorityList')
+    ProxyRuleGroupPriorityResult = Shapes::StructureShape.new(name: 'ProxyRuleGroupPriorityResult')
+    ProxyRuleGroupPriorityResultList = Shapes::ListShape.new(name: 'ProxyRuleGroupPriorityResultList')
+    ProxyRuleGroupPriorityResultPriority = Shapes::IntegerShape.new(name: 'ProxyRuleGroupPriorityResultPriority')
+    ProxyRuleGroups = Shapes::ListShape.new(name: 'ProxyRuleGroups')
+    ProxyRuleList = Shapes::ListShape.new(name: 'ProxyRuleList')
+    ProxyRulePhaseAction = Shapes::StringShape.new(name: 'ProxyRulePhaseAction')
+    ProxyRulePriority = Shapes::StructureShape.new(name: 'ProxyRulePriority')
+    ProxyRulePriorityList = Shapes::ListShape.new(name: 'ProxyRulePriorityList')
+    ProxyRulesByRequestPhase = Shapes::StructureShape.new(name: 'ProxyRulesByRequestPhase')
+    ProxyState = Shapes::StringShape.new(name: 'ProxyState')
     PublishMetricAction = Shapes::StructureShape.new(name: 'PublishMetricAction')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
@@ -234,10 +320,12 @@ module Aws::NetworkFirewall
     RejectNetworkFirewallTransitGatewayAttachmentResponse = Shapes::StructureShape.new(name: 'RejectNetworkFirewallTransitGatewayAttachmentResponse')
     ReportTime = Shapes::TimestampShape.new(name: 'ReportTime')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceManagedStatus = Shapes::StringShape.new(name: 'ResourceManagedStatus')
     ResourceManagedType = Shapes::StringShape.new(name: 'ResourceManagedType')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwnerCheckException = Shapes::StructureShape.new(name: 'ResourceOwnerCheckException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
@@ -246,6 +334,7 @@ module Aws::NetworkFirewall
     RuleDefinition = Shapes::StructureShape.new(name: 'RuleDefinition')
     RuleGroup = Shapes::StructureShape.new(name: 'RuleGroup')
     RuleGroupMetadata = Shapes::StructureShape.new(name: 'RuleGroupMetadata')
+    RuleGroupRequestPhase = Shapes::StringShape.new(name: 'RuleGroupRequestPhase')
     RuleGroupResponse = Shapes::StructureShape.new(name: 'RuleGroupResponse')
     RuleGroupType = Shapes::StringShape.new(name: 'RuleGroupType')
     RuleGroups = Shapes::ListShape.new(name: 'RuleGroups')
@@ -330,6 +419,9 @@ module Aws::NetworkFirewall
     TcpIdleTimeoutRangeBound = Shapes::IntegerShape.new(name: 'TcpIdleTimeoutRangeBound')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TlsCertificateData = Shapes::StructureShape.new(name: 'TlsCertificateData')
+    TlsInterceptMode = Shapes::StringShape.new(name: 'TlsInterceptMode')
+    TlsInterceptProperties = Shapes::StructureShape.new(name: 'TlsInterceptProperties')
+    TlsInterceptPropertiesRequest = Shapes::StructureShape.new(name: 'TlsInterceptPropertiesRequest')
     TransitGatewayAttachmentId = Shapes::StringShape.new(name: 'TransitGatewayAttachmentId')
     TransitGatewayAttachmentStatus = Shapes::StringShape.new(name: 'TransitGatewayAttachmentStatus')
     TransitGatewayAttachmentSyncState = Shapes::StructureShape.new(name: 'TransitGatewayAttachmentSyncState')
@@ -355,12 +447,23 @@ module Aws::NetworkFirewall
     UpdateFirewallPolicyResponse = Shapes::StructureShape.new(name: 'UpdateFirewallPolicyResponse')
     UpdateLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLoggingConfigurationRequest')
     UpdateLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateLoggingConfigurationResponse')
+    UpdateProxyConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateProxyConfigurationRequest')
+    UpdateProxyConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateProxyConfigurationResponse')
+    UpdateProxyRequest = Shapes::StructureShape.new(name: 'UpdateProxyRequest')
+    UpdateProxyResponse = Shapes::StructureShape.new(name: 'UpdateProxyResponse')
+    UpdateProxyRuleGroupPrioritiesRequest = Shapes::StructureShape.new(name: 'UpdateProxyRuleGroupPrioritiesRequest')
+    UpdateProxyRuleGroupPrioritiesResponse = Shapes::StructureShape.new(name: 'UpdateProxyRuleGroupPrioritiesResponse')
+    UpdateProxyRulePrioritiesRequest = Shapes::StructureShape.new(name: 'UpdateProxyRulePrioritiesRequest')
+    UpdateProxyRulePrioritiesResponse = Shapes::StructureShape.new(name: 'UpdateProxyRulePrioritiesResponse')
+    UpdateProxyRuleRequest = Shapes::StructureShape.new(name: 'UpdateProxyRuleRequest')
+    UpdateProxyRuleResponse = Shapes::StructureShape.new(name: 'UpdateProxyRuleResponse')
     UpdateRuleGroupRequest = Shapes::StructureShape.new(name: 'UpdateRuleGroupRequest')
     UpdateRuleGroupResponse = Shapes::StructureShape.new(name: 'UpdateRuleGroupResponse')
     UpdateSubnetChangeProtectionRequest = Shapes::StructureShape.new(name: 'UpdateSubnetChangeProtectionRequest')
     UpdateSubnetChangeProtectionResponse = Shapes::StructureShape.new(name: 'UpdateSubnetChangeProtectionResponse')
     UpdateTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateTLSInspectionConfigurationRequest')
     UpdateTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateTLSInspectionConfigurationResponse')
+    UpdateTime = Shapes::TimestampShape.new(name: 'UpdateTime')
     UpdateToken = Shapes::StringShape.new(name: 'UpdateToken')
     VariableDefinition = Shapes::StringShape.new(name: 'VariableDefinition')
     VariableDefinitionList = Shapes::ListShape.new(name: 'VariableDefinitionList')
@@ -370,6 +473,7 @@ module Aws::NetworkFirewall
     VpcEndpointAssociationStatus = Shapes::StructureShape.new(name: 'VpcEndpointAssociationStatus')
     VpcEndpointAssociations = Shapes::ListShape.new(name: 'VpcEndpointAssociations')
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
+    VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     VpcIds = Shapes::ListShape.new(name: 'VpcIds')
 
@@ -455,6 +559,16 @@ module Aws::NetworkFirewall
     AssociationSyncState.key = Shapes::ShapeRef.new(shape: AvailabilityZone)
     AssociationSyncState.value = Shapes::ShapeRef.new(shape: AZSyncState)
 
+    AttachRuleGroupsToProxyConfigurationRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    AttachRuleGroupsToProxyConfigurationRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    AttachRuleGroupsToProxyConfigurationRequest.add_member(:rule_groups, Shapes::ShapeRef.new(shape: ProxyRuleGroupAttachmentList, required: true, location_name: "RuleGroups"))
+    AttachRuleGroupsToProxyConfigurationRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    AttachRuleGroupsToProxyConfigurationRequest.struct_class = Types::AttachRuleGroupsToProxyConfigurationRequest
+
+    AttachRuleGroupsToProxyConfigurationResponse.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    AttachRuleGroupsToProxyConfigurationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    AttachRuleGroupsToProxyConfigurationResponse.struct_class = Types::AttachRuleGroupsToProxyConfigurationResponse
+
     Attachment.add_member(:subnet_id, Shapes::ShapeRef.new(shape: AzSubnet, location_name: "SubnetId"))
     Attachment.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
     Attachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "Status"))
@@ -516,6 +630,64 @@ module Aws::NetworkFirewall
     CreateFirewallResponse.add_member(:firewall, Shapes::ShapeRef.new(shape: Firewall, location_name: "Firewall"))
     CreateFirewallResponse.add_member(:firewall_status, Shapes::ShapeRef.new(shape: FirewallStatus, location_name: "FirewallStatus"))
     CreateFirewallResponse.struct_class = Types::CreateFirewallResponse
+
+    CreateProxyConfigurationRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ProxyConfigurationName"))
+    CreateProxyConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateProxyConfigurationRequest.add_member(:rule_group_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "RuleGroupNames"))
+    CreateProxyConfigurationRequest.add_member(:rule_group_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "RuleGroupArns"))
+    CreateProxyConfigurationRequest.add_member(:default_rule_phase_actions, Shapes::ShapeRef.new(shape: ProxyConfigDefaultRulePhaseActionsRequest, required: true, location_name: "DefaultRulePhaseActions"))
+    CreateProxyConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateProxyConfigurationRequest.struct_class = Types::CreateProxyConfigurationRequest
+
+    CreateProxyConfigurationResponse.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    CreateProxyConfigurationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    CreateProxyConfigurationResponse.struct_class = Types::CreateProxyConfigurationResponse
+
+    CreateProxyRequest.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ProxyName"))
+    CreateProxyRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    CreateProxyRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    CreateProxyRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    CreateProxyRequest.add_member(:listener_properties, Shapes::ShapeRef.new(shape: ListenerPropertiesRequest, location_name: "ListenerProperties"))
+    CreateProxyRequest.add_member(:tls_intercept_properties, Shapes::ShapeRef.new(shape: TlsInterceptPropertiesRequest, required: true, location_name: "TlsInterceptProperties"))
+    CreateProxyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateProxyRequest.struct_class = Types::CreateProxyRequest
+
+    CreateProxyResponse.add_member(:proxy, Shapes::ShapeRef.new(shape: Proxy, location_name: "Proxy"))
+    CreateProxyResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    CreateProxyResponse.struct_class = Types::CreateProxyResponse
+
+    CreateProxyRule.add_member(:proxy_rule_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleName"))
+    CreateProxyRule.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateProxyRule.add_member(:action, Shapes::ShapeRef.new(shape: ProxyRulePhaseAction, location_name: "Action"))
+    CreateProxyRule.add_member(:conditions, Shapes::ShapeRef.new(shape: ProxyRuleConditionList, location_name: "Conditions"))
+    CreateProxyRule.add_member(:insert_position, Shapes::ShapeRef.new(shape: InsertPosition, location_name: "InsertPosition"))
+    CreateProxyRule.struct_class = Types::CreateProxyRule
+
+    CreateProxyRuleGroupRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ProxyRuleGroupName"))
+    CreateProxyRuleGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateProxyRuleGroupRequest.add_member(:rules, Shapes::ShapeRef.new(shape: ProxyRulesByRequestPhase, location_name: "Rules"))
+    CreateProxyRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateProxyRuleGroupRequest.struct_class = Types::CreateProxyRuleGroupRequest
+
+    CreateProxyRuleGroupResponse.add_member(:proxy_rule_group, Shapes::ShapeRef.new(shape: ProxyRuleGroup, location_name: "ProxyRuleGroup"))
+    CreateProxyRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    CreateProxyRuleGroupResponse.struct_class = Types::CreateProxyRuleGroupResponse
+
+    CreateProxyRuleList.member = Shapes::ShapeRef.new(shape: CreateProxyRule)
+
+    CreateProxyRulesByRequestPhase.add_member(:pre_dns, Shapes::ShapeRef.new(shape: CreateProxyRuleList, location_name: "PreDNS"))
+    CreateProxyRulesByRequestPhase.add_member(:pre_request, Shapes::ShapeRef.new(shape: CreateProxyRuleList, location_name: "PreREQUEST"))
+    CreateProxyRulesByRequestPhase.add_member(:post_response, Shapes::ShapeRef.new(shape: CreateProxyRuleList, location_name: "PostRESPONSE"))
+    CreateProxyRulesByRequestPhase.struct_class = Types::CreateProxyRulesByRequestPhase
+
+    CreateProxyRulesRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    CreateProxyRulesRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    CreateProxyRulesRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CreateProxyRulesByRequestPhase, required: true, location_name: "Rules"))
+    CreateProxyRulesRequest.struct_class = Types::CreateProxyRulesRequest
+
+    CreateProxyRulesResponse.add_member(:proxy_rule_group, Shapes::ShapeRef.new(shape: ProxyRuleGroup, location_name: "ProxyRuleGroup"))
+    CreateProxyRulesResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    CreateProxyRulesResponse.struct_class = Types::CreateProxyRulesResponse
 
     CreateRuleGroupRequest.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "RuleGroupName"))
     CreateRuleGroupRequest.add_member(:rule_group, Shapes::ShapeRef.new(shape: RuleGroup, location_name: "RuleGroup"))
@@ -584,6 +756,40 @@ module Aws::NetworkFirewall
     DeleteNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     DeleteNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, required: true, location_name: "TransitGatewayAttachmentStatus"))
     DeleteNetworkFirewallTransitGatewayAttachmentResponse.struct_class = Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse
+
+    DeleteProxyConfigurationRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    DeleteProxyConfigurationRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    DeleteProxyConfigurationRequest.struct_class = Types::DeleteProxyConfigurationRequest
+
+    DeleteProxyConfigurationResponse.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    DeleteProxyConfigurationResponse.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    DeleteProxyConfigurationResponse.struct_class = Types::DeleteProxyConfigurationResponse
+
+    DeleteProxyRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    DeleteProxyRequest.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyName"))
+    DeleteProxyRequest.add_member(:proxy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyArn"))
+    DeleteProxyRequest.struct_class = Types::DeleteProxyRequest
+
+    DeleteProxyResponse.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "NatGatewayId"))
+    DeleteProxyResponse.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyName"))
+    DeleteProxyResponse.add_member(:proxy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyArn"))
+    DeleteProxyResponse.struct_class = Types::DeleteProxyResponse
+
+    DeleteProxyRuleGroupRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    DeleteProxyRuleGroupRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    DeleteProxyRuleGroupRequest.struct_class = Types::DeleteProxyRuleGroupRequest
+
+    DeleteProxyRuleGroupResponse.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    DeleteProxyRuleGroupResponse.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    DeleteProxyRuleGroupResponse.struct_class = Types::DeleteProxyRuleGroupResponse
+
+    DeleteProxyRulesRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    DeleteProxyRulesRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    DeleteProxyRulesRequest.add_member(:rules, Shapes::ShapeRef.new(shape: ResourceNameList, required: true, location_name: "Rules"))
+    DeleteProxyRulesRequest.struct_class = Types::DeleteProxyRulesRequest
+
+    DeleteProxyRulesResponse.add_member(:proxy_rule_group, Shapes::ShapeRef.new(shape: ProxyRuleGroup, location_name: "ProxyRuleGroup"))
+    DeleteProxyRulesResponse.struct_class = Types::DeleteProxyRulesResponse
 
     DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
@@ -669,6 +875,58 @@ module Aws::NetworkFirewall
     DescribeLoggingConfigurationResponse.add_member(:enable_monitoring_dashboard, Shapes::ShapeRef.new(shape: EnableMonitoringDashboard, location_name: "EnableMonitoringDashboard"))
     DescribeLoggingConfigurationResponse.struct_class = Types::DescribeLoggingConfigurationResponse
 
+    DescribeProxyConfigurationRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    DescribeProxyConfigurationRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    DescribeProxyConfigurationRequest.struct_class = Types::DescribeProxyConfigurationRequest
+
+    DescribeProxyConfigurationResponse.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    DescribeProxyConfigurationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DescribeProxyConfigurationResponse.struct_class = Types::DescribeProxyConfigurationResponse
+
+    DescribeProxyRequest.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyName"))
+    DescribeProxyRequest.add_member(:proxy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyArn"))
+    DescribeProxyRequest.struct_class = Types::DescribeProxyRequest
+
+    DescribeProxyResource.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyName"))
+    DescribeProxyResource.add_member(:proxy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyArn"))
+    DescribeProxyResource.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    DescribeProxyResource.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    DescribeProxyResource.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "NatGatewayId"))
+    DescribeProxyResource.add_member(:proxy_state, Shapes::ShapeRef.new(shape: ProxyState, location_name: "ProxyState"))
+    DescribeProxyResource.add_member(:proxy_modify_state, Shapes::ShapeRef.new(shape: ProxyModifyState, location_name: "ProxyModifyState"))
+    DescribeProxyResource.add_member(:listener_properties, Shapes::ShapeRef.new(shape: ListenerProperties, location_name: "ListenerProperties"))
+    DescribeProxyResource.add_member(:tls_intercept_properties, Shapes::ShapeRef.new(shape: TlsInterceptProperties, location_name: "TlsInterceptProperties"))
+    DescribeProxyResource.add_member(:vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "VpcEndpointServiceName"))
+    DescribeProxyResource.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: PrivateDNSName, location_name: "PrivateDNSName"))
+    DescribeProxyResource.add_member(:create_time, Shapes::ShapeRef.new(shape: CreateTime, location_name: "CreateTime"))
+    DescribeProxyResource.add_member(:delete_time, Shapes::ShapeRef.new(shape: DeleteTime, location_name: "DeleteTime"))
+    DescribeProxyResource.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, location_name: "UpdateTime"))
+    DescribeProxyResource.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
+    DescribeProxyResource.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "FailureMessage"))
+    DescribeProxyResource.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    DescribeProxyResource.struct_class = Types::DescribeProxyResource
+
+    DescribeProxyResponse.add_member(:proxy, Shapes::ShapeRef.new(shape: DescribeProxyResource, location_name: "Proxy"))
+    DescribeProxyResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DescribeProxyResponse.struct_class = Types::DescribeProxyResponse
+
+    DescribeProxyRuleGroupRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    DescribeProxyRuleGroupRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    DescribeProxyRuleGroupRequest.struct_class = Types::DescribeProxyRuleGroupRequest
+
+    DescribeProxyRuleGroupResponse.add_member(:proxy_rule_group, Shapes::ShapeRef.new(shape: ProxyRuleGroup, location_name: "ProxyRuleGroup"))
+    DescribeProxyRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DescribeProxyRuleGroupResponse.struct_class = Types::DescribeProxyRuleGroupResponse
+
+    DescribeProxyRuleRequest.add_member(:proxy_rule_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ProxyRuleName"))
+    DescribeProxyRuleRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    DescribeProxyRuleRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    DescribeProxyRuleRequest.struct_class = Types::DescribeProxyRuleRequest
+
+    DescribeProxyRuleResponse.add_member(:proxy_rule, Shapes::ShapeRef.new(shape: ProxyRule, location_name: "ProxyRule"))
+    DescribeProxyRuleResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DescribeProxyRuleResponse.struct_class = Types::DescribeProxyRuleResponse
+
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DescribeResourcePolicyRequest.struct_class = Types::DescribeResourcePolicyRequest
 
@@ -728,6 +986,17 @@ module Aws::NetworkFirewall
     DescribeVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association, Shapes::ShapeRef.new(shape: VpcEndpointAssociation, location_name: "VpcEndpointAssociation"))
     DescribeVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association_status, Shapes::ShapeRef.new(shape: VpcEndpointAssociationStatus, location_name: "VpcEndpointAssociationStatus"))
     DescribeVpcEndpointAssociationResponse.struct_class = Types::DescribeVpcEndpointAssociationResponse
+
+    DetachRuleGroupsFromProxyConfigurationRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    DetachRuleGroupsFromProxyConfigurationRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    DetachRuleGroupsFromProxyConfigurationRequest.add_member(:rule_group_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "RuleGroupNames"))
+    DetachRuleGroupsFromProxyConfigurationRequest.add_member(:rule_group_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "RuleGroupArns"))
+    DetachRuleGroupsFromProxyConfigurationRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    DetachRuleGroupsFromProxyConfigurationRequest.struct_class = Types::DetachRuleGroupsFromProxyConfigurationRequest
+
+    DetachRuleGroupsFromProxyConfigurationResponse.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    DetachRuleGroupsFromProxyConfigurationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DetachRuleGroupsFromProxyConfigurationResponse.struct_class = Types::DetachRuleGroupsFromProxyConfigurationResponse
 
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
@@ -994,6 +1263,30 @@ module Aws::NetworkFirewall
     ListFlowOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFlowOperationsResponse.struct_class = Types::ListFlowOperationsResponse
 
+    ListProxiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProxiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListProxiesRequest.struct_class = Types::ListProxiesRequest
+
+    ListProxiesResponse.add_member(:proxies, Shapes::ShapeRef.new(shape: Proxies, location_name: "Proxies"))
+    ListProxiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProxiesResponse.struct_class = Types::ListProxiesResponse
+
+    ListProxyConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProxyConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListProxyConfigurationsRequest.struct_class = Types::ListProxyConfigurationsRequest
+
+    ListProxyConfigurationsResponse.add_member(:proxy_configurations, Shapes::ShapeRef.new(shape: ProxyConfigurations, location_name: "ProxyConfigurations"))
+    ListProxyConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProxyConfigurationsResponse.struct_class = Types::ListProxyConfigurationsResponse
+
+    ListProxyRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProxyRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListProxyRuleGroupsRequest.struct_class = Types::ListProxyRuleGroupsRequest
+
+    ListProxyRuleGroupsResponse.add_member(:proxy_rule_groups, Shapes::ShapeRef.new(shape: ProxyRuleGroups, location_name: "ProxyRuleGroups"))
+    ListProxyRuleGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProxyRuleGroupsResponse.struct_class = Types::ListProxyRuleGroupsResponse
+
     ListRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ResourceManagedStatus, location_name: "Scope"))
@@ -1031,6 +1324,18 @@ module Aws::NetworkFirewall
     ListVpcEndpointAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListVpcEndpointAssociationsResponse.add_member(:vpc_endpoint_associations, Shapes::ShapeRef.new(shape: VpcEndpointAssociations, location_name: "VpcEndpointAssociations"))
     ListVpcEndpointAssociationsResponse.struct_class = Types::ListVpcEndpointAssociationsResponse
+
+    ListenerProperties.member = Shapes::ShapeRef.new(shape: ListenerProperty)
+
+    ListenerPropertiesRequest.member = Shapes::ShapeRef.new(shape: ListenerPropertyRequest)
+
+    ListenerProperty.add_member(:port, Shapes::ShapeRef.new(shape: NatGatewayPort, location_name: "Port"))
+    ListenerProperty.add_member(:type, Shapes::ShapeRef.new(shape: ListenerPropertyType, location_name: "Type"))
+    ListenerProperty.struct_class = Types::ListenerProperty
+
+    ListenerPropertyRequest.add_member(:port, Shapes::ShapeRef.new(shape: NatGatewayPort, required: true, location_name: "Port"))
+    ListenerPropertyRequest.add_member(:type, Shapes::ShapeRef.new(shape: ListenerPropertyType, required: true, location_name: "Type"))
+    ListenerPropertyRequest.struct_class = Types::ListenerPropertyRequest
 
     LogDestinationConfig.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, required: true, location_name: "LogType"))
     LogDestinationConfig.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, required: true, location_name: "LogDestinationType"))
@@ -1079,6 +1384,119 @@ module Aws::NetworkFirewall
 
     ProtocolStrings.member = Shapes::ShapeRef.new(shape: ProtocolString)
 
+    Proxies.member = Shapes::ShapeRef.new(shape: ProxyMetadata)
+
+    Proxy.add_member(:create_time, Shapes::ShapeRef.new(shape: CreateTime, location_name: "CreateTime"))
+    Proxy.add_member(:delete_time, Shapes::ShapeRef.new(shape: DeleteTime, location_name: "DeleteTime"))
+    Proxy.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, location_name: "UpdateTime"))
+    Proxy.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
+    Proxy.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "FailureMessage"))
+    Proxy.add_member(:proxy_state, Shapes::ShapeRef.new(shape: ProxyState, location_name: "ProxyState"))
+    Proxy.add_member(:proxy_modify_state, Shapes::ShapeRef.new(shape: ProxyModifyState, location_name: "ProxyModifyState"))
+    Proxy.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "NatGatewayId"))
+    Proxy.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    Proxy.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    Proxy.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyName"))
+    Proxy.add_member(:proxy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyArn"))
+    Proxy.add_member(:listener_properties, Shapes::ShapeRef.new(shape: ListenerProperties, location_name: "ListenerProperties"))
+    Proxy.add_member(:tls_intercept_properties, Shapes::ShapeRef.new(shape: TlsInterceptProperties, location_name: "TlsInterceptProperties"))
+    Proxy.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Proxy.struct_class = Types::Proxy
+
+    ProxyConditionValueList.member = Shapes::ShapeRef.new(shape: ProxyConditionValue)
+
+    ProxyConfigDefaultRulePhaseActionsRequest.add_member(:pre_dns, Shapes::ShapeRef.new(shape: ProxyRulePhaseAction, location_name: "PreDNS"))
+    ProxyConfigDefaultRulePhaseActionsRequest.add_member(:pre_request, Shapes::ShapeRef.new(shape: ProxyRulePhaseAction, location_name: "PreREQUEST"))
+    ProxyConfigDefaultRulePhaseActionsRequest.add_member(:post_response, Shapes::ShapeRef.new(shape: ProxyRulePhaseAction, location_name: "PostRESPONSE"))
+    ProxyConfigDefaultRulePhaseActionsRequest.struct_class = Types::ProxyConfigDefaultRulePhaseActionsRequest
+
+    ProxyConfigRuleGroup.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    ProxyConfigRuleGroup.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    ProxyConfigRuleGroup.add_member(:type, Shapes::ShapeRef.new(shape: ProxyConfigRuleGroupType, location_name: "Type"))
+    ProxyConfigRuleGroup.add_member(:priority, Shapes::ShapeRef.new(shape: ProxyConfigRuleGroupPriority, location_name: "Priority"))
+    ProxyConfigRuleGroup.struct_class = Types::ProxyConfigRuleGroup
+
+    ProxyConfigRuleGroupSet.member = Shapes::ShapeRef.new(shape: ProxyConfigRuleGroup)
+
+    ProxyConfiguration.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    ProxyConfiguration.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    ProxyConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ProxyConfiguration.add_member(:create_time, Shapes::ShapeRef.new(shape: CreateTime, location_name: "CreateTime"))
+    ProxyConfiguration.add_member(:delete_time, Shapes::ShapeRef.new(shape: DeleteTime, location_name: "DeleteTime"))
+    ProxyConfiguration.add_member(:rule_groups, Shapes::ShapeRef.new(shape: ProxyConfigRuleGroupSet, location_name: "RuleGroups"))
+    ProxyConfiguration.add_member(:default_rule_phase_actions, Shapes::ShapeRef.new(shape: ProxyConfigDefaultRulePhaseActionsRequest, location_name: "DefaultRulePhaseActions"))
+    ProxyConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ProxyConfiguration.struct_class = Types::ProxyConfiguration
+
+    ProxyConfigurationMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    ProxyConfigurationMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    ProxyConfigurationMetadata.struct_class = Types::ProxyConfigurationMetadata
+
+    ProxyConfigurations.member = Shapes::ShapeRef.new(shape: ProxyConfigurationMetadata)
+
+    ProxyMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    ProxyMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    ProxyMetadata.struct_class = Types::ProxyMetadata
+
+    ProxyRule.add_member(:proxy_rule_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleName"))
+    ProxyRule.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ProxyRule.add_member(:action, Shapes::ShapeRef.new(shape: ProxyRulePhaseAction, location_name: "Action"))
+    ProxyRule.add_member(:conditions, Shapes::ShapeRef.new(shape: ProxyRuleConditionList, location_name: "Conditions"))
+    ProxyRule.struct_class = Types::ProxyRule
+
+    ProxyRuleCondition.add_member(:condition_operator, Shapes::ShapeRef.new(shape: ConditionOperator, location_name: "ConditionOperator"))
+    ProxyRuleCondition.add_member(:condition_key, Shapes::ShapeRef.new(shape: ConditionKey, location_name: "ConditionKey"))
+    ProxyRuleCondition.add_member(:condition_values, Shapes::ShapeRef.new(shape: ProxyConditionValueList, location_name: "ConditionValues"))
+    ProxyRuleCondition.struct_class = Types::ProxyRuleCondition
+
+    ProxyRuleConditionList.member = Shapes::ShapeRef.new(shape: ProxyRuleCondition)
+
+    ProxyRuleGroup.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    ProxyRuleGroup.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    ProxyRuleGroup.add_member(:create_time, Shapes::ShapeRef.new(shape: CreateTime, location_name: "CreateTime"))
+    ProxyRuleGroup.add_member(:delete_time, Shapes::ShapeRef.new(shape: DeleteTime, location_name: "DeleteTime"))
+    ProxyRuleGroup.add_member(:rules, Shapes::ShapeRef.new(shape: ProxyRulesByRequestPhase, location_name: "Rules"))
+    ProxyRuleGroup.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ProxyRuleGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ProxyRuleGroup.struct_class = Types::ProxyRuleGroup
+
+    ProxyRuleGroupAttachment.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    ProxyRuleGroupAttachment.add_member(:insert_position, Shapes::ShapeRef.new(shape: InsertPosition, location_name: "InsertPosition"))
+    ProxyRuleGroupAttachment.struct_class = Types::ProxyRuleGroupAttachment
+
+    ProxyRuleGroupAttachmentList.member = Shapes::ShapeRef.new(shape: ProxyRuleGroupAttachment)
+
+    ProxyRuleGroupMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    ProxyRuleGroupMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    ProxyRuleGroupMetadata.struct_class = Types::ProxyRuleGroupMetadata
+
+    ProxyRuleGroupPriority.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    ProxyRuleGroupPriority.add_member(:new_position, Shapes::ShapeRef.new(shape: InsertPosition, location_name: "NewPosition"))
+    ProxyRuleGroupPriority.struct_class = Types::ProxyRuleGroupPriority
+
+    ProxyRuleGroupPriorityList.member = Shapes::ShapeRef.new(shape: ProxyRuleGroupPriority)
+
+    ProxyRuleGroupPriorityResult.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    ProxyRuleGroupPriorityResult.add_member(:priority, Shapes::ShapeRef.new(shape: ProxyRuleGroupPriorityResultPriority, location_name: "Priority"))
+    ProxyRuleGroupPriorityResult.struct_class = Types::ProxyRuleGroupPriorityResult
+
+    ProxyRuleGroupPriorityResultList.member = Shapes::ShapeRef.new(shape: ProxyRuleGroupPriorityResult)
+
+    ProxyRuleGroups.member = Shapes::ShapeRef.new(shape: ProxyRuleGroupMetadata)
+
+    ProxyRuleList.member = Shapes::ShapeRef.new(shape: ProxyRule)
+
+    ProxyRulePriority.add_member(:proxy_rule_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleName"))
+    ProxyRulePriority.add_member(:new_position, Shapes::ShapeRef.new(shape: InsertPosition, location_name: "NewPosition"))
+    ProxyRulePriority.struct_class = Types::ProxyRulePriority
+
+    ProxyRulePriorityList.member = Shapes::ShapeRef.new(shape: ProxyRulePriority)
+
+    ProxyRulesByRequestPhase.add_member(:pre_dns, Shapes::ShapeRef.new(shape: ProxyRuleList, location_name: "PreDNS"))
+    ProxyRulesByRequestPhase.add_member(:pre_request, Shapes::ShapeRef.new(shape: ProxyRuleList, location_name: "PreREQUEST"))
+    ProxyRulesByRequestPhase.add_member(:post_response, Shapes::ShapeRef.new(shape: ProxyRuleList, location_name: "PostRESPONSE"))
+    ProxyRulesByRequestPhase.struct_class = Types::ProxyRulesByRequestPhase
+
     PublishMetricAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, required: true, location_name: "Dimensions"))
     PublishMetricAction.struct_class = Types::PublishMetricAction
 
@@ -1097,6 +1515,10 @@ module Aws::NetworkFirewall
     RejectNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     RejectNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, required: true, location_name: "TransitGatewayAttachmentStatus"))
     RejectNetworkFirewallTransitGatewayAttachmentResponse.struct_class = Types::RejectNetworkFirewallTransitGatewayAttachmentResponse
+
+    ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
+    ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1359,6 +1781,14 @@ module Aws::NetworkFirewall
     TlsCertificateData.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusMessage"))
     TlsCertificateData.struct_class = Types::TlsCertificateData
 
+    TlsInterceptProperties.add_member(:pca_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PcaArn"))
+    TlsInterceptProperties.add_member(:tls_intercept_mode, Shapes::ShapeRef.new(shape: TlsInterceptMode, location_name: "TlsInterceptMode"))
+    TlsInterceptProperties.struct_class = Types::TlsInterceptProperties
+
+    TlsInterceptPropertiesRequest.add_member(:pca_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PcaArn"))
+    TlsInterceptPropertiesRequest.add_member(:tls_intercept_mode, Shapes::ShapeRef.new(shape: TlsInterceptMode, location_name: "TlsInterceptMode"))
+    TlsInterceptPropertiesRequest.struct_class = Types::TlsInterceptPropertiesRequest
+
     TransitGatewayAttachmentSyncState.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
     TransitGatewayAttachmentSyncState.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, location_name: "TransitGatewayAttachmentStatus"))
     TransitGatewayAttachmentSyncState.add_member(:status_message, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentSyncStateMessage, location_name: "StatusMessage"))
@@ -1472,6 +1902,68 @@ module Aws::NetworkFirewall
     UpdateLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     UpdateLoggingConfigurationResponse.add_member(:enable_monitoring_dashboard, Shapes::ShapeRef.new(shape: EnableMonitoringDashboard, location_name: "EnableMonitoringDashboard"))
     UpdateLoggingConfigurationResponse.struct_class = Types::UpdateLoggingConfigurationResponse
+
+    UpdateProxyConfigurationRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    UpdateProxyConfigurationRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    UpdateProxyConfigurationRequest.add_member(:default_rule_phase_actions, Shapes::ShapeRef.new(shape: ProxyConfigDefaultRulePhaseActionsRequest, required: true, location_name: "DefaultRulePhaseActions"))
+    UpdateProxyConfigurationRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    UpdateProxyConfigurationRequest.struct_class = Types::UpdateProxyConfigurationRequest
+
+    UpdateProxyConfigurationResponse.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    UpdateProxyConfigurationResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateProxyConfigurationResponse.struct_class = Types::UpdateProxyConfigurationResponse
+
+    UpdateProxyRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
+    UpdateProxyRequest.add_member(:proxy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyName"))
+    UpdateProxyRequest.add_member(:proxy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyArn"))
+    UpdateProxyRequest.add_member(:listener_properties_to_add, Shapes::ShapeRef.new(shape: ListenerPropertiesRequest, location_name: "ListenerPropertiesToAdd"))
+    UpdateProxyRequest.add_member(:listener_properties_to_remove, Shapes::ShapeRef.new(shape: ListenerPropertiesRequest, location_name: "ListenerPropertiesToRemove"))
+    UpdateProxyRequest.add_member(:tls_intercept_properties, Shapes::ShapeRef.new(shape: TlsInterceptPropertiesRequest, location_name: "TlsInterceptProperties"))
+    UpdateProxyRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    UpdateProxyRequest.struct_class = Types::UpdateProxyRequest
+
+    UpdateProxyResponse.add_member(:proxy, Shapes::ShapeRef.new(shape: Proxy, location_name: "Proxy"))
+    UpdateProxyResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateProxyResponse.struct_class = Types::UpdateProxyResponse
+
+    UpdateProxyRuleGroupPrioritiesRequest.add_member(:proxy_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyConfigurationName"))
+    UpdateProxyRuleGroupPrioritiesRequest.add_member(:proxy_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyConfigurationArn"))
+    UpdateProxyRuleGroupPrioritiesRequest.add_member(:rule_groups, Shapes::ShapeRef.new(shape: ProxyRuleGroupPriorityList, required: true, location_name: "RuleGroups"))
+    UpdateProxyRuleGroupPrioritiesRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    UpdateProxyRuleGroupPrioritiesRequest.struct_class = Types::UpdateProxyRuleGroupPrioritiesRequest
+
+    UpdateProxyRuleGroupPrioritiesResponse.add_member(:proxy_rule_groups, Shapes::ShapeRef.new(shape: ProxyRuleGroupPriorityResultList, location_name: "ProxyRuleGroups"))
+    UpdateProxyRuleGroupPrioritiesResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateProxyRuleGroupPrioritiesResponse.struct_class = Types::UpdateProxyRuleGroupPrioritiesResponse
+
+    UpdateProxyRulePrioritiesRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    UpdateProxyRulePrioritiesRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    UpdateProxyRulePrioritiesRequest.add_member(:rule_group_request_phase, Shapes::ShapeRef.new(shape: RuleGroupRequestPhase, required: true, location_name: "RuleGroupRequestPhase"))
+    UpdateProxyRulePrioritiesRequest.add_member(:rules, Shapes::ShapeRef.new(shape: ProxyRulePriorityList, required: true, location_name: "Rules"))
+    UpdateProxyRulePrioritiesRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    UpdateProxyRulePrioritiesRequest.struct_class = Types::UpdateProxyRulePrioritiesRequest
+
+    UpdateProxyRulePrioritiesResponse.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    UpdateProxyRulePrioritiesResponse.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    UpdateProxyRulePrioritiesResponse.add_member(:rule_group_request_phase, Shapes::ShapeRef.new(shape: RuleGroupRequestPhase, location_name: "RuleGroupRequestPhase"))
+    UpdateProxyRulePrioritiesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: ProxyRulePriorityList, location_name: "Rules"))
+    UpdateProxyRulePrioritiesResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateProxyRulePrioritiesResponse.struct_class = Types::UpdateProxyRulePrioritiesResponse
+
+    UpdateProxyRuleRequest.add_member(:proxy_rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ProxyRuleGroupName"))
+    UpdateProxyRuleRequest.add_member(:proxy_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProxyRuleGroupArn"))
+    UpdateProxyRuleRequest.add_member(:proxy_rule_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ProxyRuleName"))
+    UpdateProxyRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateProxyRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: ProxyRulePhaseAction, location_name: "Action"))
+    UpdateProxyRuleRequest.add_member(:add_conditions, Shapes::ShapeRef.new(shape: ProxyRuleConditionList, location_name: "AddConditions"))
+    UpdateProxyRuleRequest.add_member(:remove_conditions, Shapes::ShapeRef.new(shape: ProxyRuleConditionList, location_name: "RemoveConditions"))
+    UpdateProxyRuleRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
+    UpdateProxyRuleRequest.struct_class = Types::UpdateProxyRuleRequest
+
+    UpdateProxyRuleResponse.add_member(:proxy_rule, Shapes::ShapeRef.new(shape: ProxyRule, location_name: "ProxyRule"))
+    UpdateProxyRuleResponse.add_member(:removed_conditions, Shapes::ShapeRef.new(shape: ProxyRuleConditionList, location_name: "RemovedConditions"))
+    UpdateProxyRuleResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateProxyRuleResponse.struct_class = Types::UpdateProxyRuleResponse
 
     UpdateRuleGroupRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
     UpdateRuleGroupRequest.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleGroupArn"))
@@ -1615,6 +2107,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
       end)
 
+      api.add_operation(:attach_rule_groups_to_proxy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachRuleGroupsToProxyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachRuleGroupsToProxyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachRuleGroupsToProxyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_firewall, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFirewall"
         o.http_method = "POST"
@@ -1640,6 +2144,56 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
+      end)
+
+      api.add_operation(:create_proxy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProxy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProxyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProxyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_proxy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProxyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProxyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProxyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_proxy_rule_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProxyRuleGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProxyRuleGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProxyRuleGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_proxy_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProxyRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProxyRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProxyRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1717,6 +2271,55 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteNetworkFirewallTransitGatewayAttachmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteNetworkFirewallTransitGatewayAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_proxy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProxy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProxyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProxyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_proxy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProxyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProxyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProxyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_proxy_rule_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProxyRuleGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProxyRuleGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProxyRuleGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_proxy_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProxyRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProxyRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProxyRulesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1836,6 +2439,54 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_proxy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProxy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProxyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProxyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_proxy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProxyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProxyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProxyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_proxy_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProxyRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProxyRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProxyRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_proxy_rule_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeProxyRuleGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeProxyRuleGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeProxyRuleGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:describe_resource_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeResourcePolicy"
         o.http_method = "POST"
@@ -1902,6 +2553,18 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:detach_rule_groups_from_proxy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachRuleGroupsFromProxyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachRuleGroupsFromProxyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachRuleGroupsFromProxyConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2030,6 +2693,59 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListFlowOperationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFlowOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_proxies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProxies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProxiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProxiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_proxy_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProxyConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProxyConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProxyConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_proxy_rule_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProxyRuleGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProxyRuleGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProxyRuleGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2303,6 +3019,67 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o.errors << Shapes::ShapeRef.new(shape: LogDestinationPermissionException)
+      end)
+
+      api.add_operation(:update_proxy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProxy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProxyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProxyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_proxy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProxyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProxyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProxyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_proxy_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProxyRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProxyRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProxyRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_proxy_rule_group_priorities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProxyRuleGroupPriorities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProxyRuleGroupPrioritiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProxyRuleGroupPrioritiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_proxy_rule_priorities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProxyRulePriorities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProxyRulePrioritiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProxyRulePrioritiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_rule_group, Seahorse::Model::Operation.new.tap do |o|

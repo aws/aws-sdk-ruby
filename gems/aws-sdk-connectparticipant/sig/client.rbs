@@ -200,6 +200,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::SendMessageResponse]
         def id: () -> ::String
         def absolute_time: () -> ::String
+        def message_metadata: () -> Types::MessageProcessingMetadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#send_message-instance_method
       def send_message: (

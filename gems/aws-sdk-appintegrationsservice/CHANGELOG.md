@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2025-12-01)
+------------------
+
+* Feature - This release adds support for MCP servers via the ApplicationType field, allowing customers to register their Bedrock AgentCore gateways as third party applications.
+
 1.60.0 (2025-11-21)
 ------------------
 

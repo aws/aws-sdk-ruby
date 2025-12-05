@@ -203,7 +203,7 @@ module Aws
                          ?metadata_directive: ("COPY" | "REPLACE"),
                          ?tagging_directive: ("COPY" | "REPLACE"),
                          ?server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse"),
-                         ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS"),
+                         ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP"),
                          ?website_redirect_location: ::String,
                          ?sse_customer_algorithm: ::String,
                          ?sse_customer_key: ::String,
@@ -337,7 +337,7 @@ module Aws
                                      key: ::String,
                                      ?metadata: Hash[::String, ::String],
                                      ?server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse"),
-                                     ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS"),
+                                     ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP"),
                                      ?website_redirect_location: ::String,
                                      ?sse_customer_algorithm: ::String,
                                      ?sse_customer_key: ::String,
@@ -879,7 +879,7 @@ module Aws
         def sse_customer_key_md5: () -> ::String
         def ssekms_key_id: () -> ::String
         def bucket_key_enabled: () -> bool
-        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
+        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
         def request_charged: () -> ("requester")
         def replication_status: () -> ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
         def parts_count: () -> ::Integer
@@ -939,7 +939,7 @@ module Aws
         def etag: () -> ::String
         def checksum: () -> Types::Checksum
         def object_parts: () -> Types::GetObjectAttributesParts
-        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
+        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
         def object_size: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#get_object_attributes-instance_method
@@ -1085,7 +1085,7 @@ module Aws
         def sse_customer_key_md5: () -> ::String
         def ssekms_key_id: () -> ::String
         def bucket_key_enabled: () -> bool
-        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
+        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
         def request_charged: () -> ("requester")
         def replication_status: () -> ("COMPLETE" | "PENDING" | "FAILED" | "REPLICA" | "COMPLETED")
         def parts_count: () -> ::Integer
@@ -1344,7 +1344,7 @@ module Aws
         def parts: () -> ::Array[Types::Part]
         def initiator: () -> Types::Initiator
         def owner: () -> Types::Owner
-        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
+        def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
         def request_charged: () -> ("requester")
         def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
         def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
@@ -1907,7 +1907,7 @@ module Aws
                                           destination: {
                                             bucket: ::String,
                                             account: ::String?,
-                                            storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")?,
+                                            storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")?,
                                             access_control_translation: {
                                               owner: ("Destination")
                                             }?,
@@ -2066,7 +2066,7 @@ module Aws
                         ?write_offset_bytes: ::Integer,
                         ?metadata: Hash[::String, ::String],
                         ?server_side_encryption: ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse"),
-                        ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS"),
+                        ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP"),
                         ?website_redirect_location: ::String,
                         ?sse_customer_algorithm: ::String,
                         ?sse_customer_key: ::String,
@@ -2334,7 +2334,7 @@ module Aws
                                       value: ::String?
                                     },
                                   ]?,
-                                  storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")?
+                                  storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")?
                                 }?
                               }?
                             },
@@ -2540,7 +2540,7 @@ module Aws
                                        ?sse_customer_algorithm: ::String,
                                        ?ssekms_key_id: ::String,
                                        ?sse_customer_key_md5: ::String,
-                                       ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS"),
+                                       ?storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP"),
                                        ?tag_count: ::Integer,
                                        ?version_id: ::String,
                                        ?bucket_key_enabled: bool

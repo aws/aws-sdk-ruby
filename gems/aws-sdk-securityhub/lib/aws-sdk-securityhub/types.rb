@@ -3102,8 +3102,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   The security groups to assign to the instances in the Auto Scaling
-    #   group.
+    #   The security groups to assign to the instances in the Amazon EC2
+    #   Auto Scaling group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_price
@@ -4515,8 +4515,8 @@ module Aws::SecurityHub
     end
 
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), Elemental MediaStore, or other server from
-    # which CloudFront gets your files.
+    # example, a web server), or other server from which CloudFront gets
+    # your files.
     #
     # @!attribute [rw] domain_name
     #   Amazon S3 origins: The DNS name of the S3 bucket from which you want
@@ -9792,8 +9792,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] health_check_grace_period_seconds
     #   After a task starts, the amount of time in seconds that the Amazon
-    #   ECS service scheduler ignores unhealthy Elastic Load Balancing
-    #   target health checks.
+    #   ECS service scheduler ignores unhealthy ELB target health checks.
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
@@ -9840,7 +9839,7 @@ module Aws::SecurityHub
     # @!attribute [rw] role
     #   The ARN of the IAM role that is associated with the service. The
     #   role allows the Amazon ECS container agent to register container
-    #   instances with an Elastic Load Balancing load balancer.
+    #   instances with an ELB load balancer.
     #   @return [String]
     #
     # @!attribute [rw] scheduling_strategy
@@ -9934,8 +9933,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] target_group_arn
-    #   The ARN of the Elastic Load Balancing target group or groups
-    #   associated with a service or task set.
+    #   The ARN of the ELB target group or groups associated with a service
+    #   or task set.
     #
     #   Only specified when using an Application Load Balancer or a Network
     #   Load Balancer. For a Classic Load Balancer, the target group ARN is
@@ -22815,42 +22814,6 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # @!attribute [rw] auth_code
-    #   The authCode retrieved from authUrl to complete the OAuth 2.0
-    #   authorization code flow.
-    #   @return [String]
-    #
-    # @!attribute [rw] auth_state
-    #   The authState retrieved from authUrl to complete the OAuth 2.0
-    #   authorization code flow.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2Request AWS API Documentation
-    #
-    class ConnectorRegistrationsV2Request < Struct.new(
-      :auth_code,
-      :auth_state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] connector_arn
-    #   The Amazon Resource Name (ARN) of the connectorV2.
-    #   @return [String]
-    #
-    # @!attribute [rw] connector_id
-    #   The UUID of the connectorV2 to identify connectorV2 resource.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2Response AWS API Documentation
-    #
-    class ConnectorRegistrationsV2Response < Struct.new(
-      :connector_arn,
-      :connector_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # A condensed overview of the connectorV2..
     #
     # @!attribute [rw] connector_arn
@@ -23354,12 +23317,17 @@ module Aws::SecurityHub
     #   The Url provide to customers for OAuth auth code flow.
     #   @return [String]
     #
+    # @!attribute [rw] connector_status
+    #   The current status of the connectorV2.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2Response AWS API Documentation
     #
     class CreateConnectorV2Response < Struct.new(
       :connector_arn,
       :connector_id,
-      :auth_url)
+      :auth_url,
+      :connector_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23530,12 +23498,19 @@ module Aws::SecurityHub
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] mode
+    #   The mode for ticket creation. When set to DRYRUN, the ticket is
+    #   created using a Security Hub owned template test finding to verify
+    #   the integration is working correctly.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateTicketV2Request AWS API Documentation
     #
     class CreateTicketV2Request < Struct.new(
       :connector_id,
       :finding_metadata_uid,
-      :client_token)
+      :client_token,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29085,16 +29060,23 @@ module Aws::SecurityHub
     #   integration.
     #   @return [Types::JiraCloudUpdateConfiguration]
     #
+    # @!attribute [rw] service_now
+    #   The parameters required to update the configuration for a ServiceNow
+    #   integration.
+    #   @return [Types::ServiceNowUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderUpdateConfiguration AWS API Documentation
     #
     class ProviderUpdateConfiguration < Struct.new(
       :jira_cloud,
+      :service_now,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class JiraCloud < ProviderUpdateConfiguration; end
+      class ServiceNow < ProviderUpdateConfiguration; end
       class Unknown < ProviderUpdateConfiguration; end
     end
 
@@ -29171,6 +29153,42 @@ module Aws::SecurityHub
     class Record < Struct.new(
       :json_path,
       :record_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auth_code
+    #   The authCode retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_state
+    #   The authState retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RegisterConnectorV2Request AWS API Documentation
+    #
+    class RegisterConnectorV2Request < Struct.new(
+      :auth_code,
+      :auth_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RegisterConnectorV2Response AWS API Documentation
+    #
+    class RegisterConnectorV2Response < Struct.new(
+      :connector_arn,
+      :connector_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31319,19 +31337,20 @@ module Aws::SecurityHub
     #   The instanceName of ServiceNow ITSM.
     #   @return [String]
     #
-    # @!attribute [rw] client_id
-    #   The clientId of ServiceNow ITSM.
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the ServiceNow credentials.
     #   @return [String]
     #
     # @!attribute [rw] auth_status
-    #   The status of the authorization between Jira Cloud and the service.
+    #   The status of the authorization between ServiceNow and the service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowDetail AWS API Documentation
     #
     class ServiceNowDetail < Struct.new(
       :instance_name,
-      :client_id,
+      :secret_arn,
       :auth_status)
       SENSITIVE = []
       include Aws::Structure
@@ -31344,21 +31363,50 @@ module Aws::SecurityHub
     #   The instance name of ServiceNow ITSM.
     #   @return [String]
     #
-    # @!attribute [rw] client_id
-    #   The client ID of ServiceNow ITSM.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_secret
-    #   The client secret of ServiceNow ITSM.
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the ServiceNow credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowProviderConfiguration AWS API Documentation
     #
     class ServiceNowProviderConfiguration < Struct.new(
       :instance_name,
-      :client_id,
-      :client_secret)
-      SENSITIVE = [:client_secret]
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters used to modify an existing ServiceNow integration.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the ServiceNow credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowUpdateConfiguration AWS API Documentation
+    #
+    class ServiceNowUpdateConfiguration < Struct.new(
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because it would exceed the service quota
+    # limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -33238,10 +33286,6 @@ module Aws::SecurityHub
     #   The UUID of the connectorV2 to identify connectorV2 resource.
     #   @return [String]
     #
-    # @!attribute [rw] client_secret
-    #   The clientSecret of ServiceNow.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   The description of the connectorV2.
     #   @return [String]
@@ -33254,10 +33298,9 @@ module Aws::SecurityHub
     #
     class UpdateConnectorV2Request < Struct.new(
       :connector_id,
-      :client_secret,
       :description,
       :provider)
-      SENSITIVE = [:client_secret]
+      SENSITIVE = []
       include Aws::Structure
     end
 

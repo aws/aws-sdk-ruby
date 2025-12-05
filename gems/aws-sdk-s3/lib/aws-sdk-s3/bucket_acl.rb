@@ -34,7 +34,7 @@ module Aws::S3
       @bucket_name
     end
 
-    # Container for the bucket owner's display name and ID.
+    # Container for the bucket owner's ID.
     # @return [Types::Owner]
     def owner
       data[:owner]

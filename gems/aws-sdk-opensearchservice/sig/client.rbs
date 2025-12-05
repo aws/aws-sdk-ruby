@@ -413,6 +413,9 @@ module Aws
                              }?,
                              s3_vectors_engine: {
                                enabled: bool?
+                             }?,
+                             serverless_vector_acceleration: {
+                               enabled: bool?
                              }?
                            }
                          ) -> _CreateDomainResponseSuccess
@@ -1422,6 +1425,9 @@ module Aws
                                       desired_state: ("ENABLED" | "DISABLED")?
                                     }?,
                                     s3_vectors_engine: {
+                                      enabled: bool?
+                                    }?,
+                                    serverless_vector_acceleration: {
                                       enabled: bool?
                                     }?
                                   }

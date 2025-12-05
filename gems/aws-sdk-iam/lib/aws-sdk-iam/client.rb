@@ -5457,6 +5457,7 @@ module Aws::IAM
     #   resp.delegation_request.owner_id #=> String
     #   resp.delegation_request.approver_id #=> String
     #   resp.delegation_request.state #=> String, one of "UNASSIGNED", "ASSIGNED", "PENDING_APPROVAL", "FINALIZED", "ACCEPTED", "REJECTED", "EXPIRED"
+    #   resp.delegation_request.expiration_time #=> Time
     #   resp.delegation_request.requestor_id #=> String
     #   resp.delegation_request.requestor_name #=> String
     #   resp.delegation_request.create_date #=> Time
@@ -7753,6 +7754,7 @@ module Aws::IAM
     #   resp.delegation_requests[0].owner_id #=> String
     #   resp.delegation_requests[0].approver_id #=> String
     #   resp.delegation_requests[0].state #=> String, one of "UNASSIGNED", "ASSIGNED", "PENDING_APPROVAL", "FINALIZED", "ACCEPTED", "REJECTED", "EXPIRED"
+    #   resp.delegation_requests[0].expiration_time #=> Time
     #   resp.delegation_requests[0].requestor_id #=> String
     #   resp.delegation_requests[0].requestor_name #=> String
     #   resp.delegation_requests[0].create_date #=> Time
@@ -14689,7 +14691,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

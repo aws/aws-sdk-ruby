@@ -36,6 +36,87 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Condition that matches based on the specific WAF action taken on the
+    # request.
+    #
+    # @!attribute [rw] action
+    #   The WAF action to match against (ALLOW, BLOCK, COUNT, CAPTCHA,
+    #   CHALLENGE, EXCLUDED\_AS\_COUNT).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ActionCondition AWS API Documentation
+    #
+    class ActionCondition < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Advanced event selectors let you create fine-grained selectors for
+    # management, data, and network activity events.
+    #
+    # @!attribute [rw] name
+    #   An optional, descriptive name for an advanced event selector, such
+    #   as "Log data events for only two S3 buckets".
+    #   @return [String]
+    #
+    # @!attribute [rw] field_selectors
+    #   Contains all selector statements in an advanced event selector.
+    #   @return [Array<Types::AdvancedFieldSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AdvancedEventSelector AWS API Documentation
+    #
+    class AdvancedEventSelector < Struct.new(
+      :name,
+      :field_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines criteria for selecting resources based on field values.
+    #
+    # @!attribute [rw] field
+    #   The name of the field to use for selection.
+    #   @return [String]
+    #
+    # @!attribute [rw] equals
+    #   Matches if the field value equals the specified value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] starts_with
+    #   Matches if the field value starts with the specified value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ends_with
+    #   Matches if the field value ends with the specified value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_equals
+    #   Matches if the field value does not equal the specified value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_starts_with
+    #   Matches if the field value does not start with the specified value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_ends_with
+    #   Matches if the field value does not end with the specified value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AdvancedFieldSelector AWS API Documentation
+    #
+    class AdvancedFieldSelector < Struct.new(
+      :field,
+      :equals,
+      :starts_with,
+      :ends_with,
+      :not_equals,
+      :not_starts_with,
+      :not_ends_with)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines how telemetry data should be centralized across an Amazon Web
     # Services Organization, including source and destination
     # configurations.
@@ -182,16 +263,102 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Parameters specific to Amazon Web Services CloudTrail telemetry
+    # configuration.
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors to use for filtering Amazon Web
+    #   Services CloudTrail events.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CloudtrailParameters AWS API Documentation
+    #
+    class CloudtrailParameters < Struct.new(
+      :advanced_event_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single condition that can match based on WAF rule action or label
+    # name.
+    #
+    # @!attribute [rw] action_condition
+    #   Matches log records based on the WAF rule action taken (ALLOW,
+    #   BLOCK, COUNT, etc.).
+    #   @return [Types::ActionCondition]
+    #
+    # @!attribute [rw] label_name_condition
+    #   Matches log records based on WAF rule labels applied to the request.
+    #   @return [Types::LabelNameCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :action_condition,
+      :label_name_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of pipeline configuration components including
+    # sources, processors, and destinations.
+    #
+    # @!attribute [rw] sources
+    #   The list of data sources configured in the pipeline.
+    #   @return [Array<Types::Source>]
+    #
+    # @!attribute [rw] data_sources
+    #   The list of data sources that provide telemetry data to the
+    #   pipeline.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] processors
+    #   The list of processors configured in the pipeline for data
+    #   transformation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_count
+    #   The total number of processors configured in the pipeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sinks
+    #   The list of destinations where processed data is sent.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ConfigurationSummary AWS API Documentation
+    #
+    class ConfigurationSummary < Struct.new(
+      :sources,
+      :data_sources,
+      :processors,
+      :processor_count,
+      :sinks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation conflicts with the current state of the
     # specified resource or with another request.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource which is in conflict with the
+    #   requested operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource which is in conflict with the requested
+    #   operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
-      :message)
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -231,6 +398,87 @@ module Aws::ObservabilityAdmin
     #
     class CreateCentralizationRuleForOrganizationOutput < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encryption
+    #   The encryption configuration for the S3 Table integration, including
+    #   the encryption algorithm and KMS key settings.
+    #   @return [Types::Encryption]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants
+    #   permissions for the S3 Table integration to access necessary
+    #   resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs to associate with the S3 Table integration
+    #   resource for categorization and management purposes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateS3TableIntegrationInput AWS API Documentation
+    #
+    class CreateS3TableIntegrationInput < Struct.new(
+      :encryption,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created S3 Table integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateS3TableIntegrationOutput AWS API Documentation
+    #
+    class CreateS3TableIntegrationOutput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the telemetry pipeline to create. The name must be
+    #   unique within your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration that defines how the telemetry pipeline processes
+    #   data, including sources, processors, and destinations. For more
+    #   information about pipeline components, see the [Amazon CloudWatch
+    #   User Guide][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/pipeline-components-reference.html
+    #   @return [Types::TelemetryPipelineConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs to associate with the telemetry pipeline
+    #   resource for categorization and management purposes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateTelemetryPipelineInput AWS API Documentation
+    #
+    class CreateTelemetryPipelineInput < Struct.new(
+      :name,
+      :configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created telemetry pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateTelemetryPipelineOutput AWS API Documentation
+    #
+    class CreateTelemetryPipelineOutput < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -312,6 +560,34 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Information about a data source associated with the telemetry
+    # pipeline. For CloudWatch Logs sources, this includes both a name and
+    # type extracted from the log event metadata. For third-party sources
+    # (such as S3), this includes only a name, with the type field left
+    # empty.
+    #
+    # @!attribute [rw] name
+    #   The name of the data source. For CloudWatch Logs sources, this
+    #   corresponds to the `data_source_name` from the log event metadata.
+    #   For third-party sources, this is either the configured
+    #   `data_source_name` or defaults to the plugin name if not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the data source. For CloudWatch Logs sources, this
+    #   corresponds to the `data_source_type` from the log event metadata.
+    #   For third-party sources, this field is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DataSource AWS API Documentation
+    #
+    class DataSource < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] rule_identifier
     #   The identifier (name or ARN) of the organization centralization rule
     #   to delete.
@@ -324,6 +600,35 @@ module Aws::ObservabilityAdmin
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the S3 Table integration to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteS3TableIntegrationInput AWS API Documentation
+    #
+    class DeleteS3TableIntegrationInput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_identifier
+    #   The ARN of the telemetry pipeline to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteTelemetryPipelineInput AWS API Documentation
+    #
+    class DeleteTelemetryPipelineInput < Struct.new(
+      :pipeline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteTelemetryPipelineOutput AWS API Documentation
+    #
+    class DeleteTelemetryPipelineOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] rule_identifier
     #   The identifier (name or ARN) of the organization telemetry rule to
@@ -368,6 +673,107 @@ module Aws::ObservabilityAdmin
     class DestinationLogsConfiguration < Struct.new(
       :logs_encryption_configuration,
       :backup_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration parameters for ELB load balancer logging, including
+    # output format and field delimiter settings.
+    #
+    # @!attribute [rw] output_format
+    #   The format for ELB access log entries (plain text or JSON format).
+    #   @return [String]
+    #
+    # @!attribute [rw] field_delimiter
+    #   The delimiter character used to separate fields in ELB access log
+    #   entries when using plain text format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ELBLoadBalancerLoggingParameters AWS API Documentation
+    #
+    class ELBLoadBalancerLoggingParameters < Struct.new(
+      :output_format,
+      :field_delimiter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the encryption configuration for S3 Table integrations,
+    # including the encryption algorithm and KMS key settings.
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The server-side encryption algorithm used for encrypting data in the
+    #   S3 Table integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used for encryption
+    #   when using customer-managed keys.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/Encryption AWS API Documentation
+    #
+    class Encryption < Struct.new(
+      :sse_algorithm,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a field in the request to redact from WAF logs, such as
+    # headers, query parameters, or body content.
+    #
+    # @!attribute [rw] single_header
+    #   Redacts a specific header field by name from WAF logs.
+    #   @return [Types::SingleHeader]
+    #
+    # @!attribute [rw] uri_path
+    #   Redacts the URI path from WAF logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   Redacts the entire query string from WAF logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] method
+    #   Redacts the HTTP method from WAF logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/FieldToMatch AWS API Documentation
+    #
+    class FieldToMatch < Struct.new(
+      :single_header,
+      :uri_path,
+      :query_string,
+      :method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single filter condition that specifies behavior, requirement, and
+    # matching conditions for WAF log records.
+    #
+    # @!attribute [rw] behavior
+    #   The action to take for log records matching this filter (KEEP or
+    #   DROP).
+    #   @return [String]
+    #
+    # @!attribute [rw] requirement
+    #   Whether the log record must meet all conditions (MEETS\_ALL) or any
+    #   condition (MEETS\_ANY) to match this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditions
+    #   The list of conditions that determine if a log record matches this
+    #   filter.
+    #   @return [Array<Types::Condition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :behavior,
+      :requirement,
+      :conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -442,15 +848,66 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the S3 Table integration to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetS3TableIntegrationInput AWS API Documentation
+    #
+    class GetS3TableIntegrationInput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the S3 Table integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used by the S3 Table
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the S3 Table integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   The encryption configuration for the S3 Table integration.
+    #   @return [Types::Encryption]
+    #
+    # @!attribute [rw] destination_table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket used as the
+    #   destination for the table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The timestamp when the S3 Table integration was created.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetS3TableIntegrationOutput AWS API Documentation
+    #
+    class GetS3TableIntegrationOutput < Struct.new(
+      :arn,
+      :role_arn,
+      :status,
+      :encryption,
+      :destination_table_bucket_arn,
+      :created_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] status
     #   The current status of the resource tags for telemetry feature
     #   (`Running`, `Stopped`, or `Impaired`).
     #   @return [String]
     #
     # @!attribute [rw] aws_resource_explorer_managed_view_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Resource
-    #   Explorer managed view used for resource tags for telemetry, if the
-    #   feature is enabled.
+    #   The Amazon Resource Name (ARN) of the Resource Explorer managed view
+    #   used for resource tags for telemetry, if the feature is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEnrichmentStatusOutput AWS API Documentation
@@ -496,6 +953,31 @@ module Aws::ObservabilityAdmin
     class GetTelemetryEvaluationStatusOutput < Struct.new(
       :status,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_identifier
+    #   The identifier (name or ARN) of the telemetry pipeline to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryPipelineInput AWS API Documentation
+    #
+    class GetTelemetryPipelineInput < Struct.new(
+      :pipeline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline
+    #   The complete telemetry pipeline resource information, including
+    #   configuration, status, and metadata.
+    #   @return [Types::TelemetryPipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryPipelineOutput AWS API Documentation
+    #
+    class GetTelemetryPipelineOutput < Struct.new(
+      :pipeline)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -589,6 +1071,26 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Contains summary information about an S3 Table integration for listing
+    # operations.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the S3 Table integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the S3 Table integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/IntegrationSummary AWS API Documentation
+    #
+    class IntegrationSummary < Struct.new(
+      :arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates the request has failed to process because of an unknown
     # server error, exception, or failure.
     #
@@ -599,11 +1101,46 @@ module Aws::ObservabilityAdmin
     #   The name of the exception.
     #   @return [String]
     #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds to wait before retrying the request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
       :message,
-      :amzn_error_type)
+      :amzn_error_type,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested operation cannot be completed on the specified resource
+    # in the current state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Condition that matches based on WAF rule labels, with label names
+    # limited to 1024 characters.
+    #
+    # @!attribute [rw] label_name
+    #   The label name to match, supporting alphanumeric characters,
+    #   underscores, hyphens, and colons.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LabelNameCondition AWS API Documentation
+    #
+    class LabelNameCondition < Struct.new(
+      :label_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -800,6 +1337,43 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of S3 Table integrations to return in a single
+    #   call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. A previous call generates
+    #   this token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListS3TableIntegrationsInput AWS API Documentation
+    #
+    class ListS3TableIntegrationsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_summaries
+    #   A list of S3 Table integration summaries containing key information
+    #   about each integration.
+    #   @return [Array<Types::IntegrationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListS3TableIntegrationsOutput AWS API Documentation
+    #
+    class ListS3TableIntegrationsOutput < Struct.new(
+      :integration_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource whose
     #   tags you want to list.
@@ -821,6 +1395,43 @@ module Aws::ObservabilityAdmin
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of telemetry pipelines to return in a single
+    #   call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. A previous call generates
+    #   this token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryPipelinesInput AWS API Documentation
+    #
+    class ListTelemetryPipelinesInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_summaries
+    #   A list of telemetry pipeline summaries containing key information
+    #   about each pipeline.
+    #   @return [Array<Types::TelemetryPipelineSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryPipelinesOutput AWS API Documentation
+    #
+    class ListTelemetryPipelinesOutput < Struct.new(
+      :pipeline_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -920,6 +1531,43 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Configuration parameters for Amazon Bedrock AgentCore logging,
+    # including `logType` settings.
+    #
+    # @!attribute [rw] log_types
+    #   The type of log that the source is sending.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LogDeliveryParameters AWS API Documentation
+    #
+    class LogDeliveryParameters < Struct.new(
+      :log_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that determines which WAF log records to keep or drop
+    # based on specified conditions.
+    #
+    # @!attribute [rw] filters
+    #   A list of filter conditions that determine log record handling
+    #   behavior.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] default_behavior
+    #   The default action (KEEP or DROP) for log records that don't match
+    #   any filter conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LoggingFilter AWS API Documentation
+    #
+    class LoggingFilter < Struct.new(
+      :filters,
+      :default_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for backing up centralized log data to a secondary
     # region.
     #
@@ -929,7 +1577,7 @@ module Aws::ObservabilityAdmin
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   KMS Key arn belonging to the primary destination account and backup
+    #   KMS Key ARN belonging to the primary destination account and backup
     #   region, to encrypt newly created central log groups in the backup
     #   destination.
     #   @return [String]
@@ -955,7 +1603,7 @@ module Aws::ObservabilityAdmin
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   KMS Key arn belonging to the primary destination account and region,
+    #   KMS Key ARN belonging to the primary destination account and region,
     #   to encrypt newly created central log groups in the primary
     #   destination.
     #   @return [String]
@@ -978,15 +1626,84 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Contains the output from pipeline test operations, including processed
+    # records and any errors encountered.
+    #
+    # @!attribute [rw] record
+    #   The processed record output from the pipeline test operation.
+    #   @return [Types::Record]
+    #
+    # @!attribute [rw] error
+    #   Any error that occurred during the pipeline test operation for this
+    #   record.
+    #   @return [Types::PipelineOutputError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/PipelineOutput AWS API Documentation
+    #
+    class PipelineOutput < Struct.new(
+      :record,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed error information from pipeline test operations,
+    # providing structured error responses for better debugging and
+    # troubleshooting capabilities.
+    #
+    # @!attribute [rw] message
+    #   The detailed error message describing what went wrong during the
+    #   pipeline test operation for this record.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/PipelineOutputError AWS API Documentation
+    #
+    class PipelineOutputError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a test record structure used for pipeline testing
+    # operations to validate data processing.
+    #
+    # @!attribute [rw] data
+    #   The data content of the test record used for pipeline validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the test record, indicating the format or category of
+    #   the data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/Record AWS API Documentation
+    #
+    class Record < Struct.new(
+      :data,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource (such as a telemetry rule) could not be found.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource which could not be found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource which could not be found.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -997,6 +1714,22 @@ module Aws::ObservabilityAdmin
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource which exceeds the service quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource which exceeds the service quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the service of the exceeded quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The code for the exceeded service quota.
+    #   @return [String]
+    #
     # @!attribute [rw] amzn_error_type
     #   The name of the exception.
     #   @return [String]
@@ -1005,7 +1738,43 @@ module Aws::ObservabilityAdmin
     #
     class ServiceQuotaExceededException < Struct.new(
       :message,
+      :resource_id,
+      :resource_type,
+      :service_code,
+      :quota_code,
       :amzn_error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure containing a name field limited to 64 characters for header
+    # or query parameter identification.
+    #
+    # @!attribute [rw] name
+    #   The name value, limited to 64 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SingleHeader AWS API Documentation
+    #
+    class SingleHeader < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of source plugin types used in the pipeline configuration (such
+    # as `cloudwatch_logs` or `s3`). Currently supports a single source per
+    # pipeline, but is structured as a list to accommodate multiple
+    # pipelines in the configuration.
+    #
+    # @!attribute [rw] type
+    #   The plugin name of the source, such as `cloudwatch_logs` or `s3`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/Source AWS API Documentation
+    #
+    class Source < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1041,8 +1810,8 @@ module Aws::ObservabilityAdmin
     #   @return [String]
     #
     # @!attribute [rw] aws_resource_explorer_managed_view_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Resource
-    #   Explorer managed view created for resource tags for telemetry.
+    #   The Amazon Resource Name (ARN) of the Resource Explorer managed view
+    #   created for resource tags for telemetry.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEnrichmentOutput AWS API Documentation
@@ -1101,11 +1870,13 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] resource_type
     #   The type of resource, for example `Amazon Web
-    #   Services::EC2::Instance`.
+    #   Services::EC2::Instance`, or `Amazon Web Services::EKS::Cluster`,
+    #   etc.
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
-    #   The identifier of the resource, for example `i-0b22a22eec53b9321`.
+    #   The identifier of the resource, for example for Amazon VPC, it would
+    #   be `vpc-1a2b3c4d5e6f1a2b3`.
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
@@ -1153,13 +1924,166 @@ module Aws::ObservabilityAdmin
     #   resource type.
     #   @return [Types::VPCFlowLogParameters]
     #
+    # @!attribute [rw] cloudtrail_parameters
+    #   Configuration parameters specific to Amazon Web Services CloudTrail
+    #   when CloudTrail is the source type.
+    #   @return [Types::CloudtrailParameters]
+    #
+    # @!attribute [rw] elb_load_balancer_logging_parameters
+    #   Configuration parameters specific to ELB load balancer logging when
+    #   ELB is the resource type.
+    #   @return [Types::ELBLoadBalancerLoggingParameters]
+    #
+    # @!attribute [rw] waf_logging_parameters
+    #   Configuration parameters specific to WAF logging when WAF is the
+    #   resource type.
+    #   @return [Types::WAFLoggingParameters]
+    #
+    # @!attribute [rw] log_delivery_parameters
+    #   Configuration parameters specific to Amazon Bedrock AgentCore
+    #   logging when Amazon Bedrock AgentCore is the resource type.
+    #   @return [Types::LogDeliveryParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryDestinationConfiguration AWS API Documentation
     #
     class TelemetryDestinationConfiguration < Struct.new(
       :destination_type,
       :destination_pattern,
       :retention_in_days,
-      :vpc_flow_log_parameters)
+      :vpc_flow_log_parameters,
+      :cloudtrail_parameters,
+      :elb_load_balancer_logging_parameters,
+      :waf_logging_parameters,
+      :log_delivery_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a complete telemetry pipeline resource with configuration,
+    # status, and metadata for data processing and transformation.
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The timestamp when the telemetry pipeline was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_update_time_stamp
+    #   The timestamp when the telemetry pipeline was last updated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the telemetry pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the telemetry pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration that defines how the telemetry pipeline processes
+    #   data.
+    #   @return [Types::TelemetryPipelineConfiguration]
+    #
+    # @!attribute [rw] status
+    #   The current status of the telemetry pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the pipeline status, including reasons
+    #   for failure states.
+    #   @return [Types::TelemetryPipelineStatusReason]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs associated with the telemetry pipeline resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryPipeline AWS API Documentation
+    #
+    class TelemetryPipeline < Struct.new(
+      :created_time_stamp,
+      :last_update_time_stamp,
+      :arn,
+      :name,
+      :configuration,
+      :status,
+      :status_reason,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for a telemetry pipeline, including how data
+    # flows from sources through processors to destinations.
+    #
+    # @!attribute [rw] body
+    #   The pipeline configuration body that defines the data processing
+    #   rules and transformations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryPipelineConfiguration AWS API Documentation
+    #
+    class TelemetryPipelineConfiguration < Struct.new(
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides detailed information about the status of a telemetry
+    # pipeline, including reasons for specific states.
+    #
+    # @!attribute [rw] description
+    #   A description of the pipeline status reason, providing additional
+    #   context about the current state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryPipelineStatusReason AWS API Documentation
+    #
+    class TelemetryPipelineStatusReason < Struct.new(
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a telemetry pipeline for listing
+    # operations.
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The timestamp when the telemetry pipeline was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_update_time_stamp
+    #   The timestamp when the telemetry pipeline was last updated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the telemetry pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the telemetry pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the telemetry pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs associated with the telemetry pipeline resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] configuration_summary
+    #   A summary of the pipeline configuration components.
+    #   @return [Types::ConfigurationSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryPipelineSummary AWS API Documentation
+    #
+    class TelemetryPipelineSummary < Struct.new(
+      :created_time_stamp,
+      :last_update_time_stamp,
+      :arn,
+      :name,
+      :status,
+      :tags,
+      :configuration_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1169,12 +2093,19 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] resource_type
     #   The type of Amazon Web Services resource to configure telemetry for
-    #   (e.g., "AWS::EC2::VPC").
+    #   (e.g., "AWS::EC2::VPC", "AWS::EKS::Cluster",
+    #   "AWS::WAFv2::WebACL").
     #   @return [String]
     #
     # @!attribute [rw] telemetry_type
     #   The type of telemetry to collect (Logs, Metrics, or Traces).
     #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source_types
+    #   The specific telemetry source types to configure for the resource,
+    #   such as VPC\_FLOW\_LOGS or EKS\_AUDIT\_LOGS. TelemetrySourceTypes
+    #   must be correlated with the specific resource type.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] destination_configuration
     #   Configuration specifying where and how the telemetry data should be
@@ -1196,6 +2127,7 @@ module Aws::ObservabilityAdmin
     class TelemetryRule < Struct.new(
       :resource_type,
       :telemetry_type,
+      :telemetry_source_types,
       :destination_configuration,
       :scope,
       :selection_criteria)
@@ -1230,6 +2162,12 @@ module Aws::ObservabilityAdmin
     #   configures.
     #   @return [String]
     #
+    # @!attribute [rw] telemetry_source_types
+    #   The types of telemetry sources configured for this rule, such as VPC
+    #   Flow Logs or EKS audit logs. TelemetrySourceTypes must be correlated
+    #   with the specific resource type.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryRuleSummary AWS API Documentation
     #
     class TelemetryRuleSummary < Struct.new(
@@ -1238,7 +2176,39 @@ module Aws::ObservabilityAdmin
       :created_time_stamp,
       :last_update_time_stamp,
       :resource_type,
-      :telemetry_type)
+      :telemetry_type,
+      :telemetry_source_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] records
+    #   The sample records to process through the pipeline configuration for
+    #   testing purposes.
+    #   @return [Array<Types::Record>]
+    #
+    # @!attribute [rw] configuration
+    #   The pipeline configuration to test with the provided sample records.
+    #   @return [Types::TelemetryPipelineConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TestTelemetryPipelineInput AWS API Documentation
+    #
+    class TestTelemetryPipelineInput < Struct.new(
+      :records,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   The results of processing the test records through the pipeline
+    #   configuration, including any outputs or errors.
+    #   @return [Array<Types::PipelineOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TestTelemetryPipelineOutput AWS API Documentation
+    #
+    class TestTelemetryPipelineOutput < Struct.new(
+      :results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1306,6 +2276,28 @@ module Aws::ObservabilityAdmin
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] pipeline_identifier
+    #   The ARN of the telemetry pipeline to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The new configuration for the telemetry pipeline, including updated
+    #   sources, processors, and destinations.
+    #   @return [Types::TelemetryPipelineConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateTelemetryPipelineInput AWS API Documentation
+    #
+    class UpdateTelemetryPipelineInput < Struct.new(
+      :pipeline_identifier,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateTelemetryPipelineOutput AWS API Documentation
+    #
+    class UpdateTelemetryPipelineOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] rule_identifier
     #   The identifier (name or ARN) of the organization telemetry rule to
@@ -1394,16 +2386,98 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration
+    #   The pipeline configuration to validate for syntax and compatibility.
+    #   @return [Types::TelemetryPipelineConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ValidateTelemetryPipelineConfigurationInput AWS API Documentation
+    #
+    class ValidateTelemetryPipelineConfigurationInput < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of validation errors found in the pipeline configuration, if
+    #   any.
+    #   @return [Array<Types::ValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ValidateTelemetryPipelineConfigurationOutput AWS API Documentation
+    #
+    class ValidateTelemetryPipelineConfigurationOutput < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a detailed validation error with message, reason, and field
+    # mapping for comprehensive error reporting.
+    #
+    # @!attribute [rw] message
+    #   The error message describing the validation issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason code or category for the validation error.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_map
+    #   A mapping of field names to specific validation issues within the
+    #   configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ValidationError AWS API Documentation
+    #
+    class ValidationError < Struct.new(
+      :message,
+      :reason,
+      :field_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates input validation failed. Check your request parameters and
     # retry the request.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] errors
+    #   The errors in the input which caused the exception.
+    #   @return [Array<Types::ValidationError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration parameters for WAF logging, including redacted fields
+    # and logging filters.
+    #
+    # @!attribute [rw] redacted_fields
+    #   The fields to redact from WAF logs to protect sensitive information.
+    #   @return [Array<Types::FieldToMatch>]
+    #
+    # @!attribute [rw] logging_filter
+    #   A filter configuration that determines which WAF log records to
+    #   include or exclude.
+    #   @return [Types::LoggingFilter]
+    #
+    # @!attribute [rw] log_type
+    #   The type of WAF logs to collect (currently supports WAF\_LOGS).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/WAFLoggingParameters AWS API Documentation
+    #
+    class WAFLoggingParameters < Struct.new(
+      :redacted_fields,
+      :logging_filter,
+      :log_type)
       SENSITIVE = []
       include Aws::Structure
     end

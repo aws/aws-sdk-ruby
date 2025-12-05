@@ -519,6 +519,211 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Configuration for integrating Argo CD with IAM Identity CenterIAM;
+    # Identity Center. This allows you to use your organization's identity
+    # provider for authentication to Argo CD.
+    #
+    # @!attribute [rw] idc_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity CenterIAM;
+    #   Identity Center instance to use for authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_region
+    #   The Region where your IAM Identity CenterIAM; Identity Center
+    #   instance is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdAwsIdcConfigRequest AWS API Documentation
+    #
+    class ArgoCdAwsIdcConfigRequest < Struct.new(
+      :idc_instance_arn,
+      :idc_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing IAM Identity CenterIAM; Identity Center
+    # configuration details for an Argo CD capability.
+    #
+    # @!attribute [rw] idc_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity CenterIAM;
+    #   Identity Center instance used for authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_region
+    #   The Region where the IAM Identity CenterIAM; Identity Center
+    #   instance is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] idc_managed_application_arn
+    #   The Amazon Resource Name (ARN) of the managed application created in
+    #   IAM Identity CenterIAM; Identity Center for this Argo CD capability.
+    #   This application is automatically created and managed by Amazon EKS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdAwsIdcConfigResponse AWS API Documentation
+    #
+    class ArgoCdAwsIdcConfigResponse < Struct.new(
+      :idc_instance_arn,
+      :idc_region,
+      :idc_managed_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for an Argo CD capability. This includes the
+    # Kubernetes namespace, IAM Identity CenterIAM; Identity Center
+    # integration, RBAC role mappings, and network access configuration.
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace where Argo CD resources will be created. If
+    #   not specified, the default namespace is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_idc
+    #   Configuration for IAM Identity CenterIAM; Identity Center
+    #   integration. When configured, users can authenticate to Argo CD
+    #   using their IAM Identity CenterIAM; Identity Center credentials.
+    #   @return [Types::ArgoCdAwsIdcConfigRequest]
+    #
+    # @!attribute [rw] rbac_role_mappings
+    #   A list of role mappings that define which IAM Identity CenterIAM;
+    #   Identity Center users or groups have which Argo CD roles. Each
+    #   mapping associates an Argo CD role (`ADMIN`, `EDITOR`, or `VIEWER`)
+    #   with one or more IAM Identity CenterIAM; Identity Center identities.
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    #
+    # @!attribute [rw] network_access
+    #   Configuration for network access to the Argo CD capability's
+    #   managed API server endpoint. By default, the Argo CD server is
+    #   accessible via a public endpoint. You can optionally specify one or
+    #   more VPC endpoint IDs to enable private connectivity from your VPCs.
+    #   When VPC endpoints are configured, public access is blocked and the
+    #   Argo CD server is only accessible through the specified VPC
+    #   endpoints.
+    #   @return [Types::ArgoCdNetworkAccessConfigRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdConfigRequest AWS API Documentation
+    #
+    class ArgoCdConfigRequest < Struct.new(
+      :namespace,
+      :aws_idc,
+      :rbac_role_mappings,
+      :network_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing Argo CD configuration details,
+    # including the server URL that you use to access the Argo CD web
+    # interface and API.
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace where Argo CD resources are monitored by
+    #   your Argo CD Capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_idc
+    #   The IAM Identity CenterIAM; Identity Center integration
+    #   configuration.
+    #   @return [Types::ArgoCdAwsIdcConfigResponse]
+    #
+    # @!attribute [rw] rbac_role_mappings
+    #   The list of role mappings that define which IAM Identity CenterIAM;
+    #   Identity Center users or groups have which Argo CD roles.
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    #
+    # @!attribute [rw] network_access
+    #   The network access configuration for the Argo CD capability's
+    #   managed API server endpoint. If VPC endpoint IDs are specified,
+    #   public access is blocked and the Argo CD server is only accessible
+    #   through the specified VPC endpoints.
+    #   @return [Types::ArgoCdNetworkAccessConfigResponse]
+    #
+    # @!attribute [rw] server_url
+    #   The URL of the Argo CD server. Use this URL to access the Argo CD
+    #   web interface and API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdConfigResponse AWS API Documentation
+    #
+    class ArgoCdConfigResponse < Struct.new(
+      :namespace,
+      :aws_idc,
+      :rbac_role_mappings,
+      :network_access,
+      :server_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for network access to the Argo CD capability's managed
+    # API server endpoint. When VPC endpoint IDs are specified, public
+    # access is blocked and the Argo CD server is only accessible through
+    # the specified VPC endpoints.
+    #
+    # @!attribute [rw] vpce_ids
+    #   A list of VPC endpoint IDs to associate with the managed Argo CD API
+    #   server endpoint. Each VPC endpoint provides private connectivity
+    #   from a specific VPC to the Argo CD server. You can specify multiple
+    #   VPC endpoint IDs to enable access from multiple VPCs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdNetworkAccessConfigRequest AWS API Documentation
+    #
+    class ArgoCdNetworkAccessConfigRequest < Struct.new(
+      :vpce_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing network access configuration for the
+    # Argo CD capability's managed API server endpoint. If VPC endpoint IDs
+    # are present, public access is blocked and the Argo CD server is only
+    # accessible through the specified VPC endpoints.
+    #
+    # @!attribute [rw] vpce_ids
+    #   The list of VPC endpoint IDs associated with the managed Argo CD API
+    #   server endpoint. Each VPC endpoint provides private connectivity
+    #   from a specific VPC to the Argo CD server.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdNetworkAccessConfigResponse AWS API Documentation
+    #
+    class ArgoCdNetworkAccessConfigResponse < Struct.new(
+      :vpce_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A mapping between an Argo CD role and IAM Identity CenterIAM; Identity
+    # Center identities. This defines which users or groups have specific
+    # permissions in Argo CD.
+    #
+    # @!attribute [rw] role
+    #   The Argo CD role to assign. Valid values are:
+    #
+    #   * `ADMIN` – Full administrative access to Argo CD.
+    #
+    #   * `EDITOR` – Edit access to Argo CD resources.
+    #
+    #   * `VIEWER` – Read-only access to Argo CD resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] identities
+    #   A list of IAM Identity CenterIAM; Identity Center identities (users
+    #   or groups) that should be assigned this Argo CD role.
+    #   @return [Array<Types::SsoIdentity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdRoleMapping AWS API Documentation
+    #
+    class ArgoCdRoleMapping < Struct.new(
+      :role,
+      :identities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name of your cluster.
     #   @return [String]
@@ -743,6 +948,246 @@ module Aws::EKS
     #
     class BlockStorage < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing a managed capability in an Amazon EKS cluster.
+    # This includes all configuration, status, and health information for
+    # the capability.
+    #
+    # @!attribute [rw] capability_name
+    #   The unique name of the capability within the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that contains this capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of capability. Valid values are `ACK`, `ARGOCD`, or `KRO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the capability
+    #   uses to interact with Amazon Web Services services.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capability. Valid values include:
+    #
+    #   * `CREATING` – The capability is being created.
+    #
+    #   * `ACTIVE` – The capability is running and available.
+    #
+    #   * `UPDATING` – The capability is being updated.
+    #
+    #   * `DELETING` – The capability is being deleted.
+    #
+    #   * `CREATE_FAILED` – The capability creation failed.
+    #
+    #   * `UPDATE_FAILED` – The capability update failed.
+    #
+    #   * `DELETE_FAILED` – The capability deletion failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the capability software that is currently running.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration settings for the capability. The structure varies
+    #   depending on the capability type.
+    #   @return [Types::CapabilityConfigurationResponse]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to a resource to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value. You
+    #   define them.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource – 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length – 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length – 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] health
+    #   Health information for the capability, including any issues that may
+    #   be affecting its operation.
+    #   @return [Types::CapabilityHealth]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the capability was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The Unix epoch timestamp in seconds for when the capability was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] delete_propagation_policy
+    #   The delete propagation policy for the capability. Currently, the
+    #   only supported value is `RETAIN`, which keeps all resources managed
+    #   by the capability when the capability is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Capability AWS API Documentation
+    #
+    class Capability < Struct.new(
+      :capability_name,
+      :arn,
+      :cluster_name,
+      :type,
+      :role_arn,
+      :status,
+      :version,
+      :configuration,
+      :tags,
+      :health,
+      :created_at,
+      :modified_at,
+      :delete_propagation_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for a capability. The structure of this object
+    # varies depending on the capability type.
+    #
+    # @!attribute [rw] argo_cd
+    #   Configuration settings specific to Argo CD capabilities. This field
+    #   is only used when creating or updating an Argo CD capability.
+    #   @return [Types::ArgoCdConfigRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilityConfigurationRequest AWS API Documentation
+    #
+    class CapabilityConfigurationRequest < Struct.new(
+      :argo_cd)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing capability configuration details.
+    #
+    # @!attribute [rw] argo_cd
+    #   Configuration settings for an Argo CD capability, including the
+    #   server URL and other Argo CD-specific settings.
+    #   @return [Types::ArgoCdConfigResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilityConfigurationResponse AWS API Documentation
+    #
+    class CapabilityConfigurationResponse < Struct.new(
+      :argo_cd)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Health information for a capability, including any issues that may be
+    # affecting its operation.
+    #
+    # @!attribute [rw] issues
+    #   A list of issues affecting the capability. If this list is empty,
+    #   the capability is healthy.
+    #   @return [Array<Types::CapabilityIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilityHealth AWS API Documentation
+    #
+    class CapabilityHealth < Struct.new(
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An issue affecting a capability's health or operation.
+    #
+    # @!attribute [rw] code
+    #   A code identifying the type of issue. This can be used to
+    #   programmatically handle specific issue types.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the issue and potential
+    #   remediation steps.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilityIssue AWS API Documentation
+    #
+    class CapabilityIssue < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a capability, containing basic information without the
+    # full configuration details. This is returned by the `ListCapabilities`
+    # operation.
+    #
+    # @!attribute [rw] capability_name
+    #   The unique name of the capability within the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of capability. Valid values are `ACK`, `ARGOCD`, or `KRO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the capability software that is currently running.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the capability was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The Unix epoch timestamp in seconds for when the capability was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilitySummary AWS API Documentation
+    #
+    class CapabilitySummary < Struct.new(
+      :capability_name,
+      :arn,
+      :type,
+      :status,
+      :version,
+      :created_at,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1651,6 +2096,133 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] capability_name
+    #   A unique name for the capability. The name must be unique within
+    #   your cluster and can contain alphanumeric characters, hyphens, and
+    #   underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster where you want to create the
+    #   capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. This token is valid for 24 hours after
+    #   creation. If you retry a request with the same client request token
+    #   and the same parameters after the original request has completed
+    #   successfully, the result of the original request is returned.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of capability to create. Valid values are:
+    #
+    #   * `ACK` – Amazon Web Services Controllers for Kubernetes (ACK),
+    #     which lets you manage resources directly from Kubernetes.
+    #
+    #   * `ARGOCD` – Argo CD for GitOps-based continuous delivery.
+    #
+    #   * `KRO` – Kube Resource Orchestrator (KRO) for composing and
+    #     managing custom Kubernetes resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the capability
+    #   uses to interact with Amazon Web Services services. This role must
+    #   have a trust policy that allows the EKS service principal to assume
+    #   it, and it must have the necessary permissions for the capability
+    #   type you're creating.
+    #
+    #   For ACK capabilities, the role needs permissions to manage the
+    #   resources you want to control through Kubernetes. For Argo CD
+    #   capabilities, the role needs permissions to access Git repositories
+    #   and Secrets Manager. For KRO capabilities, the role needs
+    #   permissions based on the resources you'll be orchestrating.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration settings for the capability. The structure of this
+    #   object varies depending on the capability type. For Argo CD
+    #   capabilities, you can configure IAM Identity CenterIAM; Identity
+    #   Center integration, RBAC role mappings, and network access settings.
+    #   @return [Types::CapabilityConfigurationRequest]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to a resource to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value. You
+    #   define them.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource – 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length – 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length – 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count
+    #     against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] delete_propagation_policy
+    #   Specifies how Kubernetes resources managed by the capability should
+    #   be handled when the capability is deleted. Currently, the only
+    #   supported value is `RETAIN` which retains all Kubernetes resources
+    #   managed by the capability when the capability is deleted.
+    #
+    #   Because resources are retained, all Kubernetes resources created by
+    #   the capability should be deleted from the cluster before deleting
+    #   the capability itself. After the capability is deleted, these
+    #   resources become difficult to manage because the controller is no
+    #   longer available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCapabilityRequest AWS API Documentation
+    #
+    class CreateCapabilityRequest < Struct.new(
+      :capability_name,
+      :cluster_name,
+      :client_request_token,
+      :type,
+      :role_arn,
+      :configuration,
+      :tags,
+      :delete_propagation_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capability
+    #   An object containing information about the newly created capability,
+    #   including its name, ARN, status, and configuration.
+    #   @return [Types::Capability]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCapabilityResponse AWS API Documentation
+    #
+    class CreateCapabilityResponse < Struct.new(
+      :capability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The unique name to give to your cluster. The name can contain only
     #   alphanumeric characters (case-sensitive), hyphens, and underscores.
@@ -2470,6 +3042,37 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that contains the capability you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCapabilityRequest AWS API Documentation
+    #
+    class DeleteCapabilityRequest < Struct.new(
+      :cluster_name,
+      :capability_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capability
+    #   An object containing information about the deleted capability,
+    #   including its final status and configuration.
+    #   @return [Types::Capability]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCapabilityResponse AWS API Documentation
+    #
+    class DeleteCapabilityResponse < Struct.new(
+      :capability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the cluster to delete.
     #   @return [String]
@@ -2887,6 +3490,39 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that contains the capability you
+    #   want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCapabilityRequest AWS API Documentation
+    #
+    class DescribeCapabilityRequest < Struct.new(
+      :cluster_name,
+      :capability_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capability
+    #   An object containing detailed information about the capability,
+    #   including its name, ARN, type, status, version, configuration,
+    #   health status, and timestamps for when it was created and last
+    #   modified.
+    #   @return [Types::Capability]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCapabilityResponse AWS API Documentation
+    #
+    class DescribeCapabilityResponse < Struct.new(
+      :capability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of your cluster.
     #   @return [String]
@@ -3213,13 +3849,18 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
     #   @return [String]
     #
+    # @!attribute [rw] capability_name
+    #   The name of the capability for which you want to describe updates.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateRequest AWS API Documentation
     #
     class DescribeUpdateRequest < Struct.new(
       :name,
       :update_id,
       :nodegroup_name,
-      :addon_name)
+      :addon_name,
+      :capability_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4587,6 +5228,59 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster for which you want to list
+    #   capabilities.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value. If you don't specify a value, the default is 100
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListCapabilitiesRequest AWS API Documentation
+    #
+    class ListCapabilitiesRequest < Struct.new(
+      :cluster_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capabilities
+    #   A list of capability summary objects, each containing basic
+    #   information about a capability including its name, ARN, type,
+    #   status, version, and timestamps.
+    #   @return [Array<Types::CapabilitySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListCapabilities`
+    #   request. When the results of a `ListCapabilities` request exceed
+    #   `maxResults`, you can use this value to retrieve the next page of
+    #   results. This value is null when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListCapabilitiesResponse AWS API Documentation
+    #
+    class ListCapabilitiesResponse < Struct.new(
+      :capabilities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results, returned in paginated output. You
     #   receive `maxResults` in a single page, along with a `nextToken`
@@ -5106,6 +5800,10 @@ module Aws::EKS
     #   The names of the installed add-ons that have available updates.
     #   @return [String]
     #
+    # @!attribute [rw] capability_name
+    #   The name of the capability for which you want to list updates.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated request,
     #   where `maxResults` was used and the results exceeded the value of
@@ -5136,6 +5834,7 @@ module Aws::EKS
       :name,
       :nodegroup_name,
       :addon_name,
+      :capability_name,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -6622,6 +7321,27 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An IAM Identity CenterIAM; Identity Center identity (user or group)
+    # that can be assigned permissions in a capability.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the IAM Identity CenterIAM; Identity Center
+    #   user or group.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of identity. Valid values are `SSO_USER` or `SSO_GROUP`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/SsoIdentity AWS API Documentation
+    #
+    class SsoIdentity < Struct.new(
+      :id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name of the cluster for the refresh insights operation.
     #   @return [String]
@@ -7059,6 +7779,107 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddonResponse AWS API Documentation
     #
     class UpdateAddonResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration updates for an Argo CD capability. You only need to
+    # specify the fields you want to update.
+    #
+    # @!attribute [rw] rbac_role_mappings
+    #   Updated RBAC role mappings for the Argo CD capability. You can add,
+    #   update, or remove role mappings.
+    #   @return [Types::UpdateRoleMappings]
+    #
+    # @!attribute [rw] network_access
+    #   Updated network access configuration for the Argo CD capability's
+    #   managed API server endpoint. You can add or remove VPC endpoint
+    #   associations to control which VPCs have private access to the Argo
+    #   CD server.
+    #   @return [Types::ArgoCdNetworkAccessConfigRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateArgoCdConfig AWS API Documentation
+    #
+    class UpdateArgoCdConfig < Struct.new(
+      :rbac_role_mappings,
+      :network_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration updates for a capability. The structure varies depending
+    # on the capability type.
+    #
+    # @!attribute [rw] argo_cd
+    #   Configuration updates specific to Argo CD capabilities.
+    #   @return [Types::UpdateArgoCdConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateCapabilityConfiguration AWS API Documentation
+    #
+    class UpdateCapabilityConfiguration < Struct.new(
+      :argo_cd)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that contains the capability you
+    #   want to update configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability to update configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the capability
+    #   uses to interact with Amazon Web Services services. If you specify a
+    #   new role ARN, the capability will start using the new role for all
+    #   subsequent operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The updated configuration settings for the capability. You only need
+    #   to specify the configuration parameters you want to change. For Argo
+    #   CD capabilities, you can update RBAC role mappings and network
+    #   access settings.
+    #   @return [Types::UpdateCapabilityConfiguration]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. This token is valid for 24 hours after
+    #   creation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_propagation_policy
+    #   The updated delete propagation policy for the capability. Currently,
+    #   the only supported value is `RETAIN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateCapabilityRequest AWS API Documentation
+    #
+    class UpdateCapabilityRequest < Struct.new(
+      :cluster_name,
+      :capability_name,
+      :role_arn,
+      :configuration,
+      :client_request_token,
+      :delete_propagation_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateCapabilityResponse AWS API Documentation
+    #
+    class UpdateCapabilityResponse < Struct.new(
       :update)
       SENSITIVE = []
       include Aws::Structure
@@ -7581,6 +8402,30 @@ module Aws::EKS
     #
     class UpdatePodIdentityAssociationResponse < Struct.new(
       :association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates to RBAC role mappings for an Argo CD capability. You can add,
+    # update, or remove role mappings in a single operation.
+    #
+    # @!attribute [rw] add_or_update_role_mappings
+    #   A list of role mappings to add or update. If a mapping for the
+    #   specified role already exists, it will be updated with the new
+    #   identities. If it doesn't exist, a new mapping will be created.
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    #
+    # @!attribute [rw] remove_role_mappings
+    #   A list of role mappings to remove from the RBAC configuration. Each
+    #   mapping specifies an Argo CD role (`ADMIN`, `EDITOR`, or `VIEWER`)
+    #   and the identities to remove from that role.
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateRoleMappings AWS API Documentation
+    #
+    class UpdateRoleMappings < Struct.new(
+      :add_or_update_role_mappings,
+      :remove_role_mappings)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -797,8 +797,8 @@ module Aws::MarketplaceCatalog
     # @option params [required, String] :entity_type
     #   The type of entities to retrieve. Valid values are: `AmiProduct`,
     #   `ContainerProduct`, `DataProduct`, `SaaSProduct`, `ProcurementPolicy`,
-    #   `Experience`, `Audience`, `BrandingSettings`, `Offer`, `Seller`,
-    #   `ResaleAuthorization`.
+    #   `Experience`, `Audience`, `BrandingSettings`, `Offer`, `OfferSet`,
+    #   `Seller`, `ResaleAuthorization`, `Solution`.
     #
     # @option params [Array<Types::Filter>] :filter_list
     #   An array of filter objects. Each filter object contains two
@@ -954,6 +954,9 @@ module Aws::MarketplaceCatalog
     #             before_value: "DateTimeISO8601",
     #           },
     #         },
+    #         offer_set_id: {
+    #           value_list: ["OfferSetIdString"],
+    #         },
     #       },
     #       container_product_filters: {
     #         entity_id: {
@@ -1050,6 +1053,35 @@ module Aws::MarketplaceCatalog
     #           value_list: ["Limited"], # accepts Limited, Public, Restricted, Draft
     #         },
     #       },
+    #       offer_set_filters: {
+    #         entity_id: {
+    #           value_list: ["OfferSetEntityIdString"],
+    #         },
+    #         name: {
+    #           value_list: ["OfferSetNameString"],
+    #         },
+    #         state: {
+    #           value_list: ["Draft"], # accepts Draft, Released
+    #         },
+    #         release_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         associated_offer_ids: {
+    #           value_list: ["OfferSetAssociatedOfferIdsString"],
+    #         },
+    #         solution_id: {
+    #           value_list: ["OfferSetSolutionIdString"],
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #       },
     #     },
     #     entity_type_sort: {
     #       data_product_sort: {
@@ -1065,7 +1097,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       offer_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       container_product_sort: {
@@ -1078,6 +1110,10 @@ module Aws::MarketplaceCatalog
     #       },
     #       machine_learning_product_sort: {
     #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductTitle, Visibility
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       offer_set_sort: {
+    #         sort_by: "Name", # accepts Name, State, ReleaseDate, SolutionId, EntityId, LastModifiedDate
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #     },
@@ -1110,6 +1146,7 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].offer_summary.state #=> String, one of "Draft", "Released"
     #   resp.entity_summary_list[0].offer_summary.targeting #=> Array
     #   resp.entity_summary_list[0].offer_summary.targeting[0] #=> String, one of "BuyerAccounts", "ParticipatingPrograms", "CountryCodes", "None"
+    #   resp.entity_summary_list[0].offer_summary.offer_set_id #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.name #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.product_id #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.product_name #=> String
@@ -1123,6 +1160,12 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].resale_authorization_summary.availability_end_date #=> String
     #   resp.entity_summary_list[0].machine_learning_product_summary.product_title #=> String
     #   resp.entity_summary_list[0].machine_learning_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
+    #   resp.entity_summary_list[0].offer_set_summary.name #=> String
+    #   resp.entity_summary_list[0].offer_set_summary.state #=> String, one of "Draft", "Released"
+    #   resp.entity_summary_list[0].offer_set_summary.release_date #=> String
+    #   resp.entity_summary_list[0].offer_set_summary.associated_offer_ids #=> Array
+    #   resp.entity_summary_list[0].offer_set_summary.associated_offer_ids[0] #=> String
+    #   resp.entity_summary_list[0].offer_set_summary.solution_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntities AWS API Documentation
@@ -1406,7 +1449,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

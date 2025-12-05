@@ -64852,6 +64852,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
     #   @return [String]
     #
+    # @!attribute [rw] attached_appliances
+    #   The proxy appliances attached to the NAT Gateway for filtering and
+    #   inspecting traffic to prevent data exfiltration.
+    #   @return [Array<Types::NatGatewayAttachedAppliance>]
+    #
     # @!attribute [rw] route_table_id
     #   For regional NAT gateways only, this is the ID of the NAT gateway.
     #   @return [String]
@@ -64874,6 +64879,7 @@ module Aws::EC2
       :availability_mode,
       :auto_scaling_ips,
       :auto_provision_zones,
+      :attached_appliances,
       :route_table_id)
       SENSITIVE = []
       include Aws::Structure
@@ -64942,6 +64948,57 @@ module Aws::EC2
       :status,
       :availability_zone,
       :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an appliance attached to a NAT Gateway, providing
+    # managed security solutions for traffic filtering and inspection.
+    #
+    # @!attribute [rw] type
+    #   The type of appliance attached to the NAT Gateway. For network
+    #   firewall proxy functionality, this will be
+    #   "network-firewall-proxy".
+    #   @return [String]
+    #
+    # @!attribute [rw] appliance_arn
+    #   The Amazon Resource Name (ARN) of the attached appliance,
+    #   identifying the specific proxy or security appliance resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The VPC endpoint ID used to route traffic from application VPCs to
+    #   the proxy for inspection and filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_state
+    #   The current attachment state of the appliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] modification_state
+    #   The current modification state of the appliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code if the appliance attachment or modification
+    #   operation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A descriptive message explaining the failure if the appliance
+    #   attachment or modification operation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAttachedAppliance AWS API Documentation
+    #
+    class NatGatewayAttachedAppliance < Struct.new(
+      :type,
+      :appliance_arn,
+      :vpc_endpoint_id,
+      :attachment_state,
+      :modification_state,
+      :failure_code,
+      :failure_message)
       SENSITIVE = []
       include Aws::Structure
     end

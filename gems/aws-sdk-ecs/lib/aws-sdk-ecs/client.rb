@@ -10748,11 +10748,13 @@ module Aws::ECS
     # deleted.
     #
     # When you call `StopTask` on a task, the equivalent of `docker stop` is
-    # issued to the containers running in the task. This results in a
-    # `SIGTERM` value and a default 30-second timeout, after which the
-    # `SIGKILL` value is sent and the containers are forcibly stopped. If
-    # the container handles the `SIGTERM` value gracefully and exits within
-    # 30 seconds from receiving it, no `SIGKILL` value is sent.
+    # issued to the containers running in the task. This results in a stop
+    # signal value and a default 30-second timeout, after which the
+    # `SIGKILL` value is sent and the containers are forcibly stopped. This
+    # signal can be defined in your container image with the `STOPSIGNAL`
+    # instruction and will default to `SIGTERM`. If the container handles
+    # the `SIGTERM` value gracefully and exits within 30 seconds from
+    # receiving it, no `SIGKILL` value is sent.
     #
     # For Windows containers, POSIX signals do not work and runtime stops
     # the container by sending a `CTRL_SHUTDOWN_EVENT`. For more
@@ -14012,7 +14014,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.214.0'
+      context[:gem_version] = '1.215.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

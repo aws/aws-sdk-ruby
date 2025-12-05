@@ -23,11 +23,22 @@ module Aws::OpenSearchService
     #   features on the specified domain.
     #   @return [Types::S3VectorsEngine]
     #
+    # @!attribute [rw] serverless_vector_acceleration
+    #   Specifies whether to enable serverless vector acceleration for the
+    #   domain. When enabled, provides [GPU-accelerated][1] vector search
+    #   capabilities for improved performance on vector workloads.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html
+    #   @return [Types::ServerlessVectorAcceleration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsInput AWS API Documentation
     #
     class AIMLOptionsInput < Struct.new(
       :natural_language_query_generation_options,
-      :s3_vectors_engine)
+      :s3_vectors_engine,
+      :serverless_vector_acceleration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45,11 +56,17 @@ module Aws::OpenSearchService
     #   features on the specified domain.
     #   @return [Types::S3VectorsEngine]
     #
+    # @!attribute [rw] serverless_vector_acceleration
+    #   The current serverless vector acceleration configuration for the
+    #   domain.
+    #   @return [Types::ServerlessVectorAcceleration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsOutput AWS API Documentation
     #
     class AIMLOptionsOutput < Struct.new(
       :natural_language_query_generation_options,
-      :s3_vectors_engine)
+      :s3_vectors_engine,
+      :serverless_vector_acceleration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7098,6 +7115,27 @@ module Aws::OpenSearchService
     #
     class SecurityLakeDirectQueryDataSource < Struct.new(
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for serverless vector acceleration, which provides
+    # [GPU-accelerated][1] vector search capabilities for improved
+    # performance on vector workloads.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether serverless vector acceleration is enabled for the
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ServerlessVectorAcceleration AWS API Documentation
+    #
+    class ServerlessVectorAcceleration < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end

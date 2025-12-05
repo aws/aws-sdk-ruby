@@ -75,6 +75,27 @@ module Aws::BedrockRuntime
       SENSITIVE: [:failure_message]
     end
 
+    class AudioBlock
+      attr_accessor format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm")
+      attr_accessor source: Types::AudioSource
+      attr_accessor error: Types::ErrorBlock
+      SENSITIVE: [:source, :error]
+    end
+
+    class AudioSource
+      attr_accessor bytes: ::String
+      attr_accessor s3_location: Types::S3Location
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bytes < AudioSource
+      end
+      class S3Location < AudioSource
+      end
+      class Unknown < AudioSource
+      end
+    end
+
     class AutoToolChoice < Aws::EmptyStructure
     end
 
@@ -182,6 +203,7 @@ module Aws::BedrockRuntime
       attr_accessor image: Types::ImageBlock
       attr_accessor document: Types::DocumentBlock
       attr_accessor video: Types::VideoBlock
+      attr_accessor audio: Types::AudioBlock
       attr_accessor tool_use: Types::ToolUseBlock
       attr_accessor tool_result: Types::ToolResultBlock
       attr_accessor guard_content: Types::GuardrailConverseContentBlock
@@ -199,6 +221,8 @@ module Aws::BedrockRuntime
       class Document < ContentBlock
       end
       class Video < ContentBlock
+      end
+      class Audio < ContentBlock
       end
       class ToolUse < ContentBlock
       end
@@ -224,6 +248,7 @@ module Aws::BedrockRuntime
       attr_accessor tool_result: ::Array[Types::ToolResultBlockDelta]
       attr_accessor reasoning_content: Types::ReasoningContentBlockDelta
       attr_accessor citation: Types::CitationsDelta
+      attr_accessor image: Types::ImageBlockDelta
       attr_accessor unknown: untyped
       SENSITIVE: [:reasoning_content]
 
@@ -236,6 +261,8 @@ module Aws::BedrockRuntime
       class ReasoningContent < ContentBlockDelta
       end
       class Citation < ContentBlockDelta
+      end
+      class Image < ContentBlockDelta
       end
       class Unknown < ContentBlockDelta
       end
@@ -251,12 +278,15 @@ module Aws::BedrockRuntime
     class ContentBlockStart
       attr_accessor tool_use: Types::ToolUseBlockStart
       attr_accessor tool_result: Types::ToolResultBlockStart
+      attr_accessor image: Types::ImageBlockStart
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class ToolUse < ContentBlockStart
       end
       class ToolResult < ContentBlockStart
+      end
+      class Image < ContentBlockStart
       end
       class Unknown < ContentBlockStart
       end
@@ -309,7 +339,7 @@ module Aws::BedrockRuntime
 
     class ConverseResponse
       attr_accessor output: Types::ConverseOutput
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "model_context_window_exceeded")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "model_context_window_exceeded")
       attr_accessor usage: Types::TokenUsage
       attr_accessor metrics: Types::ConverseMetrics
       attr_accessor additional_model_response_fields: untyped
@@ -459,6 +489,11 @@ module Aws::BedrockRuntime
       end
       class Unknown < DocumentSource
       end
+    end
+
+    class ErrorBlock
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class GetAsyncInvokeRequest
@@ -838,6 +873,18 @@ module Aws::BedrockRuntime
     class ImageBlock
       attr_accessor format: ("png" | "jpeg" | "gif" | "webp")
       attr_accessor source: Types::ImageSource
+      attr_accessor error: Types::ErrorBlock
+      SENSITIVE: [:source, :error]
+    end
+
+    class ImageBlockDelta
+      attr_accessor source: Types::ImageSource
+      attr_accessor error: Types::ErrorBlock
+      SENSITIVE: [:source, :error]
+    end
+
+    class ImageBlockStart
+      attr_accessor format: ("png" | "jpeg" | "gif" | "webp")
       SENSITIVE: []
     end
 
@@ -878,7 +925,7 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_identifier: ::String
       attr_accessor guardrail_version: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
-      attr_accessor service_tier: ("priority" | "default" | "flex")
+      attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
       SENSITIVE: [:body]
     end
 
@@ -886,7 +933,7 @@ module Aws::BedrockRuntime
       attr_accessor body: ::String
       attr_accessor content_type: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
-      attr_accessor service_tier: ("priority" | "default" | "flex")
+      attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
       SENSITIVE: [:body]
     end
 
@@ -915,7 +962,7 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_identifier: ::String
       attr_accessor guardrail_version: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
-      attr_accessor service_tier: ("priority" | "default" | "flex")
+      attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
       SENSITIVE: [:body]
     end
 
@@ -923,7 +970,7 @@ module Aws::BedrockRuntime
       attr_accessor body: Types::ResponseStream
       attr_accessor content_type: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
-      attr_accessor service_tier: ("priority" | "default" | "flex")
+      attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
       SENSITIVE: []
     end
 
@@ -957,7 +1004,7 @@ module Aws::BedrockRuntime
     end
 
     class MessageStopEvent
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "model_context_window_exceeded")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "model_context_window_exceeded")
       attr_accessor additional_model_response_fields: untyped
       attr_accessor event_type: untyped
       SENSITIVE: []
@@ -1090,7 +1137,7 @@ module Aws::BedrockRuntime
     end
 
     class ServiceTier
-      attr_accessor type: ("priority" | "default" | "flex")
+      attr_accessor type: ("priority" | "default" | "flex" | "reserved")
       SENSITIVE: []
     end
 
@@ -1223,10 +1270,13 @@ module Aws::BedrockRuntime
 
     class ToolResultBlockDelta
       attr_accessor text: ::String
+      attr_accessor json: untyped
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Text < ToolResultBlockDelta
+      end
+      class Json < ToolResultBlockDelta
       end
       class Unknown < ToolResultBlockDelta
       end

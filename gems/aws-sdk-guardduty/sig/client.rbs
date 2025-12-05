@@ -175,7 +175,9 @@ module Aws
                                  greater_than: ::Integer?,
                                  greater_than_or_equal: ::Integer?,
                                  less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?
+                                 less_than_or_equal: ::Integer?,
+                                 matches: Array[::String]?,
+                                 not_matches: Array[::String]?
                                }]?
                            },
                            ?client_token: ::String,
@@ -634,7 +636,9 @@ module Aws
                                            greater_than: ::Integer?,
                                            greater_than_or_equal: ::Integer?,
                                            less_than: ::Integer?,
-                                           less_than_or_equal: ::Integer?
+                                           less_than_or_equal: ::Integer?,
+                                           matches: Array[::String]?,
+                                           not_matches: Array[::String]?
                                          }]?
                                      },
                                      ?group_by: ("ACCOUNT" | "DATE" | "FINDING_TYPE" | "RESOURCE" | "SEVERITY"),
@@ -938,7 +942,9 @@ module Aws
                                  greater_than: ::Integer?,
                                  greater_than_or_equal: ::Integer?,
                                  less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?
+                                 less_than_or_equal: ::Integer?,
+                                 matches: Array[::String]?,
+                                 not_matches: Array[::String]?
                                }]?
                            },
                            ?sort_criteria: {
@@ -1249,7 +1255,9 @@ module Aws
                                  greater_than: ::Integer?,
                                  greater_than_or_equal: ::Integer?,
                                  less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?
+                                 less_than_or_equal: ::Integer?,
+                                 matches: Array[::String]?,
+                                 not_matches: Array[::String]?
                                }]?
                            }
                          ) -> _UpdateFilterResponseSuccess

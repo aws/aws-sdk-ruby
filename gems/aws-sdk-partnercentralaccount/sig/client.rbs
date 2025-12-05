@@ -1,0 +1,617 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PartnerCentralAccount
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptConnectionInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptConnectionInvitationResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#accept_connection_invitation-instance_method
+      def accept_connection_invitation: (
+                                          catalog: ::String,
+                                          identifier: ::String,
+                                          client_token: ::String
+                                        ) -> _AcceptConnectionInvitationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptConnectionInvitationResponseSuccess
+
+      interface _AssociateAwsTrainingCertificationEmailDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAwsTrainingCertificationEmailDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#associate_aws_training_certification_email_domain-instance_method
+      def associate_aws_training_certification_email_domain: (
+                                                               catalog: ::String,
+                                                               identifier: ::String,
+                                                               ?client_token: ::String,
+                                                               email: ::String,
+                                                               email_verification_code: ::String
+                                                             ) -> _AssociateAwsTrainingCertificationEmailDomainResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAwsTrainingCertificationEmailDomainResponseSuccess
+
+      interface _CancelConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelConnectionResponse]
+        def catalog: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def other_participant_account_id: () -> ::String
+        def updated_at: () -> ::Time
+        def connection_types: () -> ::Hash[("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"), Types::ConnectionTypeDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#cancel_connection-instance_method
+      def cancel_connection: (
+                               catalog: ::String,
+                               identifier: ::String,
+                               connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"),
+                               reason: ::String,
+                               client_token: ::String
+                             ) -> _CancelConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelConnectionResponseSuccess
+
+      interface _CancelConnectionInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelConnectionInvitationResponse]
+        def catalog: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def connection_id: () -> ::String
+        def connection_type: () -> ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def expires_at: () -> ::Time
+        def other_participant_identifier: () -> ::String
+        def participant_type: () -> ("SENDER" | "RECEIVER")
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+        def invitation_message: () -> ::String
+        def inviter_email: () -> ::String
+        def inviter_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#cancel_connection_invitation-instance_method
+      def cancel_connection_invitation: (
+                                          catalog: ::String,
+                                          identifier: ::String,
+                                          client_token: ::String
+                                        ) -> _CancelConnectionInvitationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelConnectionInvitationResponseSuccess
+
+      interface _CancelProfileUpdateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelProfileUpdateTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def task_details: () -> Types::TaskDetails
+        def started_at: () -> ::Time
+        def status: () -> ("IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+        def ended_at: () -> ::Time
+        def error_detail_list: () -> ::Array[Types::ErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#cancel_profile_update_task-instance_method
+      def cancel_profile_update_task: (
+                                        catalog: ::String,
+                                        identifier: ::String,
+                                        ?client_token: ::String,
+                                        task_id: ::String
+                                      ) -> _CancelProfileUpdateTaskResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelProfileUpdateTaskResponseSuccess
+
+      interface _CreateConnectionInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionInvitationResponse]
+        def catalog: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def connection_id: () -> ::String
+        def connection_type: () -> ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def expires_at: () -> ::Time
+        def other_participant_identifier: () -> ::String
+        def participant_type: () -> ("SENDER" | "RECEIVER")
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+        def invitation_message: () -> ::String
+        def inviter_email: () -> ::String
+        def inviter_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#create_connection_invitation-instance_method
+      def create_connection_invitation: (
+                                          catalog: ::String,
+                                          client_token: ::String,
+                                          connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"),
+                                          email: ::String,
+                                          message: ::String,
+                                          name: ::String,
+                                          receiver_identifier: ::String
+                                        ) -> _CreateConnectionInvitationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionInvitationResponseSuccess
+
+      interface _CreatePartnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePartnerResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def legal_name: () -> ::String
+        def created_at: () -> ::Time
+        def profile: () -> Types::PartnerProfile
+        def aws_training_certification_email_domains: () -> ::Array[Types::PartnerDomain]
+        def alliance_lead_contact: () -> Types::AllianceLeadContact
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#create_partner-instance_method
+      def create_partner: (
+                            catalog: ::String,
+                            ?client_token: ::String,
+                            legal_name: ::String,
+                            primary_solution_type: ("SOFTWARE_PRODUCTS" | "CONSULTING_SERVICES" | "PROFESSIONAL_SERVICES" | "MANAGED_SERVICES" | "HARDWARE_PRODUCTS" | "COMMUNICATION_SERVICES" | "VALUE_ADDED_RESALE_AWS_SERVICES" | "TRAINING_SERVICES"),
+                            alliance_lead_contact: {
+                              first_name: ::String,
+                              last_name: ::String,
+                              email: ::String,
+                              business_title: ::String
+                            },
+                            email_verification_code: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreatePartnerResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePartnerResponseSuccess
+
+      interface _DisassociateAwsTrainingCertificationEmailDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAwsTrainingCertificationEmailDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#disassociate_aws_training_certification_email_domain-instance_method
+      def disassociate_aws_training_certification_email_domain: (
+                                                                  catalog: ::String,
+                                                                  identifier: ::String,
+                                                                  ?client_token: ::String,
+                                                                  domain_name: ::String
+                                                                ) -> _DisassociateAwsTrainingCertificationEmailDomainResponseSuccess
+                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAwsTrainingCertificationEmailDomainResponseSuccess
+
+      interface _GetAllianceLeadContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAllianceLeadContactResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def alliance_lead_contact: () -> Types::AllianceLeadContact
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_alliance_lead_contact-instance_method
+      def get_alliance_lead_contact: (
+                                       catalog: ::String,
+                                       identifier: ::String
+                                     ) -> _GetAllianceLeadContactResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAllianceLeadContactResponseSuccess
+
+      interface _GetConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionResponse]
+        def catalog: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def other_participant_account_id: () -> ::String
+        def updated_at: () -> ::Time
+        def connection_types: () -> ::Hash[("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"), Types::ConnectionTypeDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_connection-instance_method
+      def get_connection: (
+                            catalog: ::String,
+                            identifier: ::String
+                          ) -> _GetConnectionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionResponseSuccess
+
+      interface _GetConnectionInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionInvitationResponse]
+        def catalog: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def connection_id: () -> ::String
+        def connection_type: () -> ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def expires_at: () -> ::Time
+        def other_participant_identifier: () -> ::String
+        def participant_type: () -> ("SENDER" | "RECEIVER")
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+        def invitation_message: () -> ::String
+        def inviter_email: () -> ::String
+        def inviter_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_connection_invitation-instance_method
+      def get_connection_invitation: (
+                                       catalog: ::String,
+                                       identifier: ::String
+                                     ) -> _GetConnectionInvitationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionInvitationResponseSuccess
+
+      interface _GetConnectionPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionPreferencesResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def access_type: () -> ("ALLOW_ALL" | "DENY_ALL" | "ALLOW_BY_DEFAULT_DENY_SOME")
+        def excluded_participant_ids: () -> ::Array[::String]
+        def updated_at: () -> ::Time
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_connection_preferences-instance_method
+      def get_connection_preferences: (
+                                        catalog: ::String
+                                      ) -> _GetConnectionPreferencesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionPreferencesResponseSuccess
+
+      interface _GetPartnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPartnerResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def legal_name: () -> ::String
+        def created_at: () -> ::Time
+        def profile: () -> Types::PartnerProfile
+        def aws_training_certification_email_domains: () -> ::Array[Types::PartnerDomain]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_partner-instance_method
+      def get_partner: (
+                         catalog: ::String,
+                         identifier: ::String
+                       ) -> _GetPartnerResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPartnerResponseSuccess
+
+      interface _GetProfileUpdateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileUpdateTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def task_details: () -> Types::TaskDetails
+        def started_at: () -> ::Time
+        def status: () -> ("IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+        def ended_at: () -> ::Time
+        def error_detail_list: () -> ::Array[Types::ErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_profile_update_task-instance_method
+      def get_profile_update_task: (
+                                     catalog: ::String,
+                                     identifier: ::String
+                                   ) -> _GetProfileUpdateTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileUpdateTaskResponseSuccess
+
+      interface _GetProfileVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileVisibilityResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def visibility: () -> ("PRIVATE" | "PUBLIC")
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_profile_visibility-instance_method
+      def get_profile_visibility: (
+                                    catalog: ::String,
+                                    identifier: ::String
+                                  ) -> _GetProfileVisibilityResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileVisibilityResponseSuccess
+
+      interface _GetVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVerificationResponse]
+        def verification_type: () -> ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
+        def verification_status: () -> ("PENDING_CUSTOMER_ACTION" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "REJECTED")
+        def verification_status_reason: () -> ::String
+        def verification_response_details: () -> Types::VerificationResponseDetails
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#get_verification-instance_method
+      def get_verification: (
+                              verification_type: ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
+                            ) -> _GetVerificationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVerificationResponseSuccess
+
+      interface _ListConnectionInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionInvitationsResponse]
+        def connection_invitation_summaries: () -> ::Array[Types::ConnectionInvitationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#list_connection_invitations-instance_method
+      def list_connection_invitations: (
+                                         catalog: ::String,
+                                         ?next_token: ::String,
+                                         ?connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"),
+                                         ?max_results: ::Integer,
+                                         ?other_participant_identifiers: Array[::String],
+                                         ?participant_type: ("SENDER" | "RECEIVER"),
+                                         ?status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+                                       ) -> _ListConnectionInvitationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionInvitationsResponseSuccess
+
+      interface _ListConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionsResponse]
+        def connection_summaries: () -> ::Array[Types::ConnectionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#list_connections-instance_method
+      def list_connections: (
+                              catalog: ::String,
+                              ?next_token: ::String,
+                              ?connection_type: ::String,
+                              ?max_results: ::Integer,
+                              ?other_participant_identifiers: Array[::String]
+                            ) -> _ListConnectionsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
+
+      interface _ListPartnersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPartnersResponse]
+        def partner_summary_list: () -> ::Array[Types::PartnerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#list_partners-instance_method
+      def list_partners: (
+                           catalog: ::String,
+                           ?next_token: ::String
+                         ) -> _ListPartnersResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPartnersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAllianceLeadContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAllianceLeadContactResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def alliance_lead_contact: () -> Types::AllianceLeadContact
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#put_alliance_lead_contact-instance_method
+      def put_alliance_lead_contact: (
+                                       catalog: ::String,
+                                       identifier: ::String,
+                                       alliance_lead_contact: {
+                                         first_name: ::String,
+                                         last_name: ::String,
+                                         email: ::String,
+                                         business_title: ::String
+                                       },
+                                       ?email_verification_code: ::String
+                                     ) -> _PutAllianceLeadContactResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAllianceLeadContactResponseSuccess
+
+      interface _PutProfileVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProfileVisibilityResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def visibility: () -> ("PRIVATE" | "PUBLIC")
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#put_profile_visibility-instance_method
+      def put_profile_visibility: (
+                                    catalog: ::String,
+                                    identifier: ::String,
+                                    visibility: ("PRIVATE" | "PUBLIC")
+                                  ) -> _PutProfileVisibilityResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProfileVisibilityResponseSuccess
+
+      interface _RejectConnectionInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectConnectionInvitationResponse]
+        def catalog: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def connection_id: () -> ::String
+        def connection_type: () -> ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def expires_at: () -> ::Time
+        def other_participant_identifier: () -> ::String
+        def participant_type: () -> ("SENDER" | "RECEIVER")
+        def status: () -> ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+        def invitation_message: () -> ::String
+        def inviter_email: () -> ::String
+        def inviter_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#reject_connection_invitation-instance_method
+      def reject_connection_invitation: (
+                                          catalog: ::String,
+                                          identifier: ::String,
+                                          client_token: ::String,
+                                          ?reason: ::String
+                                        ) -> _RejectConnectionInvitationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectConnectionInvitationResponseSuccess
+
+      interface _SendEmailVerificationCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendEmailVerificationCodeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#send_email_verification_code-instance_method
+      def send_email_verification_code: (
+                                          catalog: ::String,
+                                          email: ::String
+                                        ) -> _SendEmailVerificationCodeResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEmailVerificationCodeResponseSuccess
+
+      interface _StartProfileUpdateTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartProfileUpdateTaskResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def id: () -> ::String
+        def task_id: () -> ::String
+        def task_details: () -> Types::TaskDetails
+        def started_at: () -> ::Time
+        def status: () -> ("IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+        def ended_at: () -> ::Time
+        def error_detail_list: () -> ::Array[Types::ErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#start_profile_update_task-instance_method
+      def start_profile_update_task: (
+                                       catalog: ::String,
+                                       identifier: ::String,
+                                       ?client_token: ::String,
+                                       task_details: {
+                                         display_name: ::String,
+                                         description: ::String,
+                                         website_url: ::String,
+                                         logo_url: ::String,
+                                         primary_solution_type: ("SOFTWARE_PRODUCTS" | "CONSULTING_SERVICES" | "PROFESSIONAL_SERVICES" | "MANAGED_SERVICES" | "HARDWARE_PRODUCTS" | "COMMUNICATION_SERVICES" | "VALUE_ADDED_RESALE_AWS_SERVICES" | "TRAINING_SERVICES"),
+                                         industry_segments: Array[("AGRICULTURE_MINING" | "BIOTECHNOLOGY" | "BUSINESS_CONSUMER_SERVICES" | "BUSINESS_SERV" | "COMMUNICATIONS" | "COMPUTER_HARDWARE" | "COMPUTERS_ELECTRONICS" | "COMPUTER_SOFTWARE" | "CONSUMER_GOODS" | "CONSUMER_RELATED" | "EDUCATION" | "ENERGY_UTILITIES" | "FINANCIAL_SERVICES" | "GAMING" | "GOVERNMENT" | "GOVERNMENT_EDUCATION_PUBLIC_SERVICES" | "HEALTHCARE" | "HEALTHCARE_PHARMACEUTICALS_BIOTECH" | "INDUSTRIAL_ENERGY" | "INTERNET_SPECIFIC" | "LIFE_SCIENCES" | "MANUFACTURING" | "MEDIA_ENTERTAINMENT_LEISURE" | "MEDIA_ENTERTAINMENT" | "MEDICAL_HEALTH" | "NON_PROFIT_ORGANIZATION" | "OTHER" | "PROFESSIONAL_SERVICES" | "REAL_ESTATE_CONSTRUCTION" | "RETAIL" | "RETAIL_WHOLESALE_DISTRIBUTION" | "SEMICONDUCTOR_ELECTR" | "SOFTWARE_INTERNET" | "TELECOMMUNICATIONS" | "TRANSPORTATION_LOGISTICS" | "TRAVEL_HOSPITALITY" | "WHOLESALE_DISTRIBUTION")],
+                                         translation_source_locale: ::String,
+                                         localized_contents: Array[
+                                           {
+                                             display_name: ::String,
+                                             description: ::String,
+                                             website_url: ::String,
+                                             logo_url: ::String,
+                                             locale: ::String
+                                           },
+                                         ]?
+                                       }
+                                     ) -> _StartProfileUpdateTaskResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProfileUpdateTaskResponseSuccess
+
+      interface _StartVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartVerificationResponse]
+        def verification_type: () -> ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
+        def verification_status: () -> ("PENDING_CUSTOMER_ACTION" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "REJECTED")
+        def verification_status_reason: () -> ::String
+        def verification_response_details: () -> Types::VerificationResponseDetails
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#start_verification-instance_method
+      def start_verification: (
+                                ?client_token: ::String,
+                                ?verification_details: {
+                                  business_verification_details: {
+                                    legal_name: ::String,
+                                    registration_id: ::String,
+                                    country_code: ::String,
+                                    jurisdiction_of_incorporation: ::String?
+                                  }?,
+                                  registrant_verification_details: {
+                                  }?
+                                }
+                              ) -> _StartVerificationResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartVerificationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConnectionPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionPreferencesResponse]
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def access_type: () -> ("ALLOW_ALL" | "DENY_ALL" | "ALLOW_BY_DEFAULT_DENY_SOME")
+        def excluded_participant_ids: () -> ::Array[::String]
+        def updated_at: () -> ::Time
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralAccount/Client.html#update_connection_preferences-instance_method
+      def update_connection_preferences: (
+                                           catalog: ::String,
+                                           revision: ::Integer,
+                                           access_type: ("ALLOW_ALL" | "DENY_ALL" | "ALLOW_BY_DEFAULT_DENY_SOME"),
+                                           ?excluded_participant_identifiers: Array[::String]
+                                         ) -> _UpdateConnectionPreferencesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionPreferencesResponseSuccess
+    end
+  end
+end
+

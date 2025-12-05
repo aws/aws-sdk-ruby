@@ -56,7 +56,7 @@ module Aws::BedrockAgentRuntime
   autoload :Endpoints, 'aws-sdk-bedrockagentruntime/endpoints'
   autoload :EventStreams, 'aws-sdk-bedrockagentruntime/event_streams'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

@@ -29,6 +29,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor name: ::String
       attr_accessor connect_instance_id: ::String
       attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig
+      attr_accessor type: ("MANAGED" | "JOURNEY")
       attr_accessor source: Types::Source
       attr_accessor connect_campaign_flow_arn: ::String
       attr_accessor schedule: Types::Schedule
@@ -48,7 +49,8 @@ module Aws::ConnectCampaignsV2
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor connect_instance_id: ::String
-      attr_accessor channel_subtypes: ::Array[("TELEPHONY" | "SMS" | "EMAIL")]
+      attr_accessor channel_subtypes: ::Array[("TELEPHONY" | "SMS" | "EMAIL" | "WHATSAPP")]
+      attr_accessor type: ("MANAGED" | "JOURNEY")
       attr_accessor schedule: Types::Schedule
       attr_accessor connect_campaign_flow_arn: ::String
       SENSITIVE: []
@@ -58,6 +60,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor telephony: Types::TelephonyChannelSubtypeConfig
       attr_accessor sms: Types::SmsChannelSubtypeConfig
       attr_accessor email: Types::EmailChannelSubtypeConfig
+      attr_accessor whats_app: Types::WhatsAppChannelSubtypeConfig
       SENSITIVE: []
     end
 
@@ -65,6 +68,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor telephony: Types::TelephonyChannelSubtypeParameters
       attr_accessor sms: Types::SmsChannelSubtypeParameters
       attr_accessor email: Types::EmailChannelSubtypeParameters
+      attr_accessor whats_app: Types::WhatsAppChannelSubtypeParameters
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -73,6 +77,8 @@ module Aws::ConnectCampaignsV2
       class Sms < ChannelSubtypeParameters
       end
       class Email < ChannelSubtypeParameters
+      end
+      class WhatsApp < ChannelSubtypeParameters
       end
       class Unknown < ChannelSubtypeParameters
       end
@@ -107,6 +113,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor telephony: Types::TimeWindow
       attr_accessor sms: Types::TimeWindow
       attr_accessor email: Types::TimeWindow
+      attr_accessor whats_app: Types::TimeWindow
       SENSITIVE: []
     end
 
@@ -120,6 +127,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor name: ::String
       attr_accessor connect_instance_id: ::String
       attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig
+      attr_accessor type: ("MANAGED" | "JOURNEY")
       attr_accessor source: Types::Source
       attr_accessor connect_campaign_flow_arn: ::String
       attr_accessor schedule: Types::Schedule
@@ -155,7 +163,7 @@ module Aws::ConnectCampaignsV2
 
     class DeleteCampaignChannelSubtypeConfigRequest
       attr_accessor id: ::String
-      attr_accessor channel_subtype: ("TELEPHONY" | "SMS" | "EMAIL")
+      attr_accessor channel_subtype: ("TELEPHONY" | "SMS" | "EMAIL" | "WHATSAPP")
       SENSITIVE: []
     end
 
@@ -167,7 +175,7 @@ module Aws::ConnectCampaignsV2
 
     class DeleteCampaignCommunicationTimeRequest
       attr_accessor id: ::String
-      attr_accessor config: ("TELEPHONY" | "SMS" | "EMAIL")
+      attr_accessor config: ("TELEPHONY" | "SMS" | "EMAIL" | "WHATSAPP")
       SENSITIVE: []
     end
 
@@ -347,12 +355,15 @@ module Aws::ConnectCampaignsV2
     class IntegrationConfig
       attr_accessor customer_profiles: Types::CustomerProfilesIntegrationConfig
       attr_accessor q_connect: Types::QConnectIntegrationConfig
+      attr_accessor lambda: Types::LambdaIntegrationConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CustomerProfiles < IntegrationConfig
       end
       class QConnect < IntegrationConfig
+      end
+      class Lambda < IntegrationConfig
       end
       class Unknown < IntegrationConfig
       end
@@ -361,12 +372,15 @@ module Aws::ConnectCampaignsV2
     class IntegrationIdentifier
       attr_accessor customer_profiles: Types::CustomerProfilesIntegrationIdentifier
       attr_accessor q_connect: Types::QConnectIntegrationIdentifier
+      attr_accessor lambda: Types::LambdaIntegrationIdentifier
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CustomerProfiles < IntegrationIdentifier
       end
       class QConnect < IntegrationIdentifier
+      end
+      class Lambda < IntegrationIdentifier
       end
       class Unknown < IntegrationIdentifier
       end
@@ -375,12 +389,15 @@ module Aws::ConnectCampaignsV2
     class IntegrationSummary
       attr_accessor customer_profiles: Types::CustomerProfilesIntegrationSummary
       attr_accessor q_connect: Types::QConnectIntegrationSummary
+      attr_accessor lambda: Types::LambdaIntegrationSummary
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CustomerProfiles < IntegrationSummary
       end
       class QConnect < IntegrationSummary
+      end
+      class Lambda < IntegrationSummary
       end
       class Unknown < IntegrationSummary
       end
@@ -402,6 +419,21 @@ module Aws::ConnectCampaignsV2
     class InvalidStateException
       attr_accessor message: ::String
       attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaIntegrationConfig
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaIntegrationIdentifier
+      attr_accessor function_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaIntegrationSummary
+      attr_accessor function_arn: ::String
       SENSITIVE: []
     end
 
@@ -798,6 +830,38 @@ module Aws::ConnectCampaignsV2
       attr_accessor message: ::String
       attr_accessor x_amz_error_type: ::String
       SENSITIVE: []
+    end
+
+    class WhatsAppChannelSubtypeConfig
+      attr_accessor capacity: ::Float
+      attr_accessor outbound_mode: Types::WhatsAppOutboundMode
+      attr_accessor default_outbound_config: Types::WhatsAppOutboundConfig
+      SENSITIVE: []
+    end
+
+    class WhatsAppChannelSubtypeParameters
+      attr_accessor destination_phone_number: ::String
+      attr_accessor connect_source_phone_number_arn: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:destination_phone_number, :template_parameters]
+    end
+
+    class WhatsAppOutboundConfig
+      attr_accessor connect_source_phone_number_arn: ::String
+      attr_accessor wisdom_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WhatsAppOutboundMode
+      attr_accessor agentless: Types::AgentlessConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Agentless < WhatsAppOutboundMode
+      end
+      class Unknown < WhatsAppOutboundMode
+      end
     end
   end
 end

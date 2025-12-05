@@ -2052,6 +2052,12 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class EncryptionConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor sse_algorithm: ::String
+      SENSITIVE: []
+    end
+
     class EnvironmentActionSummary
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
@@ -2396,6 +2402,21 @@ module Aws::DataZone
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW")
       SENSITIVE: [:connection_credentials, :description]
+    end
+
+    class GetDataExportConfigurationInput
+      attr_accessor domain_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataExportConfigurationOutput
+      attr_accessor created_at: ::Time
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor is_export_enabled: bool
+      attr_accessor s3_table_bucket_arn: ::String
+      attr_accessor status: ("COMPLETED" | "FAILED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class GetDataProductInput
@@ -2831,6 +2852,7 @@ module Aws::DataZone
     class GetMetadataGenerationRunInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
       SENSITIVE: []
     end
 
@@ -2840,9 +2862,11 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor id: ::String
       attr_accessor owning_project_id: ::String
-      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
       attr_accessor target: Types::MetadataGenerationRunTarget
-      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
+      attr_accessor type_stats: ::Array[Types::MetadataGenerationRunTypeStat]
+      attr_accessor types: ::Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
       SENSITIVE: []
     end
 
@@ -3753,8 +3777,9 @@ module Aws::DataZone
       attr_accessor domain_identifier: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
-      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
+      attr_accessor target_identifier: ::String
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
       SENSITIVE: []
     end
 
@@ -4091,9 +4116,10 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor id: ::String
       attr_accessor owning_project_id: ::String
-      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
       attr_accessor target: Types::MetadataGenerationRunTarget
-      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
+      attr_accessor types: ::Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
       SENSITIVE: []
     end
 
@@ -4101,6 +4127,13 @@ module Aws::DataZone
       attr_accessor identifier: ::String
       attr_accessor revision: ::String
       attr_accessor type: ("ASSET")
+      SENSITIVE: []
+    end
+
+    class MetadataGenerationRunTypeStat
+      attr_accessor error_message: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
       SENSITIVE: []
     end
 
@@ -4487,6 +4520,17 @@ module Aws::DataZone
       end
       class Unknown < ProvisioningProperties
       end
+    end
+
+    class PutDataExportConfigurationInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor enable_export: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class PutDataExportConfigurationOutput < Aws::EmptyStructure
     end
 
     class PutEnvironmentBlueprintConfigurationInput
@@ -5252,7 +5296,8 @@ module Aws::DataZone
       attr_accessor domain_identifier: ::String
       attr_accessor owning_project_identifier: ::String
       attr_accessor target: Types::MetadataGenerationRunTarget
-      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
+      attr_accessor types: ::Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
       SENSITIVE: []
     end
 
@@ -5262,8 +5307,9 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor id: ::String
       attr_accessor owning_project_id: ::String
-      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
-      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
+      attr_accessor types: ::Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
       SENSITIVE: []
     end
 

@@ -839,6 +839,7 @@ module Aws::IAM
     DelegationRequest.add_member(:owner_id, Shapes::ShapeRef.new(shape: ownerIdType, location_name: "OwnerId"))
     DelegationRequest.add_member(:approver_id, Shapes::ShapeRef.new(shape: arnType, location_name: "ApproverId"))
     DelegationRequest.add_member(:state, Shapes::ShapeRef.new(shape: stateType, location_name: "State"))
+    DelegationRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: dateType, location_name: "ExpirationTime"))
     DelegationRequest.add_member(:requestor_id, Shapes::ShapeRef.new(shape: accountIdType, location_name: "RequestorId"))
     DelegationRequest.add_member(:requestor_name, Shapes::ShapeRef.new(shape: requestorNameType, location_name: "RequestorName"))
     DelegationRequest.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))

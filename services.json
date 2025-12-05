@@ -890,6 +890,9 @@
   "NotificationsContacts": {
     "models": "notificationscontacts/2018-05-10"
   },
+  "NovaAct": {
+    "models": "nova-act/2025-08-22"
+  },
   "OAM": {
     "models": "oam/2022-06-10"
   },
@@ -925,6 +928,12 @@
   },
   "Panorama": {
     "models": "panorama/2019-07-24"
+  },
+  "PartnerCentralAccount": {
+    "models": "partnercentral-account/2025-04-04"
+  },
+  "PartnerCentralBenefits": {
+    "models": "partnercentral-benefits/2018-05-10"
   },
   "PartnerCentralChannel": {
     "models": "partnercentral-channel/2024-03-18"
@@ -1048,6 +1057,9 @@
   },
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
+  },
+  "Route53GlobalResolver": {
+    "models": "route53globalresolver/2022-09-27"
   },
   "Route53Profiles": {
     "models": "route53profiles/2018-05-10"

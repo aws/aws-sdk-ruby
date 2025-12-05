@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2025-12-01)
+------------------
+
+* Feature - AWS Clean Rooms ML now supports privacy-enhancing synthetic dataset generation for custom ML training.
+
 1.38.0 (2025-11-21)
 ------------------
 

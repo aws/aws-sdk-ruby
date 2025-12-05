@@ -1118,6 +1118,28 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the FSx for ONTAP volume that the S3 access point will be
+    # attached to, and the file system user identity.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for ONTAP volume to which you want the S3 access
+    #   point attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   Specifies the file system user identity to use for authorizing file
+    #   read and write requests that are made using this S3 access point.
+    #   @return [Types::OntapFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointOntapConfiguration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointOntapConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the FSx for OpenZFS volume that the S3 access point will be
     # attached to, and the file system user identity.
     #
@@ -1164,6 +1186,11 @@ module Aws::FSx
     #   access point to an FSx for OpenZFS volume.
     #   @return [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   Specifies the FSx for ONTAP volume that the S3 access point will be
+    #   attached to, and the file system user identity.
+    #   @return [Types::CreateAndAttachS3AccessPointOntapConfiguration]
+    #
     # @!attribute [rw] s3_access_point
     #   Specifies the virtual private cloud (VPC) configuration if you're
     #   creating an access point that is restricted to a VPC. For more
@@ -1182,6 +1209,7 @@ module Aws::FSx
       :name,
       :type,
       :open_zfs_configuration,
+      :ontap_configuration,
       :s3_access_point)
       SENSITIVE = []
       include Aws::Structure
@@ -7447,6 +7475,49 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the file system user identity that will be used for
+    # authorizing all file access requests that are made using the S3 access
+    # point. The identity can be either a UNIX user or a Windows user.
+    #
+    # @!attribute [rw] type
+    #   Specifies the FSx for ONTAP user identity type. Valid values are
+    #   `UNIX` and `WINDOWS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] unix_user
+    #   Specifies the UNIX user identity for file system operations.
+    #   @return [Types::OntapUnixFileSystemUser]
+    #
+    # @!attribute [rw] windows_user
+    #   Specifies the Windows user identity for file system operations.
+    #   @return [Types::OntapWindowsFileSystemUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemIdentity AWS API Documentation
+    #
+    class OntapFileSystemIdentity < Struct.new(
+      :type,
+      :unix_user,
+      :windows_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for ONTAP UNIX file system user that is used for authorizing
+    # all file access requests that are made using the S3 access point.
+    #
+    # @!attribute [rw] name
+    #   The name of the UNIX user. The name can be up to 256 characters
+    #   long.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapUnixFileSystemUser AWS API Documentation
+    #
+    class OntapUnixFileSystemUser < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of an Amazon FSx for NetApp ONTAP volume.
     #
     # @!attribute [rw] flex_cache_endpoint_type
@@ -7606,6 +7677,23 @@ module Aws::FSx
       :volume_style,
       :aggregate_configuration,
       :size_in_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for ONTAP Windows file system user that is used for
+    # authorizing all file access requests that are made using the S3 access
+    # point.
+    #
+    # @!attribute [rw] name
+    #   The name of the Windows user. The name can be up to 256 characters
+    #   long and supports Active Directory users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapWindowsFileSystemUser AWS API Documentation
+    #
+    class OntapWindowsFileSystemUser < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8491,6 +8579,10 @@ module Aws::FSx
     #   The OpenZFSConfiguration of the S3 access point attachment.
     #   @return [Types::S3AccessPointOpenZFSConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The ONTAP configuration of the S3 access point attachment.
+    #   @return [Types::S3AccessPointOntapConfiguration]
+    #
     # @!attribute [rw] s3_access_point
     #   The S3 access point configuration of the S3 access point attachment.
     #   @return [Types::S3AccessPoint]
@@ -8504,6 +8596,7 @@ module Aws::FSx
       :name,
       :type,
       :open_zfs_configuration,
+      :ontap_configuration,
       :s3_access_point)
       SENSITIVE = []
       include Aws::Structure
@@ -8539,6 +8632,28 @@ module Aws::FSx
     class S3AccessPointAttachmentsFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the FSx for ONTAP attachment configuration of an S3 access
+    # point attachment.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for ONTAP volume that the S3 access point is
+    #   attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   The file system identity used to authorize file access requests made
+    #   using the S3 access point.
+    #   @return [Types::OntapFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointOntapConfiguration AWS API Documentation
+    #
+    class S3AccessPointOntapConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
       SENSITIVE = []
       include Aws::Structure
     end

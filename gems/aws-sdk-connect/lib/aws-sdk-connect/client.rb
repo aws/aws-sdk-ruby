@@ -1379,6 +1379,46 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associate security profiles with an Entity in an Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, Array<Types::SecurityProfileItem>] :security_profiles
+    #   List of Security Profile Object.
+    #
+    # @option params [required, String] :entity_type
+    #   Only supported type is AI\_AGENT.
+    #
+    # @option params [required, String] :entity_arn
+    #   Arn of a Q in Connect AI Agent.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_security_profiles({
+    #     instance_id: "InstanceId", # required
+    #     security_profiles: [ # required
+    #       {
+    #         id: "SecurityProfileId",
+    #       },
+    #     ],
+    #     entity_type: "USER", # required, accepts USER, AI_AGENT
+    #     entity_arn: "EntityArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateSecurityProfiles AWS API Documentation
+    #
+    # @overload associate_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def associate_security_profiles(params = {}, options = {})
+      req = build_request(:associate_security_profiles, params)
+      req.send_request(options)
+    end
+
     # Associates an agent with a traffic distribution group. This API can be
     # called only in the Region where the traffic distribution group is
     # created.
@@ -1455,6 +1495,55 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates a workspace with one or more users or routing profiles,
+    # allowing them to access the workspace's configured views and pages.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, Array<String>] :resource_arns
+    #   The Amazon Resource Names (ARNs) of the resources to associate with
+    #   the workspace. Valid resource types are users and routing profiles.
+    #
+    # @return [Types::AssociateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateWorkspaceResponse#successful_list #successful_list} => Array&lt;Types::SuccessfulBatchAssociationSummary&gt;
+    #   * {Types::AssociateWorkspaceResponse#failed_list #failed_list} => Array&lt;Types::FailedBatchAssociationSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_workspace({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     resource_arns: ["ARN"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_list #=> Array
+    #   resp.successful_list[0].resource_arn #=> String
+    #   resp.failed_list #=> Array
+    #   resp.failed_list[0].resource_arn #=> String
+    #   resp.failed_list[0].error_code #=> String
+    #   resp.failed_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateWorkspace AWS API Documentation
+    #
+    # @overload associate_workspace(params = {})
+    # @param [Hash] params ({})
+    def associate_workspace(params = {}, options = {})
+      req = build_request(:associate_workspace, params)
+      req.send_request(options)
+    end
+
     # Associates a list of analytics datasets for a given Amazon Connect
     # instance to a target account. You can associate multiple datasets in a
     # single call.
@@ -1507,6 +1596,234 @@ module Aws::Connect
     # @param [Hash] params ({})
     def batch_associate_analytics_data_set(params = {}, options = {})
       req = build_request(:batch_associate_analytics_data_set, params)
+      req.send_request(options)
+    end
+
+    # Creates values for attributes in a data table. The value may be a
+    # default or it may be associated with a primary value. The value must
+    # pass all customer defined validation as well as the default validation
+    # for the value type. The operation must conform to Batch Operation API
+    # Standards. Although the standard specifies that successful and failed
+    # entities are listed separately in the response, authorization fails if
+    # any primary values or attributes are unauthorized. The combination of
+    # primary values and the attribute name serve as the identifier for the
+    # individual item request.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias. If no alias is provided, the
+    #   default behavior is identical to providing the $LATEST alias.
+    #
+    # @option params [required, Array<Types::DataTableValue>] :values
+    #   A list of values to create. Each value must specify the attribute name
+    #   and optionally primary values if the table has primary attributes.
+    #
+    # @return [Types::BatchCreateDataTableValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateDataTableValueResponse#successful #successful} => Array&lt;Types::BatchCreateDataTableValueSuccessResult&gt;
+    #   * {Types::BatchCreateDataTableValueResponse#failed #failed} => Array&lt;Types::BatchCreateDataTableValueFailureResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_data_table_value({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     values: [ # required
+    #       {
+    #         primary_values: [
+    #           {
+    #             attribute_name: "DataTableName", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         attribute_name: "DataTableName", # required
+    #         value: "String", # required
+    #         lock_version: {
+    #           data_table: "String",
+    #           attribute: "String",
+    #           primary_values: "String",
+    #           value: "String",
+    #         },
+    #         last_modified_time: Time.now,
+    #         last_modified_region: "RegionName",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].primary_values #=> Array
+    #   resp.successful[0].primary_values[0].attribute_name #=> String
+    #   resp.successful[0].primary_values[0].value #=> String
+    #   resp.successful[0].attribute_name #=> String
+    #   resp.successful[0].record_id #=> String
+    #   resp.successful[0].lock_version.data_table #=> String
+    #   resp.successful[0].lock_version.attribute #=> String
+    #   resp.successful[0].lock_version.primary_values #=> String
+    #   resp.successful[0].lock_version.value #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].primary_values #=> Array
+    #   resp.failed[0].primary_values[0].attribute_name #=> String
+    #   resp.failed[0].primary_values[0].value #=> String
+    #   resp.failed[0].attribute_name #=> String
+    #   resp.failed[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchCreateDataTableValue AWS API Documentation
+    #
+    # @overload batch_create_data_table_value(params = {})
+    # @param [Hash] params ({})
+    def batch_create_data_table_value(params = {}, options = {})
+      req = build_request(:batch_create_data_table_value, params)
+      req.send_request(options)
+    end
+
+    # Deletes multiple values from a data table. API users may delete values
+    # at any time. When deletion is requested from the admin website, a
+    # warning is shown alerting the user of the most recent time the
+    # attribute and its values were accessed. System managed values are not
+    # deletable by customers.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias.
+    #
+    # @option params [required, Array<Types::DataTableDeleteValueIdentifier>] :values
+    #   A list of value identifiers to delete, each specifying primary values,
+    #   attribute name, and lock version information.
+    #
+    # @return [Types::BatchDeleteDataTableValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteDataTableValueResponse#successful #successful} => Array&lt;Types::BatchDeleteDataTableValueSuccessResult&gt;
+    #   * {Types::BatchDeleteDataTableValueResponse#failed #failed} => Array&lt;Types::BatchDeleteDataTableValueFailureResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_data_table_value({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     values: [ # required
+    #       {
+    #         primary_values: [
+    #           {
+    #             attribute_name: "DataTableName", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         attribute_name: "DataTableName", # required
+    #         lock_version: { # required
+    #           data_table: "String",
+    #           attribute: "String",
+    #           primary_values: "String",
+    #           value: "String",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].primary_values #=> Array
+    #   resp.successful[0].primary_values[0].attribute_name #=> String
+    #   resp.successful[0].primary_values[0].value #=> String
+    #   resp.successful[0].attribute_name #=> String
+    #   resp.successful[0].lock_version.data_table #=> String
+    #   resp.successful[0].lock_version.attribute #=> String
+    #   resp.successful[0].lock_version.primary_values #=> String
+    #   resp.successful[0].lock_version.value #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].primary_values #=> Array
+    #   resp.failed[0].primary_values[0].attribute_name #=> String
+    #   resp.failed[0].primary_values[0].value #=> String
+    #   resp.failed[0].attribute_name #=> String
+    #   resp.failed[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchDeleteDataTableValue AWS API Documentation
+    #
+    # @overload batch_delete_data_table_value(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_data_table_value(params = {}, options = {})
+      req = build_request(:batch_delete_data_table_value, params)
+      req.send_request(options)
+    end
+
+    # Retrieves multiple values from a data table without evaluating
+    # expressions. Returns the raw stored values along with metadata such as
+    # lock versions and modification timestamps. "Describe" is a
+    # deprecated term but is allowed to maintain consistency with existing
+    # operations.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias.
+    #
+    # @option params [required, Array<Types::DataTableValueIdentifier>] :values
+    #   A list of value identifiers to retrieve, each specifying primary
+    #   values and attribute names.
+    #
+    # @return [Types::BatchDescribeDataTableValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDescribeDataTableValueResponse#successful #successful} => Array&lt;Types::BatchDescribeDataTableValueSuccessResult&gt;
+    #   * {Types::BatchDescribeDataTableValueResponse#failed #failed} => Array&lt;Types::BatchDescribeDataTableValueFailureResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_describe_data_table_value({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     values: [ # required
+    #       {
+    #         primary_values: [
+    #           {
+    #             attribute_name: "DataTableName", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         attribute_name: "DataTableName", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].record_id #=> String
+    #   resp.successful[0].attribute_id #=> String
+    #   resp.successful[0].primary_values #=> Array
+    #   resp.successful[0].primary_values[0].attribute_name #=> String
+    #   resp.successful[0].primary_values[0].attribute_id #=> String
+    #   resp.successful[0].primary_values[0].value #=> String
+    #   resp.successful[0].attribute_name #=> String
+    #   resp.successful[0].value #=> String
+    #   resp.successful[0].lock_version.data_table #=> String
+    #   resp.successful[0].lock_version.attribute #=> String
+    #   resp.successful[0].lock_version.primary_values #=> String
+    #   resp.successful[0].lock_version.value #=> String
+    #   resp.successful[0].last_modified_time #=> Time
+    #   resp.successful[0].last_modified_region #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].primary_values #=> Array
+    #   resp.failed[0].primary_values[0].attribute_name #=> String
+    #   resp.failed[0].primary_values[0].value #=> String
+    #   resp.failed[0].attribute_name #=> String
+    #   resp.failed[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchDescribeDataTableValue AWS API Documentation
+    #
+    # @overload batch_describe_data_table_value(params = {})
+    # @param [Hash] params ({})
+    def batch_describe_data_table_value(params = {}, options = {})
+      req = build_request(:batch_describe_data_table_value, params)
       req.send_request(options)
     end
 
@@ -1778,6 +2095,81 @@ module Aws::Connect
     # @param [Hash] params ({})
     def batch_put_contact(params = {}, options = {})
       req = build_request(:batch_put_contact, params)
+      req.send_request(options)
+    end
+
+    # Updates multiple data table values using all properties from
+    # BatchCreateDataTableValue. System managed values are not modifiable by
+    # customers. The operation requires proper lock versions to prevent
+    # concurrent modification conflicts.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias.
+    #
+    # @option params [required, Array<Types::DataTableValue>] :values
+    #   A list of values to update, each including the current lock version to
+    #   ensure optimistic locking.
+    #
+    # @return [Types::BatchUpdateDataTableValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateDataTableValueResponse#successful #successful} => Array&lt;Types::BatchUpdateDataTableValueSuccessResult&gt;
+    #   * {Types::BatchUpdateDataTableValueResponse#failed #failed} => Array&lt;Types::BatchUpdateDataTableValueFailureResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_data_table_value({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     values: [ # required
+    #       {
+    #         primary_values: [
+    #           {
+    #             attribute_name: "DataTableName", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         attribute_name: "DataTableName", # required
+    #         value: "String", # required
+    #         lock_version: {
+    #           data_table: "String",
+    #           attribute: "String",
+    #           primary_values: "String",
+    #           value: "String",
+    #         },
+    #         last_modified_time: Time.now,
+    #         last_modified_region: "RegionName",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].primary_values #=> Array
+    #   resp.successful[0].primary_values[0].attribute_name #=> String
+    #   resp.successful[0].primary_values[0].value #=> String
+    #   resp.successful[0].attribute_name #=> String
+    #   resp.successful[0].lock_version.data_table #=> String
+    #   resp.successful[0].lock_version.attribute #=> String
+    #   resp.successful[0].lock_version.primary_values #=> String
+    #   resp.successful[0].lock_version.value #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].primary_values #=> Array
+    #   resp.failed[0].primary_values[0].attribute_name #=> String
+    #   resp.failed[0].primary_values[0].value #=> String
+    #   resp.failed[0].attribute_name #=> String
+    #   resp.failed[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchUpdateDataTableValue AWS API Documentation
+    #
+    # @overload batch_update_data_table_value(params = {})
+    # @param [Hash] params ({})
+    def batch_update_data_table_value(params = {}, options = {})
+      req = build_request(:batch_update_data_table_value, params)
       req.send_request(options)
     end
 
@@ -2140,7 +2532,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -2514,6 +2906,181 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a new data table with the specified properties. Supports the
+    # creation of all table properties except for attributes and values. A
+    # table with no attributes and values is a valid state for a table. The
+    # number of tables per instance is limited to 100 per instance.
+    # Customers can request an increase by using AWS Service Quotas.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance where the data
+    #   table will be created.
+    #
+    # @option params [required, String] :name
+    #   The name for the data table. Must conform to Connect human readable
+    #   string specification and have 1-127 characters. Whitespace must be
+    #   trimmed first. Must not start with the reserved case insensitive
+    #   values 'connect:' and 'aws:'. Must be unique for the instance
+    #   using case-insensitive comparison.
+    #
+    # @option params [String] :description
+    #   An optional description for the data table. Must conform to Connect
+    #   human readable string specification and have 0-250 characters.
+    #   Whitespace must be trimmed first.
+    #
+    # @option params [required, String] :time_zone
+    #   The IANA timezone identifier to use when resolving time based dynamic
+    #   values. Required even if no time slices are specified.
+    #
+    # @option params [required, String] :value_lock_level
+    #   The data level that concurrent value edits are locked on. One of
+    #   DATA\_TABLE, PRIMARY\_VALUE, ATTRIBUTE, VALUE, and NONE. NONE is the
+    #   default if unspecified. This determines how concurrent edits are
+    #   handled when multiple users attempt to modify values simultaneously.
+    #
+    # @option params [required, String] :status
+    #   The status of the data table. One of PUBLISHED or SAVED. Required
+    #   parameter that determines the initial state of the table.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Key value pairs for attribute based access control (TBAC or ABAC).
+    #   Optional tags to apply to the data table for organization and access
+    #   control purposes.
+    #
+    # @return [Types::CreateDataTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataTableResponse#id #id} => String
+    #   * {Types::CreateDataTableResponse#arn #arn} => String
+    #   * {Types::CreateDataTableResponse#lock_version #lock_version} => Types::DataTableLockVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_table({
+    #     instance_id: "InstanceId", # required
+    #     name: "DataTableName", # required
+    #     description: "DataTableDescription",
+    #     time_zone: "TimeZone", # required
+    #     value_lock_level: "NONE", # required, accepts NONE, DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE
+    #     status: "PUBLISHED", # required, accepts PUBLISHED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.lock_version.data_table #=> String
+    #   resp.lock_version.attribute #=> String
+    #   resp.lock_version.primary_values #=> String
+    #   resp.lock_version.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateDataTable AWS API Documentation
+    #
+    # @overload create_data_table(params = {})
+    # @param [Hash] params ({})
+    def create_data_table(params = {}, options = {})
+      req = build_request(:create_data_table, params)
+      req.send_request(options)
+    end
+
+    # Adds an attribute to an existing data table. Creating a new primary
+    # attribute uses the empty value for the specified value type for all
+    # existing records. This should not affect uniqueness of published data
+    # tables since the existing primary values will already be unique.
+    # Creating attributes does not create any values. System managed tables
+    # may not allow customers to create new attributes.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias. If the version is provided as
+    #   part of the identifier or ARN, the version must be one of the two
+    #   available system managed aliases, $SAVED or $LATEST.
+    #
+    # @option params [required, String] :name
+    #   The name for the attribute. Must conform to Connect human readable
+    #   string specification and have 1-127 characters. Must not start with
+    #   the reserved case insensitive values 'connect:' and 'aws:'.
+    #   Whitespace trimmed before persisting. Must be unique for the data
+    #   table using case-insensitive comparison.
+    #
+    # @option params [required, String] :value_type
+    #   The type of value allowed or the resultant type after the value's
+    #   expression is evaluated. Must be one of TEXT, TEXT\_LIST, NUMBER,
+    #   NUMBER\_LIST, and BOOLEAN.
+    #
+    # @option params [String] :description
+    #   An optional description for the attribute. Must conform to Connect
+    #   human readable string specification and have 0-250 characters.
+    #   Whitespace trimmed before persisting.
+    #
+    # @option params [Boolean] :primary
+    #   Optional boolean that defaults to false. Determines if the value is
+    #   used to identify a record in the table. Values for primary attributes
+    #   must not be expressions.
+    #
+    # @option params [Types::Validation] :validation
+    #   Optional validation rules for the attribute. Borrows heavily from JSON
+    #   Schema - Draft 2020-12. The maximum length of arrays within
+    #   validations and depth of validations is 5. There are default limits
+    #   that apply to all types. Customer specified limits in excess of the
+    #   default limits are not permitted.
+    #
+    # @return [Types::CreateDataTableAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataTableAttributeResponse#name #name} => String
+    #   * {Types::CreateDataTableAttributeResponse#attribute_id #attribute_id} => String
+    #   * {Types::CreateDataTableAttributeResponse#lock_version #lock_version} => Types::DataTableLockVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_table_attribute({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     name: "DataTableName", # required
+    #     value_type: "TEXT", # required, accepts TEXT, NUMBER, BOOLEAN, TEXT_LIST, NUMBER_LIST
+    #     description: "DataTableDescription",
+    #     primary: false,
+    #     validation: {
+    #       min_length: 1,
+    #       max_length: 1,
+    #       min_values: 1,
+    #       max_values: 1,
+    #       ignore_case: false,
+    #       minimum: 1.0,
+    #       maximum: 1.0,
+    #       exclusive_minimum: 1.0,
+    #       exclusive_maximum: 1.0,
+    #       multiple_of: 1.0,
+    #       enum: {
+    #         strict: false,
+    #         values: ["String"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.attribute_id #=> String
+    #   resp.lock_version.data_table #=> String
+    #   resp.lock_version.attribute #=> String
+    #   resp.lock_version.primary_values #=> String
+    #   resp.lock_version.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateDataTableAttribute AWS API Documentation
+    #
+    # @overload create_data_table_attribute(params = {})
+    # @param [Hash] params ({})
+    def create_data_table_attribute(params = {}, options = {})
+      req = build_request(:create_data_table_attribute, params)
+      req.send_request(options)
+    end
+
     # Create new email address in the specified Amazon Connect instance. For
     # more information about email addresses, see [Create email
     # addresses][1] in the Amazon Connect Administrator Guide.
@@ -2629,10 +3196,20 @@ module Aws::Connect
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
+    # @option params [Boolean] :as_draft
+    #   A boolean flag indicating whether to create evaluation form in draft
+    #   state.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
     #   }.
+    #
+    # @option params [Types::EvaluationFormTargetConfiguration] :target_configuration
+    #   Configuration that specifies the target for the evaluation form.
+    #
+    # @option params [Types::EvaluationFormLanguageConfiguration] :language_configuration
+    #   Configuration for language settings of the evaluation form.
     #
     # @return [Types::CreateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2661,7 +3238,7 @@ module Aws::Connect
     #           instructions: "EvaluationFormQuestionInstructions",
     #           ref_id: "ReferenceId", # required
     #           not_applicable_enabled: false,
-    #           question_type: "TEXT", # required, accepts TEXT, SINGLESELECT, NUMERIC
+    #           question_type: "TEXT", # required, accepts TEXT, SINGLESELECT, NUMERIC, MULTISELECT, DATETIME
     #           question_type_properties: {
     #             numeric: {
     #               min_value: 1, # required
@@ -2679,7 +3256,7 @@ module Aws::Connect
     #               ],
     #               automation: {
     #                 property_value: {
-    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
     #                 },
     #                 answer_source: {
     #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
@@ -2722,6 +3299,30 @@ module Aws::Connect
     #                 },
     #               },
     #             },
+    #             multi_select: {
+    #               options: [ # required
+    #                 {
+    #                   ref_id: "ReferenceId", # required
+    #                   text: "EvaluationFormMultiSelectQuestionOptionText", # required
+    #                 },
+    #               ],
+    #               display_as: "DROPDOWN", # accepts DROPDOWN, CHECKBOX
+    #               automation: {
+    #                 options: [
+    #                   {
+    #                     rule_category: {
+    #                       category: "MultiSelectQuestionRuleCategoryAutomationLabel", # required
+    #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
+    #                       option_ref_ids: ["ReferenceId"], # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_option_ref_ids: ["ReferenceId"],
+    #                 answer_source: {
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                 },
+    #               },
+    #             },
     #           },
     #           enablement: {
     #             condition: { # required
@@ -2738,7 +3339,7 @@ module Aws::Connect
     #                         ref_id: "ReferenceId",
     #                       },
     #                     ],
-    #                     comparator: "IN", # required, accepts IN, NOT_IN
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT
     #                   },
     #                   condition: {
     #                     # recursive EvaluationFormItemEnablementCondition
@@ -2762,8 +3363,15 @@ module Aws::Connect
     #       enabled: false, # required
     #     },
     #     client_token: "ClientToken",
+    #     as_draft: false,
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     target_configuration: {
+    #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED
+    #     },
+    #     language_configuration: {
+    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR
     #     },
     #   })
     #
@@ -3048,7 +3656,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, Q_MESSAGE_TEMPLATES, CASES_DOMAIN, APPLICATION, FILE_SCANNER, SES_IDENTITY, ANALYTICS_CONNECTOR, CALL_TRANSFER_CONNECTOR, COGNITO_USER_POOL
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, Q_MESSAGE_TEMPLATES, CASES_DOMAIN, APPLICATION, FILE_SCANNER, SES_IDENTITY, ANALYTICS_CONNECTOR, CALL_TRANSFER_CONNECTOR, COGNITO_USER_POOL, MESSAGE_PROCESSOR
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -3631,7 +4239,7 @@ module Aws::Connect
     #     name: "QuickConnectName", # required
     #     description: "QuickConnectDescription",
     #     quick_connect_config: { # required
-    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER, FLOW
     #       user_config: {
     #         user_id: "UserId", # required
     #         contact_flow_id: "ContactFlowId", # required
@@ -3642,6 +4250,9 @@ module Aws::Connect
     #       },
     #       phone_config: {
     #         phone_number: "PhoneNumber", # required
+    #       },
+    #       flow_config: {
+    #         contact_flow_id: "ContactFlowId", # required
     #       },
     #     },
     #     tags: {
@@ -3849,7 +4460,7 @@ module Aws::Connect
     #           references: {
     #             "ReferenceKey" => {
     #               value: "ReferenceValue",
-    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #               status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #               arn: "ReferenceArn",
     #               status_reason: "ReferenceStatusReason",
@@ -4005,8 +4616,8 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
     #
     # @option params [Array<Types::Application>] :applications
-    #   A list of third-party applications that the security profile will give
-    #   access to.
+    #   A list of third-party applications or MCP Servers that the security
+    #   profile will give access to.
     #
     # @option params [Array<String>] :hierarchy_restricted_resources
     #   The list of resources that a security profile applies hierarchy
@@ -4016,6 +4627,13 @@ module Aws::Connect
     # @option params [String] :allowed_access_control_hierarchy_group_id
     #   The identifier of the hierarchy group that a security profile uses to
     #   restrict access to resources in Amazon Connect.
+    #
+    # @option params [Array<Types::FlowModule>] :allowed_flow_modules
+    #   A list of Flow Modules an AI Agent can invoke as a tool.
+    #
+    # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
+    #   The granular access control configuration for the security profile,
+    #   including data table permissions.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4040,10 +4658,30 @@ module Aws::Connect
     #       {
     #         namespace: "Namespace",
     #         application_permissions: ["Permission"],
+    #         type: "MCP", # accepts MCP, THIRD_PARTY_APPLICATION
     #       },
     #     ],
     #     hierarchy_restricted_resources: ["HierarchyRestrictedResourceName"],
     #     allowed_access_control_hierarchy_group_id: "HierarchyGroupId",
+    #     allowed_flow_modules: [
+    #       {
+    #         type: "MCP", # accepts MCP
+    #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     granular_access_control_configuration: {
+    #       data_table_access_control_configuration: {
+    #         primary_attribute_access_control_configuration: {
+    #           primary_attribute_values: [
+    #             {
+    #               access_type: "ALLOW", # accepts ALLOW
+    #               attribute_name: "PrimaryAttributeContextKeyName",
+    #               values: ["IAMRestrictedPrimaryValue"],
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -4742,6 +5380,199 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a workspace that defines the user experience by mapping views
+    # to pages. Workspaces can be assigned to users or routing profiles.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :name
+    #   The name of the workspace. Must be unique within the instance and can
+    #   contain 1-127 characters.
+    #
+    # @option params [String] :description
+    #   The description of the workspace. Maximum length is 250 characters.
+    #
+    # @option params [Types::WorkspaceTheme] :theme
+    #   The theme configuration for the workspace, including colors and
+    #   styling.
+    #
+    # @option params [String] :title
+    #   The title displayed for the workspace.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, `{ "Tags": {"key1":"value1", "key2":"value2"} }`.
+    #
+    # @return [Types::CreateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceResponse#workspace_id #workspace_id} => String
+    #   * {Types::CreateWorkspaceResponse#workspace_arn #workspace_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace({
+    #     instance_id: "InstanceId", # required
+    #     name: "WorkspaceName", # required
+    #     description: "WorkspaceDescription",
+    #     theme: {
+    #       light: {
+    #         palette: {
+    #           header: {
+    #             background: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           navigation: {
+    #             background: "ThemeString",
+    #             text_background_hover: "ThemeString",
+    #             text_background_active: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             text_active: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           canvas: {
+    #             container_background: "ThemeString",
+    #             page_background: "ThemeString",
+    #             active_background: "ThemeString",
+    #           },
+    #           primary: {
+    #             default: "ThemeString",
+    #             active: "ThemeString",
+    #             contrast_text: "ThemeString",
+    #           },
+    #         },
+    #         images: {
+    #           logo: {
+    #             default: "ThemeImageLink",
+    #             favicon: "ThemeImageLink",
+    #           },
+    #         },
+    #         typography: {
+    #           font_family: {
+    #             default: "Arial", # accepts Arial, Courier New, Georgia, Times New Roman, Trebuchet, Verdana
+    #           },
+    #         },
+    #       },
+    #       dark: {
+    #         palette: {
+    #           header: {
+    #             background: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           navigation: {
+    #             background: "ThemeString",
+    #             text_background_hover: "ThemeString",
+    #             text_background_active: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             text_active: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           canvas: {
+    #             container_background: "ThemeString",
+    #             page_background: "ThemeString",
+    #             active_background: "ThemeString",
+    #           },
+    #           primary: {
+    #             default: "ThemeString",
+    #             active: "ThemeString",
+    #             contrast_text: "ThemeString",
+    #           },
+    #         },
+    #         images: {
+    #           logo: {
+    #             default: "ThemeImageLink",
+    #             favicon: "ThemeImageLink",
+    #           },
+    #         },
+    #         typography: {
+    #           font_family: {
+    #             default: "Arial", # accepts Arial, Courier New, Georgia, Times New Roman, Trebuchet, Verdana
+    #           },
+    #         },
+    #       },
+    #     },
+    #     title: "WorkspaceTitle",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspace_id #=> String
+    #   resp.workspace_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateWorkspace AWS API Documentation
+    #
+    # @overload create_workspace(params = {})
+    # @param [Hash] params ({})
+    def create_workspace(params = {}, options = {})
+      req = build_request(:create_workspace, params)
+      req.send_request(options)
+    end
+
+    # Associates a view with a page in a workspace, defining what users see
+    # when they navigate to that page.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the view to associate with the page.
+    #
+    # @option params [required, String] :page
+    #   The page identifier. Valid system pages include `HOME` and
+    #   `AGENT_EXPERIENCE`. Custom pages cannot use the `aws:` or `connect:`
+    #   prefixes.
+    #
+    # @option params [String] :slug
+    #   The URL-friendly identifier for the page.
+    #
+    # @option params [String] :input_data
+    #   A JSON string containing input parameters for the view, validated
+    #   against the view's input schema.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_page({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     resource_arn: "ARN", # required
+    #     page: "Page", # required
+    #     slug: "Slug",
+    #     input_data: "InputData",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateWorkspacePage AWS API Documentation
+    #
+    # @overload create_workspace_page(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_page(params = {}, options = {})
+      req = build_request(:create_workspace_page, params)
+      req.send_request(options)
+    end
+
     # Deactivates an evaluation form in the specified Amazon Connect
     # instance. After a form is deactivated, it is no longer available for
     # users to start new evaluations based on the form.
@@ -5028,6 +5859,79 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_contact_flow_version(params = {}, options = {})
       req = build_request(:delete_contact_flow_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes a data table and all associated attributes, versions, audits,
+    # and values. Does not update any references to the data table, even
+    # from other data tables. This includes dynamic values and conditional
+    # validations. System managed data tables are not deletable by
+    # customers. API users may delete the table at any time. When deletion
+    # is requested from the admin website, a warning is shown alerting the
+    # user of the most recent time the table and its values were accessed.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table to delete. Must also accept
+    #   the table ARN. Fails with an error if the version is provided and is
+    #   not $LATEST.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_table({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteDataTable AWS API Documentation
+    #
+    # @overload delete_data_table(params = {})
+    # @param [Hash] params ({})
+    def delete_data_table(params = {}, options = {})
+      req = build_request(:delete_data_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes an attribute and all its values from a data table.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table.
+    #
+    # @option params [required, String] :attribute_name
+    #   The name of the attribute to delete.
+    #
+    # @return [Types::DeleteDataTableAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataTableAttributeResponse#lock_version #lock_version} => Types::DataTableLockVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_table_attribute({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     attribute_name: "DataTableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lock_version.data_table #=> String
+    #   resp.lock_version.attribute #=> String
+    #   resp.lock_version.primary_values #=> String
+    #   resp.lock_version.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteDataTableAttribute AWS API Documentation
+    #
+    # @overload delete_data_table_attribute(params = {})
+    # @param [Hash] params ({})
+    def delete_data_table_attribute(params = {}, options = {})
+      req = build_request(:delete_data_table_attribute, params)
       req.send_request(options)
     end
 
@@ -5805,6 +6709,110 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a workspace and removes all associated view and resource
+    # assignments.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteWorkspace AWS API Documentation
+    #
+    # @overload delete_workspace(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace(params = {}, options = {})
+      req = build_request(:delete_workspace, params)
+      req.send_request(options)
+    end
+
+    # Deletes a media asset (such as a logo) from a workspace.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, String] :media_type
+    #   The type of media to delete. Valid values are: `IMAGE_LOGO_FAVICON`
+    #   and `IMAGE_LOGO_HORIZONTAL`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_media({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     media_type: "IMAGE_LOGO_LIGHT_FAVICON", # required, accepts IMAGE_LOGO_LIGHT_FAVICON, IMAGE_LOGO_DARK_FAVICON, IMAGE_LOGO_LIGHT_HORIZONTAL, IMAGE_LOGO_DARK_HORIZONTAL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteWorkspaceMedia AWS API Documentation
+    #
+    # @overload delete_workspace_media(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_media(params = {}, options = {})
+      req = build_request(:delete_workspace_media, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between a view and a page in a workspace. The
+    # page will display the default view after deletion.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, String] :page
+    #   The page identifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_page({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     page: "Page", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteWorkspacePage AWS API Documentation
+    #
+    # @overload delete_workspace_page(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_page(params = {}, options = {})
+      req = build_request(:delete_workspace_page, params)
+      req.send_request(options)
+    end
+
     # Describes an agent status.
     #
     # @option params [required, String] :instance_id
@@ -6017,6 +7025,10 @@ module Aws::Connect
     #   resp.contact.scheduled_timestamp #=> Time
     #   resp.contact.related_contact_id #=> String
     #   resp.contact.wisdom_info.session_arn #=> String
+    #   resp.contact.wisdom_info.ai_agents #=> Array
+    #   resp.contact.wisdom_info.ai_agents[0].ai_use_case #=> String, one of "AgentAssistance", "SelfService"
+    #   resp.contact.wisdom_info.ai_agents[0].ai_agent_version_id #=> String
+    #   resp.contact.wisdom_info.ai_agents[0].ai_agent_escalated #=> Boolean
     #   resp.contact.customer_id #=> String
     #   resp.contact.customer_endpoint.type #=> String, one of "TELEPHONE_NUMBER", "VOIP", "CONTACT_FLOW", "CONNECT_PHONENUMBER_ARN", "EMAIL_ADDRESS"
     #   resp.contact.customer_endpoint.address #=> String
@@ -6122,6 +7134,7 @@ module Aws::Connect
     #   resp.contact.recordings[0].stop_timestamp #=> Time
     #   resp.contact.recordings[0].status #=> String, one of "AVAILABLE", "DELETED"
     #   resp.contact.recordings[0].deletion_reason #=> String
+    #   resp.contact.recordings[0].unprocessed_transcript_location #=> String
     #   resp.contact.disconnect_reason #=> String
     #   resp.contact.contact_evaluations #=> Hash
     #   resp.contact.contact_evaluations["EvaluationId"].form_id #=> String
@@ -6141,6 +7154,13 @@ module Aws::Connect
     #   resp.contact.outbound_strategy.config.agent_first.preview.allowed_user_actions[0] #=> String, one of "CALL", "DISCARD"
     #   resp.contact.attributes #=> Hash
     #   resp.contact.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.contact.next_contacts #=> Array
+    #   resp.contact.next_contacts[0].type #=> String, one of "QUICK_CONNECT"
+    #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.contact_id #=> String
+    #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.initiation_timestamp #=> Time
+    #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.quick_connect_id #=> String
+    #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.quick_connect_name #=> String
+    #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER", "FLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -6188,21 +7208,34 @@ module Aws::Connect
     #   resp.evaluation.metadata.score.percentage #=> Float
     #   resp.evaluation.metadata.score.not_applicable #=> Boolean
     #   resp.evaluation.metadata.score.automatic_fail #=> Boolean
+    #   resp.evaluation.metadata.score.applied_weight #=> Float
     #   resp.evaluation.metadata.auto_evaluation.auto_evaluation_enabled #=> Boolean
     #   resp.evaluation.metadata.auto_evaluation.auto_evaluation_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
     #   resp.evaluation.metadata.acknowledgement.acknowledged_time #=> Time
     #   resp.evaluation.metadata.acknowledgement.acknowledged_by #=> String
     #   resp.evaluation.metadata.acknowledgement.acknowledger_comment #=> String
+    #   resp.evaluation.metadata.contact_participant.contact_participant_role #=> String, one of "AGENT", "SYSTEM", "CUSTOM_BOT"
+    #   resp.evaluation.metadata.contact_participant.contact_participant_id #=> String
+    #   resp.evaluation.metadata.sampling_job_id #=> String
     #   resp.evaluation.answers #=> Hash
     #   resp.evaluation.answers["ResourceId"].value.string_value #=> String
     #   resp.evaluation.answers["ResourceId"].value.numeric_value #=> Float
+    #   resp.evaluation.answers["ResourceId"].value.string_values #=> Array
+    #   resp.evaluation.answers["ResourceId"].value.string_values[0] #=> String
+    #   resp.evaluation.answers["ResourceId"].value.date_time_value #=> String
     #   resp.evaluation.answers["ResourceId"].value.not_applicable #=> Boolean
     #   resp.evaluation.answers["ResourceId"].system_suggested_value.string_value #=> String
     #   resp.evaluation.answers["ResourceId"].system_suggested_value.numeric_value #=> Float
+    #   resp.evaluation.answers["ResourceId"].system_suggested_value.string_values #=> Array
+    #   resp.evaluation.answers["ResourceId"].system_suggested_value.string_values[0] #=> String
+    #   resp.evaluation.answers["ResourceId"].system_suggested_value.date_time_value #=> String
     #   resp.evaluation.answers["ResourceId"].system_suggested_value.not_applicable #=> Boolean
     #   resp.evaluation.answers["ResourceId"].suggested_answers #=> Array
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.string_value #=> String
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.numeric_value #=> Float
+    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.string_values #=> Array
+    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.string_values[0] #=> String
+    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.date_time_value #=> String
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.not_applicable #=> Boolean
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].input.transcript_type #=> String, one of "RAW", "REDACTED"
@@ -6224,6 +7257,7 @@ module Aws::Connect
     #   resp.evaluation.scores["ResourceId"].percentage #=> Float
     #   resp.evaluation.scores["ResourceId"].not_applicable #=> Boolean
     #   resp.evaluation.scores["ResourceId"].automatic_fail #=> Boolean
+    #   resp.evaluation.scores["ResourceId"].applied_weight #=> Float
     #   resp.evaluation.created_time #=> Time
     #   resp.evaluation.last_modified_time #=> Time
     #   resp.evaluation.evaluation_type #=> String, one of "STANDARD", "CALIBRATION"
@@ -6244,7 +7278,7 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.instructions #=> String
     #   resp.evaluation_form.items[0].question.ref_id #=> String
     #   resp.evaluation_form.items[0].question.not_applicable_enabled #=> Boolean
-    #   resp.evaluation_form.items[0].question.question_type #=> String, one of "TEXT", "SINGLESELECT", "NUMERIC"
+    #   resp.evaluation_form.items[0].question.question_type #=> String, one of "TEXT", "SINGLESELECT", "NUMERIC", "MULTISELECT", "DATETIME"
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.min_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.max_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options #=> Array
@@ -6253,7 +7287,7 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].score #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail #=> Boolean
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail_configuration.target_section #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
@@ -6269,13 +7303,25 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
     #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].text #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.display_as #=> String, one of "DROPDOWN", "CHECKBOX"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.category #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids[0] #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids[0] #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands #=> Array
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ref_id #=> String
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values #=> Array
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].ref_id #=> String
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
     #   resp.evaluation_form.items[0].question.enablement.condition.operator #=> String, one of "OR", "AND"
     #   resp.evaluation_form.items[0].question.enablement.action #=> String, one of "DISABLE", "ENABLE"
@@ -6284,6 +7330,8 @@ module Aws::Connect
     #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY"
     #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.evaluation_form.auto_evaluation_configuration.enabled #=> Boolean
+    #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED"
+    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluation AWS API Documentation
     #
@@ -6464,6 +7512,127 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Returns all properties for a data table except for attributes and
+    # values. All properties from CreateDataTable are returned as well as
+    # properties for region replication, versioning, and system tables.
+    # "Describe" is a deprecated term but is allowed to maintain
+    # consistency with existing operations.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias. If no alias is provided, the
+    #   default behavior is identical to providing the $LATEST alias.
+    #
+    # @return [Types::DescribeDataTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataTableResponse#data_table #data_table} => Types::DataTable
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_table({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_table.name #=> String
+    #   resp.data_table.id #=> String
+    #   resp.data_table.arn #=> String
+    #   resp.data_table.time_zone #=> String
+    #   resp.data_table.description #=> String
+    #   resp.data_table.value_lock_level #=> String, one of "NONE", "DATA_TABLE", "PRIMARY_VALUE", "ATTRIBUTE", "VALUE"
+    #   resp.data_table.lock_version.data_table #=> String
+    #   resp.data_table.lock_version.attribute #=> String
+    #   resp.data_table.lock_version.primary_values #=> String
+    #   resp.data_table.lock_version.value #=> String
+    #   resp.data_table.version #=> String
+    #   resp.data_table.version_description #=> String
+    #   resp.data_table.status #=> String, one of "PUBLISHED"
+    #   resp.data_table.created_time #=> Time
+    #   resp.data_table.last_modified_time #=> Time
+    #   resp.data_table.last_modified_region #=> String
+    #   resp.data_table.tags #=> Hash
+    #   resp.data_table.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeDataTable AWS API Documentation
+    #
+    # @overload describe_data_table(params = {})
+    # @param [Hash] params ({})
+    def describe_data_table(params = {}, options = {})
+      req = build_request(:describe_data_table, params)
+      req.send_request(options)
+    end
+
+    # Returns detailed information for a specific data table attribute
+    # including its configuration, validation rules, and metadata.
+    # "Describe" is a deprecated term but is allowed to maintain
+    # consistency with existing operations.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias.
+    #
+    # @option params [required, String] :attribute_name
+    #   The name of the attribute to retrieve detailed information for.
+    #
+    # @return [Types::DescribeDataTableAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataTableAttributeResponse#attribute #attribute} => Types::DataTableAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_table_attribute({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     attribute_name: "DataTableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attribute.attribute_id #=> String
+    #   resp.attribute.name #=> String
+    #   resp.attribute.value_type #=> String, one of "TEXT", "NUMBER", "BOOLEAN", "TEXT_LIST", "NUMBER_LIST"
+    #   resp.attribute.description #=> String
+    #   resp.attribute.data_table_id #=> String
+    #   resp.attribute.data_table_arn #=> String
+    #   resp.attribute.primary #=> Boolean
+    #   resp.attribute.version #=> String
+    #   resp.attribute.lock_version.data_table #=> String
+    #   resp.attribute.lock_version.attribute #=> String
+    #   resp.attribute.lock_version.primary_values #=> String
+    #   resp.attribute.lock_version.value #=> String
+    #   resp.attribute.last_modified_time #=> Time
+    #   resp.attribute.last_modified_region #=> String
+    #   resp.attribute.validation.min_length #=> Integer
+    #   resp.attribute.validation.max_length #=> Integer
+    #   resp.attribute.validation.min_values #=> Integer
+    #   resp.attribute.validation.max_values #=> Integer
+    #   resp.attribute.validation.ignore_case #=> Boolean
+    #   resp.attribute.validation.minimum #=> Float
+    #   resp.attribute.validation.maximum #=> Float
+    #   resp.attribute.validation.exclusive_minimum #=> Float
+    #   resp.attribute.validation.exclusive_maximum #=> Float
+    #   resp.attribute.validation.multiple_of #=> Float
+    #   resp.attribute.validation.enum.strict #=> Boolean
+    #   resp.attribute.validation.enum.values #=> Array
+    #   resp.attribute.validation.enum.values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeDataTableAttribute AWS API Documentation
+    #
+    # @overload describe_data_table_attribute(params = {})
+    # @param [Hash] params ({})
+    def describe_data_table_attribute(params = {}, options = {})
+      req = build_request(:describe_data_table_attribute, params)
+      req.send_request(options)
+    end
+
     # Describe email address form the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -6568,7 +7737,7 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.instructions #=> String
     #   resp.evaluation_form.items[0].question.ref_id #=> String
     #   resp.evaluation_form.items[0].question.not_applicable_enabled #=> Boolean
-    #   resp.evaluation_form.items[0].question.question_type #=> String, one of "TEXT", "SINGLESELECT", "NUMERIC"
+    #   resp.evaluation_form.items[0].question.question_type #=> String, one of "TEXT", "SINGLESELECT", "NUMERIC", "MULTISELECT", "DATETIME"
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.min_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.max_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options #=> Array
@@ -6577,7 +7746,7 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].score #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail #=> Boolean
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail_configuration.target_section #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
@@ -6593,13 +7762,25 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
     #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].text #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.display_as #=> String, one of "DROPDOWN", "CHECKBOX"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.category #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids[0] #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids[0] #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands #=> Array
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ref_id #=> String
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values #=> Array
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].ref_id #=> String
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
     #   resp.evaluation_form.items[0].question.enablement.condition.operator #=> String, one of "OR", "AND"
     #   resp.evaluation_form.items[0].question.enablement.action #=> String, one of "DISABLE", "ENABLE"
@@ -6614,6 +7795,8 @@ module Aws::Connect
     #   resp.evaluation_form.auto_evaluation_configuration.enabled #=> Boolean
     #   resp.evaluation_form.tags #=> Hash
     #   resp.evaluation_form.tags["TagKey"] #=> String
+    #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED"
+    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeEvaluationForm AWS API Documentation
     #
@@ -6809,12 +7992,12 @@ module Aws::Connect
     #
     #   resp = client.describe_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE, MESSAGE_STREAMING
     #   })
     #
     # @example Response structure
     #
-    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE"
+    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE", "MESSAGE_STREAMING"
     #   resp.attribute.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttribute AWS API Documentation
@@ -7123,12 +8306,13 @@ module Aws::Connect
     #   resp.quick_connect.quick_connect_id #=> String
     #   resp.quick_connect.name #=> String
     #   resp.quick_connect.description #=> String
-    #   resp.quick_connect.quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect.quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER", "FLOW"
     #   resp.quick_connect.quick_connect_config.user_config.user_id #=> String
     #   resp.quick_connect.quick_connect_config.user_config.contact_flow_id #=> String
     #   resp.quick_connect.quick_connect_config.queue_config.queue_id #=> String
     #   resp.quick_connect.quick_connect_config.queue_config.contact_flow_id #=> String
     #   resp.quick_connect.quick_connect_config.phone_config.phone_number #=> String
+    #   resp.quick_connect.quick_connect_config.flow_config.contact_flow_id #=> String
     #   resp.quick_connect.tags #=> Hash
     #   resp.quick_connect.tags["TagKey"] #=> String
     #   resp.quick_connect.last_modified_time #=> Time
@@ -7252,7 +8436,7 @@ module Aws::Connect
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
     #   resp.rule.actions[0].task_action.references #=> Hash
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].value #=> String
-    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "CONTACT_ANALYSIS", "NUMBER", "STRING", "DATE", "EMAIL", "EMAIL_MESSAGE"
+    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "CONTACT_ANALYSIS", "NUMBER", "STRING", "DATE", "EMAIL", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT"
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED"
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].arn #=> String
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].status_reason #=> String
@@ -7358,6 +8542,11 @@ module Aws::Connect
     #   resp.security_profile.hierarchy_restricted_resources #=> Array
     #   resp.security_profile.hierarchy_restricted_resources[0] #=> String
     #   resp.security_profile.allowed_access_control_hierarchy_group_id #=> String
+    #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values #=> Array
+    #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].access_type #=> String, one of "ALLOW"
+    #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].attribute_name #=> String
+    #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].values #=> Array
+    #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].values[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -7704,6 +8893,93 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_vocabulary(params = {}, options = {})
       req = build_request(:describe_vocabulary, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a workspace, including its configuration and
+    # metadata.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @return [Types::DescribeWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspaceResponse#workspace #workspace} => Types::Workspace
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspace({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspace.visibility #=> String, one of "ALL", "ASSIGNED", "NONE"
+    #   resp.workspace.id #=> String
+    #   resp.workspace.name #=> String
+    #   resp.workspace.arn #=> String
+    #   resp.workspace.description #=> String
+    #   resp.workspace.theme.light.palette.header.background #=> String
+    #   resp.workspace.theme.light.palette.header.text #=> String
+    #   resp.workspace.theme.light.palette.header.text_hover #=> String
+    #   resp.workspace.theme.light.palette.header.invert_actions_colors #=> Boolean
+    #   resp.workspace.theme.light.palette.navigation.background #=> String
+    #   resp.workspace.theme.light.palette.navigation.text_background_hover #=> String
+    #   resp.workspace.theme.light.palette.navigation.text_background_active #=> String
+    #   resp.workspace.theme.light.palette.navigation.text #=> String
+    #   resp.workspace.theme.light.palette.navigation.text_hover #=> String
+    #   resp.workspace.theme.light.palette.navigation.text_active #=> String
+    #   resp.workspace.theme.light.palette.navigation.invert_actions_colors #=> Boolean
+    #   resp.workspace.theme.light.palette.canvas.container_background #=> String
+    #   resp.workspace.theme.light.palette.canvas.page_background #=> String
+    #   resp.workspace.theme.light.palette.canvas.active_background #=> String
+    #   resp.workspace.theme.light.palette.primary.default #=> String
+    #   resp.workspace.theme.light.palette.primary.active #=> String
+    #   resp.workspace.theme.light.palette.primary.contrast_text #=> String
+    #   resp.workspace.theme.light.images.logo.default #=> String
+    #   resp.workspace.theme.light.images.logo.favicon #=> String
+    #   resp.workspace.theme.light.typography.font_family.default #=> String, one of "Arial", "Courier New", "Georgia", "Times New Roman", "Trebuchet", "Verdana"
+    #   resp.workspace.theme.dark.palette.header.background #=> String
+    #   resp.workspace.theme.dark.palette.header.text #=> String
+    #   resp.workspace.theme.dark.palette.header.text_hover #=> String
+    #   resp.workspace.theme.dark.palette.header.invert_actions_colors #=> Boolean
+    #   resp.workspace.theme.dark.palette.navigation.background #=> String
+    #   resp.workspace.theme.dark.palette.navigation.text_background_hover #=> String
+    #   resp.workspace.theme.dark.palette.navigation.text_background_active #=> String
+    #   resp.workspace.theme.dark.palette.navigation.text #=> String
+    #   resp.workspace.theme.dark.palette.navigation.text_hover #=> String
+    #   resp.workspace.theme.dark.palette.navigation.text_active #=> String
+    #   resp.workspace.theme.dark.palette.navigation.invert_actions_colors #=> Boolean
+    #   resp.workspace.theme.dark.palette.canvas.container_background #=> String
+    #   resp.workspace.theme.dark.palette.canvas.page_background #=> String
+    #   resp.workspace.theme.dark.palette.canvas.active_background #=> String
+    #   resp.workspace.theme.dark.palette.primary.default #=> String
+    #   resp.workspace.theme.dark.palette.primary.active #=> String
+    #   resp.workspace.theme.dark.palette.primary.contrast_text #=> String
+    #   resp.workspace.theme.dark.images.logo.default #=> String
+    #   resp.workspace.theme.dark.images.logo.favicon #=> String
+    #   resp.workspace.theme.dark.typography.font_family.default #=> String, one of "Arial", "Courier New", "Georgia", "Times New Roman", "Trebuchet", "Verdana"
+    #   resp.workspace.title #=> String
+    #   resp.workspace.last_modified_time #=> Time
+    #   resp.workspace.last_modified_region #=> String
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeWorkspace AWS API Documentation
+    #
+    # @overload describe_workspace(params = {})
+    # @param [Hash] params ({})
+    def describe_workspace(params = {}, options = {})
+      req = build_request(:describe_workspace, params)
       req.send_request(options)
     end
 
@@ -8360,6 +9636,46 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Disassociates a security profile attached to a Q in Connect AI Agent
+    # Entity in an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, Array<Types::SecurityProfileItem>] :security_profiles
+    #   List of Security Profile Object.
+    #
+    # @option params [required, String] :entity_type
+    #   Only supported type is AI\_AGENT.
+    #
+    # @option params [required, String] :entity_arn
+    #   ARN of a Q in Connect AI Agent.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_security_profiles({
+    #     instance_id: "InstanceId", # required
+    #     security_profiles: [ # required
+    #       {
+    #         id: "SecurityProfileId",
+    #       },
+    #     ],
+    #     entity_type: "USER", # required, accepts USER, AI_AGENT
+    #     entity_arn: "EntityArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateSecurityProfiles AWS API Documentation
+    #
+    # @overload disassociate_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def disassociate_security_profiles(params = {}, options = {})
+      req = build_request(:disassociate_security_profiles, params)
+      req.send_request(options)
+    end
+
     # Disassociates an agent from a traffic distribution group. This API can
     # be called only in the Region where the traffic distribution group is
     # created.
@@ -8435,6 +9751,55 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Removes the association between a workspace and one or more users or
+    # routing profiles.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, Array<String>] :resource_arns
+    #   The Amazon Resource Names (ARNs) of the resources to disassociate from
+    #   the workspace.
+    #
+    # @return [Types::DisassociateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateWorkspaceResponse#successful_list #successful_list} => Array&lt;Types::SuccessfulBatchAssociationSummary&gt;
+    #   * {Types::DisassociateWorkspaceResponse#failed_list #failed_list} => Array&lt;Types::FailedBatchAssociationSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_workspace({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     resource_arns: ["ARN"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_list #=> Array
+    #   resp.successful_list[0].resource_arn #=> String
+    #   resp.failed_list #=> Array
+    #   resp.failed_list[0].resource_arn #=> String
+    #   resp.failed_list[0].error_code #=> String
+    #   resp.failed_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateWorkspace AWS API Documentation
+    #
+    # @overload disassociate_workspace(params = {})
+    # @param [Hash] params ({})
+    def disassociate_workspace(params = {}, options = {})
+      req = build_request(:disassociate_workspace, params)
+      req.send_request(options)
+    end
+
     # Dismisses contacts from an agent’s CCP and returns the agent to an
     # available state, which allows the agent to receive a new routed
     # contact. Contacts can only be dismissed if they are in a `MISSED`,
@@ -8470,6 +9835,89 @@ module Aws::Connect
     # @param [Hash] params ({})
     def dismiss_user_contact(params = {}, options = {})
       req = build_request(:dismiss_user_contact, params)
+      req.send_request(options)
+    end
+
+    # Evaluates values at the time of the request and returns them. It
+    # considers the request's timezone or the table's timezone, in that
+    # order, when accessing time based tables. When a value is accessed, the
+    # accessor's identity and the time of access are saved alongside the
+    # value to help identify values that are actively in use. The term
+    # "Batch" is not included in the operation name since it does not meet
+    # all the criteria for a batch operation as specified in Batch
+    # Operations: AWS API Standards.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias.
+    #
+    # @option params [required, Array<Types::DataTableValueEvaluationSet>] :values
+    #   A list of value evaluation sets specifying which primary values and
+    #   attributes to evaluate.
+    #
+    # @option params [String] :time_zone
+    #   Optional IANA timezone identifier to use when resolving time based
+    #   dynamic values. Defaults to the data table time zone if not provided.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data table values to return in one page of
+    #   results.
+    #
+    # @return [Types::EvaluateDataTableValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EvaluateDataTableValuesResponse#values #values} => Array&lt;Types::DataTableEvaluatedValue&gt;
+    #   * {Types::EvaluateDataTableValuesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.evaluate_data_table_values({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     values: [ # required
+    #       {
+    #         primary_values: [
+    #           {
+    #             attribute_name: "DataTableName", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         attribute_names: ["DataTableName"], # required
+    #       },
+    #     ],
+    #     time_zone: "TimeZone",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.values #=> Array
+    #   resp.values[0].record_id #=> String
+    #   resp.values[0].primary_values #=> Array
+    #   resp.values[0].primary_values[0].attribute_name #=> String
+    #   resp.values[0].primary_values[0].value #=> String
+    #   resp.values[0].attribute_name #=> String
+    #   resp.values[0].value_type #=> String, one of "TEXT", "NUMBER", "BOOLEAN", "TEXT_LIST", "NUMBER_LIST"
+    #   resp.values[0].found #=> Boolean
+    #   resp.values[0].error #=> Boolean
+    #   resp.values[0].evaluated_value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluateDataTableValues AWS API Documentation
+    #
+    # @overload evaluate_data_table_values(params = {})
+    # @param [Hash] params ({})
+    def evaluate_data_table_values(params = {}, options = {})
+      req = build_request(:evaluate_data_table_values, params)
       req.send_request(options)
     end
 
@@ -9769,24 +11217,27 @@ module Aws::Connect
     #
     #   * **Filter keys**: A maximum of 5 filter keys are supported in a
     #     single request. Valid filter keys: `AGENT` \|
-    #     `AGENT_HIERARCHY_LEVEL_ONE` \| `AGENT_HIERARCHY_LEVEL_TWO` \|
-    #     `AGENT_HIERARCHY_LEVEL_THREE` \| `AGENT_HIERARCHY_LEVEL_FOUR` \|
-    #     `AGENT_HIERARCHY_LEVEL_FIVE` \| `ANSWERING_MACHINE_DETECTION_STATUS`
-    #     \| ` BOT_ID` \| `BOT_ALIAS` \| `BOT_VERSION` \| `BOT_LOCALE` \|
-    #     `BOT_INTENT_NAME` \| `CAMPAIGN` \| `CAMPAIGN_DELIVERY_EVENT_TYPE` \|
-    #     `CAMPAIGN_EXCLUDED_EVENT_TYPE ` \| `CASE_TEMPLATE_ARN` \|
-    #     `CASE_STATUS` \| `CHANNEL` \|
-    #     `contact/segmentAttributes/connect:Subtype` \| `DISCONNECT_REASON`
-    #     \| `EVALUATION_FORM` \| `EVALUATION_SECTION` \|
-    #     `EVALUATION_QUESTION` \| `EVALUATION_SOURCE` \| `EVALUATOR_ID` \|
+    #     `AGENT_HIERARCHY_LEVEL_FIVE` \| `AGENT_HIERARCHY_LEVEL_FOUR` \|
+    #     `AGENT_ HIERARCHY_LEVEL_ONE` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
+    #     `AGENT_HIERARCHY_LEVEL_TWO` \| ` ANSWERING_MACHINE_DETECTION_STATUS`
+    #     \| `BOT_ALIAS` \| `BOT_ID` \| `BOT_INTENT_NAME` \| `BOT_LOCALE` \|
+    #     `BOT_VERSION` \| `CAMPAIGN` \| `CAMPAIGN_DELIVERY_EVENT_TYPE` \| `
+    #     CAMPAIGN_EXCLUDED_EVENT_TYPE` \| `CASE_STATUS` \|
+    #     `CASE_TEMPLATE_ARN` \| `CHANNEL` \| `
+    #     contact/segmentAttributes/connect:Subtype` \|
+    #     `contact/segmentAttributes/connect:ValidationTestType` \| `
+    #     DISCONNECT_REASON` \| `EVALUATION_FORM` \| `EVALUATION_QUESTION` \|
+    #     `EVALUATION_SECTION` \| `EVALUATION_SOURCE` \| `EVALUATOR_ID` \|
     #     `FEATURE` \| `FLOW_ACTION_ID` \| `FLOW_TYPE` \|
     #     `FLOWS_MODULE_RESOURCE_ID` \| `FLOWS_NEXT_RESOURCE_ID` \|
     #     `FLOWS_NEXT_RESOURCE_QUEUE_ID` \| `FLOWS_OUTCOME_TYPE` \|
-    #     `FLOWS_RESOURCE_ID` \| `FORM_VERSION` \| `INITIATION_METHOD` \|
-    #     `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \| `INVOKING_RESOURCE_TYPE`
-    #     \| `PARENT_FLOWS_RESOURCE_ID` \| `RESOURCE_PUBLISHED_TIMESTAMP` \|
-    #     `ROUTING_PROFILE` \| `ROUTING_STEP_EXPRESSION` \| `QUEUE` \|
-    #     `Q_CONNECT_ENABLED` \|
+    #     `FLOWS_RESOURCE_ID` \| `FORM_VERSION` \| `INITIATING_FLOW` \|
+    #     `INITIATION_METHOD` \| `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \|
+    #     `INVOKING_RESOURCE_TYPE` \| `PARENT_FLOWS_RESOURCE_ID` \|
+    #     `Q_CONNECT_ENABLED` \| `QUEUE` \| `RESOURCE_PUBLISHED_ TIMESTAMP` \|
+    #     `ROUTING_PROFILE` \| `ROUTING_STEP_EXPRESSION` \| `TEST_CASE` \|
+    #     `TEST_ CASE_EXECUTION_FAILURE_REASON` \|
+    #     `TEST_CASE_EXECUTION_RESULT` \| `TEST_CASE_EXECUTION_STATE`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in a
     #     single request. VOICE, CHAT, and TASK are valid `filterValue` for
@@ -9811,11 +11262,15 @@ module Aws::Connect
     #     `Q_CONNECT_ENABLED`. TRUE and FALSE are the only valid filterValues
     #     for the `Q_CONNECT_ENABLED` filter key.
     #
-    #     * TRUE includes all contacts that had Amazon Q in Connect enabled as
+    #     * TRUE includes all contacts that had Connect AI Agents enabled as
     #       part of the flow.
     #
-    #     * FALSE includes all contacts that did not have Amazon Q in Connect
+    #     * FALSE includes all contacts that did not have Connect AI Agents
     #       enabled as part of the flow
+    #
+    #     * EXPERIENCE\_VALIDATION and FLOW\_VALIDATION are the only valid
+    #       filterValues for the
+    #       contact/segmentAttributes/connect:ValidationTestType filter key
     #     This filter is available only for contact record-driven metrics.
     #
     #     [Campaign][2] ARNs are valid `filterValues` for the `CAMPAIGN`
@@ -9849,7 +11304,15 @@ module Aws::Connect
     #   `INITIATION_METHOD` \| `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` \|
     #   `INVOKING_RESOURCE_TYPE` \| `PARENT_FLOWS_RESOURCE_ID` \|
     #   `Q_CONNECT_ENABLED` \| `QUEUE` \| `RESOURCE_PUBLISHED_TIMESTAMP` \|
-    #   `ROUTING_PROFILE` \| `ROUTING_STEP_EXPRESSION`
+    #   `ROUTING_PROFILE` \| `ROUTING_STEP_EXPRESSION` \| `TEST_CASE` \|
+    #   `TEST_CASE_EXECUTION_FAILURE_REASON` \| `TEST_CASE_INVOCATION_METHOD`
+    #
+    #   API, SCHEDULE, and EVENT are the only valid filterValues for
+    #   TEST\_CASE\_INVOCATION\_METHOD.
+    #
+    #   OBSERVE\_EVENT, SEND\_INSTRUCTION, ASSERT\_DATA, and
+    #   OVERRIDE\_SYSTEM\_BEHAVIOR are the only valid filterValues for
+    #   TEST\_CASE\_EXECUTION\_FAILURE\_REASON
     #
     #   Type: Array of strings
     #
@@ -9858,10 +11321,16 @@ module Aws::Connect
     #   Required: No
     #
     # @option params [required, Array<Types::MetricV2>] :metrics
-    #   The metrics to retrieve. Specify the name, groupings, and filters for
-    #   each metric. The following historical metrics are available. For a
-    #   description of each metric, see [Metrics definition][1] in the *Amazon
-    #   Connect Administrator Guide*.
+    #   The metrics to retrieve. Specify the name or metricId, groupings, and
+    #   filters for each metric. The following historical metrics are
+    #   available. For a description of each metric, see [Metrics
+    #   definition][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #   <note markdown="1"> MetricId should be used to reference custom metrics or out of the box
+    #   metrics as Arn. If using MetricId, the limit is 20 MetricId per
+    #   request.
+    #
+    #    </note>
     #
     #   ABANDONMENT\_RATE
     #
@@ -10189,6 +11658,252 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   ACTIVE\_AI\_AGENTS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type,
+    #     AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: Active AI Agents
+    #
+    #   AI\_HANDOFF\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: Handoff Rate
+    #
+    #   AI\_HANDOFFS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: AI Handoff Count
+    #
+    #   AI\_AGENT\_INVOCATION\_SUCCESS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: AI Agent Invocation Success Count
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AI\_AGENT\_INVOCATION\_SUCCESS\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: AI Agent Invocation Success Rate
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AI\_AGENT\_INVOCATIONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type,
+    #     AI Agent Name Version, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: AI Agent Invocation Count
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AI\_RESPONSE\_COMPLETION\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: AI Response Completion Rate
+    #
+    #   AI\_INVOLVED\_CONTACTS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: AI Contacts
+    #
+    #   AI\_PROMPT\_INVOCATION\_SUCCESS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI
+    #     Prompt Type, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: AI Prompt Invocation Success Count
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AI\_PROMPT\_INVOCATION\_SUCCESS\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI
+    #     Prompt Type, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: AI Prompt Invocation Success Rate
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AI\_TOOL\_INVOCATIONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI
+    #     Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: AI Tool Invocation Count
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_AI\_AGENT\_CONVERSATION\_TURNS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: Average AI Agent Conversation Turns
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_AI\_CONVERSATION\_TURNS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: AI Conversation Turns
+    #
+    #   AVG\_AI\_PROMPT\_INVOCATION\_LATENCY
+    #
+    #   : Unit: Milliseconds
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI
+    #     Prompt Type, AI Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: Average AI Prompt Invocation Latency
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_AI\_TOOL\_INVOCATION\_LATENCY
+    #
+    #   : Unit: Milliseconds
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name
+    #     Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI
+    #     Use Case, Channel, Queue, Routing Profile
+    #
+    #     UI name: Average AI Tool Invocation Latency
+    #
+    #     <note markdown="1"> AI Agent Name Version is not a valid filter but a valid grouping.
+    #
+    #      </note>
+    #
+    #   KNOWLEDGE\_CONTENT\_REFERENCES
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type,
+    #     AI Use Case, Channel, Knowledge Base Name, Queue, Routing Profile
+    #
+    #     UI name: KnowledgeBase Reference Count
+    #
+    #   PROACTIVE\_INTENT\_ENGAGEMENT\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: Proactive Intent Engagement Rate
+    #
+    #   PROACTIVE\_INTENT\_RESPONSE\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: Proactive Intent Response Rate
+    #
+    #   PROACTIVE\_INTENTS\_ANSWERED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: Proactive Intents Answered
+    #
+    #   PROACTIVE\_INTENTS\_DETECTED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: Proactive Intents Detected
+    #
+    #
+    #
+    #   : Unit:
+    #
+    #     Valid groupings and filters:
+    #
+    #     UI name:
+    #
+    #
+    #
+    #   : Unit:
+    #
+    #     Valid groupings and filters:
+    #
+    #     UI name:
+    #
+    #   PROACTIVE\_INTENTS\_ENGAGED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: AI Use Case, Channel, Queue, Routing
+    #     Profile
+    #
+    #     UI name: UI name:
     #
     #   AVG\_HOLD\_TIME
     #
@@ -11476,6 +13191,9 @@ module Aws::Connect
     #       {
     #         filter_key: "ResourceArnOrId",
     #         filter_values: ["ResourceArnOrId"],
+    #         string_condition: {
+    #           comparison: "NOT_EXISTS", # accepts NOT_EXISTS
+    #         },
     #       },
     #     ],
     #     groupings: ["GroupingV2"],
@@ -11488,6 +13206,7 @@ module Aws::Connect
     #             threshold_value: 1.0,
     #           },
     #         ],
+    #         metric_id: "MetricId",
     #         metric_filters: [
     #           {
     #             metric_filter_key: "String",
@@ -11515,6 +13234,7 @@ module Aws::Connect
     #   resp.metric_results[0].collections[0].metric.threshold #=> Array
     #   resp.metric_results[0].collections[0].metric.threshold[0].comparison #=> String
     #   resp.metric_results[0].collections[0].metric.threshold[0].threshold_value #=> Float
+    #   resp.metric_results[0].collections[0].metric.metric_id #=> String
     #   resp.metric_results[0].collections[0].metric.metric_filters #=> Array
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_key #=> String
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values #=> Array
@@ -11794,6 +13514,47 @@ module Aws::Connect
     # @param [Hash] params ({})
     def import_phone_number(params = {}, options = {})
       req = build_request(:import_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Imports a media asset (such as a logo) for use in a workspace.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, String] :media_type
+    #   The type of media. Valid values are: `IMAGE_LOGO_FAVICON` and
+    #   `IMAGE_LOGO_HORIZONTAL`.
+    #
+    # @option params [required, String] :media_source
+    #   The media source. Can be an S3 presigned URL or a base64-encoded
+    #   string.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_workspace_media({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     media_type: "IMAGE_LOGO_LIGHT_FAVICON", # required, accepts IMAGE_LOGO_LIGHT_FAVICON, IMAGE_LOGO_DARK_FAVICON, IMAGE_LOGO_LIGHT_HORIZONTAL, IMAGE_LOGO_DARK_HORIZONTAL
+    #     media_source: "MediaSource", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ImportWorkspaceMedia AWS API Documentation
+    #
+    # @overload import_workspace_media(params = {})
+    # @param [Hash] params ({})
+    def import_workspace_media(params = {}, options = {})
+      req = build_request(:import_workspace_media, params)
       req.send_request(options)
     end
 
@@ -12236,12 +13997,15 @@ module Aws::Connect
     #   resp.evaluation_summary_list[0].score.percentage #=> Float
     #   resp.evaluation_summary_list[0].score.not_applicable #=> Boolean
     #   resp.evaluation_summary_list[0].score.automatic_fail #=> Boolean
+    #   resp.evaluation_summary_list[0].score.applied_weight #=> Float
     #   resp.evaluation_summary_list[0].acknowledgement.acknowledged_time #=> Time
     #   resp.evaluation_summary_list[0].acknowledgement.acknowledged_by #=> String
     #   resp.evaluation_summary_list[0].acknowledgement.acknowledger_comment #=> String
     #   resp.evaluation_summary_list[0].evaluation_type #=> String, one of "STANDARD", "CALIBRATION"
     #   resp.evaluation_summary_list[0].created_time #=> Time
     #   resp.evaluation_summary_list[0].last_modified_time #=> Time
+    #   resp.evaluation_summary_list[0].contact_participant.contact_participant_role #=> String, one of "AGENT", "SYSTEM", "CUSTOM_BOT"
+    #   resp.evaluation_summary_list[0].contact_participant.contact_participant_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactEvaluations AWS API Documentation
@@ -12584,7 +14348,7 @@ module Aws::Connect
     #   resp = client.list_contact_references({
     #     instance_id: "InstanceId", # required
     #     contact_id: "ContactId", # required
-    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #     next_token: "NextToken",
     #   })
     #
@@ -12599,6 +14363,8 @@ module Aws::Connect
     #   resp.reference_summary_list[0].attachment.arn #=> String
     #   resp.reference_summary_list[0].email_message.name #=> String
     #   resp.reference_summary_list[0].email_message.arn #=> String
+    #   resp.reference_summary_list[0].email_message_plain_text.name #=> String
+    #   resp.reference_summary_list[0].email_message_plain_text.arn #=> String
     #   resp.reference_summary_list[0].string.name #=> String
     #   resp.reference_summary_list[0].string.value #=> String
     #   resp.reference_summary_list[0].number.name #=> String
@@ -12615,6 +14381,287 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_contact_references(params = {}, options = {})
       req = build_request(:list_contact_references, params)
+      req.send_request(options)
+    end
+
+    # Returns all attributes for a specified data table. A maximum of 100
+    # attributes per data table is allowed. Customers can request an
+    # increase by using AWS Service Quotas. The response can be filtered by
+    # specific attribute IDs for CloudFormation integration.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table whose attributes should be
+    #   listed.
+    #
+    # @option params [Array<String>] :attribute_ids
+    #   Optional list of specific attribute IDs to retrieve. Used for
+    #   CloudFormation to effectively describe attributes by ID. If NextToken
+    #   is provided, this parameter is ignored.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data table attributes to return in one page of
+    #   results.
+    #
+    # @return [Types::ListDataTableAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTableAttributesResponse#next_token #next_token} => String
+    #   * {Types::ListDataTableAttributesResponse#attributes #attributes} => Array&lt;Types::DataTableAttribute&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_table_attributes({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     attribute_ids: ["DataTableId"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].attribute_id #=> String
+    #   resp.attributes[0].name #=> String
+    #   resp.attributes[0].value_type #=> String, one of "TEXT", "NUMBER", "BOOLEAN", "TEXT_LIST", "NUMBER_LIST"
+    #   resp.attributes[0].description #=> String
+    #   resp.attributes[0].data_table_id #=> String
+    #   resp.attributes[0].data_table_arn #=> String
+    #   resp.attributes[0].primary #=> Boolean
+    #   resp.attributes[0].version #=> String
+    #   resp.attributes[0].lock_version.data_table #=> String
+    #   resp.attributes[0].lock_version.attribute #=> String
+    #   resp.attributes[0].lock_version.primary_values #=> String
+    #   resp.attributes[0].lock_version.value #=> String
+    #   resp.attributes[0].last_modified_time #=> Time
+    #   resp.attributes[0].last_modified_region #=> String
+    #   resp.attributes[0].validation.min_length #=> Integer
+    #   resp.attributes[0].validation.max_length #=> Integer
+    #   resp.attributes[0].validation.min_values #=> Integer
+    #   resp.attributes[0].validation.max_values #=> Integer
+    #   resp.attributes[0].validation.ignore_case #=> Boolean
+    #   resp.attributes[0].validation.minimum #=> Float
+    #   resp.attributes[0].validation.maximum #=> Float
+    #   resp.attributes[0].validation.exclusive_minimum #=> Float
+    #   resp.attributes[0].validation.exclusive_maximum #=> Float
+    #   resp.attributes[0].validation.multiple_of #=> Float
+    #   resp.attributes[0].validation.enum.strict #=> Boolean
+    #   resp.attributes[0].validation.enum.values #=> Array
+    #   resp.attributes[0].validation.enum.values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDataTableAttributes AWS API Documentation
+    #
+    # @overload list_data_table_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_data_table_attributes(params = {}, options = {})
+      req = build_request(:list_data_table_attributes, params)
+      req.send_request(options)
+    end
+
+    # Lists all primary value combinations for a given data table. Returns
+    # the unique combinations of primary attribute values that identify
+    # records in the table. Up to 100 records are returned per request.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table whose primary values should
+    #   be listed.
+    #
+    # @option params [Array<String>] :record_ids
+    #   Optional list of specific record IDs to retrieve. Used for
+    #   CloudFormation to effectively describe records by ID. If NextToken is
+    #   provided, this parameter is ignored.
+    #
+    # @option params [Array<Types::PrimaryAttributeValueFilter>] :primary_attribute_values
+    #   Optional filter to retrieve primary values matching specific criteria.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data table primary values to return in one page
+    #   of results.
+    #
+    # @return [Types::ListDataTablePrimaryValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTablePrimaryValuesResponse#next_token #next_token} => String
+    #   * {Types::ListDataTablePrimaryValuesResponse#primary_values_list #primary_values_list} => Array&lt;Types::RecordPrimaryValue&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_table_primary_values({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     record_ids: ["DataTableId"],
+    #     primary_attribute_values: [
+    #       {
+    #         attribute_name: "DataTableName", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.primary_values_list #=> Array
+    #   resp.primary_values_list[0].record_id #=> String
+    #   resp.primary_values_list[0].primary_values #=> Array
+    #   resp.primary_values_list[0].primary_values[0].attribute_name #=> String
+    #   resp.primary_values_list[0].primary_values[0].attribute_id #=> String
+    #   resp.primary_values_list[0].primary_values[0].value #=> String
+    #   resp.primary_values_list[0].last_modified_time #=> Time
+    #   resp.primary_values_list[0].last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDataTablePrimaryValues AWS API Documentation
+    #
+    # @overload list_data_table_primary_values(params = {})
+    # @param [Hash] params ({})
+    def list_data_table_primary_values(params = {}, options = {})
+      req = build_request(:list_data_table_primary_values, params)
+      req.send_request(options)
+    end
+
+    # Lists values stored in a data table with optional filtering by record
+    # IDs or primary attribute values. Returns the raw stored values along
+    # with metadata such as lock versions and modification timestamps.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table whose values should be
+    #   listed.
+    #
+    # @option params [Array<String>] :record_ids
+    #   Optional list of specific record IDs to retrieve values for.
+    #
+    # @option params [Array<Types::PrimaryAttributeValueFilter>] :primary_attribute_values
+    #   Optional filter to retrieve values for records matching specific
+    #   primary attribute criteria.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data table values to return in one page of
+    #   results.
+    #
+    # @return [Types::ListDataTableValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTableValuesResponse#next_token #next_token} => String
+    #   * {Types::ListDataTableValuesResponse#values #values} => Array&lt;Types::DataTableValueSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_table_values({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     record_ids: ["DataTableId"],
+    #     primary_attribute_values: [
+    #       {
+    #         attribute_name: "DataTableName", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.values #=> Array
+    #   resp.values[0].record_id #=> String
+    #   resp.values[0].attribute_id #=> String
+    #   resp.values[0].primary_values #=> Array
+    #   resp.values[0].primary_values[0].attribute_name #=> String
+    #   resp.values[0].primary_values[0].attribute_id #=> String
+    #   resp.values[0].primary_values[0].value #=> String
+    #   resp.values[0].attribute_name #=> String
+    #   resp.values[0].value_type #=> String, one of "TEXT", "NUMBER", "BOOLEAN", "TEXT_LIST", "NUMBER_LIST"
+    #   resp.values[0].value #=> String
+    #   resp.values[0].lock_version.data_table #=> String
+    #   resp.values[0].lock_version.attribute #=> String
+    #   resp.values[0].lock_version.primary_values #=> String
+    #   resp.values[0].lock_version.value #=> String
+    #   resp.values[0].last_modified_time #=> Time
+    #   resp.values[0].last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDataTableValues AWS API Documentation
+    #
+    # @overload list_data_table_values(params = {})
+    # @param [Hash] params ({})
+    def list_data_table_values(params = {}, options = {})
+      req = build_request(:list_data_table_values, params)
+      req.send_request(options)
+    end
+
+    # Lists all data tables for the specified Amazon Connect instance.
+    # Returns summary information for each table including basic metadata
+    # and modification details.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance whose data
+    #   tables should be listed.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data tables to return in one page of results.
+    #
+    # @return [Types::ListDataTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataTablesResponse#next_token #next_token} => String
+    #   * {Types::ListDataTablesResponse#data_table_summary_list #data_table_summary_list} => Array&lt;Types::DataTableSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_tables({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.data_table_summary_list #=> Array
+    #   resp.data_table_summary_list[0].name #=> String
+    #   resp.data_table_summary_list[0].id #=> String
+    #   resp.data_table_summary_list[0].arn #=> String
+    #   resp.data_table_summary_list[0].last_modified_time #=> Time
+    #   resp.data_table_summary_list[0].last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDataTables AWS API Documentation
+    #
+    # @overload list_data_tables(params = {})
+    # @param [Hash] params ({})
+    def list_data_tables(params = {}, options = {})
+      req = build_request(:list_data_tables, params)
       req.send_request(options)
     end
 
@@ -12677,6 +14724,58 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_default_vocabularies(params = {}, options = {})
       req = build_request(:list_default_vocabularies, params)
+      req.send_request(options)
+    end
+
+    # Lists all security profiles attached to a Q in Connect AIAgent Entity
+    # in an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :entity_type
+    #   Only supported type is AI\_AGENT.
+    #
+    # @option params [required, String] :entity_arn
+    #   ARN of a Q in Connect AI Agent.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #
+    # @return [Types::ListEntitySecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntitySecurityProfilesResponse#security_profiles #security_profiles} => Array&lt;Types::SecurityProfileItem&gt;
+    #   * {Types::ListEntitySecurityProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_security_profiles({
+    #     instance_id: "InstanceId", # required
+    #     entity_type: "USER", # required, accepts USER, AI_AGENT
+    #     entity_arn: "EntityArn", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profiles #=> Array
+    #   resp.security_profiles[0].id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEntitySecurityProfiles AWS API Documentation
+    #
+    # @overload list_entity_security_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_entity_security_profiles(params = {}, options = {})
+      req = build_request(:list_entity_security_profiles, params)
       req.send_request(options)
     end
 
@@ -13017,7 +15116,7 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.attributes #=> Array
-    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE"
+    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE", "MESSAGE_STREAMING"
     #   resp.attributes[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -13187,7 +15286,7 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, Q_MESSAGE_TEMPLATES, CASES_DOMAIN, APPLICATION, FILE_SCANNER, SES_IDENTITY, ANALYTICS_CONNECTOR, CALL_TRANSFER_CONNECTOR, COGNITO_USER_POOL
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, Q_MESSAGE_TEMPLATES, CASES_DOMAIN, APPLICATION, FILE_SCANNER, SES_IDENTITY, ANALYTICS_CONNECTOR, CALL_TRANSFER_CONNECTOR, COGNITO_USER_POOL, MESSAGE_PROCESSOR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     integration_arn: "ARN",
@@ -13199,7 +15298,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES", "Q_MESSAGE_TEMPLATES", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER", "SES_IDENTITY", "ANALYTICS_CONNECTOR", "CALL_TRANSFER_CONNECTOR", "COGNITO_USER_POOL"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES", "Q_MESSAGE_TEMPLATES", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER", "SES_IDENTITY", "ANALYTICS_CONNECTOR", "CALL_TRANSFER_CONNECTOR", "COGNITO_USER_POOL", "MESSAGE_PROCESSOR"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -13688,7 +15787,7 @@ module Aws::Connect
     #   resp.quick_connect_summary_list[0].id #=> String
     #   resp.quick_connect_summary_list[0].arn #=> String
     #   resp.quick_connect_summary_list[0].name #=> String
-    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER", "FLOW"
     #   resp.quick_connect_summary_list[0].last_modified_time #=> Time
     #   resp.quick_connect_summary_list[0].last_modified_region #=> String
     #   resp.last_modified_time #=> Time
@@ -13814,7 +15913,7 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     quick_connect_types: ["USER"], # accepts USER, QUEUE, PHONE_NUMBER
+    #     quick_connect_types: ["USER"], # accepts USER, QUEUE, PHONE_NUMBER, FLOW
     #   })
     #
     # @example Response structure
@@ -13823,7 +15922,7 @@ module Aws::Connect
     #   resp.quick_connect_summary_list[0].id #=> String
     #   resp.quick_connect_summary_list[0].arn #=> String
     #   resp.quick_connect_summary_list[0].name #=> String
-    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER", "FLOW"
     #   resp.quick_connect_summary_list[0].last_modified_time #=> Time
     #   resp.quick_connect_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
@@ -14280,8 +16379,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a list of third-party applications in a specific security
-    # profile.
+    # Returns a list of third-party applications or MCP Servers in a
+    # specific security profile.
     #
     # @option params [required, String] :security_profile_id
     #   The identifier for the security profle.
@@ -14326,6 +16425,7 @@ module Aws::Connect
     #   resp.applications[0].namespace #=> String
     #   resp.applications[0].application_permissions #=> Array
     #   resp.applications[0].application_permissions[0] #=> String
+    #   resp.applications[0].type #=> String, one of "MCP", "THIRD_PARTY_APPLICATION"
     #   resp.next_token #=> String
     #   resp.last_modified_time #=> Time
     #   resp.last_modified_region #=> String
@@ -14336,6 +16436,62 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_security_profile_applications(params = {}, options = {})
       req = build_request(:list_security_profile_applications, params)
+      req.send_request(options)
+    end
+
+    # A list of Flow Modules an AI Agent can invoke as a tool
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #
+    # @return [Types::ListSecurityProfileFlowModulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfileFlowModulesResponse#allowed_flow_modules #allowed_flow_modules} => Array&lt;Types::FlowModule&gt;
+    #   * {Types::ListSecurityProfileFlowModulesResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfileFlowModulesResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfileFlowModulesResponse#last_modified_region #last_modified_region} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_flow_modules({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allowed_flow_modules #=> Array
+    #   resp.allowed_flow_modules[0].type #=> String, one of "MCP"
+    #   resp.allowed_flow_modules[0].flow_module_id #=> String
+    #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileFlowModules AWS API Documentation
+    #
+    # @overload list_security_profile_flow_modules(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_flow_modules(params = {}, options = {})
+      req = build_request(:list_security_profile_flow_modules, params)
       req.send_request(options)
     end
 
@@ -15018,6 +17174,153 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists media assets (such as logos) associated with a workspace.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @return [Types::ListWorkspaceMediaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkspaceMediaResponse#media #media} => Array&lt;Types::MediaItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workspace_media({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media #=> Array
+    #   resp.media[0].type #=> String, one of "IMAGE_LOGO_LIGHT_FAVICON", "IMAGE_LOGO_DARK_FAVICON", "IMAGE_LOGO_LIGHT_HORIZONTAL", "IMAGE_LOGO_DARK_HORIZONTAL"
+    #   resp.media[0].source #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListWorkspaceMedia AWS API Documentation
+    #
+    # @overload list_workspace_media(params = {})
+    # @param [Hash] params ({})
+    def list_workspace_media(params = {}, options = {})
+      req = build_request(:list_workspace_media, params)
+      req.send_request(options)
+    end
+
+    # Lists the page configurations in a workspace, including the views
+    # assigned to each page.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListWorkspacePagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkspacePagesResponse#next_token #next_token} => String
+    #   * {Types::ListWorkspacePagesResponse#workspace_page_list #workspace_page_list} => Array&lt;Types::WorkspacePage&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workspace_pages({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workspace_page_list #=> Array
+    #   resp.workspace_page_list[0].resource_arn #=> String
+    #   resp.workspace_page_list[0].page #=> String
+    #   resp.workspace_page_list[0].slug #=> String
+    #   resp.workspace_page_list[0].input_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListWorkspacePages AWS API Documentation
+    #
+    # @overload list_workspace_pages(params = {})
+    # @param [Hash] params ({})
+    def list_workspace_pages(params = {}, options = {})
+      req = build_request(:list_workspace_pages, params)
+      req.send_request(options)
+    end
+
+    # Lists the workspaces in an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListWorkspacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkspacesResponse#next_token #next_token} => String
+    #   * {Types::ListWorkspacesResponse#workspace_summary_list #workspace_summary_list} => Array&lt;Types::WorkspaceSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workspaces({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workspace_summary_list #=> Array
+    #   resp.workspace_summary_list[0].id #=> String
+    #   resp.workspace_summary_list[0].name #=> String
+    #   resp.workspace_summary_list[0].arn #=> String
+    #   resp.workspace_summary_list[0].last_modified_time #=> Time
+    #   resp.workspace_summary_list[0].last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListWorkspaces AWS API Documentation
+    #
+    # @overload list_workspaces(params = {})
+    # @param [Hash] params ({})
+    def list_workspaces(params = {}, options = {})
+      req = build_request(:list_workspaces, params)
+      req.send_request(options)
+    end
+
     # Initiates silent monitoring of a contact. The Contact Control Panel
     # (CCP) of the user specified by *userId* will be set to silent
     # monitoring mode on the contact.
@@ -15686,6 +17989,7 @@ module Aws::Connect
     #   resp.evaluation_search_summary_list[0].evaluation_arn #=> String
     #   resp.evaluation_search_summary_list[0].evaluation_form_id #=> String
     #   resp.evaluation_search_summary_list[0].evaluation_form_version #=> Integer
+    #   resp.evaluation_search_summary_list[0].evaluation_form_title #=> String
     #   resp.evaluation_search_summary_list[0].metadata.contact_id #=> String
     #   resp.evaluation_search_summary_list[0].metadata.evaluator_arn #=> String
     #   resp.evaluation_search_summary_list[0].metadata.contact_agent_id #=> String
@@ -15698,6 +18002,10 @@ module Aws::Connect
     #   resp.evaluation_search_summary_list[0].metadata.acknowledged_time #=> Time
     #   resp.evaluation_search_summary_list[0].metadata.acknowledged_by #=> String
     #   resp.evaluation_search_summary_list[0].metadata.acknowledger_comment #=> String
+    #   resp.evaluation_search_summary_list[0].metadata.sampling_job_id #=> String
+    #   resp.evaluation_search_summary_list[0].metadata.review_id #=> String
+    #   resp.evaluation_search_summary_list[0].metadata.contact_participant_role #=> String, one of "AGENT", "SYSTEM", "CUSTOM_BOT"
+    #   resp.evaluation_search_summary_list[0].metadata.contact_participant_id #=> String
     #   resp.evaluation_search_summary_list[0].status #=> String, one of "DRAFT", "SUBMITTED"
     #   resp.evaluation_search_summary_list[0].evaluation_type #=> String, one of "STANDARD", "CALIBRATION"
     #   resp.evaluation_search_summary_list[0].created_time #=> Time
@@ -15891,6 +18199,39 @@ module Aws::Connect
     #         tag_condition: {
     #           tag_key: "String",
     #           tag_value: "String",
+    #         },
+    #       },
+    #       flow_attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             contact_flow_type_condition: {
+    #               contact_flow_type: "CONTACT_FLOW", # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER, CAMPAIGN
+    #             },
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           contact_flow_type_condition: {
+    #             contact_flow_type: "CONTACT_FLOW", # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER, CAMPAIGN
+    #           },
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #         contact_flow_type_condition: {
+    #           contact_flow_type: "CONTACT_FLOW", # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER, CAMPAIGN
     #         },
     #       },
     #     },
@@ -16128,6 +18469,123 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_contacts(params = {}, options = {})
       req = build_request(:search_contacts, params)
+      req.send_request(options)
+    end
+
+    # Searches for data tables based on the table's ID, name, and
+    # description. In the future, this operation can support searching on
+    # attribute names and possibly primary values. Follows other search
+    # operations closely and supports both search criteria and filters.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance to search
+    #   within.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data tables to return in one page of results.
+    #
+    # @option params [Types::DataTableSearchFilter] :search_filter
+    #   Optional filters to apply to the search results, such as tag-based
+    #   filtering for attribute-based access control.
+    #
+    # @option params [Types::DataTableSearchCriteria] :search_criteria
+    #   Search criteria including string conditions for matching table names,
+    #   descriptions, or resource IDs. Supports STARTS\_WITH, CONTAINS, and
+    #   EXACT comparison types.
+    #
+    # @return [Types::SearchDataTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchDataTablesResponse#data_tables #data_tables} => Array&lt;Types::DataTable&gt;
+    #   * {Types::SearchDataTablesResponse#next_token #next_token} => String
+    #   * {Types::SearchDataTablesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_data_tables({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     search_filter: {
+    #       attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive DataTableSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive DataTableSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_tables #=> Array
+    #   resp.data_tables[0].name #=> String
+    #   resp.data_tables[0].id #=> String
+    #   resp.data_tables[0].arn #=> String
+    #   resp.data_tables[0].time_zone #=> String
+    #   resp.data_tables[0].description #=> String
+    #   resp.data_tables[0].value_lock_level #=> String, one of "NONE", "DATA_TABLE", "PRIMARY_VALUE", "ATTRIBUTE", "VALUE"
+    #   resp.data_tables[0].lock_version.data_table #=> String
+    #   resp.data_tables[0].lock_version.attribute #=> String
+    #   resp.data_tables[0].lock_version.primary_values #=> String
+    #   resp.data_tables[0].lock_version.value #=> String
+    #   resp.data_tables[0].version #=> String
+    #   resp.data_tables[0].version_description #=> String
+    #   resp.data_tables[0].status #=> String, one of "PUBLISHED"
+    #   resp.data_tables[0].created_time #=> Time
+    #   resp.data_tables[0].last_modified_time #=> Time
+    #   resp.data_tables[0].last_modified_region #=> String
+    #   resp.data_tables[0].tags #=> Hash
+    #   resp.data_tables[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchDataTables AWS API Documentation
+    #
+    # @overload search_data_tables(params = {})
+    # @param [Hash] params ({})
+    def search_data_tables(params = {}, options = {})
+      req = build_request(:search_data_tables, params)
       req.send_request(options)
     end
 
@@ -16372,6 +18830,8 @@ module Aws::Connect
     #   resp.evaluation_form_search_summary_list[0].latest_version #=> Integer
     #   resp.evaluation_form_search_summary_list[0].active_version #=> Integer
     #   resp.evaluation_form_search_summary_list[0].auto_evaluation_enabled #=> Boolean
+    #   resp.evaluation_form_search_summary_list[0].evaluation_form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR"
+    #   resp.evaluation_form_search_summary_list[0].contact_interaction_type #=> String, one of "AGENT", "AUTOMATED"
     #   resp.evaluation_form_search_summary_list[0].tags #=> Hash
     #   resp.evaluation_form_search_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -17009,12 +19469,13 @@ module Aws::Connect
     #   resp.quick_connects[0].quick_connect_id #=> String
     #   resp.quick_connects[0].name #=> String
     #   resp.quick_connects[0].description #=> String
-    #   resp.quick_connects[0].quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connects[0].quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER", "FLOW"
     #   resp.quick_connects[0].quick_connect_config.user_config.user_id #=> String
     #   resp.quick_connects[0].quick_connect_config.user_config.contact_flow_id #=> String
     #   resp.quick_connects[0].quick_connect_config.queue_config.queue_id #=> String
     #   resp.quick_connects[0].quick_connect_config.queue_config.contact_flow_id #=> String
     #   resp.quick_connects[0].quick_connect_config.phone_config.phone_number #=> String
+    #   resp.quick_connects[0].quick_connect_config.flow_config.contact_flow_id #=> String
     #   resp.quick_connects[0].tags #=> Hash
     #   resp.quick_connects[0].tags["TagKey"] #=> String
     #   resp.quick_connects[0].last_modified_time #=> Time
@@ -17686,6 +20147,123 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Searches views based on name, description, or tags.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::ViewSearchFilter] :search_filter
+    #   Filters to apply to the search, such as tag-based filters.
+    #
+    # @option params [Types::ViewSearchCriteria] :search_criteria
+    #   The search criteria, including field names and comparison types.
+    #
+    # @return [Types::SearchViewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchViewsResponse#views #views} => Array&lt;Types::View&gt;
+    #   * {Types::SearchViewsResponse#next_token #next_token} => String
+    #   * {Types::SearchViewsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_views({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive ViewSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive ViewSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #       view_type_condition: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_MANAGED
+    #       view_status_condition: "PUBLISHED", # accepts PUBLISHED, SAVED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.views #=> Array
+    #   resp.views[0].id #=> String
+    #   resp.views[0].arn #=> String
+    #   resp.views[0].name #=> String
+    #   resp.views[0].status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.views[0].type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.views[0].description #=> String
+    #   resp.views[0].version #=> Integer
+    #   resp.views[0].version_description #=> String
+    #   resp.views[0].content.input_schema #=> String
+    #   resp.views[0].content.template #=> String
+    #   resp.views[0].content.actions #=> Array
+    #   resp.views[0].content.actions[0] #=> String
+    #   resp.views[0].tags #=> Hash
+    #   resp.views[0].tags["TagKey"] #=> String
+    #   resp.views[0].created_time #=> Time
+    #   resp.views[0].last_modified_time #=> Time
+    #   resp.views[0].view_content_sha_256 #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchViews AWS API Documentation
+    #
+    # @overload search_views(params = {})
+    # @param [Hash] params ({})
+    def search_views(params = {}, options = {})
+      req = build_request(:search_views, params)
+      req.send_request(options)
+    end
+
     # Searches for vocabularies within a specific Amazon Connect instance
     # using `State`, `NameStartsWith`, and `LanguageCode`.
     #
@@ -17756,6 +20334,219 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_vocabularies(params = {}, options = {})
       req = build_request(:search_vocabularies, params)
+      req.send_request(options)
+    end
+
+    # Searches for workspace associations with users or routing profiles
+    # based on various criteria.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::WorkspaceAssociationSearchFilter] :search_filter
+    #   Filters to apply to the search, such as tag-based filters.
+    #
+    # @option params [Types::WorkspaceAssociationSearchCriteria] :search_criteria
+    #   The search criteria, including workspace ID, resource ID, or resource
+    #   type.
+    #
+    # @return [Types::SearchWorkspaceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchWorkspaceAssociationsResponse#next_token #next_token} => String
+    #   * {Types::SearchWorkspaceAssociationsResponse#workspace_associations #workspace_associations} => Array&lt;Types::WorkspaceAssociationSearchSummary&gt;
+    #   * {Types::SearchWorkspaceAssociationsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_workspace_associations({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive WorkspaceAssociationSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive WorkspaceAssociationSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workspace_associations #=> Array
+    #   resp.workspace_associations[0].workspace_id #=> String
+    #   resp.workspace_associations[0].workspace_arn #=> String
+    #   resp.workspace_associations[0].resource_id #=> String
+    #   resp.workspace_associations[0].resource_arn #=> String
+    #   resp.workspace_associations[0].resource_type #=> String
+    #   resp.workspace_associations[0].resource_name #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchWorkspaceAssociations AWS API Documentation
+    #
+    # @overload search_workspace_associations(params = {})
+    # @param [Hash] params ({})
+    def search_workspace_associations(params = {}, options = {})
+      req = build_request(:search_workspace_associations, params)
+      req.send_request(options)
+    end
+
+    # Searches workspaces based on name, description, visibility, or tags.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::WorkspaceSearchFilter] :search_filter
+    #   Filters to apply to the search, such as tag-based filters.
+    #
+    # @option params [Types::WorkspaceSearchCriteria] :search_criteria
+    #   The search criteria, including field names and comparison types.
+    #
+    # @return [Types::SearchWorkspacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchWorkspacesResponse#next_token #next_token} => String
+    #   * {Types::SearchWorkspacesResponse#workspaces #workspaces} => Array&lt;Types::WorkspaceSearchSummary&gt;
+    #   * {Types::SearchWorkspacesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_workspaces({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive WorkspaceSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive WorkspaceSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workspaces #=> Array
+    #   resp.workspaces[0].id #=> String
+    #   resp.workspaces[0].name #=> String
+    #   resp.workspaces[0].visibility #=> String, one of "ALL", "ASSIGNED", "NONE"
+    #   resp.workspaces[0].description #=> String
+    #   resp.workspaces[0].title #=> String
+    #   resp.workspaces[0].arn #=> String
+    #   resp.workspaces[0].created_at #=> Time
+    #   resp.workspaces[0].tags #=> Hash
+    #   resp.workspaces[0].tags["TagKey"] #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchWorkspaces AWS API Documentation
+    #
+    # @overload search_workspaces(params = {})
+    # @param [Hash] params ({})
+    def search_workspaces(params = {}, options = {})
+      req = build_request(:search_workspaces, params)
       req.send_request(options)
     end
 
@@ -18137,6 +20928,9 @@ module Aws::Connect
     # @option params [required, Types::ParticipantDetails] :participant_details
     #   Information identifying the participant.
     #
+    # @option params [Types::ParticipantConfiguration] :participant_configuration
+    #   The configuration of the participant.
+    #
     # @option params [Types::ChatMessage] :initial_message
     #   The initial message to be sent to the newly created chat.
     #
@@ -18237,6 +21031,9 @@ module Aws::Connect
     #     },
     #     participant_details: { # required
     #       display_name: "DisplayName", # required
+    #     },
+    #     participant_configuration: {
+    #       response_mode: "INCREMENTAL", # accepts INCREMENTAL, COMPLETE
     #     },
     #     initial_message: {
     #       content_type: "ChatContentType", # required
@@ -18363,6 +21160,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def start_contact_evaluation(params = {}, options = {})
       req = build_request(:start_contact_evaluation, params)
+      req.send_request(options)
+    end
+
+    # Enables in-flight message processing for an ongoing chat session.
+    # Message processing will stay active for the rest of the chat, even if
+    # an individual contact segment ends.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @option params [String] :processor_arn
+    #   The Amazon Resource Name (ARN) of the Lambda processor. You can find
+    #   the Amazon Resource Name of the lambda in the lambda console.
+    #
+    # @option params [String] :failure_mode
+    #   The desired behavior for failed message processing.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_contact_media_processing({
+    #     instance_id: "InstanceId",
+    #     contact_id: "ContactId",
+    #     processor_arn: "ARN",
+    #     failure_mode: "DELIVER_UNPROCESSED_MESSAGE", # accepts DELIVER_UNPROCESSED_MESSAGE, DO_NOT_DELIVER_UNPROCESSED_MESSAGE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactMediaProcessing AWS API Documentation
+    #
+    # @overload start_contact_media_processing(params = {})
+    # @param [Hash] params ({})
+    def start_contact_media_processing(params = {}, options = {})
+      req = build_request(:start_contact_media_processing, params)
       req.send_request(options)
     end
 
@@ -18623,7 +21462,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -19132,7 +21971,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -19416,7 +22255,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -19561,7 +22400,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -19652,6 +22491,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def stop_contact(params = {}, options = {})
       req = build_request(:stop_contact, params)
+      req.send_request(options)
+    end
+
+    # Stops in-flight message processing for an ongoing chat session.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_contact_media_processing({
+    #     instance_id: "InstanceId",
+    #     contact_id: "ContactId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactMediaProcessing AWS API Documentation
+    #
+    # @overload stop_contact_media_processing(params = {})
+    # @param [Hash] params ({})
+    def stop_contact_media_processing(params = {}, options = {})
+      req = build_request(:stop_contact_media_processing, params)
       req.send_request(options)
     end
 
@@ -19789,6 +22659,8 @@ module Aws::Connect
     #         value: {
     #           string_value: "EvaluationAnswerDataStringValue",
     #           numeric_value: 1.0,
+    #           string_values: ["EvaluationAnswerDataStringValue"],
+    #           date_time_value: "ISO8601Datetime",
     #           not_applicable: false,
     #         },
     #       },
@@ -20355,7 +23227,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -20525,6 +23397,8 @@ module Aws::Connect
     #         value: {
     #           string_value: "EvaluationAnswerDataStringValue",
     #           numeric_value: 1.0,
+    #           string_values: ["EvaluationAnswerDataStringValue"],
+    #           date_time_value: "ISO8601Datetime",
     #           not_applicable: false,
     #         },
     #       },
@@ -20873,7 +23747,7 @@ module Aws::Connect
     #
     # @option params [Types::RoutingCriteriaInput] :routing_criteria
     #   Updates the routing criteria on the contact. These properties can be
-    #   used to change how a  contact is routed within the queue.
+    #   used to change how a contact is routed within the queue.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -20984,6 +23858,231 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates all properties for an attribute using all properties from
+    # CreateDataTableAttribute. There are no other granular update
+    # endpoints. It does not act as a patch operation - all properties must
+    # be provided. System managed attributes are not mutable by customers.
+    # Changing an attribute's validation does not invalidate existing
+    # values since validation only runs when values are created or updated.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias.
+    #
+    # @option params [required, String] :attribute_name
+    #   The current name of the attribute to update. Used as an identifier
+    #   since attribute names can be changed.
+    #
+    # @option params [required, String] :name
+    #   The new name for the attribute. Must conform to Connect human readable
+    #   string specification and be unique within the data table.
+    #
+    # @option params [required, String] :value_type
+    #   The updated value type for the attribute. When changing value types,
+    #   existing values are not deleted but may return default values if
+    #   incompatible.
+    #
+    # @option params [String] :description
+    #   The updated description for the attribute.
+    #
+    # @option params [Boolean] :primary
+    #   Whether the attribute should be treated as a primary key. Converting
+    #   to primary attribute requires existing values to maintain uniqueness.
+    #
+    # @option params [Types::Validation] :validation
+    #   The updated validation rules for the attribute. Changes do not affect
+    #   existing values until they are modified.
+    #
+    # @return [Types::UpdateDataTableAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataTableAttributeResponse#name #name} => String
+    #   * {Types::UpdateDataTableAttributeResponse#lock_version #lock_version} => Types::DataTableLockVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_table_attribute({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     attribute_name: "DataTableName", # required
+    #     name: "DataTableName", # required
+    #     value_type: "TEXT", # required, accepts TEXT, NUMBER, BOOLEAN, TEXT_LIST, NUMBER_LIST
+    #     description: "DataTableDescription",
+    #     primary: false,
+    #     validation: {
+    #       min_length: 1,
+    #       max_length: 1,
+    #       min_values: 1,
+    #       max_values: 1,
+    #       ignore_case: false,
+    #       minimum: 1.0,
+    #       maximum: 1.0,
+    #       exclusive_minimum: 1.0,
+    #       exclusive_maximum: 1.0,
+    #       multiple_of: 1.0,
+    #       enum: {
+    #         strict: false,
+    #         values: ["String"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.lock_version.data_table #=> String
+    #   resp.lock_version.attribute #=> String
+    #   resp.lock_version.primary_values #=> String
+    #   resp.lock_version.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateDataTableAttribute AWS API Documentation
+    #
+    # @overload update_data_table_attribute(params = {})
+    # @param [Hash] params ({})
+    def update_data_table_attribute(params = {}, options = {})
+      req = build_request(:update_data_table_attribute, params)
+      req.send_request(options)
+    end
+
+    # Updates the metadata properties of a data table. Accepts all fields
+    # similar to CreateDataTable, except for fields and tags. There are no
+    # other granular update endpoints. It does not act as a patch operation
+    # - all properties must be provided or defaults will be used. Fields
+    # follow the same requirements as CreateDataTable.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias. If the version is provided as
+    #   part of the identifier or ARN, the version must be $LATEST. Providing
+    #   any other alias fails with an error.
+    #
+    # @option params [required, String] :name
+    #   The updated name for the data table. Must conform to Connect human
+    #   readable string specification and have 1-127 characters. Must be
+    #   unique for the instance using case-insensitive comparison.
+    #
+    # @option params [String] :description
+    #   The updated description for the data table. Must conform to Connect
+    #   human readable string specification and have 0-250 characters.
+    #
+    # @option params [required, String] :value_lock_level
+    #   The updated value lock level for the data table. One of DATA\_TABLE,
+    #   PRIMARY\_VALUE, ATTRIBUTE, VALUE, and NONE.
+    #
+    # @option params [required, String] :time_zone
+    #   The updated IANA timezone identifier to use when resolving time based
+    #   dynamic values.
+    #
+    # @return [Types::UpdateDataTableMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataTableMetadataResponse#lock_version #lock_version} => Types::DataTableLockVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_table_metadata({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     name: "DataTableName", # required
+    #     description: "DataTableDescription",
+    #     value_lock_level: "NONE", # required, accepts NONE, DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE
+    #     time_zone: "TimeZone", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lock_version.data_table #=> String
+    #   resp.lock_version.attribute #=> String
+    #   resp.lock_version.primary_values #=> String
+    #   resp.lock_version.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateDataTableMetadata AWS API Documentation
+    #
+    # @overload update_data_table_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_data_table_metadata(params = {}, options = {})
+      req = build_request(:update_data_table_metadata, params)
+      req.send_request(options)
+    end
+
+    # Updates the primary values for a record. This operation affects all
+    # existing values that are currently associated to the record and its
+    # primary values. Users that have restrictions on attributes and/or
+    # primary values are not authorized to use this endpoint. The
+    # combination of new primary values must be unique within the table.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier for the Amazon Connect instance.
+    #
+    # @option params [required, String] :data_table_id
+    #   The unique identifier for the data table. Must also accept the table
+    #   ARN with or without a version alias. If the version is provided as
+    #   part of the identifier or ARN, the version must be one of the two
+    #   available system managed aliases, $SAVED or $LATEST.
+    #
+    # @option params [required, Array<Types::PrimaryValue>] :primary_values
+    #   The current primary values for the record. Required and must include
+    #   values for all primary attributes. Fails if the table has primary
+    #   attributes and some primary values are omitted.
+    #
+    # @option params [required, Array<Types::PrimaryValue>] :new_primary_values
+    #   The new primary values for the record. Required and must include
+    #   values for all primary attributes. The combination must be unique
+    #   within the table.
+    #
+    # @option params [required, Types::DataTableLockVersion] :lock_version
+    #   The lock version information required for optimistic locking to
+    #   prevent concurrent modifications.
+    #
+    # @return [Types::UpdateDataTablePrimaryValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataTablePrimaryValuesResponse#lock_version #lock_version} => Types::DataTableLockVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_table_primary_values({
+    #     instance_id: "InstanceId", # required
+    #     data_table_id: "DataTableId", # required
+    #     primary_values: [ # required
+    #       {
+    #         attribute_name: "DataTableName", # required
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     new_primary_values: [ # required
+    #       {
+    #         attribute_name: "DataTableName", # required
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     lock_version: { # required
+    #       data_table: "String",
+    #       attribute: "String",
+    #       primary_values: "String",
+    #       value: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lock_version.data_table #=> String
+    #   resp.lock_version.attribute #=> String
+    #   resp.lock_version.primary_values #=> String
+    #   resp.lock_version.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateDataTablePrimaryValues AWS API Documentation
+    #
+    # @overload update_data_table_primary_values(params = {})
+    # @param [Hash] params ({})
+    def update_data_table_primary_values(params = {}, options = {})
+      req = build_request(:update_data_table_primary_values, params)
+      req.send_request(options)
+    end
+
     # Updates an email address metadata. For more information about email
     # addresses, see [Create email addresses][1] in the Amazon Connect
     # Administrator Guide.
@@ -21089,6 +24188,10 @@ module Aws::Connect
     # @option params [Types::EvaluationFormAutoEvaluationConfiguration] :auto_evaluation_configuration
     #   Whether automated evaluations are enabled.
     #
+    # @option params [Boolean] :as_draft
+    #   A boolean flag indicating whether to update evaluation form to draft
+    #   state.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -21101,6 +24204,12 @@ module Aws::Connect
     #
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Types::EvaluationFormTargetConfiguration] :target_configuration
+    #   Configuration that specifies the target for the evaluation form.
+    #
+    # @option params [Types::EvaluationFormLanguageConfiguration] :language_configuration
+    #   Configuration for language settings of the evaluation form.
     #
     # @return [Types::UpdateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21133,7 +24242,7 @@ module Aws::Connect
     #           instructions: "EvaluationFormQuestionInstructions",
     #           ref_id: "ReferenceId", # required
     #           not_applicable_enabled: false,
-    #           question_type: "TEXT", # required, accepts TEXT, SINGLESELECT, NUMERIC
+    #           question_type: "TEXT", # required, accepts TEXT, SINGLESELECT, NUMERIC, MULTISELECT, DATETIME
     #           question_type_properties: {
     #             numeric: {
     #               min_value: 1, # required
@@ -21151,7 +24260,7 @@ module Aws::Connect
     #               ],
     #               automation: {
     #                 property_value: {
-    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
     #                 },
     #                 answer_source: {
     #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
@@ -21194,6 +24303,30 @@ module Aws::Connect
     #                 },
     #               },
     #             },
+    #             multi_select: {
+    #               options: [ # required
+    #                 {
+    #                   ref_id: "ReferenceId", # required
+    #                   text: "EvaluationFormMultiSelectQuestionOptionText", # required
+    #                 },
+    #               ],
+    #               display_as: "DROPDOWN", # accepts DROPDOWN, CHECKBOX
+    #               automation: {
+    #                 options: [
+    #                   {
+    #                     rule_category: {
+    #                       category: "MultiSelectQuestionRuleCategoryAutomationLabel", # required
+    #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
+    #                       option_ref_ids: ["ReferenceId"], # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_option_ref_ids: ["ReferenceId"],
+    #                 answer_source: {
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                 },
+    #               },
+    #             },
     #           },
     #           enablement: {
     #             condition: { # required
@@ -21210,7 +24343,7 @@ module Aws::Connect
     #                         ref_id: "ReferenceId",
     #                       },
     #                     ],
-    #                     comparator: "IN", # required, accepts IN, NOT_IN
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT
     #                   },
     #                   condition: {
     #                     # recursive EvaluationFormItemEnablementCondition
@@ -21233,7 +24366,14 @@ module Aws::Connect
     #     auto_evaluation_configuration: {
     #       enabled: false, # required
     #     },
+    #     as_draft: false,
     #     client_token: "ClientToken",
+    #     target_configuration: {
+    #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED
+    #     },
+    #     language_configuration: {
+    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR
+    #     },
     #   })
     #
     # @example Response structure
@@ -21395,6 +24535,13 @@ module Aws::Connect
     #
     #    </note>
     #
+    #   <note markdown="1"> If you set the attribute type as `MESSAGE_STREAMING`, you need to
+    #   update the Lex bot alias resource based policy to include the
+    #   `lex:RecognizeMessageAsync` action for the connect instance ARN
+    #   resource.
+    #
+    #    </note>
+    #
     # @option params [required, String] :value
     #   The value for the attribute. Maximum character limit is 100.
     #
@@ -21417,7 +24564,7 @@ module Aws::Connect
     #
     #   resp = client.update_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE, MESSAGE_STREAMING
     #     value: "InstanceAttributeValue", # required
     #     client_token: "ClientToken",
     #   })
@@ -22175,7 +25322,7 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     quick_connect_id: "QuickConnectId", # required
     #     quick_connect_config: { # required
-    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER, FLOW
     #       user_config: {
     #         user_id: "UserId", # required
     #         contact_flow_id: "ContactFlowId", # required
@@ -22186,6 +25333,9 @@ module Aws::Connect
     #       },
     #       phone_config: {
     #         phone_number: "PhoneNumber", # required
+    #       },
+    #       flow_config: {
+    #         contact_flow_id: "ContactFlowId", # required
     #       },
     #     },
     #   })
@@ -22501,7 +25651,7 @@ module Aws::Connect
     #           references: {
     #             "ReferenceKey" => {
     #               value: "ReferenceValue",
-    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE
+    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT
     #               status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED
     #               arn: "ReferenceArn",
     #               status_reason: "ReferenceStatusReason",
@@ -22651,6 +25801,13 @@ module Aws::Connect
     #   The identifier of the hierarchy group that a security profile uses to
     #   restrict access to resources in Amazon Connect.
     #
+    # @option params [Array<Types::FlowModule>] :allowed_flow_modules
+    #   A list of Flow Modules an AI Agent can invoke as a tool
+    #
+    # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
+    #   The granular access control configuration for the security profile,
+    #   including data table permissions.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -22668,10 +25825,30 @@ module Aws::Connect
     #       {
     #         namespace: "Namespace",
     #         application_permissions: ["Permission"],
+    #         type: "MCP", # accepts MCP, THIRD_PARTY_APPLICATION
     #       },
     #     ],
     #     hierarchy_restricted_resources: ["HierarchyRestrictedResourceName"],
     #     allowed_access_control_hierarchy_group_id: "HierarchyGroupId",
+    #     allowed_flow_modules: [
+    #       {
+    #         type: "MCP", # accepts MCP
+    #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     granular_access_control_configuration: {
+    #       data_table_access_control_configuration: {
+    #         primary_attribute_access_control_configuration: {
+    #           primary_attribute_values: [
+    #             {
+    #               access_type: "ALLOW", # accepts ALLOW
+    #               attribute_name: "PrimaryAttributeContextKeyName",
+    #               values: ["IAMRestrictedPrimaryValue"],
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
@@ -23348,6 +26525,256 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the metadata of a workspace, such as its name and description.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [String] :name
+    #   The name of the workspace.
+    #
+    # @option params [String] :description
+    #   The description of the workspace.
+    #
+    # @option params [String] :title
+    #   The title displayed for the workspace.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_metadata({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     name: "WorkspaceName",
+    #     description: "WorkspaceDescription",
+    #     title: "WorkspaceTitle",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateWorkspaceMetadata AWS API Documentation
+    #
+    # @overload update_workspace_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_metadata(params = {}, options = {})
+      req = build_request(:update_workspace_metadata, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of a page in a workspace, including the
+    # associated view and input data.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, String] :page
+    #   The current page identifier.
+    #
+    # @option params [String] :new_page
+    #   The new page identifier, if changing the page name.
+    #
+    # @option params [String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the view to associate with the page.
+    #
+    # @option params [String] :slug
+    #   The URL-friendly identifier for the page.
+    #
+    # @option params [String] :input_data
+    #   A JSON string containing input parameters for the view.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_page({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     page: "Page", # required
+    #     new_page: "Page",
+    #     resource_arn: "ARN",
+    #     slug: "Slug",
+    #     input_data: "InputData",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateWorkspacePage AWS API Documentation
+    #
+    # @overload update_workspace_page(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_page(params = {}, options = {})
+      req = build_request(:update_workspace_page, params)
+      req.send_request(options)
+    end
+
+    # Updates the theme configuration for a workspace, including colors and
+    # styling.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [Types::WorkspaceTheme] :theme
+    #   The theme configuration, including color schemes and visual styles.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_theme({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     theme: {
+    #       light: {
+    #         palette: {
+    #           header: {
+    #             background: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           navigation: {
+    #             background: "ThemeString",
+    #             text_background_hover: "ThemeString",
+    #             text_background_active: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             text_active: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           canvas: {
+    #             container_background: "ThemeString",
+    #             page_background: "ThemeString",
+    #             active_background: "ThemeString",
+    #           },
+    #           primary: {
+    #             default: "ThemeString",
+    #             active: "ThemeString",
+    #             contrast_text: "ThemeString",
+    #           },
+    #         },
+    #         images: {
+    #           logo: {
+    #             default: "ThemeImageLink",
+    #             favicon: "ThemeImageLink",
+    #           },
+    #         },
+    #         typography: {
+    #           font_family: {
+    #             default: "Arial", # accepts Arial, Courier New, Georgia, Times New Roman, Trebuchet, Verdana
+    #           },
+    #         },
+    #       },
+    #       dark: {
+    #         palette: {
+    #           header: {
+    #             background: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           navigation: {
+    #             background: "ThemeString",
+    #             text_background_hover: "ThemeString",
+    #             text_background_active: "ThemeString",
+    #             text: "ThemeString",
+    #             text_hover: "ThemeString",
+    #             text_active: "ThemeString",
+    #             invert_actions_colors: false,
+    #           },
+    #           canvas: {
+    #             container_background: "ThemeString",
+    #             page_background: "ThemeString",
+    #             active_background: "ThemeString",
+    #           },
+    #           primary: {
+    #             default: "ThemeString",
+    #             active: "ThemeString",
+    #             contrast_text: "ThemeString",
+    #           },
+    #         },
+    #         images: {
+    #           logo: {
+    #             default: "ThemeImageLink",
+    #             favicon: "ThemeImageLink",
+    #           },
+    #         },
+    #         typography: {
+    #           font_family: {
+    #             default: "Arial", # accepts Arial, Courier New, Georgia, Times New Roman, Trebuchet, Verdana
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateWorkspaceTheme AWS API Documentation
+    #
+    # @overload update_workspace_theme(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_theme(params = {}, options = {})
+      req = build_request(:update_workspace_theme, params)
+      req.send_request(options)
+    end
+
+    # Updates the visibility setting of a workspace, controlling whether it
+    # is available to all users, assigned users only, or none.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace.
+    #
+    # @option params [required, String] :visibility
+    #   The visibility setting for the workspace. Valid values are: `ALL`
+    #   (available to all users), `ASSIGNED` (available only to assigned users
+    #   and routing profiles), and `NONE` (not visible to any users).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_visibility({
+    #     instance_id: "InstanceId", # required
+    #     workspace_id: "WorkspaceId", # required
+    #     visibility: "ALL", # required, accepts ALL, ASSIGNED, NONE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateWorkspaceVisibility AWS API Documentation
+    #
+    # @overload update_workspace_visibility(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_visibility(params = {}, options = {})
+      req = build_request(:update_workspace_visibility, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -23366,7 +26793,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.226.0'
+      context[:gem_version] = '1.227.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

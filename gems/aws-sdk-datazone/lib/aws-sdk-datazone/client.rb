@@ -6063,6 +6063,46 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets data export configuration details.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to get the data export
+    #   configuration details.
+    #
+    # @return [Types::GetDataExportConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataExportConfigurationOutput#created_at #created_at} => Time
+    #   * {Types::GetDataExportConfigurationOutput#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
+    #   * {Types::GetDataExportConfigurationOutput#is_export_enabled #is_export_enabled} => Boolean
+    #   * {Types::GetDataExportConfigurationOutput#s3_table_bucket_arn #s3_table_bucket_arn} => String
+    #   * {Types::GetDataExportConfigurationOutput#status #status} => String
+    #   * {Types::GetDataExportConfigurationOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_export_configuration({
+    #     domain_identifier: "DomainId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.encryption_configuration.kms_key_arn #=> String
+    #   resp.encryption_configuration.sse_algorithm #=> String
+    #   resp.is_export_enabled #=> Boolean
+    #   resp.s3_table_bucket_arn #=> String
+    #   resp.status #=> String, one of "COMPLETED", "FAILED"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataExportConfiguration AWS API Documentation
+    #
+    # @overload get_data_export_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_data_export_configuration(params = {}, options = {})
+      req = build_request(:get_data_export_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets the data product.
     #
     # Prerequisites:
@@ -7381,6 +7421,9 @@ module Aws::DataZone
     # @option params [required, String] :identifier
     #   The identifier of the metadata generation run.
     #
+    # @option params [String] :type
+    #   The type of the metadata generation run.
+    #
     # @return [Types::GetMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMetadataGenerationRunOutput#created_at #created_at} => Time
@@ -7391,12 +7434,15 @@ module Aws::DataZone
     #   * {Types::GetMetadataGenerationRunOutput#status #status} => String
     #   * {Types::GetMetadataGenerationRunOutput#target #target} => Types::MetadataGenerationRunTarget
     #   * {Types::GetMetadataGenerationRunOutput#type #type} => String
+    #   * {Types::GetMetadataGenerationRunOutput#type_stats #type_stats} => Array&lt;Types::MetadataGenerationRunTypeStat&gt;
+    #   * {Types::GetMetadataGenerationRunOutput#types #types} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_metadata_generation_run({
     #     domain_identifier: "DomainId", # required
     #     identifier: "MetadataGenerationRunIdentifier", # required
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
     #   })
     #
     # @example Response structure
@@ -7406,11 +7452,17 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.id #=> String
     #   resp.owning_project_id #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
     #   resp.target.identifier #=> String
     #   resp.target.revision #=> String
     #   resp.target.type #=> String, one of "ASSET"
-    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.type_stats #=> Array
+    #   resp.type_stats[0].error_message #=> String
+    #   resp.type_stats[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
+    #   resp.type_stats[0].type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.types #=> Array
+    #   resp.types[0] #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRun AWS API Documentation
     #
@@ -9701,6 +9753,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   The status of the metadata generation runs.
     #
+    # @option params [String] :target_identifier
+    #   The target ID for which you want to list metadata generation runs.
+    #
     # @option params [String] :type
     #   The type of the metadata generation runs.
     #
@@ -9717,8 +9772,9 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELED, SUCCEEDED, FAILED
-    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS
+    #     status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELED, SUCCEEDED, FAILED, PARTIALLY_SUCCEEDED
+    #     target_identifier: "EntityId",
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
     #   })
     #
     # @example Response structure
@@ -9729,11 +9785,13 @@ module Aws::DataZone
     #   resp.items[0].domain_id #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].owning_project_id #=> String
-    #   resp.items[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
     #   resp.items[0].target.identifier #=> String
     #   resp.items[0].target.revision #=> String
     #   resp.items[0].target.type #=> String, one of "ASSET"
-    #   resp.items[0].type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.items[0].type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.items[0].types #=> Array
+    #   resp.items[0].types[0] #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListMetadataGenerationRuns AWS API Documentation
@@ -10930,6 +10988,64 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def post_time_series_data_points(params = {}, options = {})
       req = build_request(:post_time_series_data_points, params)
+      req.send_request(options)
+    end
+
+    # Creates data export configuration details.
+    #
+    # In the current release, you can enable exporting asset metadata only
+    # for one domain per Amazon Web Services account per region. If you
+    # disable exporting asset metadata feature for a domain where it's
+    # already enabled, you cannot enable this feature for another domain in
+    # the same Amazon Web Services account and region.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where you want to create data export configuration
+    #   details.
+    #
+    # @option params [required, Boolean] :enable_export
+    #   Specifies that the export is to be enabled as part of creating data
+    #   export configuration details.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The encryption configuration as part of creating data export
+    #   configuration details.
+    #
+    #   The KMS key provided here as part of encryptionConfiguration must have
+    #   the required permissions as described in [KMS permissions for
+    #   exporting asset metadata in Amazon SageMaker Unified Studio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_export_configuration({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     enable_export: false, # required
+    #     encryption_configuration: {
+    #       kms_key_arn: "String",
+    #       sse_algorithm: "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PutDataExportConfiguration AWS API Documentation
+    #
+    # @overload put_data_export_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_data_export_configuration(params = {}, options = {})
+      req = build_request(:put_data_export_configuration, params)
       req.send_request(options)
     end
 
@@ -12243,7 +12359,8 @@ module Aws::DataZone
     #
     # * Asset must have a structured schema with valid rows and columns.
     #
-    # * Valid values for --type: BUSINESS\_DESCRIPTIONS, BUSINESS\_NAMES.
+    # * Valid values for --type: BUSINESS\_DESCRIPTIONS, BUSINESS\_NAMES,
+    #   BUSINESS\_GLOSSARY\_ASSOCIATIONS.
     #
     # * The user must have permission to run metadata generation in the
     #   domain/project.
@@ -12266,8 +12383,11 @@ module Aws::DataZone
     # @option params [required, Types::MetadataGenerationRunTarget] :target
     #   The asset for which you want to start a metadata generation run.
     #
-    # @option params [required, String] :type
+    # @option params [String] :type
     #   The type of the metadata generation run.
+    #
+    # @option params [Array<String>] :types
+    #   The types of the metadata generation run.
     #
     # @return [Types::StartMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12278,6 +12398,7 @@ module Aws::DataZone
     #   * {Types::StartMetadataGenerationRunOutput#owning_project_id #owning_project_id} => String
     #   * {Types::StartMetadataGenerationRunOutput#status #status} => String
     #   * {Types::StartMetadataGenerationRunOutput#type #type} => String
+    #   * {Types::StartMetadataGenerationRunOutput#types #types} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -12290,7 +12411,8 @@ module Aws::DataZone
     #       revision: "Revision",
     #       type: "ASSET", # required, accepts ASSET
     #     },
-    #     type: "BUSINESS_DESCRIPTIONS", # required, accepts BUSINESS_DESCRIPTIONS
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
+    #     types: ["BUSINESS_DESCRIPTIONS"], # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
     #   })
     #
     # @example Response structure
@@ -12300,8 +12422,10 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.id #=> String
     #   resp.owning_project_id #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
-    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.types #=> Array
+    #   resp.types[0] #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRun AWS API Documentation
     #
@@ -14648,7 +14772,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

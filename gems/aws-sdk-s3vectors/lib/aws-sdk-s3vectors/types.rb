@@ -69,6 +69,31 @@ module Aws::S3Vectors
     #   The metadata configuration for the vector index.
     #   @return [Types::MetadataConfiguration]
     #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for a vector index. By default, if you
+    #   don't specify, all new vectors in the vector index will use the
+    #   encryption configuration of the vector bucket.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   An array of user-defined tags that you would like to apply to the
+    #   vector index that you are creating. A tag is a key-value pair that
+    #   you apply to your resources. Tags can help you organize, track
+    #   costs, and control access to resources. For more information, see
+    #   [Tagging for cost allocation or attribute-based access control
+    #   (ABAC)][1].
+    #
+    #   <note markdown="1"> You must have the `s3vectors:TagResource` permission in addition to
+    #   `s3vectors:CreateIndex` permission to create a vector index with
+    #   tags.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/CreateIndexInput AWS API Documentation
     #
     class CreateIndexInput < Struct.new(
@@ -78,7 +103,9 @@ module Aws::S3Vectors
       :data_type,
       :dimension,
       :distance_metric,
-      :metadata_configuration)
+      :metadata_configuration,
+      :encryption_configuration,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -106,11 +133,30 @@ module Aws::S3Vectors
     #   specifically `AES256`.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] tags
+    #   An array of user-defined tags that you would like to apply to the
+    #   vector bucket that you are creating. A tag is a key-value pair that
+    #   you apply to your resources. Tags can help you organize and control
+    #   access to resources. For more information, see [Tagging for cost
+    #   allocation or attribute-based access control (ABAC)][1].
+    #
+    #   <note markdown="1"> You must have the `s3vectors:TagResource` permission in addition to
+    #   `s3vectors:CreateVectorBucket` permission to create a vector bucket
+    #   with tags.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/CreateVectorBucketInput AWS API Documentation
     #
     class CreateVectorBucketInput < Struct.new(
       :vector_bucket_name,
-      :encryption_configuration)
+      :encryption_configuration,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -228,16 +274,12 @@ module Aws::S3Vectors
     #
     class DeleteVectorsOutput < Aws::EmptyStructure; end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The encryption configuration for a vector bucket. By default, if you
-    # don't specify, all new vectors in Amazon S3 vector buckets use
+    # The encryption configuration for a vector bucket or index. By default,
+    # if you don't specify, all new vectors in Amazon S3 vector buckets use
     # server-side encryption with Amazon S3 managed keys (SSE-S3),
-    # specifically `AES256`.
+    # specifically `AES256`. You can optionally override bucket level
+    # encryption settings, and set a specific encryption configuration for a
+    # vector index at the time of index creation.
     #
     # @!attribute [rw] sse_type
     #   The server-side encryption type to use for the encryption
@@ -302,13 +344,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The attributes of a vector returned by the `GetVectors` operation.
+    # The attributes of a vector returned by the `GetVectors` operation.
     #
     # @!attribute [rw] key
     #   The name of the vector.
@@ -441,13 +477,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The attributes of a vector index.
+    # The attributes of a vector index.
     #
     # @!attribute [rw] vector_bucket_name
     #   The name of the vector bucket that contains the vector index.
@@ -482,6 +512,12 @@ module Aws::S3Vectors
     #   The metadata configuration for the vector index.
     #   @return [Types::MetadataConfiguration]
     #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for a vector index. By default, if you
+    #   don't specify, all new vectors in the vector index will use the
+    #   encryption configuration of the vector bucket.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/Index AWS API Documentation
     #
     class Index < Struct.new(
@@ -492,18 +528,13 @@ module Aws::S3Vectors
       :data_type,
       :dimension,
       :distance_metric,
-      :metadata_configuration)
+      :metadata_configuration,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  Summary information about a vector index.
+    # Summary information about a vector index.
     #
     # @!attribute [rw] vector_bucket_name
     #   The name of the vector bucket that contains the vector index.
@@ -668,13 +699,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The attributes of a vector returned by the `ListVectors` operation.
+    # The attributes of a vector returned by the `ListVectors` operation.
     #
     # @!attribute [rw] key
     #   The name of the vector.
@@ -694,6 +719,38 @@ module Aws::S3Vectors
       :key,
       :data,
       :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource
+    #   that you want to list tags for. The tagged resource can be a vector
+    #   bucket or a vector index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The user-defined tags that are applied to the S3 Vectors resource.
+    #   For more information, see [Tagging for cost allocation or
+    #   attribute-based access control (ABAC)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -844,13 +901,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The metadata configuration for a vector index.
+    # The metadata configuration for a vector index.
     #
     # @!attribute [rw] non_filterable_metadata_keys
     #   Non-filterable metadata keys allow you to enrich vectors with
@@ -890,13 +941,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The attributes of a vector to add to a vector index.
+    # The attributes of a vector to add to a vector index.
     #
     # @!attribute [rw] key
     #   The name of the vector. The key uniquely identifies the vector in a
@@ -999,39 +1044,27 @@ module Aws::S3Vectors
     #
     class PutVectorsOutput < Aws::EmptyStructure; end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The attributes of a vector in the approximate nearest neighbor
-    # search.
-    #
-    # @!attribute [rw] key
-    #   The key of the vector in the approximate nearest neighbor search.
-    #   @return [String]
-    #
-    # @!attribute [rw] data
-    #   The vector data associated with the vector, if requested.
-    #   @return [Types::VectorData]
-    #
-    # @!attribute [rw] metadata
-    #   The metadata associated with the vector, if requested.
-    #   @return [Hash,Array,String,Numeric,Boolean]
+    # The attributes of a vector in the approximate nearest neighbor search.
     #
     # @!attribute [rw] distance
     #   The measure of similarity between the vector in the response and the
     #   query vector.
     #   @return [Float]
     #
+    # @!attribute [rw] key
+    #   The key of the vector in the approximate nearest neighbor search.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata associated with the vector, if requested.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/QueryOutputVector AWS API Documentation
     #
     class QueryOutputVector < Struct.new(
+      :distance,
       :key,
-      :data,
-      :metadata,
-      :distance)
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1153,6 +1186,35 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource
+    #   that you're applying tags to. The tagged resource can be a vector
+    #   bucket or a vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The user-defined tag that you want to add to the specified S3
+    #   Vectors resource. For more information, see [Tagging for cost
+    #   allocation or attribute-based access control (ABAC)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -1165,6 +1227,35 @@ module Aws::S3Vectors
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource
+    #   that you're removing tags from. The tagged resource can be a vector
+    #   bucket or a vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The array of tag keys that you're removing from the S3 Vectors
+    #   resource. For more information, see [Tagging for cost allocation or
+    #   attribute-based access control (ABAC)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # The requested action isn't valid.
     #
@@ -1209,13 +1300,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The attributes of a vector bucket.
+    # The attributes of a vector bucket.
     #
     # @!attribute [rw] vector_bucket_name
     #   The name of the vector bucket.
@@ -1244,13 +1329,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  Summary information about a vector bucket.
+    # Summary information about a vector bucket.
     #
     # @!attribute [rw] vector_bucket_name
     #   The name of the vector bucket.
@@ -1274,13 +1353,7 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon S3 Vectors is in preview release for Amazon
-    # S3 and is subject
-    # to change.
-    #
-    #  </note>
-    #
-    #  The vector data in different formats.
+    # The vector data in different formats.
     #
     # @note VectorData is a union - when making an API calls you must set exactly one of the members.
     #

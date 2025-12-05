@@ -12063,6 +12063,14 @@ module Aws::EC2
     #   resp.nat_gateway.availability_mode #=> String, one of "zonal", "regional"
     #   resp.nat_gateway.auto_scaling_ips #=> String, one of "enabled", "disabled"
     #   resp.nat_gateway.auto_provision_zones #=> String, one of "enabled", "disabled"
+    #   resp.nat_gateway.attached_appliances #=> Array
+    #   resp.nat_gateway.attached_appliances[0].type #=> String, one of "network-firewall-proxy"
+    #   resp.nat_gateway.attached_appliances[0].appliance_arn #=> String
+    #   resp.nat_gateway.attached_appliances[0].vpc_endpoint_id #=> String
+    #   resp.nat_gateway.attached_appliances[0].attachment_state #=> String, one of "attaching", "attached", "detaching", "detached", "attach-failed", "detach-failed"
+    #   resp.nat_gateway.attached_appliances[0].modification_state #=> String, one of "modifying", "completed", "failed"
+    #   resp.nat_gateway.attached_appliances[0].failure_code #=> String
+    #   resp.nat_gateway.attached_appliances[0].failure_message #=> String
     #   resp.nat_gateway.route_table_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGateway AWS API Documentation
@@ -34804,6 +34812,14 @@ module Aws::EC2
     #   resp.nat_gateways[0].availability_mode #=> String, one of "zonal", "regional"
     #   resp.nat_gateways[0].auto_scaling_ips #=> String, one of "enabled", "disabled"
     #   resp.nat_gateways[0].auto_provision_zones #=> String, one of "enabled", "disabled"
+    #   resp.nat_gateways[0].attached_appliances #=> Array
+    #   resp.nat_gateways[0].attached_appliances[0].type #=> String, one of "network-firewall-proxy"
+    #   resp.nat_gateways[0].attached_appliances[0].appliance_arn #=> String
+    #   resp.nat_gateways[0].attached_appliances[0].vpc_endpoint_id #=> String
+    #   resp.nat_gateways[0].attached_appliances[0].attachment_state #=> String, one of "attaching", "attached", "detaching", "detached", "attach-failed", "detach-failed"
+    #   resp.nat_gateways[0].attached_appliances[0].modification_state #=> String, one of "modifying", "completed", "failed"
+    #   resp.nat_gateways[0].attached_appliances[0].failure_code #=> String
+    #   resp.nat_gateways[0].attached_appliances[0].failure_message #=> String
     #   resp.nat_gateways[0].route_table_id #=> String
     #   resp.next_token #=> String
     #
@@ -71661,7 +71677,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.582.0'
+      context[:gem_version] = '1.583.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

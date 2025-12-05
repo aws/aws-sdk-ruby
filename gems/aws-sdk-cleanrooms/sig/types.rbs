@@ -195,6 +195,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
       SENSITIVE: []
     end
 
@@ -227,6 +228,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: ::String
       attr_accessor collaboration_id: ::String
       attr_accessor description: ::String
+      attr_accessor is_synthetic_data: bool
       SENSITIVE: []
     end
 
@@ -388,6 +390,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
       SENSITIVE: []
     end
 
@@ -401,6 +404,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor creator_account_id: ::String
       attr_accessor description: ::String
+      attr_accessor is_synthetic_data: bool
       SENSITIVE: []
     end
 
@@ -542,6 +546,11 @@ module Aws::CleanRooms
     class Column
       attr_accessor name: ::String
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnClassificationDetails
+      attr_accessor column_mapping: ::Array[Types::SyntheticDataColumnProperties]
       SENSITIVE: []
     end
 
@@ -830,6 +839,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor schema: Types::AnalysisSchema
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
       SENSITIVE: []
     end
 
@@ -1834,6 +1844,14 @@ module Aws::CleanRooms
     class MLPaymentConfig
       attr_accessor model_training: Types::ModelTrainingPaymentConfig
       attr_accessor model_inference: Types::ModelInferencePaymentConfig
+      attr_accessor synthetic_data_generation: Types::SyntheticDataGenerationPaymentConfig
+      SENSITIVE: []
+    end
+
+    class MLSyntheticDataParameters
+      attr_accessor epsilon: ::Float
+      attr_accessor max_membership_inference_attack_score: ::Float
+      attr_accessor column_classification: Types::ColumnClassificationDetails
       SENSITIVE: []
     end
 
@@ -1896,6 +1914,7 @@ module Aws::CleanRooms
     class MembershipMLPaymentConfig
       attr_accessor model_training: Types::MembershipModelTrainingPaymentConfig
       attr_accessor model_inference: Types::MembershipModelInferencePaymentConfig
+      attr_accessor synthetic_data_generation: Types::MembershipSyntheticDataGenerationPaymentConfig
       SENSITIVE: []
     end
 
@@ -1969,6 +1988,11 @@ module Aws::CleanRooms
       attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class MembershipSyntheticDataGenerationPaymentConfig
+      attr_accessor is_responsible: bool
       SENSITIVE: []
     end
 
@@ -2604,6 +2628,29 @@ module Aws::CleanRooms
     class StartProtectedQueryOutput
       attr_accessor protected_query: Types::ProtectedQuery
       SENSITIVE: []
+    end
+
+    class SyntheticDataColumnProperties
+      attr_accessor column_name: ::String
+      attr_accessor column_type: ("CATEGORICAL" | "NUMERICAL")
+      attr_accessor is_predictive_value: bool
+      SENSITIVE: []
+    end
+
+    class SyntheticDataGenerationPaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
+    class SyntheticDataParameters
+      attr_accessor ml_synthetic_data_parameters: Types::MLSyntheticDataParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MlSyntheticDataParameters < SyntheticDataParameters
+      end
+      class Unknown < SyntheticDataParameters
+      end
     end
 
     class TableReference

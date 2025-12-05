@@ -912,7 +912,7 @@ module Aws::Bedrock
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor base_model_identifier: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor custom_model_kms_key_id: ::String
       attr_accessor job_tags: ::Array[Types::Tag]
       attr_accessor custom_model_tags: ::Array[Types::Tag]
@@ -1025,13 +1025,19 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CustomModelDeploymentUpdateDetails
+      attr_accessor model_arn: ::String
+      attr_accessor update_status: ("Updating" | "UpdateCompleted" | "UpdateFailed")
+      SENSITIVE: []
+    end
+
     class CustomModelSummary
       attr_accessor model_arn: ::String
       attr_accessor model_name: ::String
       attr_accessor creation_time: ::Time
       attr_accessor base_model_arn: ::String
       attr_accessor base_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor owner_account_id: ::String
       attr_accessor model_status: ("Active" | "Creating" | "Failed")
       SENSITIVE: []
@@ -1045,10 +1051,13 @@ module Aws::Bedrock
 
     class CustomizationConfig
       attr_accessor distillation_config: Types::DistillationConfig
+      attr_accessor rft_config: Types::RFTConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DistillationConfig < CustomizationConfig
+      end
+      class RftConfig < CustomizationConfig
       end
       class Unknown < CustomizationConfig
       end
@@ -1560,6 +1569,7 @@ module Aws::Bedrock
       attr_accessor created_at: ::Time
       attr_accessor status: ("Creating" | "Active" | "Failed")
       attr_accessor description: ::String
+      attr_accessor update_details: Types::CustomModelDeploymentUpdateDetails
       attr_accessor failure_message: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -1576,7 +1586,7 @@ module Aws::Bedrock
       attr_accessor job_name: ::String
       attr_accessor job_arn: ::String
       attr_accessor base_model_arn: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor model_kms_key_arn: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
       attr_accessor training_data_config: Types::TrainingDataConfig
@@ -1758,7 +1768,7 @@ module Aws::Bedrock
       attr_accessor training_data_config: Types::TrainingDataConfig
       attr_accessor validation_data_config: Types::ValidationDataConfig
       attr_accessor output_data_config: Types::OutputDataConfig
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor output_model_kms_key_arn: ::String
       attr_accessor training_metrics: Types::TrainingMetrics
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
@@ -1868,6 +1878,17 @@ module Aws::Bedrock
     class GetUseCaseForModelAccessResponse
       attr_accessor form_data: ::String
       SENSITIVE: []
+    end
+
+    class GraderConfig
+      attr_accessor lambda_grader: Types::LambdaGraderConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LambdaGrader < GraderConfig
+      end
+      class Unknown < GraderConfig
+      end
     end
 
     class GuardrailAutomatedReasoningPolicy
@@ -2265,6 +2286,11 @@ module Aws::Bedrock
       SENSITIVE: [:filter]
     end
 
+    class LambdaGraderConfig
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
     class LegalTerm
       attr_accessor url: ::String
       SENSITIVE: []
@@ -2597,6 +2623,7 @@ module Aws::Bedrock
       attr_accessor image_data_delivery_enabled: bool
       attr_accessor embedding_data_delivery_enabled: bool
       attr_accessor video_data_delivery_enabled: bool
+      attr_accessor audio_data_delivery_enabled: bool
       SENSITIVE: []
     end
 
@@ -2662,7 +2689,7 @@ module Aws::Bedrock
       attr_accessor end_time: ::Time
       attr_accessor custom_model_arn: ::String
       attr_accessor custom_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       SENSITIVE: []
     end
 
@@ -2857,6 +2884,24 @@ module Aws::Bedrock
       end
       class Unknown < RAGConfig
       end
+    end
+
+    class RFTConfig
+      attr_accessor grader_config: Types::GraderConfig
+      attr_accessor hyper_parameters: Types::RFTHyperParameters
+      SENSITIVE: []
+    end
+
+    class RFTHyperParameters
+      attr_accessor epoch_count: ::Integer
+      attr_accessor batch_size: ::Integer
+      attr_accessor learning_rate: ::Float
+      attr_accessor max_prompt_length: ::Integer
+      attr_accessor training_sample_per_prompt: ::Integer
+      attr_accessor inference_max_tokens: ::Integer
+      attr_accessor reasoning_effort: ("low" | "medium" | "high")
+      attr_accessor eval_interval: ::Integer
+      SENSITIVE: []
     end
 
     class RatingScaleItem
@@ -3225,6 +3270,17 @@ module Aws::Bedrock
     class UpdateAutomatedReasoningPolicyTestCaseResponse
       attr_accessor policy_arn: ::String
       attr_accessor test_case_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomModelDeploymentRequest
+      attr_accessor model_arn: ::String
+      attr_accessor custom_model_deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomModelDeploymentResponse
+      attr_accessor custom_model_deployment_arn: ::String
       SENSITIVE: []
     end
 

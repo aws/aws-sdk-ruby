@@ -3460,7 +3460,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] granularity
     #   How granular you want the forecast to be. You can get 3 months of
-    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #   `DAILY` forecasts or 18 months of `MONTHLY` forecasts.
     #
     #   The `GetCostForecast` operation supports only `DAILY` and `MONTHLY`
     #   granularities.
@@ -5382,7 +5382,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] granularity
     #   How granular you want the forecast to be. You can get 3 months of
-    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #   `DAILY` forecasts or 18 months of `MONTHLY` forecasts.
     #
     #   The `GetUsageForecast` operation supports only `DAILY` and `MONTHLY`
     #   granularities.

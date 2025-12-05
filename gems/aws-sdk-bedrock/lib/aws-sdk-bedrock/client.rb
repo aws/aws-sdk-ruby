@@ -2279,7 +2279,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
-    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION, IMPORTED
+    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION, REINFORCEMENT_FINE_TUNING, IMPORTED
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -2352,6 +2352,23 @@ module Aws::Bedrock
     #         teacher_model_config: { # required
     #           teacher_model_identifier: "TeacherModelIdentifier", # required
     #           max_response_length_for_inference: 1,
+    #         },
+    #       },
+    #       rft_config: {
+    #         grader_config: {
+    #           lambda_grader: {
+    #             lambda_arn: "LambdaArn", # required
+    #           },
+    #         },
+    #         hyper_parameters: {
+    #           epoch_count: 1,
+    #           batch_size: 1,
+    #           learning_rate: 1.0,
+    #           max_prompt_length: 1,
+    #           training_sample_per_prompt: 1,
+    #           inference_max_tokens: 1,
+    #           reasoning_effort: "low", # accepts low, medium, high
+    #           eval_interval: 1,
     #         },
     #       },
     #     },
@@ -3855,7 +3872,7 @@ module Aws::Bedrock
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
@@ -3885,6 +3902,15 @@ module Aws::Bedrock
     #   resp.creation_time #=> Time
     #   resp.customization_config.distillation_config.teacher_model_config.teacher_model_identifier #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.max_response_length_for_inference #=> Integer
+    #   resp.customization_config.rft_config.grader_config.lambda_grader.lambda_arn #=> String
+    #   resp.customization_config.rft_config.hyper_parameters.epoch_count #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.batch_size #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.learning_rate #=> Float
+    #   resp.customization_config.rft_config.hyper_parameters.max_prompt_length #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.training_sample_per_prompt #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.inference_max_tokens #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.reasoning_effort #=> String, one of "low", "medium", "high"
+    #   resp.customization_config.rft_config.hyper_parameters.eval_interval #=> Integer
     #   resp.model_status #=> String, one of "Active", "Creating", "Failed"
     #   resp.failure_message #=> String
     #
@@ -3928,6 +3954,7 @@ module Aws::Bedrock
     #   * {Types::GetCustomModelDeploymentResponse#created_at #created_at} => Time
     #   * {Types::GetCustomModelDeploymentResponse#status #status} => String
     #   * {Types::GetCustomModelDeploymentResponse#description #description} => String
+    #   * {Types::GetCustomModelDeploymentResponse#update_details #update_details} => Types::CustomModelDeploymentUpdateDetails
     #   * {Types::GetCustomModelDeploymentResponse#failure_message #failure_message} => String
     #   * {Types::GetCustomModelDeploymentResponse#last_updated_at #last_updated_at} => Time
     #
@@ -3945,6 +3972,8 @@ module Aws::Bedrock
     #   resp.created_at #=> Time
     #   resp.status #=> String, one of "Creating", "Active", "Failed"
     #   resp.description #=> String
+    #   resp.update_details.model_arn #=> String
+    #   resp.update_details.update_status #=> String, one of "Updating", "UpdateCompleted", "UpdateFailed"
     #   resp.failure_message #=> String
     #   resp.last_updated_at #=> Time
     #
@@ -4639,7 +4668,7 @@ module Aws::Bedrock
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
     #   resp.output_data_config.s3_uri #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #   resp.output_model_kms_key_arn #=> String
     #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
@@ -4650,6 +4679,15 @@ module Aws::Bedrock
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.teacher_model_identifier #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.max_response_length_for_inference #=> Integer
+    #   resp.customization_config.rft_config.grader_config.lambda_grader.lambda_arn #=> String
+    #   resp.customization_config.rft_config.hyper_parameters.epoch_count #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.batch_size #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.learning_rate #=> Float
+    #   resp.customization_config.rft_config.hyper_parameters.max_prompt_length #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.training_sample_per_prompt #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.inference_max_tokens #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.reasoning_effort #=> String, one of "low", "medium", "high"
+    #   resp.customization_config.rft_config.hyper_parameters.eval_interval #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCustomizationJob AWS API Documentation
     #
@@ -4808,6 +4846,7 @@ module Aws::Bedrock
     #   resp.logging_config.image_data_delivery_enabled #=> Boolean
     #   resp.logging_config.embedding_data_delivery_enabled #=> Boolean
     #   resp.logging_config.video_data_delivery_enabled #=> Boolean
+    #   resp.logging_config.audio_data_delivery_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationLoggingConfiguration AWS API Documentation
     #
@@ -5456,7 +5495,7 @@ module Aws::Bedrock
     #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
-    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #   resp.model_summaries[0].owner_account_id #=> String
     #   resp.model_summaries[0].model_status #=> String, one of "Active", "Creating", "Failed"
     #
@@ -6164,7 +6203,7 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
-    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -6654,6 +6693,7 @@ module Aws::Bedrock
     #       image_data_delivery_enabled: false,
     #       embedding_data_delivery_enabled: false,
     #       video_data_delivery_enabled: false,
+    #       audio_data_delivery_enabled: false,
     #     },
     #   })
     #
@@ -7379,6 +7419,42 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Updates a custom model deployment with a new custom model. This allows
+    # you to deploy updated models without creating new deployment
+    # endpoints.
+    #
+    # @option params [required, String] :model_arn
+    #   ARN of the new custom model to deploy. This replaces the currently
+    #   deployed model.
+    #
+    # @option params [required, String] :custom_model_deployment_identifier
+    #   Identifier of the custom model deployment to update with the new
+    #   custom model.
+    #
+    # @return [Types::UpdateCustomModelDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomModelDeploymentResponse#custom_model_deployment_arn #custom_model_deployment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_model_deployment({
+    #     model_arn: "CustomModelArn", # required
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_model_deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateCustomModelDeployment AWS API Documentation
+    #
+    # @overload update_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def update_custom_model_deployment(params = {}, options = {})
+      req = build_request(:update_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
     # Updates a guardrail with the values you specify.
     #
     # * Specify a `name` and optional `description`.
@@ -7736,7 +7812,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

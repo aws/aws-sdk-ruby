@@ -186,7 +186,7 @@ module Aws
                            content: ::String,
                            description: ::String,
                            name: ::String,
-                           type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
+                           type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY"),
                            ?tags: Array[
                              {
                                key: ::String,
@@ -259,7 +259,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#describe_effective_policy-instance_method
       def describe_effective_policy: (
-                                       policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
+                                       policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY"),
                                        ?target_id: ::String
                                      ) -> _DescribeEffectivePolicyResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEffectivePolicyResponseSuccess
@@ -340,7 +340,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#disable_policy_type-instance_method
       def disable_policy_type: (
                                  root_id: ::String,
-                                 policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+                                 policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
                                ) -> _DisablePolicyTypeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisablePolicyTypeResponseSuccess
 
@@ -366,7 +366,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#enable_policy_type-instance_method
       def enable_policy_type: (
                                 root_id: ::String,
-                                policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+                                policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
                               ) -> _EnablePolicyTypeResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnablePolicyTypeResponseSuccess
 
@@ -457,12 +457,12 @@ module Aws
       interface _ListAccountsWithInvalidEffectivePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountsWithInvalidEffectivePolicyResponse]
         def accounts: () -> ::Array[Types::Account]
-        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_accounts_with_invalid_effective_policy-instance_method
       def list_accounts_with_invalid_effective_policy: (
-                                                         policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
+                                                         policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY"),
                                                          ?next_token: ::String,
                                                          ?max_results: ::Integer
                                                        ) -> _ListAccountsWithInvalidEffectivePolicyResponseSuccess
@@ -524,7 +524,7 @@ module Aws
       interface _ListEffectivePolicyValidationErrorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEffectivePolicyValidationErrorsResponse]
         def account_id: () -> ::String
-        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY")
+        def policy_type: () -> ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY")
         def path: () -> ::String
         def evaluation_timestamp: () -> ::Time
         def next_token: () -> ::String
@@ -533,7 +533,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_effective_policy_validation_errors-instance_method
       def list_effective_policy_validation_errors: (
                                                      account_id: ::String,
-                                                     policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
+                                                     policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY"),
                                                      ?next_token: ::String,
                                                      ?max_results: ::Integer
                                                    ) -> _ListEffectivePolicyValidationErrorsResponseSuccess
@@ -631,7 +631,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_policies-instance_method
       def list_policies: (
-                           filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
+                           filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY"),
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListPoliciesResponseSuccess
@@ -645,7 +645,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_policies_for_target-instance_method
       def list_policies_for_target: (
                                       target_id: ::String,
-                                      filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY"),
+                                      filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY"),
                                       ?next_token: ::String,
                                       ?max_results: ::Integer
                                     ) -> _ListPoliciesForTargetResponseSuccess

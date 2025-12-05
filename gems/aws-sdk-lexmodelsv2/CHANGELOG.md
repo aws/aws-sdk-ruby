@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2025-12-01)
+------------------
+
+* Feature - Adds support for speech-to-speech models for human-like, adaptive, and expressive voice interactions. Also adds support for speech model preference, allowing customers to select which speech model they want to use for speech-to-text requests.
+
 1.83.0 (2025-11-21)
 ------------------
 

@@ -49,12 +49,13 @@ module Aws::MarketplaceAgreement
   end
   autoload :Client, 'aws-sdk-marketplaceagreement/client'
   autoload :Errors, 'aws-sdk-marketplaceagreement/errors'
+  autoload :Waiters, 'aws-sdk-marketplaceagreement/waiters'
   autoload :Resource, 'aws-sdk-marketplaceagreement/resource'
   autoload :EndpointParameters, 'aws-sdk-marketplaceagreement/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-marketplaceagreement/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplaceagreement/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

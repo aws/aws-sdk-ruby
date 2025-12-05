@@ -528,6 +528,7 @@ module Aws::OpenSearchServerless
     #   resp.collection_details[0].arn #=> String
     #   resp.collection_details[0].kms_key_arn #=> String
     #   resp.collection_details[0].standby_replicas #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collection_details[0].vector_options.serverless_vector_acceleration #=> String, one of "ENABLED", "DISABLED", "ALLOWED"
     #   resp.collection_details[0].created_date #=> Integer
     #   resp.collection_details[0].last_modified_date #=> Integer
     #   resp.collection_details[0].collection_endpoint #=> String
@@ -789,6 +790,10 @@ module Aws::OpenSearchServerless
     # @option params [String] :standby_replicas
     #   Indicates whether standby replicas should be used for a collection.
     #
+    # @option params [Types::VectorOptions] :vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -813,6 +818,9 @@ module Aws::OpenSearchServerless
     #       },
     #     ],
     #     standby_replicas: "ENABLED", # accepts ENABLED, DISABLED
+    #     vector_options: {
+    #       serverless_vector_acceleration: "ENABLED", # required, accepts ENABLED, DISABLED, ALLOWED
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -826,6 +834,7 @@ module Aws::OpenSearchServerless
     #   resp.create_collection_detail.arn #=> String
     #   resp.create_collection_detail.kms_key_arn #=> String
     #   resp.create_collection_detail.standby_replicas #=> String, one of "ENABLED", "DISABLED"
+    #   resp.create_collection_detail.vector_options.serverless_vector_acceleration #=> String, one of "ENABLED", "DISABLED", "ALLOWED"
     #   resp.create_collection_detail.created_date #=> Integer
     #   resp.create_collection_detail.last_modified_date #=> Integer
     #
@@ -2647,7 +2656,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

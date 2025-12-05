@@ -42,10 +42,15 @@ module Aws::PartnerCentralSelling
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason why access was denied for the requested operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -331,6 +336,13 @@ module Aws::PartnerCentralSelling
     #   by referencing the associated email address.
     #   @return [String]
     #
+    # @!attribute [rw] phone
+    #   Specifies the contact phone number of the assignee responsible for
+    #   the opportunity or engagement. This field enables direct
+    #   communication for time-sensitive matters and facilitates
+    #   coordination between AWS and partner teams.
+    #   @return [String]
+    #
     # @!attribute [rw] business_title
     #   Specifies the business title of the assignee managing the
     #   opportunity. This helps clarify the individual's role and
@@ -344,8 +356,9 @@ module Aws::PartnerCentralSelling
       :email,
       :first_name,
       :last_name,
+      :phone,
       :business_title)
-      SENSITIVE = [:email, :first_name, :last_name, :business_title]
+      SENSITIVE = [:email, :first_name, :last_name, :phone, :business_title]
       include Aws::Structure
     end
 
@@ -643,6 +656,94 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] catalog
+    #   Specifies the catalog associated with the engagement context
+    #   request. This field takes a string value from a predefined list:
+    #   `AWS` or `Sandbox`. The catalog determines which environment the
+    #   engagement context is created in. Use `AWS` to create contexts in
+    #   the production environment, and `Sandbox` for testing in secure,
+    #   isolated environments.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_identifier
+    #   The unique identifier of the `Engagement` for which the context is
+    #   being created. This parameter ensures the context is associated with
+    #   the correct engagement and provides the necessary linkage between
+    #   the engagement and its contextual information.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier provided by the client to ensure
+    #   that the request is handled exactly once. This token helps prevent
+    #   duplicate context creations and must not exceed sixty-four
+    #   alphanumeric characters. Use a UUID or other unique string to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of context being created for the engagement. This
+    #   field determines the structure and content of the context payload.
+    #   Valid values include `CustomerProject` for customer project-related
+    #   contexts. The type field ensures that the context is properly
+    #   categorized and processed according to its intended purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   Represents the payload of an Engagement context. The structure of
+    #   this payload varies based on the context type specified in the
+    #   EngagementContextDetails.
+    #   @return [Types::EngagementContextPayload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreateEngagementContextRequest AWS API Documentation
+    #
+    class CreateEngagementContextRequest < Struct.new(
+      :catalog,
+      :engagement_identifier,
+      :client_token,
+      :type,
+      :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engagement_id
+    #   The unique identifier of the engagement to which the context was
+    #   added. This ID confirms the successful association of the context
+    #   with the specified engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_arn
+    #   The Amazon Resource Name (ARN) of the engagement to which the
+    #   context was added. This globally unique identifier can be used for
+    #   cross-service references and IAM policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_last_modified_at
+    #   The timestamp indicating when the engagement was last modified as a
+    #   result of adding the context, in ISO 8601 format (UTC). Example:
+    #   "2023-05-01T20:37:46Z".
+    #   @return [Time]
+    #
+    # @!attribute [rw] context_id
+    #   The unique identifier assigned to the newly created engagement
+    #   context. This ID can be used to reference the specific context
+    #   within the engagement for future operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreateEngagementContextResponse AWS API Documentation
+    #
+    class CreateEngagementContextResponse < Struct.new(
+      :engagement_id,
+      :engagement_arn,
+      :engagement_last_modified_at,
+      :context_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
     #   Specifies the catalog related to the engagement. Accepted values are
     #   `AWS` and `Sandbox`, which determine the environment in which the
     #   engagement is managed.
@@ -765,11 +866,18 @@ module Aws::PartnerCentralSelling
     #   The Amazon Resource Name (ARN) that identifies the engagement.
     #   @return [String]
     #
+    # @!attribute [rw] modified_at
+    #   The timestamp indicating when the engagement was last modified, in
+    #   ISO 8601 format (UTC). For newly created engagements, this value
+    #   matches the creation timestamp. Example: "2023-05-01T20:37:46Z".
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreateEngagementResponse AWS API Documentation
     #
     class CreateEngagementResponse < Struct.new(
       :id,
-      :arn)
+      :arn,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1266,6 +1374,11 @@ module Aws::PartnerCentralSelling
     # structure allows for specifying the type of context and its associated
     # payload.
     #
+    # @!attribute [rw] id
+    #   The unique identifier of the engagement context. This ID is used to
+    #   reference and manage the specific context within the engagement.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   Specifies the type of Engagement context. Valid values are
     #   "CustomerProject" or "Document", indicating whether the context
@@ -1280,6 +1393,7 @@ module Aws::PartnerCentralSelling
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/EngagementContextDetails AWS API Documentation
     #
     class EngagementContextDetails < Struct.new(
+      :id,
       :type,
       :payload)
       SENSITIVE = []
@@ -1300,16 +1414,24 @@ module Aws::PartnerCentralSelling
     #   the Type in EngagementContextDetails is set to "CustomerProject".
     #   @return [Types::CustomerProjectsContext]
     #
+    # @!attribute [rw] lead
+    #   Contains detailed information about a lead when the context type is
+    #   "Lead". This field is present only when the Type in
+    #   EngagementContextDetails is set to "Lead".
+    #   @return [Types::LeadContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/EngagementContextPayload AWS API Documentation
     #
     class EngagementContextPayload < Struct.new(
       :customer_project,
+      :lead,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CustomerProject < EngagementContextPayload; end
+      class Lead < EngagementContextPayload; end
       class Unknown < EngagementContextPayload; end
     end
 
@@ -1628,6 +1750,23 @@ module Aws::PartnerCentralSelling
     #   The number of members in the Engagement.
     #   @return [Integer]
     #
+    # @!attribute [rw] modified_at
+    #   The timestamp indicating when the engagement was last modified, in
+    #   ISO 8601 format (UTC). Example: "2023-05-01T20:37:46Z".
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_by
+    #   The AWS account ID of the user who last modified the engagement.
+    #   This field helps track who made the most recent changes to the
+    #   engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_types
+    #   An array of context types associated with the engagement, such as
+    #   "CustomerProject" or "Lead". This provides a quick overview of
+    #   the types of contexts included in the engagement.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/EngagementSummary AWS API Documentation
     #
     class EngagementSummary < Struct.new(
@@ -1636,8 +1775,11 @@ module Aws::PartnerCentralSelling
       :title,
       :created_at,
       :created_by,
-      :member_count)
-      SENSITIVE = [:created_by]
+      :member_count,
+      :modified_at,
+      :modified_by,
+      :context_types)
+      SENSITIVE = [:created_by, :modified_by]
       include Aws::Structure
     end
 
@@ -1710,12 +1852,6 @@ module Aws::PartnerCentralSelling
       include Aws::Structure
     end
 
-    # @!attribute [rw] catalog
-    #   Specifies the catalog in which the AWS Opportunity exists. This is
-    #   the environment (e.g., `AWS` or `Sandbox`) where the opportunity is
-    #   being managed.
-    #   @return [String]
-    #
     # @!attribute [rw] related_opportunity_id
     #   Provides the unique identifier of the related partner opportunity,
     #   allowing partners to link the AWS Opportunity to their corresponding
@@ -1785,10 +1921,15 @@ module Aws::PartnerCentralSelling
     #   understanding the broader context of the opportunity.
     #   @return [Types::AwsOpportunityProject]
     #
+    # @!attribute [rw] catalog
+    #   Specifies the catalog in which the AWS Opportunity exists. This is
+    #   the environment (e.g., `AWS` or `Sandbox`) where the opportunity is
+    #   being managed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetAwsOpportunitySummaryResponse AWS API Documentation
     #
     class GetAwsOpportunitySummaryResponse < Struct.new(
-      :catalog,
       :related_opportunity_id,
       :origin,
       :involvement_type,
@@ -1799,7 +1940,8 @@ module Aws::PartnerCentralSelling
       :involvement_type_change_reason,
       :related_entity_ids,
       :customer,
-      :project)
+      :project,
+      :catalog)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1993,6 +2135,18 @@ module Aws::PartnerCentralSelling
     #   their roles or permissions within the Engagement.
     #   @return [Integer]
     #
+    # @!attribute [rw] modified_at
+    #   The timestamp indicating when the engagement was last modified, in
+    #   ISO 8601 format (UTC). Example: "2023-05-01T20:37:46Z". This helps
+    #   track the most recent changes to the engagement.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_by
+    #   The AWS account ID of the user who last modified the engagement.
+    #   This field helps track who made the most recent changes to the
+    #   engagement.
+    #   @return [String]
+    #
     # @!attribute [rw] contexts
     #   A list of context objects associated with the engagement. Each
     #   context provides additional information related to the Engagement,
@@ -2009,8 +2163,10 @@ module Aws::PartnerCentralSelling
       :created_at,
       :created_by,
       :member_count,
+      :modified_at,
+      :modified_by,
       :contexts)
-      SENSITIVE = [:created_by]
+      SENSITIVE = [:created_by, :modified_by]
       include Aws::Structure
     end
 
@@ -2528,6 +2684,331 @@ module Aws::PartnerCentralSelling
     class LastModifiedDate < Struct.new(
       :after_last_modified_date,
       :before_last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a lead contact's details associated with the
+    # engagement. This provides contact information for individuals involved
+    # in lead-related activities.
+    #
+    # @!attribute [rw] business_title
+    #   The lead contact's business title or job role associated with the
+    #   engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The lead contact's email address associated with the engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The lead contact's first name associated with the engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The lead contact's last name associated with the engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone
+    #   The lead contact's phone number associated with the engagement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadContact AWS API Documentation
+    #
+    class LeadContact < Struct.new(
+      :business_title,
+      :email,
+      :first_name,
+      :last_name,
+      :phone)
+      SENSITIVE = [:business_title, :email, :first_name, :last_name, :phone]
+      include Aws::Structure
+    end
+
+    # Provides comprehensive details about a lead associated with an
+    # engagement. This structure contains information about lead
+    # qualification status, customer details, and interaction history to
+    # facilitate lead management and tracking within the engagement.
+    #
+    # @!attribute [rw] qualification_status
+    #   Indicates the current qualification status of the lead, such as
+    #   whether it has been qualified, disqualified, or is still under
+    #   evaluation. This helps track the lead's progression through the
+    #   qualification process.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer
+    #   Contains detailed information about the customer associated with the
+    #   lead, including company information, contact details, and other
+    #   relevant customer data.
+    #   @return [Types::LeadCustomer]
+    #
+    # @!attribute [rw] interactions
+    #   An array of interactions that have occurred with the lead, providing
+    #   a history of communications, meetings, and other engagement
+    #   activities related to the lead.
+    #   @return [Array<Types::LeadInteraction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadContext AWS API Documentation
+    #
+    class LeadContext < Struct.new(
+      :qualification_status,
+      :customer,
+      :interactions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about the customer associated with the
+    # lead, including company details, industry classification, and AWS
+    # maturity level. This information helps qualify and categorize the lead
+    # for appropriate engagement strategies.
+    #
+    # @!attribute [rw] industry
+    #   Specifies the industry sector to which the lead customer's company
+    #   belongs. This categorization helps in understanding the customer's
+    #   business context and tailoring appropriate solutions.
+    #   @return [String]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the lead customer's company. This field is essential
+    #   for identifying and tracking the customer organization associated
+    #   with the lead.
+    #   @return [String]
+    #
+    # @!attribute [rw] website_url
+    #   The website URL of the lead customer's company. This provides
+    #   additional context about the customer organization and helps verify
+    #   company legitimacy and size.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   An object that contains an `Address` object's subset of fields.
+    #   @return [Types::AddressSummary]
+    #
+    # @!attribute [rw] aws_maturity
+    #   Indicates the customer's level of experience and adoption with AWS
+    #   services. This assessment helps determine the appropriate engagement
+    #   approach and solution complexity.
+    #   @return [String]
+    #
+    # @!attribute [rw] market_segment
+    #   Specifies the market segment classification of the lead customer,
+    #   such as enterprise, mid-market, or small business. This segmentation
+    #   helps in targeting appropriate solutions and engagement strategies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadCustomer AWS API Documentation
+    #
+    class LeadCustomer < Struct.new(
+      :industry,
+      :company_name,
+      :website_url,
+      :address,
+      :aws_maturity,
+      :market_segment)
+      SENSITIVE = [:company_name, :website_url]
+      include Aws::Structure
+    end
+
+    # Represents a specific interaction or touchpoint with a lead customer.
+    # This structure captures details about communications, meetings, or
+    # other engagement activities that help track the lead's progression
+    # and engagement history.
+    #
+    # @!attribute [rw] source_type
+    #   Specifies the type of source that generated the lead interaction,
+    #   such as "Event", "Website", "Referral", or "Campaign". This
+    #   categorization helps track lead generation effectiveness across
+    #   different channels.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   The unique identifier of the specific source that generated the lead
+    #   interaction. This ID provides traceability back to the original lead
+    #   generation activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_name
+    #   The descriptive name of the source that generated the lead
+    #   interaction, providing a human-readable identifier for the lead
+    #   generation channel or activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] usecase
+    #   Describes the specific use case or business scenario discussed
+    #   during the lead interaction. This helps categorize the customer's
+    #   interests and potential solutions.
+    #   @return [String]
+    #
+    # @!attribute [rw] interaction_date
+    #   The date and time when the lead interaction occurred, in ISO 8601
+    #   format (UTC). This timestamp helps track the chronology of lead
+    #   engagement activities.
+    #   @return [Time]
+    #
+    # @!attribute [rw] customer_action
+    #   Describes the action taken by the customer during or as a result of
+    #   the interaction, such as requesting information, scheduling a
+    #   meeting, or expressing interest in a solution.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_problem
+    #   Describes the business problem or challenge that the customer
+    #   discussed during the interaction. This information helps qualify the
+    #   lead and identify appropriate solutions.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact
+    #   Contains contact information for the customer representative
+    #   involved in the lead interaction, including their name, title, and
+    #   contact details.
+    #   @return [Types::LeadContact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadInteraction AWS API Documentation
+    #
+    class LeadInteraction < Struct.new(
+      :source_type,
+      :source_id,
+      :source_name,
+      :usecase,
+      :interaction_date,
+      :customer_action,
+      :business_problem,
+      :contact)
+      SENSITIVE = [:business_problem]
+      include Aws::Structure
+    end
+
+    # Contains customer information included in a lead invitation payload.
+    # This structure provides essential details about the customer to help
+    # partners evaluate the lead opportunity and determine their interest in
+    # engagement.
+    #
+    # @!attribute [rw] industry
+    #   Specifies the industry sector of the customer company associated
+    #   with the lead invitation. This categorization helps partners
+    #   understand the customer's business context and assess solution fit.
+    #   @return [String]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the customer company associated with the lead
+    #   invitation. This field identifies the target organization for the
+    #   lead engagement opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] website_url
+    #   The website URL of the customer company. This provides additional
+    #   context about the customer organization and helps partners verify
+    #   company details and assess business size and legitimacy.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_code
+    #   The country code indicating the geographic location of the customer
+    #   company. This information helps partners understand regional
+    #   requirements and assess their ability to serve the customer
+    #   effectively.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_maturity
+    #   Indicates the customer's level of experience and adoption with AWS
+    #   services. This assessment helps partners understand the customer's
+    #   cloud maturity and tailor their engagement approach accordingly.
+    #   @return [String]
+    #
+    # @!attribute [rw] market_segment
+    #   Specifies the market segment classification of the customer, such as
+    #   enterprise, mid-market, or small business. This segmentation helps
+    #   partners determine the appropriate solution complexity and
+    #   engagement strategy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadInvitationCustomer AWS API Documentation
+    #
+    class LeadInvitationCustomer < Struct.new(
+      :industry,
+      :company_name,
+      :website_url,
+      :country_code,
+      :aws_maturity,
+      :market_segment)
+      SENSITIVE = [:company_name, :website_url, :country_code]
+      include Aws::Structure
+    end
+
+    # Represents interaction details included in a lead invitation payload.
+    # This structure provides context about how the lead was generated and
+    # the customer's engagement history to help partners assess the
+    # opportunity quality.
+    #
+    # @!attribute [rw] source_type
+    #   Specifies the type of source that generated the lead interaction,
+    #   such as "Event", "Website", or "Campaign". This helps partners
+    #   understand the lead generation channel and assess lead quality based
+    #   on the source type.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   The unique identifier of the specific source that generated the lead
+    #   interaction. This provides traceability to the original lead
+    #   generation activity for reference and follow-up purposes.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_name
+    #   The descriptive name of the source that generated the lead
+    #   interaction. This human-readable identifier helps partners
+    #   understand the specific lead generation channel or campaign that
+    #   created the opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] usecase
+    #   Describes the specific use case or business scenario associated with
+    #   the lead interaction. This information helps partners understand the
+    #   customer's interests and potential solution requirements.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_business_title
+    #   The business title or job role of the customer contact involved in
+    #   the lead interaction. This helps partners identify the
+    #   decision-making level and engagement approach for the lead.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadInvitationInteraction AWS API Documentation
+    #
+    class LeadInvitationInteraction < Struct.new(
+      :source_type,
+      :source_id,
+      :source_name,
+      :usecase,
+      :contact_business_title)
+      SENSITIVE = [:contact_business_title]
+      include Aws::Structure
+    end
+
+    # Represents the data payload of an engagement invitation for a lead
+    # opportunity. This contains detailed information about the customer and
+    # interaction history that partners use to evaluate whether to accept
+    # the lead engagement invitation.
+    #
+    # @!attribute [rw] customer
+    #   Contains information about the customer associated with the lead
+    #   invitation. This data helps partners understand the customer's
+    #   profile, industry, and business context to assess the lead
+    #   opportunity.
+    #   @return [Types::LeadInvitationCustomer]
+    #
+    # @!attribute [rw] interaction
+    #   Describes the interaction details associated with the lead,
+    #   including the source of the lead generation and customer engagement
+    #   information. This context helps partners evaluate the lead quality
+    #   and engagement approach.
+    #   @return [Types::LeadInvitationInteraction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/LeadInvitationPayload AWS API Documentation
+    #
+    class LeadInvitationPayload < Struct.new(
+      :customer,
+      :interaction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3438,6 +3919,20 @@ module Aws::PartnerCentralSelling
     #   exclude engagements created by specific users.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] context_types
+    #   Filters engagements to include only those containing the specified
+    #   context types, such as "CustomerProject" or "Lead". Use this to
+    #   find engagements that have specific types of contextual information
+    #   associated with them.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_context_types
+    #   Filters engagements to exclude those containing the specified
+    #   context types. Use this to find engagements that do not have certain
+    #   types of contextual information, helping to narrow results based on
+    #   context exclusion criteria.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] sort
     #   Specifies the sorting parameters for listing Engagements.
     #   @return [Types::EngagementSort]
@@ -3461,6 +3956,8 @@ module Aws::PartnerCentralSelling
       :catalog,
       :created_by,
       :exclude_created_by,
+      :context_types,
+      :exclude_context_types,
       :sort,
       :max_results,
       :next_token,
@@ -3580,6 +4077,183 @@ module Aws::PartnerCentralSelling
     #
     class ListOpportunitiesResponse < Struct.new(
       :opportunity_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of a task related to creating an opportunity from
+    # an engagement. This structure contains key information about the
+    # task's status, associated identifiers, and any failure details for
+    # opportunity creation processes.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task for creating an opportunity from
+    #   an engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the task
+    #   within AWS. This ARN can be used for referencing the task in other
+    #   AWS services or APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp indicating when the task was initiated, in RFC 3339
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_status
+    #   The current status of the task. Valid values are COMPLETE,
+    #   INPROGRESS, or FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed message providing additional information about the task,
+    #   especially useful in case of failures. This field may contain error
+    #   details or other relevant information about the task's execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   A code indicating the specific reason for a task failure. This field
+    #   is populated when the task status is FAILED and provides a
+    #   categorized reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] opportunity_id
+    #   The unique identifier of the opportunity created as a result of the
+    #   task. This field is populated when the task is completed
+    #   successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_snapshot_job_id
+    #   The identifier of the resource snapshot job associated with this
+    #   task, if a snapshot was created as part of the opportunity creation
+    #   process.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_id
+    #   The unique identifier of the engagement from which the opportunity
+    #   is being created. This field helps track the source of the
+    #   opportunity creation task.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_id
+    #   The unique identifier of the engagement context associated with the
+    #   opportunity creation task. This links the task to specific
+    #   contextual information within the engagement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListOpportunityFromEngagementTaskSummary AWS API Documentation
+    #
+    class ListOpportunityFromEngagementTaskSummary < Struct.new(
+      :task_id,
+      :task_arn,
+      :start_time,
+      :task_status,
+      :message,
+      :reason_code,
+      :opportunity_id,
+      :resource_snapshot_job_id,
+      :engagement_id,
+      :context_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return in a single page
+    #   of the response. Use this parameter to control the number of items
+    #   returned in each request, which can be useful for performance tuning
+    #   and managing large result sets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for requesting the next page of results. This value is
+    #   obtained from the NextToken field in the response of a previous call
+    #   to this API. Use this parameter for pagination when the result set
+    #   spans multiple pages.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   Defines the sorting parameters for listing tasks. This structure
+    #   allows for specifying the field to sort by and the order of sorting.
+    #   @return [Types::ListTasksSortBase]
+    #
+    # @!attribute [rw] catalog
+    #   Specifies the catalog related to the request. Valid values are `AWS`
+    #   for production environments and `Sandbox` for testing or development
+    #   purposes. The catalog determines which environment the task data is
+    #   retrieved from.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   Filters the tasks based on their current status. This allows you to
+    #   focus on tasks in specific states. Valid values are `COMPLETE` for
+    #   tasks that have finished successfully, `INPROGRESS` for tasks that
+    #   are currently running, and `FAILED` for tasks that have encountered
+    #   an error and failed to complete.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] task_identifier
+    #   Filters tasks by their unique identifiers. Use this when you want to
+    #   retrieve information about specific tasks. Provide the task ID to
+    #   get details about a particular opportunity creation task.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] opportunity_identifier
+    #   Filters tasks by the identifiers of the opportunities they created
+    #   or are associated with. Use this to find tasks related to specific
+    #   opportunity creation processes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] engagement_identifier
+    #   Filters tasks by the identifiers of the engagements from which
+    #   opportunities are being created. Use this to find all opportunity
+    #   creation tasks associated with a specific engagement.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] context_identifier
+    #   Filters tasks by the identifiers of the engagement contexts
+    #   associated with the opportunity creation. Use this to find tasks
+    #   related to specific contextual information within engagements that
+    #   are being converted to opportunities.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListOpportunityFromEngagementTasksRequest AWS API Documentation
+    #
+    class ListOpportunityFromEngagementTasksRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :sort,
+      :catalog,
+      :task_status,
+      :task_identifier,
+      :opportunity_identifier,
+      :engagement_identifier,
+      :context_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_summaries
+    #   An array of `ListOpportunityFromEngagementTaskSummary` objects, each
+    #   representing a task that matches the specified filters. The array
+    #   may be empty if no tasks match the criteria.
+    #   @return [Array<Types::ListOpportunityFromEngagementTaskSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination to retrieve the next page of results. If
+    #   there are more results available, this field will contain a token
+    #   that can be used in a subsequent API call to retrieve the next page.
+    #   If there are no more results, this field will be null or an empty
+    #   string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListOpportunityFromEngagementTasksResponse AWS API Documentation
+    #
+    class ListOpportunityFromEngagementTasksResponse < Struct.new(
+      :task_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4170,16 +4844,25 @@ module Aws::PartnerCentralSelling
     #   from AWS.
     #   @return [Types::OpportunityInvitationPayload]
     #
+    # @!attribute [rw] lead_invitation
+    #   Specifies the details of the lead invitation within the Engagement
+    #   Invitation payload. This data helps partners understand the lead
+    #   context, customer information, and interaction history for the lead
+    #   opportunity from AWS.
+    #   @return [Types::LeadInvitationPayload]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/Payload AWS API Documentation
     #
     class Payload < Struct.new(
       :opportunity_invitation,
+      :lead_invitation,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class OpportunityInvitation < Payload; end
+      class LeadInvitation < Payload; end
       class Unknown < Payload; end
     end
 
@@ -4629,6 +5312,14 @@ module Aws::PartnerCentralSelling
     #   [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aws_marketplace_offer_sets
+    #   Enables the association of AWS Marketplace offer sets with the
+    #   `Opportunity`. Offer sets allow grouping multiple related
+    #   marketplace offers together for comprehensive solution packaging.
+    #   Each value is an Amazon Resource Name (ARN) in this format:
+    #   `arn:aws:aws-marketplace:us-east-1:999999999999:AWSMarketplace/OfferSet/offerset-sampleOfferSet32`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] solutions
     #   Enables partner solutions or offerings' association with an
     #   opportunity. To associate a solution, provide the solution's unique
@@ -4665,6 +5356,7 @@ module Aws::PartnerCentralSelling
     #
     class RelatedEntityIdentifiers < Struct.new(
       :aws_marketplace_offers,
+      :aws_marketplace_offer_sets,
       :solutions,
       :aws_products)
       SENSITIVE = []
@@ -5205,6 +5897,115 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] catalog
+    #   Specifies the catalog in which the opportunity creation task is
+    #   executed. Acceptable values include `AWS` for production and
+    #   `Sandbox` for testing environments.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token provided by the client to help ensure the idempotency
+    #   of the request. It helps prevent the same task from being performed
+    #   multiple times.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier of the engagement from which the opportunity
+    #   creation task is to be initiated. This helps ensure that the task is
+    #   applied to the correct engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_identifier
+    #   The unique identifier of the engagement context from which to create
+    #   the opportunity. This specifies the specific contextual information
+    #   within the engagement that will be used for opportunity creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs of the tag or tags to assign.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/StartOpportunityFromEngagementTaskRequest AWS API Documentation
+    #
+    class StartOpportunityFromEngagementTaskRequest < Struct.new(
+      :catalog,
+      :client_token,
+      :identifier,
+      :context_identifier,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task, used to track the task's
+    #   progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The Amazon Resource Name (ARN) of the task, used for tracking and
+    #   managing the task within AWS.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp indicating when the task was initiated. The format
+    #   follows RFC 3339 section 5.6.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_status
+    #   Indicates the current status of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the task fails, this field contains a detailed message describing
+    #   the failure and possible recovery steps.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   Indicates the reason for task failure using an enumerated code.
+    #   @return [String]
+    #
+    # @!attribute [rw] opportunity_id
+    #   The unique identifier of the opportunity created as a result of the
+    #   task. This field is populated when the task is completed
+    #   successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_snapshot_job_id
+    #   The identifier of the resource snapshot job created as part of the
+    #   opportunity creation process.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_id
+    #   The unique identifier of the engagement from which the opportunity
+    #   was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_id
+    #   The unique identifier of the engagement context used to create the
+    #   opportunity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/StartOpportunityFromEngagementTaskResponse AWS API Documentation
+    #
+    class StartOpportunityFromEngagementTaskResponse < Struct.new(
+      :task_id,
+      :task_arn,
+      :start_time,
+      :task_status,
+      :message,
+      :reason_code,
+      :opportunity_id,
+      :resource_snapshot_job_id,
+      :engagement_id,
+      :context_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
     #   Specifies the catalog related to the request. Valid values are:
     #
     #   * AWS: Starts the request from the production AWS environment.
@@ -5378,6 +6179,149 @@ module Aws::PartnerCentralSelling
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Represents the updated payload of an engagement context. The structure
+    # of this payload varies based on the context type being updated.
+    #
+    # @note UpdateEngagementContextPayload is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] lead
+    #   Contains updated information about a lead when the context type is
+    #   "Lead". This field is present only when updating a lead context
+    #   within the engagement.
+    #   @return [Types::UpdateLeadContext]
+    #
+    # @!attribute [rw] customer_project
+    #   The CustomerProjects structure in Engagements offers a flexible
+    #   framework for managing customer-project relationships. It supports
+    #   multiple customers per Engagement and multiple projects per
+    #   customer, while also allowing for customers without projects and
+    #   projects without specific customers.
+    #
+    #   All Engagement members have full visibility of customers and their
+    #   associated projects, enabling the capture of relevant context even
+    #   when project details are not fully defined. This structure also
+    #   facilitates targeted invitations, allowing partners to focus on
+    #   specific customers and their business problems when sending
+    #   Engagement invitations.
+    #   @return [Types::CustomerProjectsContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UpdateEngagementContextPayload AWS API Documentation
+    #
+    class UpdateEngagementContextPayload < Struct.new(
+      :lead,
+      :customer_project,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Lead < UpdateEngagementContextPayload; end
+      class CustomerProject < UpdateEngagementContextPayload; end
+      class Unknown < UpdateEngagementContextPayload; end
+    end
+
+    # @!attribute [rw] catalog
+    #   Specifies the catalog associated with the engagement context update
+    #   request. This field takes a string value from a predefined list:
+    #   `AWS` or `Sandbox`. The catalog determines which environment the
+    #   engagement context is updated in.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_identifier
+    #   The unique identifier of the `Engagement` containing the context to
+    #   be updated. This parameter ensures the context update is applied to
+    #   the correct engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_identifier
+    #   The unique identifier of the specific engagement context to be
+    #   updated. This ensures that the correct context within the engagement
+    #   is modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_last_modified_at
+    #   The timestamp when the engagement was last modified, used for
+    #   optimistic concurrency control. This helps prevent conflicts when
+    #   multiple users attempt to update the same engagement simultaneously.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of context being updated within the engagement.
+    #   This field determines the structure and content of the context
+    #   payload being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   Contains the updated contextual information for the engagement. The
+    #   structure of this payload varies based on the context type specified
+    #   in the Type field.
+    #   @return [Types::UpdateEngagementContextPayload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UpdateEngagementContextRequest AWS API Documentation
+    #
+    class UpdateEngagementContextRequest < Struct.new(
+      :catalog,
+      :engagement_identifier,
+      :context_identifier,
+      :engagement_last_modified_at,
+      :type,
+      :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engagement_id
+    #   The unique identifier of the engagement that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_arn
+    #   The Amazon Resource Name (ARN) of the updated engagement.
+    #   @return [String]
+    #
+    # @!attribute [rw] engagement_last_modified_at
+    #   The timestamp when the engagement context was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] context_id
+    #   The unique identifier of the engagement context that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UpdateEngagementContextResponse AWS API Documentation
+    #
+    class UpdateEngagementContextResponse < Struct.new(
+      :engagement_id,
+      :engagement_arn,
+      :engagement_last_modified_at,
+      :context_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the context information for a lead with qualification status,
+    # customer details, and interaction data.
+    #
+    # @!attribute [rw] qualification_status
+    #   The updated qualification status of the lead.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer
+    #   Updated customer information associated with the lead.
+    #   @return [Types::LeadCustomer]
+    #
+    # @!attribute [rw] interaction
+    #   Updated interaction details for the lead context.
+    #   @return [Types::LeadInteraction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UpdateLeadContext AWS API Documentation
+    #
+    class UpdateLeadContext < Struct.new(
+      :qualification_status,
+      :customer,
+      :interaction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] catalog
     #   Specifies the catalog associated with the request. This field takes
@@ -5593,6 +6537,11 @@ module Aws::PartnerCentralSelling
     #   expects fewer entries.
     #
     #   Fix: Reduce the number of values to match the expected limit.
+    #
+    # * *NOT\_ENOUGH\_VALUES:* There are not enough values in a field that
+    #   expects more entries.
+    #
+    #   Fix: Increase the number of values to match the expected threshold.
     #
     # * *ACTION\_NOT\_PERMITTED:* The action isn't permitted due to current
     #   state or permissions.

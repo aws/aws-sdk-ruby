@@ -4204,53 +4204,6 @@ module Aws::Glue
     #     connector to read from and write to data stores that are not
     #     natively supported by Glue.
     #
-    #   Additionally, a `ConnectionType` for the following SaaS connectors
-    #   is supported:
-    #
-    #   * `FACEBOOKADS` - Designates a connection to Facebook Ads.
-    #
-    #   * `GOOGLEADS` - Designates a connection to Google Ads.
-    #
-    #   * `GOOGLESHEETS` - Designates a connection to Google Sheets.
-    #
-    #   * `GOOGLEANALYTICS4` - Designates a connection to Google Analytics
-    #     4.
-    #
-    #   * `HUBSPOT` - Designates a connection to HubSpot.
-    #
-    #   * `INSTAGRAMADS` - Designates a connection to Instagram Ads.
-    #
-    #   * `INTERCOM` - Designates a connection to Intercom.
-    #
-    #   * `JIRACLOUD` - Designates a connection to Jira Cloud.
-    #
-    #   * `MARKETO` - Designates a connection to Adobe Marketo Engage.
-    #
-    #   * `NETSUITEERP` - Designates a connection to Oracle NetSuite.
-    #
-    #   * `SALESFORCE` - Designates a connection to Salesforce using OAuth
-    #     authentication.
-    #
-    #   * `SALESFORCEMARKETINGCLOUD` - Designates a connection to Salesforce
-    #     Marketing Cloud.
-    #
-    #   * `SALESFORCEPARDOT` - Designates a connection to Salesforce
-    #     Marketing Cloud Account Engagement (MCAE).
-    #
-    #   * `SAPODATA` - Designates a connection to SAP OData.
-    #
-    #   * `SERVICENOW` - Designates a connection to ServiceNow.
-    #
-    #   * `SLACK` - Designates a connection to Slack.
-    #
-    #   * `SNAPCHATADS` - Designates a connection to Snapchat Ads.
-    #
-    #   * `STRIPE` - Designates a connection to Stripe.
-    #
-    #   * `ZENDESK` - Designates a connection to Zendesk.
-    #
-    #   * `ZOHOCRM` - Designates a connection to Zoho CRM.
-    #
     #   For more information on the connection parameters needed for a
     #   particular connector, see the documentation for the connector in
     #   [Adding an Glue connection][1]in the Glue User Guide.
@@ -15392,6 +15345,10 @@ module Aws::Glue
     #   different query engines and can therefore be read by those engines.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_materialized_view
+    #   Indicates if a table is a materialized view.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] resource_arn
     #   The resource ARN of the parent resource extracted from the request.
     #   @return [String]
@@ -15425,6 +15382,7 @@ module Aws::Glue
       :cell_filters,
       :query_authorization_id,
       :is_multi_dialect_view,
+      :is_materialized_view,
       :resource_arn,
       :is_protected,
       :permissions,
@@ -16137,6 +16095,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Encryption key structure used for Iceberg table encryption. Contains
+    # the key ID, encrypted key metadata, optional reference to the
+    # encrypting key, and additional properties for the table's encryption
+    # scheme.
+    #
+    # @!attribute [rw] key_id
+    #   Unique identifier of the encryption key used for Iceberg table
+    #   encryption. This ID is used to reference the key in table metadata
+    #   and track which key was used to encrypt specific data.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted_key_metadata
+    #   Encrypted key and metadata, base64 encoded. The format of encrypted
+    #   key metadata is determined by the table's encryption scheme and can
+    #   be a wrapped format specific to the table's KMS provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted_by_id
+    #   Optional ID of the key used to encrypt or wrap the key metadata in
+    #   Iceberg table encryption. This field references another encryption
+    #   key that was used to encrypt the current key's metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A string to string map of additional metadata used by the table's
+    #   encryption scheme. These properties provide additional context and
+    #   configuration for the encryption key implementation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergEncryptedKey AWS API Documentation
+    #
+    class IcebergEncryptedKey < Struct.new(
+      :key_id,
+      :encrypted_key_metadata,
+      :encrypted_by_id,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that defines an Apache Iceberg metadata table to create in
     # the catalog.
     #
@@ -16566,6 +16564,20 @@ module Aws::Glue
     #   context about the purpose and usage of this field.
     #   @return [String]
     #
+    # @!attribute [rw] initial_default
+    #   Default value used to populate the field's value for all records
+    #   that were written before the field was added to the schema. This
+    #   enables backward compatibility when adding new fields to existing
+    #   Iceberg tables.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] write_default
+    #   Default value used to populate the field's value for any records
+    #   written after the field was added to the schema, if the writer does
+    #   not supply the field's value. This can be changed through schema
+    #   evolution.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergStructField AWS API Documentation
     #
     class IcebergStructField < Struct.new(
@@ -16573,7 +16585,9 @@ module Aws::Glue
       :name,
       :type,
       :required,
-      :doc)
+      :doc,
+      :initial_default,
+      :write_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16606,6 +16620,24 @@ module Aws::Glue
     #   settings for the Iceberg table.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] action
+    #   The type of update action to be performed on the Iceberg table.
+    #   Defines the specific operation such as adding schema, setting
+    #   current schema, adding partition spec, or managing encryption keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   Encryption key information associated with an Iceberg table update
+    #   operation. Used when adding or removing encryption keys from the
+    #   table metadata during table evolution.
+    #   @return [Types::IcebergEncryptedKey]
+    #
+    # @!attribute [rw] key_id
+    #   Identifier of the encryption key involved in an Iceberg table update
+    #   operation. References the specific key being added to or removed
+    #   from the table's encryption configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergTableUpdate AWS API Documentation
     #
     class IcebergTableUpdate < Struct.new(
@@ -16613,7 +16645,10 @@ module Aws::Glue
       :partition_spec,
       :sort_order,
       :location,
-      :properties)
+      :properties,
+      :action,
+      :encryption_key,
+      :key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26840,9 +26875,12 @@ module Aws::Glue
     #   different query engines and can therefore be read by those engines.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_materialized_view
+    #   Indicates a table is a `MaterializedView`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] status
-    #   A structure containing information about the state of an
-    #   asynchronous change to a table.
+    #   Indicates the the state of an asynchronous change to a table.
     #   @return [Types::TableStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
@@ -26871,6 +26909,7 @@ module Aws::Glue
       :federated_table,
       :view_definition,
       :is_multi_dialect_view,
+      :is_materialized_view,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -29853,9 +29892,32 @@ module Aws::Glue
     #   The definer of a view in SQL.
     #   @return [String]
     #
+    # @!attribute [rw] view_version_id
+    #   The ID value that identifies this view's version. For materialized
+    #   views, the version ID is the Apache Iceberg table's snapshot ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] view_version_token
+    #   The version ID of the Apache Iceberg table.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_seconds
+    #   Auto refresh interval in seconds for the materialized view. If not
+    #   specified, the view will not automatically refresh.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_refresh_type
+    #   Sets the method used for the most recent refresh.
+    #   @return [String]
+    #
     # @!attribute [rw] sub_objects
     #   A list of table Amazon Resource Names (ARNs).
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] sub_object_version_ids
+    #   List of the Apache Iceberg table versions referenced by the
+    #   materialized view.
+    #   @return [Array<Integer>]
     #
     # @!attribute [rw] representations
     #   A list of representations.
@@ -29866,7 +29928,12 @@ module Aws::Glue
     class ViewDefinition < Struct.new(
       :is_protected,
       :definer,
+      :view_version_id,
+      :view_version_token,
+      :refresh_seconds,
+      :last_refresh_type,
       :sub_objects,
+      :sub_object_version_ids,
       :representations)
       SENSITIVE = []
       include Aws::Structure
@@ -29891,9 +29958,33 @@ module Aws::Glue
     #   query that defines the view.
     #   @return [Array<Types::ViewRepresentationInput>]
     #
+    # @!attribute [rw] view_version_id
+    #   The ID value that identifies this view's version. For materialized
+    #   views, the version ID is the Apache Iceberg table's snapshot ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] view_version_token
+    #   The version ID of the Apache Iceberg table.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_seconds
+    #   Auto refresh interval in seconds for the materialized view. If not
+    #   specified, the view will not automatically refresh.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_refresh_type
+    #   The type of the materialized view's last refresh. Valid values:
+    #   `Full`, `Incremental`.
+    #   @return [String]
+    #
     # @!attribute [rw] sub_objects
     #   A list of base table ARNs that make up the view.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] sub_object_version_ids
+    #   List of the Apache Iceberg table versions referenced by the
+    #   materialized view.
+    #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinitionInput AWS API Documentation
     #
@@ -29901,7 +29992,12 @@ module Aws::Glue
       :is_protected,
       :definer,
       :representations,
-      :sub_objects)
+      :view_version_id,
+      :view_version_token,
+      :refresh_seconds,
+      :last_refresh_type,
+      :sub_objects,
+      :sub_object_version_ids)
       SENSITIVE = []
       include Aws::Structure
     end

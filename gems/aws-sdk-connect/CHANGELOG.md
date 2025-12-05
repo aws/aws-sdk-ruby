@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.227.0 (2025-12-01)
+------------------
+
+* Feature - This is a combined re:Invent release for Amazon Connect.
+
 1.226.0 (2025-11-21)
 ------------------
 

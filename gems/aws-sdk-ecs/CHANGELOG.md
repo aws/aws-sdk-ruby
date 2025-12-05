@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2025-12-05)
+------------------
+
+* Feature - Updating stop-task API to encapsulate containers with custom stop signal
+
 1.214.0 (2025-11-21)
 ------------------
 

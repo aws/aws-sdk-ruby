@@ -191,6 +191,11 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
+    class ColumnClassificationDetails
+      attr_accessor column_mapping: ::Array[Types::SyntheticDataColumnProperties]
+      SENSITIVE: []
+    end
+
     class ColumnSchema
       attr_accessor column_name: ::String
       attr_accessor column_types: ::Array[("USER_ID" | "ITEM_ID" | "TIMESTAMP" | "CATEGORICAL_FEATURE" | "NUMERICAL_FEATURE")]
@@ -384,6 +389,11 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
+    class DataPrivacyScores
+      attr_accessor membership_inference_attack_scores: ::Array[Types::MembershipInferenceAttackScore]
+      SENSITIVE: []
+    end
+
     class DataSource
       attr_accessor glue_data_source: Types::GlueDataSource
       SENSITIVE: []
@@ -543,6 +553,7 @@ module Aws::CleanRoomsML
       attr_accessor number_of_records: ::Integer
       attr_accessor privacy_budgets: Types::PrivacyBudgets
       attr_accessor description: ::String
+      attr_accessor synthetic_data_configuration: Types::SyntheticDataConfiguration
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor creator_account_id: ::String
@@ -685,6 +696,7 @@ module Aws::CleanRoomsML
       attr_accessor number_of_records: ::Integer
       attr_accessor privacy_budgets: Types::PrivacyBudgets
       attr_accessor description: ::String
+      attr_accessor synthetic_data_configuration: Types::SyntheticDataConfiguration
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor input_channel: Types::InputChannel
@@ -1110,6 +1122,19 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
+    class MLSyntheticDataParameters
+      attr_accessor epsilon: ::Float
+      attr_accessor max_membership_inference_attack_score: ::Float
+      attr_accessor column_classification: Types::ColumnClassificationDetails
+      SENSITIVE: []
+    end
+
+    class MembershipInferenceAttackScore
+      attr_accessor attack_version: ("DISTANCE_TO_CLOSEST_RECORD_V1")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
     class MetricDefinition
       attr_accessor name: ::String
       attr_accessor regex: ::String
@@ -1284,6 +1309,24 @@ module Aws::CleanRoomsML
 
     class StoppingCondition
       attr_accessor max_runtime_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SyntheticDataColumnProperties
+      attr_accessor column_name: ::String
+      attr_accessor column_type: ("CATEGORICAL" | "NUMERICAL")
+      attr_accessor is_predictive_value: bool
+      SENSITIVE: []
+    end
+
+    class SyntheticDataConfiguration
+      attr_accessor synthetic_data_parameters: Types::MLSyntheticDataParameters
+      attr_accessor synthetic_data_evaluation_scores: Types::SyntheticDataEvaluationScores
+      SENSITIVE: []
+    end
+
+    class SyntheticDataEvaluationScores
+      attr_accessor data_privacy_scores: Types::DataPrivacyScores
       SENSITIVE: []
     end
 

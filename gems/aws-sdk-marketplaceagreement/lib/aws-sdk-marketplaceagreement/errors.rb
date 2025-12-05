@@ -49,13 +49,13 @@ module Aws::MarketplaceAgreement
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def request_id
+        @data[:request_id]
       end
 
       # @return [String]
-      def request_id
-        @data[:request_id]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -69,13 +69,13 @@ module Aws::MarketplaceAgreement
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def request_id
+        @data[:request_id]
       end
 
       # @return [String]
-      def request_id
-        @data[:request_id]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -89,13 +89,13 @@ module Aws::MarketplaceAgreement
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def request_id
+        @data[:request_id]
       end
 
       # @return [String]
-      def request_id
-        @data[:request_id]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
@@ -119,13 +119,13 @@ module Aws::MarketplaceAgreement
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def request_id
+        @data[:request_id]
       end
 
       # @return [String]
-      def request_id
-        @data[:request_id]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -139,8 +139,8 @@ module Aws::MarketplaceAgreement
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
+      def request_id
+        @data[:request_id]
       end
 
       # @return [String]
@@ -154,8 +154,8 @@ module Aws::MarketplaceAgreement
       end
 
       # @return [String]
-      def request_id
-        @data[:request_id]
+      def fields
+        @data[:fields]
       end
     end
 

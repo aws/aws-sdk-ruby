@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2025-12-02)
+------------------
+
+* Feature - Supports AgentCore Evaluations, Policy, Episodic Memory Strategy, Resource Based Policy for Runtime and Gateway APIs, API Gateway Rest API Targets and enhances JWT authorizer.
+
 1.15.0 (2025-11-21)
 ------------------
 

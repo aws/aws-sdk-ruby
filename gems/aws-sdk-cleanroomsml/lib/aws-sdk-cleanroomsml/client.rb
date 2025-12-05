@@ -1855,6 +1855,7 @@ module Aws::CleanRoomsML
     #   * {Types::GetCollaborationMLInputChannelResponse#number_of_records #number_of_records} => Integer
     #   * {Types::GetCollaborationMLInputChannelResponse#privacy_budgets #privacy_budgets} => Types::PrivacyBudgets
     #   * {Types::GetCollaborationMLInputChannelResponse#description #description} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#synthetic_data_configuration #synthetic_data_configuration} => Types::SyntheticDataConfiguration
     #   * {Types::GetCollaborationMLInputChannelResponse#create_time #create_time} => Time
     #   * {Types::GetCollaborationMLInputChannelResponse#update_time #update_time} => Time
     #   * {Types::GetCollaborationMLInputChannelResponse#creator_account_id #creator_account_id} => String
@@ -1890,6 +1891,15 @@ module Aws::CleanRoomsML
     #   resp.privacy_budgets.access_budgets[0].details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
     #   resp.privacy_budgets.access_budgets[0].aggregate_remaining_budget #=> Integer
     #   resp.description #=> String
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.epsilon #=> Float
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
+    #   resp.synthetic_data_configuration.synthetic_data_evaluation_scores.data_privacy_scores.membership_inference_attack_scores #=> Array
+    #   resp.synthetic_data_configuration.synthetic_data_evaluation_scores.data_privacy_scores.membership_inference_attack_scores[0].attack_version #=> String, one of "DISTANCE_TO_CLOSEST_RECORD_V1"
+    #   resp.synthetic_data_configuration.synthetic_data_evaluation_scores.data_privacy_scores.membership_inference_attack_scores[0].score #=> Float
     #   resp.create_time #=> Time
     #   resp.update_time #=> Time
     #   resp.creator_account_id #=> String
@@ -2273,6 +2283,7 @@ module Aws::CleanRoomsML
     #   * {Types::GetMLInputChannelResponse#number_of_records #number_of_records} => Integer
     #   * {Types::GetMLInputChannelResponse#privacy_budgets #privacy_budgets} => Types::PrivacyBudgets
     #   * {Types::GetMLInputChannelResponse#description #description} => String
+    #   * {Types::GetMLInputChannelResponse#synthetic_data_configuration #synthetic_data_configuration} => Types::SyntheticDataConfiguration
     #   * {Types::GetMLInputChannelResponse#create_time #create_time} => Time
     #   * {Types::GetMLInputChannelResponse#update_time #update_time} => Time
     #   * {Types::GetMLInputChannelResponse#input_channel #input_channel} => Types::InputChannel
@@ -2313,6 +2324,15 @@ module Aws::CleanRoomsML
     #   resp.privacy_budgets.access_budgets[0].details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
     #   resp.privacy_budgets.access_budgets[0].aggregate_remaining_budget #=> Integer
     #   resp.description #=> String
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.epsilon #=> Float
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.synthetic_data_configuration.synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
+    #   resp.synthetic_data_configuration.synthetic_data_evaluation_scores.data_privacy_scores.membership_inference_attack_scores #=> Array
+    #   resp.synthetic_data_configuration.synthetic_data_evaluation_scores.data_privacy_scores.membership_inference_attack_scores[0].attack_version #=> String, one of "DISTANCE_TO_CLOSEST_RECORD_V1"
+    #   resp.synthetic_data_configuration.synthetic_data_evaluation_scores.data_privacy_scores.membership_inference_attack_scores[0].score #=> Float
     #   resp.create_time #=> Time
     #   resp.update_time #=> Time
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.query_string #=> String
@@ -4075,7 +4095,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

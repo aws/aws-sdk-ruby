@@ -146,7 +146,7 @@ module Aws
       def create_and_attach_s3_access_point: (
                                                ?client_request_token: ::String,
                                                name: ::String,
-                                               type: ("OPENZFS"),
+                                               type: ("OPENZFS" | "ONTAP"),
                                                ?open_zfs_configuration: {
                                                  volume_id: ::String,
                                                  file_system_identity: {
@@ -155,6 +155,18 @@ module Aws
                                                      uid: ::Integer,
                                                      gid: ::Integer,
                                                      secondary_gids: Array[::Integer]?
+                                                   }?
+                                                 }
+                                               },
+                                               ?ontap_configuration: {
+                                                 volume_id: ::String,
+                                                 file_system_identity: {
+                                                   type: ("UNIX" | "WINDOWS"),
+                                                   unix_user: {
+                                                     name: ::String
+                                                   }?,
+                                                   windows_user: {
+                                                     name: ::String
                                                    }?
                                                  }
                                                },
@@ -1092,7 +1104,7 @@ module Aws
 
       interface _DetachAndDeleteS3AccessPointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DetachAndDeleteS3AccessPointResponse]
-        def lifecycle: () -> ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+        def lifecycle: () -> ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED" | "MISCONFIGURED")
         def name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#detach_and_delete_s3_access_point-instance_method

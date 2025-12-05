@@ -127,6 +127,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_availability_zone-instance_method
       def snapshot_availability_zone: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#additional_storage_volumes-instance_method
+      def additional_storage_volumes: () -> ::Array[Types::AdditionalStorageVolume]
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#load-instance_method
@@ -231,7 +234,17 @@ module Aws
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,
                      ?manage_master_user_password: bool,
-                     ?master_user_secret_kms_key_id: ::String
+                     ?master_user_secret_kms_key_id: ::String,
+                     ?additional_storage_volumes: Array[
+                       {
+                         volume_name: ::String,
+                         allocated_storage: ::Integer?,
+                         iops: ::Integer?,
+                         max_allocated_storage: ::Integer?,
+                         storage_throughput: ::Integer?,
+                         storage_type: ::String?
+                       },
+                     ]
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
 

@@ -11,12 +11,14 @@ module Aws::OpenSearchService
     class AIMLOptionsInput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine
+      attr_accessor serverless_vector_acceleration: Types::ServerlessVectorAcceleration
       SENSITIVE: []
     end
 
     class AIMLOptionsOutput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine
+      attr_accessor serverless_vector_acceleration: Types::ServerlessVectorAcceleration
       SENSITIVE: []
     end
 
@@ -1817,6 +1819,11 @@ module Aws::OpenSearchService
 
     class SecurityLakeDirectQueryDataSource
       attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServerlessVectorAcceleration
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 

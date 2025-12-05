@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2025-12-01)
+------------------
+
+* Feature - Amazon Connect now supports message processing that intercepts and processes chat messages before they reach any participant.
+
 1.73.0 (2025-11-21)
 ------------------
 

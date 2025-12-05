@@ -2008,6 +2008,21 @@ module Aws
                           ) -> _GetConnectionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionResponseSuccess
 
+      interface _GetDataExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataExportConfigurationOutput]
+        def created_at: () -> ::Time
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def is_export_enabled: () -> bool
+        def s3_table_bucket_arn: () -> ::String
+        def status: () -> ("COMPLETED" | "FAILED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_data_export_configuration-instance_method
+      def get_data_export_configuration: (
+                                           domain_identifier: ::String
+                                         ) -> _GetDataExportConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataExportConfigurationResponseSuccess
+
       interface _GetDataProductResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataProductOutput]
         def created_at: () -> ::Time
@@ -2444,14 +2459,17 @@ module Aws
         def domain_id: () -> ::String
         def id: () -> ::String
         def owning_project_id: () -> ::String
-        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
         def target: () -> Types::MetadataGenerationRunTarget
-        def type: () -> ("BUSINESS_DESCRIPTIONS")
+        def type: () -> ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
+        def type_stats: () -> ::Array[Types::MetadataGenerationRunTypeStat]
+        def types: () -> ::Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_metadata_generation_run-instance_method
       def get_metadata_generation_run: (
                                          domain_identifier: ::String,
-                                         identifier: ::String
+                                         identifier: ::String,
+                                         ?type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
                                        ) -> _GetMetadataGenerationRunResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetadataGenerationRunResponseSuccess
 
@@ -2981,8 +2999,9 @@ module Aws
                                            domain_identifier: ::String,
                                            ?max_results: ::Integer,
                                            ?next_token: ::String,
-                                           ?status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED"),
-                                           ?type: ("BUSINESS_DESCRIPTIONS")
+                                           ?status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED"),
+                                           ?target_identifier: ::String,
+                                           ?type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
                                          ) -> _ListMetadataGenerationRunsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetadataGenerationRunsResponseSuccess
 
@@ -3235,6 +3254,21 @@ module Aws
                                           ]
                                         ) -> _PostTimeSeriesDataPointsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostTimeSeriesDataPointsResponseSuccess
+
+      interface _PutDataExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDataExportConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#put_data_export_configuration-instance_method
+      def put_data_export_configuration: (
+                                           ?client_token: ::String,
+                                           domain_identifier: ::String,
+                                           enable_export: bool,
+                                           ?encryption_configuration: {
+                                             kms_key_arn: ::String?,
+                                             sse_algorithm: ::String?
+                                           }
+                                         ) -> _PutDataExportConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataExportConfigurationResponseSuccess
 
       interface _PutEnvironmentBlueprintConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEnvironmentBlueprintConfigurationOutput]
@@ -3586,8 +3620,9 @@ module Aws
         def domain_id: () -> ::String
         def id: () -> ::String
         def owning_project_id: () -> ::String
-        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
-        def type: () -> ("BUSINESS_DESCRIPTIONS")
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED" | "PARTIALLY_SUCCEEDED")
+        def type: () -> ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")
+        def types: () -> ::Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_metadata_generation_run-instance_method
       def start_metadata_generation_run: (
@@ -3599,7 +3634,8 @@ module Aws
                                              revision: ::String?,
                                              type: ("ASSET")
                                            },
-                                           type: ("BUSINESS_DESCRIPTIONS")
+                                           ?type: ("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS"),
+                                           ?types: Array[("BUSINESS_DESCRIPTIONS" | "BUSINESS_NAMES" | "BUSINESS_GLOSSARY_ASSOCIATIONS")]
                                          ) -> _StartMetadataGenerationRunResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataGenerationRunResponseSuccess
 

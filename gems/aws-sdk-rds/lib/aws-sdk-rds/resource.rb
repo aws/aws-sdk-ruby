@@ -1181,6 +1181,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1500,6 +1510,8 @@ module Aws::RDS
     #   * `oracle-se2-cdb`
     #
     #   * `postgres`
+    #
+    #   * `sqlserver-dev-ee`
     #
     #   * `sqlserver-ee`
     #
@@ -2436,6 +2448,12 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

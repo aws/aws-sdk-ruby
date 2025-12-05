@@ -67,9 +67,14 @@ module Aws::BedrockAgentCoreControl
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name    | params              | :delay   | :max_attempts |
-  # | -------------- | ------------------- | -------- | ------------- |
-  # | memory_created | {Client#get_memory} | 2        | 60            |
+  # | waiter_name                 | params                         | :delay   | :max_attempts |
+  # | --------------------------- | ------------------------------ | -------- | ------------- |
+  # | memory_created              | {Client#get_memory}            | 2        | 60            |
+  # | policy_active               | {Client#get_policy}            | 2        | 60            |
+  # | policy_deleted              | {Client#get_policy}            | 2        | 60            |
+  # | policy_engine_active        | {Client#get_policy_engine}     | 2        | 60            |
+  # | policy_engine_deleted       | {Client#get_policy_engine}     | 2        | 60            |
+  # | policy_generation_completed | {Client#get_policy_generation} | 2        | 60            |
   #
   module Waiters
 
@@ -114,6 +119,277 @@ module Aws::BedrockAgentCoreControl
 
       # @option (see Client#get_memory)
       # @return (see Client#get_memory)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a Policy is active
+    class PolicyActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_policy,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "UPDATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_policy)
+      # @return (see Client#get_policy)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a Policy is deleted
+    class PolicyDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_policy,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "retry",
+                "expected" => "DELETING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_policy)
+      # @return (see Client#get_policy)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a PolicyEngine is active
+    class PolicyEngineActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_policy_engine,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "UPDATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_policy_engine)
+      # @return (see Client#get_policy_engine)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a PolicyEngine is deleted
+    class PolicyEngineDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_policy_engine,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "retry",
+                "expected" => "DELETING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_policy_engine)
+      # @return (see Client#get_policy_engine)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until policy generation is completed
+    class PolicyGenerationCompleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_policy_generation,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "GENERATED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "retry",
+                "expected" => "GENERATING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "GENERATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_policy_generation)
+      # @return (see Client#get_policy_generation)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

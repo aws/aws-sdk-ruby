@@ -1352,7 +1352,7 @@ module Aws::CostExplorer
     #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.analysis_type #=> String, one of "MAX_SAVINGS", "CUSTOM_COMMITMENT"
     #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add #=> Array
     #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
-    #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"
+    #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"
     #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].region #=> String
     #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].instance_family #=> String
     #   resp.commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
@@ -2488,7 +2488,7 @@ module Aws::CostExplorer
     #
     # @option params [required, String] :granularity
     #   How granular you want the forecast to be. You can get 3 months of
-    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #   `DAILY` forecasts or 18 months of `MONTHLY` forecasts.
     #
     #   The `GetCostForecast` operation supports only `DAILY` and `MONTHLY`
     #   granularities.
@@ -4119,7 +4119,7 @@ module Aws::CostExplorer
     #   resp.recommendation_detail_id #=> String
     #   resp.recommendation_detail_data.account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.recommendation_detail_data.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
-    #   resp.recommendation_detail_data.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"
+    #   resp.recommendation_detail_data.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"
     #   resp.recommendation_detail_data.term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
     #   resp.recommendation_detail_data.payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
     #   resp.recommendation_detail_data.account_id #=> String
@@ -4391,7 +4391,7 @@ module Aws::CostExplorer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_savings_plans_purchase_recommendation({
-    #     savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP
+    #     savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP, DATABASE_SP
     #     term_in_years: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEARS
     #     payment_option: "NO_UPFRONT", # required, accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #     account_scope: "PAYER", # accepts PAYER, LINKED
@@ -4436,7 +4436,7 @@ module Aws::CostExplorer
     #   resp.metadata.generation_timestamp #=> String
     #   resp.metadata.additional_metadata #=> String
     #   resp.savings_plans_purchase_recommendation.account_scope #=> String, one of "PAYER", "LINKED"
-    #   resp.savings_plans_purchase_recommendation.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"
+    #   resp.savings_plans_purchase_recommendation.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"
     #   resp.savings_plans_purchase_recommendation.term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
     #   resp.savings_plans_purchase_recommendation.payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
     #   resp.savings_plans_purchase_recommendation.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
@@ -5045,7 +5045,7 @@ module Aws::CostExplorer
     #
     # @option params [required, String] :granularity
     #   How granular you want the forecast to be. You can get 3 months of
-    #   `DAILY` forecasts or 12 months of `MONTHLY` forecasts.
+    #   `DAILY` forecasts or 18 months of `MONTHLY` forecasts.
     #
     #   The `GetUsageForecast` operation supports only `DAILY` and `MONTHLY`
     #   granularities.
@@ -5227,7 +5227,7 @@ module Aws::CostExplorer
     #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.analysis_type #=> String, one of "MAX_SAVINGS", "CUSTOM_COMMITMENT"
     #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add #=> Array
     #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
-    #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"
+    #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"
     #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].region #=> String
     #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].instance_family #=> String
     #   resp.analysis_summary_list[0].commitment_purchase_analysis_configuration.savings_plans_purchase_analysis_configuration.savings_plans_to_add[0].term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
@@ -5559,7 +5559,7 @@ module Aws::CostExplorer
     #         savings_plans_to_add: [ # required
     #           {
     #             payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
-    #             savings_plans_type: "COMPUTE_SP", # accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP
+    #             savings_plans_type: "COMPUTE_SP", # accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP, DATABASE_SP
     #             region: "GenericString",
     #             instance_family: "GenericString",
     #             term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
@@ -6113,7 +6113,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

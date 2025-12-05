@@ -2139,8 +2139,7 @@ module Aws::SecurityHub
     # permission to perform the `securityhub:BatchUpdateFindings` action.
     # Updates from `BatchUpdateFindingsV2` don't affect the value of
     # f`inding_info.modified_time`, `finding_info.modified_time_dt`, `time`,
-    # `time_dt for a finding`. This API is in public preview and subject to
-    # change.
+    # `time_dt for a finding`.
     #
     # @option params [Array<String>] :metadata_uids
     #   The list of finding `metadata.uid` to indicate findings to update.
@@ -2298,43 +2297,6 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Grants permission to complete the authorization based on input
-    # parameters. This API is in public preview and subject to change.
-    #
-    # @option params [required, String] :auth_code
-    #   The authCode retrieved from authUrl to complete the OAuth 2.0
-    #   authorization code flow.
-    #
-    # @option params [required, String] :auth_state
-    #   The authState retrieved from authUrl to complete the OAuth 2.0
-    #   authorization code flow.
-    #
-    # @return [Types::ConnectorRegistrationsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ConnectorRegistrationsV2Response#connector_arn #connector_arn} => String
-    #   * {Types::ConnectorRegistrationsV2Response#connector_id #connector_id} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.connector_registrations_v2({
-    #     auth_code: "NonEmptyString", # required
-    #     auth_state: "NonEmptyString", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.connector_arn #=> String
-    #   resp.connector_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2 AWS API Documentation
-    #
-    # @overload connector_registrations_v2(params = {})
-    # @param [Hash] params ({})
-    def connector_registrations_v2(params = {}, options = {})
-      req = build_request(:connector_registrations_v2, params)
-      req.send_request(options)
-    end
-
     # Creates a custom action target in Security Hub.
     #
     # You can use custom actions on findings and insights in Security Hub to
@@ -2392,8 +2354,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables aggregation across Amazon Web Services Regions. This API is in
-    # public preview and subject to change.
+    # Enables aggregation across Amazon Web Services Regions.
     #
     # @option params [required, String] :region_linking_mode
     #   Determines how Regions are linked to an Aggregator V2.
@@ -2878,8 +2839,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates a V2 automation rule. This API is in public preview and
-    # subject to change.
+    # Creates a V2 automation rule.
     #
     # @option params [required, String] :rule_name
     #   The name of the V2 automation rule.
@@ -2926,7 +2886,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -2956,7 +2916,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
+    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count, vulnerabilities.cve.cvss.base_score, vendor_attributes.severity_id
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -3222,7 +3182,6 @@ module Aws::SecurityHub
     end
 
     # Grants permission to create a connectorV2 based on input parameters.
-    # This API is in public preview and subject to change.
     #
     # @option params [required, String] :name
     #   The unique name of the connectorV2.
@@ -3251,6 +3210,7 @@ module Aws::SecurityHub
     #   * {Types::CreateConnectorV2Response#connector_arn #connector_arn} => String
     #   * {Types::CreateConnectorV2Response#connector_id #connector_id} => String
     #   * {Types::CreateConnectorV2Response#auth_url #auth_url} => String
+    #   * {Types::CreateConnectorV2Response#connector_status #connector_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3263,8 +3223,7 @@ module Aws::SecurityHub
     #       },
     #       service_now: {
     #         instance_name: "NonEmptyString", # required
-    #         client_id: "NonEmptyString", # required
-    #         client_secret: "SensitiveNonEmptyString", # required
+    #         secret_arn: "NonEmptyString", # required
     #       },
     #     },
     #     kms_key_arn: "NonEmptyString",
@@ -3279,6 +3238,7 @@ module Aws::SecurityHub
     #   resp.connector_arn #=> String
     #   resp.connector_id #=> String
     #   resp.auth_url #=> String
+    #   resp.connector_status #=> String, one of "CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2 AWS API Documentation
     #
@@ -4279,8 +4239,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to create a ticket in the chosen ITSM based on
-    # finding information for the provided finding metadata UID. This API is
-    # in public preview and subject to change.
+    # finding information for the provided finding metadata UID.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -4294,6 +4253,11 @@ module Aws::SecurityHub
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :mode
+    #   The mode for ticket creation. When set to DRYRUN, the ticket is
+    #   created using a Security Hub owned template test finding to verify the
+    #   integration is working correctly.
+    #
     # @return [Types::CreateTicketV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTicketV2Response#ticket_id #ticket_id} => String
@@ -4305,6 +4269,7 @@ module Aws::SecurityHub
     #     connector_id: "NonEmptyString", # required
     #     finding_metadata_uid: "NonEmptyString", # required
     #     client_token: "ClientToken",
+    #     mode: "DRYRUN", # accepts DRYRUN
     #   })
     #
     # @example Response structure
@@ -4437,8 +4402,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes the Aggregator V2. This API is in public preview and subject
-    # to change.
+    # Deletes the Aggregator V2.
     #
     # @option params [required, String] :aggregator_v2_arn
     #   The ARN of the Aggregator V2.
@@ -4460,8 +4424,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a V2 automation rule. This API is in public preview and
-    # subject to change.
+    # Deletes a V2 automation rule.
     #
     # @option params [required, String] :identifier
     #   The ARN of the V2 automation rule.
@@ -4519,8 +4482,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Grants permission to delete a connectorV2. This API is in public
-    # preview and subject to change.
+    # Grants permission to delete a connectorV2.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -5026,8 +4988,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Gets information about the product integration. This API is in public
-    # preview and subject to change.
+    # Gets information about the product integration.
     #
     # @option params [String] :next_token
     #   The token required for pagination. On your first call, set the value
@@ -5075,8 +5036,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns details about the service resource in your account. This API
-    # is in public preview and subject to change.
+    # Returns details about the service resource in your account.
     #
     # @return [Types::DescribeSecurityHubV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5405,8 +5365,7 @@ module Aws::SecurityHub
     end
 
     # Disable the service for the current Amazon Web Services Region or
-    # specified Amazon Web Services Region. This API is in public preview
-    # and subject to change.
+    # specified Amazon Web Services Region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5703,8 +5662,7 @@ module Aws::SecurityHub
     end
 
     # Enables the service in account for the current Amazon Web Services
-    # Region or specified Amazon Web Services Region. This API is in public
-    # preview and subject to change.
+    # Region or specified Amazon Web Services Region.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the hub V2 resource when you enable Security Hub.
@@ -5778,8 +5736,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the configuration of the specified Aggregator V2. This API is
-    # in public preview and subject to change.
+    # Returns the configuration of the specified Aggregator V2.
     #
     # @option params [required, String] :aggregator_v2_arn
     #   The ARN of the Aggregator V2.
@@ -5814,8 +5771,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns an automation rule for the V2 service. This API is in public
-    # preview and subject to change.
+    # Returns an automation rule for the V2 service.
     #
     # @option params [required, String] :identifier
     #   The ARN of the V2 automation rule.
@@ -5849,7 +5805,7 @@ module Aws::SecurityHub
     #   resp.description #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters #=> Array
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.value #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters #=> Array
@@ -5862,7 +5818,7 @@ module Aws::SecurityHub
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters[0].field_name #=> String, one of "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters[0].filter.value #=> Boolean
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].field_name #=> String, one of "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].field_name #=> String, one of "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.gte #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.lte #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.eq #=> Float
@@ -6080,7 +6036,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to retrieve details for a connectorV2 based on
-    # connector id. This API is in public preview and subject to change.
+    # connector id.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
@@ -6121,7 +6077,7 @@ module Aws::SecurityHub
     #   resp.provider_detail.jira_cloud.auth_url #=> String
     #   resp.provider_detail.jira_cloud.auth_status #=> String, one of "ACTIVE", "FAILED"
     #   resp.provider_detail.service_now.instance_name #=> String
-    #   resp.provider_detail.service_now.client_id #=> String
+    #   resp.provider_detail.service_now.secret_arn #=> String
     #   resp.provider_detail.service_now.auth_status #=> String, one of "ACTIVE", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConnectorV2 AWS API Documentation
@@ -6438,8 +6394,7 @@ module Aws::SecurityHub
     # Returns aggregated statistical data about findings.
     # `GetFindingStatisticsV2` use `securityhub:GetAdhocInsightResults` in
     # the `Action` element of an IAM policy statement. You must have
-    # permission to perform the `s` action. This API is in public preview
-    # and subject to change.
+    # permission to perform the `s` action.
     #
     # @option params [required, Array<Types::GroupByRule>] :group_by_rules
     #   Specifies how security findings should be aggregated and organized in
@@ -6467,7 +6422,7 @@ module Aws::SecurityHub
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
+    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -6497,7 +6452,7 @@ module Aws::SecurityHub
     #               ],
     #               number_filters: [
     #                 {
-    #                   field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
+    #                   field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count, vulnerabilities.cve.cvss.base_score, vendor_attributes.severity_id
     #                   filter: {
     #                     gte: 1.0,
     #                     lte: 1.0,
@@ -6533,7 +6488,7 @@ module Aws::SecurityHub
     #           ],
     #           composite_operator: "AND", # accepts AND, OR
     #         },
-    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name
+    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity
     #       },
     #     ],
     #     sort_order: "asc", # accepts asc, desc
@@ -7424,7 +7379,7 @@ module Aws::SecurityHub
 
     # Returns findings trend data based on the specified criteria. This
     # operation helps you analyze patterns and changes in findings over
-    # time. This API is in public preview and subject to change.
+    # time.
     #
     # @option params [Types::FindingsTrendsFilters] :filters
     #   The filters to apply to the findings trend data.
@@ -7509,8 +7464,7 @@ module Aws::SecurityHub
     # Return a list of findings that match the specified criteria.
     # `GetFindings` and `GetFindingsV2` both use `securityhub:GetFindings`
     # in the `Action` element of an IAM policy statement. You must have
-    # permission to perform the `securityhub:GetFindings` action. This API
-    # is in public preview and subject to change.
+    # permission to perform the `securityhub:GetFindings` action.
     #
     # @option params [Types::OcsfFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
@@ -7545,7 +7499,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
+    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -7575,7 +7529,7 @@ module Aws::SecurityHub
     #           ],
     #           number_filters: [
     #             {
-    #               field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
+    #               field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count, vulnerabilities.cve.cvss.base_score, vendor_attributes.severity_id
     #               filter: {
     #                 gte: 1.0,
     #                 lte: 1.0,
@@ -8309,8 +8263,7 @@ module Aws::SecurityHub
     end
 
     # Retrieves statistical information about Amazon Web Services resources
-    # and their associated security findings. This API is in public preview
-    # and subject to change.
+    # and their associated security findings.
     #
     # @option params [required, Array<Types::ResourceGroupByRule>] :group_by_rules
     #   How resource statistics should be aggregated and organized in the
@@ -8412,8 +8365,7 @@ module Aws::SecurityHub
 
     # Returns resource trend data based on the specified criteria. This
     # operation helps you analyze patterns and changes in resource
-    # compliance over time. This API is in public preview and subject to
-    # change.
+    # compliance over time.
     #
     # @option params [Types::ResourcesTrendsFilters] :filters
     #   The filters to apply to the resources trend data.
@@ -8488,8 +8440,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of resources. This API is in public preview and subject
-    # to change.
+    # Returns a list of resources.
     #
     # @option params [Types::ResourcesFilters] :filters
     #   Filters resources based on a set of criteria.
@@ -8796,8 +8747,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Retrieves a list of V2 aggregators. This API is in public preview and
-    # subject to change.
+    # Retrieves a list of V2 aggregators.
     #
     # @option params [String] :next_token
     #   The token required for pagination. On your first call, set the value
@@ -8922,7 +8872,7 @@ module Aws::SecurityHub
     end
 
     # Returns a list of automation rules and metadata for the calling
-    # account. This API is in public preview and subject to change.
+    # account.
     #
     # @option params [String] :next_token
     #   The token required for pagination. On your first call, set the value
@@ -9149,8 +9099,7 @@ module Aws::SecurityHub
     end
 
     # Grants permission to retrieve a list of connectorsV2 and their
-    # metadata for the calling account. This API is in public preview and
-    # subject to change.
+    # metadata for the calling account.
     #
     # @option params [String] :next_token
     #   The pagination token per the Amazon Web Services Pagination standard
@@ -9855,6 +9804,43 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Grants permission to complete the authorization based on input
+    # parameters.
+    #
+    # @option params [required, String] :auth_code
+    #   The authCode retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #
+    # @option params [required, String] :auth_state
+    #   The authState retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #
+    # @return [Types::RegisterConnectorV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterConnectorV2Response#connector_arn #connector_arn} => String
+    #   * {Types::RegisterConnectorV2Response#connector_id #connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_connector_v2({
+    #     auth_code: "NonEmptyString", # required
+    #     auth_state: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #   resp.connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RegisterConnectorV2 AWS API Documentation
+    #
+    # @overload register_connector_v2(params = {})
+    # @param [Hash] params ({})
+    def register_connector_v2(params = {}, options = {})
+      req = build_request(:register_connector_v2, params)
+      req.send_request(options)
+    end
+
     # Associates a target account, organizational unit, or the root with a
     # specified configuration. The target can be associated with a
     # configuration policy or self-managed behavior. Only the Security Hub
@@ -10112,8 +10098,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Udpates the configuration for the Aggregator V2. This API is in public
-    # preview and subject to change.
+    # Udpates the configuration for the Aggregator V2.
     #
     # @option params [required, String] :aggregator_v2_arn
     #   The ARN of the Aggregator V2.
@@ -10157,8 +10142,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates a V2 automation rule. This API is in public preview and
-    # subject to change.
+    # Updates a V2 automation rule.
     #
     # @option params [required, String] :identifier
     #   The ARN of the automation rule.
@@ -10197,7 +10181,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -10227,7 +10211,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
+    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count, vulnerabilities.cve.cvss.base_score, vendor_attributes.severity_id
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -10489,13 +10473,10 @@ module Aws::SecurityHub
     end
 
     # Grants permission to update a connectorV2 based on its id and input
-    # parameters. This API is in public preview and subject to change.
+    # parameters.
     #
     # @option params [required, String] :connector_id
     #   The UUID of the connectorV2 to identify connectorV2 resource.
-    #
-    # @option params [String] :client_secret
-    #   The clientSecret of ServiceNow.
     #
     # @option params [String] :description
     #   The description of the connectorV2.
@@ -10509,11 +10490,13 @@ module Aws::SecurityHub
     #
     #   resp = client.update_connector_v2({
     #     connector_id: "NonEmptyString", # required
-    #     client_secret: "SensitiveNonEmptyString",
     #     description: "NonEmptyString",
     #     provider: {
     #       jira_cloud: {
-    #         project_key: "NonEmptyString", # required
+    #         project_key: "NonEmptyString",
+    #       },
+    #       service_now: {
+    #         secret_arn: "NonEmptyString",
     #       },
     #     },
     #   })
@@ -12411,7 +12394,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.147.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

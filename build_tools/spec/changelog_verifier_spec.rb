@@ -47,7 +47,7 @@ end
 describe "ensures CHANGELOG.md has parsable entries" do
 
   let(:skip_pattern) { /(------------------\n|Unreleased Changes\n|\d\.\d+\.\d.*)/ }
-  let(:entry_pattern) { /(\*\sFeature\s-\s\w+|\*\sIssue\s-\s\w+)/ }
+  let(:entry_pattern) { /(\*\sFeature\s-\s[\w:]+|\*\sIssue\s-\s[\w:]+|\s+.+)/ }
 
   log_paths.each do |path|
     it "#{path} has parsable changlog entries" do

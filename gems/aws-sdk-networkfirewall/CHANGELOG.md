@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2025-11-25)
+------------------
+
+* Feature - Network Firewall release of the Proxy feature.
+
 1.81.0 (2025-11-21)
 ------------------
 

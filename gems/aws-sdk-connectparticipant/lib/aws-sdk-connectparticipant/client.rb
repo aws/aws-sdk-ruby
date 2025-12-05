@@ -1064,6 +1064,7 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].message_metadata.receipts[0].delivered_timestamp #=> String
     #   resp.transcript[0].message_metadata.receipts[0].read_timestamp #=> String
     #   resp.transcript[0].message_metadata.receipts[0].recipient_participant_id #=> String
+    #   resp.transcript[0].message_metadata.message_processing_status #=> String, one of "PROCESSING", "FAILED", "REJECTED"
     #   resp.transcript[0].related_contact_id #=> String
     #   resp.transcript[0].contact_id #=> String
     #   resp.next_token #=> String
@@ -1239,6 +1240,7 @@ module Aws::ConnectParticipant
     #
     #   * {Types::SendMessageResponse#id #id} => String
     #   * {Types::SendMessageResponse#absolute_time #absolute_time} => String
+    #   * {Types::SendMessageResponse#message_metadata #message_metadata} => Types::MessageProcessingMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -1253,6 +1255,7 @@ module Aws::ConnectParticipant
     #
     #   resp.id #=> String
     #   resp.absolute_time #=> String
+    #   resp.message_metadata.message_processing_status #=> String, one of "PROCESSING", "FAILED", "REJECTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/SendMessage AWS API Documentation
     #
@@ -1364,7 +1367,7 @@ module Aws::ConnectParticipant
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

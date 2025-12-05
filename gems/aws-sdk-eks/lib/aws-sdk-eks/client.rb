@@ -1011,6 +1011,198 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Creates a managed capability resource for an Amazon EKS cluster.
+    #
+    # Capabilities provide fully managed capabilities to build and scale
+    # with Kubernetes. When you create a capability, Amazon EKSprovisions
+    # and manages the infrastructure required to run the capability outside
+    # of your cluster. This approach reduces operational overhead and
+    # preserves cluster resources.
+    #
+    # You can only create one Capability of each type on a given Amazon EKS
+    # cluster. Valid types are Argo CD for declarative GitOps deployment,
+    # Amazon Web Services Controllers for Kubernetes (ACK) for resource
+    # management, and Kube Resource Orchestrator (KRO) for Kubernetes custom
+    # resource orchestration.
+    #
+    # For more information, see [EKS Capabilities][1] in the *Amazon EKS
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/capabilities.html
+    #
+    # @option params [required, String] :capability_name
+    #   A unique name for the capability. The name must be unique within your
+    #   cluster and can contain alphanumeric characters, hyphens, and
+    #   underscores.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster where you want to create the
+    #   capability.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. This token is valid for 24 hours after
+    #   creation. If you retry a request with the same client request token
+    #   and the same parameters after the original request has completed
+    #   successfully, the result of the original request is returned.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :type
+    #   The type of capability to create. Valid values are:
+    #
+    #   * `ACK` – Amazon Web Services Controllers for Kubernetes (ACK), which
+    #     lets you manage resources directly from Kubernetes.
+    #
+    #   * `ARGOCD` – Argo CD for GitOps-based continuous delivery.
+    #
+    #   * `KRO` – Kube Resource Orchestrator (KRO) for composing and managing
+    #     custom Kubernetes resources.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the capability
+    #   uses to interact with Amazon Web Services services. This role must
+    #   have a trust policy that allows the EKS service principal to assume
+    #   it, and it must have the necessary permissions for the capability type
+    #   you're creating.
+    #
+    #   For ACK capabilities, the role needs permissions to manage the
+    #   resources you want to control through Kubernetes. For Argo CD
+    #   capabilities, the role needs permissions to access Git repositories
+    #   and Secrets Manager. For KRO capabilities, the role needs permissions
+    #   based on the resources you'll be orchestrating.
+    #
+    # @option params [Types::CapabilityConfigurationRequest] :configuration
+    #   The configuration settings for the capability. The structure of this
+    #   object varies depending on the capability type. For Argo CD
+    #   capabilities, you can configure IAM Identity CenterIAM; Identity
+    #   Center integration, RBAC role mappings, and network access settings.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata that you apply to a resource to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value. You
+    #   define them.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource – 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length – 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length – 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for
+    #     Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count against
+    #     your tags per resource limit.
+    #
+    # @option params [required, String] :delete_propagation_policy
+    #   Specifies how Kubernetes resources managed by the capability should be
+    #   handled when the capability is deleted. Currently, the only supported
+    #   value is `RETAIN` which retains all Kubernetes resources managed by
+    #   the capability when the capability is deleted.
+    #
+    #   Because resources are retained, all Kubernetes resources created by
+    #   the capability should be deleted from the cluster before deleting the
+    #   capability itself. After the capability is deleted, these resources
+    #   become difficult to manage because the controller is no longer
+    #   available.
+    #
+    # @return [Types::CreateCapabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCapabilityResponse#capability #capability} => Types::Capability
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capability({
+    #     capability_name: "String", # required
+    #     cluster_name: "String", # required
+    #     client_request_token: "String",
+    #     type: "ACK", # required, accepts ACK, KRO, ARGOCD
+    #     role_arn: "String", # required
+    #     configuration: {
+    #       argo_cd: {
+    #         namespace: "String",
+    #         aws_idc: { # required
+    #           idc_instance_arn: "String", # required
+    #           idc_region: "String",
+    #         },
+    #         rbac_role_mappings: [
+    #           {
+    #             role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
+    #             identities: [ # required
+    #               {
+    #                 id: "String", # required
+    #                 type: "SSO_USER", # required, accepts SSO_USER, SSO_GROUP
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         network_access: {
+    #           vpce_ids: ["String"],
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     delete_propagation_policy: "RETAIN", # required, accepts RETAIN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capability.capability_name #=> String
+    #   resp.capability.arn #=> String
+    #   resp.capability.cluster_name #=> String
+    #   resp.capability.type #=> String, one of "ACK", "KRO", "ARGOCD"
+    #   resp.capability.role_arn #=> String
+    #   resp.capability.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "ACTIVE", "DEGRADED"
+    #   resp.capability.version #=> String
+    #   resp.capability.configuration.argo_cd.namespace #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_instance_arn #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_region #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_managed_application_arn #=> String
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings #=> Array
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities #=> Array
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities[0].id #=> String
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities[0].type #=> String, one of "SSO_USER", "SSO_GROUP"
+    #   resp.capability.configuration.argo_cd.network_access.vpce_ids #=> Array
+    #   resp.capability.configuration.argo_cd.network_access.vpce_ids[0] #=> String
+    #   resp.capability.configuration.argo_cd.server_url #=> String
+    #   resp.capability.tags #=> Hash
+    #   resp.capability.tags["TagKey"] #=> String
+    #   resp.capability.health.issues #=> Array
+    #   resp.capability.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable"
+    #   resp.capability.health.issues[0].message #=> String
+    #   resp.capability.created_at #=> Time
+    #   resp.capability.modified_at #=> Time
+    #   resp.capability.delete_propagation_policy #=> String, one of "RETAIN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCapability AWS API Documentation
+    #
+    # @overload create_capability(params = {})
+    # @param [Hash] params ({})
+    def create_capability(params = {}, options = {})
+      req = build_request(:create_capability, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon EKS control plane.
     #
     # The Amazon EKS control plane consists of control plane instances that
@@ -2283,6 +2475,74 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Deletes a managed capability from your Amazon EKS cluster. When you
+    # delete a capability, Amazon EKS removes the capability infrastructure
+    # but retains all resources that were managed by the capability.
+    #
+    # Before deleting a capability, you should delete all Kubernetes
+    # resources that were created by the capability. After the capability is
+    # deleted, these resources become difficult to manage because the
+    # controller that managed them is no longer available. To delete
+    # resources before removing the capability, use `kubectl delete` or
+    # remove them through your GitOps workflow.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that contains the capability you
+    #   want to delete.
+    #
+    # @option params [required, String] :capability_name
+    #   The name of the capability to delete.
+    #
+    # @return [Types::DeleteCapabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCapabilityResponse#capability #capability} => Types::Capability
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_capability({
+    #     cluster_name: "String", # required
+    #     capability_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capability.capability_name #=> String
+    #   resp.capability.arn #=> String
+    #   resp.capability.cluster_name #=> String
+    #   resp.capability.type #=> String, one of "ACK", "KRO", "ARGOCD"
+    #   resp.capability.role_arn #=> String
+    #   resp.capability.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "ACTIVE", "DEGRADED"
+    #   resp.capability.version #=> String
+    #   resp.capability.configuration.argo_cd.namespace #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_instance_arn #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_region #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_managed_application_arn #=> String
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings #=> Array
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities #=> Array
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities[0].id #=> String
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities[0].type #=> String, one of "SSO_USER", "SSO_GROUP"
+    #   resp.capability.configuration.argo_cd.network_access.vpce_ids #=> Array
+    #   resp.capability.configuration.argo_cd.network_access.vpce_ids[0] #=> String
+    #   resp.capability.configuration.argo_cd.server_url #=> String
+    #   resp.capability.tags #=> Hash
+    #   resp.capability.tags["TagKey"] #=> String
+    #   resp.capability.health.issues #=> Array
+    #   resp.capability.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable"
+    #   resp.capability.health.issues[0].message #=> String
+    #   resp.capability.created_at #=> Time
+    #   resp.capability.modified_at #=> Time
+    #   resp.capability.delete_propagation_policy #=> String, one of "RETAIN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCapability AWS API Documentation
+    #
+    # @overload delete_capability(params = {})
+    # @param [Hash] params ({})
+    def delete_capability(params = {}, options = {})
+      req = build_request(:delete_capability, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon EKS cluster control plane.
     #
     # If you have active services in your cluster that are associated with a
@@ -3009,6 +3269,68 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns detailed information about a specific managed capability in
+    # your Amazon EKS cluster, including its current status, configuration,
+    # health information, and any issues that may be affecting its
+    # operation.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that contains the capability you
+    #   want to describe.
+    #
+    # @option params [required, String] :capability_name
+    #   The name of the capability to describe.
+    #
+    # @return [Types::DescribeCapabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapabilityResponse#capability #capability} => Types::Capability
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capability({
+    #     cluster_name: "String", # required
+    #     capability_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capability.capability_name #=> String
+    #   resp.capability.arn #=> String
+    #   resp.capability.cluster_name #=> String
+    #   resp.capability.type #=> String, one of "ACK", "KRO", "ARGOCD"
+    #   resp.capability.role_arn #=> String
+    #   resp.capability.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "ACTIVE", "DEGRADED"
+    #   resp.capability.version #=> String
+    #   resp.capability.configuration.argo_cd.namespace #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_instance_arn #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_region #=> String
+    #   resp.capability.configuration.argo_cd.aws_idc.idc_managed_application_arn #=> String
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings #=> Array
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities #=> Array
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities[0].id #=> String
+    #   resp.capability.configuration.argo_cd.rbac_role_mappings[0].identities[0].type #=> String, one of "SSO_USER", "SSO_GROUP"
+    #   resp.capability.configuration.argo_cd.network_access.vpce_ids #=> Array
+    #   resp.capability.configuration.argo_cd.network_access.vpce_ids[0] #=> String
+    #   resp.capability.configuration.argo_cd.server_url #=> String
+    #   resp.capability.tags #=> Hash
+    #   resp.capability.tags["TagKey"] #=> String
+    #   resp.capability.health.issues #=> Array
+    #   resp.capability.health.issues[0].code #=> String, one of "AccessDenied", "ClusterUnreachable"
+    #   resp.capability.health.issues[0].message #=> String
+    #   resp.capability.created_at #=> Time
+    #   resp.capability.modified_at #=> Time
+    #   resp.capability.delete_propagation_policy #=> String, one of "RETAIN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCapability AWS API Documentation
+    #
+    # @overload describe_capability(params = {})
+    # @param [Hash] params ({})
+    def describe_capability(params = {}, options = {})
+      req = build_request(:describe_capability, params)
+      req.send_request(options)
+    end
+
     # Describes an Amazon EKS cluster.
     #
     # The API server endpoint and certificate authority data returned by
@@ -3644,6 +3966,9 @@ module Aws::EKS
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
     #
+    # @option params [String] :capability_name
+    #   The name of the capability for which you want to describe updates.
+    #
     # @return [Types::DescribeUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeUpdateResponse#update #update} => Types::Update
@@ -3655,6 +3980,7 @@ module Aws::EKS
     #     update_id: "String", # required
     #     nodegroup_name: "String",
     #     addon_name: "String",
+    #     capability_name: "String",
     #   })
     #
     # @example Response structure
@@ -4011,6 +4337,62 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_associated_access_policies(params = {}, options = {})
       req = build_request(:list_associated_access_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists all managed capabilities in your Amazon EKS cluster. You can use
+    # this operation to get an overview of all capabilities and their
+    # current status.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster for which you want to list
+    #   capabilities.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `nextToken`
+    #   value. If you don't specify a value, the default is 100 results.
+    #
+    # @return [Types::ListCapabilitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCapabilitiesResponse#capabilities #capabilities} => Array&lt;Types::CapabilitySummary&gt;
+    #   * {Types::ListCapabilitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_capabilities({
+    #     cluster_name: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capabilities #=> Array
+    #   resp.capabilities[0].capability_name #=> String
+    #   resp.capabilities[0].arn #=> String
+    #   resp.capabilities[0].type #=> String, one of "ACK", "KRO", "ARGOCD"
+    #   resp.capabilities[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "ACTIVE", "DEGRADED"
+    #   resp.capabilities[0].version #=> String
+    #   resp.capabilities[0].created_at #=> Time
+    #   resp.capabilities[0].modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListCapabilities AWS API Documentation
+    #
+    # @overload list_capabilities(params = {})
+    # @param [Hash] params ({})
+    def list_capabilities(params = {}, options = {})
+      req = build_request(:list_capabilities, params)
       req.send_request(options)
     end
 
@@ -4558,6 +4940,9 @@ module Aws::EKS
     # @option params [String] :addon_name
     #   The names of the installed add-ons that have available updates.
     #
+    # @option params [String] :capability_name
+    #   The name of the capability for which you want to list updates.
+    #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated request,
     #   where `maxResults` was used and the results exceeded the value of that
@@ -4593,6 +4978,7 @@ module Aws::EKS
     #     name: "String", # required
     #     nodegroup_name: "String",
     #     addon_name: "String",
+    #     capability_name: "String",
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -5059,6 +5445,115 @@ module Aws::EKS
     # @param [Hash] params ({})
     def update_addon(params = {}, options = {})
       req = build_request(:update_addon, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of a managed capability in your Amazon EKS
+    # cluster. You can update the IAM role, configuration settings, and
+    # delete propagation policy for a capability.
+    #
+    # When you update a capability, Amazon EKS applies the changes and may
+    # restart capability components as needed. The capability remains
+    # available during the update process, but some operations may be
+    # temporarily unavailable.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that contains the capability you
+    #   want to update configuration for.
+    #
+    # @option params [required, String] :capability_name
+    #   The name of the capability to update configuration for.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the capability
+    #   uses to interact with Amazon Web Services services. If you specify a
+    #   new role ARN, the capability will start using the new role for all
+    #   subsequent operations.
+    #
+    # @option params [Types::UpdateCapabilityConfiguration] :configuration
+    #   The updated configuration settings for the capability. You only need
+    #   to specify the configuration parameters you want to change. For Argo
+    #   CD capabilities, you can update RBAC role mappings and network access
+    #   settings.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. This token is valid for 24 hours after
+    #   creation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :delete_propagation_policy
+    #   The updated delete propagation policy for the capability. Currently,
+    #   the only supported value is `RETAIN`.
+    #
+    # @return [Types::UpdateCapabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCapabilityResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_capability({
+    #     cluster_name: "String", # required
+    #     capability_name: "String", # required
+    #     role_arn: "String",
+    #     configuration: {
+    #       argo_cd: {
+    #         rbac_role_mappings: {
+    #           add_or_update_role_mappings: [
+    #             {
+    #               role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
+    #               identities: [ # required
+    #                 {
+    #                   id: "String", # required
+    #                   type: "SSO_USER", # required, accepts SSO_USER, SSO_GROUP
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           remove_role_mappings: [
+    #             {
+    #               role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
+    #               identities: [ # required
+    #                 {
+    #                   id: "String", # required
+    #                   type: "SSO_USER", # required, accepts SSO_USER, SSO_GROUP
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         network_access: {
+    #           vpce_ids: ["String"],
+    #         },
+    #       },
+    #     },
+    #     client_request_token: "String",
+    #     delete_propagation_policy: "RETAIN", # accepts RETAIN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate", "ControlPlaneScalingConfigUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig", "UpdatedTier", "PreviousTier"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateCapability AWS API Documentation
+    #
+    # @overload update_capability(params = {})
+    # @param [Hash] params ({})
+    def update_capability(params = {}, options = {})
+      req = build_request(:update_capability, params)
       req.send_request(options)
     end
 
@@ -5859,7 +6354,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

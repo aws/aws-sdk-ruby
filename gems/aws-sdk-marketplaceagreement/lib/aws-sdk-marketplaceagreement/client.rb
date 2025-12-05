@@ -491,15 +491,15 @@ module Aws::MarketplaceAgreement
     #
     # @return [Types::DescribeAgreementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeAgreementOutput#acceptance_time #acceptance_time} => Time
-    #   * {Types::DescribeAgreementOutput#acceptor #acceptor} => Types::Acceptor
     #   * {Types::DescribeAgreementOutput#agreement_id #agreement_id} => String
-    #   * {Types::DescribeAgreementOutput#agreement_type #agreement_type} => String
-    #   * {Types::DescribeAgreementOutput#end_time #end_time} => Time
-    #   * {Types::DescribeAgreementOutput#estimated_charges #estimated_charges} => Types::EstimatedCharges
-    #   * {Types::DescribeAgreementOutput#proposal_summary #proposal_summary} => Types::ProposalSummary
+    #   * {Types::DescribeAgreementOutput#acceptor #acceptor} => Types::Acceptor
     #   * {Types::DescribeAgreementOutput#proposer #proposer} => Types::Proposer
     #   * {Types::DescribeAgreementOutput#start_time #start_time} => Time
+    #   * {Types::DescribeAgreementOutput#end_time #end_time} => Time
+    #   * {Types::DescribeAgreementOutput#acceptance_time #acceptance_time} => Time
+    #   * {Types::DescribeAgreementOutput#agreement_type #agreement_type} => String
+    #   * {Types::DescribeAgreementOutput#estimated_charges #estimated_charges} => Types::EstimatedCharges
+    #   * {Types::DescribeAgreementOutput#proposal_summary #proposal_summary} => Types::ProposalSummary
     #   * {Types::DescribeAgreementOutput#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -510,19 +510,20 @@ module Aws::MarketplaceAgreement
     #
     # @example Response structure
     #
-    #   resp.acceptance_time #=> Time
-    #   resp.acceptor.account_id #=> String
     #   resp.agreement_id #=> String
-    #   resp.agreement_type #=> String
+    #   resp.acceptor.account_id #=> String
+    #   resp.proposer.account_id #=> String
+    #   resp.start_time #=> Time
     #   resp.end_time #=> Time
-    #   resp.estimated_charges.agreement_value #=> String
+    #   resp.acceptance_time #=> Time
+    #   resp.agreement_type #=> String
     #   resp.estimated_charges.currency_code #=> String
-    #   resp.proposal_summary.offer_id #=> String
+    #   resp.estimated_charges.agreement_value #=> String
     #   resp.proposal_summary.resources #=> Array
     #   resp.proposal_summary.resources[0].id #=> String
     #   resp.proposal_summary.resources[0].type #=> String
-    #   resp.proposer.account_id #=> String
-    #   resp.start_time #=> Time
+    #   resp.proposal_summary.offer_id #=> String
+    #   resp.proposal_summary.offer_set_id #=> String
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "CANCELLED", "EXPIRED", "RENEWED", "REPLACED", "ROLLED_BACK", "SUPERSEDED", "TERMINATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/DescribeAgreement AWS API Documentation
@@ -584,61 +585,66 @@ module Aws::MarketplaceAgreement
     # @example Response structure
     #
     #   resp.accepted_terms #=> Array
-    #   resp.accepted_terms[0].byol_pricing_term.type #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions #=> Array
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_key #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_value #=> Integer
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.selector_value #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.currency_code #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards #=> Array
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].constraints.multiple_dimension_selection #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].constraints.quantity_configuration #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card #=> Array
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.type #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.value #=> String
-    #   resp.accepted_terms[0].configurable_upfront_pricing_term.type #=> String
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.currency_code #=> String
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.duration #=> String
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.grants #=> Array
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.grants[0].dimension_key #=> String
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.grants[0].max_quantity #=> Integer
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.price #=> String
-    #   resp.accepted_terms[0].fixed_upfront_pricing_term.type #=> String
-    #   resp.accepted_terms[0].free_trial_pricing_term.duration #=> String
-    #   resp.accepted_terms[0].free_trial_pricing_term.grants #=> Array
-    #   resp.accepted_terms[0].free_trial_pricing_term.grants[0].dimension_key #=> String
-    #   resp.accepted_terms[0].free_trial_pricing_term.grants[0].max_quantity #=> Integer
-    #   resp.accepted_terms[0].free_trial_pricing_term.type #=> String
+    #   resp.accepted_terms[0].legal_term.type #=> String
     #   resp.accepted_terms[0].legal_term.documents #=> Array
     #   resp.accepted_terms[0].legal_term.documents[0].type #=> String
     #   resp.accepted_terms[0].legal_term.documents[0].url #=> String
     #   resp.accepted_terms[0].legal_term.documents[0].version #=> String
-    #   resp.accepted_terms[0].legal_term.type #=> String
-    #   resp.accepted_terms[0].payment_schedule_term.currency_code #=> String
-    #   resp.accepted_terms[0].payment_schedule_term.schedule #=> Array
-    #   resp.accepted_terms[0].payment_schedule_term.schedule[0].charge_amount #=> String
-    #   resp.accepted_terms[0].payment_schedule_term.schedule[0].charge_date #=> Time
-    #   resp.accepted_terms[0].payment_schedule_term.type #=> String
-    #   resp.accepted_terms[0].recurring_payment_term.billing_period #=> String
-    #   resp.accepted_terms[0].recurring_payment_term.currency_code #=> String
-    #   resp.accepted_terms[0].recurring_payment_term.price #=> String
-    #   resp.accepted_terms[0].recurring_payment_term.type #=> String
-    #   resp.accepted_terms[0].renewal_term.configuration.enable_auto_renew #=> Boolean
-    #   resp.accepted_terms[0].renewal_term.type #=> String
-    #   resp.accepted_terms[0].support_term.refund_policy #=> String
     #   resp.accepted_terms[0].support_term.type #=> String
+    #   resp.accepted_terms[0].support_term.refund_policy #=> String
+    #   resp.accepted_terms[0].renewal_term.type #=> String
+    #   resp.accepted_terms[0].renewal_term.configuration.enable_auto_renew #=> Boolean
+    #   resp.accepted_terms[0].usage_based_pricing_term.type #=> String
     #   resp.accepted_terms[0].usage_based_pricing_term.currency_code #=> String
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards #=> Array
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card #=> Array
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].price #=> String
-    #   resp.accepted_terms[0].usage_based_pricing_term.type #=> String
-    #   resp.accepted_terms[0].validity_term.agreement_duration #=> String
-    #   resp.accepted_terms[0].validity_term.agreement_end_date #=> Time
-    #   resp.accepted_terms[0].validity_term.agreement_start_date #=> Time
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.type #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.currency_code #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards #=> Array
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.type #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.value #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].constraints.multiple_dimension_selection #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].constraints.quantity_configuration #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card #=> Array
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.selector_value #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions #=> Array
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_key #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_value #=> Integer
+    #   resp.accepted_terms[0].byol_pricing_term.type #=> String
+    #   resp.accepted_terms[0].recurring_payment_term.type #=> String
+    #   resp.accepted_terms[0].recurring_payment_term.currency_code #=> String
+    #   resp.accepted_terms[0].recurring_payment_term.billing_period #=> String
+    #   resp.accepted_terms[0].recurring_payment_term.price #=> String
     #   resp.accepted_terms[0].validity_term.type #=> String
+    #   resp.accepted_terms[0].validity_term.agreement_duration #=> String
+    #   resp.accepted_terms[0].validity_term.agreement_start_date #=> Time
+    #   resp.accepted_terms[0].validity_term.agreement_end_date #=> Time
+    #   resp.accepted_terms[0].payment_schedule_term.type #=> String
+    #   resp.accepted_terms[0].payment_schedule_term.currency_code #=> String
+    #   resp.accepted_terms[0].payment_schedule_term.schedule #=> Array
+    #   resp.accepted_terms[0].payment_schedule_term.schedule[0].charge_date #=> Time
+    #   resp.accepted_terms[0].payment_schedule_term.schedule[0].charge_amount #=> String
+    #   resp.accepted_terms[0].free_trial_pricing_term.type #=> String
+    #   resp.accepted_terms[0].free_trial_pricing_term.duration #=> String
+    #   resp.accepted_terms[0].free_trial_pricing_term.grants #=> Array
+    #   resp.accepted_terms[0].free_trial_pricing_term.grants[0].dimension_key #=> String
+    #   resp.accepted_terms[0].free_trial_pricing_term.grants[0].max_quantity #=> Integer
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.type #=> String
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.currency_code #=> String
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.duration #=> String
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.price #=> String
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.grants #=> Array
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.grants[0].dimension_key #=> String
+    #   resp.accepted_terms[0].fixed_upfront_pricing_term.grants[0].max_quantity #=> Integer
+    #   resp.accepted_terms[0].variable_payment_term.type #=> String
+    #   resp.accepted_terms[0].variable_payment_term.currency_code #=> String
+    #   resp.accepted_terms[0].variable_payment_term.max_total_charge_amount #=> String
+    #   resp.accepted_terms[0].variable_payment_term.configuration.payment_request_approval_strategy #=> String, one of "AUTO_APPROVE_ON_EXPIRATION", "WAIT_FOR_APPROVAL"
+    #   resp.accepted_terms[0].variable_payment_term.configuration.expiration_duration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementTerms AWS API Documentation
@@ -650,48 +656,92 @@ module Aws::MarketplaceAgreement
       req.send_request(options)
     end
 
-    # Searches across all agreements that a proposer or an acceptor has in
-    # AWS Marketplace. The search returns a list of agreements with basic
-    # agreement information.
+    # Searches across all agreements that a proposer has in AWS Marketplace.
+    # The search returns a list of agreements with basic agreement
+    # information.
     #
-    # The following filter combinations are supported:
+    # The following filter combinations are supported when the `PartyType`
+    # is `Proposer`:
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `ResourceIdentifier`
+    # * `AgreementType`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `OfferId`
+    # * `AgreementType` + `EndTime`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId`
+    # * `AgreementType` + `ResourceType`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `Status`
+    # * `AgreementType` + `ResourceType` + `EndTime`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `ResourceIdentifier` +
-    #   `Status`
+    # * `AgreementType` + `ResourceType` + `Status`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `OfferId` + `Status`
+    # * `AgreementType` + `ResourceType` + `Status` + `EndTime`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `Status`
+    # * `AgreementType` + `ResourceId`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `ResourceType` +
-    #   `Status`
+    # * `AgreementType` + `ResourceId` + `EndTime`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `ResourceType` + `Status`
+    # * `AgreementType` + `ResourceId` + `Status`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `OfferId`
+    # * `AgreementType` + `ResourceId` + `Status` + `EndTime`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `OfferId` + `Status`
+    # * `AgreementType` + `AcceptorAccountId`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `ResourceIdentifier`
+    # * `AgreementType` + `AcceptorAccountId` + `EndTime`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `ResourceIdentifier` + `Status`
+    # * `AgreementType` + `AcceptorAccountId` + `Status`
     #
-    # * `PartyType` as `Proposer` + `AgreementType` + `AcceptorAccountId` +
-    #   `ResourceType`
+    # * `AgreementType` + `AcceptorAccountId` + `Status` + `EndTime`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `OfferId`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `OfferId` + `Status`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `OfferId` + `EndTime`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `OfferId` + `Status` +
+    #   `EndTime`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceId`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceId` + `Status`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceId` + `EndTime`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceId` + `Status` +
+    #   `EndTime`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceType`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `EndTime`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `Status`
+    #
+    # * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `Status` +
+    #   `EndTime`
+    #
+    # * `AgreementType` + `Status`
+    #
+    # * `AgreementType` + `Status` + `EndTime`
+    #
+    # * `AgreementType` + `OfferId`
+    #
+    # * `AgreementType` + `OfferId` + `EndTime`
+    #
+    # * `AgreementType` + `OfferId` + `Status`
+    #
+    # * `AgreementType` + `OfferId` + `Status` + `EndTime`
+    #
+    # * `AgreementType` + `OfferSetId`
+    #
+    # * `AgreementType` + `OfferSetId` + `EndTime`
+    #
+    # * `AgreementType` + `OfferSetId` + `Status`
+    #
+    # * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
+    #
+    # <note markdown="1"> To filter by `EndTime`, you can use either `BeforeEndTime` or
+    # `AfterEndTime`. Only `EndTime` is supported for sorting.
+    #
+    #  </note>
     #
     # @option params [String] :catalog
     #   The catalog in which the agreement was created.
@@ -705,12 +755,11 @@ module Aws::MarketplaceAgreement
     #   * `ResourceIdentifier` – The unique identifier of the resource.
     #
     #   * `ResourceType` – Type of the resource, which is the product
-    #     (`AmiProduct`, `ContainerProduct`, or `SaaSProduct`).
+    #     (`AmiProduct`, `ContainerProduct`, `SaaSProduct`,
+    #     `ProfessionalServicesProduct`, or `MachineLearningProduct`).
     #
-    #   * `PartyType` – The party type (either `Acceptor` or `Proposer`) of
-    #     the caller. For agreements where the caller is the proposer, use the
-    #     `Proposer` filter. For agreements where the caller is the acceptor,
-    #     use the `Acceptor` filter.
+    #   * `PartyType` – The party type of the caller. For agreements where the
+    #     caller is the proposer, use the `Proposer` filter.
     #
     #   * `AcceptorAccountId` – The AWS account ID of the party accepting the
     #     agreement terms.
@@ -728,17 +777,23 @@ module Aws::MarketplaceAgreement
     #   * `AfterEndTime` – A date used to filter agreements with a date after
     #     the `endTime` of an agreement.
     #
-    #   * `AgreementType` – The type of agreement. Values include
-    #     `PurchaseAgreement` or `VendorInsightsAgreement`.
+    #   * `AgreementType` – The type of agreement. Supported value includes
+    #     `PurchaseAgreement`.
+    #
+    #   * `OfferSetId` – A unique identifier for the offer set containing this
+    #     offer. All agreements created from offers in this set include this
+    #     identifier as context.
+    #
+    # @option params [Types::Sort] :sort
+    #   An object that contains the `SortBy` and `SortOrder` attributes. Only
+    #   `EndTime` is supported for `SearchAgreements`. The default sort is
+    #   `EndTime` descending.
     #
     # @option params [Integer] :max_results
     #   The maximum number of agreements to return in the response.
     #
     # @option params [String] :next_token
     #   A token to specify where to start pagination.
-    #
-    # @option params [Types::Sort] :sort
-    #   An object that contains the `SortBy` and `SortOrder` attributes.
     #
     # @return [Types::SearchAgreementsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -757,28 +812,29 @@ module Aws::MarketplaceAgreement
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     sort: {
     #       sort_by: "SortBy",
     #       sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.agreement_view_summaries #=> Array
-    #   resp.agreement_view_summaries[0].acceptance_time #=> Time
-    #   resp.agreement_view_summaries[0].acceptor.account_id #=> String
     #   resp.agreement_view_summaries[0].agreement_id #=> String
-    #   resp.agreement_view_summaries[0].agreement_type #=> String
+    #   resp.agreement_view_summaries[0].acceptance_time #=> Time
+    #   resp.agreement_view_summaries[0].start_time #=> Time
     #   resp.agreement_view_summaries[0].end_time #=> Time
-    #   resp.agreement_view_summaries[0].proposal_summary.offer_id #=> String
+    #   resp.agreement_view_summaries[0].agreement_type #=> String
+    #   resp.agreement_view_summaries[0].acceptor.account_id #=> String
+    #   resp.agreement_view_summaries[0].proposer.account_id #=> String
     #   resp.agreement_view_summaries[0].proposal_summary.resources #=> Array
     #   resp.agreement_view_summaries[0].proposal_summary.resources[0].id #=> String
     #   resp.agreement_view_summaries[0].proposal_summary.resources[0].type #=> String
-    #   resp.agreement_view_summaries[0].proposer.account_id #=> String
-    #   resp.agreement_view_summaries[0].start_time #=> Time
+    #   resp.agreement_view_summaries[0].proposal_summary.offer_id #=> String
+    #   resp.agreement_view_summaries[0].proposal_summary.offer_set_id #=> String
     #   resp.agreement_view_summaries[0].status #=> String, one of "ACTIVE", "ARCHIVED", "CANCELLED", "EXPIRED", "RENEWED", "REPLACED", "ROLLED_BACK", "SUPERSEDED", "TERMINATED"
     #   resp.next_token #=> String
     #
@@ -809,7 +865,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

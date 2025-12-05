@@ -686,6 +686,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters used to generate synthetic data for this analysis
+    #   template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
     #
     class AnalysisTemplate < Struct.new(
@@ -705,7 +710,8 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -813,6 +819,11 @@ module Aws::CleanRooms
     #   The description of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] is_synthetic_data
+    #   Indicates if this analysis template summary generated synthetic
+    #   data.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateSummary AWS API Documentation
     #
     class AnalysisTemplateSummary < Struct.new(
@@ -825,7 +836,8 @@ module Aws::CleanRooms
       :membership_id,
       :collaboration_arn,
       :collaboration_id,
-      :description)
+      :description,
+      :is_synthetic_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1428,6 +1440,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The synthetic data generation parameters configured for this
+    #   collaboration analysis template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
     #
     class CollaborationAnalysisTemplate < Struct.new(
@@ -1446,7 +1463,8 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -1493,6 +1511,11 @@ module Aws::CleanRooms
     #   The description of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] is_synthetic_data
+    #   Indicates if this collaboration analysis template uses synthetic
+    #   data generation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplateSummary AWS API Documentation
     #
     class CollaborationAnalysisTemplateSummary < Struct.new(
@@ -1504,7 +1527,8 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :creator_account_id,
-      :description)
+      :description,
+      :is_synthetic_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2156,6 +2180,24 @@ module Aws::CleanRooms
     class Column < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains classification information for data columns, including
+    # mappings that specify how columns should be handled during synthetic
+    # data generation and privacy analysis.
+    #
+    # @!attribute [rw] column_mapping
+    #   A mapping that defines the classification of data columns for
+    #   synthetic data generation and specifies how each column should be
+    #   handled during the privacy-preserving data synthesis process.
+    #   @return [Array<Types::SyntheticDataColumnProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ColumnClassificationDetails AWS API Documentation
+    #
+    class ColumnClassificationDetails < Struct.new(
+      :column_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3188,6 +3230,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters for generating synthetic data when running the
+    #   analysis template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplateInput AWS API Documentation
     #
     class CreateAnalysisTemplateInput < Struct.new(
@@ -3199,7 +3246,8 @@ module Aws::CleanRooms
       :tags,
       :analysis_parameters,
       :schema,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -6556,11 +6604,48 @@ module Aws::CleanRooms
     #   inference.
     #   @return [Types::ModelInferencePaymentConfig]
     #
+    # @!attribute [rw] synthetic_data_generation
+    #   The payment configuration for machine learning synthetic data
+    #   generation.
+    #   @return [Types::SyntheticDataGenerationPaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLPaymentConfig AWS API Documentation
     #
     class MLPaymentConfig < Struct.new(
       :model_training,
-      :model_inference)
+      :model_inference,
+      :synthetic_data_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters that control the generation of synthetic data for machine
+    # learning, including privacy settings and column classification
+    # details.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value for differential privacy when generating synthetic
+    #   data. Lower values provide stronger privacy guarantees but may
+    #   reduce data utility.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_membership_inference_attack_score
+    #   The maximum acceptable score for membership inference attack
+    #   vulnerability. Synthetic data generation fails if the score for the
+    #   resulting data exceeds this threshold.
+    #   @return [Float]
+    #
+    # @!attribute [rw] column_classification
+    #   Classification details for data columns that specify how each column
+    #   should be treated during synthetic data generation.
+    #   @return [Types::ColumnClassificationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLSyntheticDataParameters AWS API Documentation
+    #
+    class MLSyntheticDataParameters < Struct.new(
+      :epsilon,
+      :max_membership_inference_attack_score,
+      :column_classification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6851,11 +6936,17 @@ module Aws::CleanRooms
     #   inference.
     #   @return [Types::MembershipModelInferencePaymentConfig]
     #
+    # @!attribute [rw] synthetic_data_generation
+    #   The payment configuration for synthetic data generation for this
+    #   machine learning membership.
+    #   @return [Types::MembershipSyntheticDataGenerationPaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipMLPaymentConfig AWS API Documentation
     #
     class MembershipMLPaymentConfig < Struct.new(
       :model_training,
-      :model_inference)
+      :model_inference,
+      :synthetic_data_generation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7135,6 +7226,22 @@ module Aws::CleanRooms
       :member_abilities,
       :ml_member_abilities,
       :payment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for payment for synthetic data generation in a
+    # membership.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates if this membership is responsible for paying for synthetic
+    #   data generation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipSyntheticDataGenerationPaymentConfig AWS API Documentation
+    #
+    class MembershipSyntheticDataGenerationPaymentConfig < Struct.new(
+      :is_responsible)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9190,6 +9297,78 @@ module Aws::CleanRooms
       :protected_query)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Properties that define how a specific data column should be handled
+    # during synthetic data generation, including its name, type, and role
+    # in predictive modeling.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the data column as it appears in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_type
+    #   The data type of the column, which determines how the synthetic data
+    #   generation algorithm processes and synthesizes values for this
+    #   column.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_predictive_value
+    #   Indicates if this column contains predictive values that should be
+    #   treated as target variables in machine learning models. This affects
+    #   how the synthetic data generation preserves statistical
+    #   relationships.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataColumnProperties AWS API Documentation
+    #
+    class SyntheticDataColumnProperties < Struct.new(
+      :column_name,
+      :column_type,
+      :is_predictive_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Payment configuration for synthetic data generation.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates who is responsible for paying for synthetic data
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataGenerationPaymentConfig AWS API Documentation
+    #
+    class SyntheticDataGenerationPaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that control how synthetic data is generated, including
+    # privacy settings, column classifications, and other configuration
+    # options that affect the data synthesis process.
+    #
+    # @note SyntheticDataParameters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SyntheticDataParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SyntheticDataParameters corresponding to the set member.
+    #
+    # @!attribute [rw] ml_synthetic_data_parameters
+    #   The machine learning-specific parameters for synthetic data
+    #   generation.
+    #   @return [Types::MLSyntheticDataParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataParameters AWS API Documentation
+    #
+    class SyntheticDataParameters < Struct.new(
+      :ml_synthetic_data_parameters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MlSyntheticDataParameters < SyntheticDataParameters; end
+      class Unknown < SyntheticDataParameters; end
     end
 
     # A pointer to the dataset that underlies this table.

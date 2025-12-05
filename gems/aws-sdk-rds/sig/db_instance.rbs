@@ -279,6 +279,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#engine_lifecycle_support-instance_method
       def engine_lifecycle_support: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#additional_storage_volumes-instance_method
+      def additional_storage_volumes: () -> ::Array[Types::AdditionalStorageVolumeOutput]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#storage_volume_status-instance_method
+      def storage_volume_status: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#load-instance_method
@@ -367,7 +373,17 @@ module Aws
                     ?multi_tenant: bool,
                     ?dedicated_log_volume: bool,
                     ?engine_lifecycle_support: ::String,
-                    ?master_user_authentication_type: ("password" | "iam-db-auth")
+                    ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                    ?additional_storage_volumes: Array[
+                      {
+                        volume_name: ::String,
+                        allocated_storage: ::Integer?,
+                        iops: ::Integer?,
+                        max_allocated_storage: ::Integer?,
+                        storage_throughput: ::Integer?,
+                        storage_type: ::String?
+                      },
+                    ]
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 
@@ -429,6 +445,16 @@ module Aws
                                  ?dedicated_log_volume: bool,
                                  ?upgrade_storage_config: bool,
                                  ?ca_certificate_identifier: ::String,
+                                 ?additional_storage_volumes: Array[
+                                   {
+                                     volume_name: ::String,
+                                     allocated_storage: ::Integer?,
+                                     iops: ::Integer?,
+                                     max_allocated_storage: ::Integer?,
+                                     storage_throughput: ::Integer?,
+                                     storage_type: ::String?
+                                   },
+                                 ],
                                  ?source_region: ::String
                                ) -> DBInstance
                              | (?Hash[Symbol, untyped]) -> DBInstance
@@ -523,7 +549,18 @@ module Aws
                     ?multi_tenant: bool,
                     ?dedicated_log_volume: bool,
                     ?engine: ::String,
-                    ?master_user_authentication_type: ("password" | "iam-db-auth")
+                    ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                    ?additional_storage_volumes: Array[
+                      {
+                        volume_name: ::String,
+                        allocated_storage: ::Integer?,
+                        iops: ::Integer?,
+                        max_allocated_storage: ::Integer?,
+                        storage_throughput: ::Integer?,
+                        storage_type: ::String?,
+                        set_for_delete: bool?
+                      },
+                    ]
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 
@@ -598,7 +635,17 @@ module Aws
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,
                      ?manage_master_user_password: bool,
-                     ?master_user_secret_kms_key_id: ::String
+                     ?master_user_secret_kms_key_id: ::String,
+                     ?additional_storage_volumes: Array[
+                       {
+                         volume_name: ::String,
+                         allocated_storage: ::Integer?,
+                         iops: ::Integer?,
+                         max_allocated_storage: ::Integer?,
+                         storage_throughput: ::Integer?,
+                         storage_type: ::String?
+                       },
+                     ]
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
 

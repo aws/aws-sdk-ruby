@@ -11,6 +11,14 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class CallbackTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class CapacityProviderLimitExceededException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
       class CodeSigningConfigNotFoundException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def message: () -> ::String
@@ -20,6 +28,10 @@ module Aws
         def message: () -> ::String
       end
       class CodeVerificationFailedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class DurableExecutionAlreadyStartedException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
@@ -53,6 +65,10 @@ module Aws
         def message: () -> ::String
       end
       class ENILimitReachedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class FunctionVersionsPerCapacityProviderLimitExceededException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
@@ -97,6 +113,10 @@ module Aws
         def message: () -> ::String
       end
       class KMSNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class NoPublishedVersionException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end

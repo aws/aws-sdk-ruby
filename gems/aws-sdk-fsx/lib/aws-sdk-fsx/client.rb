@@ -1568,6 +1568,10 @@ module Aws::FSx
     #   Specifies the configuration to use when creating and attaching an S3
     #   access point to an FSx for OpenZFS volume.
     #
+    # @option params [Types::CreateAndAttachS3AccessPointOntapConfiguration] :ontap_configuration
+    #   Specifies the FSx for ONTAP volume that the S3 access point will be
+    #   attached to, and the file system user identity.
+    #
     # @option params [Types::CreateAndAttachS3AccessPointS3Configuration] :s3_access_point
     #   Specifies the virtual private cloud (VPC) configuration if you're
     #   creating an access point that is restricted to a VPC. For more
@@ -1587,7 +1591,7 @@ module Aws::FSx
     #   resp = client.create_and_attach_s3_access_point({
     #     client_request_token: "ClientRequestToken",
     #     name: "S3AccessPointAttachmentName", # required
-    #     type: "OPENZFS", # required, accepts OPENZFS
+    #     type: "OPENZFS", # required, accepts OPENZFS, ONTAP
     #     open_zfs_configuration: {
     #       volume_id: "VolumeId", # required
     #       file_system_identity: { # required
@@ -1596,6 +1600,18 @@ module Aws::FSx
     #           uid: 1, # required
     #           gid: 1, # required
     #           secondary_gids: [1],
+    #         },
+    #       },
+    #     },
+    #     ontap_configuration: {
+    #       volume_id: "VolumeId", # required
+    #       file_system_identity: { # required
+    #         type: "UNIX", # required, accepts UNIX, WINDOWS
+    #         unix_user: {
+    #           name: "OntapFileSystemUserName", # required
+    #         },
+    #         windows_user: {
+    #           name: "OntapFileSystemUserName", # required
     #         },
     #       },
     #     },
@@ -1609,17 +1625,21 @@ module Aws::FSx
     #
     # @example Response structure
     #
-    #   resp.s3_access_point_attachment.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.s3_access_point_attachment.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"
     #   resp.s3_access_point_attachment.lifecycle_transition_reason.message #=> String
     #   resp.s3_access_point_attachment.creation_time #=> Time
     #   resp.s3_access_point_attachment.name #=> String
-    #   resp.s3_access_point_attachment.type #=> String, one of "OPENZFS"
+    #   resp.s3_access_point_attachment.type #=> String, one of "OPENZFS", "ONTAP"
     #   resp.s3_access_point_attachment.open_zfs_configuration.volume_id #=> String
     #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.type #=> String, one of "POSIX"
     #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.uid #=> Integer
     #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.gid #=> Integer
     #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.secondary_gids #=> Array
     #   resp.s3_access_point_attachment.open_zfs_configuration.file_system_identity.posix_user.secondary_gids[0] #=> Integer
+    #   resp.s3_access_point_attachment.ontap_configuration.volume_id #=> String
+    #   resp.s3_access_point_attachment.ontap_configuration.file_system_identity.type #=> String, one of "UNIX", "WINDOWS"
+    #   resp.s3_access_point_attachment.ontap_configuration.file_system_identity.unix_user.name #=> String
+    #   resp.s3_access_point_attachment.ontap_configuration.file_system_identity.windows_user.name #=> String
     #   resp.s3_access_point_attachment.s3_access_point.resource_arn #=> String
     #   resp.s3_access_point_attachment.s3_access_point.alias #=> String
     #   resp.s3_access_point_attachment.s3_access_point.vpc_configuration.vpc_id #=> String
@@ -6897,17 +6917,21 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.s3_access_point_attachments #=> Array
-    #   resp.s3_access_point_attachments[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.s3_access_point_attachments[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"
     #   resp.s3_access_point_attachments[0].lifecycle_transition_reason.message #=> String
     #   resp.s3_access_point_attachments[0].creation_time #=> Time
     #   resp.s3_access_point_attachments[0].name #=> String
-    #   resp.s3_access_point_attachments[0].type #=> String, one of "OPENZFS"
+    #   resp.s3_access_point_attachments[0].type #=> String, one of "OPENZFS", "ONTAP"
     #   resp.s3_access_point_attachments[0].open_zfs_configuration.volume_id #=> String
     #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.type #=> String, one of "POSIX"
     #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.uid #=> Integer
     #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.gid #=> Integer
     #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.secondary_gids #=> Array
     #   resp.s3_access_point_attachments[0].open_zfs_configuration.file_system_identity.posix_user.secondary_gids[0] #=> Integer
+    #   resp.s3_access_point_attachments[0].ontap_configuration.volume_id #=> String
+    #   resp.s3_access_point_attachments[0].ontap_configuration.file_system_identity.type #=> String, one of "UNIX", "WINDOWS"
+    #   resp.s3_access_point_attachments[0].ontap_configuration.file_system_identity.unix_user.name #=> String
+    #   resp.s3_access_point_attachments[0].ontap_configuration.file_system_identity.windows_user.name #=> String
     #   resp.s3_access_point_attachments[0].s3_access_point.resource_arn #=> String
     #   resp.s3_access_point_attachments[0].s3_access_point.alias #=> String
     #   resp.s3_access_point_attachments[0].s3_access_point.vpc_configuration.vpc_id #=> String
@@ -7642,7 +7666,7 @@ module Aws::FSx
     #
     # @example Response structure
     #
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"
     #   resp.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DetachAndDeleteS3AccessPoint AWS API Documentation
@@ -10138,7 +10162,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

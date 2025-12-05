@@ -568,7 +568,7 @@ module Aws::QConnect
     #     client_token: "ClientToken",
     #     assistant_id: "UuidOrArn", # required
     #     name: "Name", # required
-    #     type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER
+    #     type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
     #     configuration: { # required
     #       manual_search_ai_agent_configuration: {
     #         answer_generation_ai_prompt_id: "UuidWithQualifier",
@@ -657,6 +657,7 @@ module Aws::QConnect
     #           },
     #         ],
     #         locale: "NonEmptyString",
+    #         suggested_messages: ["NonEmptySensitiveString"],
     #       },
     #       self_service_ai_agent_configuration: {
     #         self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -791,6 +792,66 @@ module Aws::QConnect
     #           },
     #         ],
     #       },
+    #       orchestration_ai_agent_configuration: {
+    #         orchestration_ai_prompt_id: "UuidWithQualifier", # required
+    #         orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #         tool_configurations: [
+    #           {
+    #             tool_name: "NonEmptyString", # required
+    #             tool_type: "MODEL_CONTEXT_PROTOCOL", # required, accepts MODEL_CONTEXT_PROTOCOL, RETURN_TO_CONTROL, CONSTANT
+    #             title: "NonEmptyString",
+    #             tool_id: "NonEmptyString",
+    #             description: "String",
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"],
+    #             },
+    #             override_input_values: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 value: { # required
+    #                   constant: {
+    #                     type: "STRING", # required, accepts STRING, NUMBER, JSON_STRING
+    #                     value: "NonEmptySensitiveString", # required
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             output_filters: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 output_configuration: {
+    #                   output_variable_name_override: "NonEmptyString",
+    #                   session_data_namespace: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #             input_schema: {
+    #             },
+    #             output_schema: {
+    #             },
+    #             annotations: {
+    #               title: "String",
+    #               destructive_hint: false,
+    #             },
+    #             user_interaction_configuration: {
+    #               is_user_confirmation_required: false,
+    #             },
+    #           },
+    #         ],
+    #         connect_instance_arn: "GenericArn",
+    #         locale: "NonEmptyString",
+    #       },
+    #       note_taking_ai_agent_configuration: {
+    #         note_taking_ai_prompt_id: "UuidWithQualifier",
+    #         note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #       },
+    #       case_summarization_ai_agent_configuration: {
+    #         case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #         case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #       },
     #     },
     #     visibility_status: "SAVED", # required, accepts SAVED, PUBLISHED
     #     tags: {
@@ -806,7 +867,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -847,6 +908,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages[0] #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_pre_processing_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_ai_guardrail_id #=> String
@@ -906,6 +969,36 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_name #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_type #=> String, one of "MODEL_CONTEXT_PROTOCOL", "RETURN_TO_CONTROL", "CONSTANT"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].description #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.type #=> String, one of "STRING", "NUMBER", "JSON_STRING"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.value #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.output_variable_name_override #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.session_data_namespace #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -974,7 +1067,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -1015,6 +1108,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages[0] #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_pre_processing_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_ai_guardrail_id #=> String
@@ -1074,6 +1169,36 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_name #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_type #=> String, one of "MODEL_CONTEXT_PROTOCOL", "RETURN_TO_CONTROL", "CONSTANT"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].description #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.type #=> String, one of "STRING", "NUMBER", "JSON_STRING"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.value #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.output_variable_name_override #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.session_data_namespace #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -1421,6 +1546,9 @@ module Aws::QConnect
     # @option params [String] :description
     #   The description of the AI Prompt.
     #
+    # @option params [Types::AIPromptInferenceConfiguration] :inference_configuration
+    #   The inference configuration for the AI Prompt being created.
+    #
     # @return [Types::CreateAIPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAIPromptResponse#ai_prompt #ai_prompt} => Types::AIPromptData
@@ -1431,7 +1559,7 @@ module Aws::QConnect
     #     client_token: "ClientToken",
     #     assistant_id: "UuidOrArn", # required
     #     name: "Name", # required
-    #     type: "ANSWER_GENERATION", # required, accepts ANSWER_GENERATION, INTENT_LABELING_GENERATION, QUERY_REFORMULATION, SELF_SERVICE_PRE_PROCESSING, SELF_SERVICE_ANSWER_GENERATION, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, EMAIL_QUERY_REFORMULATION
+    #     type: "ANSWER_GENERATION", # required, accepts ANSWER_GENERATION, INTENT_LABELING_GENERATION, QUERY_REFORMULATION, SELF_SERVICE_PRE_PROCESSING, SELF_SERVICE_ANSWER_GENERATION, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, EMAIL_QUERY_REFORMULATION, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
     #     template_configuration: { # required
     #       text_full_ai_prompt_edit_template_configuration: {
     #         text: "TextAIPrompt", # required
@@ -1445,6 +1573,14 @@ module Aws::QConnect
     #       "TagKey" => "TagValue",
     #     },
     #     description: "Description",
+    #     inference_configuration: {
+    #       text_ai_prompt_inference_configuration: {
+    #         temperature: 1.0,
+    #         top_p: 1.0,
+    #         top_k: 1,
+    #         max_tokens_to_sample: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1454,11 +1590,15 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
     #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.temperature #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_p #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_k #=> Integer
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -1522,11 +1662,15 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
     #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.temperature #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_p #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_k #=> Integer
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -1626,6 +1770,9 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list #=> Array
+    #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAssistant AWS API Documentation
     #
@@ -1674,9 +1821,13 @@ module Aws::QConnect
     #
     #   resp = client.create_assistant_association({
     #     assistant_id: "UuidOrArn", # required
-    #     association_type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
+    #     association_type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_BEDROCK_KNOWLEDGE_BASE
     #     association: { # required
     #       knowledge_base_id: "Uuid",
+    #       external_bedrock_knowledge_base_config: {
+    #         bedrock_knowledge_base_arn: "BedrockKnowledgeBaseArn", # required
+    #         access_role_arn: "AccessRoleArn", # required
+    #       },
     #     },
     #     client_token: "ClientToken",
     #     tags: {
@@ -1690,9 +1841,11 @@ module Aws::QConnect
     #   resp.assistant_association.assistant_association_arn #=> String
     #   resp.assistant_association.assistant_id #=> String
     #   resp.assistant_association.assistant_arn #=> String
-    #   resp.assistant_association.association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.assistant_association.association_type #=> String, one of "KNOWLEDGE_BASE", "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
     #   resp.assistant_association.association_data.knowledge_base_association.knowledge_base_id #=> String
     #   resp.assistant_association.association_data.knowledge_base_association.knowledge_base_arn #=> String
+    #   resp.assistant_association.association_data.external_bedrock_knowledge_base_config.bedrock_knowledge_base_arn #=> String
+    #   resp.assistant_association.association_data.external_bedrock_knowledge_base_config.access_role_arn #=> String
     #   resp.assistant_association.tags #=> Hash
     #   resp.assistant_association.tags["TagKey"] #=> String
     #
@@ -2958,6 +3111,12 @@ module Aws::QConnect
     #   Used to retrieve email content and establish session context for
     #   AI-powered email assistance.
     #
+    # @option params [Array<Types::OrchestratorConfigurationEntry>] :orchestrator_configuration_list
+    #   The list of orchestrator configurations for the session being created.
+    #
+    # @option params [Boolean] :remove_orchestrator_configuration_list
+    #   The list of orchestrator configurations to remove from the session.
+    #
     # @return [Types::CreateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSessionResponse#session #session} => Types::SessionData
@@ -3004,6 +3163,13 @@ module Aws::QConnect
     #       },
     #     },
     #     contact_arn: "GenericArn",
+    #     orchestrator_configuration_list: [
+    #       {
+    #         ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #         orchestrator_use_case: "NonEmptyString", # required
+    #       },
+    #     ],
+    #     remove_orchestrator_configuration_list: false,
     #   })
     #
     # @example Response structure
@@ -3029,6 +3195,9 @@ module Aws::QConnect
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.session.orchestrator_configuration_list #=> Array
+    #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.session.orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateSession AWS API Documentation
     #
@@ -3568,7 +3737,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -3609,6 +3778,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages[0] #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_pre_processing_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_ai_guardrail_id #=> String
@@ -3668,6 +3839,36 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_name #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_type #=> String, one of "MODEL_CONTEXT_PROTOCOL", "RETURN_TO_CONTROL", "CONSTANT"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].description #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.type #=> String, one of "STRING", "NUMBER", "JSON_STRING"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.value #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.output_variable_name_override #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.session_data_namespace #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -3786,11 +3987,15 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
     #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.temperature #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_p #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_k #=> Integer
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -3840,6 +4045,9 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list #=> Array
+    #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAssistant AWS API Documentation
     #
@@ -3877,9 +4085,11 @@ module Aws::QConnect
     #   resp.assistant_association.assistant_association_arn #=> String
     #   resp.assistant_association.assistant_id #=> String
     #   resp.assistant_association.assistant_arn #=> String
-    #   resp.assistant_association.association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.assistant_association.association_type #=> String, one of "KNOWLEDGE_BASE", "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
     #   resp.assistant_association.association_data.knowledge_base_association.knowledge_base_id #=> String
     #   resp.assistant_association.association_data.knowledge_base_association.knowledge_base_arn #=> String
+    #   resp.assistant_association.association_data.external_bedrock_knowledge_base_config.bedrock_knowledge_base_arn #=> String
+    #   resp.assistant_association.association_data.external_bedrock_knowledge_base_config.access_role_arn #=> String
     #   resp.assistant_association.tags #=> Hash
     #   resp.assistant_association.tags["TagKey"] #=> String
     #
@@ -4357,6 +4567,7 @@ module Aws::QConnect
     #   * {Types::GetNextMessageResponse#conversation_state #conversation_state} => Types::ConversationState
     #   * {Types::GetNextMessageResponse#next_message_token #next_message_token} => String
     #   * {Types::GetNextMessageResponse#conversation_session_data #conversation_session_data} => Array&lt;Types::RuntimeSessionData&gt;
+    #   * {Types::GetNextMessageResponse#chunked_response_terminated #chunked_response_terminated} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -4370,6 +4581,17 @@ module Aws::QConnect
     #
     #   resp.type #=> String, one of "TEXT"
     #   resp.response.value.text.value #=> String
+    #   resp.response.value.text.citations #=> Array
+    #   resp.response.value.text.citations[0].content_id #=> String
+    #   resp.response.value.text.citations[0].title #=> String
+    #   resp.response.value.text.citations[0].knowledge_base_id #=> String
+    #   resp.response.value.text.citations[0].citation_span.begin_offset_inclusive #=> Integer
+    #   resp.response.value.text.citations[0].citation_span.end_offset_exclusive #=> Integer
+    #   resp.response.value.text.citations[0].source_url #=> String
+    #   resp.response.value.text.citations[0].reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
+    #   resp.response.value.text.ai_guardrail_assessment.blocked #=> Boolean
+    #   resp.response.value.tool_use_result.tool_use_id #=> String
+    #   resp.response.value.tool_use_result.tool_name #=> String
     #   resp.response.message_id #=> String
     #   resp.response.participant #=> String, one of "CUSTOMER", "AGENT", "BOT"
     #   resp.response.timestamp #=> Time
@@ -4380,6 +4602,7 @@ module Aws::QConnect
     #   resp.conversation_session_data #=> Array
     #   resp.conversation_session_data[0].key #=> String
     #   resp.conversation_session_data[0].value.string_value #=> String
+    #   resp.chunked_response_terminated #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetNextMessage AWS API Documentation
     #
@@ -4487,6 +4710,9 @@ module Aws::QConnect
     #   previous response in the next request to retrieve the next set of
     #   chunks.
     #
+    # @option params [String] :recommendation_type
+    #   The type of recommendation being requested.
+    #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::RecommendationData&gt;
@@ -4500,6 +4726,7 @@ module Aws::QConnect
     #     max_results: 1,
     #     wait_time_seconds: 1,
     #     next_chunk_token: "NextToken",
+    #     recommendation_type: "KNOWLEDGE_CONTENT", # accepts KNOWLEDGE_CONTENT, GENERATIVE_RESPONSE, GENERATIVE_ANSWER, DETECTED_INTENT, GENERATIVE_ANSWER_CHUNK, BLOCKED_GENERATIVE_ANSWER_CHUNK, INTENT_ANSWER_CHUNK, BLOCKED_INTENT_ANSWER_CHUNK, EMAIL_RESPONSE_CHUNK, EMAIL_OVERVIEW_CHUNK, EMAIL_GENERATIVE_ANSWER_CHUNK, CASE_SUMMARIZATION_CHUNK, BLOCKED_CASE_SUMMARIZATION_CHUNK, SUGGESTED_MESSAGE, NOTES_CHUNK, BLOCKED_NOTES_CHUNK
     #   })
     #
     # @example Response structure
@@ -4511,7 +4738,7 @@ module Aws::QConnect
     #   resp.recommendations[0].document.content_reference.content_arn #=> String
     #   resp.recommendations[0].document.content_reference.content_id #=> String
     #   resp.recommendations[0].document.content_reference.source_url #=> String
-    #   resp.recommendations[0].document.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.recommendations[0].document.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
     #   resp.recommendations[0].document.title.text #=> String
     #   resp.recommendations[0].document.title.highlights #=> Array
     #   resp.recommendations[0].document.title.highlights[0].begin_offset_inclusive #=> Integer
@@ -4522,15 +4749,17 @@ module Aws::QConnect
     #   resp.recommendations[0].document.excerpt.highlights[0].end_offset_exclusive #=> Integer
     #   resp.recommendations[0].relevance_score #=> Float
     #   resp.recommendations[0].relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
-    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK"
+    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "SUGGESTED_MESSAGE", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK"
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_arn #=> String
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_id #=> String
     #   resp.recommendations[0].data.reference.content_reference.content_arn #=> String
     #   resp.recommendations[0].data.reference.content_reference.content_id #=> String
     #   resp.recommendations[0].data.reference.content_reference.source_url #=> String
-    #   resp.recommendations[0].data.reference.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.recommendations[0].data.reference.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
     #   resp.recommendations[0].data.reference.generative_reference.model_id #=> String
     #   resp.recommendations[0].data.reference.generative_reference.generation_id #=> String
+    #   resp.recommendations[0].data.reference.suggested_message_reference.ai_agent_id #=> String
+    #   resp.recommendations[0].data.reference.suggested_message_reference.ai_agent_arn #=> String
     #   resp.recommendations[0].data.details.content_data.text_data.title.text #=> String
     #   resp.recommendations[0].data.details.content_data.text_data.title.highlights #=> Array
     #   resp.recommendations[0].data.details.content_data.text_data.title.highlights[0].begin_offset_inclusive #=> Integer
@@ -4548,6 +4777,7 @@ module Aws::QConnect
     #   resp.recommendations[0].data.details.generative_data.ranking_data.relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendations[0].data.details.intent_detected_data.intent #=> String
     #   resp.recommendations[0].data.details.intent_detected_data.intent_id #=> String
+    #   resp.recommendations[0].data.details.intent_detected_data.relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendations[0].data.details.source_content_data.id #=> String
     #   resp.recommendations[0].data.details.source_content_data.type #=> String, one of "KNOWLEDGE_CONTENT"
     #   resp.recommendations[0].data.details.source_content_data.text_data.title.text #=> String
@@ -4574,6 +4804,12 @@ module Aws::QConnect
     #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.references #=> Array
     #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.references[0] #=> Types::DataSummary
     #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.case_summarization_chunk_data.completion #=> String
+    #   resp.recommendations[0].data.details.case_summarization_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.suggested_message_data.message_text #=> String
+    #   resp.recommendations[0].data.details.notes_data.completion #=> String
+    #   resp.recommendations[0].data.details.notes_chunk_data.completion #=> String
+    #   resp.recommendations[0].data.details.notes_chunk_data.next_chunk_token #=> String
     #   resp.triggers #=> Array
     #   resp.triggers[0].id #=> String
     #   resp.triggers[0].type #=> String, one of "QUERY", "GENERATIVE"
@@ -4635,6 +4871,9 @@ module Aws::QConnect
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.session.orchestrator_configuration_list #=> Array
+    #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.session.orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetSession AWS API Documentation
     #
@@ -4692,7 +4931,7 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.assistant_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.assistant_arn #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_id #=> String
-    #   resp.ai_agent_version_summaries[0].ai_agent_summary.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_arn #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.modified_time #=> Time
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -4736,6 +4975,8 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.suggested_messages #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.suggested_messages[0] #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.self_service_ai_agent_configuration.self_service_pre_processing_ai_prompt_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.self_service_ai_agent_configuration.self_service_answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.self_service_ai_agent_configuration.self_service_ai_guardrail_id #=> String
@@ -4795,6 +5036,36 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.orchestration_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.orchestration_ai_guardrail_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_name #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_type #=> String, one of "MODEL_CONTEXT_PROTOCOL", "RETURN_TO_CONTROL", "CONSTANT"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].title #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].description #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.instruction #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples[0] #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].json_path #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.type #=> String, one of "STRING", "NUMBER", "JSON_STRING"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].json_path #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.output_variable_name_override #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.session_data_namespace #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.note_taking_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.description #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -4854,7 +5125,7 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].assistant_id #=> String
     #   resp.ai_agent_summaries[0].assistant_arn #=> String
     #   resp.ai_agent_summaries[0].ai_agent_id #=> String
-    #   resp.ai_agent_summaries[0].type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
+    #   resp.ai_agent_summaries[0].type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent_summaries[0].ai_agent_arn #=> String
     #   resp.ai_agent_summaries[0].modified_time #=> Time
     #   resp.ai_agent_summaries[0].visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -4898,6 +5169,8 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.suggested_messages #=> Array
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.suggested_messages[0] #=> String
     #   resp.ai_agent_summaries[0].configuration.self_service_ai_agent_configuration.self_service_pre_processing_ai_prompt_id #=> String
     #   resp.ai_agent_summaries[0].configuration.self_service_ai_agent_configuration.self_service_answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent_summaries[0].configuration.self_service_ai_agent_configuration.self_service_ai_guardrail_id #=> String
@@ -4957,6 +5230,36 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.orchestration_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.orchestration_ai_guardrail_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_name #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_type #=> String, one of "MODEL_CONTEXT_PROTOCOL", "RETURN_TO_CONTROL", "CONSTANT"
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].title #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].description #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.instruction #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples[0] #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].json_path #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.type #=> String, one of "STRING", "NUMBER", "JSON_STRING"
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].json_path #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.output_variable_name_override #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.session_data_namespace #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.note_taking_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.case_summarization_ai_agent_configuration.case_summarization_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent_summaries[0].origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.ai_agent_summaries[0].description #=> String
     #   resp.ai_agent_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -5135,7 +5438,7 @@ module Aws::QConnect
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.assistant_id #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.assistant_arn #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_id #=> String
-    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_arn #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.modified_time #=> Time
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.template_type #=> String, one of "TEXT"
@@ -5201,7 +5504,7 @@ module Aws::QConnect
     #   resp.ai_prompt_summaries[0].assistant_id #=> String
     #   resp.ai_prompt_summaries[0].assistant_arn #=> String
     #   resp.ai_prompt_summaries[0].ai_prompt_id #=> String
-    #   resp.ai_prompt_summaries[0].type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
+    #   resp.ai_prompt_summaries[0].type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt_summaries[0].ai_prompt_arn #=> String
     #   resp.ai_prompt_summaries[0].modified_time #=> Time
     #   resp.ai_prompt_summaries[0].template_type #=> String, one of "TEXT"
@@ -5260,9 +5563,11 @@ module Aws::QConnect
     #   resp.assistant_association_summaries[0].assistant_association_arn #=> String
     #   resp.assistant_association_summaries[0].assistant_id #=> String
     #   resp.assistant_association_summaries[0].assistant_arn #=> String
-    #   resp.assistant_association_summaries[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.assistant_association_summaries[0].association_type #=> String, one of "KNOWLEDGE_BASE", "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
     #   resp.assistant_association_summaries[0].association_data.knowledge_base_association.knowledge_base_id #=> String
     #   resp.assistant_association_summaries[0].association_data.knowledge_base_association.knowledge_base_arn #=> String
+    #   resp.assistant_association_summaries[0].association_data.external_bedrock_knowledge_base_config.bedrock_knowledge_base_arn #=> String
+    #   resp.assistant_association_summaries[0].association_data.external_bedrock_knowledge_base_config.access_role_arn #=> String
     #   resp.assistant_association_summaries[0].tags #=> Hash
     #   resp.assistant_association_summaries[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -5316,6 +5621,9 @@ module Aws::QConnect
     #   resp.assistant_summaries[0].capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant_summaries[0].ai_agent_configuration #=> Hash
     #   resp.assistant_summaries[0].ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant_summaries[0].orchestrator_configuration_list #=> Array
+    #   resp.assistant_summaries[0].orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.assistant_summaries[0].orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAssistants AWS API Documentation
@@ -5710,6 +6018,9 @@ module Aws::QConnect
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
+    # @option params [String] :filter
+    #   The filter criteria for listing messages.
+    #
     # @return [Types::ListMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMessagesResponse#messages #messages} => Array&lt;Types::MessageOutput&gt;
@@ -5724,12 +6035,24 @@ module Aws::QConnect
     #     session_id: "UuidOrArn", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filter: "ALL", # accepts ALL, TEXT_ONLY
     #   })
     #
     # @example Response structure
     #
     #   resp.messages #=> Array
     #   resp.messages[0].value.text.value #=> String
+    #   resp.messages[0].value.text.citations #=> Array
+    #   resp.messages[0].value.text.citations[0].content_id #=> String
+    #   resp.messages[0].value.text.citations[0].title #=> String
+    #   resp.messages[0].value.text.citations[0].knowledge_base_id #=> String
+    #   resp.messages[0].value.text.citations[0].citation_span.begin_offset_inclusive #=> Integer
+    #   resp.messages[0].value.text.citations[0].citation_span.end_offset_exclusive #=> Integer
+    #   resp.messages[0].value.text.citations[0].source_url #=> String
+    #   resp.messages[0].value.text.citations[0].reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
+    #   resp.messages[0].value.text.ai_guardrail_assessment.blocked #=> Boolean
+    #   resp.messages[0].value.tool_use_result.tool_use_id #=> String
+    #   resp.messages[0].value.tool_use_result.tool_name #=> String
     #   resp.messages[0].message_id #=> String
     #   resp.messages[0].participant #=> String, one of "CUSTOMER", "AGENT", "BOT"
     #   resp.messages[0].timestamp #=> Time
@@ -5800,6 +6123,141 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def list_quick_responses(params = {}, options = {})
       req = build_request(:list_quick_responses, params)
+      req.send_request(options)
+    end
+
+    # Retrieves AI agent execution traces for a session, providing granular
+    # visibility into agent orchestration flows, LLM interactions, and tool
+    # invocations.
+    #
+    # @option params [required, String] :assistant_id
+    #   UUID or ARN of the Connect AI Assistant resource
+    #
+    # @option params [required, String] :session_id
+    #   UUID or ARN of the Connect AI Session resource
+    #
+    # @option params [String] :next_token
+    #   Pagination token for retrieving the next page of results
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of spans to return per page
+    #
+    # @return [Types::ListSpansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSpansResponse#spans #spans} => Array&lt;Types::Span&gt;
+    #   * {Types::ListSpansResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_spans({
+    #     assistant_id: "UuidOrArn", # required
+    #     session_id: "UuidOrArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.spans #=> Array
+    #   resp.spans[0].span_id #=> String
+    #   resp.spans[0].assistant_id #=> String
+    #   resp.spans[0].session_id #=> String
+    #   resp.spans[0].parent_span_id #=> String
+    #   resp.spans[0].span_name #=> String
+    #   resp.spans[0].span_type #=> String, one of "CLIENT", "SERVER", "INTERNAL"
+    #   resp.spans[0].start_timestamp #=> Time
+    #   resp.spans[0].end_timestamp #=> Time
+    #   resp.spans[0].status #=> String, one of "OK", "ERROR", "TIMEOUT"
+    #   resp.spans[0].request_id #=> String
+    #   resp.spans[0].attributes.operation_name #=> String
+    #   resp.spans[0].attributes.provider_name #=> String
+    #   resp.spans[0].attributes.error_type #=> String
+    #   resp.spans[0].attributes.agent_id #=> String
+    #   resp.spans[0].attributes.instance_arn #=> String
+    #   resp.spans[0].attributes.contact_id #=> String
+    #   resp.spans[0].attributes.initial_contact_id #=> String
+    #   resp.spans[0].attributes.session_name #=> String
+    #   resp.spans[0].attributes.ai_agent_arn #=> String
+    #   resp.spans[0].attributes.ai_agent_type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
+    #   resp.spans[0].attributes.ai_agent_name #=> String
+    #   resp.spans[0].attributes.ai_agent_id #=> String
+    #   resp.spans[0].attributes.ai_agent_version #=> Integer
+    #   resp.spans[0].attributes.ai_agent_invoker #=> String
+    #   resp.spans[0].attributes.ai_agent_orchestrator_use_case #=> String
+    #   resp.spans[0].attributes.request_model #=> String
+    #   resp.spans[0].attributes.request_max_tokens #=> Integer
+    #   resp.spans[0].attributes.temperature #=> Float
+    #   resp.spans[0].attributes.top_p #=> Float
+    #   resp.spans[0].attributes.response_model #=> String
+    #   resp.spans[0].attributes.response_finish_reasons #=> Array
+    #   resp.spans[0].attributes.response_finish_reasons[0] #=> String
+    #   resp.spans[0].attributes.usage_input_tokens #=> Integer
+    #   resp.spans[0].attributes.usage_output_tokens #=> Integer
+    #   resp.spans[0].attributes.usage_total_tokens #=> Integer
+    #   resp.spans[0].attributes.cache_read_input_tokens #=> Integer
+    #   resp.spans[0].attributes.cache_write_input_tokens #=> Integer
+    #   resp.spans[0].attributes.input_messages #=> Array
+    #   resp.spans[0].attributes.input_messages[0].message_id #=> String
+    #   resp.spans[0].attributes.input_messages[0].participant #=> String, one of "CUSTOMER", "AGENT", "BOT"
+    #   resp.spans[0].attributes.input_messages[0].timestamp #=> Time
+    #   resp.spans[0].attributes.input_messages[0].values #=> Array
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.value #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.citations #=> Array
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.citations[0].content_id #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.citations[0].title #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.citations[0].knowledge_base_id #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.citations[0].knowledge_base_arn #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].text.ai_guardrail_assessment.blocked #=> Boolean
+    #   resp.spans[0].attributes.input_messages[0].values[0].tool_use.tool_use_id #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].tool_use.name #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].tool_result.tool_use_id #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].tool_result.values #=> Types::SpanMessageValueList
+    #   resp.spans[0].attributes.input_messages[0].values[0].tool_result.error #=> String
+    #   resp.spans[0].attributes.output_messages #=> Array
+    #   resp.spans[0].attributes.output_messages[0].message_id #=> String
+    #   resp.spans[0].attributes.output_messages[0].participant #=> String, one of "CUSTOMER", "AGENT", "BOT"
+    #   resp.spans[0].attributes.output_messages[0].timestamp #=> Time
+    #   resp.spans[0].attributes.output_messages[0].values #=> Array
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.value #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.citations #=> Array
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.citations[0].content_id #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.citations[0].title #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.citations[0].knowledge_base_id #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.citations[0].knowledge_base_arn #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].text.ai_guardrail_assessment.blocked #=> Boolean
+    #   resp.spans[0].attributes.output_messages[0].values[0].tool_use.tool_use_id #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].tool_use.name #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].tool_result.tool_use_id #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].tool_result.values #=> Types::SpanMessageValueList
+    #   resp.spans[0].attributes.output_messages[0].values[0].tool_result.error #=> String
+    #   resp.spans[0].attributes.system_instructions #=> Array
+    #   resp.spans[0].attributes.system_instructions[0].text.value #=> String
+    #   resp.spans[0].attributes.system_instructions[0].text.citations #=> Array
+    #   resp.spans[0].attributes.system_instructions[0].text.citations[0].content_id #=> String
+    #   resp.spans[0].attributes.system_instructions[0].text.citations[0].title #=> String
+    #   resp.spans[0].attributes.system_instructions[0].text.citations[0].knowledge_base_id #=> String
+    #   resp.spans[0].attributes.system_instructions[0].text.citations[0].knowledge_base_arn #=> String
+    #   resp.spans[0].attributes.system_instructions[0].text.ai_guardrail_assessment.blocked #=> Boolean
+    #   resp.spans[0].attributes.system_instructions[0].tool_use.tool_use_id #=> String
+    #   resp.spans[0].attributes.system_instructions[0].tool_use.name #=> String
+    #   resp.spans[0].attributes.system_instructions[0].tool_result.tool_use_id #=> String
+    #   resp.spans[0].attributes.system_instructions[0].tool_result.values #=> Types::SpanMessageValueList
+    #   resp.spans[0].attributes.system_instructions[0].tool_result.error #=> String
+    #   resp.spans[0].attributes.prompt_arn #=> String
+    #   resp.spans[0].attributes.prompt_id #=> String
+    #   resp.spans[0].attributes.prompt_type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
+    #   resp.spans[0].attributes.prompt_name #=> String
+    #   resp.spans[0].attributes.prompt_version #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListSpans AWS API Documentation
+    #
+    # @overload list_spans(params = {})
+    # @param [Hash] params ({})
+    def list_spans(params = {}, options = {})
+      req = build_request(:list_spans, params)
       req.send_request(options)
     end
 
@@ -6009,6 +6467,9 @@ module Aws::QConnect
     #       intent_input_data: {
     #         intent_id: "Uuid", # required
     #       },
+    #       case_summarization_input_data: {
+    #         case_arn: "CaseArn", # required
+    #       },
     #     },
     #     override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #   })
@@ -6022,7 +6483,7 @@ module Aws::QConnect
     #   resp.results[0].document.content_reference.content_arn #=> String
     #   resp.results[0].document.content_reference.content_id #=> String
     #   resp.results[0].document.content_reference.source_url #=> String
-    #   resp.results[0].document.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.results[0].document.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
     #   resp.results[0].document.title.text #=> String
     #   resp.results[0].document.title.highlights #=> Array
     #   resp.results[0].document.title.highlights[0].begin_offset_inclusive #=> Integer
@@ -6037,9 +6498,11 @@ module Aws::QConnect
     #   resp.results[0].data.reference.content_reference.content_arn #=> String
     #   resp.results[0].data.reference.content_reference.content_id #=> String
     #   resp.results[0].data.reference.content_reference.source_url #=> String
-    #   resp.results[0].data.reference.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.results[0].data.reference.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
     #   resp.results[0].data.reference.generative_reference.model_id #=> String
     #   resp.results[0].data.reference.generative_reference.generation_id #=> String
+    #   resp.results[0].data.reference.suggested_message_reference.ai_agent_id #=> String
+    #   resp.results[0].data.reference.suggested_message_reference.ai_agent_arn #=> String
     #   resp.results[0].data.details.content_data.text_data.title.text #=> String
     #   resp.results[0].data.details.content_data.text_data.title.highlights #=> Array
     #   resp.results[0].data.details.content_data.text_data.title.highlights[0].begin_offset_inclusive #=> Integer
@@ -6057,6 +6520,7 @@ module Aws::QConnect
     #   resp.results[0].data.details.generative_data.ranking_data.relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.results[0].data.details.intent_detected_data.intent #=> String
     #   resp.results[0].data.details.intent_detected_data.intent_id #=> String
+    #   resp.results[0].data.details.intent_detected_data.relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.results[0].data.details.source_content_data.id #=> String
     #   resp.results[0].data.details.source_content_data.type #=> String, one of "KNOWLEDGE_CONTENT"
     #   resp.results[0].data.details.source_content_data.text_data.title.text #=> String
@@ -6083,7 +6547,13 @@ module Aws::QConnect
     #   resp.results[0].data.details.email_generative_answer_chunk_data.references #=> Array
     #   resp.results[0].data.details.email_generative_answer_chunk_data.references[0] #=> Types::DataSummary
     #   resp.results[0].data.details.email_generative_answer_chunk_data.next_chunk_token #=> String
-    #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK"
+    #   resp.results[0].data.details.case_summarization_chunk_data.completion #=> String
+    #   resp.results[0].data.details.case_summarization_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].data.details.suggested_message_data.message_text #=> String
+    #   resp.results[0].data.details.notes_data.completion #=> String
+    #   resp.results[0].data.details.notes_chunk_data.completion #=> String
+    #   resp.results[0].data.details.notes_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "NOTES", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/QueryAssistant AWS API Documentation
@@ -6106,13 +6576,17 @@ module Aws::QConnect
     #   The type of the AI Agent being removed for use by default from the
     #   Amazon Q in Connect Assistant.
     #
+    # @option params [String] :orchestrator_use_case
+    #   The orchestrator use case for the AI Agent being removed.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_assistant_ai_agent({
     #     assistant_id: "UuidOrArn", # required
-    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER
+    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
+    #     orchestrator_use_case: "NonEmptyString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RemoveAssistantAIAgent AWS API Documentation
@@ -6332,6 +6806,120 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def render_message_template(params = {}, options = {})
       req = build_request(:render_message_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves content from knowledge sources based on a query.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant for content
+    #   retrieval.
+    #
+    # @option params [required, Types::RetrievalConfiguration] :retrieval_configuration
+    #   The configuration for the content retrieval operation.
+    #
+    # @option params [required, String] :retrieval_query
+    #   The query for content retrieval.
+    #
+    # @return [Types::RetrieveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetrieveResponse#results #results} => Array&lt;Types::RetrieveResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retrieve({
+    #     assistant_id: "UuidOrArn", # required
+    #     retrieval_configuration: { # required
+    #       knowledge_source: { # required
+    #         assistant_association_ids: ["UuidOrArn"],
+    #       },
+    #       filter: {
+    #         and_all: [
+    #           {
+    #             # recursive RetrievalFilterConfiguration
+    #           },
+    #         ],
+    #         equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         greater_than: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         greater_than_or_equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         in: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         less_than: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         less_than_or_equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         list_contains: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         not_equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         not_in: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         or_all: [
+    #           {
+    #             # recursive RetrievalFilterConfiguration
+    #           },
+    #         ],
+    #         starts_with: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #         string_contains: {
+    #           key: "FilterAttributeKey", # required
+    #           value: { # required
+    #           },
+    #         },
+    #       },
+    #       number_of_results: 1,
+    #       override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #     },
+    #     retrieval_query: "NonEmptySensitiveString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].association_id #=> String
+    #   resp.results[0].source_id #=> String
+    #   resp.results[0].reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
+    #   resp.results[0].content_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/Retrieve AWS API Documentation
+    #
+    # @overload retrieve(params = {})
+    # @param [Hash] params ({})
+    def retrieve(params = {}, options = {})
+      req = build_request(:retrieve, params)
       req.send_request(options)
     end
 
@@ -6684,6 +7272,9 @@ module Aws::QConnect
     # @option params [required, Types::MessageInput] :message
     #   The message data to submit to the Amazon Q in Connect session.
     #
+    # @option params [String] :ai_agent_id
+    #   The identifier of the AI Agent to use for processing the message.
+    #
     # @option params [Types::ConversationContext] :conversation_context
     #   The conversation context before the Amazon Q in Connect session.
     #
@@ -6703,6 +7294,12 @@ module Aws::QConnect
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :orchestrator_use_case
+    #   The orchestrator use case for message processing.
+    #
+    # @option params [Hash<String,String>] :metadata
+    #   Additional metadata for the message.
+    #
     # @return [Types::SendMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendMessageResponse#request_message_id #request_message_id} => String
@@ -6719,28 +7316,60 @@ module Aws::QConnect
     #       value: { # required
     #         text: {
     #           value: "TextMessageValueString",
+    #           citations: [
+    #             {
+    #               content_id: "Uuid",
+    #               title: "SensitiveString",
+    #               knowledge_base_id: "Uuid",
+    #               citation_span: { # required
+    #                 begin_offset_inclusive: 1,
+    #                 end_offset_exclusive: 1,
+    #               },
+    #               source_url: "SensitiveString",
+    #               reference_type: "WEB_CRAWLER", # required, accepts WEB_CRAWLER, KNOWLEDGE_BASE, BEDROCK_KB_S3, BEDROCK_KB_WEB, BEDROCK_KB_CONFLUENCE, BEDROCK_KB_SALESFORCE, BEDROCK_KB_SHAREPOINT, BEDROCK_KB_KENDRA, BEDROCK_KB_CUSTOM_DOCUMENT, BEDROCK_KB_SQL
+    #             },
+    #           ],
+    #           ai_guardrail_assessment: {
+    #             blocked: false, # required
+    #           },
+    #         },
+    #         tool_use_result: {
+    #           tool_use_id: "NonEmptyString", # required
+    #           tool_name: "NonEmptyString", # required
+    #           tool_result: { # required
+    #           },
+    #           input_schema: {
+    #           },
     #         },
     #       },
     #     },
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier",
     #     conversation_context: {
     #       self_service_conversation_history: [ # required
     #         {
-    #           turn_number: 1, # required
+    #           turn_number: 1,
     #           input_transcript: "SensitiveString",
     #           bot_response: "SensitiveString",
+    #           timestamp: Time.now,
     #         },
     #       ],
     #     },
     #     configuration: {
     #       generate_filler_message: false,
+    #       generate_chunked_message: false,
     #     },
     #     client_token: "ClientToken",
+    #     orchestrator_use_case: "NonEmptyString",
+    #     metadata: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.request_message_id #=> String
     #   resp.configuration.generate_filler_message #=> Boolean
+    #   resp.configuration.generate_chunked_message #=> Boolean
     #   resp.next_message_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SendMessage AWS API Documentation
@@ -7097,6 +7726,7 @@ module Aws::QConnect
     #           },
     #         ],
     #         locale: "NonEmptyString",
+    #         suggested_messages: ["NonEmptySensitiveString"],
     #       },
     #       self_service_ai_agent_configuration: {
     #         self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -7231,6 +7861,66 @@ module Aws::QConnect
     #           },
     #         ],
     #       },
+    #       orchestration_ai_agent_configuration: {
+    #         orchestration_ai_prompt_id: "UuidWithQualifier", # required
+    #         orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #         tool_configurations: [
+    #           {
+    #             tool_name: "NonEmptyString", # required
+    #             tool_type: "MODEL_CONTEXT_PROTOCOL", # required, accepts MODEL_CONTEXT_PROTOCOL, RETURN_TO_CONTROL, CONSTANT
+    #             title: "NonEmptyString",
+    #             tool_id: "NonEmptyString",
+    #             description: "String",
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"],
+    #             },
+    #             override_input_values: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 value: { # required
+    #                   constant: {
+    #                     type: "STRING", # required, accepts STRING, NUMBER, JSON_STRING
+    #                     value: "NonEmptySensitiveString", # required
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             output_filters: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 output_configuration: {
+    #                   output_variable_name_override: "NonEmptyString",
+    #                   session_data_namespace: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #             input_schema: {
+    #             },
+    #             output_schema: {
+    #             },
+    #             annotations: {
+    #               title: "String",
+    #               destructive_hint: false,
+    #             },
+    #             user_interaction_configuration: {
+    #               is_user_confirmation_required: false,
+    #             },
+    #           },
+    #         ],
+    #         connect_instance_arn: "GenericArn",
+    #         locale: "NonEmptyString",
+    #       },
+    #       note_taking_ai_agent_configuration: {
+    #         note_taking_ai_prompt_id: "UuidWithQualifier",
+    #         note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #       },
+    #       case_summarization_ai_agent_configuration: {
+    #         case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #         case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #       },
     #     },
     #     description: "Description",
     #   })
@@ -7242,7 +7932,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -7283,6 +7973,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.suggested_messages[0] #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_pre_processing_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.self_service_ai_guardrail_id #=> String
@@ -7342,6 +8034,36 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.orchestration_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_name #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_type #=> String, one of "MODEL_CONTEXT_PROTOCOL", "RETURN_TO_CONTROL", "CONSTANT"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].tool_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].description #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.type #=> String, one of "STRING", "NUMBER", "JSON_STRING"
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].override_input_values[0].value.constant.value #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].json_path #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.output_variable_name_override #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].output_filters[0].output_configuration.session_data_namespace #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
+    #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -7573,6 +8295,9 @@ module Aws::QConnect
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
     #
+    # @option params [Types::AIPromptInferenceConfiguration] :inference_configuration
+    #   The updated inference configuration for the AI Prompt.
+    #
     # @return [Types::UpdateAIPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAIPromptResponse#ai_prompt #ai_prompt} => Types::AIPromptData
@@ -7591,6 +8316,14 @@ module Aws::QConnect
     #     },
     #     description: "Description",
     #     model_id: "AIPromptModelIdentifier",
+    #     inference_configuration: {
+    #       text_ai_prompt_inference_configuration: {
+    #         temperature: 1.0,
+    #         top_p: 1.0,
+    #         top_k: 1,
+    #         max_tokens_to_sample: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -7600,11 +8333,15 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
     #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.temperature #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_p #=> Float
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.top_k #=> Integer
+    #   resp.ai_prompt.inference_configuration.text_ai_prompt_inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -7637,6 +8374,10 @@ module Aws::QConnect
     #   The configuration of the AI Agent being updated for use by default on
     #   the Amazon Q in Connect Assistant.
     #
+    # @option params [Array<Types::OrchestratorConfigurationEntry>] :orchestrator_configuration_list
+    #   The updated list of orchestrator configurations for the assistant AI
+    #   Agent.
+    #
     # @return [Types::UpdateAssistantAIAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssistantAIAgentResponse#assistant #assistant} => Types::AssistantData
@@ -7645,10 +8386,16 @@ module Aws::QConnect
     #
     #   resp = client.update_assistant_ai_agent({
     #     assistant_id: "UuidOrArn", # required
-    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER
+    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
     #     configuration: { # required
     #       ai_agent_id: "UuidWithQualifier", # required
     #     },
+    #     orchestrator_configuration_list: [
+    #       {
+    #         ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #         orchestrator_use_case: "NonEmptyString", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7666,6 +8413,9 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list #=> Array
+    #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAssistantAIAgent AWS API Documentation
     #
@@ -8545,6 +9295,12 @@ module Aws::QConnect
     #   Agent version) that should be used by Amazon Q in Connect for this
     #   Session.
     #
+    # @option params [Array<Types::OrchestratorConfigurationEntry>] :orchestrator_configuration_list
+    #   The updated list of orchestrator configurations for the session.
+    #
+    # @option params [Boolean] :remove_orchestrator_configuration_list
+    #   The list of orchestrator configurations to remove from the session.
+    #
     # @return [Types::UpdateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSessionResponse#session #session} => Types::SessionData
@@ -8586,6 +9342,13 @@ module Aws::QConnect
     #         ai_agent_id: "UuidWithQualifier", # required
     #       },
     #     },
+    #     orchestrator_configuration_list: [
+    #       {
+    #         ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #         orchestrator_use_case: "NonEmptyString", # required
+    #       },
+    #     ],
+    #     remove_orchestrator_configuration_list: false,
     #   })
     #
     # @example Response structure
@@ -8611,6 +9374,9 @@ module Aws::QConnect
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.session.orchestrator_configuration_list #=> Array
+    #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.session.orchestrator_configuration_list[0].orchestrator_use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateSession AWS API Documentation
     #
@@ -8697,7 +9463,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

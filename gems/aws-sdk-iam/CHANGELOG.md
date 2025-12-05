@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2025-12-05)
+------------------
+
+* Feature - Adding the ExpirationTime attribute to the delegation request resource.
+
 1.136.0 (2025-11-21)
 ------------------
 

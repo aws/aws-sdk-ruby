@@ -564,7 +564,7 @@ module Aws::SavingsPlans
     # @!attribute [rw] returnable_until
     #   The time until when a return for the Savings Plan can be requested.
     #   If the Savings Plan is not returnable, the field reflects the
-    #   Savings Plan start time.
+    #   Savings Plans start time.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/SavingsPlan AWS API Documentation

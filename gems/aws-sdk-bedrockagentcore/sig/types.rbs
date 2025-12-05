@@ -152,6 +152,17 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class Context
+      attr_accessor span_context: Types::SpanContext
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SpanContext < Context
+      end
+      class Unknown < Context
+      end
+    end
+
     class Conversational
       attr_accessor content: Types::Content
       attr_accessor role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
@@ -197,6 +208,62 @@ module Aws::BedrockAgentCore
     class DeleteMemoryRecordOutput
       attr_accessor memory_record_id: ::String
       SENSITIVE: []
+    end
+
+    class DuplicateIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateRequest
+      attr_accessor evaluator_id: ::String
+      attr_accessor evaluation_input: Types::EvaluationInput
+      attr_accessor evaluation_target: Types::EvaluationTarget
+      SENSITIVE: []
+    end
+
+    class EvaluateResponse
+      attr_accessor evaluation_results: ::Array[Types::EvaluationResultContent]
+      SENSITIVE: []
+    end
+
+    class EvaluationInput
+      attr_accessor session_spans: ::Array[untyped]
+      attr_accessor unknown: untyped
+      SENSITIVE: [:session_spans]
+
+      class SessionSpans < EvaluationInput
+      end
+      class Unknown < EvaluationInput
+      end
+    end
+
+    class EvaluationResultContent
+      attr_accessor evaluator_arn: ::String
+      attr_accessor evaluator_id: ::String
+      attr_accessor evaluator_name: ::String
+      attr_accessor explanation: ::String
+      attr_accessor context: Types::Context
+      attr_accessor value: ::Float
+      attr_accessor label: ::String
+      attr_accessor token_usage: Types::TokenUsage
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: [:explanation]
+    end
+
+    class EvaluationTarget
+      attr_accessor span_ids: ::Array[::String]
+      attr_accessor trace_ids: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SpanIds < EvaluationTarget
+      end
+      class TraceIds < EvaluationTarget
+      end
+      class Unknown < EvaluationTarget
+      end
     end
 
     class Event
@@ -591,12 +658,20 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class MemoryMetadataFilterExpression
+      attr_accessor left: Types::LeftExpression
+      attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS")
+      attr_accessor right: Types::RightExpression
+      SENSITIVE: []
+    end
+
     class MemoryRecord
       attr_accessor memory_record_id: ::String
       attr_accessor content: Types::MemoryContent
       attr_accessor memory_strategy_id: ::String
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       SENSITIVE: []
     end
 
@@ -630,6 +705,7 @@ module Aws::BedrockAgentCore
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor score: ::Float
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       SENSITIVE: []
     end
 
@@ -723,6 +799,7 @@ module Aws::BedrockAgentCore
       attr_accessor search_query: ::String
       attr_accessor memory_strategy_id: ::String
       attr_accessor top_k: ::Integer
+      attr_accessor metadata_filters: ::Array[Types::MemoryMetadataFilterExpression]
       SENSITIVE: [:search_query]
     end
 
@@ -741,6 +818,13 @@ module Aws::BedrockAgentCore
       attr_accessor session_id: ::String
       attr_accessor actor_id: ::String
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SpanContext
+      attr_accessor session_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor span_id: ::String
       SENSITIVE: []
     end
 
@@ -857,6 +941,13 @@ module Aws::BedrockAgentCore
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TokenUsage
+      attr_accessor input_tokens: ::Integer
+      attr_accessor output_tokens: ::Integer
+      attr_accessor total_tokens: ::Integer
       SENSITIVE: []
     end
 

@@ -162,6 +162,108 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration for an Amazon API Gateway target.
+    #
+    # @!attribute [rw] rest_api_id
+    #   The ID of the API Gateway REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The ID of the stage of the REST API to add as a target.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_tool_configuration
+    #   The configuration for defining REST API tool filters and overrides
+    #   for the gateway target.
+    #   @return [Types::ApiGatewayToolConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ApiGatewayTargetConfiguration AWS API Documentation
+    #
+    class ApiGatewayTargetConfiguration < Struct.new(
+      :rest_api_id,
+      :stage,
+      :api_gateway_tool_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for defining REST API tool filters and overrides for
+    # the gateway target.
+    #
+    # @!attribute [rw] tool_overrides
+    #   A list of explicit tool definitions with optional custom names and
+    #   descriptions.
+    #   @return [Array<Types::ApiGatewayToolOverride>]
+    #
+    # @!attribute [rw] tool_filters
+    #   A list of path and method patterns to expose as tools using metadata
+    #   from the REST API's OpenAPI specification.
+    #   @return [Array<Types::ApiGatewayToolFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ApiGatewayToolConfiguration AWS API Documentation
+    #
+    class ApiGatewayToolConfiguration < Struct.new(
+      :tool_overrides,
+      :tool_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies which operations from an API Gateway REST API are exposed as
+    # tools. Tool names and descriptions are derived from the operationId
+    # and description fields in the API's exported OpenAPI specification.
+    #
+    # @!attribute [rw] filter_path
+    #   Resource path to match in the REST API. Supports exact paths (for
+    #   example, `/pets`) or wildcard paths (for example, `/pets/*` to match
+    #   all paths under `/pets`). Must match existing paths in the REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] methods
+    #   The methods to filter for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ApiGatewayToolFilter AWS API Documentation
+    #
+    class ApiGatewayToolFilter < Struct.new(
+      :filter_path,
+      :methods)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings to override configurations for a tool.
+    #
+    # @!attribute [rw] name
+    #   The name of tool. Identifies the tool in the Model Context Protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the tool. Provides information about the purpose
+    #   and usage of the tool. If not provided, uses the description from
+    #   the API's OpenAPI specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   Resource path in the REST API (e.g., `/pets`). Must explicitly match
+    #   an existing path in the REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] method
+    #   The HTTP method to expose for the specified path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ApiGatewayToolOverride AWS API Documentation
+    #
+    class ApiGatewayToolOverride < Struct.new(
+      :name,
+      :description,
+      :path,
+      :method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An API key credential provider for gateway authentication. This
     # structure contains the configuration for authenticating with the
     # target endpoint using an API key.
@@ -325,6 +427,56 @@ module Aws::BedrockAgentCoreControl
       class Unknown < AuthorizerConfiguration; end
     end
 
+    # Defines the value or values to match for and the relationship of the
+    # match.
+    #
+    # @!attribute [rw] claim_match_value
+    #   The value or values to match for.
+    #   @return [Types::ClaimMatchValueType]
+    #
+    # @!attribute [rw] claim_match_operator
+    #   Defines the relationship between the claim field value and the value
+    #   or values you're matching for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AuthorizingClaimMatchValueType AWS API Documentation
+    #
+    class AuthorizingClaimMatchValueType < Struct.new(
+      :claim_match_value,
+      :claim_match_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for using Amazon Bedrock models in evaluator
+    # assessments, including model selection and inference parameters.
+    #
+    # @!attribute [rw] model_id
+    #   The identifier of the Amazon Bedrock model to use for evaluation.
+    #   Must be a supported foundation model available in your region.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_config
+    #   The inference configuration parameters that control model behavior
+    #   during evaluation, including temperature, token limits, and sampling
+    #   settings.
+    #   @return [Types::InferenceConfiguration]
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model-specific request fields to customize model behavior
+    #   beyond the standard inference configuration.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BedrockEvaluatorModelConfig AWS API Documentation
+    #
+    class BedrockEvaluatorModelConfig < Struct.new(
+      :model_id,
+      :inference_config,
+      :additional_model_request_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The network configuration for a browser. This structure defines how
     # the browser connects to the network.
     #
@@ -423,6 +575,125 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :last_updated_at)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # The definition of a categorical rating scale option that provides a
+    # named category with its description for evaluation scoring.
+    #
+    # @!attribute [rw] definition
+    #   The description that explains what this categorical rating
+    #   represents and when it should be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   The label or name of this categorical rating option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CategoricalScaleDefinition AWS API Documentation
+    #
+    class CategoricalScaleDefinition < Struct.new(
+      :definition,
+      :label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a Cedar policy statement within the AgentCore Policy
+    # system. Cedar is a policy language designed for authorization that
+    # provides human-readable, analyzable, and high-performance policy
+    # evaluation for controlling agent behavior and access decisions.
+    #
+    # @!attribute [rw] statement
+    #   The Cedar policy statement that defines the authorization logic.
+    #   This statement follows Cedar syntax and specifies principals,
+    #   actions, resources, and conditions that determine when access should
+    #   be allowed or denied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CedarPolicy AWS API Documentation
+    #
+    class CedarPolicy < Struct.new(
+      :statement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value or values to match for.
+    #
+    # * Include a `matchValueString` with the `EQUALS` operator to specify a
+    #   string that matches the claim field value.
+    #
+    # * Include a `matchValueArray` to specify an array of string values.
+    #   You can use the following operators:
+    #
+    #   * Use `CONTAINS` to yield a match if the claim field value is in the
+    #     array.
+    #
+    #   * Use `CONTAINS_ANY` to yield a match if the claim field value
+    #     contains any of the strings in the array.
+    #
+    # @note ClaimMatchValueType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ClaimMatchValueType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ClaimMatchValueType corresponding to the set member.
+    #
+    # @!attribute [rw] match_value_string
+    #   The string value to match for.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_value_string_list
+    #   An array of strings to check for a match.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ClaimMatchValueType AWS API Documentation
+    #
+    class ClaimMatchValueType < Struct.new(
+      :match_value_string,
+      :match_value_string_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MatchValueString < ClaimMatchValueType; end
+      class MatchValueStringList < ClaimMatchValueType; end
+      class Unknown < ClaimMatchValueType; end
+    end
+
+    # The configuration for reading agent traces from CloudWatch logs as
+    # input for online evaluation.
+    #
+    # @!attribute [rw] log_group_names
+    #   The list of CloudWatch log group names to monitor for agent traces.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_names
+    #   The list of service names to filter traces within the specified log
+    #   groups. Used to identify relevant agent sessions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CloudWatchLogsInputConfig AWS API Documentation
+    #
+    class CloudWatchLogsInputConfig < Struct.new(
+      :log_group_names,
+      :service_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for writing evaluation results to CloudWatch logs
+    # with embedded metric format (EMF) for monitoring.
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the CloudWatch log group where evaluation results will
+    #   be written. The log group will be created if it doesn't exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CloudWatchOutputConfig AWS API Documentation
+    #
+    class CloudWatchOutputConfig < Struct.new(
+      :log_group_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -607,6 +878,33 @@ module Aws::BedrockAgentCoreControl
       :container_uri)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Represents content input for policy generation operations. This
+    # structure encapsulates the natural language descriptions or other
+    # content formats that are used as input for AI-powered policy
+    # generation.
+    #
+    # @note Content is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] raw_text
+    #   The raw text content containing natural language descriptions of
+    #   desired policy behavior. This text is processed by AI to generate
+    #   corresponding Cedar policy statements that match the described
+    #   intent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Content AWS API Documentation
+    #
+    class Content < Struct.new(
+      :raw_text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RawText < Content; end
+      class Unknown < Content; end
     end
 
     # @!attribute [rw] agent_runtime_id
@@ -1022,6 +1320,82 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_name
+    #   The name of the evaluator. Must be unique within your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluator that explains its purpose and
+    #   evaluation criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_config
+    #   The configuration for the evaluator, including LLM-as-a-Judge
+    #   settings with instructions, rating scale, and model configuration.
+    #   @return [Types::EvaluatorConfig]
+    #
+    # @!attribute [rw] level
+    #   The evaluation level that determines the scope of evaluation. Valid
+    #   values are `TOOL_CALL` for individual tool invocations, `TRACE` for
+    #   single request-response interactions, or `SESSION` for entire
+    #   conversation sessions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateEvaluatorRequest AWS API Documentation
+    #
+    class CreateEvaluatorRequest < Struct.new(
+      :client_token,
+      :evaluator_name,
+      :description,
+      :evaluator_config,
+      :level)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the created evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the created evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the evaluator was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the evaluator creation operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateEvaluatorResponse AWS API Documentation
+    #
+    class CreateEvaluatorResponse < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :created_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the gateway. The name must be unique within your
     #   account.
@@ -1088,6 +1462,14 @@ module Aws::BedrockAgentCoreControl
     #   invocations.
     #   @return [Array<Types::GatewayInterceptorConfiguration>]
     #
+    # @!attribute [rw] policy_engine_configuration
+    #   The policy engine configuration for the gateway. A policy engine is
+    #   a collection of policies that evaluates and authorizes agent tool
+    #   calls. When associated with a gateway, the policy engine intercepts
+    #   all agent requests and determines whether to allow or deny each
+    #   action based on the defined policies.
+    #   @return [Types::GatewayPolicyEngineConfiguration]
+    #
     # @!attribute [rw] exception_level
     #   The level of detail in error messages returned when invoking the
     #   gateway.
@@ -1117,6 +1499,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :interceptor_configurations,
+      :policy_engine_configuration,
       :exception_level,
       :tags)
       SENSITIVE = [:name, :description]
@@ -1189,6 +1572,10 @@ module Aws::BedrockAgentCoreControl
     #   The list of interceptor configurations for the created gateway.
     #   @return [Array<Types::GatewayInterceptorConfiguration>]
     #
+    # @!attribute [rw] policy_engine_configuration
+    #   The policy engine configuration for the created gateway.
+    #   @return [Types::GatewayPolicyEngineConfiguration]
+    #
     # @!attribute [rw] workload_identity_details
     #   The workload identity details for the created gateway.
     #   @return [Types::WorkloadIdentityDetails]
@@ -1223,6 +1610,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :interceptor_configurations,
+      :policy_engine_configuration,
       :workload_identity_details,
       :exception_level)
       SENSITIVE = [:name, :description]
@@ -1483,6 +1871,359 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_name
+    #   The name of the online evaluation configuration. Must be unique
+    #   within your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the online evaluation configuration that explains
+    #   its monitoring purpose and scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   The evaluation rule that defines sampling configuration, filters,
+    #   and session detection settings for the online evaluation.
+    #   @return [Types::Rule]
+    #
+    # @!attribute [rw] data_source_config
+    #   The data source configuration that specifies CloudWatch log groups
+    #   and service names to monitor for agent traces.
+    #   @return [Types::DataSourceConfig]
+    #
+    # @!attribute [rw] evaluators
+    #   The list of evaluators to apply during online evaluation. Can
+    #   include both built-in evaluators and custom evaluators created with
+    #   `CreateEvaluator`.
+    #   @return [Array<Types::EvaluatorReference>]
+    #
+    # @!attribute [rw] evaluation_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants
+    #   permissions to read from CloudWatch logs, write evaluation results,
+    #   and invoke Amazon Bedrock models for evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_on_create
+    #   Whether to enable the online evaluation configuration immediately
+    #   upon creation. If true, evaluation begins automatically.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateOnlineEvaluationConfigRequest AWS API Documentation
+    #
+    class CreateOnlineEvaluationConfigRequest < Struct.new(
+      :client_token,
+      :online_evaluation_config_name,
+      :description,
+      :rule,
+      :data_source_config,
+      :evaluators,
+      :evaluation_execution_role_arn,
+      :enable_on_create)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The Amazon Resource Name (ARN) of the created online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the created online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the online evaluation configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] status
+    #   The status of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The execution status indicating whether the online evaluation is
+    #   currently running.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the online evaluation configuration
+    #   creation or execution failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateOnlineEvaluationConfigResponse AWS API Documentation
+    #
+    class CreateOnlineEvaluationConfigResponse < Struct.new(
+      :online_evaluation_config_arn,
+      :online_evaluation_config_id,
+      :created_at,
+      :output_config,
+      :status,
+      :execution_status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The customer-assigned immutable name for the policy engine. This
+    #   name identifies the policy engine and cannot be changed after
+    #   creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy engine's purpose and
+    #   scope (1-4,096 characters). This helps administrators understand the
+    #   policy engine's role in the overall governance strategy. Document
+    #   which Gateway this engine will be associated with, what types of
+    #   tools or workflows it governs, and the team or service responsible
+    #   for maintaining it. Clear descriptions are essential when managing
+    #   multiple policy engines across different services or environments.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request with the same
+    #   client token, the service returns the same response without creating
+    #   a duplicate policy engine.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyEngineRequest AWS API Documentation
+    #
+    class CreatePolicyEngineRequest < Struct.new(
+      :name,
+      :description,
+      :client_token)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier for the created policy engine. This
+    #   system-generated identifier consists of the user name plus a
+    #   10-character generated suffix and is used for all subsequent policy
+    #   engine operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the created policy engine. This
+    #   matches the name provided in the request and serves as the
+    #   human-readable identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy engine's purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy engine was created. This is
+    #   automatically set by the service and used for auditing and lifecycle
+    #   management.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy engine was last updated. For newly
+    #   created policy engines, this matches the `createdAt` timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The Amazon Resource Name (ARN) of the created policy engine. This
+    #   globally unique identifier can be used for cross-service references
+    #   and IAM policy statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy engine. A status of `ACTIVE`
+    #   indicates the policy engine is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the policy engine status. This provides
+    #   details about any failures or the current state of the policy engine
+    #   creation process.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyEngineResponse AWS API Documentation
+    #
+    class CreatePolicyEngineResponse < Struct.new(
+      :policy_engine_id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The customer-assigned immutable name for the policy. Must be unique
+    #   within the account. This name is used for policy identification and
+    #   cannot be changed after creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that defines the access control rules.
+    #   This contains the actual policy logic written in Cedar policy
+    #   language, specifying effect (permit or forbid), principals, actions,
+    #   resources, and conditions for agent behavior control.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy's purpose and
+    #   functionality (1-4,096 characters). This helps policy administrators
+    #   understand the policy's intent, business rules, and operational
+    #   scope. Use this field to document why the policy exists, what
+    #   business requirement it addresses, and any special considerations
+    #   for maintenance. Clear descriptions are essential for policy
+    #   governance, auditing, and troubleshooting.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_mode
+    #   The validation mode for the policy creation. Determines how Cedar
+    #   analyzer validation results are handled during policy creation.
+    #   FAIL\_ON\_ANY\_FINDINGS (default) runs the Cedar analyzer to
+    #   validate the policy against the Cedar schema and tool context,
+    #   failing creation if the analyzer detects any validation issues to
+    #   ensure strict conformance. IGNORE\_ALL\_FINDINGS runs the Cedar
+    #   analyzer but allows policy creation even if validation issues are
+    #   detected, useful for testing or when the policy schema is evolving.
+    #   Use FAIL\_ON\_ANY\_FINDINGS for production policies to ensure
+    #   correctness, and IGNORE\_ALL\_FINDINGS only when you understand and
+    #   accept the analyzer findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine which contains this policy.
+    #   Policy engines group related policies and provide the execution
+    #   context for policy evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. The AWS SDK automatically generates this token, so you
+    #   don't need to provide it in most cases. If you retry a request with
+    #   the same client token, the service returns the same response without
+    #   creating a duplicate policy.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyRequest AWS API Documentation
+    #
+    class CreatePolicyRequest < Struct.new(
+      :name,
+      :definition,
+      :description,
+      :validation_mode,
+      :policy_engine_id,
+      :client_token)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_id
+    #   The unique identifier for the created policy. This is a
+    #   system-generated identifier consisting of the user name plus a
+    #   10-character generated suffix, used for all subsequent policy
+    #   operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the created policy. This matches the
+    #   name provided in the request and serves as the human-readable
+    #   identifier for the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages this policy. This
+    #   confirms the policy engine assignment and is used for policy
+    #   evaluation routing.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that was created. This is the validated
+    #   policy definition that will be used for agent behavior control and
+    #   access decisions.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the policy's purpose and
+    #   functionality. This helps administrators understand and manage the
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy was created. This is automatically set
+    #   by the service and used for auditing and lifecycle management.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy was last updated. For newly created
+    #   policies, this matches the createdAt timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the created policy. This globally
+    #   unique identifier can be used for cross-service references and IAM
+    #   policy statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy. A status of `ACTIVE` indicates the
+    #   policy is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the policy status. This provides
+    #   details about any failures or the current state of the policy
+    #   creation process.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyResponse AWS API Documentation
+    #
+    class CreatePolicyResponse < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :definition,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the workload identity. The name must be unique within
     #   your account.
@@ -1587,6 +2328,38 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Defines the name of a custom claim field and rules for finding matches
+    # to authenticate its value.
+    #
+    # @!attribute [rw] inbound_token_claim_name
+    #   The name of the custom claim field to check.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_token_claim_value_type
+    #   The data type of the claim value to check for.
+    #
+    #   * Use `STRING` if you want to find an exact match to a string you
+    #     define.
+    #
+    #   * Use `STRING_ARRAY` if you want to fnd a match to at least one
+    #     value in an array you define.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizing_claim_match_value
+    #   Defines the value or values to match for and the relationship of the
+    #   match.
+    #   @return [Types::AuthorizingClaimMatchValueType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomClaimValidationType AWS API Documentation
+    #
+    class CustomClaimValidationType < Struct.new(
+      :inbound_token_claim_name,
+      :inbound_token_claim_value_type,
+      :authorizing_claim_match_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for custom configuration of a memory strategy.
     #
     # @note CustomConfigurationInput is a union - when making an API calls you must set exactly one of the members.
@@ -1604,6 +2377,11 @@ module Aws::BedrockAgentCoreControl
     #   strategy.
     #   @return [Types::UserPreferenceOverrideConfigurationInput]
     #
+    # @!attribute [rw] episodic_override
+    #   The episodic memory strategy override configuration for a custom
+    #   memory strategy.
+    #   @return [Types::EpisodicOverrideConfigurationInput]
+    #
     # @!attribute [rw] self_managed_configuration
     #   The self managed configuration for a custom memory strategy.
     #   @return [Types::SelfManagedConfigurationInput]
@@ -1614,6 +2392,7 @@ module Aws::BedrockAgentCoreControl
       :semantic_override,
       :summary_override,
       :user_preference_override,
+      :episodic_override,
       :self_managed_configuration,
       :unknown)
       SENSITIVE = []
@@ -1623,6 +2402,7 @@ module Aws::BedrockAgentCoreControl
       class SemanticOverride < CustomConfigurationInput; end
       class SummaryOverride < CustomConfigurationInput; end
       class UserPreferenceOverride < CustomConfigurationInput; end
+      class EpisodicOverride < CustomConfigurationInput; end
       class SelfManagedConfiguration < CustomConfigurationInput; end
       class Unknown < CustomConfigurationInput; end
     end
@@ -1643,12 +2423,18 @@ module Aws::BedrockAgentCoreControl
     #   The user preference consolidation override configuration.
     #   @return [Types::UserPreferenceConsolidationOverride]
     #
+    # @!attribute [rw] episodic_consolidation_override
+    #   The configurations to override the default consolidation step for
+    #   the episodic memory strategy.
+    #   @return [Types::EpisodicConsolidationOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomConsolidationConfiguration AWS API Documentation
     #
     class CustomConsolidationConfiguration < Struct.new(
       :semantic_consolidation_override,
       :summary_consolidation_override,
       :user_preference_consolidation_override,
+      :episodic_consolidation_override,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1657,6 +2443,7 @@ module Aws::BedrockAgentCoreControl
       class SemanticConsolidationOverride < CustomConsolidationConfiguration; end
       class SummaryConsolidationOverride < CustomConsolidationConfiguration; end
       class UserPreferenceConsolidationOverride < CustomConsolidationConfiguration; end
+      class EpisodicConsolidationOverride < CustomConsolidationConfiguration; end
       class Unknown < CustomConsolidationConfiguration; end
     end
 
@@ -1676,12 +2463,18 @@ module Aws::BedrockAgentCoreControl
     #   The user preference consolidation override configuration input.
     #   @return [Types::UserPreferenceOverrideConsolidationConfigurationInput]
     #
+    # @!attribute [rw] episodic_consolidation_override
+    #   Configurations to override the consolidation step of the episodic
+    #   strategy.
+    #   @return [Types::EpisodicOverrideConsolidationConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomConsolidationConfigurationInput AWS API Documentation
     #
     class CustomConsolidationConfigurationInput < Struct.new(
       :semantic_consolidation_override,
       :summary_consolidation_override,
       :user_preference_consolidation_override,
+      :episodic_consolidation_override,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1690,6 +2483,7 @@ module Aws::BedrockAgentCoreControl
       class SemanticConsolidationOverride < CustomConsolidationConfigurationInput; end
       class SummaryConsolidationOverride < CustomConsolidationConfigurationInput; end
       class UserPreferenceConsolidationOverride < CustomConsolidationConfigurationInput; end
+      class EpisodicConsolidationOverride < CustomConsolidationConfigurationInput; end
       class Unknown < CustomConsolidationConfigurationInput; end
     end
 
@@ -1705,11 +2499,17 @@ module Aws::BedrockAgentCoreControl
     #   The user preference extraction override configuration.
     #   @return [Types::UserPreferenceExtractionOverride]
     #
+    # @!attribute [rw] episodic_extraction_override
+    #   The configurations to override the default extraction step for the
+    #   episodic memory strategy.
+    #   @return [Types::EpisodicExtractionOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomExtractionConfiguration AWS API Documentation
     #
     class CustomExtractionConfiguration < Struct.new(
       :semantic_extraction_override,
       :user_preference_extraction_override,
+      :episodic_extraction_override,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1717,6 +2517,7 @@ module Aws::BedrockAgentCoreControl
 
       class SemanticExtractionOverride < CustomExtractionConfiguration; end
       class UserPreferenceExtractionOverride < CustomExtractionConfiguration; end
+      class EpisodicExtractionOverride < CustomExtractionConfiguration; end
       class Unknown < CustomExtractionConfiguration; end
     end
 
@@ -1732,11 +2533,17 @@ module Aws::BedrockAgentCoreControl
     #   The user preference extraction override configuration input.
     #   @return [Types::UserPreferenceOverrideExtractionConfigurationInput]
     #
+    # @!attribute [rw] episodic_extraction_override
+    #   Configurations to override the extraction step of the episodic
+    #   strategy.
+    #   @return [Types::EpisodicOverrideExtractionConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomExtractionConfigurationInput AWS API Documentation
     #
     class CustomExtractionConfigurationInput < Struct.new(
       :semantic_extraction_override,
       :user_preference_extraction_override,
+      :episodic_extraction_override,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1744,6 +2551,7 @@ module Aws::BedrockAgentCoreControl
 
       class SemanticExtractionOverride < CustomExtractionConfigurationInput; end
       class UserPreferenceExtractionOverride < CustomExtractionConfigurationInput; end
+      class EpisodicExtractionOverride < CustomExtractionConfigurationInput; end
       class Unknown < CustomExtractionConfigurationInput; end
     end
 
@@ -1765,12 +2573,23 @@ module Aws::BedrockAgentCoreControl
     #   JWT token validation process.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allowed_scopes
+    #   An array of scopes that are allowed to access the token.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_claims
+    #   An array of objects that define a custom claim validation name,
+    #   value, and operation
+    #   @return [Array<Types::CustomClaimValidationType>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomJWTAuthorizerConfiguration AWS API Documentation
     #
     class CustomJWTAuthorizerConfiguration < Struct.new(
       :discovery_url,
       :allowed_audience,
-      :allowed_clients)
+      :allowed_clients,
+      :allowed_scopes,
+      :custom_claims)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1845,6 +2664,74 @@ module Aws::BedrockAgentCoreControl
       :client_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains configurations for a custom reflection strategy.
+    #
+    # @note CustomReflectionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CustomReflectionConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] episodic_reflection_override
+    #   The configuration for a reflection strategy to override the default
+    #   one.
+    #   @return [Types::EpisodicReflectionOverride]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomReflectionConfiguration AWS API Documentation
+    #
+    class CustomReflectionConfiguration < Struct.new(
+      :episodic_reflection_override,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EpisodicReflectionOverride < CustomReflectionConfiguration; end
+      class Unknown < CustomReflectionConfiguration; end
+    end
+
+    # Input for a custom reflection configuration.
+    #
+    # @note CustomReflectionConfigurationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] episodic_reflection_override
+    #   The reflection override configuration input.
+    #   @return [Types::EpisodicOverrideReflectionConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomReflectionConfigurationInput AWS API Documentation
+    #
+    class CustomReflectionConfigurationInput < Struct.new(
+      :episodic_reflection_override,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EpisodicReflectionOverride < CustomReflectionConfigurationInput; end
+      class Unknown < CustomReflectionConfigurationInput; end
+    end
+
+    # The configuration that specifies where to read agent traces for online
+    # evaluation.
+    #
+    # @note DataSourceConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DataSourceConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataSourceConfig corresponding to the set member.
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   The CloudWatch logs configuration for reading agent traces from log
+    #   groups.
+    #   @return [Types::CloudWatchLogsInputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DataSourceConfig AWS API Documentation
+    #
+    class DataSourceConfig < Struct.new(
+      :cloud_watch_logs,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CloudWatchLogs < DataSourceConfig; end
+      class Unknown < DataSourceConfig; end
     end
 
     # Exception thrown when decryption of a secret fails.
@@ -2051,6 +2938,40 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteEvaluatorRequest AWS API Documentation
+    #
+    class DeleteEvaluatorRequest < Struct.new(
+      :evaluator_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the deleted evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the deleted evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the evaluator deletion operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteEvaluatorResponse AWS API Documentation
+    #
+    class DeleteEvaluatorResponse < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_identifier
     #   The identifier of the gateway to delete.
     #   @return [String]
@@ -2198,6 +3119,222 @@ module Aws::BedrockAgentCoreControl
     #
     class DeleteOauth2CredentialProviderResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the online evaluation configuration to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteOnlineEvaluationConfigRequest AWS API Documentation
+    #
+    class DeleteOnlineEvaluationConfigRequest < Struct.new(
+      :online_evaluation_config_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The Amazon Resource Name (ARN) of the deleted online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the deleted online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the online evaluation configuration deletion
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteOnlineEvaluationConfigResponse AWS API Documentation
+    #
+    class DeleteOnlineEvaluationConfigResponse < Struct.new(
+      :online_evaluation_config_arn,
+      :online_evaluation_config_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine to be deleted. This must
+    #   be a valid policy engine ID that exists within the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyEngineRequest AWS API Documentation
+    #
+    class DeletePolicyEngineRequest < Struct.new(
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine being deleted. This
+    #   confirms which policy engine the deletion operation targets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the deleted policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the deleted policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the deleted policy engine was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the deleted policy engine was last modified
+    #   before deletion. This tracks the final state of the policy engine
+    #   before it was removed from the system.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The Amazon Resource Name (ARN) of the deleted policy engine. This
+    #   globally unique identifier confirms which policy engine resource was
+    #   successfully removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the policy engine deletion operation. This provides
+    #   status about any issues that occurred during the deletion process.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the deletion status. This provides
+    #   details about the deletion process or any issues that may have
+    #   occurred.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyEngineResponse AWS API Documentation
+    #
+    class DeletePolicyEngineResponse < Struct.new(
+      :policy_engine_id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages the policy to be
+    #   deleted. This ensures the policy is deleted from the correct policy
+    #   engine context.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy to be deleted. This must be a
+    #   valid policy ID that exists within the specified policy engine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyRequest AWS API Documentation
+    #
+    class DeletePolicyRequest < Struct.new(
+      :policy_engine_id,
+      :policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy being deleted. This confirms
+    #   which policy the deletion operation targets.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the deleted policy. This confirms
+    #   which policy was successfully removed from the system and matches
+    #   the name that was originally assigned during policy creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine from which the policy was
+    #   deleted. This confirms the policy engine context for the deletion
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Represents the definition structure for policies within the
+    #   AgentCore Policy system. This structure encapsulates different
+    #   policy formats and languages that can be used to define access
+    #   control rules.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the deleted policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the deleted policy was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the deleted policy was last modified before
+    #   deletion. This tracks the final state of the policy before it was
+    #   removed from the system.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the deleted policy. This globally
+    #   unique identifier confirms which policy resource was successfully
+    #   removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the policy deletion operation. This provides
+    #   information about any issues that occurred during the deletion
+    #   process.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the deletion status. This provides
+    #   details about the deletion process or any issues that may have
+    #   occurred.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyResponse AWS API Documentation
+    #
+    class DeletePolicyResponse < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :definition,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to delete
+    #   the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] name
     #   The name of the workload identity to delete.
     #   @return [String]
@@ -2227,6 +3364,376 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains configurations to override the default consolidation step for
+    # the episodic memory strategy.
+    #
+    # @!attribute [rw] append_to_prompt
+    #   The text appended to the prompt for the consolidation step of the
+    #   episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The model ID used for the consolidation step of the episodic memory
+    #   strategy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicConsolidationOverride AWS API Documentation
+    #
+    class EpisodicConsolidationOverride < Struct.new(
+      :append_to_prompt,
+      :model_id)
+      SENSITIVE = [:append_to_prompt]
+      include Aws::Structure
+    end
+
+    # Contains configurations to override the default extraction step for
+    # the episodic memory strategy.
+    #
+    # @!attribute [rw] append_to_prompt
+    #   The text appended to the prompt for the extraction step of the
+    #   episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The model ID used for the extraction step of the episodic memory
+    #   strategy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicExtractionOverride AWS API Documentation
+    #
+    class EpisodicExtractionOverride < Struct.new(
+      :append_to_prompt,
+      :model_id)
+      SENSITIVE = [:append_to_prompt]
+      include Aws::Structure
+    end
+
+    # Input for creating an episodic memory strategy.
+    #
+    # @!attribute [rw] name
+    #   The name of the episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespaces
+    #   The namespaces for which to create episodes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reflection_configuration
+    #   The configuration for the reflections created with the episodic
+    #   memory strategy.
+    #   @return [Types::EpisodicReflectionConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicMemoryStrategyInput AWS API Documentation
+    #
+    class EpisodicMemoryStrategyInput < Struct.new(
+      :name,
+      :description,
+      :namespaces,
+      :reflection_configuration)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Input for the configuration to override the episodic memory strategy.
+    #
+    # @!attribute [rw] extraction
+    #   Contains configurations for overriding the extraction step of the
+    #   episodic memory strategy.
+    #   @return [Types::EpisodicOverrideExtractionConfigurationInput]
+    #
+    # @!attribute [rw] consolidation
+    #   Contains configurations for overriding the consolidation step of the
+    #   episodic memory strategy.
+    #   @return [Types::EpisodicOverrideConsolidationConfigurationInput]
+    #
+    # @!attribute [rw] reflection
+    #   Contains configurations for overriding the reflection step of the
+    #   episodic memory strategy.
+    #   @return [Types::EpisodicOverrideReflectionConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicOverrideConfigurationInput AWS API Documentation
+    #
+    class EpisodicOverrideConfigurationInput < Struct.new(
+      :extraction,
+      :consolidation,
+      :reflection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configurations for overriding the consolidation step of the episodic
+    # memory strategy.
+    #
+    # @!attribute [rw] append_to_prompt
+    #   The text to append to the prompt for the consolidation step of the
+    #   episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The model ID to use for the consolidation step of the episodic
+    #   memory strategy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicOverrideConsolidationConfigurationInput AWS API Documentation
+    #
+    class EpisodicOverrideConsolidationConfigurationInput < Struct.new(
+      :append_to_prompt,
+      :model_id)
+      SENSITIVE = [:append_to_prompt]
+      include Aws::Structure
+    end
+
+    # Configurations for overriding the extraction step of the episodic
+    # memory strategy.
+    #
+    # @!attribute [rw] append_to_prompt
+    #   The text to append to the prompt for the extraction step of the
+    #   episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The model ID to use for the extraction step of the episodic memory
+    #   strategy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicOverrideExtractionConfigurationInput AWS API Documentation
+    #
+    class EpisodicOverrideExtractionConfigurationInput < Struct.new(
+      :append_to_prompt,
+      :model_id)
+      SENSITIVE = [:append_to_prompt]
+      include Aws::Structure
+    end
+
+    # Configurations for overriding the reflection step of the episodic
+    # memory strategy.
+    #
+    # @!attribute [rw] append_to_prompt
+    #   The text to append to the prompt for reflection step of the episodic
+    #   memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The model ID to use for the reflection step of the episodic memory
+    #   strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespaces
+    #   The namespaces to use for episodic reflection. Can be less nested
+    #   than the episodic namespaces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicOverrideReflectionConfigurationInput AWS API Documentation
+    #
+    class EpisodicOverrideReflectionConfigurationInput < Struct.new(
+      :append_to_prompt,
+      :model_id,
+      :namespaces)
+      SENSITIVE = [:append_to_prompt]
+      include Aws::Structure
+    end
+
+    # The configuration for the reflections created with the episodic memory
+    # strategy.
+    #
+    # @!attribute [rw] namespaces
+    #   The namespaces for which to create reflections. Can be less nested
+    #   than the episodic namespaces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicReflectionConfiguration AWS API Documentation
+    #
+    class EpisodicReflectionConfiguration < Struct.new(
+      :namespaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An episodic reflection configuration input.
+    #
+    # @!attribute [rw] namespaces
+    #   The namespaces over which to create reflections. Can be less nested
+    #   than episode namespaces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicReflectionConfigurationInput AWS API Documentation
+    #
+    class EpisodicReflectionConfigurationInput < Struct.new(
+      :namespaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations to override the default reflection step for
+    # the episodic memory strategy.
+    #
+    # @!attribute [rw] append_to_prompt
+    #   The text appended to the prompt for the reflection step of the
+    #   episodic memory strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The model ID used for the reflection step of the episodic memory
+    #   strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespaces
+    #   The namespaces over which reflections were created. Can be less
+    #   nested than the episodic namespaces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EpisodicReflectionOverride AWS API Documentation
+    #
+    class EpisodicReflectionOverride < Struct.new(
+      :append_to_prompt,
+      :model_id,
+      :namespaces)
+      SENSITIVE = [:append_to_prompt]
+      include Aws::Structure
+    end
+
+    # The configuration that defines how an evaluator assesses agent
+    # performance, including the evaluation method and parameters.
+    #
+    # @note EvaluatorConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluatorConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluatorConfig corresponding to the set member.
+    #
+    # @!attribute [rw] llm_as_a_judge
+    #   The LLM-as-a-Judge configuration that uses a language model to
+    #   evaluate agent performance based on custom instructions and rating
+    #   scales.
+    #   @return [Types::LlmAsAJudgeEvaluatorConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluatorConfig AWS API Documentation
+    #
+    class EvaluatorConfig < Struct.new(
+      :llm_as_a_judge,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LlmAsAJudge < EvaluatorConfig; end
+      class Unknown < EvaluatorConfig; end
+    end
+
+    # The model configuration that specifies which foundation model to use
+    # for evaluation and how to configure it.
+    #
+    # @note EvaluatorModelConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluatorModelConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluatorModelConfig corresponding to the set member.
+    #
+    # @!attribute [rw] bedrock_evaluator_model_config
+    #   The Amazon Bedrock model configuration for evaluation.
+    #   @return [Types::BedrockEvaluatorModelConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluatorModelConfig AWS API Documentation
+    #
+    class EvaluatorModelConfig < Struct.new(
+      :bedrock_evaluator_model_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BedrockEvaluatorModelConfig < EvaluatorModelConfig; end
+      class Unknown < EvaluatorModelConfig; end
+    end
+
+    # The reference to an evaluator used in online evaluation
+    # configurations, containing the evaluator identifier.
+    #
+    # @note EvaluatorReference is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluatorReference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluatorReference corresponding to the set member.
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator. Can reference builtin
+    #   evaluators (e.g., Builtin.Helpfulness) or custom evaluators.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluatorReference AWS API Documentation
+    #
+    class EvaluatorReference < Struct.new(
+      :evaluator_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EvaluatorId < EvaluatorReference; end
+      class Unknown < EvaluatorReference; end
+    end
+
+    # The summary information about an evaluator, including basic metadata
+    # and status information.
+    #
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_name
+    #   The name of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_type
+    #   The type of evaluator, indicating whether it is a built-in evaluator
+    #   provided by the service or a custom evaluator created by the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
+    #   determines the scope of evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the evaluator was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the evaluator was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] locked_for_modification
+    #   Whether the evaluator is locked for modification due to being
+    #   referenced by active online evaluation configurations.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluatorSummary AWS API Documentation
+    #
+    class EvaluatorSummary < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :evaluator_name,
+      :description,
+      :evaluator_type,
+      :level,
+      :status,
+      :created_at,
+      :updated_at,
+      :locked_for_modification)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # Contains extraction configuration information for a memory strategy.
     #
     # @note ExtractionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExtractionConfiguration corresponding to the set member.
@@ -2246,6 +3753,101 @@ module Aws::BedrockAgentCoreControl
 
       class CustomExtractionConfiguration < ExtractionConfiguration; end
       class Unknown < ExtractionConfiguration; end
+    end
+
+    # The filter that applies conditions to agent traces during online
+    # evaluation to determine which traces should be evaluated.
+    #
+    # @!attribute [rw] key
+    #   The key or field name to filter on within the agent trace data.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator to use for filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to compare against using the specified operator.
+    #   @return [Types::FilterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :key,
+      :operator,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value used in filter comparisons, supporting different data types
+    # for flexible filtering criteria.
+    #
+    # @note FilterValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FilterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FilterValue corresponding to the set member.
+    #
+    # @!attribute [rw] string_value
+    #   The string value for text-based filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] double_value
+    #   The numeric value for numerical filtering and comparisons.
+    #   @return [Float]
+    #
+    # @!attribute [rw] boolean_value
+    #   The boolean value for true/false filtering conditions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FilterValue AWS API Documentation
+    #
+    class FilterValue < Struct.new(
+      :string_value,
+      :double_value,
+      :boolean_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringValue < FilterValue; end
+      class DoubleValue < FilterValue; end
+      class BooleanValue < FilterValue; end
+      class Unknown < FilterValue; end
+    end
+
+    # Represents a finding or issue discovered during policy generation or
+    # validation. Findings provide insights about potential problems,
+    # recommendations, or validation results from policy analysis
+    # operations. Finding types include: VALID (policy is ready to use),
+    # INVALID (policy has validation errors that must be fixed),
+    # NOT\_TRANSLATABLE (input couldn't be converted to policy), ALLOW\_ALL
+    # (policy would allow all actions, potential security risk), ALLOW\_NONE
+    # (policy would allow no actions, unusable), DENY\_ALL (policy would
+    # deny all actions, may be too restrictive), and DENY\_NONE (policy
+    # would deny no actions, ineffective). Review all findings before
+    # creating policies from generated assets to ensure they match your
+    # security requirements.
+    #
+    # @!attribute [rw] type
+    #   The type or category of the finding. This classifies the finding as
+    #   an error, warning, recommendation, or informational message to help
+    #   users understand the severity and nature of the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the finding. This provides detailed
+    #   information about the issue, recommendation, or validation result to
+    #   help users understand and address the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Finding AWS API Documentation
+    #
+    class Finding < Struct.new(
+      :type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The configuration for an interceptor on a gateway. This structure
@@ -2273,6 +3875,43 @@ module Aws::BedrockAgentCoreControl
       :interceptor,
       :interception_points,
       :input_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a policy engine associated with a gateway. A
+    # policy engine is a collection of policies that evaluates and
+    # authorizes agent tool calls. When associated with a gateway, the
+    # policy engine intercepts all agent requests and determines whether to
+    # allow or deny each action based on the defined policies.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the policy engine. The policy engine contains Cedar
+    #   policies that define fine-grained authorization rules specifying who
+    #   can perform what actions on which resources as agents interact
+    #   through the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The enforcement mode for the policy engine. Valid values include:
+    #
+    #   * `LOG_ONLY` - The policy engine evaluates each action against your
+    #     policies and adds traces on whether tool calls would be allowed or
+    #     denied, but does not enforce the decision. Use this mode to test
+    #     and validate policies before enabling enforcement.
+    #
+    #   * `ENFORCE` - The policy engine evaluates actions against your
+    #     policies and enforces decisions by allowing or denying agent
+    #     operations. Test and validate policies in `LOG_ONLY` mode before
+    #     enabling enforcement to avoid unintended denials or adversely
+    #     affecting production traffic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayPolicyEngineConfiguration AWS API Documentation
+    #
+    class GatewayPolicyEngineConfiguration < Struct.new(
+      :arn,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2557,6 +4196,11 @@ module Aws::BedrockAgentCoreControl
     #   The life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the AgentCore Runtime is in a failed
+    #   state.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the AgentCore Runtime.
     #   @return [String]
@@ -2600,6 +4244,7 @@ module Aws::BedrockAgentCoreControl
       :network_configuration,
       :status,
       :lifecycle_configuration,
+      :failure_reason,
       :description,
       :workload_identity_details,
       :agent_runtime_artifact,
@@ -2808,6 +4453,80 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator to retrieve. Can be a
+    #   built-in evaluator ID (e.g., Builtin.Helpfulness) or a custom
+    #   evaluator ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetEvaluatorRequest AWS API Documentation
+    #
+    class GetEvaluatorRequest < Struct.new(
+      :evaluator_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_name
+    #   The name of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_config
+    #   The configuration of the evaluator, including LLM-as-a-Judge
+    #   settings for custom evaluators.
+    #   @return [Types::EvaluatorConfig]
+    #
+    # @!attribute [rw] level
+    #   The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
+    #   determines the scope of evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the evaluator was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the evaluator was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] locked_for_modification
+    #   Whether the evaluator is locked for modification due to being
+    #   referenced by active online evaluation configurations.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetEvaluatorResponse AWS API Documentation
+    #
+    class GetEvaluatorResponse < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :evaluator_name,
+      :description,
+      :evaluator_config,
+      :level,
+      :status,
+      :created_at,
+      :updated_at,
+      :locked_for_modification)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_identifier
     #   The identifier of the gateway to retrieve.
     #   @return [String]
@@ -2886,6 +4605,10 @@ module Aws::BedrockAgentCoreControl
     #   The interceptors configured on the gateway.
     #   @return [Array<Types::GatewayInterceptorConfiguration>]
     #
+    # @!attribute [rw] policy_engine_configuration
+    #   The policy engine configuration for the gateway.
+    #   @return [Types::GatewayPolicyEngineConfiguration]
+    #
     # @!attribute [rw] workload_identity_details
     #   The workload identity details for the gateway.
     #   @return [Types::WorkloadIdentityDetails]
@@ -2920,6 +4643,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :interceptor_configurations,
+      :policy_engine_configuration,
       :workload_identity_details,
       :exception_level)
       SENSITIVE = [:name, :description]
@@ -3088,6 +4812,390 @@ module Aws::BedrockAgentCoreControl
       :oauth2_provider_config_output,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the online evaluation configuration to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetOnlineEvaluationConfigRequest AWS API Documentation
+    #
+    class GetOnlineEvaluationConfigRequest < Struct.new(
+      :online_evaluation_config_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The Amazon Resource Name (ARN) of the online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_name
+    #   The name of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   The evaluation rule containing sampling configuration, filters, and
+    #   session settings.
+    #   @return [Types::Rule]
+    #
+    # @!attribute [rw] data_source_config
+    #   The data source configuration specifying CloudWatch log groups and
+    #   service names to monitor.
+    #   @return [Types::DataSourceConfig]
+    #
+    # @!attribute [rw] evaluators
+    #   The list of evaluators applied during online evaluation.
+    #   @return [Array<Types::EvaluatorReference>]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration specifying where evaluation results are
+    #   written.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] evaluation_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used for evaluation
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The execution status indicating whether the online evaluation is
+    #   currently running.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the online evaluation configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the online evaluation configuration was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the online evaluation configuration
+    #   execution failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetOnlineEvaluationConfigResponse AWS API Documentation
+    #
+    class GetOnlineEvaluationConfigResponse < Struct.new(
+      :online_evaluation_config_arn,
+      :online_evaluation_config_id,
+      :online_evaluation_config_name,
+      :description,
+      :rule,
+      :data_source_config,
+      :evaluators,
+      :output_config,
+      :evaluation_execution_role_arn,
+      :status,
+      :execution_status,
+      :created_at,
+      :updated_at,
+      :failure_reason)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine to be retrieved. This
+    #   must be a valid policy engine ID that exists within the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyEngineRequest AWS API Documentation
+    #
+    class GetPolicyEngineRequest < Struct.new(
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the retrieved policy engine. This matches
+    #   the policy engine ID provided in the request and serves as the
+    #   system identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the policy engine. This is the
+    #   human-readable identifier that was specified when the policy engine
+    #   was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the policy engine's purpose and
+    #   scope. This helps administrators understand the policy engine's
+    #   role in governance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy engine was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy engine was last modified. This tracks
+    #   the most recent changes to the policy engine configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The Amazon Resource Name (ARN) of the policy engine. This globally
+    #   unique identifier can be used for cross-service references and IAM
+    #   policy statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the policy engine status. This provides
+    #   details about any failures or the current state of the policy
+    #   engine.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyEngineResponse AWS API Documentation
+    #
+    class GetPolicyEngineResponse < Struct.new(
+      :policy_engine_id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier of the policy generation request to be
+    #   retrieved. This must be a valid generation ID from a previous
+    #   [StartPolicyGeneration][1] call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with the policy
+    #   generation request. This provides the context for the generation
+    #   operation and schema validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyGenerationRequest AWS API Documentation
+    #
+    class GetPolicyGenerationRequest < Struct.new(
+      :policy_generation_id,
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with this policy
+    #   generation. This confirms the policy engine context for the
+    #   generation operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier of the policy generation request. This matches
+    #   the generation ID provided in the request and serves as the tracking
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name for the policy generation request. This
+    #   helps identify and track generation operations across multiple
+    #   requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_arn
+    #   The Amazon Resource Name (ARN) of the policy generation. This
+    #   globally unique identifier can be used for tracking, auditing, and
+    #   cross-service references.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource information associated with the policy generation. This
+    #   provides context about the target resources for which the policies
+    #   are being generated.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy generation request was created. This
+    #   is used for tracking and auditing generation operations and their
+    #   lifecycle.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy generation was last updated. This
+    #   tracks the progress of the generation process and any status
+    #   changes.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy generation. This indicates whether
+    #   the generation is in progress, completed successfully, or failed
+    #   during processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the generation status. This provides
+    #   details about any failures, warnings, or the current state of the
+    #   generation process.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] findings
+    #   The findings and results from the policy generation process. This
+    #   includes any issues, recommendations, validation results, or
+    #   insights from the generated policies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyGenerationResponse AWS API Documentation
+    #
+    class GetPolicyGenerationResponse < Struct.new(
+      :policy_engine_id,
+      :policy_generation_id,
+      :name,
+      :policy_generation_arn,
+      :resource,
+      :created_at,
+      :updated_at,
+      :status,
+      :status_reasons,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages the policy to be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy to be retrieved. This must be a
+    #   valid policy ID that exists within the specified policy engine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyRequest AWS API Documentation
+    #
+    class GetPolicyRequest < Struct.new(
+      :policy_engine_id,
+      :policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the retrieved policy. This matches the
+    #   policy ID provided in the request and serves as the system
+    #   identifier for the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the policy. This is the human-readable
+    #   identifier that was specified when the policy was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages this policy. This
+    #   confirms the policy engine context for the retrieved policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that defines the access control rules.
+    #   This contains the actual policy logic used for agent behavior
+    #   control and access decisions.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the policy's purpose and
+    #   functionality. This helps administrators understand and manage the
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy was last modified. This tracks the
+    #   most recent changes to the policy configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy. This globally unique
+    #   identifier can be used for cross-service references and IAM policy
+    #   statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the policy status. This provides
+    #   details about any failures or the current state of the policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyResponse AWS API Documentation
+    #
+    class GetPolicyResponse < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :definition,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to retrieve
+    #   the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource policy associated with the specified resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3307,6 +5415,41 @@ module Aws::BedrockAgentCoreControl
     class IncludedOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
       :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration parameters that control how the foundation model
+    # behaves during evaluation, including response generation settings.
+    #
+    # @!attribute [rw] max_tokens
+    #   The maximum number of tokens to generate in the model response
+    #   during evaluation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] temperature
+    #   The temperature value that controls randomness in the model's
+    #   responses. Lower values produce more deterministic outputs.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_p
+    #   The top-p sampling parameter that controls the diversity of the
+    #   model's responses by limiting the cumulative probability of token
+    #   choices.
+    #   @return [Float]
+    #
+    # @!attribute [rw] stop_sequences
+    #   The list of sequences that will cause the model to stop generating
+    #   tokens when encountered.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/InferenceConfiguration AWS API Documentation
+    #
+    class InferenceConfiguration < Struct.new(
+      :max_tokens,
+      :temperature,
+      :top_p,
+      :stop_sequences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3736,6 +5879,43 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request to retrieve the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of evaluators to return in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListEvaluatorsRequest AWS API Documentation
+    #
+    class ListEvaluatorsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluators
+    #   The list of evaluator summaries containing basic information about
+    #   each evaluator.
+    #   @return [Array<Types::EvaluatorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListEvaluatorsResponse AWS API Documentation
+    #
+    class ListEvaluatorsResponse < Struct.new(
+      :evaluators,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_identifier
     #   The identifier of the gateway to list targets for.
     #   @return [String]
@@ -3898,6 +6078,272 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request to retrieve the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of online evaluation configurations to return in
+    #   a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListOnlineEvaluationConfigsRequest AWS API Documentation
+    #
+    class ListOnlineEvaluationConfigsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] online_evaluation_configs
+    #   The list of online evaluation configuration summaries containing
+    #   basic information about each configuration.
+    #   @return [Array<Types::OnlineEvaluationConfigSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListOnlineEvaluationConfigsResponse AWS API Documentation
+    #
+    class ListOnlineEvaluationConfigsResponse < Struct.new(
+      :online_evaluation_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous [ListPolicies][1] call.
+    #   Use this token to retrieve the next page of results when the
+    #   response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policies to return in a single response. If
+    #   not specified, the default is 10 policies per page, with a maximum
+    #   of 100 per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine whose policies to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_scope
+    #   Optional filter to list policies that apply to a specific resource
+    #   scope or resource type. This helps narrow down policy results to
+    #   those relevant for particular Amazon Web Services resources, agent
+    #   tools, or operational contexts within the policy engine ecosystem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPoliciesRequest AWS API Documentation
+    #
+    class ListPoliciesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :policy_engine_id,
+      :target_resource_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policies
+    #   An array of policy objects that match the specified criteria. Each
+    #   policy object contains the policy metadata, status, and key
+    #   identifiers for further operations.
+    #   @return [Array<Types::Policy>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in subsequent ListPolicies calls
+    #   to retrieve additional results. This token is only present when
+    #   there are more results available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPoliciesResponse AWS API Documentation
+    #
+    class ListPoliciesResponse < Struct.new(
+      :policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous [ListPolicyEngines][1]
+    #   call. Use this token to retrieve the next page of results when the
+    #   response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policy engines to return in a single response.
+    #   If not specified, the default is 10 policy engines per page, with a
+    #   maximum of 100 per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEnginesRequest AWS API Documentation
+    #
+    class ListPolicyEnginesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engines
+    #   An array of policy engine objects that exist in the account. Each
+    #   policy engine object contains the engine metadata, status, and key
+    #   identifiers for further operations.
+    #   @return [Array<Types::PolicyEngine>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in subsequent
+    #   [ListPolicyEngines][1] calls to retrieve additional results. This
+    #   token is only present when there are more results available.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEnginesResponse AWS API Documentation
+    #
+    class ListPolicyEnginesResponse < Struct.new(
+      :policy_engines,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier of the policy generation request whose assets
+    #   are to be retrieved. This must be a valid generation ID from a
+    #   previous [StartPolicyGeneration][1] call that has completed
+    #   processing.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine associated with the
+    #   policy generation request. This provides the context for the
+    #   generation operation and ensures assets are retrieved from the
+    #   correct policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous
+    #   [ListPolicyGenerationAssets][1] call. Use this token to retrieve the
+    #   next page of assets when the response is paginated due to large
+    #   numbers of generated policy options.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policy generation assets to return in a single
+    #   response. If not specified, the default is 10 assets per page, with
+    #   a maximum of 100 per page. This helps control response size when
+    #   dealing with policy generations that produce many alternative policy
+    #   options.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationAssetsRequest AWS API Documentation
+    #
+    class ListPolicyGenerationAssetsRequest < Struct.new(
+      :policy_generation_id,
+      :policy_engine_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_generation_assets
+    #   An array of generated policy assets including Cedar policies and
+    #   related artifacts from the AI-powered policy generation process.
+    #   Each asset represents a different policy option or variation
+    #   generated from the original natural language input.
+    #   @return [Array<Types::PolicyGenerationAsset>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in subsequent
+    #   [ListPolicyGenerationAssets][1] calls to retrieve additional assets.
+    #   This token is only present when there are more generated policy
+    #   assets available beyond the current response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationAssetsResponse AWS API Documentation
+    #
+    class ListPolicyGenerationAssetsResponse < Struct.new(
+      :policy_generation_assets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token for retrieving additional policy generations when
+    #   results are paginated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policy generations to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine whose policy generations to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationsRequest AWS API Documentation
+    #
+    class ListPolicyGenerationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_generations
+    #   An array of policy generation objects that match the specified
+    #   criteria.
+    #   @return [Array<Types::PolicyGeneration>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for retrieving additional policy generations if
+    #   more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationsResponse AWS API Documentation
+    #
+    class ListPolicyGenerationsResponse < Struct.new(
+      :policy_generations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
     #   list tags.
@@ -3954,6 +6400,36 @@ module Aws::BedrockAgentCoreControl
       :workload_identities,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for LLM-as-a-Judge evaluation that uses a language
+    # model to assess agent performance based on custom instructions and
+    # rating scales.
+    #
+    # @!attribute [rw] instructions
+    #   The evaluation instructions that guide the language model in
+    #   assessing agent performance, including criteria and evaluation
+    #   guidelines.
+    #   @return [String]
+    #
+    # @!attribute [rw] rating_scale
+    #   The rating scale that defines how the evaluator should score agent
+    #   performance, either numerical or categorical.
+    #   @return [Types::RatingScale]
+    #
+    # @!attribute [rw] model_config
+    #   The model configuration that specifies which foundation model to use
+    #   and how to configure it for evaluation.
+    #   @return [Types::EvaluatorModelConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LlmAsAJudgeEvaluatorConfig AWS API Documentation
+    #
+    class LlmAsAJudgeEvaluatorConfig < Struct.new(
+      :instructions,
+      :rating_scale,
+      :model_config)
+      SENSITIVE = [:instructions]
       include Aws::Structure
     end
 
@@ -4051,6 +6527,10 @@ module Aws::BedrockAgentCoreControl
     #   The MCP server specified as the gateway target.
     #   @return [Types::McpServerTargetConfiguration]
     #
+    # @!attribute [rw] api_gateway
+    #   The configuration for an Amazon API Gateway target.
+    #   @return [Types::ApiGatewayTargetConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/McpTargetConfiguration AWS API Documentation
     #
     class McpTargetConfiguration < Struct.new(
@@ -4058,6 +6538,7 @@ module Aws::BedrockAgentCoreControl
       :smithy_model,
       :lambda,
       :mcp_server,
+      :api_gateway,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4067,6 +6548,7 @@ module Aws::BedrockAgentCoreControl
       class SmithyModel < McpTargetConfiguration; end
       class Lambda < McpTargetConfiguration; end
       class McpServer < McpTargetConfiguration; end
+      class ApiGateway < McpTargetConfiguration; end
       class Unknown < McpTargetConfiguration; end
     end
 
@@ -4213,6 +6695,10 @@ module Aws::BedrockAgentCoreControl
     #   Input for creating a custom memory strategy.
     #   @return [Types::CustomMemoryStrategyInput]
     #
+    # @!attribute [rw] episodic_memory_strategy
+    #   Input for creating an episodic memory strategy
+    #   @return [Types::EpisodicMemoryStrategyInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MemoryStrategyInput AWS API Documentation
     #
     class MemoryStrategyInput < Struct.new(
@@ -4220,6 +6706,7 @@ module Aws::BedrockAgentCoreControl
       :summary_memory_strategy,
       :user_preference_memory_strategy,
       :custom_memory_strategy,
+      :episodic_memory_strategy,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4229,6 +6716,7 @@ module Aws::BedrockAgentCoreControl
       class SummaryMemoryStrategy < MemoryStrategyInput; end
       class UserPreferenceMemoryStrategy < MemoryStrategyInput; end
       class CustomMemoryStrategy < MemoryStrategyInput; end
+      class EpisodicMemoryStrategy < MemoryStrategyInput; end
       class Unknown < MemoryStrategyInput; end
     end
 
@@ -4453,6 +6941,33 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains information for modifying a reflection configuration.
+    #
+    # @note ModifyReflectionConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] episodic_reflection_configuration
+    #   The updated episodic reflection configuration.
+    #   @return [Types::EpisodicReflectionConfigurationInput]
+    #
+    # @!attribute [rw] custom_reflection_configuration
+    #   The updated custom reflection configuration.
+    #   @return [Types::CustomReflectionConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ModifyReflectionConfiguration AWS API Documentation
+    #
+    class ModifyReflectionConfiguration < Struct.new(
+      :episodic_reflection_configuration,
+      :custom_reflection_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EpisodicReflectionConfiguration < ModifyReflectionConfiguration; end
+      class CustomReflectionConfiguration < ModifyReflectionConfiguration; end
+      class Unknown < ModifyReflectionConfiguration; end
+    end
+
     # The configuration for updating the self-managed memory strategy.
     #
     # @!attribute [rw] trigger_conditions
@@ -4489,6 +7004,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated consolidation configuration.
     #   @return [Types::ModifyConsolidationConfiguration]
     #
+    # @!attribute [rw] reflection
+    #   The updated reflection configuration.
+    #   @return [Types::ModifyReflectionConfiguration]
+    #
     # @!attribute [rw] self_managed_configuration
     #   The updated self-managed configuration.
     #   @return [Types::ModifySelfManagedConfiguration]
@@ -4498,6 +7017,7 @@ module Aws::BedrockAgentCoreControl
     class ModifyStrategyConfiguration < Struct.new(
       :extraction,
       :consolidation,
+      :reflection,
       :self_managed_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -4522,6 +7042,32 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The definition of a numerical rating scale option that provides a
+    # numeric value with its description for evaluation scoring.
+    #
+    # @!attribute [rw] definition
+    #   The description that explains what this numerical rating represents
+    #   and when it should be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The numerical value for this rating scale option.
+    #   @return [Float]
+    #
+    # @!attribute [rw] label
+    #   The label or name that describes this numerical rating option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/NumericalScaleDefinition AWS API Documentation
+    #
+    class NumericalScaleDefinition < Struct.new(
+      :definition,
+      :value,
+      :label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An OAuth credential provider for gateway authentication. This
     # structure contains the configuration for authenticating with the
     # target endpoint using OAuth.
@@ -4542,12 +7088,29 @@ module Aws::BedrockAgentCoreControl
     #   authentication process.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] grant_type
+    #   Specifies the kind of credentials to use for authorization:
+    #
+    #   * `CLIENT_CREDENTIALS` - Authorization with a client ID and secret.
+    #
+    #   * `AUTHORIZATION_CODE` - Authorization with a token that is specific
+    #     to an individual end user.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_return_url
+    #   The URL where the end user's browser is redirected after obtaining
+    #   the authorization code. Generally points to the customer's
+    #   application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OAuthCredentialProvider AWS API Documentation
     #
     class OAuthCredentialProvider < Struct.new(
       :provider_arn,
       :scopes,
-      :custom_parameters)
+      :custom_parameters,
+      :grant_type,
+      :default_return_url)
       SENSITIVE = [:custom_parameters]
       include Aws::Structure
     end
@@ -4793,6 +7356,401 @@ module Aws::BedrockAgentCoreControl
       class Unknown < Oauth2ProviderConfigOutput; end
     end
 
+    # The summary information about an online evaluation configuration,
+    # including basic metadata and execution status.
+    #
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The Amazon Resource Name (ARN) of the online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_name
+    #   The name of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The execution status indicating whether the online evaluation is
+    #   currently running.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the online evaluation configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the online evaluation configuration was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the online evaluation configuration
+    #   execution failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OnlineEvaluationConfigSummary AWS API Documentation
+    #
+    class OnlineEvaluationConfigSummary < Struct.new(
+      :online_evaluation_config_arn,
+      :online_evaluation_config_id,
+      :online_evaluation_config_name,
+      :description,
+      :status,
+      :execution_status,
+      :created_at,
+      :updated_at,
+      :failure_reason)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # The configuration that specifies where evaluation results should be
+    # written for monitoring and analysis.
+    #
+    # @!attribute [rw] cloud_watch_config
+    #   The CloudWatch configuration for writing evaluation results to
+    #   CloudWatch logs with embedded metric format.
+    #   @return [Types::CloudWatchOutputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OutputConfig AWS API Documentation
+    #
+    class OutputConfig < Struct.new(
+      :cloud_watch_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a complete policy resource within the AgentCore Policy
+    # system. Policies are ARN-able resources that contain Cedar policy
+    # statements and associated metadata for controlling agent behavior and
+    # access decisions. Each policy belongs to a policy engine and defines
+    # fine-grained authorization rules that are evaluated in real-time as
+    # agents interact with tools through Gateway. Policies use the Cedar
+    # policy language to specify who (principals based on OAuth claims like
+    # username, role, or scope) can perform what actions (tool calls) on
+    # which resources (Gateways), with optional conditions for
+    # attribute-based access control. Multiple policies can apply to a
+    # single request, with Cedar's forbid-wins semantics ensuring that
+    # security restrictions are never accidentally overridden.
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier for the policy. This system-generated
+    #   identifier consists of the user name plus a 10-character generated
+    #   suffix and serves as the primary key for policy operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned immutable name for the policy. This
+    #   human-readable identifier must be unique within the account and
+    #   cannot exceed 48 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages this policy. This
+    #   establishes the policy engine context for policy evaluation and
+    #   management.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that defines the access control rules.
+    #   This contains the actual policy logic used for agent behavior
+    #   control and access decisions.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy's purpose and
+    #   functionality. Limited to 4,096 characters, this helps
+    #   administrators understand and manage the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy was originally created. This is
+    #   automatically set by the service and used for auditing and lifecycle
+    #   management.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy was last modified. This tracks the
+    #   most recent changes to the policy configuration or metadata.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy. This globally unique
+    #   identifier can be used for cross-service references and IAM policy
+    #   statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the policy status. This provides
+    #   details about any failures or the current state of the policy
+    #   lifecycle.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Policy AWS API Documentation
+    #
+    class Policy < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :definition,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Represents the definition structure for policies within the AgentCore
+    # Policy system. This structure encapsulates different policy formats
+    # and languages that can be used to define access control rules.
+    #
+    # @note PolicyDefinition is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PolicyDefinition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PolicyDefinition corresponding to the set member.
+    #
+    # @!attribute [rw] cedar
+    #   The Cedar policy definition within the policy definition structure.
+    #   This contains the Cedar policy statement that defines the
+    #   authorization logic using Cedar's human-readable, analyzable policy
+    #   language. Cedar policies specify principals (who can access),
+    #   actions (what operations are allowed), resources (what can be
+    #   accessed), and optional conditions for fine-grained control. Cedar
+    #   provides a formal policy language designed for authorization with
+    #   deterministic evaluation, making policies testable, reviewable, and
+    #   auditable. All Cedar policies follow a default-deny model where
+    #   actions are denied unless explicitly permitted, and forbid policies
+    #   always override permit policies.
+    #   @return [Types::CedarPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyDefinition AWS API Documentation
+    #
+    class PolicyDefinition < Struct.new(
+      :cedar,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Cedar < PolicyDefinition; end
+      class Unknown < PolicyDefinition; end
+    end
+
+    # Represents a policy engine resource within the AgentCore Policy
+    # system. Policy engines serve as containers for grouping related
+    # policies and provide the execution context for policy evaluation and
+    # management. Each policy engine can be associated with one Gateway (one
+    # engine per Gateway), where it intercepts all agent tool calls and
+    # evaluates them against the contained policies before allowing tools to
+    # execute. The policy engine maintains the Cedar schema generated from
+    # the Gateway's tool manifest, ensuring that policies are validated
+    # against the actual tools and parameters available. Policy engines
+    # support two enforcement modes that can be configured when associating
+    # with a Gateway: log-only mode for testing (evaluates decisions without
+    # blocking) and enforce mode for production (actively allows or denies
+    # based on policy evaluation).
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier for the policy engine. This system-generated
+    #   identifier consists of the user name plus a 10-character generated
+    #   suffix and serves as the primary key for policy engine operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned immutable name for the policy engine. This
+    #   human-readable identifier must be unique within the account and
+    #   cannot exceed 48 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy engine's purpose and
+    #   scope. Limited to 4,096 characters, this helps administrators
+    #   understand the policy engine's role in the overall governance
+    #   strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy engine was originally created. This is
+    #   automatically set by the service and used for auditing and lifecycle
+    #   management.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy engine was last modified. This tracks
+    #   the most recent changes to the policy engine configuration or
+    #   metadata.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The Amazon Resource Name (ARN) of the policy engine. This globally
+    #   unique identifier can be used for cross-service references and IAM
+    #   policy statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the policy engine status. This provides
+    #   details about any failures or the current state of the policy engine
+    #   lifecycle.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyEngine AWS API Documentation
+    #
+    class PolicyEngine < Struct.new(
+      :policy_engine_id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Represents a policy generation request within the AgentCore Policy
+    # system. Tracks the AI-powered conversion of natural language
+    # descriptions into Cedar policy statements, enabling users to author
+    # policies by describing authorization requirements in plain English.
+    # The generation process analyzes the natural language input along with
+    # the Gateway's tool context and Cedar schema to produce one or more
+    # validated policy options. Each generation request tracks the status of
+    # the conversion process and maintains findings about the generated
+    # policies, including validation results and potential issues. Generated
+    # policy assets remain available for one week after successful
+    # generation, allowing time to review and create policies from the
+    # generated options.
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with this generation
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier for this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name for this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_arn
+    #   The ARN of this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource information associated with this policy generation.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this policy generation request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when this policy generation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the generation status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] findings
+    #   Findings and insights from this policy generation process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyGeneration AWS API Documentation
+    #
+    class PolicyGeneration < Struct.new(
+      :policy_engine_id,
+      :policy_generation_id,
+      :name,
+      :policy_generation_arn,
+      :resource,
+      :created_at,
+      :updated_at,
+      :status,
+      :status_reasons,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a generated policy asset from the AI-powered policy
+    # generation process within the AgentCore Policy system. Each asset
+    # contains a Cedar policy statement generated from natural language
+    # input, along with associated metadata and analysis findings to help
+    # users evaluate and select the most appropriate policy option.
+    #
+    # @!attribute [rw] policy_generation_asset_id
+    #   The unique identifier for this generated policy asset within the
+    #   policy generation request. This ID can be used to reference specific
+    #   generated policy options when creating actual policies from the
+    #   generation results.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Represents the definition structure for policies within the
+    #   AgentCore Policy system. This structure encapsulates different
+    #   policy formats and languages that can be used to define access
+    #   control rules.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] raw_text_fragment
+    #   The portion of the original natural language input that this
+    #   generated policy asset addresses. This helps users understand which
+    #   part of their policy description was translated into this specific
+    #   Cedar policy statement, enabling better policy selection and
+    #   refinement. When a single natural language input describes multiple
+    #   authorization requirements, the generation process creates separate
+    #   policy assets for each requirement, with each asset's
+    #   rawTextFragment showing which requirement it addresses. Use this
+    #   mapping to verify that all parts of your natural language input were
+    #   correctly translated into Cedar policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] findings
+    #   Analysis findings and insights related to this specific generated
+    #   policy asset. These findings may include validation results,
+    #   potential issues, or recommendations for improvement to help users
+    #   evaluate the quality and appropriateness of the generated policy.
+    #   @return [Array<Types::Finding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyGenerationAsset AWS API Documentation
+    #
+    class PolicyGenerationAsset < Struct.new(
+      :policy_generation_asset_id,
+      :definition,
+      :raw_text_fragment,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The protocol configuration for an agent runtime. This structure
     # defines how the agent runtime communicates with clients.
     #
@@ -4807,6 +7765,68 @@ module Aws::BedrockAgentCoreControl
       :server_protocol)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to create
+    #   or update the resource policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource policy to create or update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource policy that was created or updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rating scale that defines how evaluators should score agent
+    # performance, supporting both numerical and categorical scales.
+    #
+    # @note RatingScale is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RatingScale is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RatingScale corresponding to the set member.
+    #
+    # @!attribute [rw] numerical
+    #   The numerical rating scale with defined score values and
+    #   descriptions for quantitative evaluation.
+    #   @return [Array<Types::NumericalScaleDefinition>]
+    #
+    # @!attribute [rw] categorical
+    #   The categorical rating scale with named categories and definitions
+    #   for qualitative evaluation.
+    #   @return [Array<Types::CategoricalScaleDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RatingScale AWS API Documentation
+    #
+    class RatingScale < Struct.new(
+      :numerical,
+      :categorical,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Numerical < RatingScale; end
+      class Categorical < RatingScale; end
+      class Unknown < RatingScale; end
     end
 
     # The recording configuration for a browser. This structure defines how
@@ -4829,6 +7849,33 @@ module Aws::BedrockAgentCoreControl
       :s3_location)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains reflection configuration information for a memory strategy.
+    #
+    # @note ReflectionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReflectionConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] custom_reflection_configuration
+    #   The configuration for a custom reflection strategy.
+    #   @return [Types::CustomReflectionConfiguration]
+    #
+    # @!attribute [rw] episodic_reflection_configuration
+    #   The configuration for the episodic reflection strategy.
+    #   @return [Types::EpisodicReflectionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ReflectionConfiguration AWS API Documentation
+    #
+    class ReflectionConfiguration < Struct.new(
+      :custom_reflection_configuration,
+      :episodic_reflection_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CustomReflectionConfiguration < ReflectionConfiguration; end
+      class EpisodicReflectionConfiguration < ReflectionConfiguration; end
+      class Unknown < ReflectionConfiguration; end
     end
 
     # Configuration for HTTP request headers that will be passed through to
@@ -4856,6 +7903,33 @@ module Aws::BedrockAgentCoreControl
       class Unknown < RequestHeaderConfiguration; end
     end
 
+    # Represents a resource within the AgentCore Policy system. Resources
+    # are the targets of policy evaluation. Currently, only AgentCore
+    # Gateways are supported as resources for policy enforcement.
+    #
+    # @note Resource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Resource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Resource corresponding to the set member.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource. This globally unique
+    #   identifier specifies the exact resource that policies will be
+    #   evaluated against for access control decisions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Resource AWS API Documentation
+    #
+    class Resource < Struct.new(
+      :arn,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Arn < Resource; end
+      class Unknown < Resource; end
+    end
+
     # Exception thrown when a resource limit is exceeded.
     #
     # @!attribute [rw] message
@@ -4879,6 +7953,34 @@ module Aws::BedrockAgentCoreControl
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The evaluation rule that defines sampling configuration, filtering
+    # criteria, and session detection settings for online evaluation.
+    #
+    # @!attribute [rw] sampling_config
+    #   The sampling configuration that determines what percentage of agent
+    #   traces to evaluate.
+    #   @return [Types::SamplingConfig]
+    #
+    # @!attribute [rw] filters
+    #   The list of filters that determine which agent traces should be
+    #   included in the evaluation based on trace properties.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] session_config
+    #   The session configuration that defines timeout settings for
+    #   detecting when agent sessions are complete and ready for evaluation.
+    #   @return [Types::SessionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Rule AWS API Documentation
+    #
+    class Rule < Struct.new(
+      :sampling_config,
+      :filters,
+      :session_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4967,6 +8069,22 @@ module Aws::BedrockAgentCoreControl
     class SalesforceOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
       :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that controls what percentage of agent traces are
+    # sampled for evaluation to manage evaluation volume and costs.
+    #
+    # @!attribute [rw] sampling_percentage
+    #   The percentage of agent traces to sample for evaluation, ranging
+    #   from 0.01% to 100%.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SamplingConfig AWS API Documentation
+    #
+    class SamplingConfig < Struct.new(
+      :sampling_percentage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5222,6 +8340,22 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration that defines how agent sessions are detected and
+    # when they are considered complete for evaluation.
+    #
+    # @!attribute [rw] session_timeout_minutes
+    #   The number of minutes of inactivity after which an agent session is
+    #   considered complete and ready for evaluation. Default is 15 minutes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SessionConfig AWS API Documentation
+    #
+    class SessionConfig < Struct.new(
+      :session_timeout_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] token_vault_id
     #   The unique identifier of the token vault to update.
     #   @return [String]
@@ -5300,6 +8434,113 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that provides the context for
+    #   policy generation. This engine's schema and tool context are used
+    #   to ensure generated policies are valid and applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource information that provides context for policy
+    #   generation. This helps the AI understand the target resources and
+    #   generate appropriate access control rules.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] content
+    #   The natural language description of the desired policy behavior.
+    #   This content is processed by AI to generate corresponding Cedar
+    #   policy statements that match the described intent.
+    #   @return [Types::Content]
+    #
+    # @!attribute [rw] name
+    #   A customer-assigned name for the policy generation request. This
+    #   helps track and identify generation operations, especially when
+    #   running multiple generations simultaneously.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. The AWS SDK automatically generates this token, so you
+    #   don't need to provide it in most cases. If you retry a request with
+    #   the same client token, the service returns the same response without
+    #   starting a duplicate generation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StartPolicyGenerationRequest AWS API Documentation
+    #
+    class StartPolicyGenerationRequest < Struct.new(
+      :policy_engine_id,
+      :resource,
+      :content,
+      :name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with the started
+    #   policy generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier assigned to the policy generation request for
+    #   tracking progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name for the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_arn
+    #   The ARN of the created policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource information associated with the policy generation
+    #   request.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy generation request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy generation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The initial status of the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the generation status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] findings
+    #   Initial findings from the policy generation process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StartPolicyGenerationResponse AWS API Documentation
+    #
+    class StartPolicyGenerationResponse < Struct.new(
+      :policy_engine_id,
+      :policy_generation_id,
+      :name,
+      :policy_generation_arn,
+      :resource,
+      :created_at,
+      :updated_at,
+      :status,
+      :status_reasons,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configuration information for a memory strategy.
     #
     # @!attribute [rw] type
@@ -5314,6 +8555,10 @@ module Aws::BedrockAgentCoreControl
     #   The consolidation configuration for the memory strategy.
     #   @return [Types::ConsolidationConfiguration]
     #
+    # @!attribute [rw] reflection
+    #   The reflection configuration for the memory strategy.
+    #   @return [Types::ReflectionConfiguration]
+    #
     # @!attribute [rw] self_managed_configuration
     #   Self-managed configuration settings.
     #   @return [Types::SelfManagedConfiguration]
@@ -5324,6 +8569,7 @@ module Aws::BedrockAgentCoreControl
       :type,
       :extraction,
       :consolidation,
+      :reflection,
       :self_managed_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -6015,6 +9261,80 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_config
+    #   The updated configuration for the evaluator, including
+    #   LLM-as-a-Judge settings with instructions, rating scale, and model
+    #   configuration.
+    #   @return [Types::EvaluatorConfig]
+    #
+    # @!attribute [rw] level
+    #   The updated evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`)
+    #   that determines the scope of evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateEvaluatorRequest AWS API Documentation
+    #
+    class UpdateEvaluatorRequest < Struct.new(
+      :client_token,
+      :evaluator_id,
+      :description,
+      :evaluator_config,
+      :level)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the updated evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the updated evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the evaluator was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the evaluator update operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateEvaluatorResponse AWS API Documentation
+    #
+    class UpdateEvaluatorResponse < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :updated_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_identifier
     #   The identifier of the gateway to update.
     #   @return [String]
@@ -6057,6 +9377,14 @@ module Aws::BedrockAgentCoreControl
     #   The updated interceptor configurations for the gateway.
     #   @return [Array<Types::GatewayInterceptorConfiguration>]
     #
+    # @!attribute [rw] policy_engine_configuration
+    #   The updated policy engine configuration for the gateway. A policy
+    #   engine is a collection of policies that evaluates and authorizes
+    #   agent tool calls. When associated with a gateway, the policy engine
+    #   intercepts all agent requests and determines whether to allow or
+    #   deny each action based on the defined policies.
+    #   @return [Types::GatewayPolicyEngineConfiguration]
+    #
     # @!attribute [rw] exception_level
     #   The level of detail in error messages returned when invoking the
     #   gateway.
@@ -6081,6 +9409,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :interceptor_configurations,
+      :policy_engine_configuration,
       :exception_level)
       SENSITIVE = [:name, :description]
       include Aws::Structure
@@ -6151,6 +9480,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated interceptor configurations for the gateway.
     #   @return [Array<Types::GatewayInterceptorConfiguration>]
     #
+    # @!attribute [rw] policy_engine_configuration
+    #   The updated policy engine configuration for the gateway.
+    #   @return [Types::GatewayPolicyEngineConfiguration]
+    #
     # @!attribute [rw] workload_identity_details
     #   The workload identity details for the updated gateway.
     #   @return [Types::WorkloadIdentityDetails]
@@ -6185,6 +9518,7 @@ module Aws::BedrockAgentCoreControl
       :authorizer_configuration,
       :kms_key_arn,
       :interceptor_configurations,
+      :policy_engine_configuration,
       :workload_identity_details,
       :exception_level)
       SENSITIVE = [:name, :description]
@@ -6419,6 +9753,279 @@ module Aws::BedrockAgentCoreControl
       :created_time,
       :last_updated_time)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the online evaluation configuration to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   The updated evaluation rule containing sampling configuration,
+    #   filters, and session settings.
+    #   @return [Types::Rule]
+    #
+    # @!attribute [rw] data_source_config
+    #   The updated data source configuration specifying CloudWatch log
+    #   groups and service names to monitor.
+    #   @return [Types::DataSourceConfig]
+    #
+    # @!attribute [rw] evaluators
+    #   The updated list of evaluators to apply during online evaluation.
+    #   @return [Array<Types::EvaluatorReference>]
+    #
+    # @!attribute [rw] evaluation_execution_role_arn
+    #   The updated Amazon Resource Name (ARN) of the IAM role used for
+    #   evaluation execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The updated execution status to enable or disable the online
+    #   evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateOnlineEvaluationConfigRequest AWS API Documentation
+    #
+    class UpdateOnlineEvaluationConfigRequest < Struct.new(
+      :client_token,
+      :online_evaluation_config_id,
+      :description,
+      :rule,
+      :data_source_config,
+      :evaluators,
+      :evaluation_execution_role_arn,
+      :execution_status)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The Amazon Resource Name (ARN) of the updated online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] online_evaluation_config_id
+    #   The unique identifier of the updated online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the online evaluation configuration was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the online evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The execution status indicating whether the online evaluation is
+    #   currently running.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the online evaluation configuration update
+    #   or execution failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateOnlineEvaluationConfigResponse AWS API Documentation
+    #
+    class UpdateOnlineEvaluationConfigResponse < Struct.new(
+      :online_evaluation_config_arn,
+      :online_evaluation_config_id,
+      :updated_at,
+      :status,
+      :execution_status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description for the policy engine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyEngineRequest AWS API Documentation
+    #
+    class UpdatePolicyEngineRequest < Struct.new(
+      :policy_engine_id,
+      :description)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the updated policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the updated policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The original creation timestamp of the policy engine.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy engine was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The ARN of the updated policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the updated policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the update status.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyEngineResponse AWS API Documentation
+    #
+    class UpdatePolicyEngineResponse < Struct.new(
+      :policy_engine_id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages the policy to be
+    #   updated. This ensures the policy is updated within the correct
+    #   policy engine context.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy to be updated. This must be a
+    #   valid policy ID that exists within the specified policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new human-readable description for the policy. This optional
+    #   field allows updating the policy's documentation while keeping the
+    #   same policy logic.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The new Cedar policy statement that defines the access control
+    #   rules. This replaces the existing policy definition with new logic
+    #   while maintaining the policy's identity.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] validation_mode
+    #   The validation mode for the policy update. Determines how Cedar
+    #   analyzer validation results are handled during policy updates.
+    #   FAIL\_ON\_ANY\_FINDINGS runs the Cedar analyzer and fails the update
+    #   if validation issues are detected, ensuring the policy conforms to
+    #   the Cedar schema and tool context. IGNORE\_ALL\_FINDINGS runs the
+    #   Cedar analyzer but allows updates despite validation warnings. Use
+    #   FAIL\_ON\_ANY\_FINDINGS to ensure policy correctness during updates,
+    #   especially when modifying policy logic or conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyRequest AWS API Documentation
+    #
+    class UpdatePolicyRequest < Struct.new(
+      :policy_engine_id,
+      :policy_id,
+      :description,
+      :definition,
+      :validation_mode)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the updated policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the updated policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine managing the updated policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The updated Cedar policy statement.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The original creation timestamp of the policy.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the updated policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the updated policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the update status.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyResponse AWS API Documentation
+    #
+    class UpdatePolicyResponse < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :definition,
+      :description,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status,
+      :status_reasons)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

@@ -632,6 +632,23 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Auto Scaling Group involved in a
+    # GuardDuty finding, including unique identifiers of the Amazon EC2
+    # instances.
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the compromised Amazon EC2
+    #   instances that are part of the same Auto Scaling Group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AutoscalingAutoScalingGroup AWS API Documentation
+    #
+    class AutoscalingAutoScalingGroup < Struct.new(
+      :ec2_instance_uids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the API action.
     #
     # @!attribute [rw] api
@@ -824,6 +841,24 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the CloudFormation stack involved in a
+    # GuardDuty finding, including unique identifiers of the Amazon EC2
+    # instances.
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the compromised Amazon EC2
+    #   instances that were created as part of the same CloudFormation
+    #   stack.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CloudformationStack AWS API Documentation
+    #
+    class CloudformationStack < Struct.new(
+      :ec2_instance_uids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the condition.
     #
     # @!attribute [rw] eq
@@ -886,6 +921,26 @@ module Aws::GuardDuty
     #   single field when querying for findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] matches
+    #   Represents the *match* condition to be applied to a single field
+    #   when querying for findings.
+    #
+    #   <note markdown="1"> The *matches* condition is available only for create-filter and
+    #   update-filter APIs.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_matches
+    #   Represents the *not match* condition to be applied to a single field
+    #   when querying for findings.
+    #
+    #   <note markdown="1"> The *not-matches* condition is available only for create-filter and
+    #   update-filter APIs.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition AWS API Documentation
     #
     class Condition < Struct.new(
@@ -900,7 +955,9 @@ module Aws::GuardDuty
       :greater_than,
       :greater_than_or_equal,
       :less_than,
-      :less_than_or_equal)
+      :less_than_or_equal,
+      :matches,
+      :not_matches)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3419,6 +3476,24 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Amazon EC2 Image involved in a
+    # GuardDuty finding, including unique identifiers of the Amazon EC2
+    # instances.
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the compromised Amazon EC2
+    #   instances that were launched with the same Amazon Machine Image
+    #   (AMI).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Ec2Image AWS API Documentation
+    #
+    class Ec2Image < Struct.new(
+      :ec2_instance_uids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the EC2 AMI that was scanned.
     #
     # @!attribute [rw] image_arn
@@ -3500,6 +3575,28 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Amazon EC2 launch template involved in
+    # a GuardDuty finding, including unique identifiers of the Amazon EC2
+    # instances.
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the compromised Amazon EC2
+    #   instances that share the same Amazon EC2 launch template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] version
+    #   Version of the EC2 launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Ec2LaunchTemplate AWS API Documentation
+    #
+    class Ec2LaunchTemplate < Struct.new(
+      :ec2_instance_uids,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the elastic network interface of the Amazon
     # EC2 instance.
     #
@@ -3536,6 +3633,44 @@ module Aws::GuardDuty
       :security_groups,
       :sub_net_id,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the Amazon EC2 VPC involved in a GuardDuty
+    # finding, including unique identifiers of the Amazon EC2 instances.
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the compromised Amazon EC2
+    #   instances that were launched within the same Virtual Private Cloud
+    #   (VPC).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Ec2Vpc AWS API Documentation
+    #
+    class Ec2Vpc < Struct.new(
+      :ec2_instance_uids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the Amazon ECS cluster involved in a
+    # GuardDuty finding, including cluster identification and status.
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon ECS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the Amazon EC2 instances that serve
+    #   as container instances in the Amazon ECS cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EcsCluster AWS API Documentation
+    #
+    class EcsCluster < Struct.new(
+      :status,
+      :ec2_instance_uids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3586,6 +3721,39 @@ module Aws::GuardDuty
       :running_tasks_count,
       :tags,
       :task_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about Amazon ECS task involved in a GuardDuty
+    # finding, including task definition and container identifiers.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp indicating when the Amazon ECS task was created, in
+    #   UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_definition_arn
+    #   The ARN of task definition which describes the container and volume
+    #   definitions of the Amazon ECS task.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_type
+    #   The infrastructure type on which the Amazon ECS task runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_uids
+    #   A list of unique identifiers for the containers associated with the
+    #   Amazon ECS task.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EcsTask AWS API Documentation
+    #
+    class EcsTask < Struct.new(
+      :created_at,
+      :task_definition_arn,
+      :launch_type,
+      :container_uids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5310,6 +5478,23 @@ module Aws::GuardDuty
     class IamInstanceProfile < Struct.new(
       :arn,
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the IAM instance profile involved in a
+    # GuardDuty finding, including unique identifiers of the Amazon EC2
+    # instances.
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the compromised Amazon EC2
+    #   instances that share the same IAM instance profile.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfileV2 AWS API Documentation
+    #
+    class IamInstanceProfileV2 < Struct.new(
+      :ec2_instance_uids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8948,6 +9133,51 @@ module Aws::GuardDuty
     #   the activity that prompted GuardDuty to generate a finding.
     #   @return [Types::ContainerFindingResource]
     #
+    # @!attribute [rw] ecs_cluster
+    #   Contains detailed information about the Amazon ECS cluster
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::EcsCluster]
+    #
+    # @!attribute [rw] ecs_task
+    #   Contains detailed information about the Amazon ECS task associated
+    #   with the activity that prompted GuardDuty to generate a finding.
+    #   @return [Types::EcsTask]
+    #
+    # @!attribute [rw] iam_instance_profile
+    #   Contains detailed information about the IAM instance profile
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::IamInstanceProfileV2]
+    #
+    # @!attribute [rw] autoscaling_auto_scaling_group
+    #   Contains detailed information about the Auto Scaling Group
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::AutoscalingAutoScalingGroup]
+    #
+    # @!attribute [rw] ec2_launch_template
+    #   Contains detailed information about the EC2 launch template
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::Ec2LaunchTemplate]
+    #
+    # @!attribute [rw] ec2_vpc
+    #   Contains detailed information about the EC2 VPC associated with the
+    #   activity that prompted GuardDuty to generate a finding.
+    #   @return [Types::Ec2Vpc]
+    #
+    # @!attribute [rw] ec2_image
+    #   Contains detailed information about the EC2 Image associated with
+    #   the activity that prompted GuardDuty to generate a finding.
+    #   @return [Types::Ec2Image]
+    #
+    # @!attribute [rw] cloudformation_stack
+    #   Contains detailed information about the CloudFormation stack
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::CloudformationStack]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceData AWS API Documentation
     #
     class ResourceData < Struct.new(
@@ -8958,7 +9188,15 @@ module Aws::GuardDuty
       :s3_object,
       :eks_cluster,
       :kubernetes_workload,
-      :container)
+      :container,
+      :ecs_cluster,
+      :ecs_task,
+      :iam_instance_profile,
+      :autoscaling_auto_scaling_group,
+      :ec2_launch_template,
+      :ec2_vpc,
+      :ec2_image,
+      :cloudformation_stack)
       SENSITIVE = []
       include Aws::Structure
     end

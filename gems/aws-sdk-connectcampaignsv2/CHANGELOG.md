@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-12-01)
+------------------
+
+* Feature - This release added support for new WhatsApp channel and Journey type outbound campaign
+
 1.17.0 (2025-11-21)
 ------------------
 

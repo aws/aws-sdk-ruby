@@ -88,7 +88,7 @@ module Aws
       def create_campaign: (
                              name: ::String,
                              connect_instance_id: ::String,
-                             channel_subtype_config: {
+                             ?channel_subtype_config: {
                                telephony: {
                                  capacity: ::Float?,
                                  connect_queue_id: ::String?,
@@ -141,8 +141,20 @@ module Aws
                                    source_email_address_display_name: ::String?,
                                    wisdom_template_arn: ::String
                                  }
+                               }?,
+                               whats_app: {
+                                 capacity: ::Float?,
+                                 outbound_mode: {
+                                   agentless: {
+                                   }?
+                                 },
+                                 default_outbound_config: {
+                                   connect_source_phone_number_arn: ::String,
+                                   wisdom_template_arn: ::String
+                                 }
                                }?
                              },
+                             ?type: ("MANAGED" | "JOURNEY"),
                              ?source: {
                                customer_profiles_segment_arn: ::String?,
                                event_trigger: {
@@ -216,6 +228,25 @@ module Aws
                                      },
                                    ]?
                                  }?
+                               }?,
+                               whats_app: {
+                                 open_hours: {
+                                   daily_hours: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+                                       {
+                                         start_time: ::String,
+                                         end_time: ::String
+                                       },
+                                     ]]?
+                                 },
+                                 restricted_periods: {
+                                   restricted_period_list: Array[
+                                     {
+                                       name: ::String?,
+                                       start_date: ::String,
+                                       end_date: ::String
+                                     },
+                                   ]?
+                                 }?
                                }?
                              },
                              ?communication_limits_override: {
@@ -243,7 +274,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignsV2/Client.html#delete_campaign_channel_subtype_config-instance_method
       def delete_campaign_channel_subtype_config: (
                                                     id: ::String,
-                                                    channel_subtype: ("TELEPHONY" | "SMS" | "EMAIL")
+                                                    channel_subtype: ("TELEPHONY" | "SMS" | "EMAIL" | "WHATSAPP")
                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -257,7 +288,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignsV2/Client.html#delete_campaign_communication_time-instance_method
       def delete_campaign_communication_time: (
                                                 id: ::String,
-                                                config: ("TELEPHONY" | "SMS" | "EMAIL")
+                                                config: ("TELEPHONY" | "SMS" | "EMAIL" | "WHATSAPP")
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -277,6 +308,9 @@ module Aws
                                                    }?,
                                                    q_connect: {
                                                      knowledge_base_arn: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String
                                                    }?
                                                  }
                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -406,6 +440,9 @@ module Aws
                                                 }?,
                                                 q_connect: {
                                                   knowledge_base_arn: ::String
+                                                }?,
+                                                lambda: {
+                                                  function_arn: ::String
                                                 }?
                                               }
                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -460,6 +497,12 @@ module Aws
                                               email: {
                                                 destination_email_address: ::String,
                                                 connect_source_email_address: ::String?,
+                                                template_arn: ::String?,
+                                                template_parameters: Hash[::String, ::String]
+                                              }?,
+                                              whats_app: {
+                                                destination_phone_number: ::String,
+                                                connect_source_phone_number_arn: ::String?,
                                                 template_arn: ::String?,
                                                 template_parameters: Hash[::String, ::String]
                                               }?
@@ -590,6 +633,17 @@ module Aws
                                                           source_email_address_display_name: ::String?,
                                                           wisdom_template_arn: ::String
                                                         }
+                                                      }?,
+                                                      whats_app: {
+                                                        capacity: ::Float?,
+                                                        outbound_mode: {
+                                                          agentless: {
+                                                          }?
+                                                        },
+                                                        default_outbound_config: {
+                                                          connect_source_phone_number_arn: ::String,
+                                                          wisdom_template_arn: ::String
+                                                        }
                                                       }?
                                                     }
                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -660,6 +714,25 @@ module Aws
                                                     }?
                                                   }?,
                                                   email: {
+                                                    open_hours: {
+                                                      daily_hours: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+                                                          {
+                                                            start_time: ::String,
+                                                            end_time: ::String
+                                                          },
+                                                        ]]?
+                                                    },
+                                                    restricted_periods: {
+                                                      restricted_period_list: Array[
+                                                        {
+                                                          name: ::String?,
+                                                          start_date: ::String,
+                                                          end_date: ::String
+                                                        },
+                                                      ]?
+                                                    }?
+                                                  }?,
+                                                  whats_app: {
                                                     open_hours: {
                                                       daily_hours: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
                                                           {

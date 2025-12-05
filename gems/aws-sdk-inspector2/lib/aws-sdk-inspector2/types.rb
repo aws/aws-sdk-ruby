@@ -7802,6 +7802,9 @@ module Aws::Inspector2
     #   Once the instance becomes managed by SSM, Inspector will
     #   automatically begin scanning this instance.
     #
+    #   `UNSUPPORTED_CODE_ARTIFACTS ` - The function was not scanned because
+    #   it has an unsupported code artifacts.
+    #
     #   `UNSUPPORTED_CONFIG_FILE` - Reserved for future use.
     #
     #   `UNSUPPORTED_LANGUAGE` - The scan was unsuccessful because the

@@ -146,7 +146,9 @@ module Aws::CleanRooms
     CollaborationSummary = Shapes::StructureShape.new(name: 'CollaborationSummary')
     CollaborationSummaryList = Shapes::ListShape.new(name: 'CollaborationSummaryList')
     Column = Shapes::StructureShape.new(name: 'Column')
+    ColumnClassificationDetails = Shapes::StructureShape.new(name: 'ColumnClassificationDetails')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
+    ColumnMappingList = Shapes::ListShape.new(name: 'ColumnMappingList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
     CommercialRegion = Shapes::StringShape.new(name: 'CommercialRegion')
@@ -396,6 +398,9 @@ module Aws::CleanRooms
     Long = Shapes::IntegerShape.new(name: 'Long')
     MLMemberAbilities = Shapes::StructureShape.new(name: 'MLMemberAbilities')
     MLPaymentConfig = Shapes::StructureShape.new(name: 'MLPaymentConfig')
+    MLSyntheticDataParameters = Shapes::StructureShape.new(name: 'MLSyntheticDataParameters')
+    MLSyntheticDataParametersEpsilonDouble = Shapes::FloatShape.new(name: 'MLSyntheticDataParametersEpsilonDouble')
+    MaxMembershipInferenceAttackScore = Shapes::FloatShape.new(name: 'MaxMembershipInferenceAttackScore')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAbilities = Shapes::ListShape.new(name: 'MemberAbilities')
     MemberAbility = Shapes::StringShape.new(name: 'MemberAbility')
@@ -423,6 +428,7 @@ module Aws::CleanRooms
     MembershipStatus = Shapes::StringShape.new(name: 'MembershipStatus')
     MembershipSummary = Shapes::StructureShape.new(name: 'MembershipSummary')
     MembershipSummaryList = Shapes::ListShape.new(name: 'MembershipSummaryList')
+    MembershipSyntheticDataGenerationPaymentConfig = Shapes::StructureShape.new(name: 'MembershipSyntheticDataGenerationPaymentConfig')
     ModelInferencePaymentConfig = Shapes::StructureShape.new(name: 'ModelInferencePaymentConfig')
     ModelTrainingPaymentConfig = Shapes::StructureShape.new(name: 'ModelTrainingPaymentConfig')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
@@ -567,6 +573,11 @@ module Aws::CleanRooms
     StartProtectedQueryOutput = Shapes::StructureShape.new(name: 'StartProtectedQueryOutput')
     String = Shapes::StringShape.new(name: 'String')
     SupportedS3Region = Shapes::StringShape.new(name: 'SupportedS3Region')
+    SyntheticDataColumnName = Shapes::StringShape.new(name: 'SyntheticDataColumnName')
+    SyntheticDataColumnProperties = Shapes::StructureShape.new(name: 'SyntheticDataColumnProperties')
+    SyntheticDataColumnType = Shapes::StringShape.new(name: 'SyntheticDataColumnType')
+    SyntheticDataGenerationPaymentConfig = Shapes::StructureShape.new(name: 'SyntheticDataGenerationPaymentConfig')
+    SyntheticDataParameters = Shapes::UnionShape.new(name: 'SyntheticDataParameters')
     TableAlias = Shapes::StringShape.new(name: 'TableAlias')
     TableAliasList = Shapes::ListShape.new(name: 'TableAliasList')
     TableDescription = Shapes::StringShape.new(name: 'TableDescription')
@@ -782,6 +793,7 @@ module Aws::CleanRooms
     AnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
     AnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     AnalysisTemplate.add_member(:error_message_configuration, Shapes::ShapeRef.new(shape: ErrorMessageConfiguration, location_name: "errorMessageConfiguration"))
+    AnalysisTemplate.add_member(:synthetic_data_parameters, Shapes::ShapeRef.new(shape: SyntheticDataParameters, location_name: "syntheticDataParameters"))
     AnalysisTemplate.struct_class = Types::AnalysisTemplate
 
     AnalysisTemplateArnList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArn)
@@ -810,6 +822,7 @@ module Aws::CleanRooms
     AnalysisTemplateSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
     AnalysisTemplateSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
     AnalysisTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    AnalysisTemplateSummary.add_member(:is_synthetic_data, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSyntheticData"))
     AnalysisTemplateSummary.struct_class = Types::AnalysisTemplateSummary
 
     AnalysisTemplateSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateSummary)
@@ -950,6 +963,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
     CollaborationAnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     CollaborationAnalysisTemplate.add_member(:error_message_configuration, Shapes::ShapeRef.new(shape: ErrorMessageConfiguration, location_name: "errorMessageConfiguration"))
+    CollaborationAnalysisTemplate.add_member(:synthetic_data_parameters, Shapes::ShapeRef.new(shape: SyntheticDataParameters, location_name: "syntheticDataParameters"))
     CollaborationAnalysisTemplate.struct_class = Types::CollaborationAnalysisTemplate
 
     CollaborationAnalysisTemplateList.member = Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate)
@@ -963,6 +977,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
     CollaborationAnalysisTemplateSummary.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
     CollaborationAnalysisTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CollaborationAnalysisTemplateSummary.add_member(:is_synthetic_data, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSyntheticData"))
     CollaborationAnalysisTemplateSummary.struct_class = Types::CollaborationAnalysisTemplateSummary
 
     CollaborationAnalysisTemplateSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummary)
@@ -1098,7 +1113,12 @@ module Aws::CleanRooms
     Column.add_member(:type, Shapes::ShapeRef.new(shape: ColumnTypeString, required: true, location_name: "type"))
     Column.struct_class = Types::Column
 
+    ColumnClassificationDetails.add_member(:column_mapping, Shapes::ShapeRef.new(shape: ColumnMappingList, required: true, location_name: "columnMapping"))
+    ColumnClassificationDetails.struct_class = Types::ColumnClassificationDetails
+
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
+
+    ColumnMappingList.member = Shapes::ShapeRef.new(shape: SyntheticDataColumnProperties)
 
     ComputeConfiguration.add_member(:worker, Shapes::ShapeRef.new(shape: WorkerComputeConfiguration, location_name: "worker"))
     ComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1326,6 +1346,7 @@ module Aws::CleanRooms
     CreateAnalysisTemplateInput.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
     CreateAnalysisTemplateInput.add_member(:schema, Shapes::ShapeRef.new(shape: AnalysisSchema, location_name: "schema"))
     CreateAnalysisTemplateInput.add_member(:error_message_configuration, Shapes::ShapeRef.new(shape: ErrorMessageConfiguration, location_name: "errorMessageConfiguration"))
+    CreateAnalysisTemplateInput.add_member(:synthetic_data_parameters, Shapes::ShapeRef.new(shape: SyntheticDataParameters, location_name: "syntheticDataParameters"))
     CreateAnalysisTemplateInput.struct_class = Types::CreateAnalysisTemplateInput
 
     CreateAnalysisTemplateOutput.add_member(:analysis_template, Shapes::ShapeRef.new(shape: AnalysisTemplate, required: true, location_name: "analysisTemplate"))
@@ -2040,7 +2061,13 @@ module Aws::CleanRooms
 
     MLPaymentConfig.add_member(:model_training, Shapes::ShapeRef.new(shape: ModelTrainingPaymentConfig, location_name: "modelTraining"))
     MLPaymentConfig.add_member(:model_inference, Shapes::ShapeRef.new(shape: ModelInferencePaymentConfig, location_name: "modelInference"))
+    MLPaymentConfig.add_member(:synthetic_data_generation, Shapes::ShapeRef.new(shape: SyntheticDataGenerationPaymentConfig, location_name: "syntheticDataGeneration"))
     MLPaymentConfig.struct_class = Types::MLPaymentConfig
+
+    MLSyntheticDataParameters.add_member(:epsilon, Shapes::ShapeRef.new(shape: MLSyntheticDataParametersEpsilonDouble, required: true, location_name: "epsilon"))
+    MLSyntheticDataParameters.add_member(:max_membership_inference_attack_score, Shapes::ShapeRef.new(shape: MaxMembershipInferenceAttackScore, required: true, location_name: "maxMembershipInferenceAttackScore"))
+    MLSyntheticDataParameters.add_member(:column_classification, Shapes::ShapeRef.new(shape: ColumnClassificationDetails, required: true, location_name: "columnClassification"))
+    MLSyntheticDataParameters.struct_class = Types::MLSyntheticDataParameters
 
     MemberAbilities.member = Shapes::ShapeRef.new(shape: MemberAbility)
 
@@ -2096,6 +2123,7 @@ module Aws::CleanRooms
 
     MembershipMLPaymentConfig.add_member(:model_training, Shapes::ShapeRef.new(shape: MembershipModelTrainingPaymentConfig, location_name: "modelTraining"))
     MembershipMLPaymentConfig.add_member(:model_inference, Shapes::ShapeRef.new(shape: MembershipModelInferencePaymentConfig, location_name: "modelInference"))
+    MembershipMLPaymentConfig.add_member(:synthetic_data_generation, Shapes::ShapeRef.new(shape: MembershipSyntheticDataGenerationPaymentConfig, location_name: "syntheticDataGeneration"))
     MembershipMLPaymentConfig.struct_class = Types::MembershipMLPaymentConfig
 
     MembershipModelInferencePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
@@ -2148,6 +2176,9 @@ module Aws::CleanRooms
     MembershipSummary.struct_class = Types::MembershipSummary
 
     MembershipSummaryList.member = Shapes::ShapeRef.new(shape: MembershipSummary)
+
+    MembershipSyntheticDataGenerationPaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    MembershipSyntheticDataGenerationPaymentConfig.struct_class = Types::MembershipSyntheticDataGenerationPaymentConfig
 
     ModelInferencePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
     ModelInferencePaymentConfig.struct_class = Types::ModelInferencePaymentConfig
@@ -2325,7 +2356,7 @@ module Aws::CleanRooms
     ProtectedJobOutputConfigurationOutput.add_member_subclass(:unknown, Types::ProtectedJobOutputConfigurationOutput::Unknown)
     ProtectedJobOutputConfigurationOutput.struct_class = Types::ProtectedJobOutputConfigurationOutput
 
-    ProtectedJobParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: "analysisTemplateArn"))
+    ProtectedJobParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "analysisTemplateArn"))
     ProtectedJobParameters.struct_class = Types::ProtectedJobParameters
 
     ProtectedJobReceiverAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
@@ -2624,6 +2655,20 @@ module Aws::CleanRooms
 
     StartProtectedQueryOutput.add_member(:protected_query, Shapes::ShapeRef.new(shape: ProtectedQuery, required: true, location_name: "protectedQuery"))
     StartProtectedQueryOutput.struct_class = Types::StartProtectedQueryOutput
+
+    SyntheticDataColumnProperties.add_member(:column_name, Shapes::ShapeRef.new(shape: SyntheticDataColumnName, required: true, location_name: "columnName"))
+    SyntheticDataColumnProperties.add_member(:column_type, Shapes::ShapeRef.new(shape: SyntheticDataColumnType, required: true, location_name: "columnType"))
+    SyntheticDataColumnProperties.add_member(:is_predictive_value, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isPredictiveValue"))
+    SyntheticDataColumnProperties.struct_class = Types::SyntheticDataColumnProperties
+
+    SyntheticDataGenerationPaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    SyntheticDataGenerationPaymentConfig.struct_class = Types::SyntheticDataGenerationPaymentConfig
+
+    SyntheticDataParameters.add_member(:ml_synthetic_data_parameters, Shapes::ShapeRef.new(shape: MLSyntheticDataParameters, location_name: "mlSyntheticDataParameters"))
+    SyntheticDataParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SyntheticDataParameters.add_member_subclass(:ml_synthetic_data_parameters, Types::SyntheticDataParameters::MlSyntheticDataParameters)
+    SyntheticDataParameters.add_member_subclass(:unknown, Types::SyntheticDataParameters::Unknown)
+    SyntheticDataParameters.struct_class = Types::SyntheticDataParameters
 
     TableAliasList.member = Shapes::ShapeRef.new(shape: TableAlias)
 

@@ -160,6 +160,7 @@ module Aws::DataZone
     ConfigurableActionParameterList = Shapes::ListShape.new(name: 'ConfigurableActionParameterList')
     ConfigurableActionTypeAuthorization = Shapes::StringShape.new(name: 'ConfigurableActionTypeAuthorization')
     ConfigurableEnvironmentAction = Shapes::StructureShape.new(name: 'ConfigurableEnvironmentAction')
+    ConfigurationStatus = Shapes::StringShape.new(name: 'ConfigurationStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionCredentials = Shapes::StructureShape.new(name: 'ConnectionCredentials')
     ConnectionId = Shapes::StringShape.new(name: 'ConnectionId')
@@ -381,6 +382,7 @@ module Aws::DataZone
     EditedValue = Shapes::StringShape.new(name: 'EditedValue')
     EnableSetting = Shapes::StringShape.new(name: 'EnableSetting')
     EnabledRegionList = Shapes::ListShape.new(name: 'EnabledRegionList')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityIdentifier = Shapes::StringShape.new(name: 'EntityIdentifier')
     EntityOwners = Shapes::ListShape.new(name: 'EntityOwners')
@@ -467,6 +469,8 @@ module Aws::DataZone
     GetAssetTypeOutput = Shapes::StructureShape.new(name: 'GetAssetTypeOutput')
     GetConnectionInput = Shapes::StructureShape.new(name: 'GetConnectionInput')
     GetConnectionOutput = Shapes::StructureShape.new(name: 'GetConnectionOutput')
+    GetDataExportConfigurationInput = Shapes::StructureShape.new(name: 'GetDataExportConfigurationInput')
+    GetDataExportConfigurationOutput = Shapes::StructureShape.new(name: 'GetDataExportConfigurationOutput')
     GetDataProductInput = Shapes::StructureShape.new(name: 'GetDataProductInput')
     GetDataProductOutput = Shapes::StructureShape.new(name: 'GetDataProductOutput')
     GetDataSourceInput = Shapes::StructureShape.new(name: 'GetDataSourceInput')
@@ -745,6 +749,9 @@ module Aws::DataZone
     MetadataGenerationRunStatus = Shapes::StringShape.new(name: 'MetadataGenerationRunStatus')
     MetadataGenerationRunTarget = Shapes::StructureShape.new(name: 'MetadataGenerationRunTarget')
     MetadataGenerationRunType = Shapes::StringShape.new(name: 'MetadataGenerationRunType')
+    MetadataGenerationRunTypeStat = Shapes::StructureShape.new(name: 'MetadataGenerationRunTypeStat')
+    MetadataGenerationRunTypeStats = Shapes::ListShape.new(name: 'MetadataGenerationRunTypeStats')
+    MetadataGenerationRunTypes = Shapes::ListShape.new(name: 'MetadataGenerationRunTypes')
     MetadataGenerationRuns = Shapes::ListShape.new(name: 'MetadataGenerationRuns')
     MetadataGenerationTargetType = Shapes::StringShape.new(name: 'MetadataGenerationTargetType')
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
@@ -827,6 +834,8 @@ module Aws::DataZone
     ProvisioningConfiguration = Shapes::UnionShape.new(name: 'ProvisioningConfiguration')
     ProvisioningConfigurationList = Shapes::ListShape.new(name: 'ProvisioningConfigurationList')
     ProvisioningProperties = Shapes::UnionShape.new(name: 'ProvisioningProperties')
+    PutDataExportConfigurationInput = Shapes::StructureShape.new(name: 'PutDataExportConfigurationInput')
+    PutDataExportConfigurationOutput = Shapes::StructureShape.new(name: 'PutDataExportConfigurationOutput')
     PutEnvironmentBlueprintConfigurationInput = Shapes::StructureShape.new(name: 'PutEnvironmentBlueprintConfigurationInput')
     PutEnvironmentBlueprintConfigurationOutput = Shapes::StructureShape.new(name: 'PutEnvironmentBlueprintConfigurationOutput')
     RecommendationConfiguration = Shapes::StructureShape.new(name: 'RecommendationConfiguration')
@@ -2833,6 +2842,10 @@ module Aws::DataZone
 
     EnabledRegionList.member = Shapes::ShapeRef.new(shape: RegionName)
 
+    EncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
+    EncryptionConfiguration.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "sseAlgorithm"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
     EntityOwners.member = Shapes::ShapeRef.new(shape: OwnerPropertiesOutput)
 
     EnvironmentActionList.member = Shapes::ShapeRef.new(shape: ConfigurableEnvironmentAction)
@@ -3149,6 +3162,17 @@ module Aws::DataZone
     GetConnectionOutput.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     GetConnectionOutput.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     GetConnectionOutput.struct_class = Types::GetConnectionOutput
+
+    GetDataExportConfigurationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetDataExportConfigurationInput.struct_class = Types::GetDataExportConfigurationInput
+
+    GetDataExportConfigurationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetDataExportConfigurationOutput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    GetDataExportConfigurationOutput.add_member(:is_export_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isExportEnabled"))
+    GetDataExportConfigurationOutput.add_member(:s3_table_bucket_arn, Shapes::ShapeRef.new(shape: String, location_name: "s3TableBucketArn"))
+    GetDataExportConfigurationOutput.add_member(:status, Shapes::ShapeRef.new(shape: ConfigurationStatus, location_name: "status"))
+    GetDataExportConfigurationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    GetDataExportConfigurationOutput.struct_class = Types::GetDataExportConfigurationOutput
 
     GetDataProductInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetDataProductInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DataProductId, required: true, location: "uri", location_name: "identifier"))
@@ -3504,6 +3528,7 @@ module Aws::DataZone
 
     GetMetadataGenerationRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetMetadataGenerationRunInput.add_member(:identifier, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location: "uri", location_name: "identifier"))
+    GetMetadataGenerationRunInput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location: "querystring", location_name: "type"))
     GetMetadataGenerationRunInput.struct_class = Types::GetMetadataGenerationRunInput
 
     GetMetadataGenerationRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -3513,7 +3538,9 @@ module Aws::DataZone
     GetMetadataGenerationRunOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
     GetMetadataGenerationRunOutput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
     GetMetadataGenerationRunOutput.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, location_name: "target"))
-    GetMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
+    GetMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, deprecated: true, location_name: "type", metadata: {"deprecatedMessage" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types"}))
+    GetMetadataGenerationRunOutput.add_member(:type_stats, Shapes::ShapeRef.new(shape: MetadataGenerationRunTypeStats, location_name: "typeStats"))
+    GetMetadataGenerationRunOutput.add_member(:types, Shapes::ShapeRef.new(shape: MetadataGenerationRunTypes, location_name: "types"))
     GetMetadataGenerationRunOutput.struct_class = Types::GetMetadataGenerationRunOutput
 
     GetProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -4228,6 +4255,7 @@ module Aws::DataZone
     ListMetadataGenerationRunsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListMetadataGenerationRunsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListMetadataGenerationRunsInput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location: "querystring", location_name: "status"))
+    ListMetadataGenerationRunsInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: EntityId, location: "querystring", location_name: "targetIdentifier"))
     ListMetadataGenerationRunsInput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location: "querystring", location_name: "type"))
     ListMetadataGenerationRunsInput.struct_class = Types::ListMetadataGenerationRunsInput
 
@@ -4490,13 +4518,23 @@ module Aws::DataZone
     MetadataGenerationRunItem.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
     MetadataGenerationRunItem.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
     MetadataGenerationRunItem.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, location_name: "target"))
-    MetadataGenerationRunItem.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
+    MetadataGenerationRunItem.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, deprecated: true, location_name: "type", metadata: {"deprecatedMessage" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types"}))
+    MetadataGenerationRunItem.add_member(:types, Shapes::ShapeRef.new(shape: MetadataGenerationRunTypes, location_name: "types"))
     MetadataGenerationRunItem.struct_class = Types::MetadataGenerationRunItem
 
     MetadataGenerationRunTarget.add_member(:identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "identifier"))
     MetadataGenerationRunTarget.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "revision"))
     MetadataGenerationRunTarget.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationTargetType, required: true, location_name: "type"))
     MetadataGenerationRunTarget.struct_class = Types::MetadataGenerationRunTarget
+
+    MetadataGenerationRunTypeStat.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    MetadataGenerationRunTypeStat.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, required: true, location_name: "status"))
+    MetadataGenerationRunTypeStat.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, required: true, location_name: "type"))
+    MetadataGenerationRunTypeStat.struct_class = Types::MetadataGenerationRunTypeStat
+
+    MetadataGenerationRunTypeStats.member = Shapes::ShapeRef.new(shape: MetadataGenerationRunTypeStat)
+
+    MetadataGenerationRunTypes.member = Shapes::ShapeRef.new(shape: MetadataGenerationRunType)
 
     MetadataGenerationRuns.member = Shapes::ShapeRef.new(shape: MetadataGenerationRunItem)
 
@@ -4791,6 +4829,14 @@ module Aws::DataZone
     ProvisioningProperties.add_member_subclass(:cloud_formation, Types::ProvisioningProperties::CloudFormation)
     ProvisioningProperties.add_member_subclass(:unknown, Types::ProvisioningProperties::Unknown)
     ProvisioningProperties.struct_class = Types::ProvisioningProperties
+
+    PutDataExportConfigurationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    PutDataExportConfigurationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    PutDataExportConfigurationInput.add_member(:enable_export, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableExport"))
+    PutDataExportConfigurationInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    PutDataExportConfigurationInput.struct_class = Types::PutDataExportConfigurationInput
+
+    PutDataExportConfigurationOutput.struct_class = Types::PutDataExportConfigurationOutput
 
     PutEnvironmentBlueprintConfigurationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:enabled_regions, Shapes::ShapeRef.new(shape: EnabledRegionList, required: true, location_name: "enabledRegions"))
@@ -5387,7 +5433,8 @@ module Aws::DataZone
     StartMetadataGenerationRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     StartMetadataGenerationRunInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
     StartMetadataGenerationRunInput.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, required: true, location_name: "target"))
-    StartMetadataGenerationRunInput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, required: true, location_name: "type"))
+    StartMetadataGenerationRunInput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, deprecated: true, location_name: "type", metadata: {"deprecatedMessage" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types"}))
+    StartMetadataGenerationRunInput.add_member(:types, Shapes::ShapeRef.new(shape: MetadataGenerationRunTypes, location_name: "types"))
     StartMetadataGenerationRunInput.struct_class = Types::StartMetadataGenerationRunInput
 
     StartMetadataGenerationRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -5396,7 +5443,8 @@ module Aws::DataZone
     StartMetadataGenerationRunOutput.add_member(:id, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location_name: "id"))
     StartMetadataGenerationRunOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
     StartMetadataGenerationRunOutput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
-    StartMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
+    StartMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, deprecated: true, location_name: "type", metadata: {"deprecatedMessage" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types"}))
+    StartMetadataGenerationRunOutput.add_member(:types, Shapes::ShapeRef.new(shape: MetadataGenerationRunTypes, location_name: "types"))
     StartMetadataGenerationRunOutput.struct_class = Types::StartMetadataGenerationRunOutput
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
@@ -7237,6 +7285,20 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:get_data_export_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataExportConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/data-export-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetDataExportConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDataExportConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:get_data_product, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDataProduct"
         o.http_method = "GET"
@@ -8336,6 +8398,22 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/time-series-data-points"
         o.input = Shapes::ShapeRef.new(shape: PostTimeSeriesDataPointsInput)
         o.output = Shapes::ShapeRef.new(shape: PostTimeSeriesDataPointsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:put_data_export_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDataExportConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/data-export-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutDataExportConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: PutDataExportConfigurationOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2025-12-01)
+------------------
+
+* Feature - Support audio and video ingestion on Bedrock Knowledge Bases.
+
 1.68.0 (2025-11-21)
 ------------------
 

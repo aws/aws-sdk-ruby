@@ -497,9 +497,9 @@ module Aws::ComputeOptimizer
     #   The target resource type of the recommendation preference to delete.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The `AutoScalingGroup`
-    #   option encompasses only instances that are part of an Auto Scaling
-    #   group.
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part of
+    #   an Amazon EC2 Auto Scaling group.
     #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
@@ -614,7 +614,8 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Exports optimization recommendations for Auto Scaling groups.
+    # Exports optimization recommendations for Amazon EC2 Auto Scaling
+    # groups.
     #
     # Recommendations are exported in a comma-separated values (.csv) file,
     # and its metadata in a JavaScript Object Notation (JSON) (.json) file,
@@ -622,16 +623,16 @@ module Aws::ComputeOptimizer
     # you specify. For more information, see [Exporting Recommendations][1]
     # in the *Compute Optimizer User Guide*.
     #
-    # You can have only one Auto Scaling group export job in progress per
-    # Amazon Web Services Region.
+    # You can have only one Amazon EC2 Auto Scaling group export job in
+    # progress per Amazon Web Services Region.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the Amazon Web Services accounts for which to export Auto
-    #   Scaling group recommendations.
+    #   The IDs of the Amazon Web Services accounts for which to export Amazon
+    #   EC2 Auto Scaling group recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to export
@@ -647,7 +648,7 @@ module Aws::ComputeOptimizer
     #
     # @option params [Array<Types::Filter>] :filters
     #   An array of objects to specify a filter that exports a more specific
-    #   set of Auto Scaling group recommendations.
+    #   set of Amazon EC2 Auto Scaling group recommendations.
     #
     # @option params [Array<String>] :fields_to_export
     #   The recommendations data to include in the export file. For more
@@ -706,8 +707,8 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
     #
     # @option params [Types::RecommendationPreferences] :recommendation_preferences
-    #   An object to specify the preferences for the Auto Scaling group
-    #   recommendations to export.
+    #   An object to specify the preferences for the Amazon EC2 Auto Scaling
+    #   group recommendations to export.
     #
     # @return [Types::ExportAutoScalingGroupRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1252,7 +1253,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, ResourceArn, ResourceId, ResourceType, LastRefreshTimestamp, LookbackPeriodInDays, SavingsOpportunity, SavingsOpportunityAfterDiscount, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsDatabaseConnectionsMaximum, UtilizationMetricsEBSVolumeReadIOPSMaximum, UtilizationMetricsEBSVolumeWriteIOPSMaximum, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, Finding, FindingDescription, Tags
+    #     fields_to_export: ["AccountId"], # accepts AccountId, ResourceArn, ResourceId, ResourceType, LastRefreshTimestamp, LookbackPeriodInDays, SavingsOpportunity, SavingsOpportunityAfterDiscount, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsDatabaseConnectionsMaximum, UtilizationMetricsEBSVolumeReadIOPSMaximum, UtilizationMetricsEBSVolumeWriteIOPSMaximum, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsActiveConnectionCountMaximum, UtilizationMetricsPacketsInFromSourceMaximum, UtilizationMetricsPacketsInFromDestinationMaximum, Finding, FindingDescription, Tags
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -1676,7 +1677,7 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Returns Auto Scaling group recommendations.
+    # Returns Amazon EC2 Auto Scaling group recommendations.
     #
     # Compute Optimizer generates recommendations for Amazon EC2 Auto
     # Scaling groups that meet a specific set of requirements. For more
@@ -1688,37 +1689,37 @@ module Aws::ComputeOptimizer
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :account_ids
-    #   The ID of the Amazon Web Services account for which to return Auto
-    #   Scaling group recommendations.
+    #   The ID of the Amazon Web Services account for which to return Amazon
+    #   EC2 Auto Scaling group recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to return
-    #   Auto Scaling group recommendations.
+    #   Amazon EC2 Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
     #
     # @option params [Array<String>] :auto_scaling_group_arns
-    #   The Amazon Resource Name (ARN) of the Auto Scaling groups for which to
-    #   return recommendations.
+    #   The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling groups
+    #   for which to return recommendations.
     #
     # @option params [String] :next_token
-    #   The token to advance to the next page of Auto Scaling group
+    #   The token to advance to the next page of Amazon EC2 Auto Scaling group
     #   recommendations.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Auto Scaling group recommendations to return
-    #   with a single request.
+    #   The maximum number of Amazon EC2 Auto Scaling group recommendations to
+    #   return with a single request.
     #
     #   To retrieve the remaining results, make another request with the
     #   returned `nextToken` value.
     #
     # @option params [Array<Types::Filter>] :filters
     #   An array of objects to specify a filter that returns a more specific
-    #   list of Auto Scaling group recommendations.
+    #   list of Amazon EC2 Auto Scaling group recommendations.
     #
     # @option params [Types::RecommendationPreferences] :recommendation_preferences
-    #   An object to specify the preferences for the Auto Scaling group
-    #   recommendations to return in the response.
+    #   An object to specify the preferences for the Amazon EC2 Auto Scaling
+    #   group recommendations to return in the response.
     #
     # @return [Types::GetAutoScalingGroupRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2053,7 +2054,7 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].recommendation_options[0].migration_effort #=> String, one of "VeryLow", "Low", "Medium", "High"
     #   resp.instance_recommendations[0].recommendation_sources #=> Array
     #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_arn #=> String
-    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage"
+    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage", "NatGateway"
     #   resp.instance_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.instance_recommendations[0].current_performance_risk #=> String, one of "VeryLow", "Low", "Medium", "High"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.cpu_vendor_architectures #=> Array
@@ -2370,8 +2371,8 @@ module Aws::ComputeOptimizer
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which to confirm
-    #   effective recommendation preferences. Only EC2 instance and Auto
-    #   Scaling group ARNs are currently supported.
+    #   effective recommendation preferences. Only EC2 instance and Amazon EC2
+    #   Auto Scaling group ARNs are currently supported.
     #
     # @return [Types::GetEffectiveRecommendationPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2579,9 +2580,9 @@ module Aws::ComputeOptimizer
     #   resp.idle_recommendations #=> Array
     #   resp.idle_recommendations[0].resource_arn #=> String
     #   resp.idle_recommendations[0].resource_id #=> String
-    #   resp.idle_recommendations[0].resource_type #=> String, one of "EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance"
+    #   resp.idle_recommendations[0].resource_type #=> String, one of "EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance", "NatGateway"
     #   resp.idle_recommendations[0].account_id #=> String
-    #   resp.idle_recommendations[0].finding #=> String, one of "Idle", "Unattached"
+    #   resp.idle_recommendations[0].finding #=> String, one of "Idle", "Unattached", "Unused"
     #   resp.idle_recommendations[0].finding_description #=> String
     #   resp.idle_recommendations[0].savings_opportunity.savings_opportunity_percentage #=> Float
     #   resp.idle_recommendations[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
@@ -2590,7 +2591,7 @@ module Aws::ComputeOptimizer
     #   resp.idle_recommendations[0].savings_opportunity_after_discounts.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
     #   resp.idle_recommendations[0].savings_opportunity_after_discounts.estimated_monthly_savings.value #=> Float
     #   resp.idle_recommendations[0].utilization_metrics #=> Array
-    #   resp.idle_recommendations[0].utilization_metrics[0].name #=> String, one of "CPU", "Memory", "NetworkOutBytesPerSecond", "NetworkInBytesPerSecond", "DatabaseConnections", "EBSVolumeReadIOPS", "EBSVolumeWriteIOPS", "VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond"
+    #   resp.idle_recommendations[0].utilization_metrics[0].name #=> String, one of "CPU", "Memory", "NetworkOutBytesPerSecond", "NetworkInBytesPerSecond", "DatabaseConnections", "EBSVolumeReadIOPS", "EBSVolumeWriteIOPS", "VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond", "ActiveConnectionCount", "PacketsInFromSource", "PacketsInFromDestination"
     #   resp.idle_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.idle_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.idle_recommendations[0].look_back_period_in_days #=> Float
@@ -2602,7 +2603,7 @@ module Aws::ComputeOptimizer
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
-    #   resp.errors[0].resource_type #=> String, one of "EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance"
+    #   resp.errors[0].resource_type #=> String, one of "EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance", "NatGateway"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetIdleRecommendations AWS API Documentation
     #
@@ -3070,8 +3071,8 @@ module Aws::ComputeOptimizer
     #
     # Use the `scope` parameter to specify which preferences to return. You
     # can specify to return preferences for an organization, a specific
-    # account ID, or a specific EC2 instance or Auto Scaling group Amazon
-    # Resource Name (ARN).
+    # account ID, or a specific EC2 instance or Amazon EC2 Auto Scaling
+    # group Amazon Resource Name (ARN).
     #
     # For more information, see [Activating enhanced infrastructure
     # metrics][1] in the *Compute Optimizer User Guide*.
@@ -3085,9 +3086,9 @@ module Aws::ComputeOptimizer
     #   return preferences.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The `AutoScalingGroup`
-    #   option encompasses only instances that are part of an Auto Scaling
-    #   group.
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part of
+    #   an Amazon EC2 Auto Scaling group.
     #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
@@ -3173,8 +3174,8 @@ module Aws::ComputeOptimizer
     # * Amazon EC2 instances in an account that are `Underprovisioned`,
     #   `Overprovisioned`, or `Optimized`.
     #
-    # * EC2Auto Scaling groups in an account that are `NotOptimized`, or
-    #   `Optimized`.
+    # * EC2Amazon EC2 Auto Scaling groups in an account that are
+    #   `NotOptimized`, or `Optimized`.
     #
     # * Amazon EBS volumes in an account that are `NotOptimized`, or
     #   `Optimized`.
@@ -3238,9 +3239,9 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].name #=> String, one of "MemoryOverprovisioned", "MemoryUnderprovisioned"
     #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].value #=> Float
     #   resp.recommendation_summaries[0].idle_summaries #=> Array
-    #   resp.recommendation_summaries[0].idle_summaries[0].name #=> String, one of "Idle", "Unattached"
+    #   resp.recommendation_summaries[0].idle_summaries[0].name #=> String, one of "Idle", "Unattached", "Unused"
     #   resp.recommendation_summaries[0].idle_summaries[0].value #=> Float
-    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage"
+    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage", "NatGateway"
     #   resp.recommendation_summaries[0].account_id #=> String
     #   resp.recommendation_summaries[0].savings_opportunity.savings_opportunity_percentage #=> Float
     #   resp.recommendation_summaries[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
@@ -3284,9 +3285,9 @@ module Aws::ComputeOptimizer
     #   The target resource type of the recommendation preference to create.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The `AutoScalingGroup`
-    #   option encompasses only instances that are part of an Auto Scaling
-    #   group.
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part of
+    #   an Amazon EC2 Auto Scaling group.
     #
     # @option params [Types::Scope] :scope
     #   An object that describes the scope of the recommendation preference to
@@ -3297,16 +3298,17 @@ module Aws::ComputeOptimizer
     #   resource level. For more information, see [Activating enhanced
     #   infrastructure metrics][1] in the *Compute Optimizer User Guide*.
     #
-    #   <note markdown="1"> You cannot create recommendation preferences for Auto Scaling groups
-    #   at the organization and account levels. You can create recommendation
-    #   preferences for Auto Scaling groups only at the resource level by
-    #   specifying a scope name of `ResourceArn` and a scope value of the Auto
-    #   Scaling group Amazon Resource Name (ARN). This will configure the
-    #   preference for all instances that are part of the specified Auto
-    #   Scaling group. You also cannot create recommendation preferences at
-    #   the resource level for instances that are part of an Auto Scaling
-    #   group. You can create recommendation preferences at the resource level
-    #   only for standalone instances.
+    #   <note markdown="1"> You cannot create recommendation preferences for Amazon EC2 Auto
+    #   Scaling groups at the organization and account levels. You can create
+    #   recommendation preferences for Amazon EC2 Auto Scaling groups only at
+    #   the resource level by specifying a scope name of `ResourceArn` and a
+    #   scope value of the Amazon EC2 Auto Scaling group Amazon Resource Name
+    #   (ARN). This will configure the preference for all instances that are
+    #   part of the specified Amazon EC2 Auto Scaling group. You also cannot
+    #   create recommendation preferences at the resource level for instances
+    #   that are part of an Amazon EC2 Auto Scaling group. You can create
+    #   recommendation preferences at the resource level only for standalone
+    #   instances.
     #
     #    </note>
     #
@@ -3369,14 +3371,14 @@ module Aws::ComputeOptimizer
     #   of the Amazon Web Services resource are analyzed. When this preference
     #   isn't specified, we use the default value `DAYS_14`.
     #
-    #   You can only set this preference for the Amazon EC2 instance and Auto
-    #   Scaling group resource types.
+    #   You can only set this preference for the Amazon EC2 instance and
+    #   Amazon EC2 Auto Scaling group resource types.
     #
     #   <note markdown="1"> * Amazon EC2 instance lookback preferences can be set at the
     #     organization, account, and resource levels.
     #
-    #   * Auto Scaling group lookback preferences can only be set at the
-    #     resource level.
+    #   * Amazon EC2 Auto Scaling group lookback preferences can only be set
+    #     at the resource level.
     #
     #    </note>
     #
@@ -3411,8 +3413,8 @@ module Aws::ComputeOptimizer
     #   specify either an `includeList` or `excludeList`. If the preference is
     #   an empty set of resource type values, an error occurs.
     #
-    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance and Auto
-    #   Scaling group resource types.
+    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance and
+    #   Amazon EC2 Auto Scaling group resource types.
     #
     #    </note>
     #
@@ -3571,7 +3573,7 @@ module Aws::ComputeOptimizer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

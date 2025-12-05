@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2025-11-25)
+------------------
+
+* Feature - Adds support for new route53 feature: accelerated recovery.
+
 1.126.0 (2025-11-21)
 ------------------
 

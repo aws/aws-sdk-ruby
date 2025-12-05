@@ -30,6 +30,7 @@ module Aws::ObservabilityAdmin
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {InvalidStateException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {TooManyRequestsException}
@@ -74,6 +75,16 @@ module Aws::ObservabilityAdmin
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
     end
 
     class InternalServerException < ServiceError
@@ -94,6 +105,26 @@ module Aws::ObservabilityAdmin
       def amzn_error_type
         @data[:amzn_error_type]
       end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
+    end
+
+    class InvalidStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ObservabilityAdmin::Types::InvalidStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -109,6 +140,16 @@ module Aws::ObservabilityAdmin
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -123,6 +164,26 @@ module Aws::ObservabilityAdmin
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
       end
 
       # @return [String]
@@ -158,6 +219,11 @@ module Aws::ObservabilityAdmin
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
       end
     end
 

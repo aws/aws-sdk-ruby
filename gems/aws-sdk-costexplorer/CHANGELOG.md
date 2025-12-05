@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2025-12-02)
+------------------
+
+* Feature - This release updates existing Savings Plans Purchase Analyzer and Recommendations APIs to support Database Savings Plans.
+
 1.140.0 (2025-11-21)
 ------------------
 

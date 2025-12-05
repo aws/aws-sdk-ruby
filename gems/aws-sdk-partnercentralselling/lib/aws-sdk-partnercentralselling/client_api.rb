@@ -16,6 +16,7 @@ module Aws::PartnerCentralSelling
 
     AcceptEngagementInvitationRequest = Shapes::StructureShape.new(name: 'AcceptEngagementInvitationRequest')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessDeniedExceptionErrorCode = Shapes::StringShape.new(name: 'AccessDeniedExceptionErrorCode')
     Account = Shapes::StructureShape.new(name: 'Account')
     AccountCompanyNameString = Shapes::StringShape.new(name: 'AccountCompanyNameString')
     AccountOtherIndustryString = Shapes::StringShape.new(name: 'AccountOtherIndustryString')
@@ -47,6 +48,9 @@ module Aws::PartnerCentralSelling
     AwsFundingUsed = Shapes::StringShape.new(name: 'AwsFundingUsed')
     AwsMarketplaceOfferIdentifier = Shapes::StringShape.new(name: 'AwsMarketplaceOfferIdentifier')
     AwsMarketplaceOfferIdentifiers = Shapes::ListShape.new(name: 'AwsMarketplaceOfferIdentifiers')
+    AwsMarketplaceOfferSetIdentifier = Shapes::StringShape.new(name: 'AwsMarketplaceOfferSetIdentifier')
+    AwsMarketplaceOfferSetIdentifiers = Shapes::ListShape.new(name: 'AwsMarketplaceOfferSetIdentifiers')
+    AwsMaturity = Shapes::StringShape.new(name: 'AwsMaturity')
     AwsMemberBusinessTitle = Shapes::StringShape.new(name: 'AwsMemberBusinessTitle')
     AwsOpportunityCustomer = Shapes::StructureShape.new(name: 'AwsOpportunityCustomer')
     AwsOpportunityInsights = Shapes::StructureShape.new(name: 'AwsOpportunityInsights')
@@ -75,24 +79,25 @@ module Aws::PartnerCentralSelling
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactFirstNameString = Shapes::StringShape.new(name: 'ContactFirstNameString')
     ContactLastNameString = Shapes::StringShape.new(name: 'ContactLastNameString')
+    ContextIdentifier = Shapes::StringShape.new(name: 'ContextIdentifier')
+    ContextIdentifiers = Shapes::ListShape.new(name: 'ContextIdentifiers')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
+    CreateEngagementContextRequest = Shapes::StructureShape.new(name: 'CreateEngagementContextRequest')
+    CreateEngagementContextResponse = Shapes::StructureShape.new(name: 'CreateEngagementContextResponse')
     CreateEngagementInvitationRequest = Shapes::StructureShape.new(name: 'CreateEngagementInvitationRequest')
     CreateEngagementInvitationResponse = Shapes::StructureShape.new(name: 'CreateEngagementInvitationResponse')
     CreateEngagementRequest = Shapes::StructureShape.new(name: 'CreateEngagementRequest')
-    CreateEngagementRequestClientTokenString = Shapes::StringShape.new(name: 'CreateEngagementRequestClientTokenString')
     CreateEngagementResponse = Shapes::StructureShape.new(name: 'CreateEngagementResponse')
     CreateOpportunityRequest = Shapes::StructureShape.new(name: 'CreateOpportunityRequest')
-    CreateOpportunityRequestClientTokenString = Shapes::StringShape.new(name: 'CreateOpportunityRequestClientTokenString')
     CreateOpportunityRequestPartnerOpportunityIdentifierString = Shapes::StringShape.new(name: 'CreateOpportunityRequestPartnerOpportunityIdentifierString')
     CreateOpportunityResponse = Shapes::StructureShape.new(name: 'CreateOpportunityResponse')
     CreateResourceSnapshotJobRequest = Shapes::StructureShape.new(name: 'CreateResourceSnapshotJobRequest')
-    CreateResourceSnapshotJobRequestClientTokenString = Shapes::StringShape.new(name: 'CreateResourceSnapshotJobRequestClientTokenString')
     CreateResourceSnapshotJobResponse = Shapes::StructureShape.new(name: 'CreateResourceSnapshotJobResponse')
     CreateResourceSnapshotRequest = Shapes::StructureShape.new(name: 'CreateResourceSnapshotRequest')
-    CreateResourceSnapshotRequestClientTokenString = Shapes::StringShape.new(name: 'CreateResourceSnapshotRequestClientTokenString')
     CreateResourceSnapshotResponse = Shapes::StructureShape.new(name: 'CreateResourceSnapshotResponse')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     Customer = Shapes::StructureShape.new(name: 'Customer')
+    CustomerAction = Shapes::StringShape.new(name: 'CustomerAction')
     CustomerContactsList = Shapes::ListShape.new(name: 'CustomerContactsList')
     CustomerProjectsContext = Shapes::StructureShape.new(name: 'CustomerProjectsContext')
     CustomerSummary = Shapes::StructureShape.new(name: 'CustomerSummary')
@@ -108,8 +113,10 @@ module Aws::PartnerCentralSelling
     EngagementArn = Shapes::StringShape.new(name: 'EngagementArn')
     EngagementArnOrIdentifier = Shapes::StringShape.new(name: 'EngagementArnOrIdentifier')
     EngagementContextDetails = Shapes::StructureShape.new(name: 'EngagementContextDetails')
+    EngagementContextIdentifier = Shapes::StringShape.new(name: 'EngagementContextIdentifier')
     EngagementContextPayload = Shapes::UnionShape.new(name: 'EngagementContextPayload')
     EngagementContextType = Shapes::StringShape.new(name: 'EngagementContextType')
+    EngagementContextTypeList = Shapes::ListShape.new(name: 'EngagementContextTypeList')
     EngagementContexts = Shapes::ListShape.new(name: 'EngagementContexts')
     EngagementCustomer = Shapes::StructureShape.new(name: 'EngagementCustomer')
     EngagementCustomerBusinessProblem = Shapes::StringShape.new(name: 'EngagementCustomerBusinessProblem')
@@ -141,6 +148,7 @@ module Aws::PartnerCentralSelling
     EngagementSummary = Shapes::StructureShape.new(name: 'EngagementSummary')
     EngagementSummaryList = Shapes::ListShape.new(name: 'EngagementSummaryList')
     EngagementTitle = Shapes::StringShape.new(name: 'EngagementTitle')
+    EngagementUseCase = Shapes::StringShape.new(name: 'EngagementUseCase')
     ExpectedCustomerSpend = Shapes::StructureShape.new(name: 'ExpectedCustomerSpend')
     ExpectedCustomerSpendCurrencyCodeEnum = Shapes::StringShape.new(name: 'ExpectedCustomerSpendCurrencyCodeEnum')
     ExpectedCustomerSpendList = Shapes::ListShape.new(name: 'ExpectedCustomerSpendList')
@@ -171,6 +179,18 @@ module Aws::PartnerCentralSelling
     InvolvementTypeChangeReason = Shapes::StringShape.new(name: 'InvolvementTypeChangeReason')
     JobTitle = Shapes::StringShape.new(name: 'JobTitle')
     LastModifiedDate = Shapes::StructureShape.new(name: 'LastModifiedDate')
+    LeadContact = Shapes::StructureShape.new(name: 'LeadContact')
+    LeadContext = Shapes::StructureShape.new(name: 'LeadContext')
+    LeadCustomer = Shapes::StructureShape.new(name: 'LeadCustomer')
+    LeadInteraction = Shapes::StructureShape.new(name: 'LeadInteraction')
+    LeadInteractionList = Shapes::ListShape.new(name: 'LeadInteractionList')
+    LeadInvitationCustomer = Shapes::StructureShape.new(name: 'LeadInvitationCustomer')
+    LeadInvitationInteraction = Shapes::StructureShape.new(name: 'LeadInvitationInteraction')
+    LeadInvitationPayload = Shapes::StructureShape.new(name: 'LeadInvitationPayload')
+    LeadQualificationStatus = Shapes::StringShape.new(name: 'LeadQualificationStatus')
+    LeadSourceId = Shapes::StringShape.new(name: 'LeadSourceId')
+    LeadSourceName = Shapes::StringShape.new(name: 'LeadSourceName')
+    LeadSourceType = Shapes::StringShape.new(name: 'LeadSourceType')
     LifeCycle = Shapes::StructureShape.new(name: 'LifeCycle')
     LifeCycleForView = Shapes::StructureShape.new(name: 'LifeCycleForView')
     LifeCycleForViewNextStepsString = Shapes::StringShape.new(name: 'LifeCycleForViewNextStepsString')
@@ -205,6 +225,12 @@ module Aws::PartnerCentralSelling
     ListOpportunitiesRequestLifeCycleReviewStatusList = Shapes::ListShape.new(name: 'ListOpportunitiesRequestLifeCycleReviewStatusList')
     ListOpportunitiesRequestLifeCycleStageList = Shapes::ListShape.new(name: 'ListOpportunitiesRequestLifeCycleStageList')
     ListOpportunitiesResponse = Shapes::StructureShape.new(name: 'ListOpportunitiesResponse')
+    ListOpportunityFromEngagementTaskSummaries = Shapes::ListShape.new(name: 'ListOpportunityFromEngagementTaskSummaries')
+    ListOpportunityFromEngagementTaskSummary = Shapes::StructureShape.new(name: 'ListOpportunityFromEngagementTaskSummary')
+    ListOpportunityFromEngagementTasksRequest = Shapes::StructureShape.new(name: 'ListOpportunityFromEngagementTasksRequest')
+    ListOpportunityFromEngagementTasksRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOpportunityFromEngagementTasksRequestMaxResultsInteger')
+    ListOpportunityFromEngagementTasksRequestNextTokenString = Shapes::StringShape.new(name: 'ListOpportunityFromEngagementTasksRequestNextTokenString')
+    ListOpportunityFromEngagementTasksResponse = Shapes::StructureShape.new(name: 'ListOpportunityFromEngagementTasksResponse')
     ListResourceSnapshotJobsRequest = Shapes::StructureShape.new(name: 'ListResourceSnapshotJobsRequest')
     ListResourceSnapshotJobsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListResourceSnapshotJobsRequestMaxResultsInteger')
     ListResourceSnapshotJobsResponse = Shapes::StructureShape.new(name: 'ListResourceSnapshotJobsResponse')
@@ -220,6 +246,7 @@ module Aws::PartnerCentralSelling
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTasksSortBase = Shapes::StructureShape.new(name: 'ListTasksSortBase')
     ListTasksSortName = Shapes::StringShape.new(name: 'ListTasksSortName')
+    MarketSegment = Shapes::StringShape.new(name: 'MarketSegment')
     Marketing = Shapes::StructureShape.new(name: 'Marketing')
     MarketingSource = Shapes::StringShape.new(name: 'MarketingSource')
     MemberCompanyName = Shapes::StringShape.new(name: 'MemberCompanyName')
@@ -312,11 +339,11 @@ module Aws::PartnerCentralSelling
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     Stage = Shapes::StringShape.new(name: 'Stage')
     StartEngagementByAcceptingInvitationTaskRequest = Shapes::StructureShape.new(name: 'StartEngagementByAcceptingInvitationTaskRequest')
-    StartEngagementByAcceptingInvitationTaskRequestClientTokenString = Shapes::StringShape.new(name: 'StartEngagementByAcceptingInvitationTaskRequestClientTokenString')
     StartEngagementByAcceptingInvitationTaskResponse = Shapes::StructureShape.new(name: 'StartEngagementByAcceptingInvitationTaskResponse')
     StartEngagementFromOpportunityTaskRequest = Shapes::StructureShape.new(name: 'StartEngagementFromOpportunityTaskRequest')
-    StartEngagementFromOpportunityTaskRequestClientTokenString = Shapes::StringShape.new(name: 'StartEngagementFromOpportunityTaskRequestClientTokenString')
     StartEngagementFromOpportunityTaskResponse = Shapes::StructureShape.new(name: 'StartEngagementFromOpportunityTaskResponse')
+    StartOpportunityFromEngagementTaskRequest = Shapes::StructureShape.new(name: 'StartOpportunityFromEngagementTaskRequest')
+    StartOpportunityFromEngagementTaskResponse = Shapes::StructureShape.new(name: 'StartOpportunityFromEngagementTaskResponse')
     StartResourceSnapshotJobRequest = Shapes::StructureShape.new(name: 'StartResourceSnapshotJobRequest')
     StopResourceSnapshotJobRequest = Shapes::StructureShape.new(name: 'StopResourceSnapshotJobRequest')
     String = Shapes::StringShape.new(name: 'String')
@@ -338,6 +365,10 @@ module Aws::PartnerCentralSelling
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateEngagementContextPayload = Shapes::UnionShape.new(name: 'UpdateEngagementContextPayload')
+    UpdateEngagementContextRequest = Shapes::StructureShape.new(name: 'UpdateEngagementContextRequest')
+    UpdateEngagementContextResponse = Shapes::StructureShape.new(name: 'UpdateEngagementContextResponse')
+    UpdateLeadContext = Shapes::StructureShape.new(name: 'UpdateLeadContext')
     UpdateOpportunityRequest = Shapes::StructureShape.new(name: 'UpdateOpportunityRequest')
     UpdateOpportunityRequestPartnerOpportunityIdentifierString = Shapes::StringShape.new(name: 'UpdateOpportunityRequestPartnerOpportunityIdentifierString')
     UpdateOpportunityResponse = Shapes::StructureShape.new(name: 'UpdateOpportunityResponse')
@@ -355,6 +386,7 @@ module Aws::PartnerCentralSelling
     AcceptEngagementInvitationRequest.struct_class = Types::AcceptEngagementInvitationRequest
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionErrorCode, location_name: "Reason"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     Account.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
@@ -400,6 +432,7 @@ module Aws::PartnerCentralSelling
     AssigneeContact.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
     AssigneeContact.add_member(:first_name, Shapes::ShapeRef.new(shape: AssigneeContactFirstNameString, required: true, location_name: "FirstName"))
     AssigneeContact.add_member(:last_name, Shapes::ShapeRef.new(shape: AssigneeContactLastNameString, required: true, location_name: "LastName"))
+    AssigneeContact.add_member(:phone, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Phone"))
     AssigneeContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "BusinessTitle"))
     AssigneeContact.struct_class = Types::AssigneeContact
 
@@ -414,6 +447,8 @@ module Aws::PartnerCentralSelling
     AwsAccountList.member = Shapes::ShapeRef.new(shape: AwsAccount)
 
     AwsMarketplaceOfferIdentifiers.member = Shapes::ShapeRef.new(shape: AwsMarketplaceOfferIdentifier)
+
+    AwsMarketplaceOfferSetIdentifiers.member = Shapes::ShapeRef.new(shape: AwsMarketplaceOfferSetIdentifier)
 
     AwsOpportunityCustomer.add_member(:contacts, Shapes::ShapeRef.new(shape: CustomerContactsList, location_name: "Contacts"))
     AwsOpportunityCustomer.struct_class = Types::AwsOpportunityCustomer
@@ -464,6 +499,21 @@ module Aws::PartnerCentralSelling
     Contact.add_member(:phone, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Phone"))
     Contact.struct_class = Types::Contact
 
+    ContextIdentifiers.member = Shapes::ShapeRef.new(shape: ContextIdentifier)
+
+    CreateEngagementContextRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    CreateEngagementContextRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementArnOrIdentifier, required: true, location_name: "EngagementIdentifier"))
+    CreateEngagementContextRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateEngagementContextRequest.add_member(:type, Shapes::ShapeRef.new(shape: EngagementContextType, required: true, location_name: "Type"))
+    CreateEngagementContextRequest.add_member(:payload, Shapes::ShapeRef.new(shape: EngagementContextPayload, required: true, location_name: "Payload"))
+    CreateEngagementContextRequest.struct_class = Types::CreateEngagementContextRequest
+
+    CreateEngagementContextResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
+    CreateEngagementContextResponse.add_member(:engagement_arn, Shapes::ShapeRef.new(shape: EngagementArn, location_name: "EngagementArn"))
+    CreateEngagementContextResponse.add_member(:engagement_last_modified_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "EngagementLastModifiedAt"))
+    CreateEngagementContextResponse.add_member(:context_id, Shapes::ShapeRef.new(shape: EngagementContextIdentifier, location_name: "ContextId"))
+    CreateEngagementContextResponse.struct_class = Types::CreateEngagementContextResponse
+
     CreateEngagementInvitationRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     CreateEngagementInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEngagementInvitationRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
@@ -475,7 +525,7 @@ module Aws::PartnerCentralSelling
     CreateEngagementInvitationResponse.struct_class = Types::CreateEngagementInvitationResponse
 
     CreateEngagementRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateEngagementRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateEngagementRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateEngagementRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEngagementRequest.add_member(:title, Shapes::ShapeRef.new(shape: EngagementTitle, required: true, location_name: "Title"))
     CreateEngagementRequest.add_member(:description, Shapes::ShapeRef.new(shape: EngagementDescription, required: true, location_name: "Description"))
     CreateEngagementRequest.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
@@ -483,6 +533,7 @@ module Aws::PartnerCentralSelling
 
     CreateEngagementResponse.add_member(:id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "Id"))
     CreateEngagementResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EngagementArn, location_name: "Arn"))
+    CreateEngagementResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedAt"))
     CreateEngagementResponse.struct_class = Types::CreateEngagementResponse
 
     CreateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -494,7 +545,7 @@ module Aws::PartnerCentralSelling
     CreateOpportunityRequest.add_member(:opportunity_type, Shapes::ShapeRef.new(shape: OpportunityType, location_name: "OpportunityType"))
     CreateOpportunityRequest.add_member(:marketing, Shapes::ShapeRef.new(shape: Marketing, location_name: "Marketing"))
     CreateOpportunityRequest.add_member(:software_revenue, Shapes::ShapeRef.new(shape: SoftwareRevenue, location_name: "SoftwareRevenue"))
-    CreateOpportunityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOpportunityRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateOpportunityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateOpportunityRequest.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
     CreateOpportunityRequest.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
     CreateOpportunityRequest.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: PartnerOpportunityTeamMembersList, location_name: "OpportunityTeam"))
@@ -507,7 +558,7 @@ module Aws::PartnerCentralSelling
     CreateOpportunityResponse.struct_class = Types::CreateOpportunityResponse
 
     CreateResourceSnapshotJobRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    CreateResourceSnapshotJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotJobRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateResourceSnapshotJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotJobRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementIdentifier"))
     CreateResourceSnapshotJobRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     CreateResourceSnapshotJobRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
@@ -524,7 +575,7 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     CreateResourceSnapshotRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     CreateResourceSnapshotRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
-    CreateResourceSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateResourceSnapshotRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateResourceSnapshotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceSnapshotRequest.struct_class = Types::CreateResourceSnapshotRequest
 
     CreateResourceSnapshotResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
@@ -556,15 +607,20 @@ module Aws::PartnerCentralSelling
     DisassociateOpportunityRequest.add_member(:related_entity_identifier, Shapes::ShapeRef.new(shape: DisassociateOpportunityRequestRelatedEntityIdentifierString, required: true, location_name: "RelatedEntityIdentifier"))
     DisassociateOpportunityRequest.struct_class = Types::DisassociateOpportunityRequest
 
+    EngagementContextDetails.add_member(:id, Shapes::ShapeRef.new(shape: EngagementContextIdentifier, location_name: "Id"))
     EngagementContextDetails.add_member(:type, Shapes::ShapeRef.new(shape: EngagementContextType, required: true, location_name: "Type"))
     EngagementContextDetails.add_member(:payload, Shapes::ShapeRef.new(shape: EngagementContextPayload, location_name: "Payload"))
     EngagementContextDetails.struct_class = Types::EngagementContextDetails
 
     EngagementContextPayload.add_member(:customer_project, Shapes::ShapeRef.new(shape: CustomerProjectsContext, location_name: "CustomerProject"))
+    EngagementContextPayload.add_member(:lead, Shapes::ShapeRef.new(shape: LeadContext, location_name: "Lead"))
     EngagementContextPayload.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EngagementContextPayload.add_member_subclass(:customer_project, Types::EngagementContextPayload::CustomerProject)
+    EngagementContextPayload.add_member_subclass(:lead, Types::EngagementContextPayload::Lead)
     EngagementContextPayload.add_member_subclass(:unknown, Types::EngagementContextPayload::Unknown)
     EngagementContextPayload.struct_class = Types::EngagementContextPayload
+
+    EngagementContextTypeList.member = Shapes::ShapeRef.new(shape: EngagementContextType)
 
     EngagementContexts.member = Shapes::ShapeRef.new(shape: EngagementContextDetails)
 
@@ -634,6 +690,9 @@ module Aws::PartnerCentralSelling
     EngagementSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     EngagementSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     EngagementSummary.add_member(:member_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MemberCount"))
+    EngagementSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedAt"))
+    EngagementSummary.add_member(:modified_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "ModifiedBy"))
+    EngagementSummary.add_member(:context_types, Shapes::ShapeRef.new(shape: EngagementContextTypeList, location_name: "ContextTypes"))
     EngagementSummary.struct_class = Types::EngagementSummary
 
     EngagementSummaryList.member = Shapes::ShapeRef.new(shape: EngagementSummary)
@@ -651,7 +710,6 @@ module Aws::PartnerCentralSelling
     GetAwsOpportunitySummaryRequest.add_member(:related_opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "RelatedOpportunityIdentifier"))
     GetAwsOpportunitySummaryRequest.struct_class = Types::GetAwsOpportunitySummaryRequest
 
-    GetAwsOpportunitySummaryResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetAwsOpportunitySummaryResponse.add_member(:related_opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "RelatedOpportunityId"))
     GetAwsOpportunitySummaryResponse.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
     GetAwsOpportunitySummaryResponse.add_member(:involvement_type, Shapes::ShapeRef.new(shape: SalesInvolvementType, location_name: "InvolvementType"))
@@ -663,6 +721,7 @@ module Aws::PartnerCentralSelling
     GetAwsOpportunitySummaryResponse.add_member(:related_entity_ids, Shapes::ShapeRef.new(shape: AwsOpportunityRelatedEntities, location_name: "RelatedEntityIds"))
     GetAwsOpportunitySummaryResponse.add_member(:customer, Shapes::ShapeRef.new(shape: AwsOpportunityCustomer, location_name: "Customer"))
     GetAwsOpportunitySummaryResponse.add_member(:project, Shapes::ShapeRef.new(shape: AwsOpportunityProject, location_name: "Project"))
+    GetAwsOpportunitySummaryResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetAwsOpportunitySummaryResponse.struct_class = Types::GetAwsOpportunitySummaryResponse
 
     GetEngagementInvitationRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -699,6 +758,8 @@ module Aws::PartnerCentralSelling
     GetEngagementResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     GetEngagementResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "CreatedBy"))
     GetEngagementResponse.add_member(:member_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MemberCount"))
+    GetEngagementResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedAt"))
+    GetEngagementResponse.add_member(:modified_by, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "ModifiedBy"))
     GetEngagementResponse.add_member(:contexts, Shapes::ShapeRef.new(shape: EngagementContexts, location_name: "Contexts"))
     GetEngagementResponse.struct_class = Types::GetEngagementResponse
 
@@ -782,6 +843,57 @@ module Aws::PartnerCentralSelling
     LastModifiedDate.add_member(:after_last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "AfterLastModifiedDate"))
     LastModifiedDate.add_member(:before_last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "BeforeLastModifiedDate"))
     LastModifiedDate.struct_class = Types::LastModifiedDate
+
+    LeadContact.add_member(:business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "BusinessTitle"))
+    LeadContact.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
+    LeadContact.add_member(:first_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "FirstName"))
+    LeadContact.add_member(:last_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "LastName"))
+    LeadContact.add_member(:phone, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "Phone"))
+    LeadContact.struct_class = Types::LeadContact
+
+    LeadContext.add_member(:qualification_status, Shapes::ShapeRef.new(shape: LeadQualificationStatus, location_name: "QualificationStatus"))
+    LeadContext.add_member(:customer, Shapes::ShapeRef.new(shape: LeadCustomer, required: true, location_name: "Customer"))
+    LeadContext.add_member(:interactions, Shapes::ShapeRef.new(shape: LeadInteractionList, required: true, location_name: "Interactions"))
+    LeadContext.struct_class = Types::LeadContext
+
+    LeadCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
+    LeadCustomer.add_member(:company_name, Shapes::ShapeRef.new(shape: CompanyName, required: true, location_name: "CompanyName"))
+    LeadCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: CompanyWebsiteUrl, location_name: "WebsiteUrl"))
+    LeadCustomer.add_member(:address, Shapes::ShapeRef.new(shape: AddressSummary, required: true, location_name: "Address"))
+    LeadCustomer.add_member(:aws_maturity, Shapes::ShapeRef.new(shape: AwsMaturity, location_name: "AwsMaturity"))
+    LeadCustomer.add_member(:market_segment, Shapes::ShapeRef.new(shape: MarketSegment, location_name: "MarketSegment"))
+    LeadCustomer.struct_class = Types::LeadCustomer
+
+    LeadInteraction.add_member(:source_type, Shapes::ShapeRef.new(shape: LeadSourceType, required: true, location_name: "SourceType"))
+    LeadInteraction.add_member(:source_id, Shapes::ShapeRef.new(shape: LeadSourceId, required: true, location_name: "SourceId"))
+    LeadInteraction.add_member(:source_name, Shapes::ShapeRef.new(shape: LeadSourceName, required: true, location_name: "SourceName"))
+    LeadInteraction.add_member(:usecase, Shapes::ShapeRef.new(shape: EngagementUseCase, location_name: "Usecase"))
+    LeadInteraction.add_member(:interaction_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "InteractionDate"))
+    LeadInteraction.add_member(:customer_action, Shapes::ShapeRef.new(shape: CustomerAction, required: true, location_name: "CustomerAction"))
+    LeadInteraction.add_member(:business_problem, Shapes::ShapeRef.new(shape: EngagementCustomerBusinessProblem, location_name: "BusinessProblem"))
+    LeadInteraction.add_member(:contact, Shapes::ShapeRef.new(shape: LeadContact, required: true, location_name: "Contact"))
+    LeadInteraction.struct_class = Types::LeadInteraction
+
+    LeadInteractionList.member = Shapes::ShapeRef.new(shape: LeadInteraction)
+
+    LeadInvitationCustomer.add_member(:industry, Shapes::ShapeRef.new(shape: Industry, location_name: "Industry"))
+    LeadInvitationCustomer.add_member(:company_name, Shapes::ShapeRef.new(shape: CompanyName, required: true, location_name: "CompanyName"))
+    LeadInvitationCustomer.add_member(:website_url, Shapes::ShapeRef.new(shape: CompanyWebsiteUrl, location_name: "WebsiteUrl"))
+    LeadInvitationCustomer.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "CountryCode"))
+    LeadInvitationCustomer.add_member(:aws_maturity, Shapes::ShapeRef.new(shape: AwsMaturity, location_name: "AwsMaturity"))
+    LeadInvitationCustomer.add_member(:market_segment, Shapes::ShapeRef.new(shape: MarketSegment, location_name: "MarketSegment"))
+    LeadInvitationCustomer.struct_class = Types::LeadInvitationCustomer
+
+    LeadInvitationInteraction.add_member(:source_type, Shapes::ShapeRef.new(shape: LeadSourceType, required: true, location_name: "SourceType"))
+    LeadInvitationInteraction.add_member(:source_id, Shapes::ShapeRef.new(shape: LeadSourceId, required: true, location_name: "SourceId"))
+    LeadInvitationInteraction.add_member(:source_name, Shapes::ShapeRef.new(shape: LeadSourceName, required: true, location_name: "SourceName"))
+    LeadInvitationInteraction.add_member(:usecase, Shapes::ShapeRef.new(shape: EngagementUseCase, location_name: "Usecase"))
+    LeadInvitationInteraction.add_member(:contact_business_title, Shapes::ShapeRef.new(shape: JobTitle, required: true, location_name: "ContactBusinessTitle"))
+    LeadInvitationInteraction.struct_class = Types::LeadInvitationInteraction
+
+    LeadInvitationPayload.add_member(:customer, Shapes::ShapeRef.new(shape: LeadInvitationCustomer, required: true, location_name: "Customer"))
+    LeadInvitationPayload.add_member(:interaction, Shapes::ShapeRef.new(shape: LeadInvitationInteraction, required: true, location_name: "Interaction"))
+    LeadInvitationPayload.struct_class = Types::LeadInvitationPayload
 
     LifeCycle.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "Stage"))
     LifeCycle.add_member(:closed_lost_reason, Shapes::ShapeRef.new(shape: ClosedLostReason, location_name: "ClosedLostReason"))
@@ -906,6 +1018,8 @@ module Aws::PartnerCentralSelling
     ListEngagementsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     ListEngagementsRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: AwsAccountList, location_name: "CreatedBy"))
     ListEngagementsRequest.add_member(:exclude_created_by, Shapes::ShapeRef.new(shape: AwsAccountList, location_name: "ExcludeCreatedBy"))
+    ListEngagementsRequest.add_member(:context_types, Shapes::ShapeRef.new(shape: EngagementContextTypeList, location_name: "ContextTypes"))
+    ListEngagementsRequest.add_member(:exclude_context_types, Shapes::ShapeRef.new(shape: EngagementContextTypeList, location_name: "ExcludeContextTypes"))
     ListEngagementsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: EngagementSort, location_name: "Sort"))
     ListEngagementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: EngagementPageSize, location_name: "MaxResults"))
     ListEngagementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -938,6 +1052,35 @@ module Aws::PartnerCentralSelling
     ListOpportunitiesResponse.add_member(:opportunity_summaries, Shapes::ShapeRef.new(shape: OpportunitySummaries, required: true, location_name: "OpportunitySummaries"))
     ListOpportunitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListOpportunitiesResponse.struct_class = Types::ListOpportunitiesResponse
+
+    ListOpportunityFromEngagementTaskSummaries.member = Shapes::ShapeRef.new(shape: ListOpportunityFromEngagementTaskSummary)
+
+    ListOpportunityFromEngagementTaskSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:context_id, Shapes::ShapeRef.new(shape: ContextIdentifier, location_name: "ContextId"))
+    ListOpportunityFromEngagementTaskSummary.struct_class = Types::ListOpportunityFromEngagementTaskSummary
+
+    ListOpportunityFromEngagementTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOpportunityFromEngagementTasksRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOpportunityFromEngagementTasksRequestNextTokenString, location_name: "NextToken"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:sort, Shapes::ShapeRef.new(shape: ListTasksSortBase, location_name: "Sort"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatuses, location_name: "TaskStatus"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:task_identifier, Shapes::ShapeRef.new(shape: TaskIdentifiers, location_name: "TaskIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:opportunity_identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifiers, location_name: "OpportunityIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementIdentifiers, location_name: "EngagementIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:context_identifier, Shapes::ShapeRef.new(shape: ContextIdentifiers, location_name: "ContextIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.struct_class = Types::ListOpportunityFromEngagementTasksRequest
+
+    ListOpportunityFromEngagementTasksResponse.add_member(:task_summaries, Shapes::ShapeRef.new(shape: ListOpportunityFromEngagementTaskSummaries, location_name: "TaskSummaries"))
+    ListOpportunityFromEngagementTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListOpportunityFromEngagementTasksResponse.struct_class = Types::ListOpportunityFromEngagementTasksResponse
 
     ListResourceSnapshotJobsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     ListResourceSnapshotJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResourceSnapshotJobsRequestMaxResultsInteger, location_name: "MaxResults"))
@@ -1051,8 +1194,10 @@ module Aws::PartnerCentralSelling
     PartnerOpportunityTeamMembersList.member = Shapes::ShapeRef.new(shape: Contact)
 
     Payload.add_member(:opportunity_invitation, Shapes::ShapeRef.new(shape: OpportunityInvitationPayload, location_name: "OpportunityInvitation"))
+    Payload.add_member(:lead_invitation, Shapes::ShapeRef.new(shape: LeadInvitationPayload, location_name: "LeadInvitation"))
     Payload.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Payload.add_member_subclass(:opportunity_invitation, Types::Payload::OpportunityInvitation)
+    Payload.add_member_subclass(:lead_invitation, Types::Payload::LeadInvitation)
     Payload.add_member_subclass(:unknown, Types::Payload::Unknown)
     Payload.struct_class = Types::Payload
 
@@ -1115,6 +1260,7 @@ module Aws::PartnerCentralSelling
     RejectEngagementInvitationRequest.struct_class = Types::RejectEngagementInvitationRequest
 
     RelatedEntityIdentifiers.add_member(:aws_marketplace_offers, Shapes::ShapeRef.new(shape: AwsMarketplaceOfferIdentifiers, location_name: "AwsMarketplaceOffers"))
+    RelatedEntityIdentifiers.add_member(:aws_marketplace_offer_sets, Shapes::ShapeRef.new(shape: AwsMarketplaceOfferSetIdentifiers, location_name: "AwsMarketplaceOfferSets"))
     RelatedEntityIdentifiers.add_member(:solutions, Shapes::ShapeRef.new(shape: SolutionIdentifiers, location_name: "Solutions"))
     RelatedEntityIdentifiers.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductIdentifiers, location_name: "AwsProducts"))
     RelatedEntityIdentifiers.struct_class = Types::RelatedEntityIdentifiers
@@ -1188,7 +1334,7 @@ module Aws::PartnerCentralSelling
     SortObject.struct_class = Types::SortObject
 
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementByAcceptingInvitationTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Identifier"))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementByAcceptingInvitationTaskRequest.struct_class = Types::StartEngagementByAcceptingInvitationTaskRequest
@@ -1205,7 +1351,7 @@ module Aws::PartnerCentralSelling
     StartEngagementByAcceptingInvitationTaskResponse.struct_class = Types::StartEngagementByAcceptingInvitationTaskResponse
 
     StartEngagementFromOpportunityTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
-    StartEngagementFromOpportunityTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartEngagementFromOpportunityTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartEngagementFromOpportunityTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
     StartEngagementFromOpportunityTaskRequest.add_member(:aws_submission, Shapes::ShapeRef.new(shape: AwsSubmission, required: true, location_name: "AwsSubmission"))
     StartEngagementFromOpportunityTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -1222,6 +1368,25 @@ module Aws::PartnerCentralSelling
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
     StartEngagementFromOpportunityTaskResponse.struct_class = Types::StartEngagementFromOpportunityTaskResponse
+
+    StartOpportunityFromEngagementTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    StartOpportunityFromEngagementTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartOpportunityFromEngagementTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: EngagementArnOrIdentifier, required: true, location_name: "Identifier"))
+    StartOpportunityFromEngagementTaskRequest.add_member(:context_identifier, Shapes::ShapeRef.new(shape: ContextIdentifier, required: true, location_name: "ContextIdentifier"))
+    StartOpportunityFromEngagementTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartOpportunityFromEngagementTaskRequest.struct_class = Types::StartOpportunityFromEngagementTaskRequest
+
+    StartOpportunityFromEngagementTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskIdentifier, location_name: "TaskId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "TaskStatus"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:reason_code, Shapes::ShapeRef.new(shape: ReasonCode, location_name: "ReasonCode"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "OpportunityId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:resource_snapshot_job_id, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, location_name: "ResourceSnapshotJobId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:context_id, Shapes::ShapeRef.new(shape: ContextIdentifier, location_name: "ContextId"))
+    StartOpportunityFromEngagementTaskResponse.struct_class = Types::StartOpportunityFromEngagementTaskResponse
 
     StartResourceSnapshotJobRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     StartResourceSnapshotJobRequest.add_member(:resource_snapshot_job_identifier, Shapes::ShapeRef.new(shape: ResourceSnapshotJobIdentifier, required: true, location_name: "ResourceSnapshotJobIdentifier"))
@@ -1263,6 +1428,33 @@ module Aws::PartnerCentralSelling
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateEngagementContextPayload.add_member(:lead, Shapes::ShapeRef.new(shape: UpdateLeadContext, location_name: "Lead"))
+    UpdateEngagementContextPayload.add_member(:customer_project, Shapes::ShapeRef.new(shape: CustomerProjectsContext, location_name: "CustomerProject"))
+    UpdateEngagementContextPayload.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateEngagementContextPayload.add_member_subclass(:lead, Types::UpdateEngagementContextPayload::Lead)
+    UpdateEngagementContextPayload.add_member_subclass(:customer_project, Types::UpdateEngagementContextPayload::CustomerProject)
+    UpdateEngagementContextPayload.add_member_subclass(:unknown, Types::UpdateEngagementContextPayload::Unknown)
+    UpdateEngagementContextPayload.struct_class = Types::UpdateEngagementContextPayload
+
+    UpdateEngagementContextRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
+    UpdateEngagementContextRequest.add_member(:engagement_identifier, Shapes::ShapeRef.new(shape: EngagementArnOrIdentifier, required: true, location_name: "EngagementIdentifier"))
+    UpdateEngagementContextRequest.add_member(:context_identifier, Shapes::ShapeRef.new(shape: EngagementContextIdentifier, required: true, location_name: "ContextIdentifier"))
+    UpdateEngagementContextRequest.add_member(:engagement_last_modified_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EngagementLastModifiedAt"))
+    UpdateEngagementContextRequest.add_member(:type, Shapes::ShapeRef.new(shape: EngagementContextType, required: true, location_name: "Type"))
+    UpdateEngagementContextRequest.add_member(:payload, Shapes::ShapeRef.new(shape: UpdateEngagementContextPayload, required: true, location_name: "Payload"))
+    UpdateEngagementContextRequest.struct_class = Types::UpdateEngagementContextRequest
+
+    UpdateEngagementContextResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, required: true, location_name: "EngagementId"))
+    UpdateEngagementContextResponse.add_member(:engagement_arn, Shapes::ShapeRef.new(shape: EngagementArn, required: true, location_name: "EngagementArn"))
+    UpdateEngagementContextResponse.add_member(:engagement_last_modified_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EngagementLastModifiedAt"))
+    UpdateEngagementContextResponse.add_member(:context_id, Shapes::ShapeRef.new(shape: EngagementContextIdentifier, required: true, location_name: "ContextId"))
+    UpdateEngagementContextResponse.struct_class = Types::UpdateEngagementContextResponse
+
+    UpdateLeadContext.add_member(:qualification_status, Shapes::ShapeRef.new(shape: LeadQualificationStatus, location_name: "QualificationStatus"))
+    UpdateLeadContext.add_member(:customer, Shapes::ShapeRef.new(shape: LeadCustomer, required: true, location_name: "Customer"))
+    UpdateLeadContext.add_member(:interaction, Shapes::ShapeRef.new(shape: LeadInteraction, location_name: "Interaction"))
+    UpdateLeadContext.struct_class = Types::UpdateLeadContext
 
     UpdateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     UpdateOpportunityRequest.add_member(:primary_needs_from_aws, Shapes::ShapeRef.new(shape: PrimaryNeedsFromAws, location_name: "PrimaryNeedsFromAws"))
@@ -1366,6 +1558,22 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_engagement_context, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEngagementContext"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEngagementContextRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEngagementContextResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1380,6 +1588,7 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1408,6 +1617,7 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1422,6 +1632,7 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1436,6 +1647,7 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1474,6 +1686,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: GetEngagementResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1512,6 +1725,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: GetResourceSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1524,6 +1738,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: GetResourceSnapshotJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1536,6 +1751,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: GetSellingSystemSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1548,6 +1764,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListEngagementByAcceptingInvitationTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1566,6 +1783,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListEngagementFromOpportunityTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1603,6 +1821,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListEngagementMembersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1621,6 +1840,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListEngagementResourceAssociationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1639,6 +1859,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListEngagementsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1668,6 +1889,25 @@ module Aws::PartnerCentralSelling
         )
       end)
 
+      api.add_operation(:list_opportunity_from_engagement_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOpportunityFromEngagementTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListOpportunityFromEngagementTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOpportunityFromEngagementTasksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_resource_snapshot_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListResourceSnapshotJobs"
         o.http_method = "POST"
@@ -1676,6 +1916,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListResourceSnapshotJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1694,6 +1935,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: ListResourceSnapshotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
@@ -1710,6 +1952,7 @@ module Aws::PartnerCentralSelling
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListSolutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSolutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1743,6 +1986,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: PutSellingSystemSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1791,6 +2035,21 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:start_opportunity_from_engagement_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartOpportunityFromEngagementTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartOpportunityFromEngagementTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartOpportunityFromEngagementTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_resource_snapshot_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartResourceSnapshotJob"
         o.http_method = "POST"
@@ -1799,6 +2058,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1811,6 +2071,7 @@ module Aws::PartnerCentralSelling
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1853,6 +2114,21 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_engagement_context, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEngagementContext"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEngagementContextRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEngagementContextResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

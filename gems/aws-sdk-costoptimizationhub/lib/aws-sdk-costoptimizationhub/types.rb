@@ -1496,6 +1496,51 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
+    # The NAT Gateway recommendation details.
+    #
+    # @!attribute [rw] configuration
+    #   The NAT Gateway configuration used for recommendations.
+    #   @return [Types::NatGatewayConfiguration]
+    #
+    # @!attribute [rw] cost_calculation
+    #   Cost impact of the resource recommendation.
+    #   @return [Types::ResourceCostCalculation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/NatGateway AWS API Documentation
+    #
+    class NatGateway < Struct.new(
+      :configuration,
+      :cost_calculation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The NAT Gateway configuration used for recommendations.
+    #
+    # @!attribute [rw] active_connection_count
+    #   The number of active connections through the NAT Gateway.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] packets_in_from_source
+    #   The number of packets received from the source through the NAT
+    #   Gateway.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] packets_in_from_destination
+    #   The number of packets received from the destination through the NAT
+    #   Gateway.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/NatGatewayConfiguration AWS API Documentation
+    #
+    class NatGatewayConfiguration < Struct.new(
+      :active_connection_count,
+      :packets_in_from_source,
+      :packets_in_from_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The OpenSearch reserved instances recommendation details.
     #
     # @!attribute [rw] configuration
@@ -2219,6 +2264,10 @@ module Aws::CostOptimizationHub
     #   The MemoryDB reserved instances recommendation details.
     #   @return [Types::MemoryDbReservedInstances]
     #
+    # @!attribute [rw] nat_gateway
+    #   The NAT Gateway recommendation details.
+    #   @return [Types::NatGateway]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -2240,6 +2289,7 @@ module Aws::CostOptimizationHub
       :aurora_db_cluster_storage,
       :dynamo_db_reserved_capacity,
       :memory_db_reserved_instances,
+      :nat_gateway,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2263,6 +2313,7 @@ module Aws::CostOptimizationHub
       class AuroraDbClusterStorage < ResourceDetails; end
       class DynamoDbReservedCapacity < ResourceDetails; end
       class MemoryDbReservedInstances < ResourceDetails; end
+      class NatGateway < ResourceDetails; end
       class Unknown < ResourceDetails; end
     end
 

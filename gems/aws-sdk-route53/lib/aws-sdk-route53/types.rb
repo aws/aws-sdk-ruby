@@ -3483,6 +3483,9 @@ module Aws::Route53
     #   health check request. Each Route 53 health checker makes requests at
     #   this interval.
     #
+    #   `RequestInterval` is not supported when you specify a value for
+    #   `Type` of `RECOVERY_CONTROL`.
+    #
     #   You can't change the value of `RequestInterval` after you create a
     #   health check.
     #
@@ -3497,8 +3500,11 @@ module Aws::Route53
     #   information, see [How Amazon Route 53 Determines Whether an Endpoint
     #   Is Healthy][1] in the *Amazon Route 53 Developer Guide*.
     #
-    #   If you don't specify a value for `FailureThreshold`, the default
-    #   value is three health checks.
+    #   `FailureThreshold` is not supported when you specify a value for
+    #   `Type` of `RECOVERY_CONTROL`.
+    #
+    #   Otherwise, if you don't specify a value for `FailureThreshold`, the
+    #   default value is three health checks.
     #
     #
     #
@@ -3510,6 +3516,9 @@ module Aws::Route53
     #   between health checkers in multiple Amazon Web Services regions and
     #   your endpoint, and to display CloudWatch latency graphs on the
     #   **Health Checks** page in the Route 53 console.
+    #
+    #   `MeasureLatency` is not supported when you specify a value for
+    #   `Type` of `RECOVERY_CONTROL`.
     #
     #   You can't change the value of `MeasureLatency` after you create a
     #   health check.
@@ -3776,6 +3785,11 @@ module Aws::Route53
     #   service, you can't edit or delete it using Route 53.
     #   @return [Types::LinkedService]
     #
+    # @!attribute [rw] features
+    #   The features configuration for the hosted zone, including
+    #   accelerated recovery settings and status information.
+    #   @return [Types::HostedZoneFeatures]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZone AWS API Documentation
     #
     class HostedZone < Struct.new(
@@ -3784,7 +3798,8 @@ module Aws::Route53
       :caller_reference,
       :config,
       :resource_record_set_count,
-      :linked_service)
+      :linked_service,
+      :features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3821,6 +3836,43 @@ module Aws::Route53
     class HostedZoneConfig < Struct.new(
       :comment,
       :private_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about why certain features failed to be enabled
+    # or configured for the hosted zone.
+    #
+    # @!attribute [rw] accelerated_recovery
+    #   The reason why accelerated recovery failed to be enabled or disabled
+    #   for the hosted zone, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneFailureReasons AWS API Documentation
+    #
+    class HostedZoneFailureReasons < Struct.new(
+      :accelerated_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the features configuration for a hosted zone, including the
+    # status of various features and any associated failure reasons.
+    #
+    # @!attribute [rw] accelerated_recovery_status
+    #   The current status of accelerated recovery for the hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   Information about any failures that occurred when attempting to
+    #   enable or configure features for the hosted zone.
+    #   @return [Types::HostedZoneFailureReasons]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneFeatures AWS API Documentation
+    #
+    class HostedZoneFeatures < Struct.new(
+      :accelerated_recovery_status,
+      :failure_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7757,8 +7809,8 @@ module Aws::Route53
     #   information, see [How Amazon Route 53 Determines Whether an Endpoint
     #   Is Healthy][1] in the *Amazon Route 53 Developer Guide*.
     #
-    #   If you don't specify a value for `FailureThreshold`, the default
-    #   value is three health checks.
+    #   Otherwise, if you don't specify a value for `FailureThreshold`, the
+    #   default value is three health checks.
     #
     #
     #
@@ -7978,6 +8030,30 @@ module Aws::Route53
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone for which you want to update features.
+    #   This is the unique identifier for your hosted zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_accelerated_recovery
+    #   Specifies whether to enable accelerated recovery for the hosted
+    #   zone. Set to `true` to enable accelerated recovery, or `false` to
+    #   disable it.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneFeaturesRequest AWS API Documentation
+    #
+    class UpdateHostedZoneFeaturesRequest < Struct.new(
+      :hosted_zone_id,
+      :enable_accelerated_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneFeaturesResponse AWS API Documentation
+    #
+    class UpdateHostedZoneFeaturesResponse < Aws::EmptyStructure; end
 
     # A complex type that contains information about the traffic policy that
     # you want to update the comment for.

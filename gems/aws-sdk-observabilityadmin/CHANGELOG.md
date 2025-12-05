@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-12-02)
+------------------
+
+* Feature - CloudWatch Observability Admin adds pipelines configuration for third party log ingestion and transformation of all logs ingested, integration of CloudWatch logs with S3 Tables, and AWS account or organization level enablement for 7 AWS services.
+
 1.16.0 (2025-11-21)
 ------------------
 

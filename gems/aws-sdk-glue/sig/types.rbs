@@ -3804,6 +3804,7 @@ module Aws::Glue
       attr_accessor cell_filters: ::Array[Types::ColumnRowFilter]
       attr_accessor query_authorization_id: ::String
       attr_accessor is_multi_dialect_view: bool
+      attr_accessor is_materialized_view: bool
       attr_accessor resource_arn: ::String
       attr_accessor is_protected: bool
       attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
@@ -3996,6 +3997,14 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergEncryptedKey
+      attr_accessor key_id: ::String
+      attr_accessor encrypted_key_metadata: ::String
+      attr_accessor encrypted_by_id: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class IcebergInput
       attr_accessor metadata_operation: ("CREATE")
       attr_accessor version: ::String
@@ -4095,6 +4104,8 @@ module Aws::Glue
       attr_accessor type: untyped
       attr_accessor required: bool
       attr_accessor doc: ::String
+      attr_accessor initial_default: untyped
+      attr_accessor write_default: untyped
       SENSITIVE: []
     end
 
@@ -4104,6 +4115,9 @@ module Aws::Glue
       attr_accessor sort_order: Types::IcebergSortOrder
       attr_accessor location: ::String
       attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor action: ("add-schema" | "set-current-schema" | "add-spec" | "set-default-spec" | "add-sort-order" | "set-default-sort-order" | "set-location" | "set-properties" | "remove-properties" | "add-encryption-key" | "remove-encryption-key")
+      attr_accessor encryption_key: Types::IcebergEncryptedKey
+      attr_accessor key_id: ::String
       SENSITIVE: []
     end
 
@@ -6552,6 +6566,7 @@ module Aws::Glue
       attr_accessor federated_table: Types::FederatedTable
       attr_accessor view_definition: Types::ViewDefinition
       attr_accessor is_multi_dialect_view: bool
+      attr_accessor is_materialized_view: bool
       attr_accessor status: Types::TableStatus
       SENSITIVE: []
     end
@@ -7331,7 +7346,12 @@ module Aws::Glue
     class ViewDefinition
       attr_accessor is_protected: bool
       attr_accessor definer: ::String
+      attr_accessor view_version_id: ::Integer
+      attr_accessor view_version_token: ::String
+      attr_accessor refresh_seconds: ::Integer
+      attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
+      attr_accessor sub_object_version_ids: ::Array[::Integer]
       attr_accessor representations: ::Array[Types::ViewRepresentation]
       SENSITIVE: []
     end
@@ -7340,7 +7360,12 @@ module Aws::Glue
       attr_accessor is_protected: bool
       attr_accessor definer: ::String
       attr_accessor representations: ::Array[Types::ViewRepresentationInput]
+      attr_accessor view_version_id: ::Integer
+      attr_accessor view_version_token: ::String
+      attr_accessor refresh_seconds: ::Integer
+      attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
+      attr_accessor sub_object_version_ids: ::Array[::Integer]
       SENSITIVE: []
     end
 

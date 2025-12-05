@@ -60,6 +60,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#auto_provision_zones-instance_method
       def auto_provision_zones: () -> ("enabled" | "disabled")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#attached_appliances-instance_method
+      def attached_appliances: () -> ::Array[Types::NatGatewayAttachedAppliance]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#route_table_id-instance_method
       def route_table_id: () -> ::String
 

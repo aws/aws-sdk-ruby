@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2025-12-02)
+------------------
+
+* Feature - GPU-acceleration helps you build large-scale vector databases faster and more efficiently. You can enable this feature on new OpenSearch domains and OpenSearch Serverless collections. This feature uses GPU-acceleration to reduce the time needed to index data into vector indexes.
+
 1.49.0 (2025-11-21)
 ------------------
 

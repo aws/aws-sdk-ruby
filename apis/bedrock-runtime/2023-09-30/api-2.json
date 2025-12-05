@@ -364,6 +364,51 @@
         "outputDataConfig":{"shape":"AsyncInvokeOutputDataConfig"}
       }
     },
+    "AudioBlock":{
+      "type":"structure",
+      "required":[
+        "format",
+        "source"
+      ],
+      "members":{
+        "format":{"shape":"AudioFormat"},
+        "source":{"shape":"AudioSource"},
+        "error":{"shape":"ErrorBlock"}
+      }
+    },
+    "AudioFormat":{
+      "type":"string",
+      "enum":[
+        "mp3",
+        "opus",
+        "wav",
+        "aac",
+        "flac",
+        "mp4",
+        "ogg",
+        "mkv",
+        "mka",
+        "x-aac",
+        "m4a",
+        "mpeg",
+        "mpga",
+        "pcm",
+        "webm"
+      ]
+    },
+    "AudioSource":{
+      "type":"structure",
+      "members":{
+        "bytes":{"shape":"AudioSourceBytesBlob"},
+        "s3Location":{"shape":"S3Location"}
+      },
+      "sensitive":true,
+      "union":true
+    },
+    "AudioSourceBytesBlob":{
+      "type":"blob",
+      "min":1
+    },
     "AutoToolChoice":{
       "type":"structure",
       "members":{}
@@ -509,6 +554,7 @@
         "image":{"shape":"ImageBlock"},
         "document":{"shape":"DocumentBlock"},
         "video":{"shape":"VideoBlock"},
+        "audio":{"shape":"AudioBlock"},
         "toolUse":{"shape":"ToolUseBlock"},
         "toolResult":{"shape":"ToolResultBlock"},
         "guardContent":{"shape":"GuardrailConverseContentBlock"},
@@ -526,7 +572,8 @@
         "toolUse":{"shape":"ToolUseBlockDelta"},
         "toolResult":{"shape":"ToolResultBlocksDelta"},
         "reasoningContent":{"shape":"ReasoningContentBlockDelta"},
-        "citation":{"shape":"CitationsDelta"}
+        "citation":{"shape":"CitationsDelta"},
+        "image":{"shape":"ImageBlockDelta"}
       },
       "union":true
     },
@@ -546,7 +593,8 @@
       "type":"structure",
       "members":{
         "toolUse":{"shape":"ToolUseBlockStart"},
-        "toolResult":{"shape":"ToolResultBlockStart"}
+        "toolResult":{"shape":"ToolResultBlockStart"},
+        "image":{"shape":"ImageBlockStart"}
       },
       "union":true
     },
@@ -916,6 +964,13 @@
     "DocumentSourceBytesBlob":{
       "type":"blob",
       "min":1
+    },
+    "ErrorBlock":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "sensitive":true
     },
     "FoundationModelVersionIdentifier":{
       "type":"string",
@@ -1792,7 +1847,22 @@
       ],
       "members":{
         "format":{"shape":"ImageFormat"},
-        "source":{"shape":"ImageSource"}
+        "source":{"shape":"ImageSource"},
+        "error":{"shape":"ErrorBlock"}
+      }
+    },
+    "ImageBlockDelta":{
+      "type":"structure",
+      "members":{
+        "source":{"shape":"ImageSource"},
+        "error":{"shape":"ErrorBlock"}
+      }
+    },
+    "ImageBlockStart":{
+      "type":"structure",
+      "required":["format"],
+      "members":{
+        "format":{"shape":"ImageFormat"}
       }
     },
     "ImageFormat":{
@@ -1810,6 +1880,7 @@
         "bytes":{"shape":"ImageSourceBytesBlob"},
         "s3Location":{"shape":"S3Location"}
       },
+      "sensitive":true,
       "union":true
     },
     "ImageSourceBytesBlob":{
@@ -2461,7 +2532,8 @@
       "enum":[
         "priority",
         "default",
-        "flex"
+        "flex",
+        "reserved"
       ]
     },
     "ServiceUnavailableException":{
@@ -2531,6 +2603,8 @@
         "stop_sequence",
         "guardrail_intervened",
         "content_filtered",
+        "malformed_model_output",
+        "malformed_tool_use",
         "model_context_window_exceeded"
       ]
     },
@@ -2707,7 +2781,8 @@
     "ToolResultBlockDelta":{
       "type":"structure",
       "members":{
-        "text":{"shape":"String"}
+        "text":{"shape":"String"},
+        "json":{"shape":"Document"}
       },
       "union":true
     },

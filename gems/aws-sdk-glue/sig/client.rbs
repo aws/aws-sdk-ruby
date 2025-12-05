@@ -2878,7 +2878,12 @@ module Aws
                                   view_expanded_text: ::String?
                                 },
                               ]?,
-                              sub_objects: Array[::String]?
+                              view_version_id: ::Integer?,
+                              view_version_token: ::String?,
+                              refresh_seconds: ::Integer?,
+                              last_refresh_type: ("FULL" | "INCREMENTAL")?,
+                              sub_objects: Array[::String]?,
+                              sub_object_version_ids: Array[::Integer]?
                             }?
                           },
                           ?partition_indexes: Array[
@@ -2905,7 +2910,11 @@ module Aws
                                       type: {
                                       },
                                       required: bool,
-                                      doc: ::String?
+                                      doc: ::String?,
+                                      initial_default: {
+                                      }?,
+                                      write_default: {
+                                      }?
                                     },
                                   ]
                                 },
@@ -4677,6 +4686,7 @@ module Aws
         def cell_filters: () -> ::Array[Types::ColumnRowFilter]
         def query_authorization_id: () -> ::String
         def is_multi_dialect_view: () -> bool
+        def is_materialized_view: () -> bool
         def resource_arn: () -> ::String
         def is_protected: () -> bool
         def permissions: () -> ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
@@ -8258,7 +8268,12 @@ module Aws
                                   view_expanded_text: ::String?
                                 },
                               ]?,
-                              sub_objects: Array[::String]?
+                              view_version_id: ::Integer?,
+                              view_version_token: ::String?,
+                              refresh_seconds: ::Integer?,
+                              last_refresh_type: ("FULL" | "INCREMENTAL")?,
+                              sub_objects: Array[::String]?,
+                              sub_object_version_ids: Array[::Integer]?
                             }?
                           },
                           ?skip_archive: bool,
@@ -8282,7 +8297,11 @@ module Aws
                                           type: {
                                           },
                                           required: bool,
-                                          doc: ::String?
+                                          doc: ::String?,
+                                          initial_default: {
+                                          }?,
+                                          write_default: {
+                                          }?
                                         },
                                       ]
                                     },
@@ -8309,7 +8328,15 @@ module Aws
                                       ]
                                     }?,
                                     location: ::String,
-                                    properties: Hash[::String, ::String]?
+                                    properties: Hash[::String, ::String]?,
+                                    action: ("add-schema" | "set-current-schema" | "add-spec" | "set-default-spec" | "add-sort-order" | "set-default-sort-order" | "set-location" | "set-properties" | "remove-properties" | "add-encryption-key" | "remove-encryption-key")?,
+                                    encryption_key: {
+                                      key_id: ::String,
+                                      encrypted_key_metadata: ::String,
+                                      encrypted_by_id: ::String?,
+                                      properties: Hash[::String, ::String]?
+                                    }?,
+                                    key_id: ::String?
                                   },
                                 ]
                               }

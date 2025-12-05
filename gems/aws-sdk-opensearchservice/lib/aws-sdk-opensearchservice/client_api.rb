@@ -470,6 +470,7 @@ module Aws::OpenSearchService
     ScheduledAutoTuneSeverityType = Shapes::StringShape.new(name: 'ScheduledAutoTuneSeverityType')
     ScheduledBy = Shapes::StringShape.new(name: 'ScheduledBy')
     SecurityLakeDirectQueryDataSource = Shapes::StructureShape.new(name: 'SecurityLakeDirectQueryDataSource')
+    ServerlessVectorAcceleration = Shapes::StructureShape.new(name: 'ServerlessVectorAcceleration')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SkipUnavailableStatus = Shapes::StringShape.new(name: 'SkipUnavailableStatus')
@@ -566,10 +567,12 @@ module Aws::OpenSearchService
 
     AIMLOptionsInput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsInput, location_name: "NaturalLanguageQueryGenerationOptions"))
     AIMLOptionsInput.add_member(:s3_vectors_engine, Shapes::ShapeRef.new(shape: S3VectorsEngine, location_name: "S3VectorsEngine"))
+    AIMLOptionsInput.add_member(:serverless_vector_acceleration, Shapes::ShapeRef.new(shape: ServerlessVectorAcceleration, location_name: "ServerlessVectorAcceleration"))
     AIMLOptionsInput.struct_class = Types::AIMLOptionsInput
 
     AIMLOptionsOutput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsOutput, location_name: "NaturalLanguageQueryGenerationOptions"))
     AIMLOptionsOutput.add_member(:s3_vectors_engine, Shapes::ShapeRef.new(shape: S3VectorsEngine, location_name: "S3VectorsEngine"))
+    AIMLOptionsOutput.add_member(:serverless_vector_acceleration, Shapes::ShapeRef.new(shape: ServerlessVectorAcceleration, location_name: "ServerlessVectorAcceleration"))
     AIMLOptionsOutput.struct_class = Types::AIMLOptionsOutput
 
     AIMLOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "Options"))
@@ -1959,6 +1962,9 @@ module Aws::OpenSearchService
 
     SecurityLakeDirectQueryDataSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: DirectQueryDataSourceRoleArn, required: true, location_name: "RoleArn"))
     SecurityLakeDirectQueryDataSource.struct_class = Types::SecurityLakeDirectQueryDataSource
+
+    ServerlessVectorAcceleration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ServerlessVectorAcceleration.struct_class = Types::ServerlessVectorAcceleration
 
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))

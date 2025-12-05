@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2025-12-02)
+------------------
+
+* Feature - ITSM enhancements: DRYRUN mode for testing ticket creation, ServiceNow now uses AWS Secrets Manager for credentials, ConnectorRegistrationsV2 renamed to RegisterConnectorV2, added ServiceQuotaExceededException error, and ConnectorStatus visibility in CreateConnectorV2.
+
 1.147.0 (2025-11-21)
 ------------------
 

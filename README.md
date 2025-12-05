@@ -623,6 +623,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Relational Database Service                    | Aws::RDS                                 | aws-sdk-rds                                 | 2014-10-31  |
 | Amazon Route 53                                       | Aws::Route53                             | aws-sdk-route53                             | 2013-04-01  |
 | Amazon Route 53 Domains                               | Aws::Route53Domains                      | aws-sdk-route53domains                      | 2014-05-15  |
+| Amazon Route 53 Global Resolver                       | Aws::Route53GlobalResolver               | aws-sdk-route53globalresolver               | 2022-09-27  |
 | Amazon Route 53 Resolver                              | Aws::Route53Resolver                     | aws-sdk-route53resolver                     | 2018-04-01  |
 | Amazon S3 Tables                                      | Aws::S3Tables                            | aws-sdk-s3tables                            | 2018-05-10  |
 | Amazon S3 Vectors                                     | Aws::S3Vectors                           | aws-sdk-s3vectors                           | 2025-07-15  |
@@ -696,7 +697,10 @@ RubyGems.org page under "LINKS" section.
 | Managed integrations for AWS IoT Device Management    | Aws::IoTManagedIntegrations              | aws-sdk-iotmanagedintegrations              | 2025-03-03  |
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |
 | Network Flow Monitor                                  | Aws::NetworkFlowMonitor                  | aws-sdk-networkflowmonitor                  | 2023-04-19  |
+| Nova Act Service                                      | Aws::NovaAct                             | aws-sdk-novaact                             | 2025-08-22  |
 | OpenSearch Service Serverless                         | Aws::OpenSearchServerless                | aws-sdk-opensearchserverless                | 2021-11-01  |
+| Partner Central Account API                           | Aws::PartnerCentralAccount               | aws-sdk-partnercentralaccount               | 2025-04-04  |
+| Partner Central Benefits API                          | Aws::PartnerCentralBenefits              | aws-sdk-partnercentralbenefits              | 2018-05-10  |
 | Partner Central Channel API                           | Aws::PartnerCentralChannel               | aws-sdk-partnercentralchannel               | 2024-03-18  |
 | Partner Central Selling API                           | Aws::PartnerCentralSelling               | aws-sdk-partnercentralselling               | 2022-07-26  |
 | Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |

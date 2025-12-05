@@ -767,6 +767,7 @@ module Aws::Route53
       attr_accessor config: Types::HostedZoneConfig
       attr_accessor resource_record_set_count: ::Integer
       attr_accessor linked_service: Types::LinkedService
+      attr_accessor features: Types::HostedZoneFeatures
       SENSITIVE: []
     end
 
@@ -778,6 +779,17 @@ module Aws::Route53
     class HostedZoneConfig
       attr_accessor comment: ::String
       attr_accessor private_zone: bool
+      SENSITIVE: []
+    end
+
+    class HostedZoneFailureReasons
+      attr_accessor accelerated_recovery: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZoneFeatures
+      attr_accessor accelerated_recovery_status: ("ENABLING" | "ENABLE_FAILED" | "ENABLING_HOSTED_ZONE_LOCKED" | "ENABLED" | "DISABLING" | "DISABLE_FAILED" | "DISABLED" | "DISABLING_HOSTED_ZONE_LOCKED")
+      attr_accessor failure_reasons: Types::HostedZoneFailureReasons
       SENSITIVE: []
     end
 
@@ -1514,6 +1526,15 @@ module Aws::Route53
     class UpdateHostedZoneCommentResponse
       attr_accessor hosted_zone: Types::HostedZone
       SENSITIVE: []
+    end
+
+    class UpdateHostedZoneFeaturesRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor enable_accelerated_recovery: bool
+      SENSITIVE: []
+    end
+
+    class UpdateHostedZoneFeaturesResponse < Aws::EmptyStructure
     end
 
     class UpdateTrafficPolicyCommentRequest

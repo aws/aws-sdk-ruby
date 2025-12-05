@@ -878,6 +878,75 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Performs on-demand evaluation of agent traces using a specified
+    # evaluator. This synchronous API accepts traces in OpenTelemetry format
+    # and returns immediate scoring results with detailed explanations.
+    #
+    # @option params [required, String] :evaluator_id
+    #   The unique identifier of the evaluator to use for scoring. Can be a
+    #   built-in evaluator (e.g., `Builtin.Helpfulness`,
+    #   `Builtin.Correctness`) or a custom evaluator ARN created through the
+    #   control plane API.
+    #
+    # @option params [required, Types::EvaluationInput] :evaluation_input
+    #   The input data containing agent session spans to be evaluated.
+    #   Includes a list of spans in OpenTelemetry format from supported
+    #   frameworks like Strands (AgentCore Runtime) or LangGraph with
+    #   OpenInference instrumentation.
+    #
+    # @option params [Types::EvaluationTarget] :evaluation_target
+    #   The specific trace or span IDs to evaluate within the provided input.
+    #   Allows targeting evaluation at different levels: individual tool
+    #   calls, single request-response interactions (traces), or entire
+    #   conversation sessions.
+    #
+    # @return [Types::EvaluateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EvaluateResponse#evaluation_results #evaluation_results} => Array&lt;Types::EvaluationResultContent&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.evaluate({
+    #     evaluator_id: "EvaluatorId", # required
+    #     evaluation_input: { # required
+    #       session_spans: [
+    #         {
+    #         },
+    #       ],
+    #     },
+    #     evaluation_target: {
+    #       span_ids: ["SpanId"],
+    #       trace_ids: ["TraceId"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_results #=> Array
+    #   resp.evaluation_results[0].evaluator_arn #=> String
+    #   resp.evaluation_results[0].evaluator_id #=> String
+    #   resp.evaluation_results[0].evaluator_name #=> String
+    #   resp.evaluation_results[0].explanation #=> String
+    #   resp.evaluation_results[0].context.span_context.session_id #=> String
+    #   resp.evaluation_results[0].context.span_context.trace_id #=> String
+    #   resp.evaluation_results[0].context.span_context.span_id #=> String
+    #   resp.evaluation_results[0].value #=> Float
+    #   resp.evaluation_results[0].label #=> String
+    #   resp.evaluation_results[0].token_usage.input_tokens #=> Integer
+    #   resp.evaluation_results[0].token_usage.output_tokens #=> Integer
+    #   resp.evaluation_results[0].token_usage.total_tokens #=> Integer
+    #   resp.evaluation_results[0].error_message #=> String
+    #   resp.evaluation_results[0].error_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Evaluate AWS API Documentation
+    #
+    # @overload evaluate(params = {})
+    # @param [Hash] params ({})
+    def evaluate(params = {}, options = {})
+      req = build_request(:evaluate, params)
+      req.send_request(options)
+    end
+
     # Retrieves the A2A agent card associated with an AgentCore Runtime
     # agent.
     #
@@ -942,9 +1011,9 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartBrowserSession.html
-    # [2]: https://docs.aws.amazon.com/API_ListBrowserSessions.html
-    # [3]: https://docs.aws.amazon.com/API_StopBrowserSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_ListBrowserSessions.html
+    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
     #
     # @option params [required, String] :browser_identifier
     #   The unique identifier of the browser associated with the session.
@@ -1015,9 +1084,9 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartCodeInterpreterSession.html
-    # [2]: https://docs.aws.amazon.com/API_ListCodeInterpreterSessions.html
-    # [3]: https://docs.aws.amazon.com/API_StopCodeInterpreterSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_ListCodeInterpreterSessions.html
+    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopCodeInterpreterSession.html
     #
     # @option params [required, String] :code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
@@ -1146,6 +1215,8 @@ module Aws::BedrockAgentCore
     #   resp.memory_record.namespaces #=> Array
     #   resp.memory_record.namespaces[0] #=> String
     #   resp.memory_record.created_at #=> Time
+    #   resp.memory_record.metadata #=> Hash
+    #   resp.memory_record.metadata["MetadataKey"].string_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetMemoryRecord AWS API Documentation
     #
@@ -1530,8 +1601,8 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartCodeInterpreterSession.html
-    # [2]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html
     #
     # @option params [required, String] :code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
@@ -1894,8 +1965,8 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartBrowserSession.html
-    # [2]: https://docs.aws.amazon.com/API_GetBrowserSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
     #
     # @option params [required, String] :browser_identifier
     #   The unique identifier of the browser to list sessions for. If
@@ -1973,8 +2044,8 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartCodeInterpreterSession.html
-    # [2]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html
     #
     # @option params [required, String] :code_interpreter_identifier
     #   The unique identifier of the code interpreter to list sessions for. If
@@ -2248,6 +2319,8 @@ module Aws::BedrockAgentCore
     #   resp.memory_record_summaries[0].namespaces[0] #=> String
     #   resp.memory_record_summaries[0].created_at #=> Time
     #   resp.memory_record_summaries[0].score #=> Float
+    #   resp.memory_record_summaries[0].metadata #=> Hash
+    #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListMemoryRecords AWS API Documentation
@@ -2360,6 +2433,19 @@ module Aws::BedrockAgentCore
     #       search_query: "SearchCriteriaSearchQueryString", # required
     #       memory_strategy_id: "MemoryStrategyId",
     #       top_k: 1,
+    #       metadata_filters: [
+    #         {
+    #           left: { # required
+    #             metadata_key: "MetadataKey",
+    #           },
+    #           operator: "EQUALS_TO", # required, accepts EQUALS_TO, EXISTS, NOT_EXISTS
+    #           right: {
+    #             metadata_value: {
+    #               string_value: "MetadataValueStringValueString",
+    #             },
+    #           },
+    #         },
+    #       ],
     #     },
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -2375,6 +2461,8 @@ module Aws::BedrockAgentCore
     #   resp.memory_record_summaries[0].namespaces[0] #=> String
     #   resp.memory_record_summaries[0].created_at #=> Time
     #   resp.memory_record_summaries[0].score #=> Float
+    #   resp.memory_record_summaries[0].metadata #=> Hash
+    #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RetrieveMemoryRecords AWS API Documentation
@@ -2406,9 +2494,9 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_GetBrowserSession.html
-    # [2]: https://docs.aws.amazon.com/API_UpdateBrowserStream.html
-    # [3]: https://docs.aws.amazon.com/API_StopBrowserSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
+    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
     #
     # @option params [String] :trace_id
     #   The trace identifier for request tracking.
@@ -2506,9 +2594,9 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_InvokeCodeInterpreter.html
-    # [2]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
-    # [3]: https://docs.aws.amazon.com/API_StopCodeInterpreterSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_InvokeCodeInterpreter.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html
+    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopCodeInterpreterSession.html
     #
     # @option params [String] :trace_id
     #   The trace identifier for request tracking.
@@ -2638,8 +2726,8 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartBrowserSession.html
-    # [2]: https://docs.aws.amazon.com/API_GetBrowserSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
     #
     # @option params [String] :trace_id
     #   The trace identifier for request tracking.
@@ -2710,8 +2798,8 @@ module Aws::BedrockAgentCore
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/API_StartCodeInterpreterSession.html
-    # [2]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html
     #
     # @option params [String] :trace_id
     #   The trace identifier for request tracking.
@@ -2892,7 +2980,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

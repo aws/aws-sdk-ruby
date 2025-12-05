@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2025-12-05)
+------------------
+
+* Feature - This release adds a new ScanStatus called "Unsupported Code Artifacts". This ScanStatus will be returned when a Lambda function was not code scanned because it has unsupported code artifacts.
+
 1.64.0 (2025-11-21)
 ------------------
 

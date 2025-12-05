@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2025-12-02)
+------------------
+
+* Feature - CloudWatch Logs adds managed S3 Tables integration to access logs using other analytical tools, as well as facets and field indexing to simplify log analytics in CloudWatch Logs Insights.
+
 1.133.0 (2025-11-24)
 ------------------
 

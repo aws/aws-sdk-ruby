@@ -27,9 +27,12 @@ module Aws::Lambda
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {CallbackTimeoutException}
+  # * {CapacityProviderLimitExceededException}
   # * {CodeSigningConfigNotFoundException}
   # * {CodeStorageExceededException}
   # * {CodeVerificationFailedException}
+  # * {DurableExecutionAlreadyStartedException}
   # * {EC2AccessDeniedException}
   # * {EC2ThrottledException}
   # * {EC2UnexpectedException}
@@ -38,6 +41,7 @@ module Aws::Lambda
   # * {EFSMountFailureException}
   # * {EFSMountTimeoutException}
   # * {ENILimitReachedException}
+  # * {FunctionVersionsPerCapacityProviderLimitExceededException}
   # * {InvalidCodeSignatureException}
   # * {InvalidParameterValueException}
   # * {InvalidRequestContentException}
@@ -49,6 +53,7 @@ module Aws::Lambda
   # * {KMSDisabledException}
   # * {KMSInvalidStateException}
   # * {KMSNotFoundException}
+  # * {NoPublishedVersionException}
   # * {PolicyLengthExceededException}
   # * {PreconditionFailedException}
   # * {ProvisionedConcurrencyConfigNotFoundException}
@@ -72,6 +77,46 @@ module Aws::Lambda
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class CallbackTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::CallbackTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CapacityProviderLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::CapacityProviderLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class CodeSigningConfigNotFoundException < ServiceError
 
@@ -118,6 +163,26 @@ module Aws::Lambda
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::CodeVerificationFailedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DurableExecutionAlreadyStartedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::DurableExecutionAlreadyStartedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -283,6 +348,26 @@ module Aws::Lambda
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ENILimitReachedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class FunctionVersionsPerCapacityProviderLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::FunctionVersionsPerCapacityProviderLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -503,6 +588,26 @@ module Aws::Lambda
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::KMSNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoPublishedVersionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::NoPublishedVersionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

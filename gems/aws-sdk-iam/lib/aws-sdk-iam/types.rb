@@ -2153,9 +2153,17 @@ module Aws::IAM
     #   The state of this delegation request.
     #
     #   See the [Understanding the Request
-    #   Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html)
+    #   Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle)
     #   for an explanation of how these states are transitioned.
     #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The expiry time of this delegation request
+    #
+    #   See the [Understanding the Request
+    #   Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle)
+    #   for details on the life time of a delegation request at each state.
+    #   @return [Time]
     #
     # @!attribute [rw] requestor_id
     #   Identity of the requestor of this delegation request. This will be
@@ -2224,6 +2232,7 @@ module Aws::IAM
       :owner_id,
       :approver_id,
       :state,
+      :expiration_time,
       :requestor_id,
       :requestor_name,
       :create_date,

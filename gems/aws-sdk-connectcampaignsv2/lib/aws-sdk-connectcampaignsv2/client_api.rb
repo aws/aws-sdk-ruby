@@ -82,6 +82,7 @@ module Aws::ConnectCampaignsV2
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EventTrigger = Shapes::StructureShape.new(name: 'EventTrigger')
     EventType = Shapes::StringShape.new(name: 'EventType')
+    ExternalCampaignType = Shapes::StringShape.new(name: 'ExternalCampaignType')
     FailedCampaignStateResponse = Shapes::StructureShape.new(name: 'FailedCampaignStateResponse')
     FailedCampaignStateResponseList = Shapes::ListShape.new(name: 'FailedCampaignStateResponseList')
     FailedProfileOutboundRequest = Shapes::StructureShape.new(name: 'FailedProfileOutboundRequest')
@@ -120,6 +121,10 @@ module Aws::ConnectCampaignsV2
     Iso8601Date = Shapes::StringShape.new(name: 'Iso8601Date')
     Iso8601Duration = Shapes::StringShape.new(name: 'Iso8601Duration')
     Iso8601Time = Shapes::StringShape.new(name: 'Iso8601Time')
+    LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    LambdaIntegrationConfig = Shapes::StructureShape.new(name: 'LambdaIntegrationConfig')
+    LambdaIntegrationIdentifier = Shapes::StructureShape.new(name: 'LambdaIntegrationIdentifier')
+    LambdaIntegrationSummary = Shapes::StructureShape.new(name: 'LambdaIntegrationSummary')
     ListCampaignsRequest = Shapes::StructureShape.new(name: 'ListCampaignsRequest')
     ListCampaignsResponse = Shapes::StructureShape.new(name: 'ListCampaignsResponse')
     ListConnectInstanceIntegrationsRequest = Shapes::StructureShape.new(name: 'ListConnectInstanceIntegrationsRequest')
@@ -208,6 +213,10 @@ module Aws::ConnectCampaignsV2
     UpdateCampaignScheduleRequest = Shapes::StructureShape.new(name: 'UpdateCampaignScheduleRequest')
     UpdateCampaignSourceRequest = Shapes::StructureShape.new(name: 'UpdateCampaignSourceRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WhatsAppChannelSubtypeConfig = Shapes::StructureShape.new(name: 'WhatsAppChannelSubtypeConfig')
+    WhatsAppChannelSubtypeParameters = Shapes::StructureShape.new(name: 'WhatsAppChannelSubtypeParameters')
+    WhatsAppOutboundConfig = Shapes::StructureShape.new(name: 'WhatsAppOutboundConfig')
+    WhatsAppOutboundMode = Shapes::UnionShape.new(name: 'WhatsAppOutboundMode')
     XAmazonErrorType = Shapes::StringShape.new(name: 'XAmazonErrorType')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -229,7 +238,8 @@ module Aws::ConnectCampaignsV2
     Campaign.add_member(:arn, Shapes::ShapeRef.new(shape: CampaignArn, required: true, location_name: "arn"))
     Campaign.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     Campaign.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
-    Campaign.add_member(:channel_subtype_config, Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, required: true, location_name: "channelSubtypeConfig"))
+    Campaign.add_member(:channel_subtype_config, Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, location_name: "channelSubtypeConfig"))
+    Campaign.add_member(:type, Shapes::ShapeRef.new(shape: ExternalCampaignType, location_name: "type"))
     Campaign.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     Campaign.add_member(:connect_campaign_flow_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
     Campaign.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
@@ -246,6 +256,7 @@ module Aws::ConnectCampaignsV2
     CampaignSummary.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     CampaignSummary.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
     CampaignSummary.add_member(:channel_subtypes, Shapes::ShapeRef.new(shape: ChannelSubtypeList, required: true, location_name: "channelSubtypes"))
+    CampaignSummary.add_member(:type, Shapes::ShapeRef.new(shape: ExternalCampaignType, location_name: "type"))
     CampaignSummary.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     CampaignSummary.add_member(:connect_campaign_flow_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
     CampaignSummary.struct_class = Types::CampaignSummary
@@ -255,6 +266,7 @@ module Aws::ConnectCampaignsV2
     ChannelSubtypeConfig.add_member(:telephony, Shapes::ShapeRef.new(shape: TelephonyChannelSubtypeConfig, location_name: "telephony"))
     ChannelSubtypeConfig.add_member(:sms, Shapes::ShapeRef.new(shape: SmsChannelSubtypeConfig, location_name: "sms"))
     ChannelSubtypeConfig.add_member(:email, Shapes::ShapeRef.new(shape: EmailChannelSubtypeConfig, location_name: "email"))
+    ChannelSubtypeConfig.add_member(:whats_app, Shapes::ShapeRef.new(shape: WhatsAppChannelSubtypeConfig, location_name: "whatsApp"))
     ChannelSubtypeConfig.struct_class = Types::ChannelSubtypeConfig
 
     ChannelSubtypeList.member = Shapes::ShapeRef.new(shape: ChannelSubtype)
@@ -262,10 +274,12 @@ module Aws::ConnectCampaignsV2
     ChannelSubtypeParameters.add_member(:telephony, Shapes::ShapeRef.new(shape: TelephonyChannelSubtypeParameters, location_name: "telephony"))
     ChannelSubtypeParameters.add_member(:sms, Shapes::ShapeRef.new(shape: SmsChannelSubtypeParameters, location_name: "sms"))
     ChannelSubtypeParameters.add_member(:email, Shapes::ShapeRef.new(shape: EmailChannelSubtypeParameters, location_name: "email"))
+    ChannelSubtypeParameters.add_member(:whats_app, Shapes::ShapeRef.new(shape: WhatsAppChannelSubtypeParameters, location_name: "whatsApp"))
     ChannelSubtypeParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ChannelSubtypeParameters.add_member_subclass(:telephony, Types::ChannelSubtypeParameters::Telephony)
     ChannelSubtypeParameters.add_member_subclass(:sms, Types::ChannelSubtypeParameters::Sms)
     ChannelSubtypeParameters.add_member_subclass(:email, Types::ChannelSubtypeParameters::Email)
+    ChannelSubtypeParameters.add_member_subclass(:whats_app, Types::ChannelSubtypeParameters::WhatsApp)
     ChannelSubtypeParameters.add_member_subclass(:unknown, Types::ChannelSubtypeParameters::Unknown)
     ChannelSubtypeParameters.struct_class = Types::ChannelSubtypeParameters
 
@@ -290,6 +304,7 @@ module Aws::ConnectCampaignsV2
     CommunicationTimeConfig.add_member(:telephony, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "telephony"))
     CommunicationTimeConfig.add_member(:sms, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "sms"))
     CommunicationTimeConfig.add_member(:email, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "email"))
+    CommunicationTimeConfig.add_member(:whats_app, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "whatsApp"))
     CommunicationTimeConfig.struct_class = Types::CommunicationTimeConfig
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -298,7 +313,8 @@ module Aws::ConnectCampaignsV2
 
     CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
-    CreateCampaignRequest.add_member(:channel_subtype_config, Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, required: true, location_name: "channelSubtypeConfig"))
+    CreateCampaignRequest.add_member(:channel_subtype_config, Shapes::ShapeRef.new(shape: ChannelSubtypeConfig, location_name: "channelSubtypeConfig"))
+    CreateCampaignRequest.add_member(:type, Shapes::ShapeRef.new(shape: ExternalCampaignType, location_name: "type"))
     CreateCampaignRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     CreateCampaignRequest.add_member(:connect_campaign_flow_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
     CreateCampaignRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
@@ -460,25 +476,31 @@ module Aws::ConnectCampaignsV2
 
     IntegrationConfig.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationConfig, location_name: "customerProfiles"))
     IntegrationConfig.add_member(:q_connect, Shapes::ShapeRef.new(shape: QConnectIntegrationConfig, location_name: "qConnect"))
+    IntegrationConfig.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaIntegrationConfig, location_name: "lambda"))
     IntegrationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegrationConfig.add_member_subclass(:customer_profiles, Types::IntegrationConfig::CustomerProfiles)
     IntegrationConfig.add_member_subclass(:q_connect, Types::IntegrationConfig::QConnect)
+    IntegrationConfig.add_member_subclass(:lambda, Types::IntegrationConfig::Lambda)
     IntegrationConfig.add_member_subclass(:unknown, Types::IntegrationConfig::Unknown)
     IntegrationConfig.struct_class = Types::IntegrationConfig
 
     IntegrationIdentifier.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationIdentifier, location_name: "customerProfiles"))
     IntegrationIdentifier.add_member(:q_connect, Shapes::ShapeRef.new(shape: QConnectIntegrationIdentifier, location_name: "qConnect"))
+    IntegrationIdentifier.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaIntegrationIdentifier, location_name: "lambda"))
     IntegrationIdentifier.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegrationIdentifier.add_member_subclass(:customer_profiles, Types::IntegrationIdentifier::CustomerProfiles)
     IntegrationIdentifier.add_member_subclass(:q_connect, Types::IntegrationIdentifier::QConnect)
+    IntegrationIdentifier.add_member_subclass(:lambda, Types::IntegrationIdentifier::Lambda)
     IntegrationIdentifier.add_member_subclass(:unknown, Types::IntegrationIdentifier::Unknown)
     IntegrationIdentifier.struct_class = Types::IntegrationIdentifier
 
     IntegrationSummary.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationSummary, location_name: "customerProfiles"))
     IntegrationSummary.add_member(:q_connect, Shapes::ShapeRef.new(shape: QConnectIntegrationSummary, location_name: "qConnect"))
+    IntegrationSummary.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaIntegrationSummary, location_name: "lambda"))
     IntegrationSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegrationSummary.add_member_subclass(:customer_profiles, Types::IntegrationSummary::CustomerProfiles)
     IntegrationSummary.add_member_subclass(:q_connect, Types::IntegrationSummary::QConnect)
+    IntegrationSummary.add_member_subclass(:lambda, Types::IntegrationSummary::Lambda)
     IntegrationSummary.add_member_subclass(:unknown, Types::IntegrationSummary::Unknown)
     IntegrationSummary.struct_class = Types::IntegrationSummary
 
@@ -496,6 +518,15 @@ module Aws::ConnectCampaignsV2
     InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidStateException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     InvalidStateException.struct_class = Types::InvalidStateException
+
+    LambdaIntegrationConfig.add_member(:function_arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "functionArn"))
+    LambdaIntegrationConfig.struct_class = Types::LambdaIntegrationConfig
+
+    LambdaIntegrationIdentifier.add_member(:function_arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "functionArn"))
+    LambdaIntegrationIdentifier.struct_class = Types::LambdaIntegrationIdentifier
+
+    LambdaIntegrationSummary.add_member(:function_arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "functionArn"))
+    LambdaIntegrationSummary.struct_class = Types::LambdaIntegrationSummary
 
     ListCampaignsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListCampaignsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -778,6 +809,27 @@ module Aws::ConnectCampaignsV2
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     ValidationException.struct_class = Types::ValidationException
+
+    WhatsAppChannelSubtypeConfig.add_member(:capacity, Shapes::ShapeRef.new(shape: Capacity, location_name: "capacity"))
+    WhatsAppChannelSubtypeConfig.add_member(:outbound_mode, Shapes::ShapeRef.new(shape: WhatsAppOutboundMode, required: true, location_name: "outboundMode"))
+    WhatsAppChannelSubtypeConfig.add_member(:default_outbound_config, Shapes::ShapeRef.new(shape: WhatsAppOutboundConfig, required: true, location_name: "defaultOutboundConfig"))
+    WhatsAppChannelSubtypeConfig.struct_class = Types::WhatsAppChannelSubtypeConfig
+
+    WhatsAppChannelSubtypeParameters.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: DestinationPhoneNumber, required: true, location_name: "destinationPhoneNumber"))
+    WhatsAppChannelSubtypeParameters.add_member(:connect_source_phone_number_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "connectSourcePhoneNumberArn"))
+    WhatsAppChannelSubtypeParameters.add_member(:template_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "templateArn"))
+    WhatsAppChannelSubtypeParameters.add_member(:template_parameters, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "templateParameters"))
+    WhatsAppChannelSubtypeParameters.struct_class = Types::WhatsAppChannelSubtypeParameters
+
+    WhatsAppOutboundConfig.add_member(:connect_source_phone_number_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "connectSourcePhoneNumberArn"))
+    WhatsAppOutboundConfig.add_member(:wisdom_template_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "wisdomTemplateArn"))
+    WhatsAppOutboundConfig.struct_class = Types::WhatsAppOutboundConfig
+
+    WhatsAppOutboundMode.add_member(:agentless, Shapes::ShapeRef.new(shape: AgentlessConfig, location_name: "agentless"))
+    WhatsAppOutboundMode.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WhatsAppOutboundMode.add_member_subclass(:agentless, Types::WhatsAppOutboundMode::Agentless)
+    WhatsAppOutboundMode.add_member_subclass(:unknown, Types::WhatsAppOutboundMode::Unknown)
+    WhatsAppOutboundMode.struct_class = Types::WhatsAppOutboundMode
 
 
     # @api private

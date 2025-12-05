@@ -507,12 +507,12 @@ module Aws::BedrockAgentRuntime
     # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html
     # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html
     #
-    # @option params [String] :invocation_id
-    #   A unique identifier for the invocation in UUID format.
-    #
     # @option params [String] :description
     #   A description for the interactions in the invocation. For example,
     #   "User asking about weather in Seattle".
+    #
+    # @option params [String] :invocation_id
+    #   A unique identifier for the invocation in UUID format.
     #
     # @option params [required, String] :session_identifier
     #   The unique identifier for the associated session for the invocation.
@@ -521,23 +521,23 @@ module Aws::BedrockAgentRuntime
     #
     # @return [Types::CreateInvocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateInvocationResponse#session_id #session_id} => String
-    #   * {Types::CreateInvocationResponse#invocation_id #invocation_id} => String
     #   * {Types::CreateInvocationResponse#created_at #created_at} => Time
+    #   * {Types::CreateInvocationResponse#invocation_id #invocation_id} => String
+    #   * {Types::CreateInvocationResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_invocation({
-    #     invocation_id: "Uuid",
     #     description: "InvocationDescription",
+    #     invocation_id: "Uuid",
     #     session_identifier: "SessionIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
-    #   resp.invocation_id #=> String
     #   resp.created_at #=> Time
+    #   resp.invocation_id #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateInvocation AWS API Documentation
     #
@@ -589,11 +589,6 @@ module Aws::BedrockAgentRuntime
     # [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html
     # [7]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html
     #
-    # @option params [Hash<String,String>] :session_metadata
-    #   A map of key-value pairs containing attributes to be persisted across
-    #   the session. For example, the user's ID, their language preference,
-    #   and the type of device they are using.
-    #
     # @option params [String] :encryption_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key to use to encrypt the
     #   session data. The user or role creating the session must have
@@ -604,24 +599,29 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html
     #
+    # @option params [Hash<String,String>] :session_metadata
+    #   A map of key-value pairs containing attributes to be persisted across
+    #   the session. For example, the user's ID, their language preference,
+    #   and the type of device they are using.
+    #
     # @option params [Hash<String,String>] :tags
     #   Specify the key-value pairs for the tags that you want to attach to
     #   the session.
     #
     # @return [Types::CreateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateSessionResponse#session_id #session_id} => String
-    #   * {Types::CreateSessionResponse#session_arn #session_arn} => String
-    #   * {Types::CreateSessionResponse#session_status #session_status} => String
     #   * {Types::CreateSessionResponse#created_at #created_at} => Time
+    #   * {Types::CreateSessionResponse#session_arn #session_arn} => String
+    #   * {Types::CreateSessionResponse#session_id #session_id} => String
+    #   * {Types::CreateSessionResponse#session_status #session_status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_session({
+    #     encryption_key_arn: "KmsKeyArn",
     #     session_metadata: {
     #       "SessionMetadataKey" => "SessionMetadataValue",
     #     },
-    #     encryption_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -629,10 +629,10 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
-    #   resp.session_arn #=> String
-    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #   resp.created_at #=> Time
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateSession AWS API Documentation
     #
@@ -645,11 +645,11 @@ module Aws::BedrockAgentRuntime
 
     # Deletes memory from the specified memory identifier.
     #
-    # @option params [required, String] :agent_id
-    #   The unique identifier of the agent to which the alias belongs.
-    #
     # @option params [required, String] :agent_alias_id
     #   The unique identifier of an alias of an agent.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to which the alias belongs.
     #
     # @option params [String] :memory_id
     #   The unique identifier of the memory.
@@ -662,8 +662,8 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_agent_memory({
-    #     agent_id: "AgentId", # required
     #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "AgentId", # required
     #     memory_id: "MemoryId",
     #     session_id: "SessionId",
     #   })
@@ -725,8 +725,8 @@ module Aws::BedrockAgentRuntime
     #
     # @return [Types::EndSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::EndSessionResponse#session_id #session_id} => String
     #   * {Types::EndSessionResponse#session_arn #session_arn} => String
+    #   * {Types::EndSessionResponse#session_id #session_id} => String
     #   * {Types::EndSessionResponse#session_status #session_status} => String
     #
     # @example Request syntax with placeholder values
@@ -737,8 +737,8 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
     #   resp.session_arn #=> String
+    #   resp.session_id #=> String
     #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/EndSession AWS API Documentation
@@ -774,16 +774,16 @@ module Aws::BedrockAgentRuntime
     #
     #   resp = client.generate_query({
     #     query_generation_input: { # required
-    #       type: "TEXT", # required, accepts TEXT
     #       text: "QueryGenerationInputTextString", # required
+    #       type: "TEXT", # required, accepts TEXT
     #     },
     #     transformation_configuration: { # required
     #       mode: "TEXT_TO_SQL", # required, accepts TEXT_TO_SQL
     #       text_to_sql_configuration: {
-    #         type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
     #         knowledge_base_configuration: {
     #           knowledge_base_arn: "KnowledgeBaseArn", # required
     #         },
+    #         type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
     #       },
     #     },
     #   })
@@ -791,8 +791,8 @@ module Aws::BedrockAgentRuntime
     # @example Response structure
     #
     #   resp.queries #=> Array
-    #   resp.queries[0].type #=> String, one of "REDSHIFT_SQL"
     #   resp.queries[0].sql #=> String
+    #   resp.queries[0].type #=> String, one of "REDSHIFT_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GenerateQuery AWS API Documentation
     #
@@ -805,11 +805,11 @@ module Aws::BedrockAgentRuntime
 
     # Gets the sessions stored in the memory of the agent.
     #
-    # @option params [String] :next_token
-    #   If the total number of results is greater than the maxItems value
-    #   provided in the request, enter the token returned in the `nextToken`
-    #   field in the response in this field to return the next batch of
-    #   results.
+    # @option params [required, String] :agent_alias_id
+    #   The unique identifier of an alias of an agent.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to which the alias belongs.
     #
     # @option params [Integer] :max_items
     #   The maximum number of items to return in the response. If the total
@@ -817,45 +817,45 @@ module Aws::BedrockAgentRuntime
     #   in the response in the `nextToken` field when making another request
     #   to return the next batch of results.
     #
-    # @option params [required, String] :agent_id
-    #   The unique identifier of the agent to which the alias belongs.
-    #
-    # @option params [required, String] :agent_alias_id
-    #   The unique identifier of an alias of an agent.
+    # @option params [required, String] :memory_id
+    #   The unique identifier of the memory.
     #
     # @option params [required, String] :memory_type
     #   The type of memory.
     #
-    # @option params [required, String] :memory_id
-    #   The unique identifier of the memory.
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the maxItems value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::GetAgentMemoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAgentMemoryResponse#next_token #next_token} => String
     #   * {Types::GetAgentMemoryResponse#memory_contents #memory_contents} => Array&lt;Types::Memory&gt;
+    #   * {Types::GetAgentMemoryResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_agent_memory({
-    #     next_token: "NextToken",
-    #     max_items: 1,
-    #     agent_id: "AgentId", # required
     #     agent_alias_id: "AgentAliasId", # required
-    #     memory_type: "SESSION_SUMMARY", # required, accepts SESSION_SUMMARY
+    #     agent_id: "AgentId", # required
+    #     max_items: 1,
     #     memory_id: "MemoryId", # required
+    #     memory_type: "SESSION_SUMMARY", # required, accepts SESSION_SUMMARY
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.memory_contents #=> Array
     #   resp.memory_contents[0].session_summary.memory_id #=> String
+    #   resp.memory_contents[0].session_summary.session_expiry_time #=> Time
     #   resp.memory_contents[0].session_summary.session_id #=> String
     #   resp.memory_contents[0].session_summary.session_start_time #=> Time
-    #   resp.memory_contents[0].session_summary.session_expiry_time #=> Time
     #   resp.memory_contents[0].session_summary.summary_text #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetAgentMemory AWS API Documentation
     #
@@ -877,40 +877,40 @@ module Aws::BedrockAgentRuntime
     #
     #  </note>
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow.
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the flow execution.
     #
-    # @option params [required, String] :execution_identifier
-    #   The unique identifier of the flow execution.
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
     #
     # @return [Types::GetExecutionFlowSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetExecutionFlowSnapshotResponse#flow_identifier #flow_identifier} => String
-    #   * {Types::GetExecutionFlowSnapshotResponse#flow_alias_identifier #flow_alias_identifier} => String
-    #   * {Types::GetExecutionFlowSnapshotResponse#flow_version #flow_version} => String
-    #   * {Types::GetExecutionFlowSnapshotResponse#execution_role_arn #execution_role_arn} => String
-    #   * {Types::GetExecutionFlowSnapshotResponse#definition #definition} => String
     #   * {Types::GetExecutionFlowSnapshotResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#definition #definition} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#flow_alias_identifier #flow_alias_identifier} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#flow_identifier #flow_identifier} => String
+    #   * {Types::GetExecutionFlowSnapshotResponse#flow_version #flow_version} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_execution_flow_snapshot({
-    #     flow_identifier: "FlowIdentifier", # required
-    #     flow_alias_identifier: "FlowAliasIdentifier", # required
     #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.flow_identifier #=> String
-    #   resp.flow_alias_identifier #=> String
-    #   resp.flow_version #=> String
-    #   resp.execution_role_arn #=> String
-    #   resp.definition #=> String
     #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.flow_alias_identifier #=> String
+    #   resp.flow_identifier #=> String
+    #   resp.flow_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetExecutionFlowSnapshot AWS API Documentation
     #
@@ -925,47 +925,47 @@ module Aws::BedrockAgentRuntime
     # status, start and end times, and any errors that occurred during
     # execution.
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow.
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution to retrieve.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the execution.
     #
-    # @option params [required, String] :execution_identifier
-    #   The unique identifier of the flow execution to retrieve.
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
     #
     # @return [Types::GetFlowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetFlowExecutionResponse#execution_arn #execution_arn} => String
-    #   * {Types::GetFlowExecutionResponse#status #status} => String
-    #   * {Types::GetFlowExecutionResponse#started_at #started_at} => Time
     #   * {Types::GetFlowExecutionResponse#ended_at #ended_at} => Time
     #   * {Types::GetFlowExecutionResponse#errors #errors} => Array&lt;Types::FlowExecutionError&gt;
+    #   * {Types::GetFlowExecutionResponse#execution_arn #execution_arn} => String
     #   * {Types::GetFlowExecutionResponse#flow_alias_identifier #flow_alias_identifier} => String
     #   * {Types::GetFlowExecutionResponse#flow_identifier #flow_identifier} => String
     #   * {Types::GetFlowExecutionResponse#flow_version #flow_version} => String
+    #   * {Types::GetFlowExecutionResponse#started_at #started_at} => Time
+    #   * {Types::GetFlowExecutionResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_flow_execution({
-    #     flow_identifier: "FlowIdentifier", # required
-    #     flow_alias_identifier: "FlowAliasIdentifier", # required
     #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.execution_arn #=> String
-    #   resp.status #=> String, one of "Running", "Succeeded", "Failed", "TimedOut", "Aborted"
-    #   resp.started_at #=> Time
     #   resp.ended_at #=> Time
     #   resp.errors #=> Array
-    #   resp.errors[0].node_name #=> String
     #   resp.errors[0].error #=> String, one of "ExecutionTimedOut"
     #   resp.errors[0].message #=> String
+    #   resp.errors[0].node_name #=> String
+    #   resp.execution_arn #=> String
     #   resp.flow_alias_identifier #=> String
     #   resp.flow_identifier #=> String
     #   resp.flow_version #=> String
+    #   resp.started_at #=> Time
+    #   resp.status #=> String, one of "Running", "Succeeded", "Failed", "TimedOut", "Aborted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetFlowExecution AWS API Documentation
     #
@@ -1011,15 +1011,15 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   resp.invocation_step.session_id #=> String
     #   resp.invocation_step.invocation_id #=> String
     #   resp.invocation_step.invocation_step_id #=> String
     #   resp.invocation_step.invocation_step_time #=> Time
     #   resp.invocation_step.payload.content_blocks #=> Array
-    #   resp.invocation_step.payload.content_blocks[0].text #=> String
     #   resp.invocation_step.payload.content_blocks[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.invocation_step.payload.content_blocks[0].image.source.bytes #=> String
     #   resp.invocation_step.payload.content_blocks[0].image.source.s3_location.uri #=> String
+    #   resp.invocation_step.payload.content_blocks[0].text #=> String
+    #   resp.invocation_step.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetInvocationStep AWS API Documentation
     #
@@ -1044,13 +1044,13 @@ module Aws::BedrockAgentRuntime
     #
     # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetSessionResponse#session_id #session_id} => String
-    #   * {Types::GetSessionResponse#session_arn #session_arn} => String
-    #   * {Types::GetSessionResponse#session_status #session_status} => String
     #   * {Types::GetSessionResponse#created_at #created_at} => Time
-    #   * {Types::GetSessionResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetSessionResponse#session_metadata #session_metadata} => Hash&lt;String,String&gt;
     #   * {Types::GetSessionResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::GetSessionResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetSessionResponse#session_arn #session_arn} => String
+    #   * {Types::GetSessionResponse#session_id #session_id} => String
+    #   * {Types::GetSessionResponse#session_metadata #session_metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetSessionResponse#session_status #session_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1060,14 +1060,14 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
-    #   resp.session_arn #=> String
-    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #   resp.created_at #=> Time
+    #   resp.encryption_key_arn #=> String
     #   resp.last_updated_at #=> Time
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
     #   resp.session_metadata #=> Hash
     #   resp.session_metadata["SessionMetadataKey"] #=> String
-    #   resp.encryption_key_arn #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetSession AWS API Documentation
     #
@@ -1120,6 +1120,48 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
     #
+    # @option params [required, String] :agent_alias_id
+    #   The alias of the agent to use.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to use.
+    #
+    # @option params [Types::BedrockModelConfigurations] :bedrock_model_configurations
+    #   Model performance settings for the request.
+    #
+    # @option params [Boolean] :enable_trace
+    #   Specifies whether to turn on the trace or not to track the agent's
+    #   reasoning process. For more information, see [Trace enablement][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
+    #
+    # @option params [Boolean] :end_session
+    #   Specifies whether to end the session with the agent or not.
+    #
+    # @option params [String] :input_text
+    #   The prompt text to send the agent.
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
+    #   field, the `inputText` field will be ignored.
+    #
+    #    </note>
+    #
+    # @option params [String] :memory_id
+    #   The unique identifier of the agent memory.
+    #
+    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the agent
+    #   prompt for an `InvokeAgent` request. You can control which aspects of
+    #   previous invocations in the same agent session the service uses to
+    #   populate the agent prompt. This gives you more granular control over
+    #   the contextual history that is used to process the current request.
+    #
+    # @option params [required, String] :session_id
+    #   The unique identifier of the session. Use the same value across
+    #   requests to continue the same conversation.
+    #
     # @option params [Types::SessionState] :session_state
     #   Contains parameters that specify various attributes of the session.
     #   For more information, see [Control session context][1].
@@ -1133,40 +1175,8 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
-    # @option params [required, String] :agent_id
-    #   The unique identifier of the agent to use.
-    #
-    # @option params [required, String] :agent_alias_id
-    #   The alias of the agent to use.
-    #
-    # @option params [required, String] :session_id
-    #   The unique identifier of the session. Use the same value across
-    #   requests to continue the same conversation.
-    #
-    # @option params [Boolean] :end_session
-    #   Specifies whether to end the session with the agent or not.
-    #
-    # @option params [Boolean] :enable_trace
-    #   Specifies whether to turn on the trace or not to track the agent's
-    #   reasoning process. For more information, see [Trace enablement][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
-    #
-    # @option params [String] :input_text
-    #   The prompt text to send the agent.
-    #
-    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
-    #   field, the `inputText` field will be ignored.
-    #
-    #    </note>
-    #
-    # @option params [String] :memory_id
-    #   The unique identifier of the agent memory.
-    #
-    # @option params [Types::BedrockModelConfigurations] :bedrock_model_configurations
-    #   Model performance settings for the request.
+    # @option params [String] :source_arn
+    #   The ARN of the resource making the request.
     #
     # @option params [Types::StreamingConfigurations] :streaming_configurations
     #   Specifies the configurations for streaming.
@@ -1176,22 +1186,12 @@ module Aws::BedrockAgentRuntime
     #
     #    </note>
     #
-    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
-    #   Specifies parameters that control how the service populates the agent
-    #   prompt for an `InvokeAgent` request. You can control which aspects of
-    #   previous invocations in the same agent session the service uses to
-    #   populate the agent prompt. This gives you more granular control over
-    #   the contextual history that is used to process the current request.
-    #
-    # @option params [String] :source_arn
-    #   The ARN of the resource making the request.
-    #
     # @return [Types::InvokeAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeAgentResponse#completion #completion} => Types::ResponseStream
     #   * {Types::InvokeAgentResponse#content_type #content_type} => String
-    #   * {Types::InvokeAgentResponse#session_id #session_id} => String
     #   * {Types::InvokeAgentResponse#memory_id #memory_id} => String
+    #   * {Types::InvokeAgentResponse#session_id #session_id} => String
     #
     # @example EventStream Operation Example
     #
@@ -1235,32 +1235,14 @@ module Aws::BedrockAgentRuntime
     #   #  Example for registering callbacks with specific events
     #
     #   handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
-    #   handler.on_chunk_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::chunk
-    #   end
-    #   handler.on_trace_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::trace
-    #   end
-    #   handler.on_return_control_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #   end
-    #   handler.on_internal_server_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
-    #   end
-    #   handler.on_resource_not_found_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #   end
-    #   handler.on_service_quota_exceeded_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #   end
-    #   handler.on_throttling_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #   end
     #   handler.on_access_denied_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
     #   end
     #   handler.on_conflict_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -1268,14 +1250,32 @@ module Aws::BedrockAgentRuntime
     #   handler.on_dependency_failed_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   handler.on_files_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #   end
     #   handler.on_model_not_ready_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
     #   end
-    #   handler.on_files_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.invoke_agent(
@@ -1286,32 +1286,14 @@ module Aws::BedrockAgentRuntime
     #   #  2) Use a Ruby Proc object
     #   #  Example for registering callbacks with specific events
     #   handler = Proc.new do |stream|
-    #     stream.on_chunk_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::chunk
-    #     end
-    #     stream.on_trace_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::trace
-    #     end
-    #     stream.on_return_control_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #     end
-    #     stream.on_internal_server_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #     end
-    #     stream.on_validation_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::validationException
-    #     end
-    #     stream.on_resource_not_found_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #     end
-    #     stream.on_service_quota_exceeded_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #     end
-    #     stream.on_throttling_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #     end
     #     stream.on_access_denied_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_chunk_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::chunk
     #     end
     #     stream.on_conflict_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -1319,14 +1301,32 @@ module Aws::BedrockAgentRuntime
     #     stream.on_dependency_failed_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #     end
-    #     stream.on_bad_gateway_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     stream.on_files_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::files
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #     end
     #     stream.on_model_not_ready_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
     #     end
-    #     stream.on_files_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::files
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #     end
+    #     stream.on_return_control_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_trace_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::trace
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
     #     end
     #   end
     #
@@ -1337,32 +1337,14 @@ module Aws::BedrockAgentRuntime
     #
     #   #  Usage pattern c): Hybrid pattern of a) and b)
     #   handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
-    #   handler.on_chunk_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::chunk
-    #   end
-    #   handler.on_trace_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::trace
-    #   end
-    #   handler.on_return_control_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #   end
-    #   handler.on_internal_server_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
-    #   end
-    #   handler.on_resource_not_found_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #   end
-    #   handler.on_service_quota_exceeded_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #   end
-    #   handler.on_throttling_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #   end
     #   handler.on_access_denied_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
     #   end
     #   handler.on_conflict_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -1370,14 +1352,32 @@ module Aws::BedrockAgentRuntime
     #   handler.on_dependency_failed_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   handler.on_files_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #   end
     #   handler.on_model_not_ready_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
     #   end
-    #   handler.on_files_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.invoke_agent(
@@ -1402,10 +1402,168 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_agent({
-    #     session_state: {
-    #       session_attributes: {
-    #         "String" => "String",
+    #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "AgentId", # required
+    #     bedrock_model_configurations: {
+    #       performance_config: {
+    #         latency: "standard", # accepts standard, optimized
     #       },
+    #     },
+    #     enable_trace: false,
+    #     end_session: false,
+    #     input_text: "InputText",
+    #     memory_id: "MemoryId",
+    #     prompt_creation_configurations: {
+    #       exclude_previous_thinking_steps: false,
+    #       previous_conversation_turns_to_include: 1,
+    #     },
+    #     session_id: "SessionId", # required
+    #     session_state: {
+    #       conversation_history: {
+    #         messages: [
+    #           {
+    #             content: [ # required
+    #               {
+    #                 text: "String",
+    #               },
+    #             ],
+    #             role: "user", # required, accepts user, assistant
+    #           },
+    #         ],
+    #       },
+    #       files: [
+    #         {
+    #           name: "String", # required
+    #           source: { # required
+    #             byte_content: {
+    #               data: "data", # required
+    #               media_type: "MimeType", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
+    #           },
+    #           use_case: "CODE_INTERPRETER", # required, accepts CODE_INTERPRETER, CHAT
+    #         },
+    #       ],
+    #       invocation_id: "String",
+    #       knowledge_base_configurations: [
+    #         {
+    #           knowledge_base_id: "KnowledgeBaseId", # required
+    #           retrieval_configuration: { # required
+    #             vector_search_configuration: { # required
+    #               filter: {
+    #                 and_all: [
+    #                   {
+    #                     # recursive RetrievalFilter
+    #                   },
+    #                 ],
+    #                 equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 greater_than: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 greater_than_or_equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 in: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 less_than: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 less_than_or_equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 list_contains: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 not_equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 not_in: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 or_all: [
+    #                   {
+    #                     # recursive RetrievalFilter
+    #                   },
+    #                 ],
+    #                 starts_with: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 string_contains: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #               },
+    #               implicit_filter_configuration: {
+    #                 metadata_attributes: [ # required
+    #                   {
+    #                     description: "MetadataAttributeSchemaDescriptionString", # required
+    #                     key: "MetadataAttributeSchemaKeyString", # required
+    #                     type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
+    #                   },
+    #                 ],
+    #                 model_arn: "BedrockModelArn", # required
+    #               },
+    #               number_of_results: 1,
+    #               override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               reranking_configuration: {
+    #                 bedrock_reranking_configuration: {
+    #                   metadata_configuration: {
+    #                     selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                     selective_mode_configuration: {
+    #                       fields_to_exclude: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                       fields_to_include: [
+    #                         {
+    #                           field_name: "FieldForRerankingFieldNameString", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   model_configuration: { # required
+    #                     additional_model_request_fields: {
+    #                       "AdditionalModelRequestFieldsKey" => {
+    #                       },
+    #                     },
+    #                     model_arn: "BedrockRerankingModelArn", # required
+    #                   },
+    #                   number_of_reranked_results: 1,
+    #                 },
+    #                 type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
     #       prompt_session_attributes: {
     #         "String" => "String",
     #       },
@@ -1413,10 +1571,10 @@ module Aws::BedrockAgentRuntime
     #         {
     #           api_result: {
     #             action_group: "String", # required
-    #             http_method: "String",
+    #             agent_id: "String",
     #             api_path: "ApiPath",
     #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
-    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
+    #             http_method: "String",
     #             http_status_code: 1,
     #             response_body: {
     #               "String" => {
@@ -1431,10 +1589,11 @@ module Aws::BedrockAgentRuntime
     #                 ],
     #               },
     #             },
-    #             agent_id: "String",
+    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
     #           },
     #           function_result: {
     #             action_group: "String", # required
+    #             agent_id: "String",
     #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
     #             function: "String",
     #             response_body: {
@@ -1451,686 +1610,94 @@ module Aws::BedrockAgentRuntime
     #               },
     #             },
     #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
-    #             agent_id: "String",
     #           },
     #         },
     #       ],
-    #       invocation_id: "String",
-    #       files: [
-    #         {
-    #           name: "String", # required
-    #           source: { # required
-    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
-    #             s3_location: {
-    #               uri: "S3Uri", # required
-    #             },
-    #             byte_content: {
-    #               media_type: "MimeType", # required
-    #               data: "data", # required
-    #             },
-    #           },
-    #           use_case: "CODE_INTERPRETER", # required, accepts CODE_INTERPRETER, CHAT
-    #         },
-    #       ],
-    #       knowledge_base_configurations: [
-    #         {
-    #           knowledge_base_id: "KnowledgeBaseId", # required
-    #           retrieval_configuration: { # required
-    #             vector_search_configuration: { # required
-    #               number_of_results: 1,
-    #               override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
-    #               filter: {
-    #                 equals: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 not_equals: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 greater_than: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 greater_than_or_equals: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 less_than: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 less_than_or_equals: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 in: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 not_in: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 starts_with: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 list_contains: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 string_contains: {
-    #                   key: "FilterKey", # required
-    #                   value: { # required
-    #                   },
-    #                 },
-    #                 and_all: [
-    #                   {
-    #                     # recursive RetrievalFilter
-    #                   },
-    #                 ],
-    #                 or_all: [
-    #                   {
-    #                     # recursive RetrievalFilter
-    #                   },
-    #                 ],
-    #               },
-    #               reranking_configuration: {
-    #                 type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
-    #                 bedrock_reranking_configuration: {
-    #                   model_configuration: { # required
-    #                     model_arn: "BedrockRerankingModelArn", # required
-    #                     additional_model_request_fields: {
-    #                       "AdditionalModelRequestFieldsKey" => {
-    #                       },
-    #                     },
-    #                   },
-    #                   number_of_reranked_results: 1,
-    #                   metadata_configuration: {
-    #                     selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
-    #                     selective_mode_configuration: {
-    #                       fields_to_include: [
-    #                         {
-    #                           field_name: "FieldForRerankingFieldNameString", # required
-    #                         },
-    #                       ],
-    #                       fields_to_exclude: [
-    #                         {
-    #                           field_name: "FieldForRerankingFieldNameString", # required
-    #                         },
-    #                       ],
-    #                     },
-    #                   },
-    #                 },
-    #               },
-    #               implicit_filter_configuration: {
-    #                 metadata_attributes: [ # required
-    #                   {
-    #                     key: "MetadataAttributeSchemaKeyString", # required
-    #                     type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
-    #                     description: "MetadataAttributeSchemaDescriptionString", # required
-    #                   },
-    #                 ],
-    #                 model_arn: "BedrockModelArn", # required
-    #               },
-    #             },
-    #           },
-    #         },
-    #       ],
-    #       conversation_history: {
-    #         messages: [
-    #           {
-    #             role: "user", # required, accepts user, assistant
-    #             content: [ # required
-    #               {
-    #                 text: "String",
-    #               },
-    #             ],
-    #           },
-    #         ],
+    #       session_attributes: {
+    #         "String" => "String",
     #       },
-    #     },
-    #     agent_id: "AgentId", # required
-    #     agent_alias_id: "AgentAliasId", # required
-    #     session_id: "SessionId", # required
-    #     end_session: false,
-    #     enable_trace: false,
-    #     input_text: "InputText",
-    #     memory_id: "MemoryId",
-    #     bedrock_model_configurations: {
-    #       performance_config: {
-    #         latency: "standard", # accepts standard, optimized
-    #       },
-    #     },
-    #     streaming_configurations: {
-    #       stream_final_response: false,
-    #       apply_guardrail_interval: 1,
-    #     },
-    #     prompt_creation_configurations: {
-    #       previous_conversation_turns_to_include: 1,
-    #       exclude_previous_thinking_steps: false,
     #     },
     #     source_arn: "AWSResourceARN",
+    #     streaming_configurations: {
+    #       apply_guardrail_interval: 1,
+    #       stream_final_response: false,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   # All events are available at resp.completion:
     #   resp.completion #=> Enumerator
-    #   resp.completion.event_types #=> [:chunk, :trace, :return_control, :internal_server_exception, :validation_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :access_denied_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception, :model_not_ready_exception, :files]
+    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :files, :internal_server_exception, :model_not_ready_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+    #
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
     #
     #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
-    #   event.bytes #=> String
     #   event.attribution.citations #=> Array
-    #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
-    #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.end #=> Integer
+    #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
+    #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
     #   event.attribution.citations[0].retrieved_references #=> Array
-    #   event.attribution.citations[0].retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.audio.transcription #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.byte_content #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.row #=> Array
     #   event.attribution.citations[0].retrieved_references[0].content.row[0].column_name #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.row[0].column_value #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.web_location.url #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.attribution.citations[0].retrieved_references[0].content.video.s3_uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.video.summary #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.confluence_location.url #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.share_point_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.custom_document_location.id #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.share_point_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.sql_location.query #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.attribution.citations[0].retrieved_references[0].location.web_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
+    #   event.bytes #=> String
     #
-    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
-    #   event.session_id #=> String
-    #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
-    #   event.trace.guardrail_trace.trace_id #=> String
-    #   event.trace.guardrail_trace.input_assessments #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.output_assessments #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.metadata.start_time #=> Time
-    #   event.trace.guardrail_trace.metadata.end_time #=> Time
-    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
-    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
-    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
-    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
-    #   event.trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.orchestration_trace.rationale.trace_id #=> String
-    #   event.trace.orchestration_trace.rationale.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   event.trace.orchestration_trace.observation.trace_id #=> String
-    #   event.trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.text #=> String
-    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
-    #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.text #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.orchestration_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.orchestration_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.post_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.post_processing_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.trace_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.api_path #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   event.trace.routing_classifier_trace.observation.trace_id #=> String
-    #   event.trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.reprompt_response.text #=> String
-    #   event.trace.routing_classifier_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.failure_trace.trace_id #=> String
-    #   event.trace.failure_trace.failure_reason #=> String
-    #   event.trace.failure_trace.failure_code #=> Integer
-    #   event.trace.failure_trace.metadata.start_time #=> Time
-    #   event.trace.failure_trace.metadata.end_time #=> Time
-    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
-    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.failure_trace.metadata.client_request_id #=> String
-    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
-    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
-    #   event.trace.custom_orchestration_trace.trace_id #=> String
-    #   event.trace.custom_orchestration_trace.event.text #=> String
-    #   event.caller_chain #=> Array
-    #   event.caller_chain[0].agent_alias_arn #=> String
-    #   event.event_time #=> Time
-    #   event.collaborator_name #=> String
-    #   event.agent_id #=> String
-    #   event.agent_alias_id #=> String
-    #   event.agent_version #=> String
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :files event available at #on_files_event callback and response eventstream enumerator:
+    #   event.files #=> Array
+    #   event.files[0].bytes #=> String
+    #   event.files[0].name #=> String
+    #   event.files[0].type #=> String
+    #
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.reason #=> String
+    #
+    #   # For :model_not_ready_exception event available at #on_model_not_ready_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
     #
     #   # For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
+    #   event.invocation_id #=> String
     #   event.invocation_inputs #=> Array
     #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.invocation_inputs[0].api_invocation_input.agent_id #=> String
     #   event.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   event.invocation_inputs[0].api_invocation_input.parameters #=> Array
     #   event.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
     #   event.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
@@ -2140,29 +1707,15 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
     #   event.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.invocation_inputs[0].function_invocation_input.function #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.invocation_id #=> String
-    #
-    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.reason #=> String
-    #
-    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
     #
     #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -2170,32 +1723,491 @@ module Aws::BedrockAgentRuntime
     #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
+    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   event.agent_alias_id #=> String
+    #   event.agent_id #=> String
+    #   event.agent_version #=> String
+    #   event.caller_chain #=> Array
+    #   event.caller_chain[0].agent_alias_arn #=> String
+    #   event.collaborator_name #=> String
+    #   event.event_time #=> Time
+    #   event.session_id #=> String
+    #   event.trace.custom_orchestration_trace.event.text #=> String
+    #   event.trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.failure_trace.failure_code #=> Integer
+    #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
+    #   event.trace.failure_trace.trace_id #=> String
+    #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
+    #   event.trace.guardrail_trace.input_assessments #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
+    #   event.trace.guardrail_trace.output_assessments #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.trace_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.orchestration_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.orchestration_trace.model_invocation_input.text #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
+    #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
+    #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
+    #   event.trace.orchestration_trace.observation.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   event.trace.orchestration_trace.rationale.text #=> String
+    #   event.trace.orchestration_trace.rationale.trace_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.post_processing_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.post_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
+    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.trace_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
+    #   event.trace.routing_classifier_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
+    #   event.trace.routing_classifier_trace.observation.reprompt_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
     #
-    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #
-    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :model_not_ready_exception event available at #on_model_not_ready_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   # For :files event available at #on_files_event callback and response eventstream enumerator:
-    #   event.files #=> Array
-    #   event.files[0].name #=> String
-    #   event.files[0].type #=> String
-    #   event.files[0].bytes #=> String
     #
     #   resp.content_type #=> String
-    #   resp.session_id #=> String
     #   resp.memory_id #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeAgent AWS API Documentation
     #
@@ -2239,16 +2251,6 @@ module Aws::BedrockAgentRuntime
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html
     # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow.
-    #
-    # @option params [required, String] :flow_alias_identifier
-    #   The unique identifier of the flow alias.
-    #
-    # @option params [required, Array<Types::FlowInput>] :inputs
-    #   A list of objects, each containing information about an input into the
-    #   flow.
-    #
     # @option params [Boolean] :enable_trace
     #   Specifies whether to return the trace for the flow or not. Traces
     #   track inputs and outputs for nodes in the flow. For more information,
@@ -2259,17 +2261,27 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
     #
-    # @option params [Types::ModelPerformanceConfiguration] :model_performance_configuration
-    #   Model performance settings for the request.
-    #
     # @option params [String] :execution_id
     #   The unique identifier for the current flow execution. If you don't
     #   provide a value, Amazon Bedrock creates the identifier for you.
     #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [required, Array<Types::FlowInput>] :inputs
+    #   A list of objects, each containing information about an input into the
+    #   flow.
+    #
+    # @option params [Types::ModelPerformanceConfiguration] :model_performance_configuration
+    #   Model performance settings for the request.
+    #
     # @return [Types::InvokeFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::InvokeFlowResponse#response_stream #response_stream} => Types::FlowResponseStream
     #   * {Types::InvokeFlowResponse#execution_id #execution_id} => String
+    #   * {Types::InvokeFlowResponse#response_stream #response_stream} => Types::FlowResponseStream
     #
     # @example EventStream Operation Example
     #
@@ -2313,20 +2325,32 @@ module Aws::BedrockAgentRuntime
     #   #  Example for registering callbacks with specific events
     #
     #   handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
-    #   handler.on_flow_output_event_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
     #   handler.on_flow_completion_event_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #   end
+    #   handler.on_flow_multi_turn_input_request_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #   end
+    #   handler.on_flow_output_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #   end
     #   handler.on_flow_trace_event_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
     #   end
     #   handler.on_internal_server_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #   handler.on_resource_not_found_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
@@ -2337,20 +2361,8 @@ module Aws::BedrockAgentRuntime
     #   handler.on_throttling_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #   end
-    #   handler.on_access_denied_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #   end
-    #   handler.on_conflict_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #   end
-    #   handler.on_dependency_failed_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #   end
-    #   handler.on_flow_multi_turn_input_request_event_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.invoke_flow(
@@ -2361,20 +2373,32 @@ module Aws::BedrockAgentRuntime
     #   #  2) Use a Ruby Proc object
     #   #  Example for registering callbacks with specific events
     #   handler = Proc.new do |stream|
-    #     stream.on_flow_output_event_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_conflict_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #     end
     #     stream.on_flow_completion_event_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #     end
+    #     stream.on_flow_multi_turn_input_request_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #     end
+    #     stream.on_flow_output_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #     end
     #     stream.on_flow_trace_event_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
     #     end
     #     stream.on_internal_server_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #     end
-    #     stream.on_validation_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::validationException
     #     end
     #     stream.on_resource_not_found_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
@@ -2385,20 +2409,8 @@ module Aws::BedrockAgentRuntime
     #     stream.on_throttling_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #     end
-    #     stream.on_access_denied_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #     end
-    #     stream.on_conflict_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #     end
-    #     stream.on_dependency_failed_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #     end
-    #     stream.on_bad_gateway_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #     end
-    #     stream.on_flow_multi_turn_input_request_event_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
     #     end
     #   end
     #
@@ -2409,20 +2421,32 @@ module Aws::BedrockAgentRuntime
     #
     #   #  Usage pattern c): Hybrid pattern of a) and b)
     #   handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
-    #   handler.on_flow_output_event_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
     #   handler.on_flow_completion_event_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #   end
+    #   handler.on_flow_multi_turn_input_request_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #   end
+    #   handler.on_flow_output_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #   end
     #   handler.on_flow_trace_event_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
     #   end
     #   handler.on_internal_server_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #   handler.on_resource_not_found_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
@@ -2433,20 +2457,8 @@ module Aws::BedrockAgentRuntime
     #   handler.on_throttling_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #   end
-    #   handler.on_access_denied_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #   end
-    #   handler.on_conflict_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #   end
-    #   handler.on_dependency_failed_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #   end
-    #   handler.on_flow_multi_turn_input_request_event_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.invoke_flow(
@@ -2471,169 +2483,157 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_flow({
-    #     flow_identifier: "FlowIdentifier", # required
+    #     enable_trace: false,
+    #     execution_id: "FlowExecutionId",
     #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
     #     inputs: [ # required
     #       {
-    #         node_name: "NodeName", # required
-    #         node_output_name: "NodeOutputName",
     #         content: { # required
     #           document: {
     #           },
     #         },
     #         node_input_name: "NodeInputName",
+    #         node_name: "NodeName", # required
+    #         node_output_name: "NodeOutputName",
     #       },
     #     ],
-    #     enable_trace: false,
     #     model_performance_configuration: {
     #       performance_config: {
     #         latency: "standard", # accepts standard, optimized
     #       },
     #     },
-    #     execution_id: "FlowExecutionId",
     #   })
     #
     # @example Response structure
     #
+    #   resp.execution_id #=> String
     #   # All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
-    #   resp.response_stream.event_types #=> [:flow_output_event, :flow_completion_event, :flow_trace_event, :internal_server_exception, :validation_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :access_denied_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception, :flow_multi_turn_input_request_event]
+    #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_multi_turn_input_request_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+    #
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :flow_completion_event event available at #on_flow_completion_event_event callback and response eventstream enumerator:
+    #   event.completion_reason #=> String, one of "SUCCESS", "INPUT_REQUIRED"
+    #
+    #   # For :flow_multi_turn_input_request_event event available at #on_flow_multi_turn_input_request_event_event callback and response eventstream enumerator:
+    #   event.node_name #=> String
+    #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
     #
     #   # For :flow_output_event event available at #on_flow_output_event_event callback and response eventstream enumerator:
     #   event.node_name #=> String
     #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
     #
-    #   # For :flow_completion_event event available at #on_flow_completion_event_event callback and response eventstream enumerator:
-    #   event.completion_reason #=> String, one of "SUCCESS", "INPUT_REQUIRED"
-    #
     #   # For :flow_trace_event event available at #on_flow_trace_event_event callback and response eventstream enumerator:
-    #   event.trace.node_input_trace.node_name #=> String
-    #   event.trace.node_input_trace.timestamp #=> Time
-    #   event.trace.node_input_trace.fields #=> Array
-    #   event.trace.node_input_trace.fields[0].node_input_name #=> String
-    #   event.trace.node_input_trace.fields[0].source.node_name #=> String
-    #   event.trace.node_input_trace.fields[0].source.output_field_name #=> String
-    #   event.trace.node_input_trace.fields[0].source.expression #=> String
-    #   event.trace.node_input_trace.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   event.trace.node_input_trace.fields[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
-    #   event.trace.node_input_trace.fields[0].execution_chain #=> Array
-    #   event.trace.node_input_trace.fields[0].execution_chain[0].node_name #=> String
-    #   event.trace.node_input_trace.fields[0].execution_chain[0].index #=> Integer
-    #   event.trace.node_input_trace.fields[0].execution_chain[0].type #=> String, one of "Iterator", "Loop"
-    #   event.trace.node_output_trace.node_name #=> String
-    #   event.trace.node_output_trace.timestamp #=> Time
-    #   event.trace.node_output_trace.fields #=> Array
-    #   event.trace.node_output_trace.fields[0].node_output_name #=> String
-    #   event.trace.node_output_trace.fields[0].next #=> Array
-    #   event.trace.node_output_trace.fields[0].next[0].node_name #=> String
-    #   event.trace.node_output_trace.fields[0].next[0].input_field_name #=> String
-    #   event.trace.node_output_trace.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
     #   event.trace.condition_node_result_trace.node_name #=> String
-    #   event.trace.condition_node_result_trace.timestamp #=> Time
     #   event.trace.condition_node_result_trace.satisfied_conditions #=> Array
     #   event.trace.condition_node_result_trace.satisfied_conditions[0].condition_name #=> String
+    #   event.trace.condition_node_result_trace.timestamp #=> Time
     #   event.trace.node_action_trace.node_name #=> String
-    #   event.trace.node_action_trace.timestamp #=> Time
+    #   event.trace.node_action_trace.operation_name #=> String
     #   event.trace.node_action_trace.request_id #=> String
     #   event.trace.node_action_trace.service_name #=> String
-    #   event.trace.node_action_trace.operation_name #=> String
+    #   event.trace.node_action_trace.timestamp #=> Time
     #   event.trace.node_dependency_trace.node_name #=> String
     #   event.trace.node_dependency_trace.timestamp #=> Time
     #   event.trace.node_dependency_trace.trace_elements.agent_traces #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].agent_alias_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].agent_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].agent_version #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].caller_chain #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].caller_chain[0].agent_alias_arn #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].event_time #=> Time
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].session_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.custom_orchestration_trace.event.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.failure_code #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.failure_reason #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.trace_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.trace_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.total_time_ms #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.guardrail_trace.trace_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
@@ -2643,33 +2643,25 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
@@ -2678,25 +2670,65 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.trace_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
@@ -2706,129 +2738,130 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.reprompt_response.text #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.reprompt_response.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.foundation_model #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.override_lambda #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.trace_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
@@ -2838,33 +2871,25 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
@@ -2873,25 +2898,62 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
@@ -2901,121 +2963,95 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.reprompt_response.text #=> String
     #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.failure_reason #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.failure_code #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.start_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.end_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.client_request_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.input_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.output_tokens #=> Integer
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.custom_orchestration_trace.trace_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.custom_orchestration_trace.event.text #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].caller_chain #=> Array
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].caller_chain[0].agent_alias_arn #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].event_time #=> Time
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].collaborator_name #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].agent_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].agent_alias_id #=> String
-    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].agent_version #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.reprompt_response.text #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.trace_id #=> String
+    #   event.trace.node_dependency_trace.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   event.trace.node_input_trace.fields #=> Array
+    #   event.trace.node_input_trace.fields[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
+    #   event.trace.node_input_trace.fields[0].execution_chain #=> Array
+    #   event.trace.node_input_trace.fields[0].execution_chain[0].index #=> Integer
+    #   event.trace.node_input_trace.fields[0].execution_chain[0].node_name #=> String
+    #   event.trace.node_input_trace.fields[0].execution_chain[0].type #=> String, one of "Iterator", "Loop"
+    #   event.trace.node_input_trace.fields[0].node_input_name #=> String
+    #   event.trace.node_input_trace.fields[0].source.expression #=> String
+    #   event.trace.node_input_trace.fields[0].source.node_name #=> String
+    #   event.trace.node_input_trace.fields[0].source.output_field_name #=> String
+    #   event.trace.node_input_trace.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   event.trace.node_input_trace.node_name #=> String
+    #   event.trace.node_input_trace.timestamp #=> Time
+    #   event.trace.node_output_trace.fields #=> Array
+    #   event.trace.node_output_trace.fields[0].next #=> Array
+    #   event.trace.node_output_trace.fields[0].next[0].input_field_name #=> String
+    #   event.trace.node_output_trace.fields[0].next[0].node_name #=> String
+    #   event.trace.node_output_trace.fields[0].node_output_name #=> String
+    #   event.trace.node_output_trace.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   event.trace.node_output_trace.node_name #=> String
+    #   event.trace.node_output_trace.timestamp #=> Time
     #
     #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
-    #
-    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
     #
     #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -3026,25 +3062,8 @@ module Aws::BedrockAgentRuntime
     #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #
-    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :flow_multi_turn_input_request_event event available at #on_flow_multi_turn_input_request_event_event callback and response eventstream enumerator:
-    #   event.node_name #=> String
-    #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
-    #
-    #   resp.execution_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeFlow AWS API Documentation
     #
@@ -3099,53 +3118,20 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
-    # @option params [String] :customer_encryption_key_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to
-    #   use to encrypt your inline agent.
-    #
-    # @option params [required, String] :foundation_model
-    #   The [model identifier (ID)][1] of the model to use for orchestration
-    #   by the inline agent. For example, `meta.llama3-1-70b-instruct-v1:0`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
-    #
-    # @option params [required, String] :instruction
-    #   The instructions that tell the inline agent what it should do and how
-    #   it should interact with users.
-    #
-    # @option params [Integer] :idle_session_ttl_in_seconds
-    #   The number of seconds for which the inline agent should maintain
-    #   session information. After this time expires, the subsequent
-    #   `InvokeInlineAgent` request begins a new session.
-    #
-    #   A user interaction remains active for the amount of time specified. If
-    #   no conversation occurs during this time, the session expires and the
-    #   data provided before the timeout is deleted.
-    #
     # @option params [Array<Types::AgentActionGroup>] :action_groups
     #   A list of action groups with each action group defining the action the
     #   inline agent needs to carry out.
-    #
-    # @option params [Array<Types::KnowledgeBase>] :knowledge_bases
-    #   Contains information of the knowledge bases to associate with.
-    #
-    # @option params [Types::GuardrailConfigurationWithArn] :guardrail_configuration
-    #   The [guardrails][1] to assign to the inline agent.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
-    #
-    # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
-    #   Configurations for advanced prompts used to override the default
-    #   prompts to enhance the accuracy of the inline agent.
     #
     # @option params [String] :agent_collaboration
     #   Defines how the inline collaborator agent handles information across
     #   multiple collaborator agents to coordinate a final response. The
     #   inline collaborator agent can also be the supervisor.
+    #
+    # @option params [String] :agent_name
+    #   The name for the agent.
+    #
+    # @option params [Types::InlineBedrockModelConfigurations] :bedrock_model_configurations
+    #   Model settings for the request.
     #
     # @option params [Array<Types::CollaboratorConfiguration>] :collaborator_configurations
     #   Settings for an inline agent collaborator called with
@@ -3155,15 +3141,15 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeInlineAgent.html
     #
-    # @option params [String] :agent_name
-    #   The name for the agent.
+    # @option params [Array<Types::Collaborator>] :collaborators
+    #   List of collaborator inline agents.
     #
-    # @option params [required, String] :session_id
-    #   The unique identifier of the session. Use the same value across
-    #   requests to continue the same conversation.
+    # @option params [Types::CustomOrchestration] :custom_orchestration
+    #   Contains details of the custom orchestration configured for the agent.
     #
-    # @option params [Boolean] :end_session
-    #   Specifies whether to end the session with the inline agent or not.
+    # @option params [String] :customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to
+    #   use to encrypt your inline agent.
     #
     # @option params [Boolean] :enable_trace
     #   Specifies whether to turn on the trace or not to track the agent's
@@ -3173,29 +3159,32 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html
     #
-    # @option params [String] :input_text
-    #   The prompt text to send to the agent.
+    # @option params [Boolean] :end_session
+    #   Specifies whether to end the session with the inline agent or not.
     #
-    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
-    #   field, the `inputText` field will be ignored.
+    # @option params [required, String] :foundation_model
+    #   The [model identifier (ID)][1] of the model to use for orchestration
+    #   by the inline agent. For example, `meta.llama3-1-70b-instruct-v1:0`.
     #
-    #    </note>
     #
-    # @option params [Types::StreamingConfigurations] :streaming_configurations
-    #   Specifies the configurations for streaming.
     #
-    #   <note markdown="1"> To use agent streaming, you need permissions to perform the
-    #   `bedrock:InvokeModelWithResponseStream` action.
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
     #
-    #    </note>
+    # @option params [Types::GuardrailConfigurationWithArn] :guardrail_configuration
+    #   The [guardrails][1] to assign to the inline agent.
     #
-    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
-    #   Specifies parameters that control how the service populates the agent
-    #   prompt for an `InvokeInlineAgent` request. You can control which
-    #   aspects of previous invocations in the same agent session the service
-    #   uses to populate the agent prompt. This gives you more granular
-    #   control over the contextual history that is used to process the
-    #   current request.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
+    #
+    # @option params [Integer] :idle_session_ttl_in_seconds
+    #   The number of seconds for which the inline agent should maintain
+    #   session information. After this time expires, the subsequent
+    #   `InvokeInlineAgent` request begins a new session.
+    #
+    #   A user interaction remains active for the amount of time specified. If
+    #   no conversation occurs during this time, the session expires and the
+    #   data provided before the timeout is deleted.
     #
     # @option params [Types::InlineSessionState] :inline_session_state
     #   Parameters that specify the various attributes of a sessions. You can
@@ -3212,18 +3201,48 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
-    # @option params [Array<Types::Collaborator>] :collaborators
-    #   List of collaborator inline agents.
+    # @option params [String] :input_text
+    #   The prompt text to send to the agent.
     #
-    # @option params [Types::InlineBedrockModelConfigurations] :bedrock_model_configurations
-    #   Model settings for the request.
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
+    #   field, the `inputText` field will be ignored.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :instruction
+    #   The instructions that tell the inline agent what it should do and how
+    #   it should interact with users.
+    #
+    # @option params [Array<Types::KnowledgeBase>] :knowledge_bases
+    #   Contains information of the knowledge bases to associate with.
     #
     # @option params [String] :orchestration_type
     #   Specifies the type of orchestration strategy for the agent. This is
     #   set to DEFAULT orchestration type, by default.
     #
-    # @option params [Types::CustomOrchestration] :custom_orchestration
-    #   Contains details of the custom orchestration configured for the agent.
+    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the agent
+    #   prompt for an `InvokeInlineAgent` request. You can control which
+    #   aspects of previous invocations in the same agent session the service
+    #   uses to populate the agent prompt. This gives you more granular
+    #   control over the contextual history that is used to process the
+    #   current request.
+    #
+    # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
+    #   Configurations for advanced prompts used to override the default
+    #   prompts to enhance the accuracy of the inline agent.
+    #
+    # @option params [required, String] :session_id
+    #   The unique identifier of the session. Use the same value across
+    #   requests to continue the same conversation.
+    #
+    # @option params [Types::StreamingConfigurations] :streaming_configurations
+    #   Specifies the configurations for streaming.
+    #
+    #   <note markdown="1"> To use agent streaming, you need permissions to perform the
+    #   `bedrock:InvokeModelWithResponseStream` action.
+    #
+    #    </note>
     #
     # @return [Types::InvokeInlineAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3273,32 +3292,14 @@ module Aws::BedrockAgentRuntime
     #   #  Example for registering callbacks with specific events
     #
     #   handler = Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream.new
-    #   handler.on_chunk_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::chunk
-    #   end
-    #   handler.on_trace_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::trace
-    #   end
-    #   handler.on_return_control_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #   end
-    #   handler.on_internal_server_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
-    #   end
-    #   handler.on_resource_not_found_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #   end
-    #   handler.on_service_quota_exceeded_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #   end
-    #   handler.on_throttling_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #   end
     #   handler.on_access_denied_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
     #   end
     #   handler.on_conflict_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -3306,11 +3307,29 @@ module Aws::BedrockAgentRuntime
     #   handler.on_dependency_failed_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #   end
     #   handler.on_files_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.invoke_inline_agent(
@@ -3321,32 +3340,14 @@ module Aws::BedrockAgentRuntime
     #   #  2) Use a Ruby Proc object
     #   #  Example for registering callbacks with specific events
     #   handler = Proc.new do |stream|
-    #     stream.on_chunk_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::chunk
-    #     end
-    #     stream.on_trace_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::trace
-    #     end
-    #     stream.on_return_control_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #     end
-    #     stream.on_internal_server_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #     end
-    #     stream.on_validation_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::validationException
-    #     end
-    #     stream.on_resource_not_found_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #     end
-    #     stream.on_service_quota_exceeded_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #     end
-    #     stream.on_throttling_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #     end
     #     stream.on_access_denied_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_chunk_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::chunk
     #     end
     #     stream.on_conflict_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -3354,11 +3355,29 @@ module Aws::BedrockAgentRuntime
     #     stream.on_dependency_failed_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #     end
-    #     stream.on_bad_gateway_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #     end
     #     stream.on_files_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::files
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #     end
+    #     stream.on_return_control_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_trace_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::trace
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
     #     end
     #   end
     #
@@ -3369,32 +3388,14 @@ module Aws::BedrockAgentRuntime
     #
     #   #  Usage pattern c): Hybrid pattern of a) and b)
     #   handler = Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream.new
-    #   handler.on_chunk_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::chunk
-    #   end
-    #   handler.on_trace_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::trace
-    #   end
-    #   handler.on_return_control_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #   end
-    #   handler.on_internal_server_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
-    #   end
-    #   handler.on_resource_not_found_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #   end
-    #   handler.on_service_quota_exceeded_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #   end
-    #   handler.on_throttling_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #   end
     #   handler.on_access_denied_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
     #   end
     #   handler.on_conflict_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -3402,11 +3403,29 @@ module Aws::BedrockAgentRuntime
     #   handler.on_dependency_failed_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #   end
     #   handler.on_files_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.invoke_inline_agent(
@@ -3431,216 +3450,300 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_inline_agent({
-    #     customer_encryption_key_arn: "KmsKeyArn",
-    #     foundation_model: "ModelIdentifier", # required
-    #     instruction: "Instruction", # required
-    #     idle_session_ttl_in_seconds: 1,
     #     action_groups: [
     #       {
-    #         action_group_name: "ResourceName", # required
-    #         description: "ResourceDescription",
-    #         parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput, AMAZON.CodeInterpreter, ANTHROPIC.Computer, ANTHROPIC.Bash, ANTHROPIC.TextEditor
     #         action_group_executor: {
-    #           lambda: "LambdaResourceArn",
     #           custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
+    #           lambda: "LambdaResourceArn",
     #         },
+    #         action_group_name: "ResourceName", # required
     #         api_schema: {
+    #           payload: "Payload",
     #           s3: {
     #             s3_bucket_name: "S3BucketName",
     #             s3_object_key: "S3ObjectKey",
     #           },
-    #           payload: "Payload",
     #         },
+    #         description: "ResourceDescription",
     #         function_schema: {
     #           functions: [
     #             {
-    #               name: "ResourceName", # required
     #               description: "FunctionDescription",
+    #               name: "ResourceName", # required
     #               parameters: {
     #                 "ParameterName" => {
     #                   description: "ParameterDescription",
-    #                   type: "string", # required, accepts string, number, integer, boolean, array
     #                   required: false,
+    #                   type: "string", # required, accepts string, number, integer, boolean, array
     #                 },
     #               },
     #               require_confirmation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #           ],
     #         },
+    #         parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput, AMAZON.CodeInterpreter, ANTHROPIC.Computer, ANTHROPIC.Bash, ANTHROPIC.TextEditor
     #         parent_action_group_signature_params: {
     #           "ActionGroupSignatureParamsKeyString" => "ActionGroupSignatureParamsValueString",
     #         },
     #       },
     #     ],
-    #     knowledge_bases: [
+    #     agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
+    #     agent_name: "Name",
+    #     bedrock_model_configurations: {
+    #       performance_config: {
+    #         latency: "standard", # accepts standard, optimized
+    #       },
+    #     },
+    #     collaborator_configurations: [
     #       {
-    #         knowledge_base_id: "KnowledgeBaseId", # required
-    #         description: "ResourceDescription", # required
-    #         retrieval_configuration: {
-    #           vector_search_configuration: { # required
-    #             number_of_results: 1,
-    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
-    #             filter: {
-    #               equals: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
+    #         agent_alias_arn: "AgentAliasArn",
+    #         collaborator_instruction: "CollaborationInstruction", # required
+    #         collaborator_name: "Name", # required
+    #         relay_conversation_history: "TO_COLLABORATOR", # accepts TO_COLLABORATOR, DISABLED
+    #       },
+    #     ],
+    #     collaborators: [
+    #       {
+    #         action_groups: [
+    #           {
+    #             action_group_executor: {
+    #               custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
+    #               lambda: "LambdaResourceArn",
+    #             },
+    #             action_group_name: "ResourceName", # required
+    #             api_schema: {
+    #               payload: "Payload",
+    #               s3: {
+    #                 s3_bucket_name: "S3BucketName",
+    #                 s3_object_key: "S3ObjectKey",
     #               },
-    #               not_equals: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               greater_than: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               greater_than_or_equals: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               less_than: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               less_than_or_equals: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               in: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               not_in: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               starts_with: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               list_contains: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               string_contains: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
-    #                 },
-    #               },
-    #               and_all: [
+    #             },
+    #             description: "ResourceDescription",
+    #             function_schema: {
+    #               functions: [
     #                 {
-    #                   # recursive RetrievalFilter
-    #                 },
-    #               ],
-    #               or_all: [
-    #                 {
-    #                   # recursive RetrievalFilter
+    #                   description: "FunctionDescription",
+    #                   name: "ResourceName", # required
+    #                   parameters: {
+    #                     "ParameterName" => {
+    #                       description: "ParameterDescription",
+    #                       required: false,
+    #                       type: "string", # required, accepts string, number, integer, boolean, array
+    #                     },
+    #                   },
+    #                   require_confirmation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #               ],
     #             },
-    #             reranking_configuration: {
-    #               type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
-    #               bedrock_reranking_configuration: {
-    #                 model_configuration: { # required
-    #                   model_arn: "BedrockRerankingModelArn", # required
-    #                   additional_model_request_fields: {
-    #                     "AdditionalModelRequestFieldsKey" => {
+    #             parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput, AMAZON.CodeInterpreter, ANTHROPIC.Computer, ANTHROPIC.Bash, ANTHROPIC.TextEditor
+    #             parent_action_group_signature_params: {
+    #               "ActionGroupSignatureParamsKeyString" => "ActionGroupSignatureParamsValueString",
+    #             },
+    #           },
+    #         ],
+    #         agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
+    #         agent_name: "Name",
+    #         collaborator_configurations: [
+    #           {
+    #             agent_alias_arn: "AgentAliasArn",
+    #             collaborator_instruction: "CollaborationInstruction", # required
+    #             collaborator_name: "Name", # required
+    #             relay_conversation_history: "TO_COLLABORATOR", # accepts TO_COLLABORATOR, DISABLED
+    #           },
+    #         ],
+    #         customer_encryption_key_arn: "KmsKeyArn",
+    #         foundation_model: "ModelIdentifier", # required
+    #         guardrail_configuration: {
+    #           guardrail_identifier: "GuardrailIdentifierWithArn", # required
+    #           guardrail_version: "GuardrailVersion", # required
+    #         },
+    #         idle_session_ttl_in_seconds: 1,
+    #         instruction: "Instruction", # required
+    #         knowledge_bases: [
+    #           {
+    #             description: "ResourceDescription", # required
+    #             knowledge_base_id: "KnowledgeBaseId", # required
+    #             retrieval_configuration: {
+    #               vector_search_configuration: { # required
+    #                 filter: {
+    #                   and_all: [
+    #                     {
+    #                       # recursive RetrievalFilter
+    #                     },
+    #                   ],
+    #                   equals: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   greater_than: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   greater_than_or_equals: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   in: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   less_than: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   less_than_or_equals: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   list_contains: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   not_equals: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   not_in: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   or_all: [
+    #                     {
+    #                       # recursive RetrievalFilter
+    #                     },
+    #                   ],
+    #                   starts_with: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
+    #                     },
+    #                   },
+    #                   string_contains: {
+    #                     key: "FilterKey", # required
+    #                     value: { # required
     #                     },
     #                   },
     #                 },
-    #                 number_of_reranked_results: 1,
-    #                 metadata_configuration: {
-    #                   selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
-    #                   selective_mode_configuration: {
-    #                     fields_to_include: [
-    #                       {
-    #                         field_name: "FieldForRerankingFieldNameString", # required
+    #                 implicit_filter_configuration: {
+    #                   metadata_attributes: [ # required
+    #                     {
+    #                       description: "MetadataAttributeSchemaDescriptionString", # required
+    #                       key: "MetadataAttributeSchemaKeyString", # required
+    #                       type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
+    #                     },
+    #                   ],
+    #                   model_arn: "BedrockModelArn", # required
+    #                 },
+    #                 number_of_results: 1,
+    #                 override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #                 reranking_configuration: {
+    #                   bedrock_reranking_configuration: {
+    #                     metadata_configuration: {
+    #                       selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                       selective_mode_configuration: {
+    #                         fields_to_exclude: [
+    #                           {
+    #                             field_name: "FieldForRerankingFieldNameString", # required
+    #                           },
+    #                         ],
+    #                         fields_to_include: [
+    #                           {
+    #                             field_name: "FieldForRerankingFieldNameString", # required
+    #                           },
+    #                         ],
     #                       },
-    #                     ],
-    #                     fields_to_exclude: [
-    #                       {
-    #                         field_name: "FieldForRerankingFieldNameString", # required
+    #                     },
+    #                     model_configuration: { # required
+    #                       additional_model_request_fields: {
+    #                         "AdditionalModelRequestFieldsKey" => {
+    #                         },
     #                       },
-    #                     ],
+    #                       model_arn: "BedrockRerankingModelArn", # required
+    #                     },
+    #                     number_of_reranked_results: 1,
     #                   },
+    #                   type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #                 },
     #               },
     #             },
-    #             implicit_filter_configuration: {
-    #               metadata_attributes: [ # required
-    #                 {
-    #                   key: "MetadataAttributeSchemaKeyString", # required
-    #                   type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
-    #                   description: "MetadataAttributeSchemaDescriptionString", # required
-    #                 },
-    #               ],
-    #               model_arn: "BedrockModelArn", # required
-    #             },
     #           },
+    #         ],
+    #         prompt_override_configuration: {
+    #           override_lambda: "LambdaResourceArn",
+    #           prompt_configurations: [ # required
+    #             {
+    #               additional_model_request_fields: {
+    #               },
+    #               base_prompt_template: "BasePromptTemplate",
+    #               foundation_model: "ModelIdentifier",
+    #               inference_configuration: {
+    #                 maximum_length: 1,
+    #                 stop_sequences: ["String"],
+    #                 temperature: 1.0,
+    #                 top_k: 1,
+    #                 top_p: 1.0,
+    #               },
+    #               parser_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #               prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #               prompt_state: "ENABLED", # accepts ENABLED, DISABLED
+    #               prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, KNOWLEDGE_BASE_RESPONSE_GENERATION, POST_PROCESSING, ROUTING_CLASSIFIER
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
+    #     custom_orchestration: {
+    #       executor: {
+    #         lambda: "LambdaArn",
+    #       },
+    #     },
+    #     customer_encryption_key_arn: "KmsKeyArn",
+    #     enable_trace: false,
+    #     end_session: false,
+    #     foundation_model: "ModelIdentifier", # required
     #     guardrail_configuration: {
     #       guardrail_identifier: "GuardrailIdentifierWithArn", # required
     #       guardrail_version: "GuardrailVersion", # required
     #     },
-    #     prompt_override_configuration: {
-    #       prompt_configurations: [ # required
+    #     idle_session_ttl_in_seconds: 1,
+    #     inline_session_state: {
+    #       conversation_history: {
+    #         messages: [
+    #           {
+    #             content: [ # required
+    #               {
+    #                 text: "String",
+    #               },
+    #             ],
+    #             role: "user", # required, accepts user, assistant
+    #           },
+    #         ],
+    #       },
+    #       files: [
     #         {
-    #           prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, KNOWLEDGE_BASE_RESPONSE_GENERATION, POST_PROCESSING, ROUTING_CLASSIFIER
-    #           prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
-    #           prompt_state: "ENABLED", # accepts ENABLED, DISABLED
-    #           base_prompt_template: "BasePromptTemplate",
-    #           inference_configuration: {
-    #             temperature: 1.0,
-    #             top_p: 1.0,
-    #             top_k: 1,
-    #             maximum_length: 1,
-    #             stop_sequences: ["String"],
+    #           name: "String", # required
+    #           source: { # required
+    #             byte_content: {
+    #               data: "data", # required
+    #               media_type: "MimeType", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
     #           },
-    #           parser_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
-    #           foundation_model: "ModelIdentifier",
-    #           additional_model_request_fields: {
-    #           },
+    #           use_case: "CODE_INTERPRETER", # required, accepts CODE_INTERPRETER, CHAT
     #         },
     #       ],
-    #       override_lambda: "LambdaResourceArn",
-    #     },
-    #     agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
-    #     collaborator_configurations: [
-    #       {
-    #         collaborator_name: "Name", # required
-    #         collaborator_instruction: "CollaborationInstruction", # required
-    #         agent_alias_arn: "AgentAliasArn",
-    #         relay_conversation_history: "TO_COLLABORATOR", # accepts TO_COLLABORATOR, DISABLED
-    #       },
-    #     ],
-    #     agent_name: "Name",
-    #     session_id: "SessionId", # required
-    #     end_session: false,
-    #     enable_trace: false,
-    #     input_text: "InputText",
-    #     streaming_configurations: {
-    #       stream_final_response: false,
-    #       apply_guardrail_interval: 1,
-    #     },
-    #     prompt_creation_configurations: {
-    #       previous_conversation_turns_to_include: 1,
-    #       exclude_previous_thinking_steps: false,
-    #     },
-    #     inline_session_state: {
-    #       session_attributes: {
-    #         "String" => "String",
-    #       },
+    #       invocation_id: "String",
     #       prompt_session_attributes: {
     #         "String" => "String",
     #       },
@@ -3648,10 +3751,10 @@ module Aws::BedrockAgentRuntime
     #         {
     #           api_result: {
     #             action_group: "String", # required
-    #             http_method: "String",
+    #             agent_id: "String",
     #             api_path: "ApiPath",
     #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
-    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
+    #             http_method: "String",
     #             http_status_code: 1,
     #             response_body: {
     #               "String" => {
@@ -3666,10 +3769,11 @@ module Aws::BedrockAgentRuntime
     #                 ],
     #               },
     #             },
-    #             agent_id: "String",
+    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
     #           },
     #           function_result: {
     #             action_group: "String", # required
+    #             agent_id: "String",
     #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
     #             function: "String",
     #             response_body: {
@@ -3686,248 +3790,163 @@ module Aws::BedrockAgentRuntime
     #               },
     #             },
     #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
-    #             agent_id: "String",
     #           },
     #         },
     #       ],
-    #       invocation_id: "String",
-    #       files: [
-    #         {
-    #           name: "String", # required
-    #           source: { # required
-    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
-    #             s3_location: {
-    #               uri: "S3Uri", # required
-    #             },
-    #             byte_content: {
-    #               media_type: "MimeType", # required
-    #               data: "data", # required
-    #             },
-    #           },
-    #           use_case: "CODE_INTERPRETER", # required, accepts CODE_INTERPRETER, CHAT
-    #         },
-    #       ],
-    #       conversation_history: {
-    #         messages: [
-    #           {
-    #             role: "user", # required, accepts user, assistant
-    #             content: [ # required
-    #               {
-    #                 text: "String",
-    #               },
-    #             ],
-    #           },
-    #         ],
+    #       session_attributes: {
+    #         "String" => "String",
     #       },
     #     },
-    #     collaborators: [
+    #     input_text: "InputText",
+    #     instruction: "Instruction", # required
+    #     knowledge_bases: [
     #       {
-    #         customer_encryption_key_arn: "KmsKeyArn",
-    #         foundation_model: "ModelIdentifier", # required
-    #         instruction: "Instruction", # required
-    #         idle_session_ttl_in_seconds: 1,
-    #         action_groups: [
-    #           {
-    #             action_group_name: "ResourceName", # required
-    #             description: "ResourceDescription",
-    #             parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput, AMAZON.CodeInterpreter, ANTHROPIC.Computer, ANTHROPIC.Bash, ANTHROPIC.TextEditor
-    #             action_group_executor: {
-    #               lambda: "LambdaResourceArn",
-    #               custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
-    #             },
-    #             api_schema: {
-    #               s3: {
-    #                 s3_bucket_name: "S3BucketName",
-    #                 s3_object_key: "S3ObjectKey",
-    #               },
-    #               payload: "Payload",
-    #             },
-    #             function_schema: {
-    #               functions: [
+    #         description: "ResourceDescription", # required
+    #         knowledge_base_id: "KnowledgeBaseId", # required
+    #         retrieval_configuration: {
+    #           vector_search_configuration: { # required
+    #             filter: {
+    #               and_all: [
     #                 {
-    #                   name: "ResourceName", # required
-    #                   description: "FunctionDescription",
-    #                   parameters: {
-    #                     "ParameterName" => {
-    #                       description: "ParameterDescription",
-    #                       type: "string", # required, accepts string, number, integer, boolean, array
-    #                       required: false,
-    #                     },
-    #                   },
-    #                   require_confirmation: "ENABLED", # accepts ENABLED, DISABLED
+    #                   # recursive RetrievalFilter
     #                 },
     #               ],
-    #             },
-    #             parent_action_group_signature_params: {
-    #               "ActionGroupSignatureParamsKeyString" => "ActionGroupSignatureParamsValueString",
-    #             },
-    #           },
-    #         ],
-    #         knowledge_bases: [
-    #           {
-    #             knowledge_base_id: "KnowledgeBaseId", # required
-    #             description: "ResourceDescription", # required
-    #             retrieval_configuration: {
-    #               vector_search_configuration: { # required
-    #                 number_of_results: 1,
-    #                 override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
-    #                 filter: {
-    #                   equals: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   not_equals: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   greater_than: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   greater_than_or_equals: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   less_than: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   less_than_or_equals: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   in: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   not_in: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   starts_with: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   list_contains: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   string_contains: {
-    #                     key: "FilterKey", # required
-    #                     value: { # required
-    #                     },
-    #                   },
-    #                   and_all: [
-    #                     {
-    #                       # recursive RetrievalFilter
-    #                     },
-    #                   ],
-    #                   or_all: [
-    #                     {
-    #                       # recursive RetrievalFilter
-    #                     },
-    #                   ],
+    #               equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
     #                 },
-    #                 reranking_configuration: {
-    #                   type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
-    #                   bedrock_reranking_configuration: {
-    #                     model_configuration: { # required
-    #                       model_arn: "BedrockRerankingModelArn", # required
-    #                       additional_model_request_fields: {
-    #                         "AdditionalModelRequestFieldsKey" => {
-    #                         },
+    #               },
+    #               greater_than: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               greater_than_or_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               less_than: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               less_than_or_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               list_contains: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               or_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
+    #                 },
+    #               ],
+    #               starts_with: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               string_contains: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #             },
+    #             implicit_filter_configuration: {
+    #               metadata_attributes: [ # required
+    #                 {
+    #                   description: "MetadataAttributeSchemaDescriptionString", # required
+    #                   key: "MetadataAttributeSchemaKeyString", # required
+    #                   type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
+    #                 },
+    #               ],
+    #               model_arn: "BedrockModelArn", # required
+    #             },
+    #             number_of_results: 1,
+    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #             reranking_configuration: {
+    #               bedrock_reranking_configuration: {
+    #                 metadata_configuration: {
+    #                   selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
+    #                   selective_mode_configuration: {
+    #                     fields_to_exclude: [
+    #                       {
+    #                         field_name: "FieldForRerankingFieldNameString", # required
     #                       },
-    #                     },
-    #                     number_of_reranked_results: 1,
-    #                     metadata_configuration: {
-    #                       selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
-    #                       selective_mode_configuration: {
-    #                         fields_to_include: [
-    #                           {
-    #                             field_name: "FieldForRerankingFieldNameString", # required
-    #                           },
-    #                         ],
-    #                         fields_to_exclude: [
-    #                           {
-    #                             field_name: "FieldForRerankingFieldNameString", # required
-    #                           },
-    #                         ],
+    #                     ],
+    #                     fields_to_include: [
+    #                       {
+    #                         field_name: "FieldForRerankingFieldNameString", # required
     #                       },
-    #                     },
+    #                     ],
     #                   },
     #                 },
-    #                 implicit_filter_configuration: {
-    #                   metadata_attributes: [ # required
-    #                     {
-    #                       key: "MetadataAttributeSchemaKeyString", # required
-    #                       type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
-    #                       description: "MetadataAttributeSchemaDescriptionString", # required
+    #                 model_configuration: { # required
+    #                   additional_model_request_fields: {
+    #                     "AdditionalModelRequestFieldsKey" => {
     #                     },
-    #                   ],
-    #                   model_arn: "BedrockModelArn", # required
+    #                   },
+    #                   model_arn: "BedrockRerankingModelArn", # required
     #                 },
+    #                 number_of_reranked_results: 1,
     #               },
+    #               type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #             },
     #           },
-    #         ],
-    #         guardrail_configuration: {
-    #           guardrail_identifier: "GuardrailIdentifierWithArn", # required
-    #           guardrail_version: "GuardrailVersion", # required
     #         },
-    #         prompt_override_configuration: {
-    #           prompt_configurations: [ # required
-    #             {
-    #               prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, KNOWLEDGE_BASE_RESPONSE_GENERATION, POST_PROCESSING, ROUTING_CLASSIFIER
-    #               prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
-    #               prompt_state: "ENABLED", # accepts ENABLED, DISABLED
-    #               base_prompt_template: "BasePromptTemplate",
-    #               inference_configuration: {
-    #                 temperature: 1.0,
-    #                 top_p: 1.0,
-    #                 top_k: 1,
-    #                 maximum_length: 1,
-    #                 stop_sequences: ["String"],
-    #               },
-    #               parser_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
-    #               foundation_model: "ModelIdentifier",
-    #               additional_model_request_fields: {
-    #               },
-    #             },
-    #           ],
-    #           override_lambda: "LambdaResourceArn",
-    #         },
-    #         agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
-    #         collaborator_configurations: [
-    #           {
-    #             collaborator_name: "Name", # required
-    #             collaborator_instruction: "CollaborationInstruction", # required
-    #             agent_alias_arn: "AgentAliasArn",
-    #             relay_conversation_history: "TO_COLLABORATOR", # accepts TO_COLLABORATOR, DISABLED
-    #           },
-    #         ],
-    #         agent_name: "Name",
     #       },
     #     ],
-    #     bedrock_model_configurations: {
-    #       performance_config: {
-    #         latency: "standard", # accepts standard, optimized
-    #       },
-    #     },
     #     orchestration_type: "DEFAULT", # accepts DEFAULT, CUSTOM_ORCHESTRATION
-    #     custom_orchestration: {
-    #       executor: {
-    #         lambda: "LambdaArn",
-    #       },
+    #     prompt_creation_configurations: {
+    #       exclude_previous_thinking_steps: false,
+    #       previous_conversation_turns_to_include: 1,
+    #     },
+    #     prompt_override_configuration: {
+    #       override_lambda: "LambdaResourceArn",
+    #       prompt_configurations: [ # required
+    #         {
+    #           additional_model_request_fields: {
+    #           },
+    #           base_prompt_template: "BasePromptTemplate",
+    #           foundation_model: "ModelIdentifier",
+    #           inference_configuration: {
+    #             maximum_length: 1,
+    #             stop_sequences: ["String"],
+    #             temperature: 1.0,
+    #             top_k: 1,
+    #             top_p: 1.0,
+    #           },
+    #           parser_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #           prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #           prompt_state: "ENABLED", # accepts ENABLED, DISABLED
+    #           prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, KNOWLEDGE_BASE_RESPONSE_GENERATION, POST_PROCESSING, ROUTING_CLASSIFIER
+    #         },
+    #       ],
+    #     },
+    #     session_id: "SessionId", # required
+    #     streaming_configurations: {
+    #       apply_guardrail_interval: 1,
+    #       stream_final_response: false,
     #     },
     #   })
     #
@@ -3935,506 +3954,73 @@ module Aws::BedrockAgentRuntime
     #
     #   # All events are available at resp.completion:
     #   resp.completion #=> Enumerator
-    #   resp.completion.event_types #=> [:chunk, :trace, :return_control, :internal_server_exception, :validation_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :access_denied_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception, :files]
+    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :files, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+    #
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
     #
     #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
-    #   event.bytes #=> String
     #   event.attribution.citations #=> Array
-    #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
-    #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.end #=> Integer
+    #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
+    #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
     #   event.attribution.citations[0].retrieved_references #=> Array
-    #   event.attribution.citations[0].retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.audio.transcription #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.byte_content #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.row #=> Array
     #   event.attribution.citations[0].retrieved_references[0].content.row[0].column_name #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.row[0].column_value #=> String
     #   event.attribution.citations[0].retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.web_location.url #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.attribution.citations[0].retrieved_references[0].content.video.s3_uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].content.video.summary #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.confluence_location.url #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.share_point_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.custom_document_location.id #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.share_point_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.sql_location.query #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.attribution.citations[0].retrieved_references[0].location.web_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
+    #   event.bytes #=> String
     #
-    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
-    #   event.session_id #=> String
-    #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
-    #   event.trace.guardrail_trace.trace_id #=> String
-    #   event.trace.guardrail_trace.input_assessments #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
-    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.output_assessments #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
-    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   event.trace.guardrail_trace.metadata.start_time #=> Time
-    #   event.trace.guardrail_trace.metadata.end_time #=> Time
-    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
-    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
-    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
-    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
-    #   event.trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.orchestration_trace.rationale.trace_id #=> String
-    #   event.trace.orchestration_trace.rationale.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   event.trace.orchestration_trace.observation.trace_id #=> String
-    #   event.trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.text #=> String
-    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
-    #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.text #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.orchestration_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.orchestration_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.post_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.post_processing_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.trace_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.api_path #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   event.trace.routing_classifier_trace.observation.trace_id #=> String
-    #   event.trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.reprompt_response.text #=> String
-    #   event.trace.routing_classifier_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   event.trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   event.trace.failure_trace.trace_id #=> String
-    #   event.trace.failure_trace.failure_reason #=> String
-    #   event.trace.failure_trace.failure_code #=> Integer
-    #   event.trace.failure_trace.metadata.start_time #=> Time
-    #   event.trace.failure_trace.metadata.end_time #=> Time
-    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
-    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
-    #   event.trace.failure_trace.metadata.client_request_id #=> String
-    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
-    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
-    #   event.trace.custom_orchestration_trace.trace_id #=> String
-    #   event.trace.custom_orchestration_trace.event.text #=> String
-    #   event.caller_chain #=> Array
-    #   event.caller_chain[0].agent_alias_arn #=> String
-    #   event.event_time #=> Time
-    #   event.collaborator_name #=> String
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :files event available at #on_files_event callback and response eventstream enumerator:
+    #   event.files #=> Array
+    #   event.files[0].bytes #=> String
+    #   event.files[0].name #=> String
+    #   event.files[0].type #=> String
+    #
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.reason #=> String
+    #
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
     #
     #   # For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
+    #   event.invocation_id #=> String
     #   event.invocation_inputs #=> Array
     #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.invocation_inputs[0].api_invocation_input.agent_id #=> String
     #   event.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   event.invocation_inputs[0].api_invocation_input.parameters #=> Array
     #   event.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
     #   event.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
@@ -4444,29 +4030,15 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   event.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   event.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
     #   event.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.invocation_inputs[0].function_invocation_input.function #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   event.invocation_inputs[0].function_invocation_input.function #=> String
-    #   event.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   event.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   event.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   event.invocation_id #=> String
-    #
-    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.reason #=> String
-    #
-    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
     #
     #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -4474,25 +4046,484 @@ module Aws::BedrockAgentRuntime
     #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
+    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   event.caller_chain #=> Array
+    #   event.caller_chain[0].agent_alias_arn #=> String
+    #   event.collaborator_name #=> String
+    #   event.event_time #=> Time
+    #   event.session_id #=> String
+    #   event.trace.custom_orchestration_trace.event.text #=> String
+    #   event.trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.failure_trace.failure_code #=> Integer
+    #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
+    #   event.trace.failure_trace.trace_id #=> String
+    #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
+    #   event.trace.guardrail_trace.input_assessments #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
+    #   event.trace.guardrail_trace.output_assessments #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.trace_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.orchestration_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.orchestration_trace.model_invocation_input.text #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
+    #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
+    #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
+    #   event.trace.orchestration_trace.observation.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   event.trace.orchestration_trace.rationale.text #=> String
+    #   event.trace.orchestration_trace.rationale.trace_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.post_processing_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.post_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
+    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].value #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content #=> Hash
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"] #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].body #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.routing_classifier_trace.invocation_input.trace_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
+    #   event.trace.routing_classifier_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
+    #   event.trace.routing_classifier_trace.observation.reprompt_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
     #
-    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #
-    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :files event available at #on_files_event callback and response eventstream enumerator:
-    #   event.files #=> Array
-    #   event.files[0].name #=> String
-    #   event.files[0].type #=> String
-    #   event.files[0].bytes #=> String
     #
     #   resp.content_type #=> String
     #   resp.session_id #=> String
@@ -4534,14 +4565,18 @@ module Aws::BedrockAgentRuntime
     #
     #  </note>
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow.
+    # @option params [required, String] :event_type
+    #   The type of events to retrieve. Specify `Node` for node-level events
+    #   or `Flow` for flow-level events.
+    #
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the execution.
     #
-    # @option params [required, String] :execution_identifier
-    #   The unique identifier of the flow execution.
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
     #
     # @option params [Integer] :max_results
     #   The maximum number of events to return in a single response. If more
@@ -4551,10 +4586,6 @@ module Aws::BedrockAgentRuntime
     # @option params [String] :next_token
     #   A token to retrieve the next set of results. This value is returned in
     #   the response if more results are available.
-    #
-    # @option params [required, String] :event_type
-    #   The type of events to retrieve. Specify `Node` for node-level events
-    #   or `Flow` for flow-level events.
     #
     # @return [Types::ListFlowExecutionEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4566,159 +4597,124 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_flow_execution_events({
-    #     flow_identifier: "FlowIdentifier", # required
-    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     event_type: "Node", # required, accepts Node, Flow
     #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     event_type: "Node", # required, accepts Node, Flow
     #   })
     #
     # @example Response structure
     #
     #   resp.flow_execution_events #=> Array
-    #   resp.flow_execution_events[0].flow_input_event.node_name #=> String
-    #   resp.flow_execution_events[0].flow_input_event.timestamp #=> Time
-    #   resp.flow_execution_events[0].flow_input_event.fields #=> Array
-    #   resp.flow_execution_events[0].flow_input_event.fields[0].name #=> String
-    #   resp.flow_execution_events[0].flow_output_event.node_name #=> String
-    #   resp.flow_execution_events[0].flow_output_event.timestamp #=> Time
-    #   resp.flow_execution_events[0].flow_output_event.fields #=> Array
-    #   resp.flow_execution_events[0].flow_output_event.fields[0].name #=> String
-    #   resp.flow_execution_events[0].node_input_event.node_name #=> String
-    #   resp.flow_execution_events[0].node_input_event.timestamp #=> Time
-    #   resp.flow_execution_events[0].node_input_event.fields #=> Array
-    #   resp.flow_execution_events[0].node_input_event.fields[0].name #=> String
-    #   resp.flow_execution_events[0].node_input_event.fields[0].source.node_name #=> String
-    #   resp.flow_execution_events[0].node_input_event.fields[0].source.output_field_name #=> String
-    #   resp.flow_execution_events[0].node_input_event.fields[0].source.expression #=> String
-    #   resp.flow_execution_events[0].node_input_event.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.flow_execution_events[0].node_input_event.fields[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
-    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain #=> Array
-    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain[0].node_name #=> String
-    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain[0].index #=> Integer
-    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain[0].type #=> String, one of "Iterator", "Loop"
-    #   resp.flow_execution_events[0].node_output_event.node_name #=> String
-    #   resp.flow_execution_events[0].node_output_event.timestamp #=> Time
-    #   resp.flow_execution_events[0].node_output_event.fields #=> Array
-    #   resp.flow_execution_events[0].node_output_event.fields[0].name #=> String
-    #   resp.flow_execution_events[0].node_output_event.fields[0].next #=> Array
-    #   resp.flow_execution_events[0].node_output_event.fields[0].next[0].node_name #=> String
-    #   resp.flow_execution_events[0].node_output_event.fields[0].next[0].input_field_name #=> String
-    #   resp.flow_execution_events[0].node_output_event.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
     #   resp.flow_execution_events[0].condition_result_event.node_name #=> String
-    #   resp.flow_execution_events[0].condition_result_event.timestamp #=> Time
     #   resp.flow_execution_events[0].condition_result_event.satisfied_conditions #=> Array
     #   resp.flow_execution_events[0].condition_result_event.satisfied_conditions[0].condition_name #=> String
-    #   resp.flow_execution_events[0].node_failure_event.node_name #=> String
-    #   resp.flow_execution_events[0].node_failure_event.timestamp #=> Time
-    #   resp.flow_execution_events[0].node_failure_event.error_code #=> String, one of "VALIDATION", "DEPENDENCY_FAILED", "BAD_GATEWAY", "INTERNAL_SERVER"
-    #   resp.flow_execution_events[0].node_failure_event.error_message #=> String
-    #   resp.flow_execution_events[0].flow_failure_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].condition_result_event.timestamp #=> Time
     #   resp.flow_execution_events[0].flow_failure_event.error_code #=> String, one of "VALIDATION", "INTERNAL_SERVER", "NODE_EXECUTION_FAILED"
     #   resp.flow_execution_events[0].flow_failure_event.error_message #=> String
+    #   resp.flow_execution_events[0].flow_failure_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].flow_input_event.fields #=> Array
+    #   resp.flow_execution_events[0].flow_input_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].flow_input_event.node_name #=> String
+    #   resp.flow_execution_events[0].flow_input_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].flow_output_event.fields #=> Array
+    #   resp.flow_execution_events[0].flow_output_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].flow_output_event.node_name #=> String
+    #   resp.flow_execution_events[0].flow_output_event.timestamp #=> Time
     #   resp.flow_execution_events[0].node_action_event.node_name #=> String
-    #   resp.flow_execution_events[0].node_action_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].node_action_event.operation_name #=> String
     #   resp.flow_execution_events[0].node_action_event.request_id #=> String
     #   resp.flow_execution_events[0].node_action_event.service_name #=> String
-    #   resp.flow_execution_events[0].node_action_event.operation_name #=> String
+    #   resp.flow_execution_events[0].node_action_event.timestamp #=> Time
     #   resp.flow_execution_events[0].node_dependency_event.node_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.timestamp #=> Time
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].agent_alias_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].agent_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].agent_version #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].caller_chain #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].caller_chain[0].agent_alias_arn #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].event_time #=> Time
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].session_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.custom_orchestration_trace.event.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.custom_orchestration_trace.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.failure_code #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.failure_reason #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.trace_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.trace_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.total_time_ms #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.guardrail_trace.trace_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
@@ -4728,33 +4724,25 @@ module Aws::BedrockAgentRuntime
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
@@ -4763,25 +4751,65 @@ module Aws::BedrockAgentRuntime
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.invocation_input.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.foundation_model #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.override_lambda #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.trace_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
@@ -4791,129 +4819,130 @@ module Aws::BedrockAgentRuntime
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.reprompt_response.text #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.override_lambda #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_input.foundation_model #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.override_lambda #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.reprompt_response.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.orchestration_trace.rationale.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.foundation_model #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.override_lambda #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.foundation_model #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.post_processing_trace.model_invocation_output.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.foundation_model #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.signature #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.reasoning_content.redacted_content #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.pre_processing_trace.model_invocation_output.trace_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
@@ -4923,33 +4952,25 @@ module Aws::BedrockAgentRuntime
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.function #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_alias_arn #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.agent_collaborator_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.invocation_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.action_group #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.api_path #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_method #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.http_status_code #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body #=> Hash
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].body #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_body["String"].images[0].source.bytes #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.agent_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].api_result.response_state #=> String, one of "FAILURE", "REPROMPT"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.action_group #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.confirmation_state #=> String, one of "CONFIRM", "DENY"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.function #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body #=> Hash
@@ -4958,25 +4979,62 @@ module Aws::BedrockAgentRuntime
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_body["String"].images[0].source.bytes #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.response_state #=> String, one of "FAILURE", "REPROMPT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.return_control_results.return_control_invocation_results[0].function_result.agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.agent_collaborator_invocation_input.input.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.invocation_input.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
@@ -4986,114 +5044,95 @@ module Aws::BedrockAgentRuntime
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.collaborator_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.function #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].function_invocation_input.collaborator_name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.type #=> String, one of "TEXT", "RETURN_CONTROL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.s3_uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.audio.transcription #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_name #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].column_value #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.s3_uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.video.summary #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.custom_document_location.id #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.sql_location.query #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.reprompt_response.text #=> String
     #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_output #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_error #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.override_lambda #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_input.foundation_model #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.failure_reason #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.failure_code #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.start_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.end_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.operation_total_time_ms #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.client_request_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.input_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.failure_trace.metadata.usage.output_tokens #=> Integer
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.custom_orchestration_trace.trace_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.custom_orchestration_trace.event.text #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].caller_chain #=> Array
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].caller_chain[0].agent_alias_arn #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].event_time #=> Time
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].collaborator_name #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].agent_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].agent_alias_id #=> String
-    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].agent_version #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.reprompt_response.text #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.trace_id #=> String
+    #   resp.flow_execution_events[0].node_dependency_event.trace_elements.agent_traces[0].trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   resp.flow_execution_events[0].node_failure_event.error_code #=> String, one of "VALIDATION", "DEPENDENCY_FAILED", "BAD_GATEWAY", "INTERNAL_SERVER"
+    #   resp.flow_execution_events[0].node_failure_event.error_message #=> String
+    #   resp.flow_execution_events[0].node_failure_event.node_name #=> String
+    #   resp.flow_execution_events[0].node_failure_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].node_input_event.fields #=> Array
+    #   resp.flow_execution_events[0].node_input_event.fields[0].category #=> String, one of "LoopCondition", "ReturnValueToLoopStart", "ExitLoop"
+    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain #=> Array
+    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain[0].index #=> Integer
+    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain[0].node_name #=> String
+    #   resp.flow_execution_events[0].node_input_event.fields[0].execution_chain[0].type #=> String, one of "Iterator", "Loop"
+    #   resp.flow_execution_events[0].node_input_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].node_input_event.fields[0].source.expression #=> String
+    #   resp.flow_execution_events[0].node_input_event.fields[0].source.node_name #=> String
+    #   resp.flow_execution_events[0].node_input_event.fields[0].source.output_field_name #=> String
+    #   resp.flow_execution_events[0].node_input_event.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.flow_execution_events[0].node_input_event.node_name #=> String
+    #   resp.flow_execution_events[0].node_input_event.timestamp #=> Time
+    #   resp.flow_execution_events[0].node_output_event.fields #=> Array
+    #   resp.flow_execution_events[0].node_output_event.fields[0].name #=> String
+    #   resp.flow_execution_events[0].node_output_event.fields[0].next #=> Array
+    #   resp.flow_execution_events[0].node_output_event.fields[0].next[0].input_field_name #=> String
+    #   resp.flow_execution_events[0].node_output_event.fields[0].next[0].node_name #=> String
+    #   resp.flow_execution_events[0].node_output_event.fields[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.flow_execution_events[0].node_output_event.node_name #=> String
+    #   resp.flow_execution_events[0].node_output_event.timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListFlowExecutionEvents AWS API Documentation
@@ -5114,11 +5153,11 @@ module Aws::BedrockAgentRuntime
     #
     #  </note>
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow to list executions for.
-    #
     # @option params [String] :flow_alias_identifier
     #   The unique identifier of the flow alias to list executions for.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow to list executions for.
     #
     # @option params [Integer] :max_results
     #   The maximum number of flow executions to return in a single response.
@@ -5140,8 +5179,8 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_flow_executions({
-    #     flow_identifier: "FlowIdentifier", # required
     #     flow_alias_identifier: "FlowAliasIdentifier",
+    #     flow_identifier: "FlowIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -5149,13 +5188,13 @@ module Aws::BedrockAgentRuntime
     # @example Response structure
     #
     #   resp.flow_execution_summaries #=> Array
+    #   resp.flow_execution_summaries[0].created_at #=> Time
+    #   resp.flow_execution_summaries[0].ended_at #=> Time
     #   resp.flow_execution_summaries[0].execution_arn #=> String
     #   resp.flow_execution_summaries[0].flow_alias_identifier #=> String
     #   resp.flow_execution_summaries[0].flow_identifier #=> String
     #   resp.flow_execution_summaries[0].flow_version #=> String
     #   resp.flow_execution_summaries[0].status #=> String, one of "Running", "Succeeded", "Failed", "TimedOut", "Aborted"
-    #   resp.flow_execution_summaries[0].created_at #=> Time
-    #   resp.flow_execution_summaries[0].ended_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListFlowExecutions AWS API Documentation
@@ -5180,17 +5219,17 @@ module Aws::BedrockAgentRuntime
     #   The unique identifier (in UUID format) for the invocation to list
     #   invocation steps for.
     #
-    # @option params [String] :next_token
-    #   If the total number of results is greater than the `maxResults` value
-    #   provided in the request, enter the token returned in the `nextToken`
-    #   field in the response in this field to return the next batch of
-    #   results.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. If the total
     #   number of results is greater than this value, use the token returned
     #   in the response in the `nextToken` field when making another request
     #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @option params [required, String] :session_identifier
     #   The unique identifier for the session associated with the invocation
@@ -5208,18 +5247,18 @@ module Aws::BedrockAgentRuntime
     #
     #   resp = client.list_invocation_steps({
     #     invocation_identifier: "InvocationIdentifier",
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #     session_identifier: "SessionIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.invocation_step_summaries #=> Array
-    #   resp.invocation_step_summaries[0].session_id #=> String
     #   resp.invocation_step_summaries[0].invocation_id #=> String
     #   resp.invocation_step_summaries[0].invocation_step_id #=> String
     #   resp.invocation_step_summaries[0].invocation_step_time #=> Time
+    #   resp.invocation_step_summaries[0].session_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocationSteps AWS API Documentation
@@ -5239,17 +5278,17 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
     #
-    # @option params [String] :next_token
-    #   If the total number of results is greater than the `maxResults` value
-    #   provided in the request, enter the token returned in the `nextToken`
-    #   field in the response in this field to return the next batch of
-    #   results.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. If the total
     #   number of results is greater than this value, use the token returned
     #   in the response in the `nextToken` field when making another request
     #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @option params [required, String] :session_identifier
     #   The unique identifier for the session to list invocations for. You can
@@ -5266,17 +5305,17 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_invocations({
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #     session_identifier: "SessionIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.invocation_summaries #=> Array
-    #   resp.invocation_summaries[0].session_id #=> String
-    #   resp.invocation_summaries[0].invocation_id #=> String
     #   resp.invocation_summaries[0].created_at #=> Time
+    #   resp.invocation_summaries[0].invocation_id #=> String
+    #   resp.invocation_summaries[0].session_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocations AWS API Documentation
@@ -5310,8 +5349,8 @@ module Aws::BedrockAgentRuntime
     #
     # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSessionsResponse#session_summaries #session_summaries} => Array&lt;Types::SessionSummary&gt;
     #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListSessionsResponse#session_summaries #session_summaries} => Array&lt;Types::SessionSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -5324,13 +5363,13 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.session_summaries #=> Array
-    #   resp.session_summaries[0].session_id #=> String
-    #   resp.session_summaries[0].session_arn #=> String
-    #   resp.session_summaries[0].session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #   resp.session_summaries[0].created_at #=> Time
     #   resp.session_summaries[0].last_updated_at #=> Time
-    #   resp.next_token #=> String
+    #   resp.session_summaries[0].session_arn #=> String
+    #   resp.session_summaries[0].session_id #=> String
+    #   resp.session_summaries[0].session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListSessions AWS API Documentation
     #
@@ -5432,29 +5471,29 @@ module Aws::BedrockAgentRuntime
     #   #  Example for registering callbacks with specific events
     #
     #   handler = Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream.new
-    #   handler.on_optimized_prompt_event_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #   end
     #   handler.on_analyze_prompt_event_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
     #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
     #   handler.on_internal_server_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_optimized_prompt_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
     #   end
     #   handler.on_throttling_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #   end
     #   handler.on_validation_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::validationException
-    #   end
-    #   handler.on_dependency_failed_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #   end
-    #   handler.on_access_denied_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
     #   end
     #
     #   client.optimize_prompt(
@@ -5465,29 +5504,29 @@ module Aws::BedrockAgentRuntime
     #   #  2) Use a Ruby Proc object
     #   #  Example for registering callbacks with specific events
     #   handler = Proc.new do |stream|
-    #     stream.on_optimized_prompt_event_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #     end
     #     stream.on_analyze_prompt_event_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
     #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #     end
     #     stream.on_internal_server_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_optimized_prompt_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
     #     end
     #     stream.on_throttling_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #     end
     #     stream.on_validation_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::validationException
-    #     end
-    #     stream.on_dependency_failed_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #     end
-    #     stream.on_access_denied_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #     end
-    #     stream.on_bad_gateway_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
     #     end
     #   end
     #
@@ -5498,29 +5537,29 @@ module Aws::BedrockAgentRuntime
     #
     #   #  Usage pattern c): Hybrid pattern of a) and b)
     #   handler = Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream.new
-    #   handler.on_optimized_prompt_event_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #   end
     #   handler.on_analyze_prompt_event_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
     #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
     #   handler.on_internal_server_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_optimized_prompt_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
     #   end
     #   handler.on_throttling_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #   end
     #   handler.on_validation_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::validationException
-    #   end
-    #   handler.on_dependency_failed_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #   end
-    #   handler.on_access_denied_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
     #   end
     #
     #   client.optimize_prompt(
@@ -5557,34 +5596,34 @@ module Aws::BedrockAgentRuntime
     #
     #   # All events are available at resp.optimized_prompt:
     #   resp.optimized_prompt #=> Enumerator
-    #   resp.optimized_prompt.event_types #=> [:optimized_prompt_event, :analyze_prompt_event, :internal_server_exception, :throttling_exception, :validation_exception, :dependency_failed_exception, :access_denied_exception, :bad_gateway_exception]
+    #   resp.optimized_prompt.event_types #=> [:access_denied_exception, :analyze_prompt_event, :bad_gateway_exception, :dependency_failed_exception, :internal_server_exception, :optimized_prompt_event, :throttling_exception, :validation_exception]
     #
-    #   # For :optimized_prompt_event event available at #on_optimized_prompt_event_event callback and response eventstream enumerator:
-    #   event.optimized_prompt.text_prompt.text #=> String
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
     #
     #   # For :analyze_prompt_event event available at #on_analyze_prompt_event_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
     #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
+    #
+    #   # For :optimized_prompt_event event available at #on_optimized_prompt_event_event callback and response eventstream enumerator:
+    #   event.optimized_prompt.text_prompt.text #=> String
     #
     #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #
-    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/OptimizePrompt AWS API Documentation
     #
@@ -5636,14 +5675,12 @@ module Aws::BedrockAgentRuntime
     # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocationSteps.html
     # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html
     #
-    # @option params [required, String] :session_identifier
-    #   The unique identifier for the session to add the invocation step to.
-    #   You can specify either the session's `sessionId` or its Amazon
-    #   Resource Name (ARN).
-    #
     # @option params [required, String] :invocation_identifier
     #   The unique identifier (in UUID format) of the invocation to add the
     #   invocation step to.
+    #
+    # @option params [String] :invocation_step_id
+    #   The unique identifier of the invocation step in UUID format.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :invocation_step_time
     #   The timestamp for when the invocation step occurred.
@@ -5652,8 +5689,10 @@ module Aws::BedrockAgentRuntime
     #   The payload for the invocation step, including text and images for the
     #   interaction.
     #
-    # @option params [String] :invocation_step_id
-    #   The unique identifier of the invocation step in UUID format.
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the session to add the invocation step to.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
     #
     # @return [Types::PutInvocationStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5662,13 +5701,12 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_invocation_step({
-    #     session_identifier: "SessionIdentifier", # required
     #     invocation_identifier: "InvocationIdentifier", # required
+    #     invocation_step_id: "Uuid",
     #     invocation_step_time: Time.now, # required
     #     payload: { # required
     #       content_blocks: [
     #         {
-    #           text: "BedrockSessionContentBlockTextString",
     #           image: {
     #             format: "png", # required, accepts png, jpeg, gif, webp
     #             source: { # required
@@ -5678,10 +5716,11 @@ module Aws::BedrockAgentRuntime
     #               },
     #             },
     #           },
+    #           text: "BedrockSessionContentBlockTextString",
     #         },
     #       ],
     #     },
-    #     invocation_step_id: "Uuid",
+    #     session_identifier: "SessionIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -5705,77 +5744,77 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html
     #
-    # @option params [required, Array<Types::RerankQuery>] :queries
-    #   An array of objects, each of which contains information about a query
-    #   to submit to the reranker model.
-    #
-    # @option params [required, Array<Types::RerankSource>] :sources
-    #   An array of objects, each of which contains information about the
-    #   sources to rerank.
-    #
-    # @option params [required, Types::RerankingConfiguration] :reranking_configuration
-    #   Contains configurations for reranking.
-    #
     # @option params [String] :next_token
     #   If the total number of results was greater than could fit in a
     #   response, a token is returned in the `nextToken` field. You can enter
     #   that token in this field to return the next batch of results.
     #
+    # @option params [required, Array<Types::RerankQuery>] :queries
+    #   An array of objects, each of which contains information about a query
+    #   to submit to the reranker model.
+    #
+    # @option params [required, Types::RerankingConfiguration] :reranking_configuration
+    #   Contains configurations for reranking.
+    #
+    # @option params [required, Array<Types::RerankSource>] :sources
+    #   An array of objects, each of which contains information about the
+    #   sources to rerank.
+    #
     # @return [Types::RerankResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::RerankResponse#results #results} => Array&lt;Types::RerankResult&gt;
     #   * {Types::RerankResponse#next_token #next_token} => String
+    #   * {Types::RerankResponse#results #results} => Array&lt;Types::RerankResult&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.rerank({
+    #     next_token: "NextToken",
     #     queries: [ # required
     #       {
-    #         type: "TEXT", # required, accepts TEXT
     #         text_query: { # required
     #           text: "RerankTextDocumentTextString",
     #         },
-    #       },
-    #     ],
-    #     sources: [ # required
-    #       {
-    #         type: "INLINE", # required, accepts INLINE
-    #         inline_document_source: { # required
-    #           type: "TEXT", # required, accepts TEXT, JSON
-    #           text_document: {
-    #             text: "RerankTextDocumentTextString",
-    #           },
-    #           json_document: {
-    #           },
-    #         },
+    #         type: "TEXT", # required, accepts TEXT
     #       },
     #     ],
     #     reranking_configuration: { # required
-    #       type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #       bedrock_reranking_configuration: { # required
-    #         number_of_results: 1,
     #         model_configuration: { # required
-    #           model_arn: "BedrockModelArn", # required
     #           additional_model_request_fields: {
     #             "AdditionalModelRequestFieldsKey" => {
     #             },
     #           },
+    #           model_arn: "BedrockModelArn", # required
     #         },
+    #         number_of_results: 1,
     #       },
+    #       type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #     },
-    #     next_token: "NextToken",
+    #     sources: [ # required
+    #       {
+    #         inline_document_source: { # required
+    #           json_document: {
+    #           },
+    #           text_document: {
+    #             text: "RerankTextDocumentTextString",
+    #           },
+    #           type: "TEXT", # required, accepts TEXT, JSON
+    #         },
+    #         type: "INLINE", # required, accepts INLINE
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.results #=> Array
+    #   resp.results[0].document.text_document.text #=> String
+    #   resp.results[0].document.type #=> String, one of "TEXT", "JSON"
     #   resp.results[0].index #=> Integer
     #   resp.results[0].relevance_score #=> Float
-    #   resp.results[0].document.type #=> String, one of "TEXT", "JSON"
-    #   resp.results[0].document.text_document.text #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/Rerank AWS API Documentation
     #
@@ -5788,11 +5827,16 @@ module Aws::BedrockAgentRuntime
 
     # Queries a knowledge base and retrieves information from it.
     #
+    # @option params [Types::GuardrailConfiguration] :guardrail_configuration
+    #   Guardrail settings.
+    #
     # @option params [required, String] :knowledge_base_id
     #   The unique identifier of the knowledge base to query.
     #
-    # @option params [required, Types::KnowledgeBaseQuery] :retrieval_query
-    #   Contains the query to send the knowledge base.
+    # @option params [String] :next_token
+    #   If there are more results than can fit in the response, the response
+    #   returns a `nextToken`. Use this token in the `nextToken` field of
+    #   another request to retrieve the next batch of results.
     #
     # @option params [Types::KnowledgeBaseRetrievalConfiguration] :retrieval_configuration
     #   Contains configurations for the knowledge base query and retrieval
@@ -5802,40 +5846,35 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #
-    # @option params [Types::GuardrailConfiguration] :guardrail_configuration
-    #   Guardrail settings.
-    #
-    # @option params [String] :next_token
-    #   If there are more results than can fit in the response, the response
-    #   returns a `nextToken`. Use this token in the `nextToken` field of
-    #   another request to retrieve the next batch of results.
+    # @option params [required, Types::KnowledgeBaseQuery] :retrieval_query
+    #   Contains the query to send the knowledge base.
     #
     # @return [Types::RetrieveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::RetrieveResponse#retrieval_results #retrieval_results} => Array&lt;Types::KnowledgeBaseRetrievalResult&gt;
     #   * {Types::RetrieveResponse#guardrail_action #guardrail_action} => String
     #   * {Types::RetrieveResponse#next_token #next_token} => String
+    #   * {Types::RetrieveResponse#retrieval_results #retrieval_results} => Array&lt;Types::KnowledgeBaseRetrievalResult&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retrieve({
-    #     knowledge_base_id: "KnowledgeBaseId", # required
-    #     retrieval_query: { # required
-    #       text: "KnowledgeBaseQueryTextString", # required
+    #     guardrail_configuration: {
+    #       guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #       guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
     #     },
+    #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     next_token: "NextToken",
     #     retrieval_configuration: {
     #       vector_search_configuration: { # required
-    #         number_of_results: 1,
-    #         override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #         filter: {
-    #           equals: {
-    #             key: "FilterKey", # required
-    #             value: { # required
+    #           and_all: [
+    #             {
+    #               # recursive RetrievalFilter
     #             },
-    #           },
-    #           not_equals: {
+    #           ],
+    #           equals: {
     #             key: "FilterKey", # required
     #             value: { # required
     #             },
@@ -5850,6 +5889,11 @@ module Aws::BedrockAgentRuntime
     #             value: { # required
     #             },
     #           },
+    #           in: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
     #           less_than: {
     #             key: "FilterKey", # required
     #             value: { # required
@@ -5860,7 +5904,12 @@ module Aws::BedrockAgentRuntime
     #             value: { # required
     #             },
     #           },
-    #           in: {
+    #           list_contains: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           not_equals: {
     #             key: "FilterKey", # required
     #             value: { # required
     #             },
@@ -5870,12 +5919,12 @@ module Aws::BedrockAgentRuntime
     #             value: { # required
     #             },
     #           },
-    #           starts_with: {
-    #             key: "FilterKey", # required
-    #             value: { # required
+    #           or_all: [
+    #             {
+    #               # recursive RetrievalFilter
     #             },
-    #           },
-    #           list_contains: {
+    #           ],
+    #           starts_with: {
     #             key: "FilterKey", # required
     #             value: { # required
     #             },
@@ -5885,87 +5934,86 @@ module Aws::BedrockAgentRuntime
     #             value: { # required
     #             },
     #           },
-    #           and_all: [
-    #             {
-    #               # recursive RetrievalFilter
-    #             },
-    #           ],
-    #           or_all: [
-    #             {
-    #               # recursive RetrievalFilter
-    #             },
-    #           ],
     #         },
-    #         reranking_configuration: {
-    #           type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
-    #           bedrock_reranking_configuration: {
-    #             model_configuration: { # required
-    #               model_arn: "BedrockRerankingModelArn", # required
-    #               additional_model_request_fields: {
-    #                 "AdditionalModelRequestFieldsKey" => {
-    #                 },
-    #               },
+    #         implicit_filter_configuration: {
+    #           metadata_attributes: [ # required
+    #             {
+    #               description: "MetadataAttributeSchemaDescriptionString", # required
+    #               key: "MetadataAttributeSchemaKeyString", # required
+    #               type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
     #             },
-    #             number_of_reranked_results: 1,
+    #           ],
+    #           model_arn: "BedrockModelArn", # required
+    #         },
+    #         number_of_results: 1,
+    #         override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #         reranking_configuration: {
+    #           bedrock_reranking_configuration: {
     #             metadata_configuration: {
     #               selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
     #               selective_mode_configuration: {
-    #                 fields_to_include: [
-    #                   {
-    #                     field_name: "FieldForRerankingFieldNameString", # required
-    #                   },
-    #                 ],
     #                 fields_to_exclude: [
     #                   {
     #                     field_name: "FieldForRerankingFieldNameString", # required
     #                   },
     #                 ],
+    #                 fields_to_include: [
+    #                   {
+    #                     field_name: "FieldForRerankingFieldNameString", # required
+    #                   },
+    #                 ],
     #               },
     #             },
-    #           },
-    #         },
-    #         implicit_filter_configuration: {
-    #           metadata_attributes: [ # required
-    #             {
-    #               key: "MetadataAttributeSchemaKeyString", # required
-    #               type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
-    #               description: "MetadataAttributeSchemaDescriptionString", # required
+    #             model_configuration: { # required
+    #               additional_model_request_fields: {
+    #                 "AdditionalModelRequestFieldsKey" => {
+    #                 },
+    #               },
+    #               model_arn: "BedrockRerankingModelArn", # required
     #             },
-    #           ],
-    #           model_arn: "BedrockModelArn", # required
+    #             number_of_reranked_results: 1,
+    #           },
+    #           type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #         },
     #       },
     #     },
-    #     guardrail_configuration: {
-    #       guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
-    #       guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #     retrieval_query: { # required
+    #       image: {
+    #         format: "png", # required, accepts png, jpeg, gif, webp
+    #         inline_content: "data", # required
+    #       },
+    #       text: "KnowledgeBaseQueryTextString",
+    #       type: "TEXT", # accepts TEXT, IMAGE
     #     },
-    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.guardrail_action #=> String, one of "INTERVENED", "NONE"
+    #   resp.next_token #=> String
     #   resp.retrieval_results #=> Array
-    #   resp.retrieval_results[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   resp.retrieval_results[0].content.text #=> String
+    #   resp.retrieval_results[0].content.audio.s3_uri #=> String
+    #   resp.retrieval_results[0].content.audio.transcription #=> String
     #   resp.retrieval_results[0].content.byte_content #=> String
     #   resp.retrieval_results[0].content.row #=> Array
     #   resp.retrieval_results[0].content.row[0].column_name #=> String
     #   resp.retrieval_results[0].content.row[0].column_value #=> String
     #   resp.retrieval_results[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   resp.retrieval_results[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   resp.retrieval_results[0].location.s3_location.uri #=> String
-    #   resp.retrieval_results[0].location.web_location.url #=> String
+    #   resp.retrieval_results[0].content.text #=> String
+    #   resp.retrieval_results[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   resp.retrieval_results[0].content.video.s3_uri #=> String
+    #   resp.retrieval_results[0].content.video.summary #=> String
     #   resp.retrieval_results[0].location.confluence_location.url #=> String
-    #   resp.retrieval_results[0].location.salesforce_location.url #=> String
-    #   resp.retrieval_results[0].location.share_point_location.url #=> String
     #   resp.retrieval_results[0].location.custom_document_location.id #=> String
     #   resp.retrieval_results[0].location.kendra_document_location.uri #=> String
+    #   resp.retrieval_results[0].location.s3_location.uri #=> String
+    #   resp.retrieval_results[0].location.salesforce_location.url #=> String
+    #   resp.retrieval_results[0].location.share_point_location.url #=> String
     #   resp.retrieval_results[0].location.sql_location.query #=> String
-    #   resp.retrieval_results[0].score #=> Float
+    #   resp.retrieval_results[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   resp.retrieval_results[0].location.web_location.url #=> String
     #   resp.retrieval_results[0].metadata #=> Hash
-    #   resp.guardrail_action #=> String, one of "INTERVENED", "NONE"
-    #   resp.next_token #=> String
+    #   resp.retrieval_results[0].score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/Retrieve AWS API Documentation
     #
@@ -5985,14 +6033,6 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #
-    # @option params [String] :session_id
-    #   The unique identifier of the session. When you first make a
-    #   `RetrieveAndGenerate` request, Amazon Bedrock automatically generates
-    #   this value. You must reuse this value for all subsequent requests in
-    #   the same conversational session. This value allows Amazon Bedrock to
-    #   maintain context and knowledge from previous interactions. You can't
-    #   explicitly set the `sessionId` yourself.
-    #
     # @option params [required, Types::RetrieveAndGenerateInput] :input
     #   Contains the query to be made to the knowledge base.
     #
@@ -6007,36 +6047,127 @@ module Aws::BedrockAgentRuntime
     # @option params [Types::RetrieveAndGenerateSessionConfiguration] :session_configuration
     #   Contains details about the session with the knowledge base.
     #
+    # @option params [String] :session_id
+    #   The unique identifier of the session. When you first make a
+    #   `RetrieveAndGenerate` request, Amazon Bedrock automatically generates
+    #   this value. You must reuse this value for all subsequent requests in
+    #   the same conversational session. This value allows Amazon Bedrock to
+    #   maintain context and knowledge from previous interactions. You can't
+    #   explicitly set the `sessionId` yourself.
+    #
     # @return [Types::RetrieveAndGenerateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::RetrieveAndGenerateResponse#session_id #session_id} => String
-    #   * {Types::RetrieveAndGenerateResponse#output #output} => Types::RetrieveAndGenerateOutput
     #   * {Types::RetrieveAndGenerateResponse#citations #citations} => Array&lt;Types::Citation&gt;
     #   * {Types::RetrieveAndGenerateResponse#guardrail_action #guardrail_action} => String
+    #   * {Types::RetrieveAndGenerateResponse#output #output} => Types::RetrieveAndGenerateOutput
+    #   * {Types::RetrieveAndGenerateResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retrieve_and_generate({
-    #     session_id: "SessionId",
     #     input: { # required
     #       text: "RetrieveAndGenerateInputTextString", # required
     #     },
     #     retrieve_and_generate_configuration: {
-    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_SOURCES
+    #       external_sources_configuration: {
+    #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           performance_config: {
+    #             latency: "standard", # accepts standard, optimized
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
+    #         model_arn: "BedrockModelArn", # required
+    #         sources: [ # required
+    #           {
+    #             byte_content: {
+    #               content_type: "ContentType", # required
+    #               data: "data", # required
+    #               identifier: "Identifier", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
+    #           },
+    #         ],
+    #       },
     #       knowledge_base_configuration: {
+    #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           performance_config: {
+    #             latency: "standard", # accepts standard, optimized
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
+    #         orchestration_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           performance_config: {
+    #             latency: "standard", # accepts standard, optimized
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #           query_transformation_configuration: {
+    #             type: "QUERY_DECOMPOSITION", # required, accepts QUERY_DECOMPOSITION
+    #           },
+    #         },
     #         retrieval_configuration: {
     #           vector_search_configuration: { # required
-    #             number_of_results: 1,
-    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #             filter: {
-    #               equals: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
+    #               and_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
     #                 },
-    #               },
-    #               not_equals: {
+    #               ],
+    #               equals: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -6051,6 +6182,11 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
+    #               in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
     #               less_than: {
     #                 key: "FilterKey", # required
     #                 value: { # required
@@ -6061,7 +6197,12 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
-    #               in: {
+    #               list_contains: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_equals: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -6071,12 +6212,12 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
-    #               starts_with: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
+    #               or_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
     #                 },
-    #               },
-    #               list_contains: {
+    #               ],
+    #               starts_with: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -6086,178 +6227,89 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
-    #               and_all: [
-    #                 {
-    #                   # recursive RetrievalFilter
-    #                 },
-    #               ],
-    #               or_all: [
-    #                 {
-    #                   # recursive RetrievalFilter
-    #                 },
-    #               ],
     #             },
-    #             reranking_configuration: {
-    #               type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
-    #               bedrock_reranking_configuration: {
-    #                 model_configuration: { # required
-    #                   model_arn: "BedrockRerankingModelArn", # required
-    #                   additional_model_request_fields: {
-    #                     "AdditionalModelRequestFieldsKey" => {
-    #                     },
-    #                   },
+    #             implicit_filter_configuration: {
+    #               metadata_attributes: [ # required
+    #                 {
+    #                   description: "MetadataAttributeSchemaDescriptionString", # required
+    #                   key: "MetadataAttributeSchemaKeyString", # required
+    #                   type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
     #                 },
-    #                 number_of_reranked_results: 1,
+    #               ],
+    #               model_arn: "BedrockModelArn", # required
+    #             },
+    #             number_of_results: 1,
+    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #             reranking_configuration: {
+    #               bedrock_reranking_configuration: {
     #                 metadata_configuration: {
     #                   selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
     #                   selective_mode_configuration: {
-    #                     fields_to_include: [
-    #                       {
-    #                         field_name: "FieldForRerankingFieldNameString", # required
-    #                       },
-    #                     ],
     #                     fields_to_exclude: [
     #                       {
     #                         field_name: "FieldForRerankingFieldNameString", # required
     #                       },
     #                     ],
+    #                     fields_to_include: [
+    #                       {
+    #                         field_name: "FieldForRerankingFieldNameString", # required
+    #                       },
+    #                     ],
     #                   },
     #                 },
-    #               },
-    #             },
-    #             implicit_filter_configuration: {
-    #               metadata_attributes: [ # required
-    #                 {
-    #                   key: "MetadataAttributeSchemaKeyString", # required
-    #                   type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
-    #                   description: "MetadataAttributeSchemaDescriptionString", # required
+    #                 model_configuration: { # required
+    #                   additional_model_request_fields: {
+    #                     "AdditionalModelRequestFieldsKey" => {
+    #                     },
+    #                   },
+    #                   model_arn: "BedrockRerankingModelArn", # required
     #                 },
-    #               ],
-    #               model_arn: "BedrockModelArn", # required
+    #                 number_of_reranked_results: 1,
+    #               },
+    #               type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #             },
-    #           },
-    #         },
-    #         generation_configuration: {
-    #           prompt_template: {
-    #             text_prompt_template: "TextPromptTemplate",
-    #           },
-    #           guardrail_configuration: {
-    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
-    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
-    #           },
-    #           inference_config: {
-    #             text_inference_config: {
-    #               temperature: 1.0,
-    #               top_p: 1.0,
-    #               max_tokens: 1,
-    #               stop_sequences: ["RAGStopSequencesMemberString"],
-    #             },
-    #           },
-    #           additional_model_request_fields: {
-    #             "AdditionalModelRequestFieldsKey" => {
-    #             },
-    #           },
-    #           performance_config: {
-    #             latency: "standard", # accepts standard, optimized
-    #           },
-    #         },
-    #         orchestration_configuration: {
-    #           prompt_template: {
-    #             text_prompt_template: "TextPromptTemplate",
-    #           },
-    #           inference_config: {
-    #             text_inference_config: {
-    #               temperature: 1.0,
-    #               top_p: 1.0,
-    #               max_tokens: 1,
-    #               stop_sequences: ["RAGStopSequencesMemberString"],
-    #             },
-    #           },
-    #           additional_model_request_fields: {
-    #             "AdditionalModelRequestFieldsKey" => {
-    #             },
-    #           },
-    #           query_transformation_configuration: {
-    #             type: "QUERY_DECOMPOSITION", # required, accepts QUERY_DECOMPOSITION
-    #           },
-    #           performance_config: {
-    #             latency: "standard", # accepts standard, optimized
     #           },
     #         },
     #       },
-    #       external_sources_configuration: {
-    #         model_arn: "BedrockModelArn", # required
-    #         sources: [ # required
-    #           {
-    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
-    #             s3_location: {
-    #               uri: "S3Uri", # required
-    #             },
-    #             byte_content: {
-    #               identifier: "Identifier", # required
-    #               content_type: "ContentType", # required
-    #               data: "data", # required
-    #             },
-    #           },
-    #         ],
-    #         generation_configuration: {
-    #           prompt_template: {
-    #             text_prompt_template: "TextPromptTemplate",
-    #           },
-    #           guardrail_configuration: {
-    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
-    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
-    #           },
-    #           inference_config: {
-    #             text_inference_config: {
-    #               temperature: 1.0,
-    #               top_p: 1.0,
-    #               max_tokens: 1,
-    #               stop_sequences: ["RAGStopSequencesMemberString"],
-    #             },
-    #           },
-    #           additional_model_request_fields: {
-    #             "AdditionalModelRequestFieldsKey" => {
-    #             },
-    #           },
-    #           performance_config: {
-    #             latency: "standard", # accepts standard, optimized
-    #           },
-    #         },
-    #       },
+    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_SOURCES
     #     },
     #     session_configuration: {
     #       kms_key_arn: "KmsKeyArn", # required
     #     },
+    #     session_id: "SessionId",
     #   })
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
-    #   resp.output.text #=> String
     #   resp.citations #=> Array
-    #   resp.citations[0].generated_response_part.text_response_part.text #=> String
-    #   resp.citations[0].generated_response_part.text_response_part.span.start #=> Integer
     #   resp.citations[0].generated_response_part.text_response_part.span.end #=> Integer
+    #   resp.citations[0].generated_response_part.text_response_part.span.start #=> Integer
+    #   resp.citations[0].generated_response_part.text_response_part.text #=> String
     #   resp.citations[0].retrieved_references #=> Array
-    #   resp.citations[0].retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   resp.citations[0].retrieved_references[0].content.text #=> String
+    #   resp.citations[0].retrieved_references[0].content.audio.s3_uri #=> String
+    #   resp.citations[0].retrieved_references[0].content.audio.transcription #=> String
     #   resp.citations[0].retrieved_references[0].content.byte_content #=> String
     #   resp.citations[0].retrieved_references[0].content.row #=> Array
     #   resp.citations[0].retrieved_references[0].content.row[0].column_name #=> String
     #   resp.citations[0].retrieved_references[0].content.row[0].column_value #=> String
     #   resp.citations[0].retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
-    #   resp.citations[0].retrieved_references[0].location.web_location.url #=> String
+    #   resp.citations[0].retrieved_references[0].content.text #=> String
+    #   resp.citations[0].retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   resp.citations[0].retrieved_references[0].content.video.s3_uri #=> String
+    #   resp.citations[0].retrieved_references[0].content.video.summary #=> String
     #   resp.citations[0].retrieved_references[0].location.confluence_location.url #=> String
-    #   resp.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
-    #   resp.citations[0].retrieved_references[0].location.share_point_location.url #=> String
     #   resp.citations[0].retrieved_references[0].location.custom_document_location.id #=> String
     #   resp.citations[0].retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
+    #   resp.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
+    #   resp.citations[0].retrieved_references[0].location.share_point_location.url #=> String
     #   resp.citations[0].retrieved_references[0].location.sql_location.query #=> String
+    #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   resp.citations[0].retrieved_references[0].location.web_location.url #=> String
     #   resp.citations[0].retrieved_references[0].metadata #=> Hash
     #   resp.guardrail_action #=> String, one of "INTERVENED", "NONE"
+    #   resp.output.text #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerate AWS API Documentation
     #
@@ -6279,14 +6331,6 @@ module Aws::BedrockAgentRuntime
     # This operation requires permission for the `
     # bedrock:RetrieveAndGenerate` action.
     #
-    # @option params [String] :session_id
-    #   The unique identifier of the session. When you first make a
-    #   `RetrieveAndGenerate` request, Amazon Bedrock automatically generates
-    #   this value. You must reuse this value for all subsequent requests in
-    #   the same conversational session. This value allows Amazon Bedrock to
-    #   maintain context and knowledge from previous interactions. You can't
-    #   explicitly set the `sessionId` yourself.
-    #
     # @option params [required, Types::RetrieveAndGenerateInput] :input
     #   Contains the query to be made to the knowledge base.
     #
@@ -6301,10 +6345,18 @@ module Aws::BedrockAgentRuntime
     # @option params [Types::RetrieveAndGenerateSessionConfiguration] :session_configuration
     #   Contains details about the session with the knowledge base.
     #
+    # @option params [String] :session_id
+    #   The unique identifier of the session. When you first make a
+    #   `RetrieveAndGenerate` request, Amazon Bedrock automatically generates
+    #   this value. You must reuse this value for all subsequent requests in
+    #   the same conversational session. This value allows Amazon Bedrock to
+    #   maintain context and knowledge from previous interactions. You can't
+    #   explicitly set the `sessionId` yourself.
+    #
     # @return [Types::RetrieveAndGenerateStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::RetrieveAndGenerateStreamResponse#stream #stream} => Types::RetrieveAndGenerateStreamResponseOutput
     #   * {Types::RetrieveAndGenerateStreamResponse#session_id #session_id} => String
+    #   * {Types::RetrieveAndGenerateStreamResponse#stream #stream} => Types::RetrieveAndGenerateStreamResponseOutput
     #
     # @example EventStream Operation Example
     #
@@ -6348,11 +6400,20 @@ module Aws::BedrockAgentRuntime
     #   #  Example for registering callbacks with specific events
     #
     #   handler = Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput.new
-    #   handler.on_output_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::output
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
     #   end
     #   handler.on_citation_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::citation
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
     #   handler.on_guardrail_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::guardrail
@@ -6360,8 +6421,8 @@ module Aws::BedrockAgentRuntime
     #   handler.on_internal_server_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   handler.on_output_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::output
     #   end
     #   handler.on_resource_not_found_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
@@ -6372,17 +6433,8 @@ module Aws::BedrockAgentRuntime
     #   handler.on_throttling_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #   end
-    #   handler.on_access_denied_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #   end
-    #   handler.on_conflict_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #   end
-    #   handler.on_dependency_failed_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.retrieve_and_generate_stream(
@@ -6393,11 +6445,20 @@ module Aws::BedrockAgentRuntime
     #   #  2) Use a Ruby Proc object
     #   #  Example for registering callbacks with specific events
     #   handler = Proc.new do |stream|
-    #     stream.on_output_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::output
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
     #     end
     #     stream.on_citation_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::citation
+    #     end
+    #     stream.on_conflict_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #     end
     #     stream.on_guardrail_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::guardrail
@@ -6405,8 +6466,8 @@ module Aws::BedrockAgentRuntime
     #     stream.on_internal_server_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #     end
-    #     stream.on_validation_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::validationException
+    #     stream.on_output_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::output
     #     end
     #     stream.on_resource_not_found_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
@@ -6417,17 +6478,8 @@ module Aws::BedrockAgentRuntime
     #     stream.on_throttling_exception_event do |event|
     #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #     end
-    #     stream.on_access_denied_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #     end
-    #     stream.on_conflict_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #     end
-    #     stream.on_dependency_failed_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #     end
-    #     stream.on_bad_gateway_exception_event do |event|
-    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
     #     end
     #   end
     #
@@ -6438,11 +6490,20 @@ module Aws::BedrockAgentRuntime
     #
     #   #  Usage pattern c): Hybrid pattern of a) and b)
     #   handler = Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput.new
-    #   handler.on_output_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::output
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
     #   end
     #   handler.on_citation_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::citation
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #   end
     #   handler.on_guardrail_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::guardrail
@@ -6450,8 +6511,8 @@ module Aws::BedrockAgentRuntime
     #   handler.on_internal_server_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #   end
-    #   handler.on_validation_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   handler.on_output_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::output
     #   end
     #   handler.on_resource_not_found_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
@@ -6462,17 +6523,8 @@ module Aws::BedrockAgentRuntime
     #   handler.on_throttling_exception_event do |event|
     #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
     #   end
-    #   handler.on_access_denied_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #   end
-    #   handler.on_conflict_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #   end
-    #   handler.on_dependency_failed_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #   end
-    #   handler.on_bad_gateway_exception_event do |event|
-    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
     #   end
     #
     #   client.retrieve_and_generate_stream(
@@ -6497,26 +6549,109 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.retrieve_and_generate_stream({
-    #     session_id: "SessionId",
     #     input: { # required
     #       text: "RetrieveAndGenerateInputTextString", # required
     #     },
     #     retrieve_and_generate_configuration: {
-    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_SOURCES
+    #       external_sources_configuration: {
+    #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           performance_config: {
+    #             latency: "standard", # accepts standard, optimized
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
+    #         model_arn: "BedrockModelArn", # required
+    #         sources: [ # required
+    #           {
+    #             byte_content: {
+    #               content_type: "ContentType", # required
+    #               data: "data", # required
+    #               identifier: "Identifier", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
+    #           },
+    #         ],
+    #       },
     #       knowledge_base_configuration: {
+    #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           performance_config: {
+    #             latency: "standard", # accepts standard, optimized
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
+    #         orchestration_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           performance_config: {
+    #             latency: "standard", # accepts standard, optimized
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #           query_transformation_configuration: {
+    #             type: "QUERY_DECOMPOSITION", # required, accepts QUERY_DECOMPOSITION
+    #           },
+    #         },
     #         retrieval_configuration: {
     #           vector_search_configuration: { # required
-    #             number_of_results: 1,
-    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #             filter: {
-    #               equals: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
+    #               and_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
     #                 },
-    #               },
-    #               not_equals: {
+    #               ],
+    #               equals: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -6531,6 +6666,11 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
+    #               in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
     #               less_than: {
     #                 key: "FilterKey", # required
     #                 value: { # required
@@ -6541,7 +6681,12 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
-    #               in: {
+    #               list_contains: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_equals: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -6551,12 +6696,12 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
-    #               starts_with: {
-    #                 key: "FilterKey", # required
-    #                 value: { # required
+    #               or_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
     #                 },
-    #               },
-    #               list_contains: {
+    #               ],
+    #               starts_with: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -6566,203 +6711,130 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
-    #               and_all: [
-    #                 {
-    #                   # recursive RetrievalFilter
-    #                 },
-    #               ],
-    #               or_all: [
-    #                 {
-    #                   # recursive RetrievalFilter
-    #                 },
-    #               ],
     #             },
-    #             reranking_configuration: {
-    #               type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
-    #               bedrock_reranking_configuration: {
-    #                 model_configuration: { # required
-    #                   model_arn: "BedrockRerankingModelArn", # required
-    #                   additional_model_request_fields: {
-    #                     "AdditionalModelRequestFieldsKey" => {
-    #                     },
-    #                   },
+    #             implicit_filter_configuration: {
+    #               metadata_attributes: [ # required
+    #                 {
+    #                   description: "MetadataAttributeSchemaDescriptionString", # required
+    #                   key: "MetadataAttributeSchemaKeyString", # required
+    #                   type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
     #                 },
-    #                 number_of_reranked_results: 1,
+    #               ],
+    #               model_arn: "BedrockModelArn", # required
+    #             },
+    #             number_of_results: 1,
+    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #             reranking_configuration: {
+    #               bedrock_reranking_configuration: {
     #                 metadata_configuration: {
     #                   selection_mode: "SELECTIVE", # required, accepts SELECTIVE, ALL
     #                   selective_mode_configuration: {
-    #                     fields_to_include: [
-    #                       {
-    #                         field_name: "FieldForRerankingFieldNameString", # required
-    #                       },
-    #                     ],
     #                     fields_to_exclude: [
     #                       {
     #                         field_name: "FieldForRerankingFieldNameString", # required
     #                       },
     #                     ],
+    #                     fields_to_include: [
+    #                       {
+    #                         field_name: "FieldForRerankingFieldNameString", # required
+    #                       },
+    #                     ],
     #                   },
     #                 },
-    #               },
-    #             },
-    #             implicit_filter_configuration: {
-    #               metadata_attributes: [ # required
-    #                 {
-    #                   key: "MetadataAttributeSchemaKeyString", # required
-    #                   type: "STRING", # required, accepts STRING, NUMBER, BOOLEAN, STRING_LIST
-    #                   description: "MetadataAttributeSchemaDescriptionString", # required
+    #                 model_configuration: { # required
+    #                   additional_model_request_fields: {
+    #                     "AdditionalModelRequestFieldsKey" => {
+    #                     },
+    #                   },
+    #                   model_arn: "BedrockRerankingModelArn", # required
     #                 },
-    #               ],
-    #               model_arn: "BedrockModelArn", # required
+    #                 number_of_reranked_results: 1,
+    #               },
+    #               type: "BEDROCK_RERANKING_MODEL", # required, accepts BEDROCK_RERANKING_MODEL
     #             },
-    #           },
-    #         },
-    #         generation_configuration: {
-    #           prompt_template: {
-    #             text_prompt_template: "TextPromptTemplate",
-    #           },
-    #           guardrail_configuration: {
-    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
-    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
-    #           },
-    #           inference_config: {
-    #             text_inference_config: {
-    #               temperature: 1.0,
-    #               top_p: 1.0,
-    #               max_tokens: 1,
-    #               stop_sequences: ["RAGStopSequencesMemberString"],
-    #             },
-    #           },
-    #           additional_model_request_fields: {
-    #             "AdditionalModelRequestFieldsKey" => {
-    #             },
-    #           },
-    #           performance_config: {
-    #             latency: "standard", # accepts standard, optimized
-    #           },
-    #         },
-    #         orchestration_configuration: {
-    #           prompt_template: {
-    #             text_prompt_template: "TextPromptTemplate",
-    #           },
-    #           inference_config: {
-    #             text_inference_config: {
-    #               temperature: 1.0,
-    #               top_p: 1.0,
-    #               max_tokens: 1,
-    #               stop_sequences: ["RAGStopSequencesMemberString"],
-    #             },
-    #           },
-    #           additional_model_request_fields: {
-    #             "AdditionalModelRequestFieldsKey" => {
-    #             },
-    #           },
-    #           query_transformation_configuration: {
-    #             type: "QUERY_DECOMPOSITION", # required, accepts QUERY_DECOMPOSITION
-    #           },
-    #           performance_config: {
-    #             latency: "standard", # accepts standard, optimized
     #           },
     #         },
     #       },
-    #       external_sources_configuration: {
-    #         model_arn: "BedrockModelArn", # required
-    #         sources: [ # required
-    #           {
-    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
-    #             s3_location: {
-    #               uri: "S3Uri", # required
-    #             },
-    #             byte_content: {
-    #               identifier: "Identifier", # required
-    #               content_type: "ContentType", # required
-    #               data: "data", # required
-    #             },
-    #           },
-    #         ],
-    #         generation_configuration: {
-    #           prompt_template: {
-    #             text_prompt_template: "TextPromptTemplate",
-    #           },
-    #           guardrail_configuration: {
-    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
-    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
-    #           },
-    #           inference_config: {
-    #             text_inference_config: {
-    #               temperature: 1.0,
-    #               top_p: 1.0,
-    #               max_tokens: 1,
-    #               stop_sequences: ["RAGStopSequencesMemberString"],
-    #             },
-    #           },
-    #           additional_model_request_fields: {
-    #             "AdditionalModelRequestFieldsKey" => {
-    #             },
-    #           },
-    #           performance_config: {
-    #             latency: "standard", # accepts standard, optimized
-    #           },
-    #         },
-    #       },
+    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_SOURCES
     #     },
     #     session_configuration: {
     #       kms_key_arn: "KmsKeyArn", # required
     #     },
+    #     session_id: "SessionId",
     #   })
     #
     # @example Response structure
     #
+    #   resp.session_id #=> String
     #   # All events are available at resp.stream:
     #   resp.stream #=> Enumerator
-    #   resp.stream.event_types #=> [:output, :citation, :guardrail, :internal_server_exception, :validation_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :access_denied_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception]
+    #   resp.stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :citation, :conflict_exception, :dependency_failed_exception, :guardrail, :internal_server_exception, :output, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     #
-    #   # For :output event available at #on_output_event callback and response eventstream enumerator:
-    #   event.text #=> String
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
     #
     #   # For :citation event available at #on_citation_event callback and response eventstream enumerator:
-    #   event.citation.generated_response_part.text_response_part.text #=> String
-    #   event.citation.generated_response_part.text_response_part.span.start #=> Integer
     #   event.citation.generated_response_part.text_response_part.span.end #=> Integer
+    #   event.citation.generated_response_part.text_response_part.span.start #=> Integer
+    #   event.citation.generated_response_part.text_response_part.text #=> String
     #   event.citation.retrieved_references #=> Array
-    #   event.citation.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.citation.retrieved_references[0].content.text #=> String
+    #   event.citation.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.citation.retrieved_references[0].content.audio.transcription #=> String
     #   event.citation.retrieved_references[0].content.byte_content #=> String
     #   event.citation.retrieved_references[0].content.row #=> Array
     #   event.citation.retrieved_references[0].content.row[0].column_name #=> String
     #   event.citation.retrieved_references[0].content.row[0].column_value #=> String
     #   event.citation.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.citation.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.citation.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.citation.retrieved_references[0].location.web_location.url #=> String
+    #   event.citation.retrieved_references[0].content.text #=> String
+    #   event.citation.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.citation.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.citation.retrieved_references[0].content.video.summary #=> String
     #   event.citation.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.citation.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.citation.retrieved_references[0].location.share_point_location.url #=> String
     #   event.citation.retrieved_references[0].location.custom_document_location.id #=> String
     #   event.citation.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.citation.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.citation.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.citation.retrieved_references[0].location.share_point_location.url #=> String
     #   event.citation.retrieved_references[0].location.sql_location.query #=> String
+    #   event.citation.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.citation.retrieved_references[0].location.web_location.url #=> String
     #   event.citation.retrieved_references[0].metadata #=> Hash
-    #   event.generated_response_part.text_response_part.text #=> String
-    #   event.generated_response_part.text_response_part.span.start #=> Integer
     #   event.generated_response_part.text_response_part.span.end #=> Integer
+    #   event.generated_response_part.text_response_part.span.start #=> Integer
+    #   event.generated_response_part.text_response_part.text #=> String
     #   event.retrieved_references #=> Array
-    #   event.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW"
-    #   event.retrieved_references[0].content.text #=> String
+    #   event.retrieved_references[0].content.audio.s3_uri #=> String
+    #   event.retrieved_references[0].content.audio.transcription #=> String
     #   event.retrieved_references[0].content.byte_content #=> String
     #   event.retrieved_references[0].content.row #=> Array
     #   event.retrieved_references[0].content.row[0].column_name #=> String
     #   event.retrieved_references[0].content.row[0].column_value #=> String
     #   event.retrieved_references[0].content.row[0].type #=> String, one of "BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"
-    #   event.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
-    #   event.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.retrieved_references[0].location.web_location.url #=> String
+    #   event.retrieved_references[0].content.text #=> String
+    #   event.retrieved_references[0].content.type #=> String, one of "TEXT", "IMAGE", "ROW", "AUDIO", "VIDEO"
+    #   event.retrieved_references[0].content.video.s3_uri #=> String
+    #   event.retrieved_references[0].content.video.summary #=> String
     #   event.retrieved_references[0].location.confluence_location.url #=> String
-    #   event.retrieved_references[0].location.salesforce_location.url #=> String
-    #   event.retrieved_references[0].location.share_point_location.url #=> String
     #   event.retrieved_references[0].location.custom_document_location.id #=> String
     #   event.retrieved_references[0].location.kendra_document_location.uri #=> String
+    #   event.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.retrieved_references[0].location.share_point_location.url #=> String
     #   event.retrieved_references[0].location.sql_location.query #=> String
+    #   event.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"
+    #   event.retrieved_references[0].location.web_location.url #=> String
     #   event.retrieved_references[0].metadata #=> Hash
+    #
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
     #
     #   # For :guardrail event available at #on_guardrail_event callback and response eventstream enumerator:
     #   event.action #=> String, one of "INTERVENED", "NONE"
@@ -6771,8 +6843,8 @@ module Aws::BedrockAgentRuntime
     #   event.message #=> String
     #   event.reason #=> String
     #
-    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
+    #   # For :output event available at #on_output_event callback and response eventstream enumerator:
+    #   event.text #=> String
     #
     #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -6783,21 +6855,8 @@ module Aws::BedrockAgentRuntime
     #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #
-    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateStream AWS API Documentation
     #
@@ -6839,15 +6898,15 @@ module Aws::BedrockAgentRuntime
     #
     #  </note>
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow to execute.
-    #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias to use for the flow execution.
     #
     # @option params [String] :flow_execution_name
     #   The unique name for the flow execution. If you don't provide one, a
     #   system-generated name is used.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow to execute.
     #
     # @option params [required, Array<Types::FlowInput>] :inputs
     #   The input data required for the flow execution. This must match the
@@ -6864,18 +6923,18 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_flow_execution({
-    #     flow_identifier: "FlowIdentifier", # required
     #     flow_alias_identifier: "FlowAliasIdentifier", # required
     #     flow_execution_name: "FlowExecutionName",
+    #     flow_identifier: "FlowIdentifier", # required
     #     inputs: [ # required
     #       {
-    #         node_name: "NodeName", # required
-    #         node_output_name: "NodeOutputName",
     #         content: { # required
     #           document: {
     #           },
     #         },
     #         node_input_name: "NodeInputName",
+    #         node_name: "NodeName", # required
+    #         node_output_name: "NodeOutputName",
     #       },
     #     ],
     #     model_performance_configuration: {
@@ -6902,14 +6961,14 @@ module Aws::BedrockAgentRuntime
     # further processing of the flow and changes the execution status to
     # `Aborted`.
     #
-    # @option params [required, String] :flow_identifier
-    #   The unique identifier of the flow.
+    # @option params [required, String] :execution_identifier
+    #   The unique identifier of the flow execution to stop.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the execution.
     #
-    # @option params [required, String] :execution_identifier
-    #   The unique identifier of the flow execution to stop.
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
     #
     # @return [Types::StopFlowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6919,9 +6978,9 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_flow_execution({
-    #     flow_identifier: "FlowIdentifier", # required
-    #     flow_alias_identifier: "FlowAliasIdentifier", # required
     #     execution_identifier: "FlowExecutionIdentifier", # required
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -7007,39 +7066,39 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
     #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier of the session to modify. You can specify either
+    #   the session's `sessionId` or its Amazon Resource Name (ARN).
+    #
     # @option params [Hash<String,String>] :session_metadata
     #   A map of key-value pairs containing attributes to be persisted across
     #   the session. For example the user's ID, their language preference,
     #   and the type of device they are using.
     #
-    # @option params [required, String] :session_identifier
-    #   The unique identifier of the session to modify. You can specify either
-    #   the session's `sessionId` or its Amazon Resource Name (ARN).
-    #
     # @return [Types::UpdateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateSessionResponse#session_id #session_id} => String
-    #   * {Types::UpdateSessionResponse#session_arn #session_arn} => String
-    #   * {Types::UpdateSessionResponse#session_status #session_status} => String
     #   * {Types::UpdateSessionResponse#created_at #created_at} => Time
     #   * {Types::UpdateSessionResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdateSessionResponse#session_arn #session_arn} => String
+    #   * {Types::UpdateSessionResponse#session_id #session_id} => String
+    #   * {Types::UpdateSessionResponse#session_status #session_status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_session({
+    #     session_identifier: "SessionIdentifier", # required
     #     session_metadata: {
     #       "SessionMetadataKey" => "SessionMetadataValue",
     #     },
-    #     session_identifier: "SessionIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
-    #   resp.session_arn #=> String
-    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UpdateSession AWS API Documentation
     #
@@ -7068,7 +7127,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

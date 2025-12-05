@@ -66,6 +66,8 @@ module Aws::S3Vectors
     ListIndexesOutputList = Shapes::ListShape.new(name: 'ListIndexesOutputList')
     ListIndexesPrefix = Shapes::StringShape.new(name: 'ListIndexesPrefix')
     ListOutputVector = Shapes::StructureShape.new(name: 'ListOutputVector')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListVectorBucketsInput = Shapes::StructureShape.new(name: 'ListVectorBucketsInput')
     ListVectorBucketsMaxResults = Shapes::IntegerShape.new(name: 'ListVectorBucketsMaxResults')
     ListVectorBucketsNextToken = Shapes::StringShape.new(name: 'ListVectorBucketsNextToken')
@@ -94,13 +96,22 @@ module Aws::S3Vectors
     QueryVectorsOutput = Shapes::StructureShape.new(name: 'QueryVectorsOutput')
     QueryVectorsOutputList = Shapes::ListShape.new(name: 'QueryVectorsOutputList')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
+    ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SseType = Shapes::StringShape.new(name: 'SseType')
     String = Shapes::StringShape.new(name: 'String')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -126,6 +137,8 @@ module Aws::S3Vectors
     CreateIndexInput.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "dimension"))
     CreateIndexInput.add_member(:distance_metric, Shapes::ShapeRef.new(shape: DistanceMetric, required: true, location_name: "distanceMetric"))
     CreateIndexInput.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
+    CreateIndexInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    CreateIndexInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateIndexInput.struct_class = Types::CreateIndexInput
 
     CreateIndexOutput.add_member(:index_arn, Shapes::ShapeRef.new(shape: IndexArn, required: true, location_name: "indexArn"))
@@ -133,6 +146,7 @@ module Aws::S3Vectors
 
     CreateVectorBucketInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, required: true, location_name: "vectorBucketName"))
     CreateVectorBucketInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    CreateVectorBucketInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateVectorBucketInput.struct_class = Types::CreateVectorBucketInput
 
     CreateVectorBucketOutput.add_member(:vector_bucket_arn, Shapes::ShapeRef.new(shape: VectorBucketArn, required: true, location_name: "vectorBucketArn"))
@@ -223,6 +237,7 @@ module Aws::S3Vectors
     Index.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "dimension"))
     Index.add_member(:distance_metric, Shapes::ShapeRef.new(shape: DistanceMetric, required: true, location_name: "distanceMetric"))
     Index.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
+    Index.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     Index.struct_class = Types::Index
 
     IndexSummary.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, required: true, location_name: "vectorBucketName"))
@@ -263,6 +278,12 @@ module Aws::S3Vectors
     ListOutputVector.add_member(:data, Shapes::ShapeRef.new(shape: VectorData, location_name: "data"))
     ListOutputVector.add_member(:metadata, Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
     ListOutputVector.struct_class = Types::ListOutputVector
+
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
     ListVectorBucketsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListVectorBucketsMaxResults, location_name: "maxResults"))
     ListVectorBucketsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListVectorBucketsNextToken, location_name: "nextToken"))
@@ -322,10 +343,9 @@ module Aws::S3Vectors
 
     PutVectorsOutput.struct_class = Types::PutVectorsOutput
 
-    QueryOutputVector.add_member(:key, Shapes::ShapeRef.new(shape: VectorKey, required: true, location_name: "key"))
-    QueryOutputVector.add_member(:data, Shapes::ShapeRef.new(shape: VectorData, location_name: "data"))
-    QueryOutputVector.add_member(:metadata, Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
     QueryOutputVector.add_member(:distance, Shapes::ShapeRef.new(shape: Float, location_name: "distance"))
+    QueryOutputVector.add_member(:key, Shapes::ShapeRef.new(shape: VectorKey, required: true, location_name: "key"))
+    QueryOutputVector.add_member(:metadata, Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
     QueryOutputVector.struct_class = Types::QueryOutputVector
 
     QueryVectorsInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
@@ -353,8 +373,25 @@ module Aws::S3Vectors
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
@@ -447,6 +484,7 @@ module Aws::S3Vectors
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_vector_bucket, Seahorse::Model::Operation.new.tap do |o|
@@ -462,6 +500,7 @@ module Aws::S3Vectors
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_vector_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -583,6 +622,21 @@ module Aws::S3Vectors
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:list_vector_buckets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVectorBuckets"
         o.http_method = "POST"
@@ -676,6 +730,38 @@ module Aws::S3Vectors
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KmsDisabledException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

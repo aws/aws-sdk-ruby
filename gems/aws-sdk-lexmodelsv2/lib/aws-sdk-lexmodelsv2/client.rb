@@ -1074,6 +1074,12 @@ module Aws::LexModelsV2
     #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
     #   with the user.
     #
+    # @option params [Types::UnifiedSpeechSettings] :unified_speech_settings
+    #   Unified speech settings to configure for the new bot locale.
+    #
+    # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
+    #   Speech-to-text settings to configure for the new bot locale.
+    #
     # @option params [Types::GenerativeAISettings] :generative_ai_settings
     #   Contains specifications about the generative AI capabilities from
     #   Amazon Bedrock that you can turn on for your bot.
@@ -1093,6 +1099,8 @@ module Aws::LexModelsV2
     #   * {Types::CreateBotLocaleResponse#description #description} => String
     #   * {Types::CreateBotLocaleResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::CreateBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
+    #   * {Types::CreateBotLocaleResponse#unified_speech_settings #unified_speech_settings} => Types::UnifiedSpeechSettings
+    #   * {Types::CreateBotLocaleResponse#speech_recognition_settings #speech_recognition_settings} => Types::SpeechRecognitionSettings
     #   * {Types::CreateBotLocaleResponse#bot_locale_status #bot_locale_status} => String
     #   * {Types::CreateBotLocaleResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
@@ -1107,8 +1115,23 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
-    #       voice_id: "VoiceId", # required
     #       engine: "standard", # accepts standard, neural, long-form, generative
+    #       voice_id: "VoiceId", # required
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId",
+    #       },
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId",
+    #         },
+    #       },
     #     },
     #     generative_ai_settings: {
     #       runtime_settings: {
@@ -1172,8 +1195,13 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
-    #   resp.voice_settings.voice_id #=> String
     #   resp.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.voice_settings.voice_id #=> String
+    #   resp.unified_speech_settings.speech_foundation_model.model_arn #=> String
+    #   resp.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
+    #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.creation_date_time #=> Time
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
@@ -3598,6 +3626,8 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#description #description} => String
     #   * {Types::DescribeBotLocaleResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::DescribeBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
+    #   * {Types::DescribeBotLocaleResponse#unified_speech_settings #unified_speech_settings} => Types::UnifiedSpeechSettings
+    #   * {Types::DescribeBotLocaleResponse#speech_recognition_settings #speech_recognition_settings} => Types::SpeechRecognitionSettings
     #   * {Types::DescribeBotLocaleResponse#intents_count #intents_count} => Integer
     #   * {Types::DescribeBotLocaleResponse#slot_types_count #slot_types_count} => Integer
     #   * {Types::DescribeBotLocaleResponse#bot_locale_status #bot_locale_status} => String
@@ -3626,8 +3656,13 @@ module Aws::LexModelsV2
     #   resp.locale_name #=> String
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
-    #   resp.voice_settings.voice_id #=> String
     #   resp.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.voice_settings.voice_id #=> String
+    #   resp.unified_speech_settings.speech_foundation_model.model_arn #=> String
+    #   resp.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
+    #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.intents_count #=> Integer
     #   resp.slot_types_count #=> Integer
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
@@ -4088,9 +4123,14 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.bot_version #=> String
     #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
-    #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
+    #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.model_arn #=> String
+    #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.voice_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -8516,10 +8556,25 @@ module Aws::LexModelsV2
     #         locale_id: "LocaleId", # required
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
-    #           voice_id: "VoiceId", # required
     #           engine: "standard", # accepts standard, neural, long-form, generative
+    #           voice_id: "VoiceId", # required
+    #         },
+    #         speech_recognition_settings: {
+    #           speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
+    #           speech_model_config: {
+    #             deepgram_config: {
+    #               api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #               model_id: "DeepgramModelId",
+    #             },
+    #           },
     #         },
     #         speech_detection_sensitivity: "Default", # accepts Default, HighNoiseTolerance, MaximumNoiseTolerance
+    #         unified_speech_settings: {
+    #           speech_foundation_model: { # required
+    #             model_arn: "BedrockModelArn", # required
+    #             voice_id: "VoiceId",
+    #           },
+    #         },
     #       },
     #       custom_vocabulary_import_specification: {
     #         bot_id: "Id", # required
@@ -8565,9 +8620,14 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.bot_version #=> String
     #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
-    #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
+    #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.model_arn #=> String
+    #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.voice_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -9139,6 +9199,12 @@ module Aws::LexModelsV2
     #   The new Amazon Polly voice Amazon Lex should use for voice interaction
     #   with the user.
     #
+    # @option params [Types::UnifiedSpeechSettings] :unified_speech_settings
+    #   Updated unified speech settings to apply to the bot locale.
+    #
+    # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
+    #   Updated speech-to-text settings to apply to the bot locale.
+    #
     # @option params [Types::GenerativeAISettings] :generative_ai_settings
     #   Contains settings for generative AI features powered by Amazon Bedrock
     #   for your bot locale. Use this object to turn generative AI features on
@@ -9160,6 +9226,8 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#description #description} => String
     #   * {Types::UpdateBotLocaleResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::UpdateBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
+    #   * {Types::UpdateBotLocaleResponse#unified_speech_settings #unified_speech_settings} => Types::UnifiedSpeechSettings
+    #   * {Types::UpdateBotLocaleResponse#speech_recognition_settings #speech_recognition_settings} => Types::SpeechRecognitionSettings
     #   * {Types::UpdateBotLocaleResponse#bot_locale_status #bot_locale_status} => String
     #   * {Types::UpdateBotLocaleResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
     #   * {Types::UpdateBotLocaleResponse#creation_date_time #creation_date_time} => Time
@@ -9177,8 +9245,23 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
-    #       voice_id: "VoiceId", # required
     #       engine: "standard", # accepts standard, neural, long-form, generative
+    #       voice_id: "VoiceId", # required
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId",
+    #       },
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId",
+    #         },
+    #       },
     #     },
     #     generative_ai_settings: {
     #       runtime_settings: {
@@ -9242,8 +9325,13 @@ module Aws::LexModelsV2
     #   resp.locale_name #=> String
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
-    #   resp.voice_settings.voice_id #=> String
     #   resp.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.voice_settings.voice_id #=> String
+    #   resp.unified_speech_settings.speech_foundation_model.model_arn #=> String
+    #   resp.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
+    #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -10630,7 +10718,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

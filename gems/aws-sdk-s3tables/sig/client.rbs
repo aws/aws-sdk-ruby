@@ -111,12 +111,16 @@ module Aws
                                     required: bool?
                                   },
                                 ]
-                              }
+                              },
+                              properties: Hash[::String, ::String]?
                             }?
                           },
                           ?encryption_configuration: {
                             sse_algorithm: ("AES256" | "aws:kms"),
                             kms_key_arn: ::String?
+                          },
+                          ?storage_class_configuration: {
+                            storage_class: ("STANDARD" | "INTELLIGENT_TIERING")
                           },
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateTableResponseSuccess
@@ -132,6 +136,9 @@ module Aws
                                  ?encryption_configuration: {
                                    sse_algorithm: ("AES256" | "aws:kms"),
                                    kms_key_arn: ::String?
+                                 },
+                                 ?storage_class_configuration: {
+                                   storage_class: ("STANDARD" | "INTELLIGENT_TIERING")
                                  },
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateTableBucketResponseSuccess
@@ -177,6 +184,13 @@ module Aws
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#delete_table_bucket_replication-instance_method
+      def delete_table_bucket_replication: (
+                                             table_bucket_arn: ::String,
+                                             ?version_token: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#delete_table_policy-instance_method
       def delete_table_policy: (
                                  table_bucket_arn: ::String,
@@ -184,6 +198,13 @@ module Aws
                                  name: ::String
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#delete_table_replication-instance_method
+      def delete_table_replication: (
+                                      table_arn: ::String,
+                                      version_token: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _GetNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNamespaceResponse]
@@ -219,6 +240,7 @@ module Aws
         def owner_account_id: () -> ::String
         def format: () -> ("ICEBERG")
         def table_bucket_id: () -> ::String
+        def managed_table_information: () -> Types::ManagedTableInformation
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table-instance_method
       def get_table: (
@@ -286,6 +308,27 @@ module Aws
                                    ) -> _GetTableBucketPolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableBucketPolicyResponseSuccess
 
+      interface _GetTableBucketReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableBucketReplicationResponse]
+        def version_token: () -> ::String
+        def configuration: () -> Types::TableBucketReplicationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_bucket_replication-instance_method
+      def get_table_bucket_replication: (
+                                          table_bucket_arn: ::String
+                                        ) -> _GetTableBucketReplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableBucketReplicationResponseSuccess
+
+      interface _GetTableBucketStorageClassResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableBucketStorageClassResponse]
+        def storage_class_configuration: () -> Types::StorageClassConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_bucket_storage_class-instance_method
+      def get_table_bucket_storage_class: (
+                                            table_bucket_arn: ::String
+                                          ) -> _GetTableBucketStorageClassResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableBucketStorageClassResponseSuccess
+
       interface _GetTableEncryptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableEncryptionResponse]
         def encryption_configuration: () -> Types::EncryptionConfiguration
@@ -349,6 +392,63 @@ module Aws
                               name: ::String
                             ) -> _GetTablePolicyResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTablePolicyResponseSuccess
+
+      interface _GetTableRecordExpirationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableRecordExpirationConfigurationResponse]
+        def configuration: () -> Types::TableRecordExpirationConfigurationValue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_record_expiration_configuration-instance_method
+      def get_table_record_expiration_configuration: (
+                                                       table_arn: ::String
+                                                     ) -> _GetTableRecordExpirationConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableRecordExpirationConfigurationResponseSuccess
+
+      interface _GetTableRecordExpirationJobStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableRecordExpirationJobStatusResponse]
+        def status: () -> ("NotYetRun" | "Successful" | "Failed" | "Disabled")
+        def last_run_timestamp: () -> ::Time
+        def failure_message: () -> ::String
+        def metrics: () -> Types::TableRecordExpirationJobMetrics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_record_expiration_job_status-instance_method
+      def get_table_record_expiration_job_status: (
+                                                    table_arn: ::String
+                                                  ) -> _GetTableRecordExpirationJobStatusResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableRecordExpirationJobStatusResponseSuccess
+
+      interface _GetTableReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableReplicationResponse]
+        def version_token: () -> ::String
+        def configuration: () -> Types::TableReplicationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_replication-instance_method
+      def get_table_replication: (
+                                   table_arn: ::String
+                                 ) -> _GetTableReplicationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableReplicationResponseSuccess
+
+      interface _GetTableReplicationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableReplicationStatusResponse]
+        def source_table_arn: () -> ::String
+        def destinations: () -> ::Array[Types::ReplicationDestinationStatusModel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_replication_status-instance_method
+      def get_table_replication_status: (
+                                          table_arn: ::String
+                                        ) -> _GetTableReplicationStatusResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableReplicationStatusResponseSuccess
+
+      interface _GetTableStorageClassResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableStorageClassResponse]
+        def storage_class_configuration: () -> Types::StorageClassConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_storage_class-instance_method
+      def get_table_storage_class: (
+                                     table_bucket_arn: ::String,
+                                     namespace: ::String,
+                                     name: ::String
+                                   ) -> _GetTableStorageClassResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableStorageClassResponseSuccess
 
       interface _ListNamespacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNamespacesResponse]
@@ -442,6 +542,39 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _PutTableBucketReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTableBucketReplicationResponse]
+        def version_token: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_bucket_replication-instance_method
+      def put_table_bucket_replication: (
+                                          table_bucket_arn: ::String,
+                                          ?version_token: ::String,
+                                          configuration: {
+                                            role: ::String,
+                                            rules: Array[
+                                              {
+                                                destinations: Array[
+                                                  {
+                                                    destination_table_bucket_arn: ::String
+                                                  },
+                                                ]
+                                              },
+                                            ]
+                                          }
+                                        ) -> _PutTableBucketReplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTableBucketReplicationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_bucket_storage_class-instance_method
+      def put_table_bucket_storage_class: (
+                                            table_bucket_arn: ::String,
+                                            storage_class_configuration: {
+                                              storage_class: ("STANDARD" | "INTELLIGENT_TIERING")
+                                            }
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_maintenance_configuration-instance_method
       def put_table_maintenance_configuration: (
                                                  table_bucket_arn: ::String,
@@ -472,6 +605,42 @@ module Aws
                               resource_policy: ::String
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_record_expiration_configuration-instance_method
+      def put_table_record_expiration_configuration: (
+                                                       table_arn: ::String,
+                                                       value: {
+                                                         status: ("enabled" | "disabled")?,
+                                                         settings: {
+                                                           days: ::Integer?
+                                                         }?
+                                                       }
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutTableReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTableReplicationResponse]
+        def version_token: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_replication-instance_method
+      def put_table_replication: (
+                                   table_arn: ::String,
+                                   ?version_token: ::String,
+                                   configuration: {
+                                     role: ::String,
+                                     rules: Array[
+                                       {
+                                         destinations: Array[
+                                           {
+                                             destination_table_bucket_arn: ::String
+                                           },
+                                         ]
+                                       },
+                                     ]
+                                   }
+                                 ) -> _PutTableReplicationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTableReplicationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#rename_table-instance_method
       def rename_table: (

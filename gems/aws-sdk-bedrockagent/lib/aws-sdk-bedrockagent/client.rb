@@ -2294,6 +2294,20 @@ module Aws::BedrockAgent
     #           bedrock_embedding_model_configuration: {
     #             dimensions: 1,
     #             embedding_data_type: "FLOAT32", # accepts FLOAT32, BINARY
+    #             audio: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 },
+    #               },
+    #             ],
+    #             video: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #         },
     #         supplemental_data_storage_configuration: {
@@ -2466,6 +2480,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.dimensions #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.embedding_data_type #=> String, one of "FLOAT32", "BINARY"
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio[0].segmentation_configuration.fixed_length_duration #=> Integer
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
@@ -4323,7 +4341,7 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Gets information about a knoweldge base.
+    # Gets information about a knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
     #   The unique identifier of the knowledge base you want to get
@@ -4350,6 +4368,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.dimensions #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.embedding_data_type #=> String, one of "FLOAT32", "BINARY"
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio[0].segmentation_configuration.fixed_length_duration #=> Integer
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
@@ -7279,6 +7301,20 @@ module Aws::BedrockAgent
     #           bedrock_embedding_model_configuration: {
     #             dimensions: 1,
     #             embedding_data_type: "FLOAT32", # accepts FLOAT32, BINARY
+    #             audio: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 },
+    #               },
+    #             ],
+    #             video: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #         },
     #         supplemental_data_storage_configuration: {
@@ -7448,6 +7484,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.dimensions #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.embedding_data_type #=> String, one of "FLOAT32", "BINARY"
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio[0].segmentation_configuration.fixed_length_duration #=> Integer
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
@@ -8103,7 +8143,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

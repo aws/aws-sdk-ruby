@@ -566,8 +566,10 @@ module Aws::Glue
     EnclosedInStringPropertiesMinOne = Shapes::ListShape.new(name: 'EnclosedInStringPropertiesMinOne')
     EnclosedInStringProperty = Shapes::StringShape.new(name: 'EnclosedInStringProperty')
     EnclosedInStringPropertyWithQuote = Shapes::StringShape.new(name: 'EnclosedInStringPropertyWithQuote')
+    EncryptedKeyMetadataString = Shapes::StringShape.new(name: 'EncryptedKeyMetadataString')
     EncryptionAtRest = Shapes::StructureShape.new(name: 'EncryptionAtRest')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionKeyIdString = Shapes::StringShape.new(name: 'EncryptionKeyIdString')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityFieldName = Shapes::StringShape.new(name: 'EntityFieldName')
@@ -823,6 +825,7 @@ module Aws::Glue
     IcebergCompactionConfiguration = Shapes::StructureShape.new(name: 'IcebergCompactionConfiguration')
     IcebergCompactionMetrics = Shapes::StructureShape.new(name: 'IcebergCompactionMetrics')
     IcebergDocument = Shapes::DocumentShape.new(name: 'IcebergDocument', document: true)
+    IcebergEncryptedKey = Shapes::StructureShape.new(name: 'IcebergEncryptedKey')
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
     IcebergNullOrder = Shapes::StringShape.new(name: 'IcebergNullOrder')
     IcebergOptimizationProperties = Shapes::StructureShape.new(name: 'IcebergOptimizationProperties')
@@ -848,6 +851,7 @@ module Aws::Glue
     IcebergTargetCompressionType = Shapes::StringShape.new(name: 'IcebergTargetCompressionType')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
     IcebergTransformString = Shapes::StringShape.new(name: 'IcebergTransformString')
+    IcebergUpdateAction = Shapes::StringShape.new(name: 'IcebergUpdateAction')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     IdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IdentityCenterInstanceArn')
@@ -950,6 +954,7 @@ module Aws::Glue
     LastActiveDefinition = Shapes::StructureShape.new(name: 'LastActiveDefinition')
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
+    LastRefreshType = Shapes::StringShape.new(name: 'LastRefreshType')
     LatestSchemaVersionBoolean = Shapes::BooleanShape.new(name: 'LatestSchemaVersionBoolean')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     LimitedPathList = Shapes::ListShape.new(name: 'LimitedPathList')
@@ -1212,6 +1217,7 @@ module Aws::Glue
     RedshiftSource = Shapes::StructureShape.new(name: 'RedshiftSource')
     RedshiftTarget = Shapes::StructureShape.new(name: 'RedshiftTarget')
     ReferenceDatasetsList = Shapes::ListShape.new(name: 'ReferenceDatasetsList')
+    RefreshSeconds = Shapes::IntegerShape.new(name: 'RefreshSeconds')
     RefreshToken = Shapes::StringShape.new(name: 'RefreshToken')
     RegisterSchemaVersionInput = Shapes::StructureShape.new(name: 'RegisterSchemaVersionInput')
     RegisterSchemaVersionResponse = Shapes::StructureShape.new(name: 'RegisterSchemaVersionResponse')
@@ -1444,6 +1450,7 @@ module Aws::Glue
     TableVersion = Shapes::StructureShape.new(name: 'TableVersion')
     TableVersionError = Shapes::StructureShape.new(name: 'TableVersionError')
     TableVersionErrors = Shapes::ListShape.new(name: 'TableVersionErrors')
+    TableVersionId = Shapes::IntegerShape.new(name: 'TableVersionId')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeysList = Shapes::ListShape.new(name: 'TagKeysList')
@@ -1606,6 +1613,7 @@ module Aws::Glue
     ViewRepresentationInput = Shapes::StructureShape.new(name: 'ViewRepresentationInput')
     ViewRepresentationInputList = Shapes::ListShape.new(name: 'ViewRepresentationInputList')
     ViewRepresentationList = Shapes::ListShape.new(name: 'ViewRepresentationList')
+    ViewSubObjectVersionIdsList = Shapes::ListShape.new(name: 'ViewSubObjectVersionIdsList')
     ViewSubObjectsList = Shapes::ListShape.new(name: 'ViewSubObjectsList')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
     ViewUpdateAction = Shapes::StringShape.new(name: 'ViewUpdateAction')
@@ -4706,6 +4714,7 @@ module Aws::Glue
     GetUnfilteredTableMetadataResponse.add_member(:cell_filters, Shapes::ShapeRef.new(shape: ColumnRowFilterList, location_name: "CellFilters"))
     GetUnfilteredTableMetadataResponse.add_member(:query_authorization_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryAuthorizationId"))
     GetUnfilteredTableMetadataResponse.add_member(:is_multi_dialect_view, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMultiDialectView"))
+    GetUnfilteredTableMetadataResponse.add_member(:is_materialized_view, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMaterializedView"))
     GetUnfilteredTableMetadataResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "ResourceArn"))
     GetUnfilteredTableMetadataResponse.add_member(:is_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsProtected"))
     GetUnfilteredTableMetadataResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
@@ -4860,6 +4869,12 @@ module Aws::Glue
     IcebergCompactionMetrics.add_member(:job_duration_in_hour, Shapes::ShapeRef.new(shape: dpuDurationInHour, location_name: "JobDurationInHour"))
     IcebergCompactionMetrics.struct_class = Types::IcebergCompactionMetrics
 
+    IcebergEncryptedKey.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyIdString, required: true, location_name: "KeyId"))
+    IcebergEncryptedKey.add_member(:encrypted_key_metadata, Shapes::ShapeRef.new(shape: EncryptedKeyMetadataString, required: true, location_name: "EncryptedKeyMetadata"))
+    IcebergEncryptedKey.add_member(:encrypted_by_id, Shapes::ShapeRef.new(shape: EncryptionKeyIdString, location_name: "EncryptedById"))
+    IcebergEncryptedKey.add_member(:properties, Shapes::ShapeRef.new(shape: StringToStringMap, location_name: "Properties"))
+    IcebergEncryptedKey.struct_class = Types::IcebergEncryptedKey
+
     IcebergInput.add_member(:metadata_operation, Shapes::ShapeRef.new(shape: MetadataOperation, required: true, location_name: "MetadataOperation"))
     IcebergInput.add_member(:version, Shapes::ShapeRef.new(shape: VersionString, location_name: "Version"))
     IcebergInput.add_member(:create_iceberg_table_input, Shapes::ShapeRef.new(shape: CreateIcebergTableInput, location_name: "CreateIcebergTableInput"))
@@ -4938,6 +4953,8 @@ module Aws::Glue
     IcebergStructField.add_member(:type, Shapes::ShapeRef.new(shape: IcebergDocument, required: true, location_name: "Type"))
     IcebergStructField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Required"))
     IcebergStructField.add_member(:doc, Shapes::ShapeRef.new(shape: CommentString, location_name: "Doc"))
+    IcebergStructField.add_member(:initial_default, Shapes::ShapeRef.new(shape: IcebergDocument, location_name: "InitialDefault"))
+    IcebergStructField.add_member(:write_default, Shapes::ShapeRef.new(shape: IcebergDocument, location_name: "WriteDefault"))
     IcebergStructField.struct_class = Types::IcebergStructField
 
     IcebergStructFieldList.member = Shapes::ShapeRef.new(shape: IcebergStructField)
@@ -4947,6 +4964,9 @@ module Aws::Glue
     IcebergTableUpdate.add_member(:sort_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "SortOrder"))
     IcebergTableUpdate.add_member(:location, Shapes::ShapeRef.new(shape: LocationString, required: true, location_name: "Location"))
     IcebergTableUpdate.add_member(:properties, Shapes::ShapeRef.new(shape: StringToStringMap, location_name: "Properties"))
+    IcebergTableUpdate.add_member(:action, Shapes::ShapeRef.new(shape: IcebergUpdateAction, location_name: "Action"))
+    IcebergTableUpdate.add_member(:encryption_key, Shapes::ShapeRef.new(shape: IcebergEncryptedKey, location_name: "EncryptionKey"))
+    IcebergTableUpdate.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyIdString, location_name: "KeyId"))
     IcebergTableUpdate.struct_class = Types::IcebergTableUpdate
 
     IcebergTableUpdateList.member = Shapes::ShapeRef.new(shape: IcebergTableUpdate)
@@ -6993,6 +7013,7 @@ module Aws::Glue
     Table.add_member(:federated_table, Shapes::ShapeRef.new(shape: FederatedTable, location_name: "FederatedTable"))
     Table.add_member(:view_definition, Shapes::ShapeRef.new(shape: ViewDefinition, location_name: "ViewDefinition"))
     Table.add_member(:is_multi_dialect_view, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsMultiDialectView"))
+    Table.add_member(:is_materialized_view, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsMaterializedView"))
     Table.add_member(:status, Shapes::ShapeRef.new(shape: TableStatus, location_name: "Status"))
     Table.struct_class = Types::Table
 
@@ -7612,14 +7633,24 @@ module Aws::Glue
 
     ViewDefinition.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
     ViewDefinition.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
+    ViewDefinition.add_member(:view_version_id, Shapes::ShapeRef.new(shape: TableVersionId, location_name: "ViewVersionId"))
+    ViewDefinition.add_member(:view_version_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ViewVersionToken"))
+    ViewDefinition.add_member(:refresh_seconds, Shapes::ShapeRef.new(shape: RefreshSeconds, location_name: "RefreshSeconds"))
+    ViewDefinition.add_member(:last_refresh_type, Shapes::ShapeRef.new(shape: LastRefreshType, location_name: "LastRefreshType"))
     ViewDefinition.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
+    ViewDefinition.add_member(:sub_object_version_ids, Shapes::ShapeRef.new(shape: ViewSubObjectVersionIdsList, location_name: "SubObjectVersionIds"))
     ViewDefinition.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationList, location_name: "Representations"))
     ViewDefinition.struct_class = Types::ViewDefinition
 
     ViewDefinitionInput.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
     ViewDefinitionInput.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
     ViewDefinitionInput.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationInputList, location_name: "Representations"))
+    ViewDefinitionInput.add_member(:view_version_id, Shapes::ShapeRef.new(shape: TableVersionId, location_name: "ViewVersionId"))
+    ViewDefinitionInput.add_member(:view_version_token, Shapes::ShapeRef.new(shape: VersionString, location_name: "ViewVersionToken"))
+    ViewDefinitionInput.add_member(:refresh_seconds, Shapes::ShapeRef.new(shape: RefreshSeconds, location_name: "RefreshSeconds"))
+    ViewDefinitionInput.add_member(:last_refresh_type, Shapes::ShapeRef.new(shape: LastRefreshType, location_name: "LastRefreshType"))
     ViewDefinitionInput.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
+    ViewDefinitionInput.add_member(:sub_object_version_ids, Shapes::ShapeRef.new(shape: ViewSubObjectVersionIdsList, location_name: "SubObjectVersionIds"))
     ViewDefinitionInput.struct_class = Types::ViewDefinitionInput
 
     ViewRepresentation.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
@@ -7640,6 +7671,8 @@ module Aws::Glue
     ViewRepresentationInputList.member = Shapes::ShapeRef.new(shape: ViewRepresentationInput)
 
     ViewRepresentationList.member = Shapes::ShapeRef.new(shape: ViewRepresentation)
+
+    ViewSubObjectVersionIdsList.member = Shapes::ShapeRef.new(shape: TableVersionId)
 
     ViewSubObjectsList.member = Shapes::ShapeRef.new(shape: ArnString)
 

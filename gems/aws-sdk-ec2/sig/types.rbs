@@ -13960,6 +13960,7 @@ module Aws::EC2
       attr_accessor availability_mode: ("zonal" | "regional")
       attr_accessor auto_scaling_ips: ("enabled" | "disabled")
       attr_accessor auto_provision_zones: ("enabled" | "disabled")
+      attr_accessor attached_appliances: ::Array[Types::NatGatewayAttachedAppliance]
       attr_accessor route_table_id: ::String
       SENSITIVE: []
     end
@@ -13975,6 +13976,17 @@ module Aws::EC2
       attr_accessor status: ("assigning" | "unassigning" | "associating" | "disassociating" | "succeeded" | "failed")
       attr_accessor availability_zone: ::String
       attr_accessor availability_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class NatGatewayAttachedAppliance
+      attr_accessor type: ("network-firewall-proxy")
+      attr_accessor appliance_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor attachment_state: ("attaching" | "attached" | "detaching" | "detached" | "attach-failed" | "detach-failed")
+      attr_accessor modification_state: ("modifying" | "completed" | "failed")
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
       SENSITIVE: []
     end
 

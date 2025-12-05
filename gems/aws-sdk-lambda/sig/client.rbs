@@ -119,6 +119,53 @@ module Aws
                           ) -> _AddPermissionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPermissionResponseSuccess
 
+      interface _CheckpointDurableExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckpointDurableExecutionResponse]
+        def checkpoint_token: () -> ::String
+        def new_execution_state: () -> Types::CheckpointUpdatedExecutionState
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#checkpoint_durable_execution-instance_method
+      def checkpoint_durable_execution: (
+                                          durable_execution_arn: ::String,
+                                          checkpoint_token: ::String,
+                                          ?updates: Array[
+                                            {
+                                              id: ::String,
+                                              parent_id: ::String?,
+                                              name: ::String?,
+                                              type: ("EXECUTION" | "CONTEXT" | "STEP" | "WAIT" | "CALLBACK" | "CHAINED_INVOKE"),
+                                              sub_type: ::String?,
+                                              action: ("START" | "SUCCEED" | "FAIL" | "RETRY" | "CANCEL"),
+                                              payload: ::String?,
+                                              error: {
+                                                error_message: ::String?,
+                                                error_type: ::String?,
+                                                error_data: ::String?,
+                                                stack_trace: Array[::String]?
+                                              }?,
+                                              context_options: {
+                                                replay_children: bool?
+                                              }?,
+                                              step_options: {
+                                                next_attempt_delay_seconds: ::Integer?
+                                              }?,
+                                              wait_options: {
+                                                wait_seconds: ::Integer?
+                                              }?,
+                                              callback_options: {
+                                                timeout_seconds: ::Integer?,
+                                                heartbeat_timeout_seconds: ::Integer?
+                                              }?,
+                                              chained_invoke_options: {
+                                                function_name: ::String,
+                                                tenant_id: ::String?
+                                              }?
+                                            },
+                                          ],
+                                          ?client_token: ::String
+                                        ) -> _CheckpointDurableExecutionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckpointDurableExecutionResponseSuccess
+
       interface _CreateAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AliasConfiguration]
         def alias_arn: () -> ::String
@@ -139,6 +186,40 @@ module Aws
                           }
                         ) -> _CreateAliasResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAliasResponseSuccess
+
+      interface _CreateCapacityProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapacityProviderResponse]
+        def capacity_provider: () -> Types::CapacityProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_capacity_provider-instance_method
+      def create_capacity_provider: (
+                                      capacity_provider_name: ::String,
+                                      vpc_config: {
+                                        subnet_ids: Array[::String],
+                                        security_group_ids: Array[::String]
+                                      },
+                                      permissions_config: {
+                                        capacity_provider_operator_role_arn: ::String
+                                      },
+                                      ?instance_requirements: {
+                                        architectures: Array[("x86_64" | "arm64")]?,
+                                        allowed_instance_types: Array[::String]?,
+                                        excluded_instance_types: Array[::String]?
+                                      },
+                                      ?capacity_provider_scaling_config: {
+                                        max_v_cpu_count: ::Integer?,
+                                        scaling_mode: ("Auto" | "Manual")?,
+                                        scaling_policies: Array[
+                                          {
+                                            predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization"),
+                                            target_value: ::Float
+                                          },
+                                        ]?
+                                      },
+                                      ?kms_key_arn: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateCapacityProviderResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapacityProviderResponseSuccess
 
       interface _CreateCodeSigningConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeSigningConfigResponse]
@@ -312,12 +393,12 @@ module Aws
         def master_arn: () -> ::String
         def revision_id: () -> ::String
         def layers: () -> ::Array[Types::Layer]
-        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "DrainingDurableExecutions" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def package_type: () -> ("Zip" | "Image")
         def image_config_response: () -> Types::ImageConfigResponse
@@ -328,6 +409,9 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def capacity_provider_config: () -> Types::CapacityProviderConfig
+        def config_sha_256: () -> ::String
+        def durable_config: () -> Types::DurableConfig
         def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_function-instance_method
@@ -391,6 +475,18 @@ module Aws
                                system_log_level: ("DEBUG" | "INFO" | "WARN")?,
                                log_group: ::String?
                              },
+                             ?capacity_provider_config: {
+                               lambda_managed_instances_capacity_provider_config: {
+                                 capacity_provider_arn: ::String,
+                                 per_execution_environment_max_concurrency: ::Integer?,
+                                 execution_environment_memory_gi_b_per_v_cpu: ::Float?
+                               }
+                             },
+                             ?publish_to: ("LATEST_PUBLISHED"),
+                             ?durable_config: {
+                               retention_period_in_days: ::Integer?,
+                               execution_timeout: ::Integer?
+                             },
                              ?tenancy_config: {
                                tenant_isolation_mode: ("PER_TENANT")
                              }
@@ -429,6 +525,16 @@ module Aws
                           name: ::String
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteCapacityProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCapacityProviderResponse]
+        def capacity_provider: () -> Types::CapacityProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_capacity_provider-instance_method
+      def delete_capacity_provider: (
+                                      capacity_provider_name: ::String
+                                    ) -> _DeleteCapacityProviderResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapacityProviderResponseSuccess
 
       interface _DeleteCodeSigningConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCodeSigningConfigResponse]
@@ -480,12 +586,16 @@ module Aws
                                        ) -> _DeleteEventSourceMappingResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventSourceMappingResponseSuccess
 
+      interface _DeleteFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFunctionResponse]
+        def status_code: () -> ::Integer
+      end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function-instance_method
       def delete_function: (
                              function_name: ::String,
                              ?qualifier: ::String
-                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           ) -> _DeleteFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFunctionResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function_code_signing_config-instance_method
       def delete_function_code_signing_config: (
@@ -553,6 +663,16 @@ module Aws
                      ) -> _GetAliasResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAliasResponseSuccess
 
+      interface _GetCapacityProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityProviderResponse]
+        def capacity_provider: () -> Types::CapacityProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_capacity_provider-instance_method
+      def get_capacity_provider: (
+                                   capacity_provider_name: ::String
+                                 ) -> _GetCapacityProviderResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityProviderResponseSuccess
+
       interface _GetCodeSigningConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSigningConfigResponse]
         def code_signing_config: () -> Types::CodeSigningConfig
@@ -562,6 +682,54 @@ module Aws
                                      code_signing_config_arn: ::String
                                    ) -> _GetCodeSigningConfigResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeSigningConfigResponseSuccess
+
+      interface _GetDurableExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDurableExecutionResponse]
+        def durable_execution_arn: () -> ::String
+        def durable_execution_name: () -> ::String
+        def function_arn: () -> ::String
+        def input_payload: () -> ::String
+        def result: () -> ::String
+        def start_timestamp: () -> ::Time
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
+        def end_timestamp: () -> ::Time
+        def version: () -> ::String
+        def trace_header: () -> Types::TraceHeader
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_durable_execution-instance_method
+      def get_durable_execution: (
+                                   durable_execution_arn: ::String
+                                 ) -> _GetDurableExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDurableExecutionResponseSuccess
+
+      interface _GetDurableExecutionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDurableExecutionHistoryResponse]
+        def events: () -> ::Array[Types::Event]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_durable_execution_history-instance_method
+      def get_durable_execution_history: (
+                                           durable_execution_arn: ::String,
+                                           ?include_execution_data: bool,
+                                           ?max_items: ::Integer,
+                                           ?marker: ::String,
+                                           ?reverse_order: bool
+                                         ) -> _GetDurableExecutionHistoryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDurableExecutionHistoryResponseSuccess
+
+      interface _GetDurableExecutionStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDurableExecutionStateResponse]
+        def operations: () -> ::Array[Types::Operation]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_durable_execution_state-instance_method
+      def get_durable_execution_state: (
+                                         durable_execution_arn: ::String,
+                                         checkpoint_token: ::String,
+                                         ?marker: ::String,
+                                         ?max_items: ::Integer
+                                       ) -> _GetDurableExecutionStateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDurableExecutionStateResponseSuccess
 
       interface _GetEventSourceMappingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceMappingConfiguration]
@@ -662,12 +830,12 @@ module Aws
         def master_arn: () -> ::String
         def revision_id: () -> ::String
         def layers: () -> ::Array[Types::Layer]
-        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "DrainingDurableExecutions" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def package_type: () -> ("Zip" | "Image")
         def image_config_response: () -> Types::ImageConfigResponse
@@ -678,6 +846,9 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def capacity_provider_config: () -> Types::CapacityProviderConfig
+        def config_sha_256: () -> ::String
+        def durable_config: () -> Types::DurableConfig
         def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_configuration-instance_method
@@ -711,6 +882,19 @@ module Aws
                                            function_name: ::String
                                          ) -> _GetFunctionRecursionConfigResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionRecursionConfigResponseSuccess
+
+      interface _GetFunctionScalingConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionScalingConfigResponse]
+        def function_arn: () -> ::String
+        def applied_function_scaling_config: () -> Types::FunctionScalingConfig
+        def requested_function_scaling_config: () -> Types::FunctionScalingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_scaling_config-instance_method
+      def get_function_scaling_config: (
+                                         function_name: ::String,
+                                         qualifier: ::String
+                                       ) -> _GetFunctionScalingConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionScalingConfigResponseSuccess
 
       interface _GetFunctionUrlConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionUrlConfigResponse]
@@ -826,6 +1010,7 @@ module Aws
         def log_result: () -> ::String
         def payload: () -> ::String
         def executed_version: () -> ::String
+        def durable_execution_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#invoke-instance_method
       def invoke: (
@@ -833,6 +1018,7 @@ module Aws
                     ?invocation_type: ("Event" | "RequestResponse" | "DryRun"),
                     ?log_type: ("None" | "Tail"),
                     ?client_context: ::String,
+                    ?durable_execution_name: ::String,
                     ?payload: ::String,
                     ?qualifier: ::String,
                     ?tenant_id: ::String
@@ -883,6 +1069,19 @@ module Aws
                         ) -> _ListAliasesResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAliasesResponseSuccess
 
+      interface _ListCapacityProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCapacityProvidersResponse]
+        def capacity_providers: () -> ::Array[Types::CapacityProvider]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_capacity_providers-instance_method
+      def list_capacity_providers: (
+                                     ?state: ("Pending" | "Active" | "Failed" | "Deleting"),
+                                     ?marker: ::String,
+                                     ?max_items: ::Integer
+                                   ) -> _ListCapacityProvidersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapacityProvidersResponseSuccess
+
       interface _ListCodeSigningConfigsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeSigningConfigsResponse]
         def next_marker: () -> ::String
@@ -894,6 +1093,25 @@ module Aws
                                        ?max_items: ::Integer
                                      ) -> _ListCodeSigningConfigsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeSigningConfigsResponseSuccess
+
+      interface _ListDurableExecutionsByFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDurableExecutionsByFunctionResponse]
+        def durable_executions: () -> ::Array[Types::Execution]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_durable_executions_by_function-instance_method
+      def list_durable_executions_by_function: (
+                                                 function_name: ::String,
+                                                 ?qualifier: ::String,
+                                                 ?durable_execution_name: ::String,
+                                                 ?statuses: Array[("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")],
+                                                 ?started_after: ::Time,
+                                                 ?started_before: ::Time,
+                                                 ?reverse_order: bool,
+                                                 ?marker: ::String,
+                                                 ?max_items: ::Integer
+                                               ) -> _ListDurableExecutionsByFunctionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDurableExecutionsByFunctionResponseSuccess
 
       interface _ListEventSourceMappingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEventSourceMappingsResponse]
@@ -934,6 +1152,20 @@ module Aws
                                        ?max_items: ::Integer
                                      ) -> _ListFunctionUrlConfigsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionUrlConfigsResponseSuccess
+
+      interface _ListFunctionVersionsByCapacityProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionVersionsByCapacityProviderResponse]
+        def capacity_provider_arn: () -> ::String
+        def function_versions: () -> ::Array[Types::FunctionVersionsByCapacityProviderListItem]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_function_versions_by_capacity_provider-instance_method
+      def list_function_versions_by_capacity_provider: (
+                                                         capacity_provider_name: ::String,
+                                                         ?marker: ::String,
+                                                         ?max_items: ::Integer
+                                                       ) -> _ListFunctionVersionsByCapacityProviderResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionVersionsByCapacityProviderResponseSuccess
 
       interface _ListFunctionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResponse]
@@ -1077,12 +1309,12 @@ module Aws
         def master_arn: () -> ::String
         def revision_id: () -> ::String
         def layers: () -> ::Array[Types::Layer]
-        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "DrainingDurableExecutions" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def package_type: () -> ("Zip" | "Image")
         def image_config_response: () -> Types::ImageConfigResponse
@@ -1093,6 +1325,9 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def capacity_provider_config: () -> Types::CapacityProviderConfig
+        def config_sha_256: () -> ::String
+        def durable_config: () -> Types::DurableConfig
         def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#publish_version-instance_method
@@ -1100,7 +1335,8 @@ module Aws
                              function_name: ::String,
                              ?code_sha_256: ::String,
                              ?description: ::String,
-                             ?revision_id: ::String
+                             ?revision_id: ::String,
+                             ?publish_to: ("LATEST_PUBLISHED")
                            ) -> _PublishVersionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishVersionResponseSuccess
 
@@ -1163,6 +1399,21 @@ module Aws
                                          ) -> _PutFunctionRecursionConfigResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionRecursionConfigResponseSuccess
 
+      interface _PutFunctionScalingConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFunctionScalingConfigResponse]
+        def function_state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_function_scaling_config-instance_method
+      def put_function_scaling_config: (
+                                         function_name: ::String,
+                                         qualifier: ::String,
+                                         ?function_scaling_config: {
+                                           min_execution_environments: ::Integer?,
+                                           max_execution_environments: ::Integer?
+                                         }
+                                       ) -> _PutFunctionScalingConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionScalingConfigResponseSuccess
+
       interface _PutProvisionedConcurrencyConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutProvisionedConcurrencyConfigResponse]
         def requested_provisioned_concurrent_executions: () -> ::Integer
@@ -1213,6 +1464,56 @@ module Aws
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _SendDurableExecutionCallbackFailureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDurableExecutionCallbackFailureResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#send_durable_execution_callback_failure-instance_method
+      def send_durable_execution_callback_failure: (
+                                                     callback_id: ::String,
+                                                     ?error: {
+                                                       error_message: ::String?,
+                                                       error_type: ::String?,
+                                                       error_data: ::String?,
+                                                       stack_trace: Array[::String]?
+                                                     }
+                                                   ) -> _SendDurableExecutionCallbackFailureResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDurableExecutionCallbackFailureResponseSuccess
+
+      interface _SendDurableExecutionCallbackHeartbeatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDurableExecutionCallbackHeartbeatResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#send_durable_execution_callback_heartbeat-instance_method
+      def send_durable_execution_callback_heartbeat: (
+                                                       callback_id: ::String
+                                                     ) -> _SendDurableExecutionCallbackHeartbeatResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDurableExecutionCallbackHeartbeatResponseSuccess
+
+      interface _SendDurableExecutionCallbackSuccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDurableExecutionCallbackSuccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#send_durable_execution_callback_success-instance_method
+      def send_durable_execution_callback_success: (
+                                                     callback_id: ::String,
+                                                     ?result: ::String
+                                                   ) -> _SendDurableExecutionCallbackSuccessResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDurableExecutionCallbackSuccessResponseSuccess
+
+      interface _StopDurableExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDurableExecutionResponse]
+        def stop_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#stop_durable_execution-instance_method
+      def stop_durable_execution: (
+                                    durable_execution_arn: ::String,
+                                    ?error: {
+                                      error_message: ::String?,
+                                      error_type: ::String?,
+                                      error_data: ::String?,
+                                      stack_trace: Array[::String]?
+                                    }
+                                  ) -> _StopDurableExecutionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDurableExecutionResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#tag_resource-instance_method
       def tag_resource: (
                           resource: ::String,
@@ -1248,6 +1549,26 @@ module Aws
                           ?revision_id: ::String
                         ) -> _UpdateAliasResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAliasResponseSuccess
+
+      interface _UpdateCapacityProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCapacityProviderResponse]
+        def capacity_provider: () -> Types::CapacityProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_capacity_provider-instance_method
+      def update_capacity_provider: (
+                                      capacity_provider_name: ::String,
+                                      ?capacity_provider_scaling_config: {
+                                        max_v_cpu_count: ::Integer?,
+                                        scaling_mode: ("Auto" | "Manual")?,
+                                        scaling_policies: Array[
+                                          {
+                                            predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization"),
+                                            target_value: ::Float
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _UpdateCapacityProviderResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapacityProviderResponseSuccess
 
       interface _UpdateCodeSigningConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeSigningConfigResponse]
@@ -1413,12 +1734,12 @@ module Aws
         def master_arn: () -> ::String
         def revision_id: () -> ::String
         def layers: () -> ::Array[Types::Layer]
-        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "DrainingDurableExecutions" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def package_type: () -> ("Zip" | "Image")
         def image_config_response: () -> Types::ImageConfigResponse
@@ -1429,6 +1750,9 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def capacity_provider_config: () -> Types::CapacityProviderConfig
+        def config_sha_256: () -> ::String
+        def durable_config: () -> Types::DurableConfig
         def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_code-instance_method
@@ -1443,7 +1767,8 @@ module Aws
                                   ?dry_run: bool,
                                   ?revision_id: ::String,
                                   ?architectures: Array[("x86_64" | "arm64")],
-                                  ?source_kms_key_arn: ::String
+                                  ?source_kms_key_arn: ::String,
+                                  ?publish_to: ("LATEST_PUBLISHED")
                                 ) -> _UpdateFunctionCodeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionCodeResponseSuccess
 
@@ -1469,12 +1794,12 @@ module Aws
         def master_arn: () -> ::String
         def revision_id: () -> ::String
         def layers: () -> ::Array[Types::Layer]
-        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "DrainingDurableExecutions" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
         def file_system_configs: () -> ::Array[Types::FileSystemConfig]
         def package_type: () -> ("Zip" | "Image")
         def image_config_response: () -> Types::ImageConfigResponse
@@ -1485,6 +1810,9 @@ module Aws
         def snap_start: () -> Types::SnapStartResponse
         def runtime_version_config: () -> Types::RuntimeVersionConfig
         def logging_config: () -> Types::LoggingConfig
+        def capacity_provider_config: () -> Types::CapacityProviderConfig
+        def config_sha_256: () -> ::String
+        def durable_config: () -> Types::DurableConfig
         def tenancy_config: () -> Types::TenancyConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_configuration-instance_method
@@ -1535,6 +1863,17 @@ module Aws
                                              application_log_level: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")?,
                                              system_log_level: ("DEBUG" | "INFO" | "WARN")?,
                                              log_group: ::String?
+                                           },
+                                           ?capacity_provider_config: {
+                                             lambda_managed_instances_capacity_provider_config: {
+                                               capacity_provider_arn: ::String,
+                                               per_execution_environment_max_concurrency: ::Integer?,
+                                               execution_environment_memory_gi_b_per_v_cpu: ::Float?
+                                             }
+                                           },
+                                           ?durable_config: {
+                                             retention_period_in_days: ::Integer?,
+                                             execution_timeout: ::Integer?
                                            }
                                          ) -> _UpdateFunctionConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionConfigurationResponseSuccess

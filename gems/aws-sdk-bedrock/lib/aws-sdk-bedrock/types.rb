@@ -3847,6 +3847,26 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Details about an update to a custom model deployment, including the
+    # new custom model resource ARN and current update status.
+    #
+    # @!attribute [rw] model_arn
+    #   ARN of the new custom model being deployed as part of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status
+    #   Current status of the deployment update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelDeploymentUpdateDetails AWS API Documentation
+    #
+    class CustomModelDeploymentUpdateDetails < Struct.new(
+      :model_arn,
+      :update_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for a custom model.
     #
     # @!attribute [rw] model_arn
@@ -3948,16 +3968,23 @@ module Aws::Bedrock
     #   The Distillation configuration for the custom model.
     #   @return [Types::DistillationConfig]
     #
+    # @!attribute [rw] rft_config
+    #   Configuration settings for reinforcement fine-tuning (RFT) model
+    #   customization, including grader configuration and hyperparameters.
+    #   @return [Types::RFTConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomizationConfig AWS API Documentation
     #
     class CustomizationConfig < Struct.new(
       :distillation_config,
+      :rft_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DistillationConfig < CustomizationConfig; end
+      class RftConfig < CustomizationConfig; end
       class Unknown < CustomizationConfig; end
     end
 
@@ -5594,6 +5621,11 @@ module Aws::Bedrock
     #   The description of the custom model deployment.
     #   @return [String]
     #
+    # @!attribute [rw] update_details
+    #   Details about any pending or completed updates to the custom model
+    #   deployment, including the new model ARN and update status.
+    #   @return [Types::CustomModelDeploymentUpdateDetails]
+    #
     # @!attribute [rw] failure_message
     #   If the deployment status is `FAILED`, this field contains a message
     #   describing the failure reason.
@@ -5612,6 +5644,7 @@ module Aws::Bedrock
       :created_at,
       :status,
       :description,
+      :update_details,
       :failure_message,
       :last_updated_at)
       SENSITIVE = []
@@ -6885,6 +6918,32 @@ module Aws::Bedrock
       :form_data)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Configuration for the grader used in reinforcement fine-tuning to
+    # evaluate model responses and provide reward signals.
+    #
+    # @note GraderConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GraderConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GraderConfig corresponding to the set member.
+    #
+    # @!attribute [rw] lambda_grader
+    #   Configuration for using an AWS Lambda function as the grader for
+    #   evaluating model responses and provide reward signals in
+    #   reinforcement fine-tuning.
+    #   @return [Types::LambdaGraderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GraderConfig AWS API Documentation
+    #
+    class GraderConfig < Struct.new(
+      :lambda_grader,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LambdaGrader < GraderConfig; end
+      class Unknown < GraderConfig; end
     end
 
     # Represents the configuration of Automated Reasoning policies within a
@@ -9002,6 +9061,22 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Configuration for using an AWS Lambda function to grade model
+    # responses during reinforcement fine-tuning training.
+    #
+    # @!attribute [rw] lambda_arn
+    #   ARN of the AWS Lambda function that will evaluate model responses
+    #   and return reward scores for RFT training.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/LambdaGraderConfig AWS API Documentation
+    #
+    class LambdaGraderConfig < Struct.new(
+      :lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The legal term of the agreement.
     #
     # @!attribute [rw] url
@@ -10322,6 +10397,10 @@ module Aws::Bedrock
     #   Set to include video data in the log delivery.
     #   @return [Boolean]
     #
+    # @!attribute [rw] audio_data_delivery_enabled
+    #   Set to include audio data in the log delivery.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/LoggingConfig AWS API Documentation
     #
     class LoggingConfig < Struct.new(
@@ -10330,7 +10409,8 @@ module Aws::Bedrock
       :text_data_delivery_enabled,
       :image_data_delivery_enabled,
       :embedding_data_delivery_enabled,
-      :video_data_delivery_enabled)
+      :video_data_delivery_enabled,
+      :audio_data_delivery_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11347,6 +11427,88 @@ module Aws::Bedrock
       class KnowledgeBaseConfig < RAGConfig; end
       class PrecomputedRagSourceConfig < RAGConfig; end
       class Unknown < RAGConfig; end
+    end
+
+    # Configuration settings for reinforcement fine-tuning (RFT), including
+    # grader configuration and training hyperparameters.
+    #
+    # @!attribute [rw] grader_config
+    #   Configuration for the grader that evaluates model responses and
+    #   provides reward signals during RFT training.
+    #   @return [Types::GraderConfig]
+    #
+    # @!attribute [rw] hyper_parameters
+    #   Hyperparameters that control the reinforcement fine-tuning training
+    #   process, including learning rate, batch size, and epoch count.
+    #   @return [Types::RFTHyperParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/RFTConfig AWS API Documentation
+    #
+    class RFTConfig < Struct.new(
+      :grader_config,
+      :hyper_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Hyperparameters for controlling the reinforcement fine-tuning training
+    # process, including learning settings and evaluation intervals.
+    #
+    # @!attribute [rw] epoch_count
+    #   Number of training epochs to run during reinforcement fine-tuning.
+    #   Higher values may improve performance but increase training time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_size
+    #   Number of training samples processed in each batch during
+    #   reinforcement fine-tuning (RFT) training. Larger batches may improve
+    #   training stability.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] learning_rate
+    #   Learning rate for the reinforcement fine-tuning. Controls how
+    #   quickly the model adapts to reward signals.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_prompt_length
+    #   Maximum length of input prompts during RFT training, measured in
+    #   tokens. Longer prompts allow more context but increase memory usage
+    #   and training-time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_sample_per_prompt
+    #   Number of response samples generated per prompt during RFT training.
+    #   More samples provide better reward signal estimation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inference_max_tokens
+    #   Maximum number of tokens the model can generate in response to each
+    #   prompt during RFT training.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reasoning_effort
+    #   Level of reasoning effort applied during RFT training. Higher values
+    #   may improve response quality but increase training time.
+    #   @return [String]
+    #
+    # @!attribute [rw] eval_interval
+    #   Interval between evaluation runs during RFT training, measured in
+    #   training steps. More frequent evaluation provides better monitoring.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/RFTHyperParameters AWS API Documentation
+    #
+    class RFTHyperParameters < Struct.new(
+      :epoch_count,
+      :batch_size,
+      :learning_rate,
+      :max_prompt_length,
+      :training_sample_per_prompt,
+      :inference_max_tokens,
+      :reasoning_effort,
+      :eval_interval)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Defines the value and corresponding definition for one rating in a
@@ -12553,6 +12715,37 @@ module Aws::Bedrock
     class UpdateAutomatedReasoningPolicyTestCaseResponse < Struct.new(
       :policy_arn,
       :test_case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_arn
+    #   ARN of the new custom model to deploy. This replaces the currently
+    #   deployed model.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_model_deployment_identifier
+    #   Identifier of the custom model deployment to update with the new
+    #   custom model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateCustomModelDeploymentRequest AWS API Documentation
+    #
+    class UpdateCustomModelDeploymentRequest < Struct.new(
+      :model_arn,
+      :custom_model_deployment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_model_deployment_arn
+    #   ARN of the custom model deployment being updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateCustomModelDeploymentResponse AWS API Documentation
+    #
+    class UpdateCustomModelDeploymentResponse < Struct.new(
+      :custom_model_deployment_arn)
       SENSITIVE = []
       include Aws::Structure
     end

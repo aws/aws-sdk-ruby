@@ -38,6 +38,7 @@ module Aws::AppIntegrationsService
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor is_service: bool
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
       SENSITIVE: []
     end
 
@@ -60,6 +61,7 @@ module Aws::AppIntegrationsService
       attr_accessor initialization_timeout: ::Integer
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor iframe_config: Types::IframeConfig
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
       SENSITIVE: []
     end
 
@@ -241,6 +243,7 @@ module Aws::AppIntegrationsService
       attr_accessor initialization_timeout: ::Integer
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor iframe_config: Types::IframeConfig
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
       SENSITIVE: []
     end
 
@@ -316,6 +319,7 @@ module Aws::AppIntegrationsService
     class ListApplicationsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
       SENSITIVE: []
     end
 
@@ -461,6 +465,7 @@ module Aws::AppIntegrationsService
       attr_accessor initialization_timeout: ::Integer
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor iframe_config: Types::IframeConfig
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
       SENSITIVE: []
     end
 

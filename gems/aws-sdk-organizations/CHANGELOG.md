@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-11-25)
+------------------
+
+* Feature - Add support for policy operations on the S3_POLICY and BEDROCK_POLICY policy type.
+
 1.129.0 (2025-11-21)
 ------------------
 

@@ -277,6 +277,8 @@ module Aws
         def description: () -> ::String
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
+        def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
         def creation_date_time: () -> ::Time
         def generative_ai_settings: () -> Types::GenerativeAISettings
@@ -290,8 +292,23 @@ module Aws
                                ?description: ::String,
                                nlu_intent_confidence_threshold: ::Float,
                                ?voice_settings: {
-                                 voice_id: ::String,
-                                 engine: ("standard" | "neural" | "long-form" | "generative")?
+                                 engine: ("standard" | "neural" | "long-form" | "generative")?,
+                                 voice_id: ::String
+                               },
+                               ?unified_speech_settings: {
+                                 speech_foundation_model: {
+                                   model_arn: ::String,
+                                   voice_id: ::String?
+                                 }
+                               },
+                               ?speech_recognition_settings: {
+                                 speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+                                 speech_model_config: {
+                                   deepgram_config: {
+                                     api_token_secret_arn: ::String,
+                                     model_id: ::String?
+                                   }?
+                                 }?
                                },
                                ?generative_ai_settings: {
                                  runtime_settings: {
@@ -6074,6 +6091,8 @@ module Aws
         def description: () -> ::String
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
+        def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def intents_count: () -> ::Integer
         def slot_types_count: () -> ::Integer
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
@@ -7308,10 +7327,25 @@ module Aws
                               locale_id: ::String,
                               nlu_intent_confidence_threshold: ::Float?,
                               voice_settings: {
-                                voice_id: ::String,
-                                engine: ("standard" | "neural" | "long-form" | "generative")?
+                                engine: ("standard" | "neural" | "long-form" | "generative")?,
+                                voice_id: ::String
                               }?,
-                              speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")?
+                              speech_recognition_settings: {
+                                speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+                                speech_model_config: {
+                                  deepgram_config: {
+                                    api_token_secret_arn: ::String,
+                                    model_id: ::String?
+                                  }?
+                                }?
+                              }?,
+                              speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")?,
+                              unified_speech_settings: {
+                                speech_foundation_model: {
+                                  model_arn: ::String,
+                                  voice_id: ::String?
+                                }
+                              }?
                             }?,
                             custom_vocabulary_import_specification: {
                               bot_id: ::String,
@@ -7552,6 +7586,8 @@ module Aws
         def description: () -> ::String
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
+        def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
         def failure_reasons: () -> ::Array[::String]
         def creation_date_time: () -> ::Time
@@ -7568,8 +7604,23 @@ module Aws
                                ?description: ::String,
                                nlu_intent_confidence_threshold: ::Float,
                                ?voice_settings: {
-                                 voice_id: ::String,
-                                 engine: ("standard" | "neural" | "long-form" | "generative")?
+                                 engine: ("standard" | "neural" | "long-form" | "generative")?,
+                                 voice_id: ::String
+                               },
+                               ?unified_speech_settings: {
+                                 speech_foundation_model: {
+                                   model_arn: ::String,
+                                   voice_id: ::String?
+                                 }
+                               },
+                               ?speech_recognition_settings: {
+                                 speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+                                 speech_model_config: {
+                                   deepgram_config: {
+                                     api_token_secret_arn: ::String,
+                                     model_id: ::String?
+                                   }?
+                                 }?
                                },
                                ?generative_ai_settings: {
                                  runtime_settings: {

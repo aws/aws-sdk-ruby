@@ -29,6 +29,10 @@ module Aws::BedrockRuntime
     AsyncInvokeStatus = Shapes::StringShape.new(name: 'AsyncInvokeStatus')
     AsyncInvokeSummaries = Shapes::ListShape.new(name: 'AsyncInvokeSummaries')
     AsyncInvokeSummary = Shapes::StructureShape.new(name: 'AsyncInvokeSummary')
+    AudioBlock = Shapes::StructureShape.new(name: 'AudioBlock')
+    AudioFormat = Shapes::StringShape.new(name: 'AudioFormat')
+    AudioSource = Shapes::UnionShape.new(name: 'AudioSource')
+    AudioSourceBytesBlob = Shapes::BlobShape.new(name: 'AudioSourceBytesBlob')
     AutoToolChoice = Shapes::StructureShape.new(name: 'AutoToolChoice')
     AutomatedReasoningRuleIdentifier = Shapes::StringShape.new(name: 'AutomatedReasoningRuleIdentifier')
     BidirectionalInputPayloadPart = Shapes::StructureShape.new(name: 'BidirectionalInputPayloadPart')
@@ -99,6 +103,7 @@ module Aws::BedrockRuntime
     DocumentPageLocationStartInteger = Shapes::IntegerShape.new(name: 'DocumentPageLocationStartInteger')
     DocumentSource = Shapes::UnionShape.new(name: 'DocumentSource')
     DocumentSourceBytesBlob = Shapes::BlobShape.new(name: 'DocumentSourceBytesBlob')
+    ErrorBlock = Shapes::StructureShape.new(name: 'ErrorBlock')
     FoundationModelVersionIdentifier = Shapes::StringShape.new(name: 'FoundationModelVersionIdentifier')
     GetAsyncInvokeRequest = Shapes::StructureShape.new(name: 'GetAsyncInvokeRequest')
     GetAsyncInvokeResponse = Shapes::StructureShape.new(name: 'GetAsyncInvokeResponse')
@@ -218,6 +223,8 @@ module Aws::BedrockRuntime
     GuardrailWordPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailWordPolicyAssessment')
     GuardrailWordPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailWordPolicyUnitsProcessed')
     ImageBlock = Shapes::StructureShape.new(name: 'ImageBlock')
+    ImageBlockDelta = Shapes::StructureShape.new(name: 'ImageBlockDelta')
+    ImageBlockStart = Shapes::StructureShape.new(name: 'ImageBlockStart')
     ImageFormat = Shapes::StringShape.new(name: 'ImageFormat')
     ImageSource = Shapes::UnionShape.new(name: 'ImageSource')
     ImageSourceBytesBlob = Shapes::BlobShape.new(name: 'ImageSourceBytesBlob')
@@ -393,6 +400,19 @@ module Aws::BedrockRuntime
     AsyncInvokeSummary.add_member(:output_data_config, Shapes::ShapeRef.new(shape: AsyncInvokeOutputDataConfig, required: true, location_name: "outputDataConfig"))
     AsyncInvokeSummary.struct_class = Types::AsyncInvokeSummary
 
+    AudioBlock.add_member(:format, Shapes::ShapeRef.new(shape: AudioFormat, required: true, location_name: "format"))
+    AudioBlock.add_member(:source, Shapes::ShapeRef.new(shape: AudioSource, required: true, location_name: "source"))
+    AudioBlock.add_member(:error, Shapes::ShapeRef.new(shape: ErrorBlock, location_name: "error"))
+    AudioBlock.struct_class = Types::AudioBlock
+
+    AudioSource.add_member(:bytes, Shapes::ShapeRef.new(shape: AudioSourceBytesBlob, location_name: "bytes"))
+    AudioSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    AudioSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AudioSource.add_member_subclass(:bytes, Types::AudioSource::Bytes)
+    AudioSource.add_member_subclass(:s3_location, Types::AudioSource::S3Location)
+    AudioSource.add_member_subclass(:unknown, Types::AudioSource::Unknown)
+    AudioSource.struct_class = Types::AudioSource
+
     AutoToolChoice.struct_class = Types::AutoToolChoice
 
     BidirectionalInputPayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBody, location_name: "bytes"))
@@ -467,6 +487,7 @@ module Aws::BedrockRuntime
     ContentBlock.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlock, location_name: "image"))
     ContentBlock.add_member(:document, Shapes::ShapeRef.new(shape: DocumentBlock, location_name: "document"))
     ContentBlock.add_member(:video, Shapes::ShapeRef.new(shape: VideoBlock, location_name: "video"))
+    ContentBlock.add_member(:audio, Shapes::ShapeRef.new(shape: AudioBlock, location_name: "audio"))
     ContentBlock.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlock, location_name: "toolUse"))
     ContentBlock.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlock, location_name: "toolResult"))
     ContentBlock.add_member(:guard_content, Shapes::ShapeRef.new(shape: GuardrailConverseContentBlock, location_name: "guardContent"))
@@ -479,6 +500,7 @@ module Aws::BedrockRuntime
     ContentBlock.add_member_subclass(:image, Types::ContentBlock::Image)
     ContentBlock.add_member_subclass(:document, Types::ContentBlock::Document)
     ContentBlock.add_member_subclass(:video, Types::ContentBlock::Video)
+    ContentBlock.add_member_subclass(:audio, Types::ContentBlock::Audio)
     ContentBlock.add_member_subclass(:tool_use, Types::ContentBlock::ToolUse)
     ContentBlock.add_member_subclass(:tool_result, Types::ContentBlock::ToolResult)
     ContentBlock.add_member_subclass(:guard_content, Types::ContentBlock::GuardContent)
@@ -494,12 +516,14 @@ module Aws::BedrockRuntime
     ContentBlockDelta.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlocksDelta, location_name: "toolResult"))
     ContentBlockDelta.add_member(:reasoning_content, Shapes::ShapeRef.new(shape: ReasoningContentBlockDelta, location_name: "reasoningContent"))
     ContentBlockDelta.add_member(:citation, Shapes::ShapeRef.new(shape: CitationsDelta, location_name: "citation"))
+    ContentBlockDelta.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlockDelta, location_name: "image"))
     ContentBlockDelta.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlockDelta.add_member_subclass(:text, Types::ContentBlockDelta::Text)
     ContentBlockDelta.add_member_subclass(:tool_use, Types::ContentBlockDelta::ToolUse)
     ContentBlockDelta.add_member_subclass(:tool_result, Types::ContentBlockDelta::ToolResult)
     ContentBlockDelta.add_member_subclass(:reasoning_content, Types::ContentBlockDelta::ReasoningContent)
     ContentBlockDelta.add_member_subclass(:citation, Types::ContentBlockDelta::Citation)
+    ContentBlockDelta.add_member_subclass(:image, Types::ContentBlockDelta::Image)
     ContentBlockDelta.add_member_subclass(:unknown, Types::ContentBlockDelta::Unknown)
     ContentBlockDelta.struct_class = Types::ContentBlockDelta
 
@@ -509,9 +533,11 @@ module Aws::BedrockRuntime
 
     ContentBlockStart.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlockStart, location_name: "toolUse"))
     ContentBlockStart.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlockStart, location_name: "toolResult"))
+    ContentBlockStart.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlockStart, location_name: "image"))
     ContentBlockStart.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlockStart.add_member_subclass(:tool_use, Types::ContentBlockStart::ToolUse)
     ContentBlockStart.add_member_subclass(:tool_result, Types::ContentBlockStart::ToolResult)
+    ContentBlockStart.add_member_subclass(:image, Types::ContentBlockStart::Image)
     ContentBlockStart.add_member_subclass(:unknown, Types::ContentBlockStart::Unknown)
     ContentBlockStart.struct_class = Types::ContentBlockStart
 
@@ -673,6 +699,9 @@ module Aws::BedrockRuntime
     DocumentSource.add_member_subclass(:content, Types::DocumentSource::Content)
     DocumentSource.add_member_subclass(:unknown, Types::DocumentSource::Unknown)
     DocumentSource.struct_class = Types::DocumentSource
+
+    ErrorBlock.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ErrorBlock.struct_class = Types::ErrorBlock
 
     GetAsyncInvokeRequest.add_member(:invocation_arn, Shapes::ShapeRef.new(shape: InvocationArn, required: true, location: "uri", location_name: "invocationArn"))
     GetAsyncInvokeRequest.struct_class = Types::GetAsyncInvokeRequest
@@ -979,7 +1008,15 @@ module Aws::BedrockRuntime
 
     ImageBlock.add_member(:format, Shapes::ShapeRef.new(shape: ImageFormat, required: true, location_name: "format"))
     ImageBlock.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, required: true, location_name: "source"))
+    ImageBlock.add_member(:error, Shapes::ShapeRef.new(shape: ErrorBlock, location_name: "error"))
     ImageBlock.struct_class = Types::ImageBlock
+
+    ImageBlockDelta.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "source"))
+    ImageBlockDelta.add_member(:error, Shapes::ShapeRef.new(shape: ErrorBlock, location_name: "error"))
+    ImageBlockDelta.struct_class = Types::ImageBlockDelta
+
+    ImageBlockStart.add_member(:format, Shapes::ShapeRef.new(shape: ImageFormat, required: true, location_name: "format"))
+    ImageBlockStart.struct_class = Types::ImageBlockStart
 
     ImageSource.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageSourceBytesBlob, location_name: "bytes"))
     ImageSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
@@ -1279,8 +1316,10 @@ module Aws::BedrockRuntime
     ToolResultBlock.struct_class = Types::ToolResultBlock
 
     ToolResultBlockDelta.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    ToolResultBlockDelta.add_member(:json, Shapes::ShapeRef.new(shape: Document, location_name: "json"))
     ToolResultBlockDelta.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ToolResultBlockDelta.add_member_subclass(:text, Types::ToolResultBlockDelta::Text)
+    ToolResultBlockDelta.add_member_subclass(:json, Types::ToolResultBlockDelta::Json)
     ToolResultBlockDelta.add_member_subclass(:unknown, Types::ToolResultBlockDelta::Unknown)
     ToolResultBlockDelta.struct_class = Types::ToolResultBlockDelta
 

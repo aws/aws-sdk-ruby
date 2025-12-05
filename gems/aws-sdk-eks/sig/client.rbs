@@ -180,6 +180,45 @@ module Aws
                         ) -> _CreateAddonResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonResponseSuccess
 
+      interface _CreateCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapabilityResponse]
+        def capability: () -> Types::Capability
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#create_capability-instance_method
+      def create_capability: (
+                               capability_name: ::String,
+                               cluster_name: ::String,
+                               ?client_request_token: ::String,
+                               type: ("ACK" | "KRO" | "ARGOCD"),
+                               role_arn: ::String,
+                               ?configuration: {
+                                 argo_cd: {
+                                   namespace: ::String?,
+                                   aws_idc: {
+                                     idc_instance_arn: ::String,
+                                     idc_region: ::String?
+                                   },
+                                   rbac_role_mappings: Array[
+                                     {
+                                       role: ("ADMIN" | "EDITOR" | "VIEWER"),
+                                       identities: Array[
+                                         {
+                                           id: ::String,
+                                           type: ("SSO_USER" | "SSO_GROUP")
+                                         },
+                                       ]
+                                     },
+                                   ]?,
+                                   network_access: {
+                                     vpce_ids: Array[::String]?
+                                   }?
+                                 }?
+                               },
+                               ?tags: Hash[::String, ::String],
+                               delete_propagation_policy: ("RETAIN")
+                             ) -> _CreateCapabilityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapabilityResponseSuccess
+
       interface _CreateClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
         def cluster: () -> Types::Cluster
@@ -410,6 +449,17 @@ module Aws
                         ) -> _DeleteAddonResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddonResponseSuccess
 
+      interface _DeleteCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCapabilityResponse]
+        def capability: () -> Types::Capability
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#delete_capability-instance_method
+      def delete_capability: (
+                               cluster_name: ::String,
+                               capability_name: ::String
+                             ) -> _DeleteCapabilityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapabilityResponseSuccess
+
       interface _DeleteClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
         def cluster: () -> Types::Cluster
@@ -525,6 +575,17 @@ module Aws
                                      ?owners: Array[::String]
                                    ) -> _DescribeAddonVersionsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAddonVersionsResponseSuccess
+
+      interface _DescribeCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCapabilityResponse]
+        def capability: () -> Types::Capability
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_capability-instance_method
+      def describe_capability: (
+                                 cluster_name: ::String,
+                                 capability_name: ::String
+                               ) -> _DescribeCapabilityResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapabilityResponseSuccess
 
       interface _DescribeClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
@@ -644,7 +705,8 @@ module Aws
                              name: ::String,
                              update_id: ::String,
                              ?nodegroup_name: ::String,
-                             ?addon_name: ::String
+                             ?addon_name: ::String,
+                             ?capability_name: ::String
                            ) -> _DescribeUpdateResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUpdateResponseSuccess
 
@@ -728,6 +790,19 @@ module Aws
                                              ?next_token: ::String
                                            ) -> _ListAssociatedAccessPoliciesResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedAccessPoliciesResponseSuccess
+
+      interface _ListCapabilitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCapabilitiesResponse]
+        def capabilities: () -> ::Array[Types::CapabilitySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#list_capabilities-instance_method
+      def list_capabilities: (
+                               cluster_name: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListCapabilitiesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapabilitiesResponseSuccess
 
       interface _ListClustersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
@@ -847,6 +922,7 @@ module Aws
                           name: ::String,
                           ?nodegroup_name: ::String,
                           ?addon_name: ::String,
+                          ?capability_name: ::String,
                           ?next_token: ::String,
                           ?max_results: ::Integer
                         ) -> _ListUpdatesResponseSuccess
@@ -934,6 +1010,51 @@ module Aws
                           ]
                         ) -> _UpdateAddonResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAddonResponseSuccess
+
+      interface _UpdateCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCapabilityResponse]
+        def update: () -> Types::Update
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#update_capability-instance_method
+      def update_capability: (
+                               cluster_name: ::String,
+                               capability_name: ::String,
+                               ?role_arn: ::String,
+                               ?configuration: {
+                                 argo_cd: {
+                                   rbac_role_mappings: {
+                                     add_or_update_role_mappings: Array[
+                                       {
+                                         role: ("ADMIN" | "EDITOR" | "VIEWER"),
+                                         identities: Array[
+                                           {
+                                             id: ::String,
+                                             type: ("SSO_USER" | "SSO_GROUP")
+                                           },
+                                         ]
+                                       },
+                                     ]?,
+                                     remove_role_mappings: Array[
+                                       {
+                                         role: ("ADMIN" | "EDITOR" | "VIEWER"),
+                                         identities: Array[
+                                           {
+                                             id: ::String,
+                                             type: ("SSO_USER" | "SSO_GROUP")
+                                           },
+                                         ]
+                                       },
+                                     ]?
+                                   }?,
+                                   network_access: {
+                                     vpce_ids: Array[::String]?
+                                   }?
+                                 }?
+                               },
+                               ?client_request_token: ::String,
+                               ?delete_propagation_policy: ("RETAIN")
+                             ) -> _UpdateCapabilityResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapabilityResponseSuccess
 
       interface _UpdateClusterConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterConfigResponse]

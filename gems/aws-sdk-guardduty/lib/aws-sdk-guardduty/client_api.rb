@@ -56,6 +56,7 @@ module Aws::GuardDuty
     ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
     AutoEnableMembers = Shapes::StringShape.new(name: 'AutoEnableMembers')
     AutonomousSystem = Shapes::StructureShape.new(name: 'AutonomousSystem')
+    AutoscalingAutoScalingGroup = Shapes::StructureShape.new(name: 'AutoscalingAutoScalingGroup')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Behavior = Shapes::MapShape.new(name: 'Behavior')
@@ -66,6 +67,7 @@ module Aws::GuardDuty
     City = Shapes::StructureShape.new(name: 'City')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudTrailConfigurationResult = Shapes::StructureShape.new(name: 'CloudTrailConfigurationResult')
+    CloudformationStack = Shapes::StructureShape.new(name: 'CloudformationStack')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -194,13 +196,20 @@ module Aws::GuardDuty
     EbsVolumeDetails = Shapes::StructureShape.new(name: 'EbsVolumeDetails')
     EbsVolumeScanDetails = Shapes::StructureShape.new(name: 'EbsVolumeScanDetails')
     EbsVolumesResult = Shapes::StructureShape.new(name: 'EbsVolumesResult')
+    Ec2Image = Shapes::StructureShape.new(name: 'Ec2Image')
     Ec2ImageDetails = Shapes::StructureShape.new(name: 'Ec2ImageDetails')
     Ec2Instance = Shapes::StructureShape.new(name: 'Ec2Instance')
     Ec2InstanceUid = Shapes::StringShape.new(name: 'Ec2InstanceUid')
     Ec2InstanceUids = Shapes::ListShape.new(name: 'Ec2InstanceUids')
+    Ec2LaunchTemplate = Shapes::StructureShape.new(name: 'Ec2LaunchTemplate')
     Ec2NetworkInterface = Shapes::StructureShape.new(name: 'Ec2NetworkInterface')
     Ec2NetworkInterfaceUids = Shapes::ListShape.new(name: 'Ec2NetworkInterfaceUids')
+    Ec2Vpc = Shapes::StructureShape.new(name: 'Ec2Vpc')
+    EcsCluster = Shapes::StructureShape.new(name: 'EcsCluster')
     EcsClusterDetails = Shapes::StructureShape.new(name: 'EcsClusterDetails')
+    EcsClusterStatus = Shapes::StringShape.new(name: 'EcsClusterStatus')
+    EcsLaunchType = Shapes::StringShape.new(name: 'EcsLaunchType')
+    EcsTask = Shapes::StructureShape.new(name: 'EcsTask')
     EcsTaskDetails = Shapes::StructureShape.new(name: 'EcsTaskDetails')
     EksCluster = Shapes::StructureShape.new(name: 'EksCluster')
     EksClusterDetails = Shapes::StructureShape.new(name: 'EksClusterDetails')
@@ -296,6 +305,7 @@ module Aws::GuardDuty
     HighestSeverityThreatDetails = Shapes::StructureShape.new(name: 'HighestSeverityThreatDetails')
     HostPath = Shapes::StructureShape.new(name: 'HostPath')
     IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
+    IamInstanceProfileV2 = Shapes::StructureShape.new(name: 'IamInstanceProfileV2')
     ImpersonatedUser = Shapes::StructureShape.new(name: 'ImpersonatedUser')
     IncrementalScanDetails = Shapes::StructureShape.new(name: 'IncrementalScanDetails')
     Indicator = Shapes::StructureShape.new(name: 'Indicator')
@@ -337,6 +347,7 @@ module Aws::GuardDuty
     KubernetesWorkload = Shapes::StructureShape.new(name: 'KubernetesWorkload')
     KubernetesWorkloadDetails = Shapes::StructureShape.new(name: 'KubernetesWorkloadDetails')
     LambdaDetails = Shapes::StructureShape.new(name: 'LambdaDetails')
+    LaunchTemplateVersion = Shapes::StringShape.new(name: 'LaunchTemplateVersion')
     Lineage = Shapes::ListShape.new(name: 'Lineage')
     LineageObject = Shapes::StructureShape.new(name: 'LineageObject')
     ListCoverageRequest = Shapes::StructureShape.new(name: 'ListCoverageRequest')
@@ -402,6 +413,8 @@ module Aws::GuardDuty
     ManagementType = Shapes::StringShape.new(name: 'ManagementType')
     MapEquals = Shapes::ListShape.new(name: 'MapEquals')
     Master = Shapes::StructureShape.new(name: 'Master')
+    Match = Shapes::StringShape.new(name: 'Match')
+    Matches = Shapes::ListShape.new(name: 'Matches')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResults100 = Shapes::IntegerShape.new(name: 'MaxResults100')
     Member = Shapes::StructureShape.new(name: 'Member')
@@ -431,6 +444,8 @@ module Aws::GuardDuty
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     NotEquals = Shapes::ListShape.new(name: 'NotEquals')
+    NotMatch = Shapes::StringShape.new(name: 'NotMatch')
+    NotMatches = Shapes::ListShape.new(name: 'NotMatches')
     ObservationTexts = Shapes::ListShape.new(name: 'ObservationTexts')
     Observations = Shapes::StructureShape.new(name: 'Observations')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
@@ -811,6 +826,9 @@ module Aws::GuardDuty
     AutonomousSystem.add_member(:number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "number"))
     AutonomousSystem.struct_class = Types::AutonomousSystem
 
+    AutoscalingAutoScalingGroup.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    AutoscalingAutoScalingGroup.struct_class = Types::AutoscalingAutoScalingGroup
+
     AwsApiCallAction.add_member(:api, Shapes::ShapeRef.new(shape: String, location_name: "api"))
     AwsApiCallAction.add_member(:caller_type, Shapes::ShapeRef.new(shape: String, location_name: "callerType"))
     AwsApiCallAction.add_member(:domain_details, Shapes::ShapeRef.new(shape: DomainDetails, location_name: "domainDetails"))
@@ -850,6 +868,9 @@ module Aws::GuardDuty
     CloudTrailConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
     CloudTrailConfigurationResult.struct_class = Types::CloudTrailConfigurationResult
 
+    CloudformationStack.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    CloudformationStack.struct_class = Types::CloudformationStack
+
     Condition.add_member(:eq, Shapes::ShapeRef.new(shape: Eq, deprecated: true, location_name: "eq"))
     Condition.add_member(:neq, Shapes::ShapeRef.new(shape: Neq, deprecated: true, location_name: "neq"))
     Condition.add_member(:gt, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "gt"))
@@ -862,6 +883,8 @@ module Aws::GuardDuty
     Condition.add_member(:greater_than_or_equal, Shapes::ShapeRef.new(shape: Long, location_name: "greaterThanOrEqual"))
     Condition.add_member(:less_than, Shapes::ShapeRef.new(shape: Long, location_name: "lessThan"))
     Condition.add_member(:less_than_or_equal, Shapes::ShapeRef.new(shape: Long, location_name: "lessThanOrEqual"))
+    Condition.add_member(:matches, Shapes::ShapeRef.new(shape: Matches, location_name: "matches"))
+    Condition.add_member(:not_matches, Shapes::ShapeRef.new(shape: NotMatches, location_name: "notMatches"))
     Condition.struct_class = Types::Condition
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1319,6 +1342,9 @@ module Aws::GuardDuty
     EbsVolumesResult.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     EbsVolumesResult.struct_class = Types::EbsVolumesResult
 
+    Ec2Image.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    Ec2Image.struct_class = Types::Ec2Image
+
     Ec2ImageDetails.add_member(:image_arn, Shapes::ShapeRef.new(shape: String, location_name: "imageArn"))
     Ec2ImageDetails.struct_class = Types::Ec2ImageDetails
 
@@ -1335,6 +1361,10 @@ module Aws::GuardDuty
 
     Ec2InstanceUids.member = Shapes::ShapeRef.new(shape: Ec2InstanceUid)
 
+    Ec2LaunchTemplate.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    Ec2LaunchTemplate.add_member(:version, Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "Version"))
+    Ec2LaunchTemplate.struct_class = Types::Ec2LaunchTemplate
+
     Ec2NetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))
     Ec2NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddresses, location_name: "privateIpAddresses"))
     Ec2NetworkInterface.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -1345,6 +1375,13 @@ module Aws::GuardDuty
 
     Ec2NetworkInterfaceUids.member = Shapes::ShapeRef.new(shape: String)
 
+    Ec2Vpc.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    Ec2Vpc.struct_class = Types::Ec2Vpc
+
+    EcsCluster.add_member(:status, Shapes::ShapeRef.new(shape: EcsClusterStatus, location_name: "status"))
+    EcsCluster.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    EcsCluster.struct_class = Types::EcsCluster
+
     EcsClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EcsClusterDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     EcsClusterDetails.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
@@ -1354,6 +1391,12 @@ module Aws::GuardDuty
     EcsClusterDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     EcsClusterDetails.add_member(:task_details, Shapes::ShapeRef.new(shape: EcsTaskDetails, location_name: "taskDetails"))
     EcsClusterDetails.struct_class = Types::EcsClusterDetails
+
+    EcsTask.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    EcsTask.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
+    EcsTask.add_member(:launch_type, Shapes::ShapeRef.new(shape: EcsLaunchType, location_name: "launchType"))
+    EcsTask.add_member(:container_uids, Shapes::ShapeRef.new(shape: ContainerUids, location_name: "containerUids"))
+    EcsTask.struct_class = Types::EcsTask
 
     EcsTaskDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     EcsTaskDetails.add_member(:definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "definitionArn"))
@@ -1714,6 +1757,9 @@ module Aws::GuardDuty
     IamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     IamInstanceProfile.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     IamInstanceProfile.struct_class = Types::IamInstanceProfile
+
+    IamInstanceProfileV2.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    IamInstanceProfileV2.struct_class = Types::IamInstanceProfileV2
 
     ImpersonatedUser.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
     ImpersonatedUser.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "groups"))
@@ -2104,6 +2150,8 @@ module Aws::GuardDuty
     Master.add_member(:invited_at, Shapes::ShapeRef.new(shape: String, location_name: "invitedAt"))
     Master.struct_class = Types::Master
 
+    Matches.member = Shapes::ShapeRef.new(shape: Match)
+
     Member.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     Member.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
     Member.add_member(:master_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "masterId"))
@@ -2200,6 +2248,8 @@ module Aws::GuardDuty
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
 
     NotEquals.member = Shapes::ShapeRef.new(shape: String)
+
+    NotMatches.member = Shapes::ShapeRef.new(shape: NotMatch)
 
     ObservationTexts.member = Shapes::ShapeRef.new(shape: String)
 
@@ -2440,6 +2490,14 @@ module Aws::GuardDuty
     ResourceData.add_member(:eks_cluster, Shapes::ShapeRef.new(shape: EksCluster, location_name: "eksCluster"))
     ResourceData.add_member(:kubernetes_workload, Shapes::ShapeRef.new(shape: KubernetesWorkload, location_name: "kubernetesWorkload"))
     ResourceData.add_member(:container, Shapes::ShapeRef.new(shape: ContainerFindingResource, location_name: "container"))
+    ResourceData.add_member(:ecs_cluster, Shapes::ShapeRef.new(shape: EcsCluster, location_name: "ecsCluster"))
+    ResourceData.add_member(:ecs_task, Shapes::ShapeRef.new(shape: EcsTask, location_name: "ecsTask"))
+    ResourceData.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfileV2, location_name: "iamInstanceProfile"))
+    ResourceData.add_member(:autoscaling_auto_scaling_group, Shapes::ShapeRef.new(shape: AutoscalingAutoScalingGroup, location_name: "autoscalingAutoScalingGroup"))
+    ResourceData.add_member(:ec2_launch_template, Shapes::ShapeRef.new(shape: Ec2LaunchTemplate, location_name: "ec2LaunchTemplate"))
+    ResourceData.add_member(:ec2_vpc, Shapes::ShapeRef.new(shape: Ec2Vpc, location_name: "ec2Vpc"))
+    ResourceData.add_member(:ec2_image, Shapes::ShapeRef.new(shape: Ec2Image, location_name: "ec2Image"))
+    ResourceData.add_member(:cloudformation_stack, Shapes::ShapeRef.new(shape: CloudformationStack, location_name: "cloudformationStack"))
     ResourceData.struct_class = Types::ResourceData
 
     ResourceDetails.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))

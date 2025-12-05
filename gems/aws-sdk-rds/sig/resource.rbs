@@ -253,7 +253,17 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
-                                ?master_user_authentication_type: ("password" | "iam-db-auth")
+                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                                ?additional_storage_volumes: Array[
+                                  {
+                                    volume_name: ::String,
+                                    allocated_storage: ::Integer?,
+                                    iops: ::Integer?,
+                                    max_allocated_storage: ::Integer?,
+                                    storage_throughput: ::Integer?,
+                                    storage_type: ::String?
+                                  },
+                                ]
                               ) -> DBInstance
                             | (?Hash[Symbol, untyped]) -> DBInstance
 

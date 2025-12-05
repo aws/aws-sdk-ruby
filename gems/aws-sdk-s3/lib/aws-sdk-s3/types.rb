@@ -385,7 +385,7 @@ module Aws::S3
     # and replication requests to the bucket for objects with the specified
     # encryption type. However, you can continue to read and list any
     # pre-existing objects already encrypted with the specified encryption
-    # type. For more information, see [Blocking an encryption type for a
+    # type. For more information, see [Blocking or unblocking SSE-C for a
     # general purpose bucket][1].
     #
     # This data type is used with the following actions:
@@ -406,7 +406,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/userguide/block-encryption-type.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
@@ -2820,17 +2820,18 @@ module Aws::S3
     #   creating. Tags are key-value pairs of metadata used to categorize
     #   and organize your buckets, track costs, and control access.
     #
-    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
-    #   information, see [Using tags with directory buckets][1].
+    #   You must have the `s3:TagResource` permission to create a general
+    #   purpose bucket with tags or the `s3express:TagResource` permission
+    #   to create a directory bucket with tags.
     #
-    #    You must have the `s3express:TagResource` permission to create a
-    #   directory bucket with tags.
+    #   When creating buckets with tags, note that tag-based conditions
+    #   using `aws:ResourceTag` and `s3:BucketTag` condition keys are
+    #   applicable only after ABAC is enabled on the bucket. To learn more,
+    #   see [Enabling ABAC in general purpose buckets][1].
     #
-    #    </note>
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration AWS API Documentation
@@ -6544,7 +6545,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] owner
-    #   Container for the bucket owner's display name and ID.
+    #   Container for the bucket owner's ID.
     #   @return [Types::Owner]
     #
     # @!attribute [rw] grants
@@ -7519,7 +7520,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] owner
-    #   Container for the bucket owner's display name and ID.
+    #   Container for the bucket owner's ID.
     #   @return [Types::Owner]
     #
     # @!attribute [rw] grants
@@ -9115,56 +9116,12 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # Container for the person being granted permissions.
     #
     # @!attribute [rw] display_name
-    #   Screen name of the grantee.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   Email address of the grantee.
-    #
-    #   <note markdown="1"> Using email addresses to specify a grantee is only supported in the
-    #   following Amazon Web Services Regions:
-    #
-    #    * US East (N. Virginia)
-    #
-    #   * US West (N. California)
-    #
-    #   * US West (Oregon)
-    #
-    #   * Asia Pacific (Singapore)
-    #
-    #   * Asia Pacific (Sydney)
-    #
-    #   * Asia Pacific (Tokyo)
-    #
-    #   * Europe (Ireland)
-    #
-    #   * South America (São Paulo)
-    #
-    #    For a list of all the Amazon S3 supported Regions and endpoints, see
-    #   [Regions and Endpoints][1] in the Amazon Web Services General
-    #   Reference.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -10137,8 +10094,6 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Name of the Principal.
-    #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
@@ -12660,14 +12615,13 @@ module Aws::S3
     #   Container element that identifies who initiated the multipart
     #   upload. If the initiator is an Amazon Web Services account, this
     #   element provides the same information as the `Owner` element. If the
-    #   initiator is an IAM User, this element provides the user ARN and
-    #   display name.
+    #   initiator is an IAM User, this element provides the user ARN.
     #   @return [Types::Initiator]
     #
     # @!attribute [rw] owner
     #   Container element that identifies the object owner, after the object
     #   is created. If multipart upload is initiated by an IAM user, this
-    #   element provides the parent account ID and display name.
+    #   element provides the parent account ID.
     #
     #   <note markdown="1"> **Directory buckets** - The bucket owner is returned as the object
     #   owner for all the parts.
@@ -13983,44 +13937,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # End of support notice: Beginning November 21, 2025, Amazon S3 will
-    # stop returning `DisplayName`. Update your applications to use
-    # canonical IDs (unique identifier for Amazon Web Services accounts),
-    # Amazon Web Services account ID (12 digit identifier) or IAM ARNs (full
-    # resource naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # Container for the owner's display name and ID.
     #
     # @!attribute [rw] display_name
-    #   Container for the display name of the owner. This value is only
-    #   supported in the following Amazon Web Services Regions:
-    #
-    #   * US East (N. Virginia)
-    #
-    #   * US West (N. California)
-    #
-    #   * US West (Oregon)
-    #
-    #   * Asia Pacific (Singapore)
-    #
-    #   * Asia Pacific (Sydney)
-    #
-    #   * Asia Pacific (Tokyo)
-    #
-    #   * Europe (Ireland)
-    #
-    #   * South America (São Paulo)
-    #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -14283,9 +14202,11 @@ module Aws::S3
 
     # The PublicAccessBlock configuration that you want to apply to this
     # Amazon S3 bucket. You can enable the configuration options in any
-    # combination. For more information about when Amazon S3 considers a
-    # bucket or object public, see [The Meaning of "Public"][1] in the
-    # *Amazon S3 User Guide*.
+    # combination. Bucket-level settings work alongside account-level
+    # settings (which may inherit from organization-level policies). For
+    # more information about when Amazon S3 considers a bucket or object
+    # public, see [The Meaning of "Public"][1] in the *Amazon S3 User
+    # Guide*.
     #
     #
     #
@@ -18915,11 +18836,11 @@ module Aws::S3
     #   upload, and replication requests to the bucket for objects with the
     #   specified encryption type. However, you can continue to read and
     #   list any pre-existing objects already encrypted with the specified
-    #   encryption type. For more information, see [Blocking an encryption
-    #   type for a general purpose bucket][1].
+    #   encryption type. For more information, see [Blocking or unblocking
+    #   SSE-C for a general purpose bucket][1].
     #
     #   <note markdown="1"> Currently, this parameter only supports blocking or unblocking
-    #   Server Side Encryption with Customer Provided Keys (SSE-C). For more
+    #   server-side encryption with customer-provided keys (SSE-C). For more
     #   information about SSE-C, see [Using server-side encryption with
     #   customer-provided keys (SSE-C)][2].
     #
@@ -18927,7 +18848,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/userguide/block-encryption-type.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
     #   @return [Types::BlockedEncryptionTypes]
     #

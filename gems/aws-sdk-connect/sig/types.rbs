@@ -149,6 +149,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AiAgentInfo
+      attr_accessor ai_use_case: ("AgentAssistance" | "SelfService")
+      attr_accessor ai_agent_version_id: ::String
+      attr_accessor ai_agent_escalated: bool
+      SENSITIVE: []
+    end
+
     class AliasConfiguration
       attr_accessor email_address_id: ::String
       SENSITIVE: []
@@ -184,6 +191,7 @@ module Aws::Connect
     class Application
       attr_accessor namespace: ::String
       attr_accessor application_permissions: ::Array[::String]
+      attr_accessor type: ("MCP" | "THIRD_PARTY_APPLICATION")
       SENSITIVE: []
     end
 
@@ -329,6 +337,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AssociateSecurityProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor security_profiles: ::Array[Types::SecurityProfileItem]
+      attr_accessor entity_type: ("USER" | "AI_AGENT")
+      attr_accessor entity_arn: ::String
+      SENSITIVE: []
+    end
+
     class AssociateTrafficDistributionGroupUserRequest
       attr_accessor traffic_distribution_group_id: ::String
       attr_accessor user_id: ::String
@@ -343,6 +359,19 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor user_id: ::String
       attr_accessor user_proficiencies: ::Array[Types::UserProficiency]
+      SENSITIVE: []
+    end
+
+    class AssociateWorkspaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateWorkspaceResponse
+      attr_accessor successful_list: ::Array[Types::SuccessfulBatchAssociationSummary]
+      attr_accessor failed_list: ::Array[Types::FailedBatchAssociationSummary]
       SENSITIVE: []
     end
 
@@ -395,7 +424,7 @@ module Aws::Connect
     end
 
     class Attribute
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -491,6 +520,93 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class BatchCreateDataTableValueFailureResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateDataTableValueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor values: ::Array[Types::DataTableValue]
+      SENSITIVE: []
+    end
+
+    class BatchCreateDataTableValueResponse
+      attr_accessor successful: ::Array[Types::BatchCreateDataTableValueSuccessResult]
+      attr_accessor failed: ::Array[Types::BatchCreateDataTableValueFailureResult]
+      SENSITIVE: []
+    end
+
+    class BatchCreateDataTableValueSuccessResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor record_id: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDataTableValueFailureResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDataTableValueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor values: ::Array[Types::DataTableDeleteValueIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDataTableValueResponse
+      attr_accessor successful: ::Array[Types::BatchDeleteDataTableValueSuccessResult]
+      attr_accessor failed: ::Array[Types::BatchDeleteDataTableValueFailureResult]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDataTableValueSuccessResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class BatchDescribeDataTableValueFailureResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDescribeDataTableValueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor values: ::Array[Types::DataTableValueIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeDataTableValueResponse
+      attr_accessor successful: ::Array[Types::BatchDescribeDataTableValueSuccessResult]
+      attr_accessor failed: ::Array[Types::BatchDescribeDataTableValueFailureResult]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeDataTableValueSuccessResult
+      attr_accessor record_id: ::String
+      attr_accessor attribute_id: ::String
+      attr_accessor primary_values: ::Array[Types::PrimaryValueResponse]
+      attr_accessor attribute_name: ::String
+      attr_accessor value: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class BatchDisassociateAnalyticsDataSetRequest
       attr_accessor instance_id: ::String
       attr_accessor data_set_ids: ::Array[::String]
@@ -539,6 +655,33 @@ module Aws::Connect
     class BatchPutContactResponse
       attr_accessor successful_request_list: ::Array[Types::SuccessfulRequest]
       attr_accessor failed_request_list: ::Array[Types::FailedRequest]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDataTableValueFailureResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDataTableValueRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor values: ::Array[Types::DataTableValue]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDataTableValueResponse
+      attr_accessor successful: ::Array[Types::BatchUpdateDataTableValueSuccessResult]
+      attr_accessor failed: ::Array[Types::BatchUpdateDataTableValueFailureResult]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDataTableValueSuccessResult
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
       SENSITIVE: []
     end
 
@@ -719,6 +862,7 @@ module Aws::Connect
       attr_accessor contact_details: Types::ContactDetails
       attr_accessor outbound_strategy: Types::OutboundStrategy
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor next_contacts: ::Array[Types::NextContactEntry]
       SENSITIVE: [:name, :description]
     end
 
@@ -782,6 +926,20 @@ module Aws::Connect
       attr_accessor version_description: ::String
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ContactFlowAttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      attr_accessor contact_flow_type_condition: Types::ContactFlowTypeCondition
+      SENSITIVE: []
+    end
+
+    class ContactFlowAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::ContactFlowAttributeAndCondition]
+      attr_accessor and_condition: Types::ContactFlowAttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      attr_accessor contact_flow_type_condition: Types::ContactFlowTypeCondition
       SENSITIVE: []
     end
 
@@ -870,6 +1028,7 @@ module Aws::Connect
 
     class ContactFlowSearchFilter
       attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      attr_accessor flow_attribute_filter: Types::ContactFlowAttributeFilter
       SENSITIVE: []
     end
 
@@ -880,6 +1039,11 @@ module Aws::Connect
       attr_accessor contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")
       attr_accessor contact_flow_state: ("ACTIVE" | "ARCHIVED")
       attr_accessor contact_flow_status: ("PUBLISHED" | "SAVED")
+      SENSITIVE: []
+    end
+
+    class ContactFlowTypeCondition
+      attr_accessor contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")
       SENSITIVE: []
     end
 
@@ -1103,6 +1267,42 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CreateDataTableAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor name: ::String
+      attr_accessor value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST")
+      attr_accessor description: ::String
+      attr_accessor primary: bool
+      attr_accessor validation: Types::Validation
+      SENSITIVE: []
+    end
+
+    class CreateDataTableAttributeResponse
+      attr_accessor name: ::String
+      attr_accessor attribute_id: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class CreateDataTableRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor value_lock_level: ("NONE" | "DATA_TABLE" | "PRIMARY_VALUE" | "ATTRIBUTE" | "VALUE")
+      attr_accessor status: ("PUBLISHED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDataTableResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
     class CreateEmailAddressRequest
       attr_accessor description: ::String
       attr_accessor instance_id: ::String
@@ -1127,7 +1327,10 @@ module Aws::Connect
       attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
       attr_accessor auto_evaluation_configuration: Types::EvaluationFormAutoEvaluationConfiguration
       attr_accessor client_token: ::String
+      attr_accessor as_draft: bool
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
+      attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       SENSITIVE: []
     end
 
@@ -1188,7 +1391,7 @@ module Aws::Connect
 
     class CreateIntegrationAssociationRequest
       attr_accessor instance_id: ::String
-      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL")
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL" | "MESSAGE_PROCESSOR")
       attr_accessor integration_arn: ::String
       attr_accessor source_application_url: ::String
       attr_accessor source_application_name: ::String
@@ -1351,6 +1554,8 @@ module Aws::Connect
       attr_accessor applications: ::Array[Types::Application]
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
+      attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
 
@@ -1489,6 +1694,35 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CreateWorkspacePageRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor page: ::String
+      attr_accessor slug: ::String
+      attr_accessor input_data: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspacePageResponse < Aws::EmptyStructure
+    end
+
+    class CreateWorkspaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor theme: Types::WorkspaceTheme
+      attr_accessor title: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceResponse
+      attr_accessor workspace_id: ::String
+      attr_accessor workspace_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreatedByInfo
       attr_accessor connect_user_arn: ::String
       attr_accessor aws_identity_arn: ::String
@@ -1554,6 +1788,127 @@ module Aws::Connect
     class CustomerVoiceActivity
       attr_accessor greeting_start_timestamp: ::Time
       attr_accessor greeting_end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DataTable
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor description: ::String
+      attr_accessor value_lock_level: ("NONE" | "DATA_TABLE" | "PRIMARY_VALUE" | "ATTRIBUTE" | "VALUE")
+      attr_accessor lock_version: Types::DataTableLockVersion
+      attr_accessor version: ::String
+      attr_accessor version_description: ::String
+      attr_accessor status: ("PUBLISHED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataTableAccessControlConfiguration
+      attr_accessor primary_attribute_access_control_configuration: Types::PrimaryAttributeAccessControlConfigurationItem
+      SENSITIVE: []
+    end
+
+    class DataTableAttribute
+      attr_accessor attribute_id: ::String
+      attr_accessor name: ::String
+      attr_accessor value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST")
+      attr_accessor description: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor data_table_arn: ::String
+      attr_accessor primary: bool
+      attr_accessor version: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor validation: Types::Validation
+      SENSITIVE: []
+    end
+
+    class DataTableDeleteValueIdentifier
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class DataTableEvaluatedValue
+      attr_accessor record_id: ::String
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST")
+      attr_accessor found: bool
+      attr_accessor error: bool
+      attr_accessor evaluated_value: ::String
+      SENSITIVE: []
+    end
+
+    class DataTableLockVersion
+      attr_accessor data_table: ::String
+      attr_accessor attribute: ::String
+      attr_accessor primary_values: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DataTableSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::DataTableSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::DataTableSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class DataTableSearchFilter
+      attr_accessor attribute_filter: Types::ControlPlaneAttributeFilter
+      SENSITIVE: []
+    end
+
+    class DataTableSummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class DataTableValue
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      attr_accessor value: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class DataTableValueEvaluationSet
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataTableValueIdentifier
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class DataTableValueSummary
+      attr_accessor record_id: ::String
+      attr_accessor attribute_id: ::String
+      attr_accessor primary_values: ::Array[Types::PrimaryValueResponse]
+      attr_accessor attribute_name: ::String
+      attr_accessor value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST")
+      attr_accessor value: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -1670,6 +2025,27 @@ module Aws::Connect
     end
 
     class DeleteContactFlowVersionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDataTableAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataTableAttributeResponse
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class DeleteDataTableRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataTableResponse < Aws::EmptyStructure
     end
 
     class DeleteEmailAddressRequest
@@ -1833,6 +2209,35 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeleteWorkspaceMediaRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor media_type: ("IMAGE_LOGO_LIGHT_FAVICON" | "IMAGE_LOGO_DARK_FAVICON" | "IMAGE_LOGO_LIGHT_HORIZONTAL" | "IMAGE_LOGO_DARK_HORIZONTAL")
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceMediaResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkspacePageRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor page: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspacePageResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkspaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceResponse < Aws::EmptyStructure
+    end
+
     class DescribeAgentStatusRequest
       attr_accessor instance_id: ::String
       attr_accessor agent_status_id: ::String
@@ -1912,6 +2317,29 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DescribeDataTableAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataTableAttributeResponse
+      attr_accessor attribute: Types::DataTableAttribute
+      SENSITIVE: []
+    end
+
+    class DescribeDataTableRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataTableResponse
+      attr_accessor data_table: Types::DataTable
+      SENSITIVE: []
+    end
+
     class DescribeEmailAddressRequest
       attr_accessor instance_id: ::String
       attr_accessor email_address_id: ::String
@@ -1968,7 +2396,7 @@ module Aws::Connect
 
     class DescribeInstanceAttributeRequest
       attr_accessor instance_id: ::String
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       SENSITIVE: []
     end
 
@@ -2151,6 +2579,17 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DescribeWorkspaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceResponse
+      attr_accessor workspace: Types::Workspace
+      SENSITIVE: []
+    end
+
     class DestinationNotAllowedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -2266,6 +2705,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DisassociateSecurityProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor security_profiles: ::Array[Types::SecurityProfileItem]
+      attr_accessor entity_type: ("USER" | "AI_AGENT")
+      attr_accessor entity_arn: ::String
+      SENSITIVE: []
+    end
+
     class DisassociateTrafficDistributionGroupUserRequest
       attr_accessor traffic_distribution_group_id: ::String
       attr_accessor user_id: ::String
@@ -2280,6 +2727,19 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor user_id: ::String
       attr_accessor user_proficiencies: ::Array[Types::UserProficiencyDisassociate]
+      SENSITIVE: []
+    end
+
+    class DisassociateWorkspaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateWorkspaceResponse
+      attr_accessor successful_list: ::Array[Types::SuccessfulBatchAssociationSummary]
+      attr_accessor failed_list: ::Array[Types::FailedBatchAssociationSummary]
       SENSITIVE: []
     end
 
@@ -2409,6 +2869,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class EvaluateDataTableValuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor values: ::Array[Types::DataTableValueEvaluationSet]
+      attr_accessor time_zone: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class EvaluateDataTableValuesResponse
+      attr_accessor values: ::Array[Types::DataTableEvaluatedValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class Evaluation
       attr_accessor evaluation_id: ::String
       attr_accessor evaluation_arn: ::String
@@ -2441,6 +2917,8 @@ module Aws::Connect
     class EvaluationAnswerData
       attr_accessor string_value: ::String
       attr_accessor numeric_value: ::Float
+      attr_accessor string_values: ::Array[::String]
+      attr_accessor date_time_value: ::String
       attr_accessor not_applicable: bool
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -2448,6 +2926,10 @@ module Aws::Connect
       class StringValue < EvaluationAnswerData
       end
       class NumericValue < EvaluationAnswerData
+      end
+      class StringValues < EvaluationAnswerData
+      end
+      class DateTimeValue < EvaluationAnswerData
       end
       class NotApplicable < EvaluationAnswerData
       end
@@ -2479,6 +2961,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class EvaluationContactParticipant
+      attr_accessor contact_participant_role: ("AGENT" | "SYSTEM" | "CUSTOM_BOT")
+      attr_accessor contact_participant_id: ::String
+      SENSITIVE: []
+    end
+
     class EvaluationForm
       attr_accessor evaluation_form_id: ::String
       attr_accessor evaluation_form_version: ::Integer
@@ -2495,6 +2983,8 @@ module Aws::Connect
       attr_accessor last_modified_by: ::String
       attr_accessor auto_evaluation_configuration: Types::EvaluationFormAutoEvaluationConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
+      attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       SENSITIVE: []
     end
 
@@ -2512,6 +3002,8 @@ module Aws::Connect
       attr_accessor items: ::Array[Types::EvaluationFormItem]
       attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
       attr_accessor auto_evaluation_configuration: Types::EvaluationFormAutoEvaluationConfiguration
+      attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
+      attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       SENSITIVE: []
     end
 
@@ -2559,7 +3051,7 @@ module Aws::Connect
     class EvaluationFormItemEnablementExpression
       attr_accessor source: Types::EvaluationFormItemEnablementSource
       attr_accessor values: ::Array[Types::EvaluationFormItemEnablementSourceValue]
-      attr_accessor comparator: ("IN" | "NOT_IN")
+      attr_accessor comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
       SENSITIVE: []
     end
 
@@ -2572,6 +3064,42 @@ module Aws::Connect
     class EvaluationFormItemEnablementSourceValue
       attr_accessor type: ("OPTION_REF_ID")
       attr_accessor ref_id: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationFormLanguageConfiguration
+      attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")
+      SENSITIVE: []
+    end
+
+    class EvaluationFormMultiSelectQuestionAutomation
+      attr_accessor options: ::Array[Types::EvaluationFormMultiSelectQuestionAutomationOption]
+      attr_accessor default_option_ref_ids: ::Array[::String]
+      attr_accessor answer_source: Types::EvaluationFormQuestionAutomationAnswerSource
+      SENSITIVE: []
+    end
+
+    class EvaluationFormMultiSelectQuestionAutomationOption
+      attr_accessor rule_category: Types::MultiSelectQuestionRuleCategoryAutomation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RuleCategory < EvaluationFormMultiSelectQuestionAutomationOption
+      end
+      class Unknown < EvaluationFormMultiSelectQuestionAutomationOption
+      end
+    end
+
+    class EvaluationFormMultiSelectQuestionOption
+      attr_accessor ref_id: ::String
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationFormMultiSelectQuestionProperties
+      attr_accessor options: ::Array[Types::EvaluationFormMultiSelectQuestionOption]
+      attr_accessor display_as: ("DROPDOWN" | "CHECKBOX")
+      attr_accessor automation: Types::EvaluationFormMultiSelectQuestionAutomation
       SENSITIVE: []
     end
 
@@ -2611,7 +3139,7 @@ module Aws::Connect
       attr_accessor instructions: ::String
       attr_accessor ref_id: ::String
       attr_accessor not_applicable_enabled: bool
-      attr_accessor question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC")
+      attr_accessor question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC" | "MULTISELECT" | "DATETIME")
       attr_accessor question_type_properties: Types::EvaluationFormQuestionTypeProperties
       attr_accessor enablement: Types::EvaluationFormItemEnablementConfiguration
       attr_accessor weight: ::Float
@@ -2627,6 +3155,7 @@ module Aws::Connect
       attr_accessor numeric: Types::EvaluationFormNumericQuestionProperties
       attr_accessor single_select: Types::EvaluationFormSingleSelectQuestionProperties
       attr_accessor text: Types::EvaluationFormTextQuestionProperties
+      attr_accessor multi_select: Types::EvaluationFormMultiSelectQuestionProperties
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -2635,6 +3164,8 @@ module Aws::Connect
       class SingleSelect < EvaluationFormQuestionTypeProperties
       end
       class Text < EvaluationFormQuestionTypeProperties
+      end
+      class MultiSelect < EvaluationFormQuestionTypeProperties
       end
       class Unknown < EvaluationFormQuestionTypeProperties
       end
@@ -2676,6 +3207,8 @@ module Aws::Connect
       attr_accessor latest_version: ::Integer
       attr_accessor active_version: ::Integer
       attr_accessor auto_evaluation_enabled: bool
+      attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -2738,6 +3271,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class EvaluationFormTargetConfiguration
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED")
+      SENSITIVE: []
+    end
+
     class EvaluationFormTextQuestionAutomation
       attr_accessor answer_source: Types::EvaluationFormQuestionAutomationAnswerSource
       SENSITIVE: []
@@ -2775,6 +3313,8 @@ module Aws::Connect
       attr_accessor score: Types::EvaluationScore
       attr_accessor auto_evaluation: Types::AutoEvaluationDetails
       attr_accessor acknowledgement: Types::EvaluationAcknowledgement
+      attr_accessor contact_participant: Types::EvaluationContactParticipant
+      attr_accessor sampling_job_id: ::String
       SENSITIVE: []
     end
 
@@ -2806,6 +3346,7 @@ module Aws::Connect
       attr_accessor percentage: ::Float
       attr_accessor not_applicable: bool
       attr_accessor automatic_fail: bool
+      attr_accessor applied_weight: ::Float
       SENSITIVE: []
     end
 
@@ -2838,6 +3379,10 @@ module Aws::Connect
       attr_accessor acknowledged_time: ::Time
       attr_accessor acknowledged_by: ::String
       attr_accessor acknowledger_comment: ::String
+      attr_accessor sampling_job_id: ::String
+      attr_accessor review_id: ::String
+      attr_accessor contact_participant_role: ("AGENT" | "SYSTEM" | "CUSTOM_BOT")
+      attr_accessor contact_participant_id: ::String
       SENSITIVE: []
     end
 
@@ -2846,6 +3391,7 @@ module Aws::Connect
       attr_accessor evaluation_arn: ::String
       attr_accessor evaluation_form_id: ::String
       attr_accessor evaluation_form_version: ::Integer
+      attr_accessor evaluation_form_title: ::String
       attr_accessor metadata: Types::EvaluationSearchMetadata
       attr_accessor status: ("DRAFT" | "SUBMITTED")
       attr_accessor evaluation_type: ("STANDARD" | "CALIBRATION")
@@ -2884,6 +3430,7 @@ module Aws::Connect
       attr_accessor evaluation_type: ("STANDARD" | "CALIBRATION")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor contact_participant: Types::EvaluationContactParticipant
       SENSITIVE: []
     end
 
@@ -2928,6 +3475,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class FailedBatchAssociationSummary
+      attr_accessor resource_arn: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class FailedRequest
       attr_accessor request_identifier: ::String
       attr_accessor failure_reason_code: ("INVALID_ATTRIBUTE_KEY" | "INVALID_CUSTOMER_ENDPOINT" | "INVALID_SYSTEM_ENDPOINT" | "INVALID_QUEUE" | "INVALID_OUTBOUND_STRATEGY" | "MISSING_CAMPAIGN" | "MISSING_CUSTOMER_ENDPOINT" | "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT" | "REQUEST_THROTTLED" | "IDEMPOTENCY_EXCEPTION" | "INTERNAL_ERROR")
@@ -2952,6 +3506,12 @@ module Aws::Connect
     class FilterV2
       attr_accessor filter_key: ::String
       attr_accessor filter_values: ::Array[::String]
+      attr_accessor string_condition: Types::FilterV2StringCondition
+      SENSITIVE: []
+    end
+
+    class FilterV2StringCondition
+      attr_accessor comparison: ("NOT_EXISTS")
       SENSITIVE: []
     end
 
@@ -2968,6 +3528,22 @@ module Aws::Connect
       attr_accessor resource_id: ::String
       attr_accessor flow_id: ::String
       attr_accessor resource_type: ("WHATSAPP_MESSAGING_PHONE_NUMBER" | "VOICE_PHONE_NUMBER" | "INBOUND_EMAIL" | "OUTBOUND_EMAIL" | "ANALYTICS_CONNECTOR")
+      SENSITIVE: []
+    end
+
+    class FlowModule
+      attr_accessor type: ("MCP")
+      attr_accessor flow_module_id: ::String
+      SENSITIVE: []
+    end
+
+    class FlowQuickConnectConfig
+      attr_accessor contact_flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class FontFamily
+      attr_accessor default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")
       SENSITIVE: []
     end
 
@@ -3183,6 +3759,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class GranularAccessControlConfiguration
+      attr_accessor data_table_access_control_configuration: Types::DataTableAccessControlConfiguration
+      SENSITIVE: []
+    end
+
     class HierarchyGroup
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -3374,6 +3955,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ImagesLogo
+      attr_accessor default: ::String
+      attr_accessor favicon: ::String
+      SENSITIVE: []
+    end
+
     class ImportPhoneNumberRequest
       attr_accessor instance_id: ::String
       attr_accessor source_phone_number_arn: ::String
@@ -3387,6 +3974,17 @@ module Aws::Connect
       attr_accessor phone_number_id: ::String
       attr_accessor phone_number_arn: ::String
       SENSITIVE: []
+    end
+
+    class ImportWorkspaceMediaRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor media_type: ("IMAGE_LOGO_LIGHT_FAVICON" | "IMAGE_LOGO_DARK_FAVICON" | "IMAGE_LOGO_LIGHT_HORIZONTAL" | "IMAGE_LOGO_DARK_HORIZONTAL")
+      attr_accessor media_source: ::String
+      SENSITIVE: []
+    end
+
+    class ImportWorkspaceMediaResponse < Aws::EmptyStructure
     end
 
     class InboundAdditionalRecipients
@@ -3463,7 +4061,7 @@ module Aws::Connect
       attr_accessor integration_association_id: ::String
       attr_accessor integration_association_arn: ::String
       attr_accessor instance_id: ::String
-      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL")
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL" | "MESSAGE_PROCESSOR")
       attr_accessor integration_arn: ::String
       attr_accessor source_application_url: ::String
       attr_accessor source_application_name: ::String
@@ -3745,7 +4343,7 @@ module Aws::Connect
     class ListContactReferencesRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_id: ::String
-      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE")]
+      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT")]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -3753,6 +4351,66 @@ module Aws::Connect
     class ListContactReferencesResponse
       attr_accessor reference_summary_list: ::Array[Types::ReferenceSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataTableAttributesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor attribute_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataTableAttributesResponse
+      attr_accessor next_token: ::String
+      attr_accessor attributes: ::Array[Types::DataTableAttribute]
+      SENSITIVE: []
+    end
+
+    class ListDataTablePrimaryValuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor record_ids: ::Array[::String]
+      attr_accessor primary_attribute_values: ::Array[Types::PrimaryAttributeValueFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataTablePrimaryValuesResponse
+      attr_accessor next_token: ::String
+      attr_accessor primary_values_list: ::Array[Types::RecordPrimaryValue]
+      SENSITIVE: []
+    end
+
+    class ListDataTableValuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor record_ids: ::Array[::String]
+      attr_accessor primary_attribute_values: ::Array[Types::PrimaryAttributeValueFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataTableValuesResponse
+      attr_accessor next_token: ::String
+      attr_accessor values: ::Array[Types::DataTableValueSummary]
+      SENSITIVE: []
+    end
+
+    class ListDataTablesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataTablesResponse
+      attr_accessor next_token: ::String
+      attr_accessor data_table_summary_list: ::Array[Types::DataTableSummary]
       SENSITIVE: []
     end
 
@@ -3766,6 +4424,21 @@ module Aws::Connect
 
     class ListDefaultVocabulariesResponse
       attr_accessor default_vocabulary_list: ::Array[Types::DefaultVocabulary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitySecurityProfilesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor entity_type: ("USER" | "AI_AGENT")
+      attr_accessor entity_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntitySecurityProfilesResponse
+      attr_accessor security_profiles: ::Array[Types::SecurityProfileItem]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -3881,7 +4554,7 @@ module Aws::Connect
 
     class ListIntegrationAssociationsRequest
       attr_accessor instance_id: ::String
-      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL")
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER" | "SES_IDENTITY" | "ANALYTICS_CONNECTOR" | "CALL_TRANSFER_CONNECTOR" | "COGNITO_USER_POOL" | "MESSAGE_PROCESSOR")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor integration_arn: ::String
@@ -4025,7 +4698,7 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor quick_connect_types: ::Array[("USER" | "QUEUE" | "PHONE_NUMBER")]
+      attr_accessor quick_connect_types: ::Array[("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW")]
       SENSITIVE: []
     end
 
@@ -4136,6 +4809,22 @@ module Aws::Connect
 
     class ListSecurityProfileApplicationsResponse
       attr_accessor applications: ::Array[Types::Application]
+      attr_accessor next_token: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileFlowModulesRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileFlowModulesResponse
+      attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
       attr_accessor next_token: ::String
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
@@ -4306,6 +4995,44 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListWorkspaceMediaRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspaceMediaResponse
+      attr_accessor media: ::Array[Types::MediaItem]
+      SENSITIVE: []
+    end
+
+    class ListWorkspacePagesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkspacePagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor workspace_page_list: ::Array[Types::WorkspacePage]
+      SENSITIVE: []
+    end
+
+    class ListWorkspacesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkspacesResponse
+      attr_accessor next_token: ::String
+      attr_accessor workspace_summary_list: ::Array[Types::WorkspaceSummary]
+      SENSITIVE: []
+    end
+
     class MatchCriteria
       attr_accessor agents_criteria: Types::AgentsCriteria
       SENSITIVE: []
@@ -4320,6 +5047,12 @@ module Aws::Connect
       attr_accessor channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
       attr_accessor concurrency: ::Integer
       attr_accessor cross_channel_behavior: Types::CrossChannelBehavior
+      SENSITIVE: []
+    end
+
+    class MediaItem
+      attr_accessor type: ("IMAGE_LOGO_LIGHT_FAVICON" | "IMAGE_LOGO_DARK_FAVICON" | "IMAGE_LOGO_LIGHT_HORIZONTAL" | "IMAGE_LOGO_DARK_HORIZONTAL")
+      attr_accessor source: ::String
       SENSITIVE: []
     end
 
@@ -4375,6 +5108,7 @@ module Aws::Connect
     class MetricV2
       attr_accessor name: ::String
       attr_accessor threshold: ::Array[Types::ThresholdV2]
+      attr_accessor metric_id: ::String
       attr_accessor metric_filters: ::Array[Types::MetricFilterV2]
       SENSITIVE: []
     end
@@ -4394,6 +5128,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class MultiSelectQuestionRuleCategoryAutomation
+      attr_accessor category: ::String
+      attr_accessor condition: ("PRESENT" | "NOT_PRESENT")
+      attr_accessor option_ref_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class NameCriteria
       attr_accessor search_text: ::Array[::String]
       attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
@@ -4406,6 +5147,23 @@ module Aws::Connect
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor streaming_configuration: Types::ChatStreamingConfiguration
       SENSITIVE: []
+    end
+
+    class NextContactEntry
+      attr_accessor type: ("QUICK_CONNECT")
+      attr_accessor next_contact_metadata: Types::NextContactMetadata
+      SENSITIVE: []
+    end
+
+    class NextContactMetadata
+      attr_accessor quick_connect_contact_data: Types::QuickConnectContactData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class QuickConnectContactData < NextContactMetadata
+      end
+      class Unknown < NextContactMetadata
+      end
     end
 
     class NotificationRecipientType
@@ -4429,7 +5187,7 @@ module Aws::Connect
     end
 
     class NumericQuestionPropertyValueAutomation
-      attr_accessor label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
+      attr_accessor label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
       SENSITIVE: []
     end
 
@@ -4497,9 +5255,47 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class PaletteCanvas
+      attr_accessor container_background: ::String
+      attr_accessor page_background: ::String
+      attr_accessor active_background: ::String
+      SENSITIVE: []
+    end
+
+    class PaletteHeader
+      attr_accessor background: ::String
+      attr_accessor text: ::String
+      attr_accessor text_hover: ::String
+      attr_accessor invert_actions_colors: bool
+      SENSITIVE: []
+    end
+
+    class PaletteNavigation
+      attr_accessor background: ::String
+      attr_accessor text_background_hover: ::String
+      attr_accessor text_background_active: ::String
+      attr_accessor text: ::String
+      attr_accessor text_hover: ::String
+      attr_accessor text_active: ::String
+      attr_accessor invert_actions_colors: bool
+      SENSITIVE: []
+    end
+
+    class PalettePrimary
+      attr_accessor default: ::String
+      attr_accessor active: ::String
+      attr_accessor contrast_text: ::String
+      SENSITIVE: []
+    end
+
     class ParticipantCapabilities
       attr_accessor video: ("SEND")
       attr_accessor screen_share: ("SEND")
+      SENSITIVE: []
+    end
+
+    class ParticipantConfiguration
+      attr_accessor response_mode: ("INCREMENTAL" | "COMPLETE")
       SENSITIVE: []
     end
 
@@ -4640,6 +5436,37 @@ module Aws::Connect
     class Preview
       attr_accessor post_accept_timeout_config: Types::PostAcceptTimeoutConfig
       attr_accessor allowed_user_actions: ::Array[("CALL" | "DISCARD")]
+      SENSITIVE: []
+    end
+
+    class PrimaryAttributeAccessControlConfigurationItem
+      attr_accessor primary_attribute_values: ::Array[Types::PrimaryAttributeValue]
+      SENSITIVE: []
+    end
+
+    class PrimaryAttributeValue
+      attr_accessor access_type: ("ALLOW")
+      attr_accessor attribute_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PrimaryAttributeValueFilter
+      attr_accessor attribute_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PrimaryValue
+      attr_accessor attribute_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PrimaryValueResponse
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_id: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -4784,10 +5611,20 @@ module Aws::Connect
     end
 
     class QuickConnectConfig
-      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER")
+      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW")
       attr_accessor user_config: Types::UserQuickConnectConfig
       attr_accessor queue_config: Types::QueueQuickConnectConfig
       attr_accessor phone_config: Types::PhoneNumberQuickConnectConfig
+      attr_accessor flow_config: Types::FlowQuickConnectConfig
+      SENSITIVE: []
+    end
+
+    class QuickConnectContactData
+      attr_accessor contact_id: ::String
+      attr_accessor initiation_timestamp: ::Time
+      attr_accessor quick_connect_id: ::String
+      attr_accessor quick_connect_name: ::String
+      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW")
       SENSITIVE: []
     end
 
@@ -4807,7 +5644,7 @@ module Aws::Connect
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER")
+      attr_accessor quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW")
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
       SENSITIVE: []
@@ -4958,6 +5795,14 @@ module Aws::Connect
       end
     end
 
+    class RecordPrimaryValue
+      attr_accessor record_id: ::String
+      attr_accessor primary_values: ::Array[Types::PrimaryValueResponse]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class RecordingInfo
       attr_accessor storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE")
       attr_accessor location: ::String
@@ -4969,12 +5814,13 @@ module Aws::Connect
       attr_accessor stop_timestamp: ::Time
       attr_accessor status: ("AVAILABLE" | "DELETED")
       attr_accessor deletion_reason: ::String
+      attr_accessor unprocessed_transcript_location: ::String
       SENSITIVE: []
     end
 
     class Reference
       attr_accessor value: ::String
-      attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE")
+      attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT")
       attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
       attr_accessor arn: ::String
       attr_accessor status_reason: ::String
@@ -4985,6 +5831,7 @@ module Aws::Connect
       attr_accessor url: Types::UrlReference
       attr_accessor attachment: Types::AttachmentReference
       attr_accessor email_message: Types::EmailMessageReference
+      attr_accessor email_message_plain_text: Types::EmailMessageReference
       attr_accessor string: Types::StringReference
       attr_accessor number: Types::NumberReference
       attr_accessor date: Types::DateReference
@@ -4997,6 +5844,8 @@ module Aws::Connect
       class Attachment < ReferenceSummary
       end
       class EmailMessage < ReferenceSummary
+      end
+      class EmailMessagePlainText < ReferenceSummary
       end
       class String < ReferenceSummary
       end
@@ -5396,6 +6245,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class SearchDataTablesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::DataTableSearchFilter
+      attr_accessor search_criteria: Types::DataTableSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchDataTablesResponse
+      attr_accessor data_tables: ::Array[Types::DataTable]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
     class SearchEmailAddressesRequest
       attr_accessor instance_id: ::String
       attr_accessor max_results: ::Integer
@@ -5602,6 +6467,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class SearchViewsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::ViewSearchFilter
+      attr_accessor search_criteria: Types::ViewSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchViewsResponse
+      attr_accessor views: ::Array[Types::View]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
     class SearchVocabulariesRequest
       attr_accessor instance_id: ::String
       attr_accessor max_results: ::Integer
@@ -5615,6 +6496,38 @@ module Aws::Connect
     class SearchVocabulariesResponse
       attr_accessor vocabulary_summary_list: ::Array[Types::VocabularySummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchWorkspaceAssociationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::WorkspaceAssociationSearchFilter
+      attr_accessor search_criteria: Types::WorkspaceAssociationSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchWorkspaceAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor workspace_associations: ::Array[Types::WorkspaceAssociationSearchSummary]
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchWorkspacesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::WorkspaceSearchFilter
+      attr_accessor search_criteria: Types::WorkspaceSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchWorkspacesResponse
+      attr_accessor next_token: ::String
+      attr_accessor workspaces: ::Array[Types::WorkspaceSearchSummary]
+      attr_accessor approximate_total_count: ::Integer
       SENSITIVE: []
     end
 
@@ -5678,6 +6591,12 @@ module Aws::Connect
       attr_accessor last_modified_region: ::String
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
+      attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
+      SENSITIVE: []
+    end
+
+    class SecurityProfileItem
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -5836,6 +6755,7 @@ module Aws::Connect
       attr_accessor contact_flow_id: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor participant_details: Types::ParticipantDetails
+      attr_accessor participant_configuration: Types::ParticipantConfiguration
       attr_accessor initial_message: Types::ChatMessage
       attr_accessor client_token: ::String
       attr_accessor chat_duration_in_minutes: ::Integer
@@ -5869,6 +6789,17 @@ module Aws::Connect
       attr_accessor evaluation_id: ::String
       attr_accessor evaluation_arn: ::String
       SENSITIVE: []
+    end
+
+    class StartContactMediaProcessingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor processor_arn: ::String
+      attr_accessor failure_mode: ("DELIVER_UNPROCESSED_MESSAGE" | "DO_NOT_DELIVER_UNPROCESSED_MESSAGE")
+      SENSITIVE: []
+    end
+
+    class StartContactMediaProcessingResponse < Aws::EmptyStructure
     end
 
     class StartContactRecordingRequest
@@ -6047,6 +6978,15 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class StopContactMediaProcessingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopContactMediaProcessingResponse < Aws::EmptyStructure
+    end
+
     class StopContactRecordingRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_id: ::String
@@ -6108,6 +7048,11 @@ module Aws::Connect
     class SubmitContactEvaluationResponse
       attr_accessor evaluation_id: ::String
       attr_accessor evaluation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessfulBatchAssociationSummary
+      attr_accessor resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -6494,6 +7439,53 @@ module Aws::Connect
     class UpdateContactScheduleResponse < Aws::EmptyStructure
     end
 
+    class UpdateDataTableAttributeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor name: ::String
+      attr_accessor value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST")
+      attr_accessor description: ::String
+      attr_accessor primary: bool
+      attr_accessor validation: Types::Validation
+      SENSITIVE: []
+    end
+
+    class UpdateDataTableAttributeResponse
+      attr_accessor name: ::String
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class UpdateDataTableMetadataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor value_lock_level: ("NONE" | "DATA_TABLE" | "PRIMARY_VALUE" | "ATTRIBUTE" | "VALUE")
+      attr_accessor time_zone: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataTableMetadataResponse
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class UpdateDataTablePrimaryValuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor data_table_id: ::String
+      attr_accessor primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor new_primary_values: ::Array[Types::PrimaryValue]
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
+    class UpdateDataTablePrimaryValuesResponse
+      attr_accessor lock_version: Types::DataTableLockVersion
+      SENSITIVE: []
+    end
+
     class UpdateEmailAddressMetadataRequest
       attr_accessor instance_id: ::String
       attr_accessor email_address_id: ::String
@@ -6519,7 +7511,10 @@ module Aws::Connect
       attr_accessor items: ::Array[Types::EvaluationFormItem]
       attr_accessor scoring_strategy: Types::EvaluationFormScoringStrategy
       attr_accessor auto_evaluation_configuration: Types::EvaluationFormAutoEvaluationConfiguration
+      attr_accessor as_draft: bool
       attr_accessor client_token: ::String
+      attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
+      attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       SENSITIVE: []
     end
 
@@ -6554,7 +7549,7 @@ module Aws::Connect
 
     class UpdateInstanceAttributeRequest
       attr_accessor instance_id: ::String
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       attr_accessor value: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -6761,6 +7756,8 @@ module Aws::Connect
       attr_accessor applications: ::Array[Types::Application]
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
+      attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
 
@@ -6883,6 +7880,52 @@ module Aws::Connect
     end
 
     class UpdateViewMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspaceMetadataRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspacePageRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor page: ::String
+      attr_accessor new_page: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor slug: ::String
+      attr_accessor input_data: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspacePageResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspaceThemeRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor theme: Types::WorkspaceTheme
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceThemeResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspaceVisibilityRequest
+      attr_accessor instance_id: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor visibility: ("ALL" | "ASSIGNED" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceVisibilityResponse < Aws::EmptyStructure
     end
 
     class UploadUrlMetadata
@@ -7052,6 +8095,27 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class Validation
+      attr_accessor min_length: ::Integer
+      attr_accessor max_length: ::Integer
+      attr_accessor min_values: ::Integer
+      attr_accessor max_values: ::Integer
+      attr_accessor ignore_case: bool
+      attr_accessor minimum: ::Float
+      attr_accessor maximum: ::Float
+      attr_accessor exclusive_minimum: ::Float
+      attr_accessor exclusive_maximum: ::Float
+      attr_accessor multiple_of: ::Float
+      attr_accessor enum: Types::ValidationEnum
+      SENSITIVE: []
+    end
+
+    class ValidationEnum
+      attr_accessor strict: bool
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class View
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -7079,6 +8143,20 @@ module Aws::Connect
     class ViewInputContent
       attr_accessor template: ::String
       attr_accessor actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ViewSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::ViewSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::ViewSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      attr_accessor view_type_condition: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
+      attr_accessor view_status_condition: ("PUBLISHED" | "SAVED")
+      SENSITIVE: []
+    end
+
+    class ViewSearchFilter
+      attr_accessor attribute_filter: Types::ControlPlaneAttributeFilter
       SENSITIVE: []
     end
 
@@ -7135,6 +8213,115 @@ module Aws::Connect
 
     class WisdomInfo
       attr_accessor session_arn: ::String
+      attr_accessor ai_agents: ::Array[Types::AiAgentInfo]
+      SENSITIVE: []
+    end
+
+    class Workspace
+      attr_accessor visibility: ("ALL" | "ASSIGNED" | "NONE")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor theme: Types::WorkspaceTheme
+      attr_accessor title: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class WorkspaceAssociationSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::WorkspaceAssociationSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::WorkspaceAssociationSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class WorkspaceAssociationSearchFilter
+      attr_accessor attribute_filter: Types::ControlPlaneAttributeFilter
+      SENSITIVE: []
+    end
+
+    class WorkspaceAssociationSearchSummary
+      attr_accessor workspace_id: ::String
+      attr_accessor workspace_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspacePage
+      attr_accessor resource_arn: ::String
+      attr_accessor page: ::String
+      attr_accessor slug: ::String
+      attr_accessor input_data: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspaceSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::WorkspaceSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::WorkspaceSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class WorkspaceSearchFilter
+      attr_accessor attribute_filter: Types::ControlPlaneAttributeFilter
+      SENSITIVE: []
+    end
+
+    class WorkspaceSearchSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor visibility: ("ALL" | "ASSIGNED" | "NONE")
+      attr_accessor description: ::String
+      attr_accessor title: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class WorkspaceSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspaceTheme
+      attr_accessor light: Types::WorkspaceThemeConfig
+      attr_accessor dark: Types::WorkspaceThemeConfig
+      SENSITIVE: []
+    end
+
+    class WorkspaceThemeConfig
+      attr_accessor palette: Types::WorkspaceThemePalette
+      attr_accessor images: Types::WorkspaceThemeImages
+      attr_accessor typography: Types::WorkspaceThemeTypography
+      SENSITIVE: []
+    end
+
+    class WorkspaceThemeImages
+      attr_accessor logo: Types::ImagesLogo
+      SENSITIVE: []
+    end
+
+    class WorkspaceThemePalette
+      attr_accessor header: Types::PaletteHeader
+      attr_accessor navigation: Types::PaletteNavigation
+      attr_accessor canvas: Types::PaletteCanvas
+      attr_accessor primary: Types::PalettePrimary
+      SENSITIVE: []
+    end
+
+    class WorkspaceThemeTypography
+      attr_accessor font_family: Types::FontFamily
       SENSITIVE: []
     end
   end

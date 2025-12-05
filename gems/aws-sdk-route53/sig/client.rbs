@@ -1034,6 +1034,16 @@ module Aws
                                       ) -> _UpdateHostedZoneCommentResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneCommentResponseSuccess
 
+      interface _UpdateHostedZoneFeaturesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostedZoneFeaturesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_hosted_zone_features-instance_method
+      def update_hosted_zone_features: (
+                                         hosted_zone_id: ::String,
+                                         ?enable_accelerated_recovery: bool
+                                       ) -> _UpdateHostedZoneFeaturesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneFeaturesResponseSuccess
+
       interface _UpdateTrafficPolicyCommentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficPolicyCommentResponse]
         def traffic_policy: () -> Types::TrafficPolicy

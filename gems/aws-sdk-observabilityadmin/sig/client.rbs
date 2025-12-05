@@ -114,6 +114,35 @@ module Aws
                                                        ) -> _CreateCentralizationRuleForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCentralizationRuleForOrganizationResponseSuccess
 
+      interface _CreateS3TableIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateS3TableIntegrationOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_s3_table_integration-instance_method
+      def create_s3_table_integration: (
+                                         encryption: {
+                                           sse_algorithm: ("aws:kms" | "AES256"),
+                                           kms_key_arn: ::String?
+                                         },
+                                         role_arn: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateS3TableIntegrationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateS3TableIntegrationResponseSuccess
+
+      interface _CreateTelemetryPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTelemetryPipelineOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_telemetry_pipeline-instance_method
+      def create_telemetry_pipeline: (
+                                       name: ::String,
+                                       configuration: {
+                                         body: ::String
+                                       },
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateTelemetryPipelineResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTelemetryPipelineResponseSuccess
+
       interface _CreateTelemetryRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTelemetryRuleOutput]
         def rule_arn: () -> ::String
@@ -122,8 +151,9 @@ module Aws
       def create_telemetry_rule: (
                                    rule_name: ::String,
                                    rule: {
-                                     resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                     resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter")?,
                                      telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                     telemetry_source_types: Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]?,
                                      destination_configuration: {
                                        destination_type: ("cloud-watch-logs")?,
                                        destination_pattern: ::String?,
@@ -132,6 +162,63 @@ module Aws
                                          log_format: ::String?,
                                          traffic_type: ::String?,
                                          max_aggregation_interval: ::Integer?
+                                       }?,
+                                       cloudtrail_parameters: {
+                                         advanced_event_selectors: Array[
+                                           {
+                                             name: ::String?,
+                                             field_selectors: Array[
+                                               {
+                                                 field: ::String,
+                                                 equals: Array[::String]?,
+                                                 starts_with: Array[::String]?,
+                                                 ends_with: Array[::String]?,
+                                                 not_equals: Array[::String]?,
+                                                 not_starts_with: Array[::String]?,
+                                                 not_ends_with: Array[::String]?
+                                               },
+                                             ]
+                                           },
+                                         ]
+                                       }?,
+                                       elb_load_balancer_logging_parameters: {
+                                         output_format: ("plain" | "json")?,
+                                         field_delimiter: ::String?
+                                       }?,
+                                       waf_logging_parameters: {
+                                         redacted_fields: Array[
+                                           {
+                                             single_header: {
+                                               name: ::String?
+                                             }?,
+                                             uri_path: ::String?,
+                                             query_string: ::String?,
+                                             method: ::String?
+                                           },
+                                         ]?,
+                                         logging_filter: {
+                                           filters: Array[
+                                             {
+                                               behavior: ("KEEP" | "DROP")?,
+                                               requirement: ("MEETS_ALL" | "MEETS_ANY")?,
+                                               conditions: Array[
+                                                 {
+                                                   action_condition: {
+                                                     action: ("ALLOW" | "BLOCK" | "COUNT" | "CAPTCHA" | "CHALLENGE" | "EXCLUDED_AS_COUNT")?
+                                                   }?,
+                                                   label_name_condition: {
+                                                     label_name: ::String?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?,
+                                           default_behavior: ("KEEP" | "DROP")?
+                                         }?,
+                                         log_type: ("WAF_LOGS")?
+                                       }?,
+                                       log_delivery_parameters: {
+                                         log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS")]?
                                        }?
                                      }?,
                                      scope: ::String?,
@@ -149,8 +236,9 @@ module Aws
       def create_telemetry_rule_for_organization: (
                                                     rule_name: ::String,
                                                     rule: {
-                                                      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                                      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter")?,
                                                       telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                                      telemetry_source_types: Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]?,
                                                       destination_configuration: {
                                                         destination_type: ("cloud-watch-logs")?,
                                                         destination_pattern: ::String?,
@@ -159,6 +247,63 @@ module Aws
                                                           log_format: ::String?,
                                                           traffic_type: ::String?,
                                                           max_aggregation_interval: ::Integer?
+                                                        }?,
+                                                        cloudtrail_parameters: {
+                                                          advanced_event_selectors: Array[
+                                                            {
+                                                              name: ::String?,
+                                                              field_selectors: Array[
+                                                                {
+                                                                  field: ::String,
+                                                                  equals: Array[::String]?,
+                                                                  starts_with: Array[::String]?,
+                                                                  ends_with: Array[::String]?,
+                                                                  not_equals: Array[::String]?,
+                                                                  not_starts_with: Array[::String]?,
+                                                                  not_ends_with: Array[::String]?
+                                                                },
+                                                              ]
+                                                            },
+                                                          ]
+                                                        }?,
+                                                        elb_load_balancer_logging_parameters: {
+                                                          output_format: ("plain" | "json")?,
+                                                          field_delimiter: ::String?
+                                                        }?,
+                                                        waf_logging_parameters: {
+                                                          redacted_fields: Array[
+                                                            {
+                                                              single_header: {
+                                                                name: ::String?
+                                                              }?,
+                                                              uri_path: ::String?,
+                                                              query_string: ::String?,
+                                                              method: ::String?
+                                                            },
+                                                          ]?,
+                                                          logging_filter: {
+                                                            filters: Array[
+                                                              {
+                                                                behavior: ("KEEP" | "DROP")?,
+                                                                requirement: ("MEETS_ALL" | "MEETS_ANY")?,
+                                                                conditions: Array[
+                                                                  {
+                                                                    action_condition: {
+                                                                      action: ("ALLOW" | "BLOCK" | "COUNT" | "CAPTCHA" | "CHALLENGE" | "EXCLUDED_AS_COUNT")?
+                                                                    }?,
+                                                                    label_name_condition: {
+                                                                      label_name: ::String?
+                                                                    }?
+                                                                  },
+                                                                ]?
+                                                              },
+                                                            ]?,
+                                                            default_behavior: ("KEEP" | "DROP")?
+                                                          }?,
+                                                          log_type: ("WAF_LOGS")?
+                                                        }?,
+                                                        log_delivery_parameters: {
+                                                          log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS")]?
                                                         }?
                                                       }?,
                                                       scope: ::String?,
@@ -173,6 +318,21 @@ module Aws
                                                          rule_identifier: ::String
                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_s3_table_integration-instance_method
+      def delete_s3_table_integration: (
+                                         arn: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteTelemetryPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTelemetryPipelineOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_telemetry_pipeline-instance_method
+      def delete_telemetry_pipeline: (
+                                       pipeline_identifier: ::String
+                                     ) -> _DeleteTelemetryPipelineResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTelemetryPipelineResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_telemetry_rule-instance_method
       def delete_telemetry_rule: (
@@ -204,6 +364,21 @@ module Aws
                                                     ) -> _GetCentralizationRuleForOrganizationResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCentralizationRuleForOrganizationResponseSuccess
 
+      interface _GetS3TableIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetS3TableIntegrationOutput]
+        def arn: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING")
+        def encryption: () -> Types::Encryption
+        def destination_table_bucket_arn: () -> ::String
+        def created_time_stamp: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_s3_table_integration-instance_method
+      def get_s3_table_integration: (
+                                      arn: ::String
+                                    ) -> _GetS3TableIntegrationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetS3TableIntegrationResponseSuccess
+
       interface _GetTelemetryEnrichmentStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryEnrichmentStatusOutput]
         def status: () -> ("Running" | "Stopped" | "Impaired")
@@ -230,6 +405,16 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_telemetry_evaluation_status_for_organization-instance_method
       def get_telemetry_evaluation_status_for_organization: () -> _GetTelemetryEvaluationStatusForOrganizationResponseSuccess
                                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryEvaluationStatusForOrganizationResponseSuccess
+
+      interface _GetTelemetryPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryPipelineOutput]
+        def pipeline: () -> Types::TelemetryPipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_telemetry_pipeline-instance_method
+      def get_telemetry_pipeline: (
+                                    pipeline_identifier: ::String
+                                  ) -> _GetTelemetryPipelineResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryPipelineResponseSuccess
 
       interface _GetTelemetryRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryRuleOutput]
@@ -281,7 +466,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_resource_telemetry-instance_method
       def list_resource_telemetry: (
                                      ?resource_identifier_prefix: ::String,
-                                     ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")],
+                                     ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter")],
                                      ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")],
                                      ?resource_tags: Hash[::String, ::String],
                                      ?max_results: ::Integer,
@@ -298,13 +483,25 @@ module Aws
       def list_resource_telemetry_for_organization: (
                                                       ?account_identifiers: Array[::String],
                                                       ?resource_identifier_prefix: ::String,
-                                                      ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")],
+                                                      ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter")],
                                                       ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")],
                                                       ?resource_tags: Hash[::String, ::String],
                                                       ?max_results: ::Integer,
                                                       ?next_token: ::String
                                                     ) -> _ListResourceTelemetryForOrganizationResponseSuccess
                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceTelemetryForOrganizationResponseSuccess
+
+      interface _ListS3TableIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListS3TableIntegrationsOutput]
+        def integration_summaries: () -> ::Array[Types::IntegrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_s3_table_integrations-instance_method
+      def list_s3_table_integrations: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListS3TableIntegrationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListS3TableIntegrationsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
@@ -315,6 +512,18 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTelemetryPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTelemetryPipelinesOutput]
+        def pipeline_summaries: () -> ::Array[Types::TelemetryPipelineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_telemetry_pipelines-instance_method
+      def list_telemetry_pipelines: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListTelemetryPipelinesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryPipelinesResponseSuccess
 
       interface _ListTelemetryRulesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTelemetryRulesOutput]
@@ -384,6 +593,24 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _TestTelemetryPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestTelemetryPipelineOutput]
+        def results: () -> ::Array[Types::PipelineOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#test_telemetry_pipeline-instance_method
+      def test_telemetry_pipeline: (
+                                     records: Array[
+                                       {
+                                         data: ::String?,
+                                         type: ("STRING" | "JSON")?
+                                       },
+                                     ],
+                                     configuration: {
+                                       body: ::String
+                                     }
+                                   ) -> _TestTelemetryPipelineResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestTelemetryPipelineResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#untag_resource-instance_method
       def untag_resource: (
                             resource_arn: ::String,
@@ -426,6 +653,18 @@ module Aws
                                                        ) -> _UpdateCentralizationRuleForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCentralizationRuleForOrganizationResponseSuccess
 
+      interface _UpdateTelemetryPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTelemetryPipelineOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#update_telemetry_pipeline-instance_method
+      def update_telemetry_pipeline: (
+                                       pipeline_identifier: ::String,
+                                       configuration: {
+                                         body: ::String
+                                       }
+                                     ) -> _UpdateTelemetryPipelineResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTelemetryPipelineResponseSuccess
+
       interface _UpdateTelemetryRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTelemetryRuleOutput]
         def rule_arn: () -> ::String
@@ -434,8 +673,9 @@ module Aws
       def update_telemetry_rule: (
                                    rule_identifier: ::String,
                                    rule: {
-                                     resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                     resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter")?,
                                      telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                     telemetry_source_types: Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]?,
                                      destination_configuration: {
                                        destination_type: ("cloud-watch-logs")?,
                                        destination_pattern: ::String?,
@@ -444,6 +684,63 @@ module Aws
                                          log_format: ::String?,
                                          traffic_type: ::String?,
                                          max_aggregation_interval: ::Integer?
+                                       }?,
+                                       cloudtrail_parameters: {
+                                         advanced_event_selectors: Array[
+                                           {
+                                             name: ::String?,
+                                             field_selectors: Array[
+                                               {
+                                                 field: ::String,
+                                                 equals: Array[::String]?,
+                                                 starts_with: Array[::String]?,
+                                                 ends_with: Array[::String]?,
+                                                 not_equals: Array[::String]?,
+                                                 not_starts_with: Array[::String]?,
+                                                 not_ends_with: Array[::String]?
+                                               },
+                                             ]
+                                           },
+                                         ]
+                                       }?,
+                                       elb_load_balancer_logging_parameters: {
+                                         output_format: ("plain" | "json")?,
+                                         field_delimiter: ::String?
+                                       }?,
+                                       waf_logging_parameters: {
+                                         redacted_fields: Array[
+                                           {
+                                             single_header: {
+                                               name: ::String?
+                                             }?,
+                                             uri_path: ::String?,
+                                             query_string: ::String?,
+                                             method: ::String?
+                                           },
+                                         ]?,
+                                         logging_filter: {
+                                           filters: Array[
+                                             {
+                                               behavior: ("KEEP" | "DROP")?,
+                                               requirement: ("MEETS_ALL" | "MEETS_ANY")?,
+                                               conditions: Array[
+                                                 {
+                                                   action_condition: {
+                                                     action: ("ALLOW" | "BLOCK" | "COUNT" | "CAPTCHA" | "CHALLENGE" | "EXCLUDED_AS_COUNT")?
+                                                   }?,
+                                                   label_name_condition: {
+                                                     label_name: ::String?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?,
+                                           default_behavior: ("KEEP" | "DROP")?
+                                         }?,
+                                         log_type: ("WAF_LOGS")?
+                                       }?,
+                                       log_delivery_parameters: {
+                                         log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS")]?
                                        }?
                                      }?,
                                      scope: ::String?,
@@ -460,8 +757,9 @@ module Aws
       def update_telemetry_rule_for_organization: (
                                                     rule_identifier: ::String,
                                                     rule: {
-                                                      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function")?,
+                                                      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter")?,
                                                       telemetry_type: ("Logs" | "Metrics" | "Traces"),
+                                                      telemetry_source_types: Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]?,
                                                       destination_configuration: {
                                                         destination_type: ("cloud-watch-logs")?,
                                                         destination_pattern: ::String?,
@@ -470,6 +768,63 @@ module Aws
                                                           log_format: ::String?,
                                                           traffic_type: ::String?,
                                                           max_aggregation_interval: ::Integer?
+                                                        }?,
+                                                        cloudtrail_parameters: {
+                                                          advanced_event_selectors: Array[
+                                                            {
+                                                              name: ::String?,
+                                                              field_selectors: Array[
+                                                                {
+                                                                  field: ::String,
+                                                                  equals: Array[::String]?,
+                                                                  starts_with: Array[::String]?,
+                                                                  ends_with: Array[::String]?,
+                                                                  not_equals: Array[::String]?,
+                                                                  not_starts_with: Array[::String]?,
+                                                                  not_ends_with: Array[::String]?
+                                                                },
+                                                              ]
+                                                            },
+                                                          ]
+                                                        }?,
+                                                        elb_load_balancer_logging_parameters: {
+                                                          output_format: ("plain" | "json")?,
+                                                          field_delimiter: ::String?
+                                                        }?,
+                                                        waf_logging_parameters: {
+                                                          redacted_fields: Array[
+                                                            {
+                                                              single_header: {
+                                                                name: ::String?
+                                                              }?,
+                                                              uri_path: ::String?,
+                                                              query_string: ::String?,
+                                                              method: ::String?
+                                                            },
+                                                          ]?,
+                                                          logging_filter: {
+                                                            filters: Array[
+                                                              {
+                                                                behavior: ("KEEP" | "DROP")?,
+                                                                requirement: ("MEETS_ALL" | "MEETS_ANY")?,
+                                                                conditions: Array[
+                                                                  {
+                                                                    action_condition: {
+                                                                      action: ("ALLOW" | "BLOCK" | "COUNT" | "CAPTCHA" | "CHALLENGE" | "EXCLUDED_AS_COUNT")?
+                                                                    }?,
+                                                                    label_name_condition: {
+                                                                      label_name: ::String?
+                                                                    }?
+                                                                  },
+                                                                ]?
+                                                              },
+                                                            ]?,
+                                                            default_behavior: ("KEEP" | "DROP")?
+                                                          }?,
+                                                          log_type: ("WAF_LOGS")?
+                                                        }?,
+                                                        log_delivery_parameters: {
+                                                          log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS")]?
                                                         }?
                                                       }?,
                                                       scope: ::String?,
@@ -477,6 +832,18 @@ module Aws
                                                     }
                                                   ) -> _UpdateTelemetryRuleForOrganizationResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTelemetryRuleForOrganizationResponseSuccess
+
+      interface _ValidateTelemetryPipelineConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateTelemetryPipelineConfigurationOutput]
+        def errors: () -> ::Array[Types::ValidationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#validate_telemetry_pipeline_configuration-instance_method
+      def validate_telemetry_pipeline_configuration: (
+                                                       configuration: {
+                                                         body: ::String
+                                                       }
+                                                     ) -> _ValidateTelemetryPipelineConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateTelemetryPipelineConfigurationResponseSuccess
     end
   end
 end

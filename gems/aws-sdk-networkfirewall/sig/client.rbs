@@ -147,6 +147,25 @@ module Aws
                              ) -> _AssociateSubnetsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSubnetsResponseSuccess
 
+      interface _AttachRuleGroupsToProxyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachRuleGroupsToProxyConfigurationResponse]
+        def proxy_configuration: () -> Types::ProxyConfiguration
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#attach_rule_groups_to_proxy_configuration-instance_method
+      def attach_rule_groups_to_proxy_configuration: (
+                                                       ?proxy_configuration_name: ::String,
+                                                       ?proxy_configuration_arn: ::String,
+                                                       rule_groups: Array[
+                                                         {
+                                                           proxy_rule_group_name: ::String?,
+                                                           insert_position: ::Integer?
+                                                         },
+                                                       ],
+                                                       update_token: ::String
+                                                     ) -> _AttachRuleGroupsToProxyConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachRuleGroupsToProxyConfigurationResponseSuccess
+
       interface _CreateFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallResponse]
         def firewall: () -> Types::Firewall
@@ -259,6 +278,182 @@ module Aws
                                     }
                                   ) -> _CreateFirewallPolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallPolicyResponseSuccess
+
+      interface _CreateProxyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProxyResponse]
+        def proxy: () -> Types::Proxy
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_proxy-instance_method
+      def create_proxy: (
+                          proxy_name: ::String,
+                          nat_gateway_id: ::String,
+                          ?proxy_configuration_name: ::String,
+                          ?proxy_configuration_arn: ::String,
+                          ?listener_properties: Array[
+                            {
+                              port: ::Integer,
+                              type: ("HTTP" | "HTTPS")
+                            },
+                          ],
+                          tls_intercept_properties: {
+                            pca_arn: ::String?,
+                            tls_intercept_mode: ("ENABLED" | "DISABLED")?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateProxyResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyResponseSuccess
+
+      interface _CreateProxyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProxyConfigurationResponse]
+        def proxy_configuration: () -> Types::ProxyConfiguration
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_proxy_configuration-instance_method
+      def create_proxy_configuration: (
+                                        proxy_configuration_name: ::String,
+                                        ?description: ::String,
+                                        ?rule_group_names: Array[::String],
+                                        ?rule_group_arns: Array[::String],
+                                        default_rule_phase_actions: {
+                                          pre_dns: ("ALLOW" | "DENY" | "ALERT")?,
+                                          pre_request: ("ALLOW" | "DENY" | "ALERT")?,
+                                          post_response: ("ALLOW" | "DENY" | "ALERT")?
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]
+                                      ) -> _CreateProxyConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyConfigurationResponseSuccess
+
+      interface _CreateProxyRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProxyRuleGroupResponse]
+        def proxy_rule_group: () -> Types::ProxyRuleGroup
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_proxy_rule_group-instance_method
+      def create_proxy_rule_group: (
+                                     proxy_rule_group_name: ::String,
+                                     ?description: ::String,
+                                     ?rules: {
+                                       pre_dns: Array[
+                                         {
+                                           proxy_rule_name: ::String?,
+                                           description: ::String?,
+                                           action: ("ALLOW" | "DENY" | "ALERT")?,
+                                           conditions: Array[
+                                             {
+                                               condition_operator: ::String?,
+                                               condition_key: ::String?,
+                                               condition_values: Array[::String]?
+                                             },
+                                           ]?
+                                         },
+                                       ]?,
+                                       pre_request: Array[
+                                         {
+                                           proxy_rule_name: ::String?,
+                                           description: ::String?,
+                                           action: ("ALLOW" | "DENY" | "ALERT")?,
+                                           conditions: Array[
+                                             {
+                                               condition_operator: ::String?,
+                                               condition_key: ::String?,
+                                               condition_values: Array[::String]?
+                                             },
+                                           ]?
+                                         },
+                                       ]?,
+                                       post_response: Array[
+                                         {
+                                           proxy_rule_name: ::String?,
+                                           description: ::String?,
+                                           action: ("ALLOW" | "DENY" | "ALERT")?,
+                                           conditions: Array[
+                                             {
+                                               condition_operator: ::String?,
+                                               condition_key: ::String?,
+                                               condition_values: Array[::String]?
+                                             },
+                                           ]?
+                                         },
+                                       ]?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateProxyRuleGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyRuleGroupResponseSuccess
+
+      interface _CreateProxyRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProxyRulesResponse]
+        def proxy_rule_group: () -> Types::ProxyRuleGroup
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_proxy_rules-instance_method
+      def create_proxy_rules: (
+                                ?proxy_rule_group_arn: ::String,
+                                ?proxy_rule_group_name: ::String,
+                                rules: {
+                                  pre_dns: Array[
+                                    {
+                                      proxy_rule_name: ::String?,
+                                      description: ::String?,
+                                      action: ("ALLOW" | "DENY" | "ALERT")?,
+                                      conditions: Array[
+                                        {
+                                          condition_operator: ::String?,
+                                          condition_key: ::String?,
+                                          condition_values: Array[::String]?
+                                        },
+                                      ]?,
+                                      insert_position: ::Integer?
+                                    },
+                                  ]?,
+                                  pre_request: Array[
+                                    {
+                                      proxy_rule_name: ::String?,
+                                      description: ::String?,
+                                      action: ("ALLOW" | "DENY" | "ALERT")?,
+                                      conditions: Array[
+                                        {
+                                          condition_operator: ::String?,
+                                          condition_key: ::String?,
+                                          condition_values: Array[::String]?
+                                        },
+                                      ]?,
+                                      insert_position: ::Integer?
+                                    },
+                                  ]?,
+                                  post_response: Array[
+                                    {
+                                      proxy_rule_name: ::String?,
+                                      description: ::String?,
+                                      action: ("ALLOW" | "DENY" | "ALERT")?,
+                                      conditions: Array[
+                                        {
+                                          condition_operator: ::String?,
+                                          condition_key: ::String?,
+                                          condition_values: Array[::String]?
+                                        },
+                                      ]?,
+                                      insert_position: ::Integer?
+                                    },
+                                  ]?
+                                }
+                              ) -> _CreateProxyRulesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyRulesResponseSuccess
 
       interface _CreateRuleGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleGroupResponse]
@@ -516,6 +711,56 @@ module Aws
                                                               ) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponseSuccess
 
+      interface _DeleteProxyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProxyResponse]
+        def nat_gateway_id: () -> ::String
+        def proxy_name: () -> ::String
+        def proxy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_proxy-instance_method
+      def delete_proxy: (
+                          nat_gateway_id: ::String,
+                          ?proxy_name: ::String,
+                          ?proxy_arn: ::String
+                        ) -> _DeleteProxyResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProxyResponseSuccess
+
+      interface _DeleteProxyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProxyConfigurationResponse]
+        def proxy_configuration_name: () -> ::String
+        def proxy_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_proxy_configuration-instance_method
+      def delete_proxy_configuration: (
+                                        ?proxy_configuration_name: ::String,
+                                        ?proxy_configuration_arn: ::String
+                                      ) -> _DeleteProxyConfigurationResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProxyConfigurationResponseSuccess
+
+      interface _DeleteProxyRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProxyRuleGroupResponse]
+        def proxy_rule_group_name: () -> ::String
+        def proxy_rule_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_proxy_rule_group-instance_method
+      def delete_proxy_rule_group: (
+                                     ?proxy_rule_group_name: ::String,
+                                     ?proxy_rule_group_arn: ::String
+                                   ) -> _DeleteProxyRuleGroupResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProxyRuleGroupResponseSuccess
+
+      interface _DeleteProxyRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProxyRulesResponse]
+        def proxy_rule_group: () -> Types::ProxyRuleGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_proxy_rules-instance_method
+      def delete_proxy_rules: (
+                                ?proxy_rule_group_arn: ::String,
+                                ?proxy_rule_group_name: ::String,
+                                rules: Array[::String]
+                              ) -> _DeleteProxyRulesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProxyRulesResponseSuccess
+
       interface _DeleteResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
       end
@@ -636,6 +881,55 @@ module Aws
                                           ) -> _DescribeLoggingConfigurationResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingConfigurationResponseSuccess
 
+      interface _DescribeProxyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProxyResponse]
+        def proxy: () -> Types::DescribeProxyResource
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_proxy-instance_method
+      def describe_proxy: (
+                            ?proxy_name: ::String,
+                            ?proxy_arn: ::String
+                          ) -> _DescribeProxyResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProxyResponseSuccess
+
+      interface _DescribeProxyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProxyConfigurationResponse]
+        def proxy_configuration: () -> Types::ProxyConfiguration
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_proxy_configuration-instance_method
+      def describe_proxy_configuration: (
+                                          ?proxy_configuration_name: ::String,
+                                          ?proxy_configuration_arn: ::String
+                                        ) -> _DescribeProxyConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProxyConfigurationResponseSuccess
+
+      interface _DescribeProxyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProxyRuleResponse]
+        def proxy_rule: () -> Types::ProxyRule
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_proxy_rule-instance_method
+      def describe_proxy_rule: (
+                                 proxy_rule_name: ::String,
+                                 ?proxy_rule_group_name: ::String,
+                                 ?proxy_rule_group_arn: ::String
+                               ) -> _DescribeProxyRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProxyRuleResponseSuccess
+
+      interface _DescribeProxyRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProxyRuleGroupResponse]
+        def proxy_rule_group: () -> Types::ProxyRuleGroup
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_proxy_rule_group-instance_method
+      def describe_proxy_rule_group: (
+                                       ?proxy_rule_group_name: ::String,
+                                       ?proxy_rule_group_arn: ::String
+                                     ) -> _DescribeProxyRuleGroupResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProxyRuleGroupResponseSuccess
+
       interface _DescribeResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePolicyResponse]
         def policy: () -> ::String
@@ -719,6 +1013,21 @@ module Aws
                                                vpc_endpoint_association_arn: ::String
                                              ) -> _DescribeVpcEndpointAssociationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcEndpointAssociationResponseSuccess
+
+      interface _DetachRuleGroupsFromProxyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachRuleGroupsFromProxyConfigurationResponse]
+        def proxy_configuration: () -> Types::ProxyConfiguration
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#detach_rule_groups_from_proxy_configuration-instance_method
+      def detach_rule_groups_from_proxy_configuration: (
+                                                         ?proxy_configuration_name: ::String,
+                                                         ?proxy_configuration_arn: ::String,
+                                                         ?rule_group_names: Array[::String],
+                                                         ?rule_group_arns: Array[::String],
+                                                         update_token: ::String
+                                                       ) -> _DetachRuleGroupsFromProxyConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachRuleGroupsFromProxyConfigurationResponseSuccess
 
       interface _DisassociateAvailabilityZonesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAvailabilityZonesResponse]
@@ -856,6 +1165,42 @@ module Aws
                                   ?max_results: ::Integer
                                 ) -> _ListFlowOperationsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowOperationsResponseSuccess
+
+      interface _ListProxiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProxiesResponse]
+        def proxies: () -> ::Array[Types::ProxyMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_proxies-instance_method
+      def list_proxies: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListProxiesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProxiesResponseSuccess
+
+      interface _ListProxyConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProxyConfigurationsResponse]
+        def proxy_configurations: () -> ::Array[Types::ProxyConfigurationMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_proxy_configurations-instance_method
+      def list_proxy_configurations: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListProxyConfigurationsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProxyConfigurationsResponseSuccess
+
+      interface _ListProxyRuleGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProxyRuleGroupsResponse]
+        def proxy_rule_groups: () -> ::Array[Types::ProxyRuleGroupMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_proxy_rule_groups-instance_method
+      def list_proxy_rule_groups: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListProxyRuleGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProxyRuleGroupsResponseSuccess
 
       interface _ListRuleGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsResponse]
@@ -1217,6 +1562,127 @@ module Aws
                                           ?enable_monitoring_dashboard: bool
                                         ) -> _UpdateLoggingConfigurationResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
+
+      interface _UpdateProxyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProxyResponse]
+        def proxy: () -> Types::Proxy
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_proxy-instance_method
+      def update_proxy: (
+                          nat_gateway_id: ::String,
+                          ?proxy_name: ::String,
+                          ?proxy_arn: ::String,
+                          ?listener_properties_to_add: Array[
+                            {
+                              port: ::Integer,
+                              type: ("HTTP" | "HTTPS")
+                            },
+                          ],
+                          ?listener_properties_to_remove: Array[
+                            {
+                              port: ::Integer,
+                              type: ("HTTP" | "HTTPS")
+                            },
+                          ],
+                          ?tls_intercept_properties: {
+                            pca_arn: ::String?,
+                            tls_intercept_mode: ("ENABLED" | "DISABLED")?
+                          },
+                          update_token: ::String
+                        ) -> _UpdateProxyResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProxyResponseSuccess
+
+      interface _UpdateProxyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProxyConfigurationResponse]
+        def proxy_configuration: () -> Types::ProxyConfiguration
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_proxy_configuration-instance_method
+      def update_proxy_configuration: (
+                                        ?proxy_configuration_name: ::String,
+                                        ?proxy_configuration_arn: ::String,
+                                        default_rule_phase_actions: {
+                                          pre_dns: ("ALLOW" | "DENY" | "ALERT")?,
+                                          pre_request: ("ALLOW" | "DENY" | "ALERT")?,
+                                          post_response: ("ALLOW" | "DENY" | "ALERT")?
+                                        },
+                                        update_token: ::String
+                                      ) -> _UpdateProxyConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProxyConfigurationResponseSuccess
+
+      interface _UpdateProxyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProxyRuleResponse]
+        def proxy_rule: () -> Types::ProxyRule
+        def removed_conditions: () -> ::Array[Types::ProxyRuleCondition]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_proxy_rule-instance_method
+      def update_proxy_rule: (
+                               ?proxy_rule_group_name: ::String,
+                               ?proxy_rule_group_arn: ::String,
+                               proxy_rule_name: ::String,
+                               ?description: ::String,
+                               ?action: ("ALLOW" | "DENY" | "ALERT"),
+                               ?add_conditions: Array[
+                                 {
+                                   condition_operator: ::String?,
+                                   condition_key: ::String?,
+                                   condition_values: Array[::String]?
+                                 },
+                               ],
+                               ?remove_conditions: Array[
+                                 {
+                                   condition_operator: ::String?,
+                                   condition_key: ::String?,
+                                   condition_values: Array[::String]?
+                                 },
+                               ],
+                               update_token: ::String
+                             ) -> _UpdateProxyRuleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProxyRuleResponseSuccess
+
+      interface _UpdateProxyRuleGroupPrioritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProxyRuleGroupPrioritiesResponse]
+        def proxy_rule_groups: () -> ::Array[Types::ProxyRuleGroupPriorityResult]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_proxy_rule_group_priorities-instance_method
+      def update_proxy_rule_group_priorities: (
+                                                ?proxy_configuration_name: ::String,
+                                                ?proxy_configuration_arn: ::String,
+                                                rule_groups: Array[
+                                                  {
+                                                    proxy_rule_group_name: ::String?,
+                                                    new_position: ::Integer?
+                                                  },
+                                                ],
+                                                update_token: ::String
+                                              ) -> _UpdateProxyRuleGroupPrioritiesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProxyRuleGroupPrioritiesResponseSuccess
+
+      interface _UpdateProxyRulePrioritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProxyRulePrioritiesResponse]
+        def proxy_rule_group_name: () -> ::String
+        def proxy_rule_group_arn: () -> ::String
+        def rule_group_request_phase: () -> ("PRE_DNS" | "PRE_REQ" | "POST_RES")
+        def rules: () -> ::Array[Types::ProxyRulePriority]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_proxy_rule_priorities-instance_method
+      def update_proxy_rule_priorities: (
+                                          ?proxy_rule_group_name: ::String,
+                                          ?proxy_rule_group_arn: ::String,
+                                          rule_group_request_phase: ("PRE_DNS" | "PRE_REQ" | "POST_RES"),
+                                          rules: Array[
+                                            {
+                                              proxy_rule_name: ::String?,
+                                              new_position: ::Integer?
+                                            },
+                                          ],
+                                          update_token: ::String
+                                        ) -> _UpdateProxyRulePrioritiesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProxyRulePrioritiesResponseSuccess
 
       interface _UpdateRuleGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleGroupResponse]

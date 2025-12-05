@@ -136,7 +136,7 @@ module Aws
                                     ?states: Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted" | "pending-return" | "returned")],
                                     ?filters: Array[
                                       {
-                                        name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end")?,
+                                        name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end" | "instance-family")?,
                                         values: Array[::String]?
                                       },
                                     ]
@@ -152,9 +152,9 @@ module Aws
       def describe_savings_plans_offering_rates: (
                                                    ?savings_plan_offering_ids: Array[::String],
                                                    ?savings_plan_payment_options: Array[("All Upfront" | "Partial Upfront" | "No Upfront")],
-                                                   ?savings_plan_types: Array[("Compute" | "EC2Instance" | "SageMaker")],
-                                                   ?products: Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")],
-                                                   ?service_codes: Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")],
+                                                   ?savings_plan_types: Array[("Compute" | "EC2Instance" | "SageMaker" | "Database")],
+                                                   ?products: Array[("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")],
+                                                   ?service_codes: Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker" | "AmazonRDS" | "AuroraDSQL" | "AmazonDynamoDB" | "AmazonElastiCache" | "AmazonDocDB" | "AmazonNeptune" | "AmazonTimestream" | "AmazonMCS" | "AWSDatabaseMigrationSvc")],
                                                    ?usage_types: Array[::String],
                                                    ?operations: Array[::String],
                                                    ?filters: Array[
@@ -177,10 +177,10 @@ module Aws
       def describe_savings_plans_offerings: (
                                               ?offering_ids: Array[::String],
                                               ?payment_options: Array[("All Upfront" | "Partial Upfront" | "No Upfront")],
-                                              ?product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker"),
-                                              ?plan_types: Array[("Compute" | "EC2Instance" | "SageMaker")],
+                                              ?product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS"),
+                                              ?plan_types: Array[("Compute" | "EC2Instance" | "SageMaker" | "Database")],
                                               ?durations: Array[::Integer],
-                                              ?currencies: Array[("CNY" | "USD")],
+                                              ?currencies: Array[("CNY" | "USD" | "EUR")],
                                               ?descriptions: Array[::String],
                                               ?service_codes: Array[::String],
                                               ?usage_types: Array[::String],

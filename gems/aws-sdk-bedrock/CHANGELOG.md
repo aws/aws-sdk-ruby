@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2025-12-03)
+------------------
+
+* Feature - Adding support in Amazon Bedrock to customize models with reinforcement fine-tuning (RFT) and support for updating the existing Custom Model Deployments.
+
+1.68.0 (2025-12-02)
+------------------
+
+* Feature - Adds the audioDataDeliveryEnabled boolean field to the Model Invocation Logging Configuration.
+
 1.67.0 (2025-11-21)
 ------------------
 

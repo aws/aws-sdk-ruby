@@ -60,6 +60,7 @@ module Aws::BedrockAgentCore
     ContentBlockList = Shapes::ListShape.new(name: 'ContentBlockList')
     ContentBlockType = Shapes::StringShape.new(name: 'ContentBlockType')
     ContentTextString = Shapes::StringShape.new(name: 'ContentTextString')
+    Context = Shapes::UnionShape.new(name: 'Context')
     Conversational = Shapes::StructureShape.new(name: 'Conversational')
     CreateEventInput = Shapes::StructureShape.new(name: 'CreateEventInput')
     CreateEventOutput = Shapes::StructureShape.new(name: 'CreateEventOutput')
@@ -74,6 +75,19 @@ module Aws::BedrockAgentCore
     DeleteMemoryRecordOutput = Shapes::StructureShape.new(name: 'DeleteMemoryRecordOutput')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     Double = Shapes::FloatShape.new(name: 'Double')
+    DuplicateIdException = Shapes::StructureShape.new(name: 'DuplicateIdException')
+    EvaluateRequest = Shapes::StructureShape.new(name: 'EvaluateRequest')
+    EvaluateResponse = Shapes::StructureShape.new(name: 'EvaluateResponse')
+    EvaluationErrorCode = Shapes::StringShape.new(name: 'EvaluationErrorCode')
+    EvaluationErrorMessage = Shapes::StringShape.new(name: 'EvaluationErrorMessage')
+    EvaluationExplanation = Shapes::StringShape.new(name: 'EvaluationExplanation')
+    EvaluationInput = Shapes::UnionShape.new(name: 'EvaluationInput')
+    EvaluationResultContent = Shapes::StructureShape.new(name: 'EvaluationResultContent')
+    EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
+    EvaluationTarget = Shapes::UnionShape.new(name: 'EvaluationTarget')
+    EvaluatorArn = Shapes::StringShape.new(name: 'EvaluatorArn')
+    EvaluatorId = Shapes::StringShape.new(name: 'EvaluatorId')
+    EvaluatorName = Shapes::StringShape.new(name: 'EvaluatorName')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventList = Shapes::ListShape.new(name: 'EventList')
@@ -146,6 +160,8 @@ module Aws::BedrockAgentCore
     MemoryContent = Shapes::UnionShape.new(name: 'MemoryContent')
     MemoryContentTextString = Shapes::StringShape.new(name: 'MemoryContentTextString')
     MemoryId = Shapes::StringShape.new(name: 'MemoryId')
+    MemoryMetadataFilterExpression = Shapes::StructureShape.new(name: 'MemoryMetadataFilterExpression')
+    MemoryMetadataFilterList = Shapes::ListShape.new(name: 'MemoryMetadataFilterList')
     MemoryRecord = Shapes::StructureShape.new(name: 'MemoryRecord')
     MemoryRecordCreateInput = Shapes::StructureShape.new(name: 'MemoryRecordCreateInput')
     MemoryRecordDeleteInput = Shapes::StructureShape.new(name: 'MemoryRecordDeleteInput')
@@ -202,6 +218,11 @@ module Aws::BedrockAgentCore
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
     SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
+    Span = Shapes::DocumentShape.new(name: 'Span', document: true)
+    SpanContext = Shapes::StructureShape.new(name: 'SpanContext')
+    SpanId = Shapes::StringShape.new(name: 'SpanId')
+    SpanIds = Shapes::ListShape.new(name: 'SpanIds')
+    Spans = Shapes::ListShape.new(name: 'Spans')
     StartBrowserSessionRequest = Shapes::StructureShape.new(name: 'StartBrowserSessionRequest')
     StartBrowserSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartBrowserSessionRequestTraceIdString')
     StartBrowserSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartBrowserSessionRequestTraceParentString')
@@ -231,9 +252,12 @@ module Aws::BedrockAgentCore
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenUsage = Shapes::StructureShape.new(name: 'TokenUsage')
     ToolArguments = Shapes::StructureShape.new(name: 'ToolArguments')
     ToolName = Shapes::StringShape.new(name: 'ToolName')
     ToolResultStructuredContent = Shapes::StructureShape.new(name: 'ToolResultStructuredContent')
+    TraceId = Shapes::StringShape.new(name: 'TraceId')
+    TraceIds = Shapes::ListShape.new(name: 'TraceIds')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UpdateBrowserStreamRequest = Shapes::StructureShape.new(name: 'UpdateBrowserStreamRequest')
     UpdateBrowserStreamResponse = Shapes::StructureShape.new(name: 'UpdateBrowserStreamResponse')
@@ -365,6 +389,12 @@ module Aws::BedrockAgentCore
 
     ContentBlockList.member = Shapes::ShapeRef.new(shape: ContentBlock)
 
+    Context.add_member(:span_context, Shapes::ShapeRef.new(shape: SpanContext, location_name: "spanContext"))
+    Context.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Context.add_member_subclass(:span_context, Types::Context::SpanContext)
+    Context.add_member_subclass(:unknown, Types::Context::Unknown)
+    Context.struct_class = Types::Context
+
     Conversational.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "content"))
     Conversational.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "role"))
     Conversational.struct_class = Types::Conversational
@@ -400,6 +430,45 @@ module Aws::BedrockAgentCore
 
     DeleteMemoryRecordOutput.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location_name: "memoryRecordId"))
     DeleteMemoryRecordOutput.struct_class = Types::DeleteMemoryRecordOutput
+
+    DuplicateIdException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    DuplicateIdException.struct_class = Types::DuplicateIdException
+
+    EvaluateRequest.add_member(:evaluator_id, Shapes::ShapeRef.new(shape: EvaluatorId, required: true, location: "uri", location_name: "evaluatorId"))
+    EvaluateRequest.add_member(:evaluation_input, Shapes::ShapeRef.new(shape: EvaluationInput, required: true, location_name: "evaluationInput"))
+    EvaluateRequest.add_member(:evaluation_target, Shapes::ShapeRef.new(shape: EvaluationTarget, location_name: "evaluationTarget"))
+    EvaluateRequest.struct_class = Types::EvaluateRequest
+
+    EvaluateResponse.add_member(:evaluation_results, Shapes::ShapeRef.new(shape: EvaluationResults, required: true, location_name: "evaluationResults"))
+    EvaluateResponse.struct_class = Types::EvaluateResponse
+
+    EvaluationInput.add_member(:session_spans, Shapes::ShapeRef.new(shape: Spans, location_name: "sessionSpans"))
+    EvaluationInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EvaluationInput.add_member_subclass(:session_spans, Types::EvaluationInput::SessionSpans)
+    EvaluationInput.add_member_subclass(:unknown, Types::EvaluationInput::Unknown)
+    EvaluationInput.struct_class = Types::EvaluationInput
+
+    EvaluationResultContent.add_member(:evaluator_arn, Shapes::ShapeRef.new(shape: EvaluatorArn, required: true, location_name: "evaluatorArn"))
+    EvaluationResultContent.add_member(:evaluator_id, Shapes::ShapeRef.new(shape: EvaluatorId, required: true, location_name: "evaluatorId"))
+    EvaluationResultContent.add_member(:evaluator_name, Shapes::ShapeRef.new(shape: EvaluatorName, required: true, location_name: "evaluatorName"))
+    EvaluationResultContent.add_member(:explanation, Shapes::ShapeRef.new(shape: EvaluationExplanation, location_name: "explanation"))
+    EvaluationResultContent.add_member(:context, Shapes::ShapeRef.new(shape: Context, required: true, location_name: "context"))
+    EvaluationResultContent.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "value"))
+    EvaluationResultContent.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "label"))
+    EvaluationResultContent.add_member(:token_usage, Shapes::ShapeRef.new(shape: TokenUsage, location_name: "tokenUsage"))
+    EvaluationResultContent.add_member(:error_message, Shapes::ShapeRef.new(shape: EvaluationErrorMessage, location_name: "errorMessage"))
+    EvaluationResultContent.add_member(:error_code, Shapes::ShapeRef.new(shape: EvaluationErrorCode, location_name: "errorCode"))
+    EvaluationResultContent.struct_class = Types::EvaluationResultContent
+
+    EvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResultContent)
+
+    EvaluationTarget.add_member(:span_ids, Shapes::ShapeRef.new(shape: SpanIds, location_name: "spanIds"))
+    EvaluationTarget.add_member(:trace_ids, Shapes::ShapeRef.new(shape: TraceIds, location_name: "traceIds"))
+    EvaluationTarget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EvaluationTarget.add_member_subclass(:span_ids, Types::EvaluationTarget::SpanIds)
+    EvaluationTarget.add_member_subclass(:trace_ids, Types::EvaluationTarget::TraceIds)
+    EvaluationTarget.add_member_subclass(:unknown, Types::EvaluationTarget::Unknown)
+    EvaluationTarget.struct_class = Types::EvaluationTarget
 
     Event.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location_name: "memoryId"))
     Event.add_member(:actor_id, Shapes::ShapeRef.new(shape: ActorId, required: true, location_name: "actorId"))
@@ -697,11 +766,19 @@ module Aws::BedrockAgentCore
     MemoryContent.add_member_subclass(:unknown, Types::MemoryContent::Unknown)
     MemoryContent.struct_class = Types::MemoryContent
 
+    MemoryMetadataFilterExpression.add_member(:left, Shapes::ShapeRef.new(shape: LeftExpression, required: true, location_name: "left"))
+    MemoryMetadataFilterExpression.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorType, required: true, location_name: "operator"))
+    MemoryMetadataFilterExpression.add_member(:right, Shapes::ShapeRef.new(shape: RightExpression, location_name: "right"))
+    MemoryMetadataFilterExpression.struct_class = Types::MemoryMetadataFilterExpression
+
+    MemoryMetadataFilterList.member = Shapes::ShapeRef.new(shape: MemoryMetadataFilterExpression)
+
     MemoryRecord.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location_name: "memoryRecordId"))
     MemoryRecord.add_member(:content, Shapes::ShapeRef.new(shape: MemoryContent, required: true, location_name: "content"))
     MemoryRecord.add_member(:memory_strategy_id, Shapes::ShapeRef.new(shape: MemoryStrategyId, required: true, location_name: "memoryStrategyId"))
     MemoryRecord.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, required: true, location_name: "namespaces"))
     MemoryRecord.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    MemoryRecord.add_member(:metadata, Shapes::ShapeRef.new(shape: MetadataMap, location_name: "metadata"))
     MemoryRecord.struct_class = Types::MemoryRecord
 
     MemoryRecordCreateInput.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, required: true, location_name: "requestIdentifier"))
@@ -727,6 +804,7 @@ module Aws::BedrockAgentCore
     MemoryRecordSummary.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, required: true, location_name: "namespaces"))
     MemoryRecordSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     MemoryRecordSummary.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
+    MemoryRecordSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: MetadataMap, location_name: "metadata"))
     MemoryRecordSummary.struct_class = Types::MemoryRecordSummary
 
     MemoryRecordSummaryList.member = Shapes::ShapeRef.new(shape: MemoryRecordSummary)
@@ -808,6 +886,7 @@ module Aws::BedrockAgentCore
     SearchCriteria.add_member(:search_query, Shapes::ShapeRef.new(shape: SearchCriteriaSearchQueryString, required: true, location_name: "searchQuery"))
     SearchCriteria.add_member(:memory_strategy_id, Shapes::ShapeRef.new(shape: MemoryStrategyId, location_name: "memoryStrategyId"))
     SearchCriteria.add_member(:top_k, Shapes::ShapeRef.new(shape: SearchCriteriaTopKInteger, location_name: "topK"))
+    SearchCriteria.add_member(:metadata_filters, Shapes::ShapeRef.new(shape: MemoryMetadataFilterList, location_name: "metadataFilters"))
     SearchCriteria.struct_class = Types::SearchCriteria
 
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -822,6 +901,15 @@ module Aws::BedrockAgentCore
     SessionSummary.struct_class = Types::SessionSummary
 
     SessionSummaryList.member = Shapes::ShapeRef.new(shape: SessionSummary)
+
+    SpanContext.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sessionId"))
+    SpanContext.add_member(:trace_id, Shapes::ShapeRef.new(shape: String, location_name: "traceId"))
+    SpanContext.add_member(:span_id, Shapes::ShapeRef.new(shape: String, location_name: "spanId"))
+    SpanContext.struct_class = Types::SpanContext
+
+    SpanIds.member = Shapes::ShapeRef.new(shape: SpanId)
+
+    Spans.member = Shapes::ShapeRef.new(shape: Span)
 
     StartBrowserSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StartBrowserSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
     StartBrowserSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StartBrowserSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
@@ -907,6 +995,11 @@ module Aws::BedrockAgentCore
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TokenUsage.add_member(:input_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "inputTokens"))
+    TokenUsage.add_member(:output_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "outputTokens"))
+    TokenUsage.add_member(:total_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "totalTokens"))
+    TokenUsage.struct_class = Types::TokenUsage
+
     ToolArguments.add_member(:code, Shapes::ShapeRef.new(shape: MaxLenString, location_name: "code"))
     ToolArguments.add_member(:language, Shapes::ShapeRef.new(shape: ProgrammingLanguage, location_name: "language"))
     ToolArguments.add_member(:clear_context, Shapes::ShapeRef.new(shape: Boolean, location_name: "clearContext"))
@@ -925,6 +1018,8 @@ module Aws::BedrockAgentCore
     ToolResultStructuredContent.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
     ToolResultStructuredContent.add_member(:execution_time, Shapes::ShapeRef.new(shape: Double, location_name: "executionTime"))
     ToolResultStructuredContent.struct_class = Types::ToolResultStructuredContent
+
+    TraceIds.member = Shapes::ShapeRef.new(shape: TraceId)
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
@@ -1082,6 +1177,23 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:evaluate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "Evaluate"
+        o.http_method = "POST"
+        o.http_request_uri = "/evaluations/evaluate/{evaluatorId}"
+        o.input = Shapes::ShapeRef.new(shape: EvaluateRequest)
+        o.output = Shapes::ShapeRef.new(shape: EvaluateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateIdException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_agent_card, Seahorse::Model::Operation.new.tap do |o|

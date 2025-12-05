@@ -437,6 +437,7 @@ module Aws::SavingsPlans
         o.output = Shapes::ShapeRef.new(shape: DescribeSavingsPlanRatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:describe_savings_plans, Seahorse::Model::Operation.new.tap do |o|

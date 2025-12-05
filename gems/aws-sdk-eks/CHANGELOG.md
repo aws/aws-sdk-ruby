@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2025-12-01)
+------------------
+
+* Feature - This release adds support for EKS Capabilities
+
 1.151.0 (2025-11-21)
 ------------------
 

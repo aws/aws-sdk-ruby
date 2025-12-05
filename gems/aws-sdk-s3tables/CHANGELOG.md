@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2025-12-02)
+------------------
+
+* Feature - Add storage class, replication, and table record expiration features to S3 Tables.
+
 1.21.0 (2025-11-21)
 ------------------
 

@@ -197,6 +197,12 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class CreateAndAttachS3AccessPointOntapConfiguration
+      attr_accessor volume_id: ::String
+      attr_accessor file_system_identity: Types::OntapFileSystemIdentity
+      SENSITIVE: []
+    end
+
     class CreateAndAttachS3AccessPointOpenZFSConfiguration
       attr_accessor volume_id: ::String
       attr_accessor file_system_identity: Types::OpenZFSFileSystemIdentity
@@ -206,8 +212,9 @@ module Aws::FSx
     class CreateAndAttachS3AccessPointRequest
       attr_accessor client_request_token: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("OPENZFS")
+      attr_accessor type: ("OPENZFS" | "ONTAP")
       attr_accessor open_zfs_configuration: Types::CreateAndAttachS3AccessPointOpenZFSConfiguration
+      attr_accessor ontap_configuration: Types::CreateAndAttachS3AccessPointOntapConfiguration
       attr_accessor s3_access_point: Types::CreateAndAttachS3AccessPointS3Configuration
       SENSITIVE: []
     end
@@ -933,7 +940,7 @@ module Aws::FSx
     end
 
     class DetachAndDeleteS3AccessPointResponse
-      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED" | "MISCONFIGURED")
       attr_accessor name: ::String
       SENSITIVE: []
     end
@@ -1283,6 +1290,18 @@ module Aws::FSx
       SENSITIVE: [:fsx_admin_password]
     end
 
+    class OntapFileSystemIdentity
+      attr_accessor type: ("UNIX" | "WINDOWS")
+      attr_accessor unix_user: Types::OntapUnixFileSystemUser
+      attr_accessor windows_user: Types::OntapWindowsFileSystemUser
+      SENSITIVE: []
+    end
+
+    class OntapUnixFileSystemUser
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class OntapVolumeConfiguration
       attr_accessor flex_cache_endpoint_type: ("NONE" | "ORIGIN" | "CACHE")
       attr_accessor junction_path: ::String
@@ -1300,6 +1319,11 @@ module Aws::FSx
       attr_accessor volume_style: ("FLEXVOL" | "FLEXGROUP")
       attr_accessor aggregate_configuration: Types::AggregateConfiguration
       attr_accessor size_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class OntapWindowsFileSystemUser
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -1455,12 +1479,13 @@ module Aws::FSx
     end
 
     class S3AccessPointAttachment
-      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED" | "MISCONFIGURED")
       attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
       attr_accessor creation_time: ::Time
       attr_accessor name: ::String
-      attr_accessor type: ("OPENZFS")
+      attr_accessor type: ("OPENZFS" | "ONTAP")
       attr_accessor open_zfs_configuration: Types::S3AccessPointOpenZFSConfiguration
+      attr_accessor ontap_configuration: Types::S3AccessPointOntapConfiguration
       attr_accessor s3_access_point: Types::S3AccessPoint
       SENSITIVE: []
     end
@@ -1473,6 +1498,12 @@ module Aws::FSx
     class S3AccessPointAttachmentsFilter
       attr_accessor name: ("file-system-id" | "volume-id" | "type")
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3AccessPointOntapConfiguration
+      attr_accessor volume_id: ::String
+      attr_accessor file_system_identity: Types::OntapFileSystemIdentity
       SENSITIVE: []
     end
 

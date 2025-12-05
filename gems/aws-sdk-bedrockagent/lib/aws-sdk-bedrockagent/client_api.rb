@@ -62,6 +62,10 @@ module Aws::BedrockAgent
     AssociateAgentCollaboratorResponse = Shapes::StructureShape.new(name: 'AssociateAgentCollaboratorResponse')
     AssociateAgentKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'AssociateAgentKnowledgeBaseRequest')
     AssociateAgentKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'AssociateAgentKnowledgeBaseResponse')
+    AudioConfiguration = Shapes::StructureShape.new(name: 'AudioConfiguration')
+    AudioConfigurations = Shapes::ListShape.new(name: 'AudioConfigurations')
+    AudioSegmentationConfiguration = Shapes::StructureShape.new(name: 'AudioSegmentationConfiguration')
+    AudioSegmentationConfigurationFixedLengthDurationInteger = Shapes::IntegerShape.new(name: 'AudioSegmentationConfigurationFixedLengthDurationInteger')
     AutoToolChoice = Shapes::StructureShape.new(name: 'AutoToolChoice')
     AwsDataCatalogTableName = Shapes::StringShape.new(name: 'AwsDataCatalogTableName')
     AwsDataCatalogTableNames = Shapes::ListShape.new(name: 'AwsDataCatalogTableNames')
@@ -692,6 +696,10 @@ module Aws::BedrockAgent
     VectorSearchRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchRerankingConfiguration')
     VectorSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'VectorSearchRerankingConfigurationType')
     Version = Shapes::StringShape.new(name: 'Version')
+    VideoConfiguration = Shapes::StructureShape.new(name: 'VideoConfiguration')
+    VideoConfigurations = Shapes::ListShape.new(name: 'VideoConfigurations')
+    VideoSegmentationConfiguration = Shapes::StructureShape.new(name: 'VideoSegmentationConfiguration')
+    VideoSegmentationConfigurationFixedLengthDurationInteger = Shapes::IntegerShape.new(name: 'VideoSegmentationConfigurationFixedLengthDurationInteger')
     WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
     WebCrawlerLimits = Shapes::StructureShape.new(name: 'WebCrawlerLimits')
     WebCrawlerLimitsMaxPagesInteger = Shapes::IntegerShape.new(name: 'WebCrawlerLimitsMaxPagesInteger')
@@ -931,6 +939,14 @@ module Aws::BedrockAgent
     AssociateAgentKnowledgeBaseResponse.add_member(:agent_knowledge_base, Shapes::ShapeRef.new(shape: AgentKnowledgeBase, required: true, location_name: "agentKnowledgeBase"))
     AssociateAgentKnowledgeBaseResponse.struct_class = Types::AssociateAgentKnowledgeBaseResponse
 
+    AudioConfiguration.add_member(:segmentation_configuration, Shapes::ShapeRef.new(shape: AudioSegmentationConfiguration, required: true, location_name: "segmentationConfiguration"))
+    AudioConfiguration.struct_class = Types::AudioConfiguration
+
+    AudioConfigurations.member = Shapes::ShapeRef.new(shape: AudioConfiguration)
+
+    AudioSegmentationConfiguration.add_member(:fixed_length_duration, Shapes::ShapeRef.new(shape: AudioSegmentationConfigurationFixedLengthDurationInteger, required: true, location_name: "fixedLengthDuration"))
+    AudioSegmentationConfiguration.struct_class = Types::AudioSegmentationConfiguration
+
     AutoToolChoice.struct_class = Types::AutoToolChoice
 
     AwsDataCatalogTableNames.member = Shapes::ShapeRef.new(shape: AwsDataCatalogTableName)
@@ -940,6 +956,8 @@ module Aws::BedrockAgent
 
     BedrockEmbeddingModelConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
     BedrockEmbeddingModelConfiguration.add_member(:embedding_data_type, Shapes::ShapeRef.new(shape: EmbeddingDataType, location_name: "embeddingDataType"))
+    BedrockEmbeddingModelConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfigurations, location_name: "audio"))
+    BedrockEmbeddingModelConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfigurations, location_name: "video"))
     BedrockEmbeddingModelConfiguration.struct_class = Types::BedrockEmbeddingModelConfiguration
 
     BedrockFoundationModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
@@ -2931,6 +2949,14 @@ module Aws::BedrockAgent
     VectorSearchRerankingConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfigurationType, required: true, location_name: "type"))
     VectorSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingConfiguration, location_name: "bedrockRerankingConfiguration"))
     VectorSearchRerankingConfiguration.struct_class = Types::VectorSearchRerankingConfiguration
+
+    VideoConfiguration.add_member(:segmentation_configuration, Shapes::ShapeRef.new(shape: VideoSegmentationConfiguration, required: true, location_name: "segmentationConfiguration"))
+    VideoConfiguration.struct_class = Types::VideoConfiguration
+
+    VideoConfigurations.member = Shapes::ShapeRef.new(shape: VideoConfiguration)
+
+    VideoSegmentationConfiguration.add_member(:fixed_length_duration, Shapes::ShapeRef.new(shape: VideoSegmentationConfigurationFixedLengthDurationInteger, required: true, location_name: "fixedLengthDuration"))
+    VideoSegmentationConfiguration.struct_class = Types::VideoSegmentationConfiguration
 
     WebCrawlerConfiguration.add_member(:crawler_limits, Shapes::ShapeRef.new(shape: WebCrawlerLimits, location_name: "crawlerLimits"))
     WebCrawlerConfiguration.add_member(:inclusion_filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "inclusionFilters"))

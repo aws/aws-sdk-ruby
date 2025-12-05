@@ -34,6 +34,12 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class AggregateLogGroupSummary
+      attr_accessor log_group_count: ::Integer
+      attr_accessor grouping_identifiers: ::Array[Types::GroupingIdentifier]
+      SENSITIVE: []
+    end
+
     class Anomaly
       attr_accessor anomaly_id: ::String
       attr_accessor pattern_id: ::String
@@ -75,6 +81,17 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSourceToS3TableIntegrationRequest
+      attr_accessor integration_arn: ::String
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class AssociateSourceToS3TableIntegrationResponse
+      attr_accessor identifier: ::String
       SENSITIVE: []
     end
 
@@ -215,6 +232,18 @@ module Aws::CloudWatchLogs
 
     class DataAlreadyAcceptedException
       attr_accessor expected_sequence_token: ::String
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class DataSourceFilter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -634,6 +663,16 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class DisassociateSourceFromS3TableIntegrationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSourceFromS3TableIntegrationResponse
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
     class Entity
       attr_accessor key_attributes: ::Hash[::String, ::String]
       attr_accessor attributes: ::Hash[::String, ::String]
@@ -671,6 +710,7 @@ module Aws::CloudWatchLogs
       attr_accessor last_scan_time: ::Integer
       attr_accessor first_event_time: ::Integer
       attr_accessor last_event_time: ::Integer
+      attr_accessor type: ("FACET" | "FIELD_INDEX")
       SENSITIVE: []
     end
 
@@ -814,6 +854,17 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class GetLogFieldsRequest
+      attr_accessor data_source_name: ::String
+      attr_accessor data_source_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogFieldsResponse
+      attr_accessor log_fields: ::Array[Types::LogFieldsListItem]
+      SENSITIVE: []
+    end
+
     class GetLogGroupFieldsRequest
       attr_accessor log_group_name: ::String
       attr_accessor time: ::Integer
@@ -926,6 +977,12 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class GroupingIdentifier
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class IndexPolicy
       attr_accessor log_group_identifier: ::String
       attr_accessor last_update_time: ::Integer
@@ -980,6 +1037,24 @@ module Aws::CloudWatchLogs
     end
 
     class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListAggregateLogGroupSummariesRequest
+      attr_accessor account_identifiers: ::Array[::String]
+      attr_accessor include_linked_accounts: bool
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_name_pattern: ::String
+      attr_accessor data_sources: ::Array[Types::DataSourceFilter]
+      attr_accessor group_by: ("DATA_SOURCE_NAME_TYPE_AND_FORMAT" | "DATA_SOURCE_NAME_AND_TYPE")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAggregateLogGroupSummariesResponse
+      attr_accessor aggregate_log_group_summaries: ::Array[Types::AggregateLogGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class ListAnomaliesRequest
@@ -1041,6 +1116,8 @@ module Aws::CloudWatchLogs
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
+      attr_accessor data_sources: ::Array[Types::DataSourceFilter]
+      attr_accessor field_index_names: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1060,6 +1137,19 @@ module Aws::CloudWatchLogs
     class ListScheduledQueriesResponse
       attr_accessor next_token: ::String
       attr_accessor scheduled_queries: ::Array[Types::ScheduledQuerySummary]
+      SENSITIVE: []
+    end
+
+    class ListSourcesForS3TableIntegrationRequest
+      attr_accessor integration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourcesForS3TableIntegrationResponse
+      attr_accessor sources: ::Array[Types::S3TableIntegrationSource]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1128,6 +1218,19 @@ module Aws::CloudWatchLogs
     class LogEvent
       attr_accessor timestamp: ::Integer
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LogFieldType
+      attr_accessor type: ::String
+      attr_accessor element: Types::LogFieldType
+      attr_accessor fields: ::Array[Types::LogFieldsListItem]
+      SENSITIVE: []
+    end
+
+    class LogFieldsListItem
+      attr_accessor log_field_name: ::String
+      attr_accessor log_field_type: Types::LogFieldType
       SENSITIVE: []
     end
 
@@ -1712,6 +1815,15 @@ module Aws::CloudWatchLogs
     class S3DeliveryConfiguration
       attr_accessor suffix_path: ::String
       attr_accessor enable_hive_compatible_path: bool
+      SENSITIVE: []
+    end
+
+    class S3TableIntegrationSource
+      attr_accessor identifier: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor status: ("ACTIVE" | "UNHEALTHY" | "FAILED" | "DATA_SOURCE_DELETE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor created_time_stamp: ::Integer
       SENSITIVE: []
     end
 

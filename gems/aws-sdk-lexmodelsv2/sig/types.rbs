@@ -461,7 +461,9 @@ module Aws::LexModelsV2
       attr_accessor locale_id: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
       SENSITIVE: []
     end
 
@@ -756,6 +758,8 @@ module Aws::LexModelsV2
       attr_accessor description: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
@@ -769,6 +773,8 @@ module Aws::LexModelsV2
       attr_accessor description: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
       attr_accessor creation_date_time: ::Time
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
@@ -1073,6 +1079,12 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class DeepgramSpeechModelConfig
+      attr_accessor api_token_secret_arn: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
     class DefaultConditionalBranch
       attr_accessor next_step: Types::DialogState
       attr_accessor response: Types::ResponseSpecification
@@ -1288,6 +1300,8 @@ module Aws::LexModelsV2
       attr_accessor description: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor intents_count: ::Integer
       attr_accessor slot_types_count: ::Integer
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
@@ -3006,6 +3020,23 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class SpeechFoundationModel
+      attr_accessor model_arn: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class SpeechModelConfig
+      attr_accessor deepgram_config: Types::DeepgramSpeechModelConfig
+      SENSITIVE: []
+    end
+
+    class SpeechRecognitionSettings
+      attr_accessor speech_model_preference: ("Standard" | "Neural" | "Deepgram")
+      attr_accessor speech_model_config: Types::SpeechModelConfig
+      SENSITIVE: []
+    end
+
     class StartBotRecommendationRequest
       attr_accessor bot_id: ::String
       attr_accessor bot_version: ::String
@@ -3335,6 +3366,11 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class UnifiedSpeechSettings
+      attr_accessor speech_foundation_model: Types::SpeechFoundationModel
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -3378,6 +3414,8 @@ module Aws::LexModelsV2
       attr_accessor description: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       SENSITIVE: []
@@ -3391,6 +3429,8 @@ module Aws::LexModelsV2
       attr_accessor description: ::String
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
       attr_accessor failure_reasons: ::Array[::String]
       attr_accessor creation_date_time: ::Time
@@ -3737,8 +3777,8 @@ module Aws::LexModelsV2
     end
 
     class VoiceSettings
-      attr_accessor voice_id: ::String
       attr_accessor engine: ("standard" | "neural" | "long-form" | "generative")
+      attr_accessor voice_id: ::String
       SENSITIVE: []
     end
 

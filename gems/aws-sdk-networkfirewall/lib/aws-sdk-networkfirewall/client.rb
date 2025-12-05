@@ -766,6 +766,88 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Attaches ProxyRuleGroup resources to a ProxyConfiguration
+    #
+    # A Proxy Configuration defines the monitoring and protection behavior
+    # for a Proxy. The details of the behavior are defined in the rule
+    # groups that you add to your configuration.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Array<Types::ProxyRuleGroupAttachment>] :rule_groups
+    #   The proxy rule group(s) to attach to the proxy configuration
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy configuration. The token marks
+    #   the state of the proxy configuration resource at the time of the
+    #   request.
+    #
+    #   To make changes to the proxy configuration, you provide the token in
+    #   your request. Network Firewall uses the token to ensure that the proxy
+    #   configuration hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the proxy configuration again to get a current copy
+    #   of it with a current token. Reapply your changes as needed, then try
+    #   the operation again using the new token.
+    #
+    # @return [Types::AttachRuleGroupsToProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AttachRuleGroupsToProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
+    #   * {Types::AttachRuleGroupsToProxyConfigurationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_rule_groups_to_proxy_configuration({
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #     rule_groups: [ # required
+    #       {
+    #         proxy_rule_group_name: "ResourceName",
+    #         insert_position: 1,
+    #       },
+    #     ],
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configuration.proxy_configuration_name #=> String
+    #   resp.proxy_configuration.proxy_configuration_arn #=> String
+    #   resp.proxy_configuration.description #=> String
+    #   resp.proxy_configuration.create_time #=> Time
+    #   resp.proxy_configuration.delete_time #=> Time
+    #   resp.proxy_configuration.rule_groups #=> Array
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
+    #   resp.proxy_configuration.rule_groups[0].type #=> String
+    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.tags #=> Array
+    #   resp.proxy_configuration.tags[0].key #=> String
+    #   resp.proxy_configuration.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AttachRuleGroupsToProxyConfiguration AWS API Documentation
+    #
+    # @overload attach_rule_groups_to_proxy_configuration(params = {})
+    # @param [Hash] params ({})
+    def attach_rule_groups_to_proxy_configuration(params = {}, options = {})
+      req = build_request(:attach_rule_groups_to_proxy_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates an Network Firewall Firewall and accompanying FirewallStatus
     # for a VPC.
     #
@@ -1120,6 +1202,468 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def create_firewall_policy(params = {}, options = {})
       req = build_request(:create_firewall_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates an Network Firewall Proxy
+    #
+    # Attaches a Proxy configuration to a NAT Gateway.
+    #
+    # To manage a proxy's tags, use the standard Amazon Web Services
+    # resource tagging operations, ListTagsForResource, TagResource, and
+    # UntagResource.
+    #
+    # To retrieve information about proxies, use ListProxies and
+    # DescribeProxy.
+    #
+    # @option params [required, String] :proxy_name
+    #   The descriptive name of the proxy. You can't change the name of a
+    #   proxy after you create it.
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   A unique identifier for the NAT gateway to use with proxy resources.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [Array<Types::ListenerPropertyRequest>] :listener_properties
+    #   Listener properties for HTTP and HTTPS traffic.
+    #
+    # @option params [required, Types::TlsInterceptPropertiesRequest] :tls_intercept_properties
+    #   TLS decryption on traffic to filter on attributes in the HTTP header.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @return [Types::CreateProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProxyResponse#proxy #proxy} => Types::Proxy
+    #   * {Types::CreateProxyResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_proxy({
+    #     proxy_name: "ResourceName", # required
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #     listener_properties: [
+    #       {
+    #         port: 1, # required
+    #         type: "HTTP", # required, accepts HTTP, HTTPS
+    #       },
+    #     ],
+    #     tls_intercept_properties: { # required
+    #       pca_arn: "ResourceArn",
+    #       tls_intercept_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy.create_time #=> Time
+    #   resp.proxy.delete_time #=> Time
+    #   resp.proxy.update_time #=> Time
+    #   resp.proxy.failure_code #=> String
+    #   resp.proxy.failure_message #=> String
+    #   resp.proxy.proxy_state #=> String, one of "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "ATTACH_FAILED", "DETACH_FAILED"
+    #   resp.proxy.proxy_modify_state #=> String, one of "MODIFYING", "COMPLETED", "FAILED"
+    #   resp.proxy.nat_gateway_id #=> String
+    #   resp.proxy.proxy_configuration_name #=> String
+    #   resp.proxy.proxy_configuration_arn #=> String
+    #   resp.proxy.proxy_name #=> String
+    #   resp.proxy.proxy_arn #=> String
+    #   resp.proxy.listener_properties #=> Array
+    #   resp.proxy.listener_properties[0].port #=> Integer
+    #   resp.proxy.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.proxy.tls_intercept_properties.pca_arn #=> String
+    #   resp.proxy.tls_intercept_properties.tls_intercept_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.proxy.tags #=> Array
+    #   resp.proxy.tags[0].key #=> String
+    #   resp.proxy.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxy AWS API Documentation
+    #
+    # @overload create_proxy(params = {})
+    # @param [Hash] params ({})
+    def create_proxy(params = {}, options = {})
+      req = build_request(:create_proxy, params)
+      req.send_request(options)
+    end
+
+    # Creates an Network Firewall ProxyConfiguration
+    #
+    # A Proxy Configuration defines the monitoring and protection behavior
+    # for a Proxy. The details of the behavior are defined in the rule
+    # groups that you add to your configuration.
+    #
+    # To manage a proxy configuration's tags, use the standard Amazon Web
+    # Services resource tagging operations, ListTagsForResource,
+    # TagResource, and UntagResource.
+    #
+    # To retrieve information about proxies, use ListProxyConfigurations and
+    # DescribeProxyConfiguration.
+    #
+    # @option params [required, String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    # @option params [String] :description
+    #   A description of the proxy configuration.
+    #
+    # @option params [Array<String>] :rule_group_names
+    #   The proxy rule group name(s) to attach to the proxy configuration.
+    #
+    #   You must specify the ARNs or the names, and you can specify both.
+    #
+    # @option params [Array<String>] :rule_group_arns
+    #   The proxy rule group arn(s) to attach to the proxy configuration.
+    #
+    #   You must specify the ARNs or the names, and you can specify both.
+    #
+    # @option params [required, Types::ProxyConfigDefaultRulePhaseActionsRequest] :default_rule_phase_actions
+    #   Evaluation points in the traffic flow where rules are applied. There
+    #   are three phases in a traffic where the rule match is applied.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @return [Types::CreateProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
+    #   * {Types::CreateProxyConfigurationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_proxy_configuration({
+    #     proxy_configuration_name: "ResourceName", # required
+    #     description: "Description",
+    #     rule_group_names: ["ResourceName"],
+    #     rule_group_arns: ["ResourceArn"],
+    #     default_rule_phase_actions: { # required
+    #       pre_dns: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #       pre_request: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #       post_response: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configuration.proxy_configuration_name #=> String
+    #   resp.proxy_configuration.proxy_configuration_arn #=> String
+    #   resp.proxy_configuration.description #=> String
+    #   resp.proxy_configuration.create_time #=> Time
+    #   resp.proxy_configuration.delete_time #=> Time
+    #   resp.proxy_configuration.rule_groups #=> Array
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
+    #   resp.proxy_configuration.rule_groups[0].type #=> String
+    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.tags #=> Array
+    #   resp.proxy_configuration.tags[0].key #=> String
+    #   resp.proxy_configuration.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxyConfiguration AWS API Documentation
+    #
+    # @overload create_proxy_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_proxy_configuration(params = {}, options = {})
+      req = build_request(:create_proxy_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates an Network Firewall ProxyRuleGroup
+    #
+    # Collections of related proxy filtering rules. Rule groups help you
+    # manage and reuse sets of rules across multiple proxy configurations.
+    #
+    # To manage a proxy rule group's tags, use the standard Amazon Web
+    # Services resource tagging operations, ListTagsForResource,
+    # TagResource, and UntagResource.
+    #
+    # To retrieve information about proxy rule groups, use
+    # ListProxyRuleGroups and DescribeProxyRuleGroup.
+    #
+    # To retrieve information about individual proxy rules, use
+    # DescribeProxyRuleGroup and DescribeProxyRule.
+    #
+    # @option params [required, String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    # @option params [String] :description
+    #   A description of the proxy rule group.
+    #
+    # @option params [Types::ProxyRulesByRequestPhase] :rules
+    #   Individual rules that define match conditions and actions for
+    #   application-layer traffic. Rules specify what to inspect (domains,
+    #   headers, methods) and what action to take (allow, deny, alert).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @return [Types::CreateProxyRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProxyRuleGroupResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
+    #   * {Types::CreateProxyRuleGroupResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_proxy_rule_group({
+    #     proxy_rule_group_name: "ResourceName", # required
+    #     description: "Description",
+    #     rules: {
+    #       pre_dns: [
+    #         {
+    #           proxy_rule_name: "ResourceName",
+    #           description: "Description",
+    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #           conditions: [
+    #             {
+    #               condition_operator: "ConditionOperator",
+    #               condition_key: "ConditionKey",
+    #               condition_values: ["ProxyConditionValue"],
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       pre_request: [
+    #         {
+    #           proxy_rule_name: "ResourceName",
+    #           description: "Description",
+    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #           conditions: [
+    #             {
+    #               condition_operator: "ConditionOperator",
+    #               condition_key: "ConditionKey",
+    #               condition_values: ["ProxyConditionValue"],
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       post_response: [
+    #         {
+    #           proxy_rule_name: "ResourceName",
+    #           description: "Description",
+    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #           conditions: [
+    #             {
+    #               condition_operator: "ConditionOperator",
+    #               condition_key: "ConditionKey",
+    #               condition_values: ["ProxyConditionValue"],
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
+    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
+    #   resp.proxy_rule_group.create_time #=> Time
+    #   resp.proxy_rule_group.delete_time #=> Time
+    #   resp.proxy_rule_group.rules.pre_dns #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.pre_request #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.post_response #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.description #=> String
+    #   resp.proxy_rule_group.tags #=> Array
+    #   resp.proxy_rule_group.tags[0].key #=> String
+    #   resp.proxy_rule_group.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxyRuleGroup AWS API Documentation
+    #
+    # @overload create_proxy_rule_group(params = {})
+    # @param [Hash] params ({})
+    def create_proxy_rule_group(params = {}, options = {})
+      req = build_request(:create_proxy_rule_group, params)
+      req.send_request(options)
+    end
+
+    # Creates Network Firewall ProxyRule resources.
+    #
+    # Attaches new proxy rule(s) to an existing proxy rule group.
+    #
+    # To retrieve information about individual proxy rules, use
+    # DescribeProxyRuleGroup and DescribeProxyRule.
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Types::CreateProxyRulesByRequestPhase] :rules
+    #   Individual rules that define match conditions and actions for
+    #   application-layer traffic. Rules specify what to inspect (domains,
+    #   headers, methods) and what action to take (allow, deny, alert).
+    #
+    # @return [Types::CreateProxyRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProxyRulesResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
+    #   * {Types::CreateProxyRulesResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_proxy_rules({
+    #     proxy_rule_group_arn: "ResourceArn",
+    #     proxy_rule_group_name: "ResourceName",
+    #     rules: { # required
+    #       pre_dns: [
+    #         {
+    #           proxy_rule_name: "ResourceName",
+    #           description: "Description",
+    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #           conditions: [
+    #             {
+    #               condition_operator: "ConditionOperator",
+    #               condition_key: "ConditionKey",
+    #               condition_values: ["ProxyConditionValue"],
+    #             },
+    #           ],
+    #           insert_position: 1,
+    #         },
+    #       ],
+    #       pre_request: [
+    #         {
+    #           proxy_rule_name: "ResourceName",
+    #           description: "Description",
+    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #           conditions: [
+    #             {
+    #               condition_operator: "ConditionOperator",
+    #               condition_key: "ConditionKey",
+    #               condition_values: ["ProxyConditionValue"],
+    #             },
+    #           ],
+    #           insert_position: 1,
+    #         },
+    #       ],
+    #       post_response: [
+    #         {
+    #           proxy_rule_name: "ResourceName",
+    #           description: "Description",
+    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #           conditions: [
+    #             {
+    #               condition_operator: "ConditionOperator",
+    #               condition_key: "ConditionKey",
+    #               condition_values: ["ProxyConditionValue"],
+    #             },
+    #           ],
+    #           insert_position: 1,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
+    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
+    #   resp.proxy_rule_group.create_time #=> Time
+    #   resp.proxy_rule_group.delete_time #=> Time
+    #   resp.proxy_rule_group.rules.pre_dns #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.pre_request #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.post_response #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.description #=> String
+    #   resp.proxy_rule_group.tags #=> Array
+    #   resp.proxy_rule_group.tags[0].key #=> String
+    #   resp.proxy_rule_group.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxyRules AWS API Documentation
+    #
+    # @overload create_proxy_rules(params = {})
+    # @param [Hash] params ({})
+    def create_proxy_rules(params = {}, options = {})
+      req = build_request(:create_proxy_rules, params)
       req.send_request(options)
     end
 
@@ -1874,6 +2418,207 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Deletes the specified Proxy.
+    #
+    # Detaches a Proxy configuration from a NAT Gateway.
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   The NAT Gateway the proxy is attached to.
+    #
+    # @option params [String] :proxy_name
+    #   The descriptive name of the proxy. You can't change the name of a
+    #   proxy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_arn
+    #   The Amazon Resource Name (ARN) of a proxy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProxyResponse#nat_gateway_id #nat_gateway_id} => String
+    #   * {Types::DeleteProxyResponse#proxy_name #proxy_name} => String
+    #   * {Types::DeleteProxyResponse#proxy_arn #proxy_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_proxy({
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     proxy_name: "ResourceName",
+    #     proxy_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nat_gateway_id #=> String
+    #   resp.proxy_name #=> String
+    #   resp.proxy_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxy AWS API Documentation
+    #
+    # @overload delete_proxy(params = {})
+    # @param [Hash] params ({})
+    def delete_proxy(params = {}, options = {})
+      req = build_request(:delete_proxy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified ProxyConfiguration.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProxyConfigurationResponse#proxy_configuration_name #proxy_configuration_name} => String
+    #   * {Types::DeleteProxyConfigurationResponse#proxy_configuration_arn #proxy_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_proxy_configuration({
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configuration_name #=> String
+    #   resp.proxy_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxyConfiguration AWS API Documentation
+    #
+    # @overload delete_proxy_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_proxy_configuration(params = {}, options = {})
+      req = build_request(:delete_proxy_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified ProxyRuleGroup.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteProxyRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProxyRuleGroupResponse#proxy_rule_group_name #proxy_rule_group_name} => String
+    #   * {Types::DeleteProxyRuleGroupResponse#proxy_rule_group_arn #proxy_rule_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_proxy_rule_group({
+    #     proxy_rule_group_name: "ResourceName",
+    #     proxy_rule_group_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_group_name #=> String
+    #   resp.proxy_rule_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxyRuleGroup AWS API Documentation
+    #
+    # @overload delete_proxy_rule_group(params = {})
+    # @param [Hash] params ({})
+    def delete_proxy_rule_group(params = {}, options = {})
+      req = build_request(:delete_proxy_rule_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified ProxyRule(s). currently attached to a
+    # ProxyRuleGroup
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Array<String>] :rules
+    #   The proxy rule(s) to remove from the existing proxy rule group.
+    #
+    # @return [Types::DeleteProxyRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProxyRulesResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_proxy_rules({
+    #     proxy_rule_group_arn: "ResourceArn",
+    #     proxy_rule_group_name: "ResourceName",
+    #     rules: ["ResourceName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
+    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
+    #   resp.proxy_rule_group.create_time #=> Time
+    #   resp.proxy_rule_group.delete_time #=> Time
+    #   resp.proxy_rule_group.rules.pre_dns #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.pre_request #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.post_response #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.description #=> String
+    #   resp.proxy_rule_group.tags #=> Array
+    #   resp.proxy_rule_group.tags[0].key #=> String
+    #   resp.proxy_rule_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxyRules AWS API Documentation
+    #
+    # @overload delete_proxy_rules(params = {})
+    # @param [Hash] params ({})
+    def delete_proxy_rules(params = {}, options = {})
+      req = build_request(:delete_proxy_rules, params)
+      req.send_request(options)
+    end
+
     # Deletes a resource policy that you created in a PutResourcePolicy
     # request.
     #
@@ -2401,6 +3146,245 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Returns the data objects for the specified proxy.
+    #
+    # @option params [String] :proxy_name
+    #   The descriptive name of the proxy. You can't change the name of a
+    #   proxy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_arn
+    #   The Amazon Resource Name (ARN) of a proxy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DescribeProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProxyResponse#proxy #proxy} => Types::DescribeProxyResource
+    #   * {Types::DescribeProxyResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_proxy({
+    #     proxy_name: "ResourceName",
+    #     proxy_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy.proxy_name #=> String
+    #   resp.proxy.proxy_arn #=> String
+    #   resp.proxy.proxy_configuration_name #=> String
+    #   resp.proxy.proxy_configuration_arn #=> String
+    #   resp.proxy.nat_gateway_id #=> String
+    #   resp.proxy.proxy_state #=> String, one of "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "ATTACH_FAILED", "DETACH_FAILED"
+    #   resp.proxy.proxy_modify_state #=> String, one of "MODIFYING", "COMPLETED", "FAILED"
+    #   resp.proxy.listener_properties #=> Array
+    #   resp.proxy.listener_properties[0].port #=> Integer
+    #   resp.proxy.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.proxy.tls_intercept_properties.pca_arn #=> String
+    #   resp.proxy.tls_intercept_properties.tls_intercept_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.proxy.vpc_endpoint_service_name #=> String
+    #   resp.proxy.private_dns_name #=> String
+    #   resp.proxy.create_time #=> Time
+    #   resp.proxy.delete_time #=> Time
+    #   resp.proxy.update_time #=> Time
+    #   resp.proxy.failure_code #=> String
+    #   resp.proxy.failure_message #=> String
+    #   resp.proxy.tags #=> Array
+    #   resp.proxy.tags[0].key #=> String
+    #   resp.proxy.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxy AWS API Documentation
+    #
+    # @overload describe_proxy(params = {})
+    # @param [Hash] params ({})
+    def describe_proxy(params = {}, options = {})
+      req = build_request(:describe_proxy, params)
+      req.send_request(options)
+    end
+
+    # Returns the data objects for the specified proxy configuration.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DescribeProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
+    #   * {Types::DescribeProxyConfigurationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_proxy_configuration({
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configuration.proxy_configuration_name #=> String
+    #   resp.proxy_configuration.proxy_configuration_arn #=> String
+    #   resp.proxy_configuration.description #=> String
+    #   resp.proxy_configuration.create_time #=> Time
+    #   resp.proxy_configuration.delete_time #=> Time
+    #   resp.proxy_configuration.rule_groups #=> Array
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
+    #   resp.proxy_configuration.rule_groups[0].type #=> String
+    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.tags #=> Array
+    #   resp.proxy_configuration.tags[0].key #=> String
+    #   resp.proxy_configuration.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxyConfiguration AWS API Documentation
+    #
+    # @overload describe_proxy_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_proxy_configuration(params = {}, options = {})
+      req = build_request(:describe_proxy_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns the data objects for the specified proxy configuration for the
+    # specified proxy rule group.
+    #
+    # @option params [required, String] :proxy_rule_name
+    #   The descriptive name of the proxy rule. You can't change the name of
+    #   a proxy rule after you create it.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DescribeProxyRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProxyRuleResponse#proxy_rule #proxy_rule} => Types::ProxyRule
+    #   * {Types::DescribeProxyRuleResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_proxy_rule({
+    #     proxy_rule_name: "ResourceName", # required
+    #     proxy_rule_group_name: "ResourceName",
+    #     proxy_rule_group_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule.proxy_rule_name #=> String
+    #   resp.proxy_rule.description #=> String
+    #   resp.proxy_rule.action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule.conditions #=> Array
+    #   resp.proxy_rule.conditions[0].condition_operator #=> String
+    #   resp.proxy_rule.conditions[0].condition_key #=> String
+    #   resp.proxy_rule.conditions[0].condition_values #=> Array
+    #   resp.proxy_rule.conditions[0].condition_values[0] #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxyRule AWS API Documentation
+    #
+    # @overload describe_proxy_rule(params = {})
+    # @param [Hash] params ({})
+    def describe_proxy_rule(params = {}, options = {})
+      req = build_request(:describe_proxy_rule, params)
+      req.send_request(options)
+    end
+
+    # Returns the data objects for the specified proxy rule group.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DescribeProxyRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProxyRuleGroupResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
+    #   * {Types::DescribeProxyRuleGroupResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_proxy_rule_group({
+    #     proxy_rule_group_name: "ResourceName",
+    #     proxy_rule_group_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
+    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
+    #   resp.proxy_rule_group.create_time #=> Time
+    #   resp.proxy_rule_group.delete_time #=> Time
+    #   resp.proxy_rule_group.rules.pre_dns #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.pre_request #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.rules.post_response #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
+    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
+    #   resp.proxy_rule_group.description #=> String
+    #   resp.proxy_rule_group.tags #=> Array
+    #   resp.proxy_rule_group.tags[0].key #=> String
+    #   resp.proxy_rule_group.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxyRuleGroup AWS API Documentation
+    #
+    # @overload describe_proxy_rule_group(params = {})
+    # @param [Hash] params ({})
+    def describe_proxy_rule_group(params = {}, options = {})
+      req = build_request(:describe_proxy_rule_group, params)
+      req.send_request(options)
+    end
+
     # Retrieves a resource policy that you created in a PutResourcePolicy
     # request.
     #
@@ -2818,6 +3802,87 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_vpc_endpoint_association(params = {}, options = {})
       req = build_request(:describe_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
+    # Detaches ProxyRuleGroup resources from a ProxyConfiguration
+    #
+    # A Proxy Configuration defines the monitoring and protection behavior
+    # for a Proxy. The details of the behavior are defined in the rule
+    # groups that you add to your configuration.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [Array<String>] :rule_group_names
+    #   The proxy rule group names to detach from the proxy configuration
+    #
+    # @option params [Array<String>] :rule_group_arns
+    #   The proxy rule group arns to detach from the proxy configuration
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy configuration. The token marks
+    #   the state of the proxy configuration resource at the time of the
+    #   request.
+    #
+    #   To make changes to the proxy configuration, you provide the token in
+    #   your request. Network Firewall uses the token to ensure that the proxy
+    #   configuration hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the proxy configuration again to get a current copy
+    #   of it with a current token. Reapply your changes as needed, then try
+    #   the operation again using the new token.
+    #
+    # @return [Types::DetachRuleGroupsFromProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetachRuleGroupsFromProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
+    #   * {Types::DetachRuleGroupsFromProxyConfigurationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_rule_groups_from_proxy_configuration({
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #     rule_group_names: ["ResourceName"],
+    #     rule_group_arns: ["ResourceArn"],
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configuration.proxy_configuration_name #=> String
+    #   resp.proxy_configuration.proxy_configuration_arn #=> String
+    #   resp.proxy_configuration.description #=> String
+    #   resp.proxy_configuration.create_time #=> Time
+    #   resp.proxy_configuration.delete_time #=> Time
+    #   resp.proxy_configuration.rule_groups #=> Array
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
+    #   resp.proxy_configuration.rule_groups[0].type #=> String
+    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.tags #=> Array
+    #   resp.proxy_configuration.tags[0].key #=> String
+    #   resp.proxy_configuration.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DetachRuleGroupsFromProxyConfiguration AWS API Documentation
+    #
+    # @overload detach_rule_groups_from_proxy_configuration(params = {})
+    # @param [Hash] params ({})
+    def detach_rule_groups_from_proxy_configuration(params = {}, options = {})
+      req = build_request(:detach_rule_groups_from_proxy_configuration, params)
       req.send_request(options)
     end
 
@@ -3405,6 +4470,147 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def list_flow_operations(params = {}, options = {})
       req = build_request(:list_flow_operations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for the proxies that you have defined.
+    # Depending on your setting for max results and the number of proxies, a
+    # single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListProxiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProxiesResponse#proxies #proxies} => Array&lt;Types::ProxyMetadata&gt;
+    #   * {Types::ListProxiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_proxies({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxies #=> Array
+    #   resp.proxies[0].name #=> String
+    #   resp.proxies[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListProxies AWS API Documentation
+    #
+    # @overload list_proxies(params = {})
+    # @param [Hash] params ({})
+    def list_proxies(params = {}, options = {})
+      req = build_request(:list_proxies, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for the proxy configuration that you have
+    # defined. Depending on your setting for max results and the number of
+    # proxy configurations, a single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListProxyConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProxyConfigurationsResponse#proxy_configurations #proxy_configurations} => Array&lt;Types::ProxyConfigurationMetadata&gt;
+    #   * {Types::ListProxyConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_proxy_configurations({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configurations #=> Array
+    #   resp.proxy_configurations[0].name #=> String
+    #   resp.proxy_configurations[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListProxyConfigurations AWS API Documentation
+    #
+    # @overload list_proxy_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_proxy_configurations(params = {}, options = {})
+      req = build_request(:list_proxy_configurations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for the proxy rule groups that you have
+    # defined. Depending on your setting for max results and the number of
+    # proxy rule groups, a single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListProxyRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProxyRuleGroupsResponse#proxy_rule_groups #proxy_rule_groups} => Array&lt;Types::ProxyRuleGroupMetadata&gt;
+    #   * {Types::ListProxyRuleGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_proxy_rule_groups({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_groups #=> Array
+    #   resp.proxy_rule_groups[0].name #=> String
+    #   resp.proxy_rule_groups[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListProxyRuleGroups AWS API Documentation
+    #
+    # @overload list_proxy_rule_groups(params = {})
+    # @param [Hash] params ({})
+    def list_proxy_rule_groups(params = {}, options = {})
+      req = build_request(:list_proxy_rule_groups, params)
       req.send_request(options)
     end
 
@@ -4767,6 +5973,430 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Updates the properties of the specified proxy.
+    #
+    # @option params [required, String] :nat_gateway_id
+    #   The NAT Gateway the proxy is attached to.
+    #
+    # @option params [String] :proxy_name
+    #   The descriptive name of the proxy. You can't change the name of a
+    #   proxy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_arn
+    #   The Amazon Resource Name (ARN) of a proxy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [Array<Types::ListenerPropertyRequest>] :listener_properties_to_add
+    #   Listener properties for HTTP and HTTPS traffic to add.
+    #
+    # @option params [Array<Types::ListenerPropertyRequest>] :listener_properties_to_remove
+    #   Listener properties for HTTP and HTTPS traffic to remove.
+    #
+    # @option params [Types::TlsInterceptPropertiesRequest] :tls_intercept_properties
+    #   TLS decryption on traffic to filter on attributes in the HTTP header.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy. The token marks the state of
+    #   the proxy resource at the time of the request.
+    #
+    #   To make changes to the proxy, you provide the token in your request.
+    #   Network Firewall uses the token to ensure that the proxy hasn't
+    #   changed since you last retrieved it. If it has changed, the operation
+    #   fails with an `InvalidTokenException`. If this happens, retrieve the
+    #   proxy again to get a current copy of it with a current token. Reapply
+    #   your changes as needed, then try the operation again using the new
+    #   token.
+    #
+    # @return [Types::UpdateProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxyResponse#proxy #proxy} => Types::Proxy
+    #   * {Types::UpdateProxyResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy({
+    #     nat_gateway_id: "NatGatewayId", # required
+    #     proxy_name: "ResourceName",
+    #     proxy_arn: "ResourceArn",
+    #     listener_properties_to_add: [
+    #       {
+    #         port: 1, # required
+    #         type: "HTTP", # required, accepts HTTP, HTTPS
+    #       },
+    #     ],
+    #     listener_properties_to_remove: [
+    #       {
+    #         port: 1, # required
+    #         type: "HTTP", # required, accepts HTTP, HTTPS
+    #       },
+    #     ],
+    #     tls_intercept_properties: {
+    #       pca_arn: "ResourceArn",
+    #       tls_intercept_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy.create_time #=> Time
+    #   resp.proxy.delete_time #=> Time
+    #   resp.proxy.update_time #=> Time
+    #   resp.proxy.failure_code #=> String
+    #   resp.proxy.failure_message #=> String
+    #   resp.proxy.proxy_state #=> String, one of "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "ATTACH_FAILED", "DETACH_FAILED"
+    #   resp.proxy.proxy_modify_state #=> String, one of "MODIFYING", "COMPLETED", "FAILED"
+    #   resp.proxy.nat_gateway_id #=> String
+    #   resp.proxy.proxy_configuration_name #=> String
+    #   resp.proxy.proxy_configuration_arn #=> String
+    #   resp.proxy.proxy_name #=> String
+    #   resp.proxy.proxy_arn #=> String
+    #   resp.proxy.listener_properties #=> Array
+    #   resp.proxy.listener_properties[0].port #=> Integer
+    #   resp.proxy.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.proxy.tls_intercept_properties.pca_arn #=> String
+    #   resp.proxy.tls_intercept_properties.tls_intercept_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.proxy.tags #=> Array
+    #   resp.proxy.tags[0].key #=> String
+    #   resp.proxy.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxy AWS API Documentation
+    #
+    # @overload update_proxy(params = {})
+    # @param [Hash] params ({})
+    def update_proxy(params = {}, options = {})
+      req = build_request(:update_proxy, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of the specified proxy configuration.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Types::ProxyConfigDefaultRulePhaseActionsRequest] :default_rule_phase_actions
+    #   Evaluation points in the traffic flow where rules are applied. There
+    #   are three phases in a traffic where the rule match is applied.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy configuration. The token marks
+    #   the state of the proxy configuration resource at the time of the
+    #   request.
+    #
+    #   To make changes to the proxy configuration, you provide the token in
+    #   your request. Network Firewall uses the token to ensure that the proxy
+    #   configuration hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the proxy configuration again to get a current copy
+    #   of it with a current token. Reapply your changes as needed, then try
+    #   the operation again using the new token.
+    #
+    # @return [Types::UpdateProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
+    #   * {Types::UpdateProxyConfigurationResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy_configuration({
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #     default_rule_phase_actions: { # required
+    #       pre_dns: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #       pre_request: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #       post_response: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #     },
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_configuration.proxy_configuration_name #=> String
+    #   resp.proxy_configuration.proxy_configuration_arn #=> String
+    #   resp.proxy_configuration.description #=> String
+    #   resp.proxy_configuration.create_time #=> Time
+    #   resp.proxy_configuration.delete_time #=> Time
+    #   resp.proxy_configuration.rule_groups #=> Array
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
+    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
+    #   resp.proxy_configuration.rule_groups[0].type #=> String
+    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_configuration.tags #=> Array
+    #   resp.proxy_configuration.tags[0].key #=> String
+    #   resp.proxy_configuration.tags[0].value #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyConfiguration AWS API Documentation
+    #
+    # @overload update_proxy_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_proxy_configuration(params = {}, options = {})
+      req = build_request(:update_proxy_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of the specified proxy rule.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, String] :proxy_rule_name
+    #   The descriptive name of the proxy rule. You can't change the name of
+    #   a proxy rule after you create it.
+    #
+    # @option params [String] :description
+    #   A description of the proxy rule.
+    #
+    # @option params [String] :action
+    #   Depending on the match action, the proxy either stops the evaluation
+    #   (if the action is terminal - allow or deny), or continues it (if the
+    #   action is alert) until it matches a rule with a terminal action.
+    #
+    # @option params [Array<Types::ProxyRuleCondition>] :add_conditions
+    #   Proxy rule conditions to add. Match criteria that specify what traffic
+    #   attributes to examine. Conditions include operators (StringEquals,
+    #   StringLike) and values to match against.
+    #
+    # @option params [Array<Types::ProxyRuleCondition>] :remove_conditions
+    #   Proxy rule conditions to remove. Match criteria that specify what
+    #   traffic attributes to examine. Conditions include operators
+    #   (StringEquals, StringLike) and values to match against.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy rule. The token marks the state
+    #   of the proxy rule resource at the time of the request.
+    #
+    #   To make changes to the proxy rule, you provide the token in your
+    #   request. Network Firewall uses the token to ensure that the proxy rule
+    #   hasn't changed since you last retrieved it. If it has changed, the
+    #   operation fails with an `InvalidTokenException`. If this happens,
+    #   retrieve the proxy rule again to get a current copy of it with a
+    #   current token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @return [Types::UpdateProxyRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxyRuleResponse#proxy_rule #proxy_rule} => Types::ProxyRule
+    #   * {Types::UpdateProxyRuleResponse#removed_conditions #removed_conditions} => Array&lt;Types::ProxyRuleCondition&gt;
+    #   * {Types::UpdateProxyRuleResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy_rule({
+    #     proxy_rule_group_name: "ResourceName",
+    #     proxy_rule_group_arn: "ResourceArn",
+    #     proxy_rule_name: "ResourceName", # required
+    #     description: "Description",
+    #     action: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #     add_conditions: [
+    #       {
+    #         condition_operator: "ConditionOperator",
+    #         condition_key: "ConditionKey",
+    #         condition_values: ["ProxyConditionValue"],
+    #       },
+    #     ],
+    #     remove_conditions: [
+    #       {
+    #         condition_operator: "ConditionOperator",
+    #         condition_key: "ConditionKey",
+    #         condition_values: ["ProxyConditionValue"],
+    #       },
+    #     ],
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule.proxy_rule_name #=> String
+    #   resp.proxy_rule.description #=> String
+    #   resp.proxy_rule.action #=> String, one of "ALLOW", "DENY", "ALERT"
+    #   resp.proxy_rule.conditions #=> Array
+    #   resp.proxy_rule.conditions[0].condition_operator #=> String
+    #   resp.proxy_rule.conditions[0].condition_key #=> String
+    #   resp.proxy_rule.conditions[0].condition_values #=> Array
+    #   resp.proxy_rule.conditions[0].condition_values[0] #=> String
+    #   resp.removed_conditions #=> Array
+    #   resp.removed_conditions[0].condition_operator #=> String
+    #   resp.removed_conditions[0].condition_key #=> String
+    #   resp.removed_conditions[0].condition_values #=> Array
+    #   resp.removed_conditions[0].condition_values[0] #=> String
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyRule AWS API Documentation
+    #
+    # @overload update_proxy_rule(params = {})
+    # @param [Hash] params ({})
+    def update_proxy_rule(params = {}, options = {})
+      req = build_request(:update_proxy_rule, params)
+      req.send_request(options)
+    end
+
+    # Updates proxy rule group priorities within a proxy configuration.
+    #
+    # @option params [String] :proxy_configuration_name
+    #   The descriptive name of the proxy configuration. You can't change the
+    #   name of a proxy configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_configuration_arn
+    #   The Amazon Resource Name (ARN) of a proxy configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Array<Types::ProxyRuleGroupPriority>] :rule_groups
+    #   proxy rule group resources to update to new positions.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy configuration. The token marks
+    #   the state of the proxy configuration resource at the time of the
+    #   request.
+    #
+    #   To make changes to the proxy configuration, you provide the token in
+    #   your request. Network Firewall uses the token to ensure that the proxy
+    #   configuration hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the proxy configuration again to get a current copy
+    #   of it with a current token. Reapply your changes as needed, then try
+    #   the operation again using the new token.
+    #
+    # @return [Types::UpdateProxyRuleGroupPrioritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxyRuleGroupPrioritiesResponse#proxy_rule_groups #proxy_rule_groups} => Array&lt;Types::ProxyRuleGroupPriorityResult&gt;
+    #   * {Types::UpdateProxyRuleGroupPrioritiesResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy_rule_group_priorities({
+    #     proxy_configuration_name: "ResourceName",
+    #     proxy_configuration_arn: "ResourceArn",
+    #     rule_groups: [ # required
+    #       {
+    #         proxy_rule_group_name: "ResourceName",
+    #         new_position: 1,
+    #       },
+    #     ],
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_groups #=> Array
+    #   resp.proxy_rule_groups[0].proxy_rule_group_name #=> String
+    #   resp.proxy_rule_groups[0].priority #=> Integer
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyRuleGroupPriorities AWS API Documentation
+    #
+    # @overload update_proxy_rule_group_priorities(params = {})
+    # @param [Hash] params ({})
+    def update_proxy_rule_group_priorities(params = {}, options = {})
+      req = build_request(:update_proxy_rule_group_priorities, params)
+      req.send_request(options)
+    end
+
+    # Updates proxy rule priorities within a proxy rule group.
+    #
+    # @option params [String] :proxy_rule_group_name
+    #   The descriptive name of the proxy rule group. You can't change the
+    #   name of a proxy rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :proxy_rule_group_arn
+    #   The Amazon Resource Name (ARN) of a proxy rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, String] :rule_group_request_phase
+    #   Evaluation points in the traffic flow where rules are applied. There
+    #   are three phases in a traffic where the rule match is applied.
+    #
+    # @option params [required, Array<Types::ProxyRulePriority>] :rules
+    #   proxy rule resources to update to new positions.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the proxy rule group. The token marks the
+    #   state of the proxy rule group resource at the time of the request.
+    #
+    #   To make changes to the proxy rule group, you provide the token in your
+    #   request. Network Firewall uses the token to ensure that the proxy rule
+    #   group hasn't changed since you last retrieved it. If it has changed,
+    #   the operation fails with an `InvalidTokenException`. If this happens,
+    #   retrieve the proxy rule group again to get a current copy of it with a
+    #   current token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @return [Types::UpdateProxyRulePrioritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxyRulePrioritiesResponse#proxy_rule_group_name #proxy_rule_group_name} => String
+    #   * {Types::UpdateProxyRulePrioritiesResponse#proxy_rule_group_arn #proxy_rule_group_arn} => String
+    #   * {Types::UpdateProxyRulePrioritiesResponse#rule_group_request_phase #rule_group_request_phase} => String
+    #   * {Types::UpdateProxyRulePrioritiesResponse#rules #rules} => Array&lt;Types::ProxyRulePriority&gt;
+    #   * {Types::UpdateProxyRulePrioritiesResponse#update_token #update_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy_rule_priorities({
+    #     proxy_rule_group_name: "ResourceName",
+    #     proxy_rule_group_arn: "ResourceArn",
+    #     rule_group_request_phase: "PRE_DNS", # required, accepts PRE_DNS, PRE_REQ, POST_RES
+    #     rules: [ # required
+    #       {
+    #         proxy_rule_name: "ResourceName",
+    #         new_position: 1,
+    #       },
+    #     ],
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_rule_group_name #=> String
+    #   resp.proxy_rule_group_arn #=> String
+    #   resp.rule_group_request_phase #=> String, one of "PRE_DNS", "PRE_REQ", "POST_RES"
+    #   resp.rules #=> Array
+    #   resp.rules[0].proxy_rule_name #=> String
+    #   resp.rules[0].new_position #=> Integer
+    #   resp.update_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyRulePriorities AWS API Documentation
+    #
+    # @overload update_proxy_rule_priorities(params = {})
+    # @param [Hash] params ({})
+    def update_proxy_rule_priorities(params = {}, options = {})
+      req = build_request(:update_proxy_rule_priorities, params)
+      req.send_request(options)
+    end
+
     # Updates the rule settings for the specified rule group. You use a rule
     # group by reference in one or more firewall policies. When you modify a
     # rule group, you modify all firewall policies that use the rule group.
@@ -5290,7 +6920,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

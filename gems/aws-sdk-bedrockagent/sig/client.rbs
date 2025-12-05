@@ -752,7 +752,21 @@ module Aws
                                        embedding_model_configuration: {
                                          bedrock_embedding_model_configuration: {
                                            dimensions: ::Integer?,
-                                           embedding_data_type: ("FLOAT32" | "BINARY")?
+                                           embedding_data_type: ("FLOAT32" | "BINARY")?,
+                                           audio: Array[
+                                             {
+                                               segmentation_configuration: {
+                                                 fixed_length_duration: ::Integer
+                                               }
+                                             },
+                                           ]?,
+                                           video: Array[
+                                             {
+                                               segmentation_configuration: {
+                                                 fixed_length_duration: ::Integer
+                                               }
+                                             },
+                                           ]?
                                          }?
                                        }?,
                                        supplemental_data_storage_configuration: {
@@ -2412,7 +2426,21 @@ module Aws
                                        embedding_model_configuration: {
                                          bedrock_embedding_model_configuration: {
                                            dimensions: ::Integer?,
-                                           embedding_data_type: ("FLOAT32" | "BINARY")?
+                                           embedding_data_type: ("FLOAT32" | "BINARY")?,
+                                           audio: Array[
+                                             {
+                                               segmentation_configuration: {
+                                                 fixed_length_duration: ::Integer
+                                               }
+                                             },
+                                           ]?,
+                                           video: Array[
+                                             {
+                                               segmentation_configuration: {
+                                                 fixed_length_duration: ::Integer
+                                               }
+                                             },
+                                           ]?
                                          }?
                                        }?,
                                        supplemental_data_storage_configuration: {

@@ -794,7 +794,7 @@ module Aws::CostExplorer
     end
 
     class GetSavingsPlansPurchaseRecommendationRequest
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
       attr_accessor account_scope: ("PAYER" | "LINKED")
@@ -1054,7 +1054,7 @@ module Aws::CostExplorer
     class RecommendationDetailData
       attr_accessor account_scope: ("PAYER" | "LINKED")
       attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
       attr_accessor account_id: ::String
@@ -1279,7 +1279,7 @@ module Aws::CostExplorer
 
     class SavingsPlans
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor region: ::String
       attr_accessor instance_family: ::String
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
@@ -1355,7 +1355,7 @@ module Aws::CostExplorer
 
     class SavingsPlansPurchaseRecommendation
       attr_accessor account_scope: ("PAYER" | "LINKED")
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
       attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")

@@ -1,0 +1,409 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PartnerCentralBenefits
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AmendBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AmendBenefitApplicationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#amend_benefit_application-instance_method
+      def amend_benefit_application: (
+                                       catalog: ::String,
+                                       client_token: ::String,
+                                       revision: ::String,
+                                       identifier: ::String,
+                                       amendment_reason: ::String,
+                                       amendments: Array[
+                                         {
+                                           field_path: ::String,
+                                           new_value: ::String
+                                         },
+                                       ]
+                                     ) -> _AmendBenefitApplicationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AmendBenefitApplicationResponseSuccess
+
+      interface _AssociateBenefitApplicationResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateBenefitApplicationResourceOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#associate_benefit_application_resource-instance_method
+      def associate_benefit_application_resource: (
+                                                    catalog: ::String,
+                                                    benefit_application_identifier: ::String,
+                                                    resource_arn: ::String
+                                                  ) -> _AssociateBenefitApplicationResourceResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateBenefitApplicationResourceResponseSuccess
+
+      interface _CancelBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelBenefitApplicationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#cancel_benefit_application-instance_method
+      def cancel_benefit_application: (
+                                        catalog: ::String,
+                                        client_token: ::String,
+                                        identifier: ::String,
+                                        ?reason: ::String
+                                      ) -> _CancelBenefitApplicationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelBenefitApplicationResponseSuccess
+
+      interface _CreateBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBenefitApplicationOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#create_benefit_application-instance_method
+      def create_benefit_application: (
+                                        catalog: ::String,
+                                        client_token: ::String,
+                                        ?name: ::String,
+                                        ?description: ::String,
+                                        benefit_identifier: ::String,
+                                        ?fulfillment_types: Array[("CREDITS" | "CASH" | "ACCESS")],
+                                        ?benefit_application_details: {
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        ?associated_resources: Array[::String],
+                                        ?partner_contacts: Array[
+                                          {
+                                            email: ::String?,
+                                            first_name: ::String?,
+                                            last_name: ::String?,
+                                            business_title: ::String?,
+                                            phone: ::String?
+                                          },
+                                        ],
+                                        ?file_details: Array[
+                                          {
+                                            file_uri: ::String,
+                                            business_use_case: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateBenefitApplicationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBenefitApplicationResponseSuccess
+
+      interface _DisassociateBenefitApplicationResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateBenefitApplicationResourceOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#disassociate_benefit_application_resource-instance_method
+      def disassociate_benefit_application_resource: (
+                                                       catalog: ::String,
+                                                       benefit_application_identifier: ::String,
+                                                       resource_arn: ::String
+                                                     ) -> _DisassociateBenefitApplicationResourceResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateBenefitApplicationResourceResponseSuccess
+
+      interface _GetBenefitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBenefitOutput]
+        def id: () -> ::String
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def programs: () -> ::Array[::String]
+        def fulfillment_types: () -> ::Array[("CREDITS" | "CASH" | "ACCESS")]
+        def benefit_request_schema: () -> untyped
+        def status: () -> ("ACTIVE" | "INACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#get_benefit-instance_method
+      def get_benefit: (
+                         catalog: ::String,
+                         identifier: ::String
+                       ) -> _GetBenefitResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBenefitResponseSuccess
+
+      interface _GetBenefitAllocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBenefitAllocationOutput]
+        def id: () -> ::String
+        def catalog: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE" | "FULFILLED")
+        def status_reason: () -> ::String
+        def benefit_application_id: () -> ::String
+        def benefit_id: () -> ::String
+        def fulfillment_type: () -> ("CREDITS" | "CASH" | "ACCESS")
+        def applicable_benefit_ids: () -> ::Array[::String]
+        def fulfillment_detail: () -> Types::FulfillmentDetails
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def starts_at: () -> ::Time
+        def expires_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#get_benefit_allocation-instance_method
+      def get_benefit_allocation: (
+                                    catalog: ::String,
+                                    identifier: ::String
+                                  ) -> _GetBenefitAllocationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBenefitAllocationResponseSuccess
+
+      interface _GetBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBenefitApplicationOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def catalog: () -> ::String
+        def benefit_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def fulfillment_types: () -> ::Array[("CREDITS" | "CASH" | "ACCESS")]
+        def benefit_application_details: () -> untyped
+        def programs: () -> ::Array[::String]
+        def status: () -> ("PENDING_SUBMISSION" | "IN_REVIEW" | "ACTION_REQUIRED" | "APPROVED" | "REJECTED" | "CANCELED")
+        def stage: () -> ::String
+        def status_reason: () -> ::String
+        def status_reason_code: () -> ::String
+        def status_reason_codes: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def revision: () -> ::String
+        def associated_resources: () -> ::Array[::String]
+        def partner_contacts: () -> ::Array[Types::Contact]
+        def file_details: () -> ::Array[Types::FileDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#get_benefit_application-instance_method
+      def get_benefit_application: (
+                                     catalog: ::String,
+                                     identifier: ::String
+                                   ) -> _GetBenefitApplicationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBenefitApplicationResponseSuccess
+
+      interface _ListBenefitAllocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBenefitAllocationsOutput]
+        def benefit_allocation_summaries: () -> ::Array[Types::BenefitAllocationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#list_benefit_allocations-instance_method
+      def list_benefit_allocations: (
+                                      catalog: ::String,
+                                      ?fulfillment_types: Array[("CREDITS" | "CASH" | "ACCESS")],
+                                      ?benefit_identifiers: Array[::String],
+                                      ?benefit_application_identifiers: Array[::String],
+                                      ?status: Array[("ACTIVE" | "INACTIVE" | "FULFILLED")],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListBenefitAllocationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBenefitAllocationsResponseSuccess
+
+      interface _ListBenefitApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBenefitApplicationsOutput]
+        def benefit_application_summaries: () -> ::Array[Types::BenefitApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#list_benefit_applications-instance_method
+      def list_benefit_applications: (
+                                       catalog: ::String,
+                                       ?programs: Array[::String],
+                                       ?fulfillment_types: Array[("CREDITS" | "CASH" | "ACCESS")],
+                                       ?benefit_identifiers: Array[::String],
+                                       ?status: Array[("PENDING_SUBMISSION" | "IN_REVIEW" | "ACTION_REQUIRED" | "APPROVED" | "REJECTED" | "CANCELED")],
+                                       ?stages: Array[::String],
+                                       ?associated_resources: Array[
+                                         {
+                                           resource_type: ("OPPORTUNITY" | "BENEFIT_ALLOCATION")?,
+                                           resource_identifier: ::String?,
+                                           resource_arn: ::String?
+                                         },
+                                       ],
+                                       ?associated_resource_arns: Array[::String],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListBenefitApplicationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBenefitApplicationsResponseSuccess
+
+      interface _ListBenefitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBenefitsOutput]
+        def benefit_summaries: () -> ::Array[Types::BenefitSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#list_benefits-instance_method
+      def list_benefits: (
+                           catalog: ::String,
+                           ?programs: Array[::String],
+                           ?fulfillment_types: Array[("CREDITS" | "CASH" | "ACCESS")],
+                           ?status: Array[("ACTIVE" | "INACTIVE")],
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListBenefitsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBenefitsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RecallBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RecallBenefitApplicationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#recall_benefit_application-instance_method
+      def recall_benefit_application: (
+                                        catalog: ::String,
+                                        ?client_token: ::String,
+                                        identifier: ::String,
+                                        reason: ::String
+                                      ) -> _RecallBenefitApplicationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecallBenefitApplicationResponseSuccess
+
+      interface _SubmitBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitBenefitApplicationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#submit_benefit_application-instance_method
+      def submit_benefit_application: (
+                                        catalog: ::String,
+                                        identifier: ::String
+                                      ) -> _SubmitBenefitApplicationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitBenefitApplicationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateBenefitApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBenefitApplicationOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralBenefits/Client.html#update_benefit_application-instance_method
+      def update_benefit_application: (
+                                        catalog: ::String,
+                                        client_token: ::String,
+                                        ?name: ::String,
+                                        ?description: ::String,
+                                        identifier: ::String,
+                                        revision: ::String,
+                                        ?benefit_application_details: {
+                                        },
+                                        ?partner_contacts: Array[
+                                          {
+                                            email: ::String?,
+                                            first_name: ::String?,
+                                            last_name: ::String?,
+                                            business_title: ::String?,
+                                            phone: ::String?
+                                          },
+                                        ],
+                                        ?file_details: Array[
+                                          {
+                                            file_uri: ::String,
+                                            business_use_case: ::String?
+                                          },
+                                        ]
+                                      ) -> _UpdateBenefitApplicationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBenefitApplicationResponseSuccess
+    end
+  end
+end
+

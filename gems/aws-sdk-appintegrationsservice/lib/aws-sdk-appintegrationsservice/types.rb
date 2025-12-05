@@ -106,6 +106,10 @@ module Aws::AppIntegrationsService
     #   Indicates whether the application is a service.
     #   @return [Boolean]
     #
+    # @!attribute [rw] application_type
+    #   The type of application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ApplicationSummary AWS API Documentation
     #
     class ApplicationSummary < Struct.new(
@@ -115,7 +119,8 @@ module Aws::AppIntegrationsService
       :namespace,
       :created_time,
       :last_modified_time,
-      :is_service)
+      :is_service,
+      :application_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -201,6 +206,10 @@ module Aws::AppIntegrationsService
     #   The iframe configuration for the application.
     #   @return [Types::IframeConfig]
     #
+    # @!attribute [rw] application_type
+    #   The type of application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -216,7 +225,8 @@ module Aws::AppIntegrationsService
       :is_service,
       :initialization_timeout,
       :application_config,
-      :iframe_config)
+      :iframe_config,
+      :application_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -873,6 +883,10 @@ module Aws::AppIntegrationsService
     #   The iframe configuration for the application.
     #   @return [Types::IframeConfig]
     #
+    # @!attribute [rw] application_type
+    #   The type of application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -891,7 +905,8 @@ module Aws::AppIntegrationsService
       :is_service,
       :initialization_timeout,
       :application_config,
-      :iframe_config)
+      :iframe_config,
+      :application_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1135,11 +1150,16 @@ module Aws::AppIntegrationsService
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] application_type
+    #   The type of application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationsRequest AWS API Documentation
     #
     class ListApplicationsRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :application_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1577,6 +1597,10 @@ module Aws::AppIntegrationsService
     #   The iframe configuration for the application.
     #   @return [Types::IframeConfig]
     #
+    # @!attribute [rw] application_type
+    #   The type of application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1590,7 +1614,8 @@ module Aws::AppIntegrationsService
       :is_service,
       :initialization_timeout,
       :application_config,
-      :iframe_config)
+      :iframe_config,
+      :application_type)
       SENSITIVE = []
       include Aws::Structure
     end

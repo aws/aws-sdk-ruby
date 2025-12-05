@@ -1067,6 +1067,10 @@ module Aws::MarketplaceCatalog
     #   A summary of a machine learning product.
     #   @return [Types::MachineLearningProductSummary]
     #
+    # @!attribute [rw] offer_set_summary
+    #   An object that contains summary information about the offer set.
+    #   @return [Types::OfferSetSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntitySummary AWS API Documentation
     #
     class EntitySummary < Struct.new(
@@ -1082,7 +1086,8 @@ module Aws::MarketplaceCatalog
       :saa_s_product_summary,
       :offer_summary,
       :resale_authorization_summary,
-      :machine_learning_product_summary)
+      :machine_learning_product_summary,
+      :offer_set_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1121,6 +1126,10 @@ module Aws::MarketplaceCatalog
     #   `astModifiedDate`, `ProductTitle`, and `Visibility`.
     #   @return [Types::MachineLearningProductFilters]
     #
+    # @!attribute [rw] offer_set_filters
+    #   A filter for offer sets.
+    #   @return [Types::OfferSetFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeFilters AWS API Documentation
     #
     class EntityTypeFilters < Struct.new(
@@ -1131,6 +1140,7 @@ module Aws::MarketplaceCatalog
       :container_product_filters,
       :resale_authorization_filters,
       :machine_learning_product_filters,
+      :offer_set_filters,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1143,6 +1153,7 @@ module Aws::MarketplaceCatalog
       class ContainerProductFilters < EntityTypeFilters; end
       class ResaleAuthorizationFilters < EntityTypeFilters; end
       class MachineLearningProductFilters < EntityTypeFilters; end
+      class OfferSetFilters < EntityTypeFilters; end
       class Unknown < EntityTypeFilters; end
     end
 
@@ -1178,6 +1189,10 @@ module Aws::MarketplaceCatalog
     #   The sort options for machine learning products.
     #   @return [Types::MachineLearningProductSort]
     #
+    # @!attribute [rw] offer_set_sort
+    #   A sort for offer sets.
+    #   @return [Types::OfferSetSort]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeSort AWS API Documentation
     #
     class EntityTypeSort < Struct.new(
@@ -1188,6 +1203,7 @@ module Aws::MarketplaceCatalog
       :container_product_sort,
       :resale_authorization_sort,
       :machine_learning_product_sort,
+      :offer_set_sort,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1200,6 +1216,7 @@ module Aws::MarketplaceCatalog
       class ContainerProductSort < EntityTypeSort; end
       class ResaleAuthorizationSort < EntityTypeSort; end
       class MachineLearningProductSort < EntityTypeSort; end
+      class OfferSetSort < EntityTypeSort; end
       class Unknown < EntityTypeSort; end
     end
 
@@ -1370,7 +1387,7 @@ module Aws::MarketplaceCatalog
     #   The type of entities to retrieve. Valid values are: `AmiProduct`,
     #   `ContainerProduct`, `DataProduct`, `SaaSProduct`,
     #   `ProcurementPolicy`, `Experience`, `Audience`, `BrandingSettings`,
-    #   `Offer`, `Seller`, `ResaleAuthorization`.
+    #   `Offer`, `OfferSet`, `Seller`, `ResaleAuthorization`, `Solution`.
     #   @return [String]
     #
     # @!attribute [rw] filter_list
@@ -1760,6 +1777,10 @@ module Aws::MarketplaceCatalog
     #   Allows filtering on the `LastModifiedDate` of an offer.
     #   @return [Types::OfferLastModifiedDateFilter]
     #
+    # @!attribute [rw] offer_set_id
+    #   Allows filtering on the `OfferSetId` of an offer.
+    #   @return [Types::OfferSetIdFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferFilters AWS API Documentation
     #
     class OfferFilters < Struct.new(
@@ -1772,7 +1793,8 @@ module Aws::MarketplaceCatalog
       :buyer_accounts,
       :state,
       :targeting,
-      :last_modified_date)
+      :last_modified_date,
+      :offer_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1901,6 +1923,262 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Allows filtering on the `AssociatedOfferIds` of an offer set.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `AssociatedOfferIds` of an offer set with
+    #   list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetAssociatedOfferIdsFilter AWS API Documentation
+    #
+    class OfferSetAssociatedOfferIdsFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the entity id of an offer set.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on entity id of an offer set with list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetEntityIdFilter AWS API Documentation
+    #
+    class OfferSetEntityIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object containing all the filter fields for offer sets entity. Client
+    # can add a maximum of 8 filters in a single `ListEntities` request.
+    #
+    # @!attribute [rw] entity_id
+    #   Allows filtering on `EntityId` of an offer set.
+    #   @return [Types::OfferSetEntityIdFilter]
+    #
+    # @!attribute [rw] name
+    #   Allows filtering on the `Name` of an offer set.
+    #   @return [Types::OfferSetNameFilter]
+    #
+    # @!attribute [rw] state
+    #   Allows filtering on the `State` of an offer set.
+    #   @return [Types::OfferSetStateFilter]
+    #
+    # @!attribute [rw] release_date
+    #   Allows filtering on the `ReleaseDate` of an offer set.
+    #   @return [Types::OfferSetReleaseDateFilter]
+    #
+    # @!attribute [rw] associated_offer_ids
+    #   Allows filtering on the `AssociatedOfferIds` of an offer set.
+    #   @return [Types::OfferSetAssociatedOfferIdsFilter]
+    #
+    # @!attribute [rw] solution_id
+    #   Allows filtering on the `SolutionId` of an offer set.
+    #   @return [Types::OfferSetSolutionIdFilter]
+    #
+    # @!attribute [rw] last_modified_date
+    #   Allows filtering on the `LastModifiedDate` of an offer set.
+    #   @return [Types::OfferSetLastModifiedDateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetFilters AWS API Documentation
+    #
+    class OfferSetFilters < Struct.new(
+      :entity_id,
+      :name,
+      :state,
+      :release_date,
+      :associated_offer_ids,
+      :solution_id,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `OfferSetId` of an offer.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `OfferSetId` of an offer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetIdFilter AWS API Documentation
+    #
+    class OfferSetIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `LastModifiedDate` of an offer set.
+    #
+    # @!attribute [rw] date_range
+    #   Allows filtering on the `LastModifiedDate` of an offer set with date
+    #   range as input.
+    #   @return [Types::OfferSetLastModifiedDateFilterDateRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetLastModifiedDateFilter AWS API Documentation
+    #
+    class OfferSetLastModifiedDateFilter < Struct.new(
+      :date_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `LastModifiedDate` of an offer set with date
+    # range as input.
+    #
+    # @!attribute [rw] after_value
+    #   Allows filtering on the `LastModifiedDate` of an offer set after a
+    #   date.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   Allows filtering on the `LastModifiedDate` of an offer set before a
+    #   date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetLastModifiedDateFilterDateRange AWS API Documentation
+    #
+    class OfferSetLastModifiedDateFilterDateRange < Struct.new(
+      :after_value,
+      :before_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `Name` of an offer set.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `Name` of an offer set with list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetNameFilter AWS API Documentation
+    #
+    class OfferSetNameFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `ReleaseDate` of an offer set.
+    #
+    # @!attribute [rw] date_range
+    #   Allows filtering on the `ReleaseDate` of an offer set with date
+    #   range as input.
+    #   @return [Types::OfferSetReleaseDateFilterDateRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetReleaseDateFilter AWS API Documentation
+    #
+    class OfferSetReleaseDateFilter < Struct.new(
+      :date_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `ReleaseDate` of an offer set with date range
+    # as input.
+    #
+    # @!attribute [rw] after_value
+    #   Allows filtering on the `ReleaseDate` of offer set after a date.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   Allows filtering on the `ReleaseDate` of offer set before a date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetReleaseDateFilterDateRange AWS API Documentation
+    #
+    class OfferSetReleaseDateFilterDateRange < Struct.new(
+      :after_value,
+      :before_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `SolutionId` of an offer set.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `SolutionId` of an offer set with list
+    #   input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetSolutionIdFilter AWS API Documentation
+    #
+    class OfferSetSolutionIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows to sort offer sets.
+    #
+    # @!attribute [rw] sort_by
+    #   Allows to sort offer sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Allows to sort offer sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetSort AWS API Documentation
+    #
+    class OfferSetSort < Struct.new(
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `State` of an offer set.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `State` of an offer set with list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetStateFilter AWS API Documentation
+    #
+    class OfferSetStateFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarized information about an offer set.
+    #
+    # @!attribute [rw] name
+    #   The name of the offer set.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the offer set.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_date
+    #   The release date of the offer set.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_offer_ids
+    #   The list of offer IDs associated with the offer set.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] solution_id
+    #   The solution ID associated with the offer set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSetSummary AWS API Documentation
+    #
+    class OfferSetSummary < Struct.new(
+      :name,
+      :state,
+      :release_date,
+      :associated_offer_ids,
+      :solution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows to sort offers.
     #
     # @!attribute [rw] sort_by
@@ -1968,6 +2246,10 @@ module Aws::MarketplaceCatalog
     #   The targeting in the offer.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] offer_set_id
+    #   The offer set ID of the offer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSummary AWS API Documentation
     #
     class OfferSummary < Struct.new(
@@ -1978,7 +2260,8 @@ module Aws::MarketplaceCatalog
       :availability_end_date,
       :buyer_accounts,
       :state,
-      :targeting)
+      :targeting,
+      :offer_set_id)
       SENSITIVE = []
       include Aws::Structure
     end

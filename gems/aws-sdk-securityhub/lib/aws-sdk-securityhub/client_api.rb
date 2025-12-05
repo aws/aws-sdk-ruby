@@ -789,8 +789,6 @@ module Aws::SecurityHub
     ConnectionDirection = Shapes::StringShape.new(name: 'ConnectionDirection')
     ConnectorAuthStatus = Shapes::StringShape.new(name: 'ConnectorAuthStatus')
     ConnectorProviderName = Shapes::StringShape.new(name: 'ConnectorProviderName')
-    ConnectorRegistrationsV2Request = Shapes::StructureShape.new(name: 'ConnectorRegistrationsV2Request')
-    ConnectorRegistrationsV2Response = Shapes::StructureShape.new(name: 'ConnectorRegistrationsV2Response')
     ConnectorStatus = Shapes::StringShape.new(name: 'ConnectorStatus')
     ConnectorSummary = Shapes::StructureShape.new(name: 'ConnectorSummary')
     ConnectorSummaryList = Shapes::ListShape.new(name: 'ConnectorSummaryList')
@@ -1142,6 +1140,8 @@ module Aws::SecurityHub
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     Records = Shapes::ListShape.new(name: 'Records')
     RegionAvailabilityStatus = Shapes::StringShape.new(name: 'RegionAvailabilityStatus')
+    RegisterConnectorV2Request = Shapes::StructureShape.new(name: 'RegisterConnectorV2Request')
+    RegisterConnectorV2Response = Shapes::StructureShape.new(name: 'RegisterConnectorV2Response')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     RelatedRequirementsList = Shapes::ListShape.new(name: 'RelatedRequirementsList')
@@ -1245,10 +1245,11 @@ module Aws::SecurityHub
     SensitiveDataDetectionsList = Shapes::ListShape.new(name: 'SensitiveDataDetectionsList')
     SensitiveDataResult = Shapes::StructureShape.new(name: 'SensitiveDataResult')
     SensitiveDataResultList = Shapes::ListShape.new(name: 'SensitiveDataResultList')
-    SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     Sequence = Shapes::StructureShape.new(name: 'Sequence')
     ServiceNowDetail = Shapes::StructureShape.new(name: 'ServiceNowDetail')
     ServiceNowProviderConfiguration = Shapes::StructureShape.new(name: 'ServiceNowProviderConfiguration')
+    ServiceNowUpdateConfiguration = Shapes::StructureShape.new(name: 'ServiceNowUpdateConfiguration')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Severity = Shapes::StructureShape.new(name: 'Severity')
     SeverityLabel = Shapes::StringShape.new(name: 'SeverityLabel')
     SeverityRating = Shapes::StringShape.new(name: 'SeverityRating')
@@ -1317,6 +1318,7 @@ module Aws::SecurityHub
     ThreatIntelIndicatorType = Shapes::StringShape.new(name: 'ThreatIntelIndicatorType')
     ThreatList = Shapes::ListShape.new(name: 'ThreatList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TicketCreationMode = Shapes::StringShape.new(name: 'TicketCreationMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     TrendsMetrics = Shapes::ListShape.new(name: 'TrendsMetrics')
     TrendsMetricsResult = Shapes::StructureShape.new(name: 'TrendsMetricsResult')
@@ -5590,14 +5592,6 @@ module Aws::SecurityHub
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     ConflictException.struct_class = Types::ConflictException
 
-    ConnectorRegistrationsV2Request.add_member(:auth_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthCode"))
-    ConnectorRegistrationsV2Request.add_member(:auth_state, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthState"))
-    ConnectorRegistrationsV2Request.struct_class = Types::ConnectorRegistrationsV2Request
-
-    ConnectorRegistrationsV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
-    ConnectorRegistrationsV2Response.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
-    ConnectorRegistrationsV2Response.struct_class = Types::ConnectorRegistrationsV2Response
-
     ConnectorSummary.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
     ConnectorSummary.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
     ConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
@@ -5691,9 +5685,10 @@ module Aws::SecurityHub
     CreateConnectorV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorV2Request.struct_class = Types::CreateConnectorV2Request
 
-    CreateConnectorV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
+    CreateConnectorV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorArn"))
     CreateConnectorV2Response.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
     CreateConnectorV2Response.add_member(:auth_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuthUrl"))
+    CreateConnectorV2Response.add_member(:connector_status, Shapes::ShapeRef.new(shape: ConnectorStatus, location_name: "ConnectorStatus"))
     CreateConnectorV2Response.struct_class = Types::CreateConnectorV2Response
 
     CreateFindingAggregatorRequest.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RegionLinkingMode"))
@@ -5723,6 +5718,7 @@ module Aws::SecurityHub
     CreateTicketV2Request.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
     CreateTicketV2Request.add_member(:finding_metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FindingMetadataUid"))
     CreateTicketV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateTicketV2Request.add_member(:mode, Shapes::ShapeRef.new(shape: TicketCreationMode, location_name: "Mode"))
     CreateTicketV2Request.struct_class = Types::CreateTicketV2Request
 
     CreateTicketV2Response.add_member(:ticket_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TicketId"))
@@ -6422,7 +6418,7 @@ module Aws::SecurityHub
     JiraCloudProviderConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProjectKey"))
     JiraCloudProviderConfiguration.struct_class = Types::JiraCloudProviderConfiguration
 
-    JiraCloudUpdateConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProjectKey"))
+    JiraCloudUpdateConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProjectKey"))
     JiraCloudUpdateConfiguration.struct_class = Types::JiraCloudUpdateConfiguration
 
     KeywordFilter.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
@@ -6869,8 +6865,10 @@ module Aws::SecurityHub
     ProviderSummary.struct_class = Types::ProviderSummary
 
     ProviderUpdateConfiguration.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudUpdateConfiguration, location_name: "JiraCloud"))
+    ProviderUpdateConfiguration.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowUpdateConfiguration, location_name: "ServiceNow"))
     ProviderUpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderUpdateConfiguration.add_member_subclass(:jira_cloud, Types::ProviderUpdateConfiguration::JiraCloud)
+    ProviderUpdateConfiguration.add_member_subclass(:service_now, Types::ProviderUpdateConfiguration::ServiceNow)
     ProviderUpdateConfiguration.add_member_subclass(:unknown, Types::ProviderUpdateConfiguration::Unknown)
     ProviderUpdateConfiguration.struct_class = Types::ProviderUpdateConfiguration
 
@@ -6890,6 +6888,14 @@ module Aws::SecurityHub
     Record.struct_class = Types::Record
 
     Records.member = Shapes::ShapeRef.new(shape: Record)
+
+    RegisterConnectorV2Request.add_member(:auth_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthCode"))
+    RegisterConnectorV2Request.add_member(:auth_state, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthState"))
+    RegisterConnectorV2Request.struct_class = Types::RegisterConnectorV2Request
+
+    RegisterConnectorV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
+    RegisterConnectorV2Response.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
+    RegisterConnectorV2Response.struct_class = Types::RegisterConnectorV2Response
 
     RelatedFinding.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
     RelatedFinding.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -7347,14 +7353,20 @@ module Aws::SecurityHub
     Sequence.struct_class = Types::Sequence
 
     ServiceNowDetail.add_member(:instance_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceName"))
-    ServiceNowDetail.add_member(:client_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientId"))
+    ServiceNowDetail.add_member(:secret_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecretArn"))
     ServiceNowDetail.add_member(:auth_status, Shapes::ShapeRef.new(shape: ConnectorAuthStatus, required: true, location_name: "AuthStatus"))
     ServiceNowDetail.struct_class = Types::ServiceNowDetail
 
     ServiceNowProviderConfiguration.add_member(:instance_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InstanceName"))
-    ServiceNowProviderConfiguration.add_member(:client_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ClientId"))
-    ServiceNowProviderConfiguration.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "ClientSecret"))
+    ServiceNowProviderConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecretArn"))
     ServiceNowProviderConfiguration.struct_class = Types::ServiceNowProviderConfiguration
+
+    ServiceNowUpdateConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SecretArn"))
+    ServiceNowUpdateConfiguration.struct_class = Types::ServiceNowUpdateConfiguration
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     Severity.add_member(:product, Shapes::ShapeRef.new(shape: Double, location_name: "Product"))
     Severity.add_member(:label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "Label"))
@@ -7719,7 +7731,6 @@ module Aws::SecurityHub
     UpdateConfigurationPolicyResponse.struct_class = Types::UpdateConfigurationPolicyResponse
 
     UpdateConnectorV2Request.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ConnectorId"))
-    UpdateConnectorV2Request.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "ClientSecret"))
     UpdateConnectorV2Request.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     UpdateConnectorV2Request.add_member(:provider, Shapes::ShapeRef.new(shape: ProviderUpdateConfiguration, location_name: "Provider"))
     UpdateConnectorV2Request.struct_class = Types::UpdateConnectorV2Request
@@ -8055,20 +8066,6 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
-      api.add_operation(:connector_registrations_v2, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ConnectorRegistrationsV2"
-        o.http_method = "POST"
-        o.http_request_uri = "/connectorsv2/registrations"
-        o.input = Shapes::ShapeRef.new(shape: ConnectorRegistrationsV2Request)
-        o.output = Shapes::ShapeRef.new(shape: ConnectorRegistrationsV2Response)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
       api.add_operation(:create_action_target, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateActionTarget"
         o.http_method = "POST"
@@ -8094,6 +8091,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_automation_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -8120,6 +8118,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_configuration_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -8148,6 +8147,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
@@ -9191,6 +9191,20 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:register_connector_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterConnectorV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/connectorsv2/register"
+        o.input = Shapes::ShapeRef.new(shape: RegisterConnectorV2Request)
+        o.output = Shapes::ShapeRef.new(shape: RegisterConnectorV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

@@ -58,47 +58,47 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the configuration of an EC2 Auto Scaling group.
+    # Describes the configuration of an EC2 Amazon EC2 Auto Scaling group.
     #
     # @!attribute [rw] desired_capacity
-    #   The desired capacity, or number of instances, for the EC2 Auto
-    #   Scaling group.
+    #   The desired capacity, or number of instances, for the EC2 Amazon EC2
+    #   Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] min_size
-    #   The minimum size, or minimum number of instances, for the EC2 Auto
-    #   Scaling group.
+    #   The minimum size, or minimum number of instances, for the EC2 Amazon
+    #   EC2 Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum size, or maximum number of instances, for the EC2 Auto
-    #   Scaling group.
+    #   The maximum size, or maximum number of instances, for the EC2 Amazon
+    #   EC2 Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_type
-    #   The instance type for the EC2 Auto Scaling group.
+    #   The instance type for the EC2 Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] allocation_strategy
-    #   Describes the allocation strategy that the EC2 Auto Scaling group
-    #   uses. This field is only available for EC2 Auto Scaling groups with
-    #   mixed instance types.
+    #   Describes the allocation strategy that the EC2 Amazon EC2 Auto
+    #   Scaling group uses. This field is only available for EC2 Amazon EC2
+    #   Auto Scaling groups with mixed instance types.
     #   @return [String]
     #
     # @!attribute [rw] estimated_instance_hour_reduction_percentage
     #   Describes the projected percentage reduction in instance hours after
     #   adopting the recommended configuration. This field is only available
-    #   for EC2 Auto Scaling groups with scaling policies.
+    #   for EC2 Amazon EC2 Auto Scaling groups with scaling policies.
     #   @return [Float]
     #
     # @!attribute [rw] type
-    #   Describes whether the EC2 Auto Scaling group has a single instance
-    #   type or a mixed instance type configuration.
+    #   Describes whether the EC2 Amazon EC2 Auto Scaling group has a single
+    #   instance type or a mixed instance type configuration.
     #   @return [String]
     #
     # @!attribute [rw] mixed_instance_types
-    #   List the instance types within an EC2 Auto Scaling group that has
-    #   mixed instance types.
+    #   List the instance types within an EC2 Amazon EC2 Auto Scaling group
+    #   that has mixed instance types.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupConfiguration AWS API Documentation
@@ -117,8 +117,9 @@ module Aws::ComputeOptimizer
     end
 
     # An object that describes the estimated monthly savings possible by
-    # adopting Compute Optimizer’s Auto Scaling group recommendations. This
-    # is based on the Savings Plans and Reserved Instances discounts.
+    # adopting Compute Optimizer’s Amazon EC2 Auto Scaling group
+    # recommendations. This is based on the Savings Plans and Reserved
+    # Instances discounts.
     #
     # @!attribute [rw] currency
     #   The currency of the estimated monthly savings.
@@ -137,32 +138,33 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes an Auto Scaling group recommendation.
+    # Describes an Amazon EC2 Auto Scaling group recommendation.
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID of the Auto Scaling group.
+    #   The Amazon Web Services account ID of the Amazon EC2 Auto Scaling
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_group_arn
-    #   The Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_group_name
-    #   The name of the Auto Scaling group.
+    #   The name of the Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] finding
-    #   The finding classification of the Auto Scaling group.
+    #   The finding classification of the Amazon EC2 Auto Scaling group.
     #
-    #   Findings for Auto Scaling groups include:
+    #   Findings for Amazon EC2 Auto Scaling groups include:
     #
-    #   * <b> <code>NotOptimized</code> </b>—An Auto Scaling group is
-    #     considered not optimized when Compute Optimizer identifies a
-    #     recommendation that can provide better performance for your
-    #     workload.
+    #   * <b> <code>NotOptimized</code> </b>—An Amazon EC2 Auto Scaling
+    #     group is considered not optimized when Compute Optimizer
+    #     identifies a recommendation that can provide better performance
+    #     for your workload.
     #
-    #   * <b> <code>Optimized</code> </b>—An Auto Scaling group is
-    #     considered optimized when Compute Optimizer determines that the
+    #   * <b> <code>Optimized</code> </b>—An Amazon EC2 Auto Scaling group
+    #     is considered optimized when Compute Optimizer determines that the
     #     group is correctly provisioned to run your workload based on the
     #     chosen instance type. For optimized resources, Compute Optimizer
     #     might recommend a new generation instance type.
@@ -170,49 +172,49 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] utilization_metrics
     #   An array of objects that describe the utilization metrics of the
-    #   Auto Scaling group.
+    #   Amazon EC2 Auto Scaling group.
     #   @return [Array<Types::UtilizationMetric>]
     #
     # @!attribute [rw] look_back_period_in_days
     #   The number of days for which utilization metrics were analyzed for
-    #   the Auto Scaling group.
+    #   the Amazon EC2 Auto Scaling group.
     #   @return [Float]
     #
     # @!attribute [rw] current_configuration
     #   An array of objects that describe the current configuration of the
-    #   Auto Scaling group.
+    #   Amazon EC2 Auto Scaling group.
     #   @return [Types::AutoScalingGroupConfiguration]
     #
     # @!attribute [rw] current_instance_gpu_info
     #   Describes the GPU accelerator settings for the current instance type
-    #   of the Auto Scaling group.
+    #   of the Amazon EC2 Auto Scaling group.
     #   @return [Types::GpuInfo]
     #
     # @!attribute [rw] recommendation_options
     #   An array of objects that describe the recommendation options for the
-    #   Auto Scaling group.
+    #   Amazon EC2 Auto Scaling group.
     #   @return [Array<Types::AutoScalingGroupRecommendationOption>]
     #
     # @!attribute [rw] last_refresh_timestamp
-    #   The timestamp of when the Auto Scaling group recommendation was last
-    #   generated.
+    #   The timestamp of when the Amazon EC2 Auto Scaling group
+    #   recommendation was last generated.
     #   @return [Time]
     #
     # @!attribute [rw] current_performance_risk
-    #   The risk of the current Auto Scaling group not meeting the
-    #   performance needs of its workloads. The higher the risk, the more
-    #   likely the current Auto Scaling group configuration has insufficient
-    #   capacity and cannot meet workload requirements.
+    #   The risk of the current Amazon EC2 Auto Scaling group not meeting
+    #   the performance needs of its workloads. The higher the risk, the
+    #   more likely the current Amazon EC2 Auto Scaling group configuration
+    #   has insufficient capacity and cannot meet workload requirements.
     #   @return [String]
     #
     # @!attribute [rw] effective_recommendation_preferences
     #   An object that describes the effective recommendation preferences
-    #   for the Auto Scaling group.
+    #   for the Amazon EC2 Auto Scaling group.
     #   @return [Types::EffectiveRecommendationPreferences]
     #
     # @!attribute [rw] inferred_workload_types
-    #   The applications that might be running on the instances in the Auto
-    #   Scaling group as inferred by Compute Optimizer.
+    #   The applications that might be running on the instances in the
+    #   Amazon EC2 Auto Scaling group as inferred by Compute Optimizer.
     #
     #   Compute Optimizer can infer if one of the following applications
     #   might be running on the instances:
@@ -262,21 +264,22 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes a recommendation option for an Auto Scaling group.
+    # Describes a recommendation option for an Amazon EC2 Auto Scaling
+    # group.
     #
     # @!attribute [rw] configuration
-    #   An array of objects that describe an Auto Scaling group
+    #   An array of objects that describe an Amazon EC2 Auto Scaling group
     #   configuration.
     #   @return [Types::AutoScalingGroupConfiguration]
     #
     # @!attribute [rw] instance_gpu_info
     #   Describes the GPU accelerator settings for the recommended instance
-    #   type of the Auto Scaling group.
+    #   type of the Amazon EC2 Auto Scaling group.
     #   @return [Types::GpuInfo]
     #
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
-    #   of the Auto Scaling group recommendation option.
+    #   of the Amazon EC2 Auto Scaling group recommendation option.
     #
     #   <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
     #   metrics returned. Additionally, the `Memory` metric is returned only
@@ -292,8 +295,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::UtilizationMetric>]
     #
     # @!attribute [rw] performance_risk
-    #   The performance risk of the Auto Scaling group configuration
-    #   recommendation.
+    #   The performance risk of the Amazon EC2 Auto Scaling group
+    #   configuration recommendation.
     #
     #   Performance risk indicates the likelihood of the recommended
     #   instance type not meeting the resource needs of your workload.
@@ -312,21 +315,21 @@ module Aws::ComputeOptimizer
     #   @return [Float]
     #
     # @!attribute [rw] rank
-    #   The rank of the Auto Scaling group recommendation option.
+    #   The rank of the Amazon EC2 Auto Scaling group recommendation option.
     #
     #   The top recommendation option is ranked as `1`.
     #   @return [Integer]
     #
     # @!attribute [rw] savings_opportunity
-    #   An object that describes the savings opportunity for the Auto
-    #   Scaling group recommendation option. Savings opportunity includes
-    #   the estimated monthly savings amount and percentage.
+    #   An object that describes the savings opportunity for the Amazon EC2
+    #   Auto Scaling group recommendation option. Savings opportunity
+    #   includes the estimated monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
     # @!attribute [rw] savings_opportunity_after_discounts
-    #   An object that describes the savings opportunity for the Auto
-    #   Scaling group recommendation option that includes Savings Plans and
-    #   Reserved Instances discounts. Savings opportunity includes the
+    #   An object that describes the savings opportunity for the Amazon EC2
+    #   Auto Scaling group recommendation option that includes Savings Plans
+    #   and Reserved Instances discounts. Savings opportunity includes the
     #   estimated monthly savings and percentage.
     #   @return [Types::AutoScalingGroupSavingsOpportunityAfterDiscounts]
     #
@@ -358,7 +361,7 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the savings opportunity for Auto Scaling group
+    # Describes the savings opportunity for Amazon EC2 Auto Scaling group
     # recommendations after applying the Savings Plans and Reserved
     # Instances discounts.
     #
@@ -369,14 +372,14 @@ module Aws::ComputeOptimizer
     #   The estimated monthly savings possible as a percentage of monthly
     #   cost after applying the Savings Plans and Reserved Instances
     #   discounts. This saving can be achieved by adopting Compute
-    #   Optimizer’s Auto Scaling group recommendations.
+    #   Optimizer’s Amazon EC2 Auto Scaling group recommendations.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_monthly_savings
     #   An object that describes the estimated monthly savings possible by
-    #   adopting Compute Optimizer’s Auto Scaling group recommendations.
-    #   This is based on the Savings Plans and Reserved Instances pricing
-    #   discounts.
+    #   adopting Compute Optimizer’s Amazon EC2 Auto Scaling group
+    #   recommendations. This is based on the Savings Plans and Reserved
+    #   Instances pricing discounts.
     #   @return [Types::AutoScalingGroupEstimatedMonthlySavings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupSavingsOpportunityAfterDiscounts AWS API Documentation
@@ -545,9 +548,9 @@ module Aws::ComputeOptimizer
     #   The target resource type of the recommendation preference to delete.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
-    #   of an Auto Scaling group.
+    #   of an Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1389,8 +1392,8 @@ module Aws::ComputeOptimizer
     # Describes the effective recommendation preferences for a resource.
     #
     # @!attribute [rw] cpu_vendor_architectures
-    #   Describes the CPU vendor and architecture for an instance or Auto
-    #   Scaling group recommendations.
+    #   Describes the CPU vendor and architecture for an instance or Amazon
+    #   EC2 Auto Scaling group recommendations.
     #
     #   For example, when you specify `AWS_ARM64` with:
     #
@@ -1540,8 +1543,8 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] account_ids
-    #   The IDs of the Amazon Web Services accounts for which to export Auto
-    #   Scaling group recommendations.
+    #   The IDs of the Amazon Web Services accounts for which to export
+    #   Amazon EC2 Auto Scaling group recommendations.
     #
     #   If your account is the management account of an organization, use
     #   this parameter to specify the member account for which you want to
@@ -1559,7 +1562,7 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that exports a more specific
-    #   set of Auto Scaling group recommendations.
+    #   set of Amazon EC2 Auto Scaling group recommendations.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] fields_to_export
@@ -1623,8 +1626,8 @@ module Aws::ComputeOptimizer
     #   @return [Boolean]
     #
     # @!attribute [rw] recommendation_preferences
-    #   An object to specify the preferences for the Auto Scaling group
-    #   recommendations to export.
+    #   An object to specify the preferences for the Amazon EC2 Auto Scaling
+    #   group recommendations to export.
     #   @return [Types::RecommendationPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportAutoScalingGroupRecommendationsRequest AWS API Documentation
@@ -2592,8 +2595,8 @@ module Aws::ComputeOptimizer
     #   you wish to filter results for:
     #
     #   * Specify `Optimized` or `NotOptimized` if you specify the `name`
-    #     parameter as `Finding` and you want to filter results for Auto
-    #     Scaling groups.
+    #     parameter as `Finding` and you want to filter results for Amazon
+    #     EC2 Auto Scaling groups.
     #
     #   * Specify `Underprovisioned`, `Overprovisioned`, or `Optimized` if
     #     you specify the `name` parameter as `Finding` and you want to
@@ -2695,29 +2698,29 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] account_ids
-    #   The ID of the Amazon Web Services account for which to return Auto
-    #   Scaling group recommendations.
+    #   The ID of the Amazon Web Services account for which to return Amazon
+    #   EC2 Auto Scaling group recommendations.
     #
     #   If your account is the management account of an organization, use
     #   this parameter to specify the member account for which you want to
-    #   return Auto Scaling group recommendations.
+    #   return Amazon EC2 Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_arns
-    #   The Amazon Resource Name (ARN) of the Auto Scaling groups for which
-    #   to return recommendations.
+    #   The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling groups
+    #   for which to return recommendations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to advance to the next page of Auto Scaling group
-    #   recommendations.
+    #   The token to advance to the next page of Amazon EC2 Auto Scaling
+    #   group recommendations.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Auto Scaling group recommendations to return
-    #   with a single request.
+    #   The maximum number of Amazon EC2 Auto Scaling group recommendations
+    #   to return with a single request.
     #
     #   To retrieve the remaining results, make another request with the
     #   returned `nextToken` value.
@@ -2725,12 +2728,12 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that returns a more specific
-    #   list of Auto Scaling group recommendations.
+    #   list of Amazon EC2 Auto Scaling group recommendations.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] recommendation_preferences
-    #   An object to specify the preferences for the Auto Scaling group
-    #   recommendations to return in the response.
+    #   An object to specify the preferences for the Amazon EC2 Auto Scaling
+    #   group recommendations to return in the response.
     #   @return [Types::RecommendationPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetAutoScalingGroupRecommendationsRequest AWS API Documentation
@@ -2747,15 +2750,15 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] next_token
-    #   The token to use to advance to the next page of Auto Scaling group
-    #   recommendations.
+    #   The token to use to advance to the next page of Amazon EC2 Auto
+    #   Scaling group recommendations.
     #
-    #   This value is null when there are no more pages of Auto Scaling
-    #   group recommendations to return.
+    #   This value is null when there are no more pages of Amazon EC2 Auto
+    #   Scaling group recommendations to return.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_group_recommendations
-    #   An array of objects that describe Auto Scaling group
+    #   An array of objects that describe Amazon EC2 Auto Scaling group
     #   recommendations.
     #   @return [Array<Types::AutoScalingGroupRecommendation>]
     #
@@ -2763,7 +2766,7 @@ module Aws::ComputeOptimizer
     #   An array of objects that describe errors of the request.
     #
     #   For example, an error is returned if you request recommendations for
-    #   an unsupported Auto Scaling group.
+    #   an unsupported Amazon EC2 Auto Scaling group.
     #   @return [Array<Types::GetRecommendationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetAutoScalingGroupRecommendationsResponse AWS API Documentation
@@ -3104,8 +3107,8 @@ module Aws::ComputeOptimizer
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which to confirm
-    #   effective recommendation preferences. Only EC2 instance and Auto
-    #   Scaling group ARNs are currently supported.
+    #   effective recommendation preferences. Only EC2 instance and Amazon
+    #   EC2 Auto Scaling group ARNs are currently supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesRequest AWS API Documentation
@@ -3678,8 +3681,8 @@ module Aws::ComputeOptimizer
     # Describes an error experienced when getting recommendations.
     #
     # For example, an error is returned if you request recommendations for
-    # an unsupported Auto Scaling group, or if you request recommendations
-    # for an instance of an unsupported instance family.
+    # an unsupported Amazon EC2 Auto Scaling group, or if you request
+    # recommendations for an instance of an unsupported instance family.
     #
     # @!attribute [rw] identifier
     #   The ID of the error.
@@ -3708,9 +3711,9 @@ module Aws::ComputeOptimizer
     #   to return preferences.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
-    #   of an Auto Scaling group.
+    #   of an Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -5599,7 +5602,7 @@ module Aws::ComputeOptimizer
     # *Compute Optimizer User Guide*.
     #
     # <note markdown="1"> * This preference is only available for the Amazon EC2 instance and
-    #   Auto Scaling group resource types.
+    #   Amazon EC2 Auto Scaling group resource types.
     #
     # * Compute Optimizer only supports the customization of
     #   `Ec2InstanceTypes`.
@@ -5738,9 +5741,9 @@ module Aws::ComputeOptimizer
     #   The target resource type of the recommendation preference to create.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
-    #   of an Auto Scaling group.
+    #   of an Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -5752,16 +5755,17 @@ module Aws::ComputeOptimizer
     #   and resource level. For more information, see [Activating enhanced
     #   infrastructure metrics][1] in the *Compute Optimizer User Guide*.
     #
-    #   <note markdown="1"> You cannot create recommendation preferences for Auto Scaling groups
-    #   at the organization and account levels. You can create
-    #   recommendation preferences for Auto Scaling groups only at the
-    #   resource level by specifying a scope name of `ResourceArn` and a
-    #   scope value of the Auto Scaling group Amazon Resource Name (ARN).
-    #   This will configure the preference for all instances that are part
-    #   of the specified Auto Scaling group. You also cannot create
-    #   recommendation preferences at the resource level for instances that
-    #   are part of an Auto Scaling group. You can create recommendation
-    #   preferences at the resource level only for standalone instances.
+    #   <note markdown="1"> You cannot create recommendation preferences for Amazon EC2 Auto
+    #   Scaling groups at the organization and account levels. You can
+    #   create recommendation preferences for Amazon EC2 Auto Scaling groups
+    #   only at the resource level by specifying a scope name of
+    #   `ResourceArn` and a scope value of the Amazon EC2 Auto Scaling group
+    #   Amazon Resource Name (ARN). This will configure the preference for
+    #   all instances that are part of the specified Amazon EC2 Auto Scaling
+    #   group. You also cannot create recommendation preferences at the
+    #   resource level for instances that are part of an Amazon EC2 Auto
+    #   Scaling group. You can create recommendation preferences at the
+    #   resource level only for standalone instances.
     #
     #    </note>
     #
@@ -5829,13 +5833,13 @@ module Aws::ComputeOptimizer
     #   preference isn't specified, we use the default value `DAYS_14`.
     #
     #   You can only set this preference for the Amazon EC2 instance and
-    #   Auto Scaling group resource types.
+    #   Amazon EC2 Auto Scaling group resource types.
     #
     #   <note markdown="1"> * Amazon EC2 instance lookback preferences can be set at the
     #     organization, account, and resource levels.
     #
-    #   * Auto Scaling group lookback preferences can only be set at the
-    #     resource level.
+    #   * Amazon EC2 Auto Scaling group lookback preferences can only be set
+    #     at the resource level.
     #
     #    </note>
     #   @return [String]
@@ -5873,7 +5877,7 @@ module Aws::ComputeOptimizer
     #   is an empty set of resource type values, an error occurs.
     #
     #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance and
-    #   Auto Scaling group resource types.
+    #   Amazon EC2 Auto Scaling group resource types.
     #
     #    </note>
     #   @return [Array<Types::PreferredResource>]
@@ -6576,7 +6580,7 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] cpu_vendor_architectures
     #   Specifies the CPU vendor and architecture for Amazon EC2 instance
-    #   and Auto Scaling group recommendations.
+    #   and Amazon EC2 Auto Scaling group recommendations.
     #
     #   For example, when you specify `AWS_ARM64` with:
     #
@@ -6622,9 +6626,9 @@ module Aws::ComputeOptimizer
     #   The target resource type of the recommendation preference to create.
     #
     #   The `Ec2Instance` option encompasses standalone instances and
-    #   instances that are part of Auto Scaling groups. The
+    #   instances that are part of Amazon EC2 Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
-    #   of an Auto Scaling group.
+    #   of an Amazon EC2 Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] enhanced_infrastructure_metrics
@@ -6713,7 +6717,7 @@ module Aws::ComputeOptimizer
     end
 
     # Describes the source of a recommendation, such as an Amazon EC2
-    # instance or Auto Scaling group.
+    # instance or Amazon EC2 Auto Scaling group.
     #
     # @!attribute [rw] recommendation_source_arn
     #   The Amazon Resource Name (ARN) of the recommendation source.
@@ -7013,16 +7017,17 @@ module Aws::ComputeOptimizer
     # resource level. For more information, see [Activating enhanced
     # infrastructure metrics][1] in the *Compute Optimizer User Guide*.
     #
-    # <note markdown="1"> You cannot create recommendation preferences for Auto Scaling groups
-    # at the organization and account levels. You can create recommendation
-    # preferences for Auto Scaling groups only at the resource level by
-    # specifying a scope name of `ResourceArn` and a scope value of the Auto
-    # Scaling group Amazon Resource Name (ARN). This will configure the
-    # preference for all instances that are part of the specified Auto
-    # Scaling group. You also cannot create recommendation preferences at
-    # the resource level for instances that are part of an Auto Scaling
-    # group. You can create recommendation preferences at the resource level
-    # only for standalone instances.
+    # <note markdown="1"> You cannot create recommendation preferences for Amazon EC2 Auto
+    # Scaling groups at the organization and account levels. You can create
+    # recommendation preferences for Amazon EC2 Auto Scaling groups only at
+    # the resource level by specifying a scope name of `ResourceArn` and a
+    # scope value of the Amazon EC2 Auto Scaling group Amazon Resource Name
+    # (ARN). This will configure the preference for all instances that are
+    # part of the specified Amazon EC2 Auto Scaling group. You also cannot
+    # create recommendation preferences at the resource level for instances
+    # that are part of an Amazon EC2 Auto Scaling group. You can create
+    # recommendation preferences at the resource level only for standalone
+    # instances.
     #
     #  </note>
     #
@@ -7058,10 +7063,10 @@ module Aws::ComputeOptimizer
     #     account ID.
     #
     #   * `ResourceArn` - The `value` must be the Amazon Resource Name (ARN)
-    #     of an EC2 instance or an Auto Scaling group.
+    #     of an EC2 instance or an Amazon EC2 Auto Scaling group.
     #
-    #   Only EC2 instance and Auto Scaling group ARNs are currently
-    #   supported.
+    #   Only EC2 instance and Amazon EC2 Auto Scaling group ARNs are
+    #   currently supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Scope AWS API Documentation

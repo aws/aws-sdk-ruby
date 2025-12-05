@@ -4411,7 +4411,12 @@ module Aws::Glue
     #             view_expanded_text: "ViewTextString",
     #           },
     #         ],
+    #         view_version_id: 1,
+    #         view_version_token: "VersionString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL", # accepts FULL, INCREMENTAL
     #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
     #       },
     #     },
     #     partition_indexes: [
@@ -4439,6 +4444,10 @@ module Aws::Glue
     #                 },
     #                 required: false, # required
     #                 doc: "CommentString",
+    #                 initial_default: {
+    #                 },
+    #                 write_default: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -10303,8 +10312,14 @@ module Aws::Glue
     #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
     #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.view_version_id #=> Integer
+    #   resp.table.view_definition.view_version_token #=> String
+    #   resp.table.view_definition.refresh_seconds #=> Integer
+    #   resp.table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table.view_definition.sub_objects #=> Array
     #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table.view_definition.representations #=> Array
     #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table.view_definition.representations[0].dialect_version #=> String
@@ -10313,6 +10328,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.is_materialized_view #=> Boolean
     #   resp.table.status.requested_by #=> String
     #   resp.table.status.updated_by #=> String
     #   resp.table.status.request_time #=> Time
@@ -10528,8 +10544,14 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.connection_type #=> String
     #   resp.table_version.table.view_definition.is_protected #=> Boolean
     #   resp.table_version.table.view_definition.definer #=> String
+    #   resp.table_version.table.view_definition.view_version_id #=> Integer
+    #   resp.table_version.table.view_definition.view_version_token #=> String
+    #   resp.table_version.table.view_definition.refresh_seconds #=> Integer
+    #   resp.table_version.table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_version.table.view_definition.sub_objects #=> Array
     #   resp.table_version.table.view_definition.sub_objects[0] #=> String
+    #   resp.table_version.table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table_version.table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_version.table.view_definition.representations #=> Array
     #   resp.table_version.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
@@ -10538,6 +10560,7 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
+    #   resp.table_version.table.is_materialized_view #=> Boolean
     #   resp.table_version.table.status.requested_by #=> String
     #   resp.table_version.table.status.updated_by #=> String
     #   resp.table_version.table.status.request_time #=> Time
@@ -10677,8 +10700,14 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.connection_type #=> String
     #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
     #   resp.table_versions[0].table.view_definition.definer #=> String
+    #   resp.table_versions[0].table.view_definition.view_version_id #=> Integer
+    #   resp.table_versions[0].table.view_definition.view_version_token #=> String
+    #   resp.table_versions[0].table.view_definition.refresh_seconds #=> Integer
+    #   resp.table_versions[0].table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_versions[0].table.view_definition.sub_objects #=> Array
     #   resp.table_versions[0].table.view_definition.sub_objects[0] #=> String
+    #   resp.table_versions[0].table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table_versions[0].table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_versions[0].table.view_definition.representations #=> Array
     #   resp.table_versions[0].table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
@@ -10687,6 +10716,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
+    #   resp.table_versions[0].table.is_materialized_view #=> Boolean
     #   resp.table_versions[0].table.status.requested_by #=> String
     #   resp.table_versions[0].table.status.updated_by #=> String
     #   resp.table_versions[0].table.status.request_time #=> Time
@@ -10866,8 +10896,14 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.view_version_id #=> Integer
+    #   resp.table_list[0].view_definition.view_version_token #=> String
+    #   resp.table_list[0].view_definition.refresh_seconds #=> Integer
+    #   resp.table_list[0].view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_list[0].view_definition.sub_objects #=> Array
     #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.sub_object_version_ids #=> Array
+    #   resp.table_list[0].view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_list[0].view_definition.representations #=> Array
     #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
@@ -10876,6 +10912,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].is_materialized_view #=> Boolean
     #   resp.table_list[0].status.requested_by #=> String
     #   resp.table_list[0].status.updated_by #=> String
     #   resp.table_list[0].status.request_time #=> Time
@@ -11495,6 +11532,7 @@ module Aws::Glue
     #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
     #   * {Types::GetUnfilteredTableMetadataResponse#query_authorization_id #query_authorization_id} => String
     #   * {Types::GetUnfilteredTableMetadataResponse#is_multi_dialect_view #is_multi_dialect_view} => Boolean
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_materialized_view #is_materialized_view} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
     #   * {Types::GetUnfilteredTableMetadataResponse#is_protected #is_protected} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
@@ -11603,8 +11641,14 @@ module Aws::Glue
     #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
     #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.view_version_id #=> Integer
+    #   resp.table.view_definition.view_version_token #=> String
+    #   resp.table.view_definition.refresh_seconds #=> Integer
+    #   resp.table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table.view_definition.sub_objects #=> Array
     #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table.view_definition.representations #=> Array
     #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table.view_definition.representations[0].dialect_version #=> String
@@ -11613,6 +11657,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.is_materialized_view #=> Boolean
     #   resp.table.status.requested_by #=> String
     #   resp.table.status.updated_by #=> String
     #   resp.table.status.request_time #=> Time
@@ -11638,6 +11683,7 @@ module Aws::Glue
     #   resp.cell_filters[0].row_filter_expression #=> String
     #   resp.query_authorization_id #=> String
     #   resp.is_multi_dialect_view #=> Boolean
+    #   resp.is_materialized_view #=> Boolean
     #   resp.resource_arn #=> String
     #   resp.is_protected #=> Boolean
     #   resp.permissions #=> Array
@@ -14692,8 +14738,14 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.view_version_id #=> Integer
+    #   resp.table_list[0].view_definition.view_version_token #=> String
+    #   resp.table_list[0].view_definition.refresh_seconds #=> Integer
+    #   resp.table_list[0].view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_list[0].view_definition.sub_objects #=> Array
     #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.sub_object_version_ids #=> Array
+    #   resp.table_list[0].view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_list[0].view_definition.representations #=> Array
     #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
@@ -14702,6 +14754,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].is_materialized_view #=> Boolean
     #   resp.table_list[0].status.requested_by #=> String
     #   resp.table_list[0].status.updated_by #=> String
     #   resp.table_list[0].status.request_time #=> Time
@@ -17661,7 +17714,12 @@ module Aws::Glue
     #             view_expanded_text: "ViewTextString",
     #           },
     #         ],
+    #         view_version_id: 1,
+    #         view_version_token: "VersionString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL", # accepts FULL, INCREMENTAL
     #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
     #       },
     #     },
     #     skip_archive: false,
@@ -17686,6 +17744,10 @@ module Aws::Glue
     #                     },
     #                     required: false, # required
     #                     doc: "CommentString",
+    #                     initial_default: {
+    #                     },
+    #                     write_default: {
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -17715,6 +17777,16 @@ module Aws::Glue
     #               properties: {
     #                 "NullableString" => "NullableString",
     #               },
+    #               action: "add-schema", # accepts add-schema, set-current-schema, add-spec, set-default-spec, add-sort-order, set-default-sort-order, set-location, set-properties, remove-properties, add-encryption-key, remove-encryption-key
+    #               encryption_key: {
+    #                 key_id: "EncryptionKeyIdString", # required
+    #                 encrypted_key_metadata: "EncryptedKeyMetadataString", # required
+    #                 encrypted_by_id: "EncryptionKeyIdString",
+    #                 properties: {
+    #                   "NullableString" => "NullableString",
+    #                 },
+    #               },
+    #               key_id: "EncryptionKeyIdString",
     #             },
     #           ],
     #         },
@@ -18066,7 +18138,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.243.0'
+      context[:gem_version] = '1.244.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

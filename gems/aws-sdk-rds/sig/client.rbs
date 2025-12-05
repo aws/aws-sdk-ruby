@@ -350,6 +350,8 @@ module Aws
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
         def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
+        def database_installation_files: () -> ::Array[::String]
+        def failure_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_custom_db_engine_version-instance_method
       def create_custom_db_engine_version: (
@@ -368,7 +370,8 @@ module Aws
                                                  key: ::String?,
                                                  value: ::String?
                                                },
-                                             ]
+                                             ],
+                                             ?database_installation_files: Array[::String]
                                            ) -> _CreateCustomDBEngineVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDBEngineVersionResponseSuccess
 
@@ -603,7 +606,17 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
-                                ?master_user_authentication_type: ("password" | "iam-db-auth")
+                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                                ?additional_storage_volumes: Array[
+                                  {
+                                    volume_name: ::String,
+                                    allocated_storage: ::Integer?,
+                                    iops: ::Integer?,
+                                    max_allocated_storage: ::Integer?,
+                                    storage_throughput: ::Integer?,
+                                    storage_type: ::String?
+                                  },
+                                ]
                               ) -> _CreateDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceResponseSuccess
 
@@ -670,6 +683,16 @@ module Aws
                                              ?dedicated_log_volume: bool,
                                              ?upgrade_storage_config: bool,
                                              ?ca_certificate_identifier: ::String,
+                                             ?additional_storage_volumes: Array[
+                                               {
+                                                 volume_name: ::String,
+                                                 allocated_storage: ::Integer?,
+                                                 iops: ::Integer?,
+                                                 max_allocated_storage: ::Integer?,
+                                                 storage_throughput: ::Integer?,
+                                                 storage_type: ::String?
+                                               },
+                                             ],
                                              ?source_region: ::String
                                            ) -> _CreateDBInstanceReadReplicaResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceReadReplicaResponseSuccess
@@ -999,6 +1022,8 @@ module Aws
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
         def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
+        def database_installation_files: () -> ::Array[::String]
+        def failure_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_custom_db_engine_version-instance_method
       def delete_custom_db_engine_version: (
@@ -2278,6 +2303,8 @@ module Aws
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
         def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
+        def database_installation_files: () -> ::Array[::String]
+        def failure_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_custom_db_engine_version-instance_method
       def modify_custom_db_engine_version: (
@@ -2493,7 +2520,18 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine: ::String,
-                                ?master_user_authentication_type: ("password" | "iam-db-auth")
+                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                                ?additional_storage_volumes: Array[
+                                  {
+                                    volume_name: ::String,
+                                    allocated_storage: ::Integer?,
+                                    iops: ::Integer?,
+                                    max_allocated_storage: ::Integer?,
+                                    storage_throughput: ::Integer?,
+                                    storage_type: ::String?,
+                                    set_for_delete: bool?
+                                  },
+                                ]
                               ) -> _ModifyDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBInstanceResponseSuccess
 
@@ -3193,7 +3231,17 @@ module Aws
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
                                                   ?manage_master_user_password: bool,
-                                                  ?master_user_secret_kms_key_id: ::String
+                                                  ?master_user_secret_kms_key_id: ::String,
+                                                  ?additional_storage_volumes: Array[
+                                                    {
+                                                      volume_name: ::String,
+                                                      allocated_storage: ::Integer?,
+                                                      iops: ::Integer?,
+                                                      max_allocated_storage: ::Integer?,
+                                                      storage_throughput: ::Integer?,
+                                                      storage_type: ::String?
+                                                    },
+                                                  ]
                                                 ) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
 
@@ -3264,7 +3312,17 @@ module Aws
                                          ?master_user_secret_kms_key_id: ::String,
                                          ?dedicated_log_volume: bool,
                                          ?ca_certificate_identifier: ::String,
-                                         ?engine_lifecycle_support: ::String
+                                         ?engine_lifecycle_support: ::String,
+                                         ?additional_storage_volumes: Array[
+                                           {
+                                             volume_name: ::String,
+                                             allocated_storage: ::Integer?,
+                                             iops: ::Integer?,
+                                             max_allocated_storage: ::Integer?,
+                                             storage_throughput: ::Integer?,
+                                             storage_type: ::String?
+                                           },
+                                         ]
                                        ) -> _RestoreDBInstanceFromS3ResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromS3ResponseSuccess
 
@@ -3331,7 +3389,17 @@ module Aws
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
                                                   ?manage_master_user_password: bool,
-                                                  ?master_user_secret_kms_key_id: ::String
+                                                  ?master_user_secret_kms_key_id: ::String,
+                                                  ?additional_storage_volumes: Array[
+                                                    {
+                                                      volume_name: ::String,
+                                                      allocated_storage: ::Integer?,
+                                                      iops: ::Integer?,
+                                                      max_allocated_storage: ::Integer?,
+                                                      storage_throughput: ::Integer?,
+                                                      storage_type: ::String?
+                                                    },
+                                                  ]
                                                 ) -> _RestoreDBInstanceToPointInTimeResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceToPointInTimeResponseSuccess
 

@@ -1,0 +1,19 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListModelsSuccess",
+    "operationName" : "ListModels",
+    "input" : {
+      "clientCompatibilityVersion" : 1
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

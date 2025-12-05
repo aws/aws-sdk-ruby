@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2025-11-26)
+------------------
+
+* Feature - This release enables AWS Cost Optimization Hub to show cost optimization recommendations for NAT Gateway.
+
 1.36.0 (2025-11-21)
 ------------------
 

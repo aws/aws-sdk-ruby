@@ -545,6 +545,105 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Creates an integration between CloudWatch and S3 Tables for analytics.
+    # This integration enables querying CloudWatch telemetry data using
+    # analytics engines like Amazon Athena, Amazon Redshift, and Apache
+    # Spark.
+    #
+    # @option params [required, Types::Encryption] :encryption
+    #   The encryption configuration for the S3 Table integration, including
+    #   the encryption algorithm and KMS key settings.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants permissions
+    #   for the S3 Table integration to access necessary resources.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to associate with the S3 Table integration
+    #   resource for categorization and management purposes.
+    #
+    # @return [Types::CreateS3TableIntegrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateS3TableIntegrationOutput#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_s3_table_integration({
+    #     encryption: { # required
+    #       sse_algorithm: "aws:kms", # required, accepts aws:kms, AES256
+    #       kms_key_arn: "ResourceArn",
+    #     },
+    #     role_arn: "ResourceArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateS3TableIntegration AWS API Documentation
+    #
+    # @overload create_s3_table_integration(params = {})
+    # @param [Hash] params ({})
+    def create_s3_table_integration(params = {}, options = {})
+      req = build_request(:create_s3_table_integration, params)
+      req.send_request(options)
+    end
+
+    # Creates a telemetry pipeline for processing and transforming telemetry
+    # data. The pipeline defines how data flows from sources through
+    # processors to destinations, enabling data transformation and
+    # delivering capabilities.
+    #
+    # @option params [required, String] :name
+    #   The name of the telemetry pipeline to create. The name must be unique
+    #   within your account.
+    #
+    # @option params [required, Types::TelemetryPipelineConfiguration] :configuration
+    #   The configuration that defines how the telemetry pipeline processes
+    #   data, including sources, processors, and destinations. For more
+    #   information about pipeline components, see the [Amazon CloudWatch User
+    #   Guide][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/pipeline-components-reference.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to associate with the telemetry pipeline resource
+    #   for categorization and management purposes.
+    #
+    # @return [Types::CreateTelemetryPipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTelemetryPipelineOutput#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_telemetry_pipeline({
+    #     name: "TelemetryPipelineName", # required
+    #     configuration: { # required
+    #       body: "TelemetryPipelineConfigurationBody", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateTelemetryPipeline AWS API Documentation
+    #
+    # @overload create_telemetry_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_telemetry_pipeline(params = {}, options = {})
+      req = build_request(:create_telemetry_pipeline, params)
+      req.send_request(options)
+    end
+
     # Creates a telemetry rule that defines how telemetry should be
     # configured for Amazon Web Services resources in your account. The rule
     # specifies which resources should have telemetry enabled and how that
@@ -572,8 +671,9 @@ module Aws::ObservabilityAdmin
     #   resp = client.create_telemetry_rule({
     #     rule_name: "RuleName", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
     #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
     #         destination_pattern: "String",
@@ -582,6 +682,63 @@ module Aws::ObservabilityAdmin
     #           log_format: "String",
     #           traffic_type: "String",
     #           max_aggregation_interval: 1,
+    #         },
+    #         cloudtrail_parameters: {
+    #           advanced_event_selectors: [ # required
+    #             {
+    #               name: "String",
+    #               field_selectors: [ # required
+    #                 {
+    #                   field: "String", # required
+    #                   equals: ["String"],
+    #                   starts_with: ["String"],
+    #                   ends_with: ["String"],
+    #                   not_equals: ["String"],
+    #                   not_starts_with: ["String"],
+    #                   not_ends_with: ["String"],
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         elb_load_balancer_logging_parameters: {
+    #           output_format: "plain", # accepts plain, json
+    #           field_delimiter: "String",
+    #         },
+    #         waf_logging_parameters: {
+    #           redacted_fields: [
+    #             {
+    #               single_header: {
+    #                 name: "SingleHeaderNameString",
+    #               },
+    #               uri_path: "String",
+    #               query_string: "String",
+    #               method: "String",
+    #             },
+    #           ],
+    #           logging_filter: {
+    #             filters: [
+    #               {
+    #                 behavior: "KEEP", # accepts KEEP, DROP
+    #                 requirement: "MEETS_ALL", # accepts MEETS_ALL, MEETS_ANY
+    #                 conditions: [
+    #                   {
+    #                     action_condition: {
+    #                       action: "ALLOW", # accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
+    #                     },
+    #                     label_name_condition: {
+    #                       label_name: "LabelNameConditionLabelNameString",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             default_behavior: "KEEP", # accepts KEEP, DROP
+    #           },
+    #           log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #         },
+    #         log_delivery_parameters: {
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
     #         },
     #       },
     #       scope: "String",
@@ -631,8 +788,9 @@ module Aws::ObservabilityAdmin
     #   resp = client.create_telemetry_rule_for_organization({
     #     rule_name: "RuleName", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
     #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
     #         destination_pattern: "String",
@@ -641,6 +799,63 @@ module Aws::ObservabilityAdmin
     #           log_format: "String",
     #           traffic_type: "String",
     #           max_aggregation_interval: 1,
+    #         },
+    #         cloudtrail_parameters: {
+    #           advanced_event_selectors: [ # required
+    #             {
+    #               name: "String",
+    #               field_selectors: [ # required
+    #                 {
+    #                   field: "String", # required
+    #                   equals: ["String"],
+    #                   starts_with: ["String"],
+    #                   ends_with: ["String"],
+    #                   not_equals: ["String"],
+    #                   not_starts_with: ["String"],
+    #                   not_ends_with: ["String"],
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         elb_load_balancer_logging_parameters: {
+    #           output_format: "plain", # accepts plain, json
+    #           field_delimiter: "String",
+    #         },
+    #         waf_logging_parameters: {
+    #           redacted_fields: [
+    #             {
+    #               single_header: {
+    #                 name: "SingleHeaderNameString",
+    #               },
+    #               uri_path: "String",
+    #               query_string: "String",
+    #               method: "String",
+    #             },
+    #           ],
+    #           logging_filter: {
+    #             filters: [
+    #               {
+    #                 behavior: "KEEP", # accepts KEEP, DROP
+    #                 requirement: "MEETS_ALL", # accepts MEETS_ALL, MEETS_ANY
+    #                 conditions: [
+    #                   {
+    #                     action_condition: {
+    #                       action: "ALLOW", # accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
+    #                     },
+    #                     label_name_condition: {
+    #                       label_name: "LabelNameConditionLabelNameString",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             default_behavior: "KEEP", # accepts KEEP, DROP
+    #           },
+    #           log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #         },
+    #         log_delivery_parameters: {
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
     #         },
     #       },
     #       scope: "String",
@@ -686,6 +901,54 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def delete_centralization_rule_for_organization(params = {}, options = {})
       req = build_request(:delete_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Deletes an S3 Table integration and its associated data. This
+    # operation removes the connection between CloudWatch Observability
+    # Admin and S3 Tables.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the S3 Table integration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_s3_table_integration({
+    #     arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteS3TableIntegration AWS API Documentation
+    #
+    # @overload delete_s3_table_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_s3_table_integration(params = {}, options = {})
+      req = build_request(:delete_s3_table_integration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a telemetry pipeline and its associated resources. This
+    # operation stops data processing and removes the pipeline
+    # configuration.
+    #
+    # @option params [required, String] :pipeline_identifier
+    #   The ARN of the telemetry pipeline to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_telemetry_pipeline({
+    #     pipeline_identifier: "TelemetryPipelineIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteTelemetryPipeline AWS API Documentation
+    #
+    # @overload delete_telemetry_pipeline(params = {})
+    # @param [Hash] params ({})
+    def delete_telemetry_pipeline(params = {}, options = {})
+      req = build_request(:delete_telemetry_pipeline, params)
       req.send_request(options)
     end
 
@@ -796,9 +1059,50 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Retrieves information about a specific S3 Table integration, including
+    # its configuration, status, and metadata.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the S3 Table integration to
+    #   retrieve.
+    #
+    # @return [Types::GetS3TableIntegrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetS3TableIntegrationOutput#arn #arn} => String
+    #   * {Types::GetS3TableIntegrationOutput#role_arn #role_arn} => String
+    #   * {Types::GetS3TableIntegrationOutput#status #status} => String
+    #   * {Types::GetS3TableIntegrationOutput#encryption #encryption} => Types::Encryption
+    #   * {Types::GetS3TableIntegrationOutput#destination_table_bucket_arn #destination_table_bucket_arn} => String
+    #   * {Types::GetS3TableIntegrationOutput#created_time_stamp #created_time_stamp} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_s3_table_integration({
+    #     arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.encryption.sse_algorithm #=> String, one of "aws:kms", "AES256"
+    #   resp.encryption.kms_key_arn #=> String
+    #   resp.destination_table_bucket_arn #=> String
+    #   resp.created_time_stamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetS3TableIntegration AWS API Documentation
+    #
+    # @overload get_s3_table_integration(params = {})
+    # @param [Hash] params ({})
+    def get_s3_table_integration(params = {}, options = {})
+      req = build_request(:get_s3_table_integration, params)
+      req.send_request(options)
+    end
+
     # Returns the current status of the resource tags for telemetry feature,
     # which enhances telemetry data with additional resource metadata from
-    # Amazon Web Services Resource Explorer.
+    # Resource Explorer.
     #
     # @return [Types::GetTelemetryEnrichmentStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -866,6 +1170,43 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Retrieves information about a specific telemetry pipeline, including
+    # its configuration, status, and metadata.
+    #
+    # @option params [required, String] :pipeline_identifier
+    #   The identifier (name or ARN) of the telemetry pipeline to retrieve.
+    #
+    # @return [Types::GetTelemetryPipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTelemetryPipelineOutput#pipeline #pipeline} => Types::TelemetryPipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_telemetry_pipeline({
+    #     pipeline_identifier: "TelemetryPipelineIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline.created_time_stamp #=> Integer
+    #   resp.pipeline.last_update_time_stamp #=> Integer
+    #   resp.pipeline.arn #=> String
+    #   resp.pipeline.name #=> String
+    #   resp.pipeline.configuration.body #=> String
+    #   resp.pipeline.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.pipeline.status_reason.description #=> String
+    #   resp.pipeline.tags #=> Hash
+    #   resp.pipeline.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryPipeline AWS API Documentation
+    #
+    # @overload get_telemetry_pipeline(params = {})
+    # @param [Hash] params ({})
+    def get_telemetry_pipeline(params = {}, options = {})
+      req = build_request(:get_telemetry_pipeline, params)
+      req.send_request(options)
+    end
+
     # Retrieves the details of a specific telemetry rule in your account.
     #
     # @option params [required, String] :rule_identifier
@@ -891,14 +1232,49 @@ module Aws::ObservabilityAdmin
     #   resp.rule_arn #=> String
     #   resp.created_time_stamp #=> Integer
     #   resp.last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
     #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.telemetry_rule.telemetry_source_types #=> Array
+    #   resp.telemetry_rule.telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.telemetry_rule.destination_configuration.destination_type #=> String, one of "cloud-watch-logs"
     #   resp.telemetry_rule.destination_configuration.destination_pattern #=> String
     #   resp.telemetry_rule.destination_configuration.retention_in_days #=> Integer
     #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.log_format #=> String
     #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.traffic_type #=> String
     #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.max_aggregation_interval #=> Integer
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].name #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.elb_load_balancer_logging_parameters.output_format #=> String, one of "plain", "json"
+    #   resp.telemetry_rule.destination_configuration.elb_load_balancer_logging_parameters.field_delimiter #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields #=> Array
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].single_header.name #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].uri_path #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].query_string #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].method #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters #=> Array
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].conditions #=> Array
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.log_type #=> String, one of "WAF_LOGS"
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS"
     #   resp.telemetry_rule.scope #=> String
     #   resp.telemetry_rule.selection_criteria #=> String
     #
@@ -939,14 +1315,49 @@ module Aws::ObservabilityAdmin
     #   resp.rule_arn #=> String
     #   resp.created_time_stamp #=> Integer
     #   resp.last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
     #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.telemetry_rule.telemetry_source_types #=> Array
+    #   resp.telemetry_rule.telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.telemetry_rule.destination_configuration.destination_type #=> String, one of "cloud-watch-logs"
     #   resp.telemetry_rule.destination_configuration.destination_pattern #=> String
     #   resp.telemetry_rule.destination_configuration.retention_in_days #=> Integer
     #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.log_format #=> String
     #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.traffic_type #=> String
     #   resp.telemetry_rule.destination_configuration.vpc_flow_log_parameters.max_aggregation_interval #=> Integer
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].name #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.telemetry_rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.telemetry_rule.destination_configuration.elb_load_balancer_logging_parameters.output_format #=> String, one of "plain", "json"
+    #   resp.telemetry_rule.destination_configuration.elb_load_balancer_logging_parameters.field_delimiter #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields #=> Array
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].single_header.name #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].uri_path #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].query_string #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.redacted_fields[0].method #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters #=> Array
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].conditions #=> Array
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.log_type #=> String, one of "WAF_LOGS"
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS"
     #   resp.telemetry_rule.scope #=> String
     #   resp.telemetry_rule.selection_criteria #=> String
     #
@@ -1068,7 +1479,7 @@ module Aws::ObservabilityAdmin
     #
     #   resp = client.list_resource_telemetry({
     #     resource_identifier_prefix: "ResourceIdentifierPrefix",
-    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
     #     telemetry_configuration_state: {
     #       "Logs" => "Enabled", # accepts Enabled, Disabled, NotApplicable
     #     },
@@ -1085,7 +1496,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].account_identifier #=> String
     #   resp.telemetry_configurations[0].telemetry_configuration_state #=> Hash
     #   resp.telemetry_configurations[0].telemetry_configuration_state["TelemetryType"] #=> String, one of "Enabled", "Disabled", "NotApplicable"
-    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
     #   resp.telemetry_configurations[0].resource_identifier #=> String
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
@@ -1151,7 +1562,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.list_resource_telemetry_for_organization({
     #     account_identifiers: ["AccountIdentifier"],
     #     resource_identifier_prefix: "ResourceIdentifierPrefix",
-    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
     #     telemetry_configuration_state: {
     #       "Logs" => "Enabled", # accepts Enabled, Disabled, NotApplicable
     #     },
@@ -1168,7 +1579,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].account_identifier #=> String
     #   resp.telemetry_configurations[0].telemetry_configuration_state #=> Hash
     #   resp.telemetry_configurations[0].telemetry_configuration_state["TelemetryType"] #=> String, one of "Enabled", "Disabled", "NotApplicable"
-    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
     #   resp.telemetry_configurations[0].resource_identifier #=> String
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
@@ -1184,7 +1595,50 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Lists all tags attached to the specified telemetry rule resource.
+    # Lists all S3 Table integrations in your account. We recommend using
+    # pagination to ensure that the operation returns quickly and
+    # successfully.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of S3 Table integrations to return in a single
+    #   call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. A previous call generates this
+    #   token.
+    #
+    # @return [Types::ListS3TableIntegrationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListS3TableIntegrationsOutput#integration_summaries #integration_summaries} => Array&lt;Types::IntegrationSummary&gt;
+    #   * {Types::ListS3TableIntegrationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_s3_table_integrations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_summaries #=> Array
+    #   resp.integration_summaries[0].arn #=> String
+    #   resp.integration_summaries[0].status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListS3TableIntegrations AWS API Documentation
+    #
+    # @overload list_s3_table_integrations(params = {})
+    # @param [Hash] params ({})
+    def list_s3_table_integrations(params = {}, options = {})
+      req = build_request(:list_s3_table_integrations, params)
+      req.send_request(options)
+    end
+
+    # Lists all tags attached to the specified resource. Supports telemetry
+    # rule resources and telemetry pipeline resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource whose
@@ -1211,6 +1665,63 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of telemetry pipelines in your account. Returns up to
+    # 100 results. If more than 100 telemetry pipelines exist, include the
+    # `NextToken` value from the response to retrieve the next set of
+    # results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of telemetry pipelines to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. A previous call generates this
+    #   token.
+    #
+    # @return [Types::ListTelemetryPipelinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTelemetryPipelinesOutput#pipeline_summaries #pipeline_summaries} => Array&lt;Types::TelemetryPipelineSummary&gt;
+    #   * {Types::ListTelemetryPipelinesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_telemetry_pipelines({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_summaries #=> Array
+    #   resp.pipeline_summaries[0].created_time_stamp #=> Integer
+    #   resp.pipeline_summaries[0].last_update_time_stamp #=> Integer
+    #   resp.pipeline_summaries[0].arn #=> String
+    #   resp.pipeline_summaries[0].name #=> String
+    #   resp.pipeline_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.pipeline_summaries[0].tags #=> Hash
+    #   resp.pipeline_summaries[0].tags["String"] #=> String
+    #   resp.pipeline_summaries[0].configuration_summary.sources #=> Array
+    #   resp.pipeline_summaries[0].configuration_summary.sources[0].type #=> String
+    #   resp.pipeline_summaries[0].configuration_summary.data_sources #=> Array
+    #   resp.pipeline_summaries[0].configuration_summary.data_sources[0].name #=> String
+    #   resp.pipeline_summaries[0].configuration_summary.data_sources[0].type #=> String
+    #   resp.pipeline_summaries[0].configuration_summary.processors #=> Array
+    #   resp.pipeline_summaries[0].configuration_summary.processors[0] #=> String
+    #   resp.pipeline_summaries[0].configuration_summary.processor_count #=> Integer
+    #   resp.pipeline_summaries[0].configuration_summary.sinks #=> Array
+    #   resp.pipeline_summaries[0].configuration_summary.sinks[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryPipelines AWS API Documentation
+    #
+    # @overload list_telemetry_pipelines(params = {})
+    # @param [Hash] params ({})
+    def list_telemetry_pipelines(params = {}, options = {})
+      req = build_request(:list_telemetry_pipelines, params)
       req.send_request(options)
     end
 
@@ -1250,8 +1761,10 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule_summaries[0].rule_arn #=> String
     #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
     #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
     #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.telemetry_rule_summaries[0].telemetry_source_types #=> Array
+    #   resp.telemetry_rule_summaries[0].telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryRules AWS API Documentation
@@ -1311,8 +1824,10 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule_summaries[0].rule_arn #=> String
     #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
     #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function"
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
     #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
+    #   resp.telemetry_rule_summaries[0].telemetry_source_types #=> Array
+    #   resp.telemetry_rule_summaries[0].telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListTelemetryRulesForOrganization AWS API Documentation
@@ -1326,8 +1841,8 @@ module Aws::ObservabilityAdmin
 
     # Enables the resource tags for telemetry feature for your account,
     # which enhances telemetry data with additional resource metadata from
-    # Amazon Web Services Resource Explorer to provide richer context for
-    # monitoring and observability.
+    # Resource Explorer to provide richer context for monitoring and
+    # observability.
     #
     # @return [Types::StartTelemetryEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1425,7 +1940,8 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Adds or updates tags for a telemetry rule resource.
+    # Adds or updates tags for a resource. Supports telemetry rule resources
+    # and telemetry pipeline resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource to tag.
@@ -1453,7 +1969,53 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Removes tags from a telemetry rule resource.
+    # Tests a pipeline configuration with sample records to validate data
+    # processing before deployment. This operation helps ensure your
+    # pipeline configuration works as expected.
+    #
+    # @option params [required, Array<Types::Record>] :records
+    #   The sample records to process through the pipeline configuration for
+    #   testing purposes.
+    #
+    # @option params [required, Types::TelemetryPipelineConfiguration] :configuration
+    #   The pipeline configuration to test with the provided sample records.
+    #
+    # @return [Types::TestTelemetryPipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestTelemetryPipelineOutput#results #results} => Array&lt;Types::PipelineOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_telemetry_pipeline({
+    #     records: [ # required
+    #       {
+    #         data: "String",
+    #         type: "STRING", # accepts STRING, JSON
+    #       },
+    #     ],
+    #     configuration: { # required
+    #       body: "TelemetryPipelineConfigurationBody", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].record.data #=> String
+    #   resp.results[0].record.type #=> String, one of "STRING", "JSON"
+    #   resp.results[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TestTelemetryPipeline AWS API Documentation
+    #
+    # @overload test_telemetry_pipeline(params = {})
+    # @param [Hash] params ({})
+    def test_telemetry_pipeline(params = {}, options = {})
+      req = build_request(:test_telemetry_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource. Supports telemetry rule resources and
+    # telemetry pipeline resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource to
@@ -1542,7 +2104,109 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Updates an existing telemetry rule in your account.
+    # Updates the configuration of an existing telemetry pipeline.
+    #
+    # <note markdown="1"> The following attributes cannot be updated after pipeline creation:
+    #
+    #  * **Pipeline name** - The pipeline name is immutable
+    #
+    # * **Pipeline ARN** - The ARN is automatically generated and cannot be
+    #   changed
+    #
+    # * **Source type** - Once a pipeline is created with a specific source
+    #   type (such as S3, CloudWatch Logs, GitHub, or third-party sources),
+    #   it cannot be changed to a different source type
+    #
+    #  Processors can be added, removed, or modified. However, some
+    # processors are not supported for third-party pipelines and cannot be
+    # added through updates.
+    #
+    #  </note>
+    #
+    # **Source-Specific Update Rules**
+    #
+    # CloudWatch Logs Sources (Vended and Custom)
+    #
+    # : **Updatable:** `sts_role_arn`
+    #
+    #   **Fixed:** `data_source_name`, `data_source_type`, sink (must remain
+    #   `@original`)
+    #
+    # S3 Sources (Crowdstrike, Zscaler, SentinelOne, Custom)
+    #
+    # : **Updatable:** All SQS configuration parameters, `sts_role_arn`,
+    #   codec settings, compression type, bucket ownership settings, sink
+    #   log group
+    #
+    #   **Fixed:** `notification_type`, `aws.region`
+    #
+    # GitHub Audit Logs
+    #
+    # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
+    #   `scope` (can switch between ORGANIZATION/ENTERPRISE), `organization`
+    #   or `enterprise` name, `range`, authentication credentials (PAT or
+    #   GitHub App)
+    #
+    # Microsoft Sources (Entra ID, Office365, Windows)
+    #
+    # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
+    #   `tenant_id`, `workspace_id` (Windows only), OAuth2 credentials
+    #   (`client_id`, `client_secret`)
+    #
+    # Okta Sources (SSO, Auth0)
+    #
+    # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
+    #   `domain`, `range` (SSO only), OAuth2 credentials (`client_id`,
+    #   `client_secret`)
+    #
+    # Palo Alto Networks
+    #
+    # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
+    #   `hostname`, basic authentication credentials (`username`,
+    #   `password`)
+    #
+    # ServiceNow CMDB
+    #
+    # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
+    #   `instance_url`, `range`, OAuth2 credentials (`client_id`,
+    #   `client_secret`)
+    #
+    # Wiz CNAPP
+    #
+    # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
+    #   `region`, `range`, OAuth2 credentials (`client_id`, `client_secret`)
+    #
+    # @option params [required, String] :pipeline_identifier
+    #   The ARN of the telemetry pipeline to update.
+    #
+    # @option params [required, Types::TelemetryPipelineConfiguration] :configuration
+    #   The new configuration for the telemetry pipeline, including updated
+    #   sources, processors, and destinations.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_telemetry_pipeline({
+    #     pipeline_identifier: "TelemetryPipelineIdentifier", # required
+    #     configuration: { # required
+    #       body: "TelemetryPipelineConfigurationBody", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateTelemetryPipeline AWS API Documentation
+    #
+    # @overload update_telemetry_pipeline(params = {})
+    # @param [Hash] params ({})
+    def update_telemetry_pipeline(params = {}, options = {})
+      req = build_request(:update_telemetry_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing telemetry rule in your account. If multiple users
+    # attempt to modify the same telemetry rule simultaneously, a
+    # ConflictException is returned to provide specific error information
+    # for concurrent modification scenarios.
     #
     # @option params [required, String] :rule_identifier
     #   The identifier (name or ARN) of the telemetry rule to update.
@@ -1559,8 +2223,9 @@ module Aws::ObservabilityAdmin
     #   resp = client.update_telemetry_rule({
     #     rule_identifier: "RuleIdentifier", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
     #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
     #         destination_pattern: "String",
@@ -1569,6 +2234,63 @@ module Aws::ObservabilityAdmin
     #           log_format: "String",
     #           traffic_type: "String",
     #           max_aggregation_interval: 1,
+    #         },
+    #         cloudtrail_parameters: {
+    #           advanced_event_selectors: [ # required
+    #             {
+    #               name: "String",
+    #               field_selectors: [ # required
+    #                 {
+    #                   field: "String", # required
+    #                   equals: ["String"],
+    #                   starts_with: ["String"],
+    #                   ends_with: ["String"],
+    #                   not_equals: ["String"],
+    #                   not_starts_with: ["String"],
+    #                   not_ends_with: ["String"],
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         elb_load_balancer_logging_parameters: {
+    #           output_format: "plain", # accepts plain, json
+    #           field_delimiter: "String",
+    #         },
+    #         waf_logging_parameters: {
+    #           redacted_fields: [
+    #             {
+    #               single_header: {
+    #                 name: "SingleHeaderNameString",
+    #               },
+    #               uri_path: "String",
+    #               query_string: "String",
+    #               method: "String",
+    #             },
+    #           ],
+    #           logging_filter: {
+    #             filters: [
+    #               {
+    #                 behavior: "KEEP", # accepts KEEP, DROP
+    #                 requirement: "MEETS_ALL", # accepts MEETS_ALL, MEETS_ANY
+    #                 conditions: [
+    #                   {
+    #                     action_condition: {
+    #                       action: "ALLOW", # accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
+    #                     },
+    #                     label_name_condition: {
+    #                       label_name: "LabelNameConditionLabelNameString",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             default_behavior: "KEEP", # accepts KEEP, DROP
+    #           },
+    #           log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #         },
+    #         log_delivery_parameters: {
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
     #         },
     #       },
     #       scope: "String",
@@ -1612,8 +2334,9 @@ module Aws::ObservabilityAdmin
     #   resp = client.update_telemetry_rule_for_organization({
     #     rule_identifier: "RuleIdentifier", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
+    #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
     #         destination_type: "cloud-watch-logs", # accepts cloud-watch-logs
     #         destination_pattern: "String",
@@ -1622,6 +2345,63 @@ module Aws::ObservabilityAdmin
     #           log_format: "String",
     #           traffic_type: "String",
     #           max_aggregation_interval: 1,
+    #         },
+    #         cloudtrail_parameters: {
+    #           advanced_event_selectors: [ # required
+    #             {
+    #               name: "String",
+    #               field_selectors: [ # required
+    #                 {
+    #                   field: "String", # required
+    #                   equals: ["String"],
+    #                   starts_with: ["String"],
+    #                   ends_with: ["String"],
+    #                   not_equals: ["String"],
+    #                   not_starts_with: ["String"],
+    #                   not_ends_with: ["String"],
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         elb_load_balancer_logging_parameters: {
+    #           output_format: "plain", # accepts plain, json
+    #           field_delimiter: "String",
+    #         },
+    #         waf_logging_parameters: {
+    #           redacted_fields: [
+    #             {
+    #               single_header: {
+    #                 name: "SingleHeaderNameString",
+    #               },
+    #               uri_path: "String",
+    #               query_string: "String",
+    #               method: "String",
+    #             },
+    #           ],
+    #           logging_filter: {
+    #             filters: [
+    #               {
+    #                 behavior: "KEEP", # accepts KEEP, DROP
+    #                 requirement: "MEETS_ALL", # accepts MEETS_ALL, MEETS_ANY
+    #                 conditions: [
+    #                   {
+    #                     action_condition: {
+    #                       action: "ALLOW", # accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
+    #                     },
+    #                     label_name_condition: {
+    #                       label_name: "LabelNameConditionLabelNameString",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             default_behavior: "KEEP", # accepts KEEP, DROP
+    #           },
+    #           log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #         },
+    #         log_delivery_parameters: {
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
     #         },
     #       },
     #       scope: "String",
@@ -1639,6 +2419,42 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def update_telemetry_rule_for_organization(params = {}, options = {})
       req = build_request(:update_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Validates a pipeline configuration without creating the pipeline. This
+    # operation checks the configuration for syntax errors and compatibility
+    # issues.
+    #
+    # @option params [required, Types::TelemetryPipelineConfiguration] :configuration
+    #   The pipeline configuration to validate for syntax and compatibility.
+    #
+    # @return [Types::ValidateTelemetryPipelineConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateTelemetryPipelineConfigurationOutput#errors #errors} => Array&lt;Types::ValidationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_telemetry_pipeline_configuration({
+    #     configuration: { # required
+    #       body: "TelemetryPipelineConfigurationBody", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].message #=> String
+    #   resp.errors[0].reason #=> String
+    #   resp.errors[0].field_map #=> Hash
+    #   resp.errors[0].field_map["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ValidateTelemetryPipelineConfiguration AWS API Documentation
+    #
+    # @overload validate_telemetry_pipeline_configuration(params = {})
+    # @param [Hash] params ({})
+    def validate_telemetry_pipeline_configuration(params = {}, options = {})
+      req = build_request(:validate_telemetry_pipeline_configuration, params)
       req.send_request(options)
     end
 
@@ -1660,7 +2476,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

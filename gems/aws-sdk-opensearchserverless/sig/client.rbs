@@ -164,6 +164,9 @@ module Aws
                                  },
                                ],
                                ?standby_replicas: ("ENABLED" | "DISABLED"),
+                               ?vector_options: {
+                                 serverless_vector_acceleration: ("ENABLED" | "DISABLED" | "ALLOWED")
+                               },
                                ?client_token: ::String
                              ) -> _CreateCollectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollectionResponseSuccess

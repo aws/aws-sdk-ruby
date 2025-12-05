@@ -7452,6 +7452,35 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The encryption configuration details.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to use for encryption.
+    #   This field is required only when `sseAlgorithm` is set to `aws:kms`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The server-side encryption algorithm to use. Valid values are AES256
+    #   for S3-managed encryption keys, or aws:kms for Amazon Web Services
+    #   KMS-managed encryption keys. If you choose SSE-KMS encryption you
+    #   must grant the S3 Tables maintenance principal access to your KMS
+    #   key. For more information, see [Permissions requirements for S3
+    #   Tables SSE-KMS encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :kms_key_arn,
+      :sse_algorithm)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details about the specified action configured for an environment.
     # For example, the details of the specified console links for an
     # analytics tool that is available in this environment.
@@ -8757,6 +8786,60 @@ module Aws::DataZone
       :scope,
       :type)
       SENSITIVE = [:connection_credentials, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to get the data export
+    #   configuration details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataExportConfigurationInput AWS API Documentation
+    #
+    class GetDataExportConfigurationInput < Struct.new(
+      :domain_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data export configuration report was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration as part of the data export
+    #   configuration details.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] is_export_enabled
+    #   Specifies whether the export is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] s3_table_bucket_arn
+    #   The Amazon S3 table bucket ARN as part of the data export
+    #   configuration details.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data export configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the data export configuration report was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataExportConfigurationOutput AWS API Documentation
+    #
+    class GetDataExportConfigurationOutput < Struct.new(
+      :created_at,
+      :encryption_configuration,
+      :is_export_enabled,
+      :s3_table_bucket_arn,
+      :status,
+      :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10444,11 +10527,16 @@ module Aws::DataZone
     #   The identifier of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRunInput AWS API Documentation
     #
     class GetMetadataGenerationRunInput < Struct.new(
       :domain_identifier,
-      :identifier)
+      :identifier,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10487,6 +10575,15 @@ module Aws::DataZone
     #   The type of metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] type_stats
+    #   The type stats included in the metadata generation run output
+    #   details.
+    #   @return [Array<Types::MetadataGenerationRunTypeStat>]
+    #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRunOutput AWS API Documentation
     #
     class GetMetadataGenerationRunOutput < Struct.new(
@@ -10497,7 +10594,9 @@ module Aws::DataZone
       :owning_project_id,
       :status,
       :target,
-      :type)
+      :type,
+      :type_stats,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14044,6 +14143,10 @@ module Aws::DataZone
     #   The status of the metadata generation runs.
     #   @return [String]
     #
+    # @!attribute [rw] target_identifier
+    #   The target ID for which you want to list metadata generation runs.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The type of the metadata generation runs.
     #   @return [String]
@@ -14055,6 +14158,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       :status,
+      :target_identifier,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -15341,6 +15445,10 @@ module Aws::DataZone
     #   The type of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MetadataGenerationRunItem AWS API Documentation
     #
     class MetadataGenerationRunItem < Struct.new(
@@ -15351,7 +15459,8 @@ module Aws::DataZone
       :owning_project_id,
       :status,
       :target,
-      :type)
+      :type,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15375,6 +15484,30 @@ module Aws::DataZone
     class MetadataGenerationRunTarget < Struct.new(
       :identifier,
       :revision,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The statistics of the metadata generation run type.
+    #
+    # @!attribute [rw] error_message
+    #   The error message displayed if the action fails to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the metadata generation run type statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run type statistics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MetadataGenerationRunTypeStat AWS API Documentation
+    #
+    class MetadataGenerationRunTypeStat < Struct.new(
+      :error_message,
+      :status,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -16520,6 +16653,52 @@ module Aws::DataZone
       class CloudFormation < ProvisioningProperties; end
       class Unknown < ProvisioningProperties; end
     end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where you want to create data export configuration
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_export
+    #   Specifies that the export is to be enabled as part of creating data
+    #   export configuration details.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration as part of creating data export
+    #   configuration details.
+    #
+    #   The KMS key provided here as part of encryptionConfiguration must
+    #   have the required permissions as described in [KMS permissions for
+    #   exporting asset metadata in Amazon SageMaker Unified Studio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PutDataExportConfigurationInput AWS API Documentation
+    #
+    class PutDataExportConfigurationInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :enable_export,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PutDataExportConfigurationOutput AWS API Documentation
+    #
+    class PutDataExportConfigurationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain.
@@ -19121,6 +19300,10 @@ module Aws::DataZone
     #   The type of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRunInput AWS API Documentation
     #
     class StartMetadataGenerationRunInput < Struct.new(
@@ -19128,7 +19311,8 @@ module Aws::DataZone
       :domain_identifier,
       :owning_project_identifier,
       :target,
-      :type)
+      :type,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19163,6 +19347,10 @@ module Aws::DataZone
     #   The type of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRunOutput AWS API Documentation
     #
     class StartMetadataGenerationRunOutput < Struct.new(
@@ -19172,7 +19360,8 @@ module Aws::DataZone
       :id,
       :owning_project_id,
       :status,
-      :type)
+      :type,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
