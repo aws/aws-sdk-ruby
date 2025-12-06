@@ -461,15 +461,14 @@ module Aws
       # Wrapper for request body that implements application-layer
       # chunking with Digest computed on chunks + added as a trailer
       class AwsChunkedTrailerDigestIO
-        DEFAULT_CHUNK_SIZE = 16_384
+        MIN_CHUNK_SIZE = 16_384
 
         def initialize(options = {})
           @io = options.delete(:io)
           @location_name = options.delete(:location_name)
           @algorithm = options.delete(:algorithm)
           @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
-
-          @chunk_size = options.delete(:chunk_size) || DEFAULT_CHUNK_SIZE
+          @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || MIN_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @max_chunk_size = @chunk_size - @overhead_bytes
           @current_chunk = ''.b
@@ -494,12 +493,12 @@ module Aws
           @eof = false
         end
 
-        def read(length, buf = nil)
+        def read(_length = nil, buf = nil)
           return if @eof
 
           buf&.clear
           output_buffer = buf || ''.b
-          fill_chunk(length) if @current_chunk.empty? && !@eof
+          fill_chunk if @current_chunk.empty? && !@eof
 
           output_buffer << @current_chunk
           @current_chunk.clear
@@ -512,14 +511,15 @@ module Aws
           chunk_size.to_s(16).size + 4 # hex_length + "\r\n\r\n"
         end
 
-        def fill_chunk(_length)
+        def fill_chunk
           chunk = @io.read(@max_chunk_size)
           if chunk
+            chunk.force_encoding('ASCII-8BIT')
             @digest.update(chunk)
-            @current_chunk << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
+            @current_chunk << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n".b
           else
             trailer_str = { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
-            @current_chunk << "0\r\n#{trailer_str}\r\n\r\n"
+            @current_chunk << "0\r\n#{trailer_str}\r\n\r\n".b
             @eof = true
           end
         end
