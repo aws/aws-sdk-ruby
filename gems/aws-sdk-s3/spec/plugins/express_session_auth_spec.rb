@@ -147,7 +147,7 @@ module Aws
             key: 'key',
             body: 'body'
           )
-          expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to_not be_nil
+          expect(resp.context.http_request.headers['x-amz-sdk-checksum-algorithm']).to eq('CRC32')
         end
       end
 
