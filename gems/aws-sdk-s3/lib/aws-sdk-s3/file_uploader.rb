@@ -15,6 +15,7 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
+        @http_chunk_size = options[:http_chunk_size]
         @multipart_threshold = options[:multipart_threshold] || DEFAULT_MULTIPART_THRESHOLD
       end
 
@@ -37,7 +38,11 @@ module Aws
       def upload(source, options = {})
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
           if File.size(source) >= @multipart_threshold
-            MultipartFileUploader.new(client: @client, executor: @executor).upload(source, options)
+            MultipartFileUploader.new(
+              client: @client,
+              executor: @executor,
+              http_chunk_size: @http_chunk_size
+            ).upload(source, options)
           else
             put_object(source, options)
           end
@@ -59,7 +64,10 @@ module Aws
           options[:on_chunk_sent] = single_part_progress(callback)
         end
         open_file(source) do |file|
+          Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
           @client.put_object(options.merge(body: file))
+        ensure
+          Thread.current[:net_http_override_body_stream_chunk] = nil
         end
       end
 

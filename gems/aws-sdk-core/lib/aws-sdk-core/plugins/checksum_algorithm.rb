@@ -5,6 +5,7 @@ module Aws
     # @api private
     class ChecksumAlgorithm < Seahorse::Client::Plugin
       CHUNK_SIZE = 1 * 1024 * 1024 # one MB
+      MIN_CHUNK_SIZE = 16_384 # 16 KB
 
       # determine the set of supported client side checksum algorithms
       # CRC32c requires aws-crt (optional sdk dependency) for support
@@ -461,8 +462,6 @@ module Aws
       # Wrapper for request body that implements application-layer
       # chunking with Digest computed on chunks + added as a trailer
       class AwsChunkedTrailerDigestIO
-        MIN_CHUNK_SIZE = 16_384
-
         def initialize(options = {})
           @io = options.delete(:io)
           @location_name = options.delete(:location_name)
@@ -489,7 +488,7 @@ module Aws
 
         def rewind
           @io.rewind
-          @current_chunk = ''.b
+          @current_chunk.clear
           @eof = false
         end
 
