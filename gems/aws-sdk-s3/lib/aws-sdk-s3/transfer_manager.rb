@@ -205,10 +205,9 @@ module Aws
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
       #   Only used when no custom executor is provided (creates {DefaultExecutor} with the given thread count).
       #
-      # @option option [Integer] :http_chunk_size (16384) Sizes in bytes for HTTP request body processing.
-      #   Controls how much data is processed at once during S3 uploads. Default value is 16384 bytes (16KB).
-      #   Larger values use more memory but may be faster due to fewer I/O operations.
-      #   Custom values must be at least 16KB.
+      # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
+      #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
+      #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.

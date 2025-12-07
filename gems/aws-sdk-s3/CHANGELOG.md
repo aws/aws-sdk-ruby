@@ -1,7 +1,10 @@
 Unreleased Changes
 ------------------
 
-* Feature - TBD
+* Feature - `Aws::S3::TransferManager#upload_file` supports a new parameter, `:http_chunk_size` to control 
+chunk size 
+
+* Feature -  Improved memory efficiency when calculating request checksums for large file uploads.
 
 1.206.0 (2025-12-02)
 ------------------
