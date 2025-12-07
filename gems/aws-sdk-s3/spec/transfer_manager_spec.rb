@@ -95,6 +95,22 @@ module Aws
           expect(client).to receive(:put_object).with({ bucket: 'bucket', key: 'key', body: large_file })
           subject.upload_file(large_file, bucket: 'bucket', key: 'key', multipart_threshold: 200 * one_mb_size)
         end
+
+        context ':http_check_size' do
+          it 'sets chunk size greater than 16KB' do
+            subject.upload_file(file, bucket: 'bucket', key: 'key', http_chunk_size: 32_768) do |resp|
+              expect(resp.context.http_request.body).to be_a(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
+              expect(resp.context.http_request.body.instance_variable_get(:@chunk_size)).to eq(32_768)
+            end
+          end
+
+          it 'raises error when less than 16KB' do
+            expect do
+              subject.upload_file(large_file, bucket: 'bucket', key: 'key', http_chunk_size: 100)
+            end.to raise_error(ArgumentError, /:http_chunk_size must be at least 16384 bytes/)
+          end
+        end
+
       end
 
       describe '#upload_stream', :jruby_flaky do
