@@ -5,17 +5,29 @@ require 'forwardable'
 module Aws
   module S3
     # Provides an encryption client that encrypts and decrypts data client-side,
-    # storing the encrypted data in Amazon S3.  The `EncryptionV2::Client` (V2 Client)
-    # provides improved security over the `Encryption::Client` (V1 Client)
-    # by using more modern and secure algorithms. You can use the V2 Client
-    # to continue decrypting objects encrypted using deprecated algorithms
-    # by setting security_profile: :v2_and_legacy. The latest V1 Client also
-    # supports reading and decrypting objects encrypted by the V2 Client.
+    # storing the encrypted data in Amazon S3. The `EncryptionV3::Client` (V3 Client)
+    # provides improved security over the `EncryptionV2::Client` (V2 Client)
+    # through key commitment. You can use the V3 Client to continue decrypting 
+    # objects encrypted by V2 by setting security_profile: :v3_and_legacy. 
+    # The latest V2 Client also supports reading and decrypting objects 
+    # encrypted by the V3 Client.
     #
     # This client uses a process called "envelope encryption". Your private
     # encryption keys and your data's plain-text are **never** sent to
     # Amazon S3. **If you lose you encryption keys, you will not be able to
     # decrypt your data.**
+    #
+    # ## Key Commitment
+    #
+    # Key commitment (also known as robustness) is a security property that 
+    # guarantees that each ciphertext can be decrypted to only a single plaintext.
+    # This prevents sophisticated attacks where a ciphertext could theoretically 
+    # decrypt to different plaintexts under different keys.
+    #
+    # The V3 client encrypts with key commitment by default using the 
+    # `:alg_aes_256_gcm_hkdf_sha512_commit_key` algorithm. Key commitment adds 
+    # approximately 32 bytes to each encrypted object and slightly increases 
+    # processing time, but significantly enhances security.
     #
     # ## Envelope Encryption Overview
     #
@@ -47,11 +59,9 @@ module Aws
     #     key = OpenSSL::PKey::RSA.new(1024)
     #
     #     # encryption client
-    #     s3 = Aws::S3::EncryptionV2::Client.new(
+    #     s3 = Aws::S3::EncryptionV3::Client.new(
     #       encryption_key: key,
-    #       key_wrap_schema: :rsa_oaep_sha1, # the key_wrap_schema must be rsa_oaep_sha1 for asymmetric keys
-    #       content_encryption_schema: :aes_gcm_no_padding,
-    #       security_profile: :v2 # use :v2_and_legacy to allow reading/decrypting objects encrypted by the V1 encryption client
+    #       key_wrap_schema: :rsa_oaep_sha1 # the key_wrap_schema must be rsa_oaep_sha1 for asymmetric keys
     #     )
     #
     #     # round-trip an object, encrypted/decrypted locally
@@ -66,17 +76,17 @@ module Aws
     #
     # ## Required Configuration
     #
-    # You must configure all of the following:
+    # You must configure the following:
     #
     # * a key or key provider - See the Keys section below. The key provided determines
     #   the key wrapping schema(s) supported for both encryption and decryption.
     # * `key_wrap_schema` - The key wrapping schema. It must match the type of key configured.
-    # * `content_encryption_schema` - The only supported value currently is `:aes_gcm_no_padding`.
-    #    More options will be added in future releases.
-    # * `security_profile` - Determines the support for reading objects written
-    #    using older key wrap or content encryption schemas. If you need to read
-    #    legacy objects encrypted by an existing V1 Client, then set this to `:v2_and_legacy`.
-    #    Otherwise, set it to `:v2`
+    #
+    # The following have defaults and are optional:
+    #
+    # * `content_encryption_schema` - Defaults to `:alg_aes_256_gcm_hkdf_sha512_commit_key`
+    # * `security_profile` - Defaults to `:v3`. Set to `:v3_and_legacy` to read V2-encrypted objects.
+    # * `commitment_policy` - Defaults to `:require_encrypt_require_decrypt` (most secure)
     #
     # ## Keys
     #
@@ -99,11 +109,9 @@ module Aws
     #     key = OpenSSL::Cipher.new("AES-256-ECB").random_key # symmetric key - used with `key_wrap_schema: :aes_gcm`
     #     key = OpenSSL::PKey::RSA.new(1024) # asymmetric key pair - used with `key_wrap_schema: :rsa_oaep_sha1`
     #
-    #     s3 = Aws::S3::EncryptionV2::Client.new(
+    #     s3 = Aws::S3::EncryptionV3::Client.new(
     #       encryption_key: key,
-    #       key_wrap_schema: :aes_gcm, # or :rsa_oaep_sha1 if using RSA
-    #       content_encryption_schema: :aes_gcm_no_padding,
-    #       security_profile: :v2
+    #       key_wrap_schema: :aes_gcm # or :rsa_oaep_sha1 if using RSA
     #     )
     #
     # ### Key Provider
@@ -121,12 +129,10 @@ module Aws
     #     kms = Aws::KMS::Client.new
     #     key_id = kms.create_key.key_metadata.key_id
     #
-    #     Aws::S3::EncryptionV2::Client.new(
+    #     Aws::S3::EncryptionV3::Client.new(
     #       kms_key_id: key_id,
     #       kms_client: kms,
-    #       key_wrap_schema: :kms_context,
-    #       content_encryption_schema: :aes_gcm_no_padding,
-    #       security_profile: :v2
+    #       key_wrap_schema: :kms_context
     #     )
     #
     # ## Custom Key Providers
@@ -144,7 +150,7 @@ module Aws
     #
     #       def initialize(default_key_name, keys)
     #         @keys = keys
-    #         @encryption_materials = Aws::S3::EncryptionV2::Materials.new(
+    #         @encryption_materials = Aws::S3::EncryptionV3::Materials.new(
     #           key: @keys[default_key_name],
     #           description: JSON.dump(key: default_key_name),
     #         )
@@ -175,11 +181,9 @@ module Aws
     #
     #     # chooses the key based on the materials description stored
     #     # with the encrypted object
-    #     s3 = Aws::S3::EncryptionV2::Client.new(
+    #     s3 = Aws::S3::EncryptionV3::Client.new(
     #       key_provider: keys,
-    #       key_wrap_schema: ...,
-    #       content_encryption_schema: :aes_gcm_no_padding,
-    #       security_profile: :v2
+    #       key_wrap_schema: :aes_gcm # or :rsa_oaep_sha1 for RSA keys
     #     )
     #
     # ## Materials Description
@@ -204,24 +208,38 @@ module Aws
     # use an instruction file for storing the envelope.
     #
     #     # default behavior
-    #     s3 = Aws::S3::EncryptionV2::Client.new(
-    #       key_provider: ...,
-    #       envelope_location: :metadata,
+    #     s3 = Aws::S3::EncryptionV3::Client.new(
+    #       encryption_key: your_key,
+    #       key_wrap_schema: :aes_gcm,
+    #       envelope_location: :metadata
     #     )
     #
     #     # store envelope in a separate object
-    #     s3 = Aws::S3::EncryptionV2::Client.new(
-    #       key_provider: ...,
+    #     s3 = Aws::S3::EncryptionV3::Client.new(
+    #       encryption_key: your_key,
+    #       key_wrap_schema: :aes_gcm,
     #       envelope_location: :instruction_file,
     #       instruction_file_suffix: '.instruction' # default
-    #       key_wrap_schema: ...,
-    #       content_encryption_schema: :aes_gcm_no_padding,
-    #       security_profile: :v2
     #     )
     #
     # When using an instruction file, multiple requests are made when
     # putting and getting the object. **This may cause issues if you are
     # issuing concurrent PUT and GET requests to an encrypted object.**
+    #
+    # ## Commitment Policies Explained
+    #
+    # * `:forbid_encrypt_allow_decrypt` - Encrypts without key commitment (for
+    #   backward compatibility with systems that have not been updated), but can decrypt
+    #   objects with or without commitment. Use if you are not sure that all readers
+    #   can decrypt objects encrypted with key commitment.
+    #
+    # * `:require_encrypt_allow_decrypt` - Encrypts with key commitment, can decrypt
+    #   objects with or without commitment. Use once all readers
+    #   can decrypt objects encrypted with key commitment.
+    #
+    # * `:require_encrypt_require_decrypt` - Encrypts with key commitment, can only
+    #   decrypt objects with key commitment. **Recommended for new applications and
+    #   after migrations are complete.** This is the default.
     #
     module EncryptionV3
       class Client
@@ -272,17 +290,19 @@ module Aws
         extend Forwardable
         def_delegators :@client, :config, :delete_object, :head_object, :build_request
 
-        # Creates a new encryption client. You must configure all of the following:
+        # Creates a new encryption client.
+        #
+        # ## Required Configuration
         #
         # * a key or key provider - The key provided also determines the key wrapping
         #   schema(s) supported for both encryption and decryption.
         # * `key_wrap_schema` - The key wrapping schema. It must match the type of key configured.
-        # * `content_encryption_schema` - The only supported value currently is `:aes_gcm_no_padding`
-        #    More options will be added in future releases.
-        # * `security_profile` - Determines the support for reading objects written
-        #    using older key wrap or content encryption schemas. If you need to read
-        #    legacy objects encrypted by an existing V1 Client, then set this to `:v2_and_legacy`.
-        #    Otherwise, set it to `:v2`
+        #
+        # ## Optional Configuration (with defaults)
+        #
+        # * `content_encryption_schema` - Defaults to `:alg_aes_256_gcm_hkdf_sha512_commit_key`
+        # * `security_profile` - Defaults to `:v3`. Set to `:v3_and_legacy` to read V2-encrypted objects.
+        # * `commitment_policy` - Defaults to `:require_encrypt_require_decrypt` (most secure)
         #
         # To configure the key you must provide one of the following set of options:
         #
@@ -320,18 +340,25 @@ module Aws
         #   * :aes_gcm (Must provide an AES (string) key)
         #   * :rsa_oaep_sha1 (Must provide an RSA key)
         #
-        # @option options [required, Symbol] :content_encryption_schema
-        #   Must be one of the following:
+        # @option options [Symbol] :content_encryption_schema (:alg_aes_256_gcm_hkdf_sha512_commit_key)
+        #   The content encryption algorithm to use. Defaults to the V3 algorithm with key commitment.
         #
-        #   * :aes_gcm_no_padding
-        #
-        # @option options [Required, Symbol] :security_profile
+        # @option options [Symbol] :security_profile (:v3)
         #   Determines the support for reading objects written using older
-        #   key wrap or content encryption schemas.
-        #   Must be one of the following:
+        #   encryption schemas. Must be one of the following:
         #
-        #   * :v2 - Reads of legacy (v1) objects are NOT allowed
-        #   * :v2_and_legacy - Enables reading of legacy (V1) schemas.
+        #   * :v3 - Only reads V3-encrypted objects (default, most secure)
+        #   * :v3_and_legacy - Enables reading of V2-encrypted objects
+        #
+        # @option options [Symbol] :commitment_policy (:require_encrypt_require_decrypt)
+        #   Determines support for key commitment. Must be one of the following:
+        #
+        #   * :forbid_encrypt_allow_decrypt - Does not encrypt with key commitment,
+        #     can decrypt with or without. Use only for specific compatibility needs.
+        #   * :require_encrypt_allow_decrypt - Encrypts with key commitment, can
+        #     decrypt with or without.
+        #   * :require_encrypt_require_decrypt - Encrypts with key commitment, only
+        #     decrypts objects with key commitment (default, most secure)
         #
         # @option options [Symbol] :envelope_location (:metadata) Where to
         #   store the envelope encryption keys. By default, the envelope is
@@ -471,12 +498,11 @@ module Aws
         #
         # @option options [Symbol] :security_profile
         #   Determines the support for reading objects written using older
-        #   key wrap or content encryption schemas. Overrides the value set
-        #   on client construction if provided.
+        #   encryption schemas. Overrides the value set on client construction if provided.
         #   Must be one of the following:
         #
-        #   * :v2 - Reads of legacy (v1) objects are NOT allowed
-        #   * :v2_and_legacy - Enables reading of legacy (V1) schemas.
+        #   * :v3 - Only reads V3-encrypted objects (most secure)
+        #   * :v3_and_legacy - Enables reading of V2-encrypted objects
         # @option params [String] :instruction_file_suffix The suffix
         #   used to find the instruction file containing the encryption
         #   envelope. You should not set this option when the envelope
